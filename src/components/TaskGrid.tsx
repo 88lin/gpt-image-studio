@@ -9,6 +9,7 @@ export default function TaskGrid() {
   const filterFavorite = useStore((s) => s.filterFavorite)
   const setDetailTaskId = useStore((s) => s.setDetailTaskId)
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
+  const setShowPromptLibrary = useStore((s) => s.setShowPromptLibrary)
   const selectedTaskIds = useStore((s) => s.selectedTaskIds)
   const setSelectedTaskIds = useStore((s) => s.setSelectedTaskIds)
   const clearSelection = useStore((s) => s.clearSelection)
@@ -274,6 +275,39 @@ export default function TaskGrid() {
               />
             </svg>
             <p className="text-sm">输入提示词开始生成图片</p>
+            <button
+              type="button"
+              onClick={() => setShowPromptLibrary(true)}
+              className="mx-auto mt-5 flex w-full max-w-xl items-center justify-between gap-3 rounded-2xl border border-emerald-200/80 bg-white/90 px-4 py-3 text-left shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-emerald-300 hover:shadow-[0_16px_36px_rgba(16,185,129,0.10)] dark:border-emerald-400/10 dark:bg-white/[0.04] dark:hover:border-emerald-300/20 dark:hover:bg-white/[0.06] sm:px-5"
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z" />
+                    <path d="M8 7h8" />
+                    <path d="M8 11h6" />
+                  </svg>
+                </div>
+                <div className="min-w-0">
+                  <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">提示词模板库</div>
+                  <div className="mt-1 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+                    从内置模板快速开始，再按你的场景继续改写。
+                  </div>
+                </div>
+              </div>
+              <div className="shrink-0 rounded-xl bg-emerald-600 px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-emerald-600/20 dark:bg-emerald-400 dark:text-emerald-950">
+                打开
+              </div>
+            </button>
           </>
         )}
       </div>

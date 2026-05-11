@@ -1,29 +1,29 @@
 <div align="center">
 
-# 🎨 GPT Image Playground
+# 🎨 GPT Image Studio
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/CookSleep/gpt_image_playground?style=flat-square&color=eab308)](https://github.com/CookSleep/gpt_image_playground/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/CookSleep/gpt_image_playground?style=flat-square&color=3b82f6)](https://github.com/CookSleep/gpt_image_playground/network/members)
-[![License](https://img.shields.io/badge/license-MIT-10b981?style=flat-square)](https://github.com/CookSleep/gpt_image_playground/blob/main/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/88lin/gpt-image-studio?style=flat-square&color=eab308)](https://github.com/88lin/gpt-image-studio/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/88lin/gpt-image-studio?style=flat-square&color=3b82f6)](https://github.com/88lin/gpt-image-studio/network/members)
+[![License](https://img.shields.io/badge/license-MIT-10b981?style=flat-square)](LICENSE)
 [![React](https://img.shields.io/badge/React-19-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-**基于 OpenAI gpt-image-2 API 的图片生成与编辑工具**
+**基于 OpenAI gpt-image-2 API 的图片生成、编辑与提示词工作台**
 
 提供简洁精美的 Web UI，支持 OpenAI / OpenAI 兼容接口、fal.ai 与可导入的自定义 HTTP 服务商。<br>
-支持文本生图、参考图与遮罩编辑，数据纯本地化存储，带来流畅的历史记录与参数管理体验。
+支持文本生图、参考图、遮罩编辑、提示词模板库和本地化历史记录，适合 GPT Image 2 的高频创作与调试。
 
 <br>
 
-[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-black?style=for-the-badge&logo=vercel&logoColor=white)](https://gpt-image-playground.cooksleep.dev)
-&nbsp;&nbsp;&nbsp;
-[![GitHub Pages 在线体验](https://img.shields.io/badge/GitHub%20Pages-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-222222?style=for-the-badge&logo=github&logoColor=white)](https://cooksleep.github.io/gpt_image_playground)
+[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-black?style=for-the-badge&logo=vercel&logoColor=white)](https://gpt-image-playground-seven-psi.vercel.app)
 
 </div>
 
 <br>
 
-> 💡 **提示**：若需调用非 HTTPS 的内网或本地 HTTP API，请使用 GitHub Pages 版本或自行部署，Vercel 部署的体验版绑定的 `.dev` 域名因安全策略通常要求接口必须为 HTTPS。
+> 💡 **提示**：若需调用非 HTTPS 的内网或本地 HTTP API，建议自行部署到支持 HTTP API 的环境，或开启同源 API 代理。浏览器直连第三方接口时可能遇到 CORS 限制。
+
+> 🔁 **二次开发说明**：本项目基于 [CookSleep/gpt_image_playground](https://github.com/CookSleep/gpt_image_playground) 二次开发。核心生成、编辑、多服务商和本地历史能力来自上游；本分支保留网页端显示名 **GPT Image 2**，并额外加入提示词模板库、工作台式首页入口、`@图N` 图片引用体验、配置复制等增强。为避免影响创作流程，已移除上游「生成超过 50 张图片后自动弹出赞助提示」的弹窗。
 
 ---
 
@@ -76,6 +76,12 @@
 - **双模接口支持**：自由切换使用常规 `Images API` (`/v1/images`) 或 `Responses API` (`/v1/responses`)。
 - **参考图与遮罩**：支持上传最多 16 张参考图（支持剪贴板和拖拽）。内置可视化遮罩编辑器，自动预处理以符合官方分辨率限制。
 - **批量与迭代**：支持单次多图生成；一键将满意结果转为参考图，无缝开启下一轮修改。
+- **图片引用**：在输入框中输入 `@` 可选择当前参考图，生成 `@图1`、`@图2` 等引用；提交时会自动转换为模型更容易理解的 `[image 1]` 格式。
+
+### 🧠 提示词模板库
+- **内置精选模板**：内置来自 prompts.kkkm.cn、all-image-prompts 等来源的中文提示词模板，适合电商图、海报、封面、产品图、摄影风格和视觉概念图。
+- **搜索与套用**：支持按标题、描述、来源和提示词内容检索，一键填入输入框并继续二次编辑。
+- **示例图辅助判断**：部分模板保留示例图，便于快速判断构图、画风和适用场景。
 
 ### ⚙️ 精细化参数追踪
 - **智能尺寸控制**：提供 1K/2K/4K 快速预设，自定义宽高时会自动规整至模型安全范围（16 的倍数、总像素校验等）。
@@ -93,7 +99,7 @@
 - **Codex CLI 兼容模式**：对上游为 Codex CLI 的 API，开启后应用 Codex CLI 实际支持的参数，并将多图生成拆分为并发单图。
 - **提示词防改写**：Responses API 会始终在请求文本前加入强制指令防止提示词被改写；开启 Codex CLI 模式后，Images API 也会获得同等保护。
 - **智能诊断提示**：当检测到接口异常改写行为或缺少常规参数时，自动提示开启相应的兼容模式。
-- **习惯配置**：支持设置提交后清空输入、重启后保留历史输入、临时复用历史任务 API 配置等。
+- **习惯配置**：支持设置提交后清空输入、重启后保留历史输入、任务提交方式、临时复用历史任务 API 配置等。
 
 ---
 
@@ -104,7 +110,7 @@
 <details>
 <summary><strong>▲ 方式一：Vercel 一键部署 (推荐)</strong></summary>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCookSleep%2Fgpt_image_playground&project-name=gpt-image-playground&repository-name=gpt-image-playground)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F88lin%2Fgpt-image-studio&project-name=gpt-image-studio&repository-name=gpt-image-studio)
 
 点击上方按钮导入仓库即可，Vercel 会自动执行构建并部署静态文件。
 
@@ -159,7 +165,7 @@ $env:VITE_DEFAULT_API_URL="https://api.openai.com/v1"; npm run deploy:cf
 <details>
 <summary><strong>🐳 方式三：Docker 部署</strong></summary>
 
-官方镜像已发布至 GitHub Container Registry。Docker 部署支持在运行时注入默认配置。
+可自行构建 Docker 镜像并发布到 GitHub Container Registry。Docker 部署支持在运行时注入默认配置。
 
 **环境变量说明：**
 
@@ -175,13 +181,15 @@ $env:VITE_DEFAULT_API_URL="https://api.openai.com/v1"; npm run deploy:cf
 
 **1. Docker CLI 示例**
 
+如果你已将镜像发布到 `ghcr.io/88lin/gpt-image-studio:latest`，可按下面方式运行：
+
 ```bash
 docker run -d -p 8080:80 \
   -e DEFAULT_API_URL=https://api.openai.com/v1 \
   -e ENABLE_API_PROXY=true \
   -e LOCK_API_PROXY=true \
   -e API_PROXY_URL=https://api.openai.com/v1 \
-  ghcr.io/cooksleep/gpt_image_playground:latest
+  ghcr.io/88lin/gpt-image-studio:latest
 ```
 
 *(注：使用 host 网络时加 `--network host`，修改容器监听端口使用 `-e PORT=28080`)*
@@ -190,8 +198,8 @@ docker run -d -p 8080:80 \
 
 ```yaml
 services:
-  gpt-image-playground:
-    image: ghcr.io/cooksleep/gpt_image_playground:latest
+  gpt-image-studio:
+    image: ghcr.io/88lin/gpt-image-studio:latest
     environment:
       - DEFAULT_API_URL=https://api.openai.com/v1
     ports:
@@ -201,7 +209,7 @@ services:
 
 **更新说明：**
 
-使用 `latest` 标签时，重新拉取镜像并重启即可更新（如 `docker compose pull && docker compose up -d`）。若需固定版本可使用官方提供的版本号标签（如 `0.2.x`）。
+使用 `latest` 标签时，重新拉取镜像并重启即可更新（如 `docker compose pull && docker compose up -d`）。若你没有发布自己的镜像，也可以直接使用 `npm run build` 生成静态产物后部署。
 
 </details>
 
@@ -264,11 +272,7 @@ npm run build
 例如，集成到 New API 的聊天系统：
 
 ```text
-https://gpt-image-playground.cooksleep.dev?apiUrl={address}&apiKey={key}&model={model}
-```
-
-```text
-https://cooksleep.github.io/gpt_image_playground?apiUrl={address}&apiKey={key}&model={model}
+https://gpt-image-playground-seven-psi.vercel.app?apiUrl={address}&apiKey={key}&model={model}
 ```
 
 **方式二：自定义格式服务商**
@@ -358,32 +362,14 @@ JSON 结构示例：
 
 特别致谢：[LINUX DO](https://linux.do)
 
-## 💜 赞助支持
-
-<div align="center">
-
-如果这个项目对你有帮助，欢迎通过爱发电赞助支持，你的每一份鼓励都是持续更新的动力！
-
-<br>
-<br>
-
-<a href="https://www.ifdian.net/a/cooksleep">
-  <img src="https://img.shields.io/badge/%E7%88%B1%E5%8F%91%E7%94%B5-%E8%B5%9E%E5%8A%A9%E4%BD%9C%E8%80%85-946ce6?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMiAyMS4zNWwtMS40NS0xLjMyQzUuNCAxNS4zNiAyIDEyLjI4IDIgOC41IDIgNS40MiA0LjQyIDMgNy41IDNjMS43NCAwIDMuNDEuODEgNC41IDIuMDlDMTMuMDkgMy44MSAxNC43NiAzIDE2LjUgMyAxOS41OCAzIDIyIDUuNDIgMjIgOC41YzAgMy43OC0zLjQgNi44Ni04LjU1IDExLjU0TDEyIDIxLjM1eiIvPjwvc3ZnPg==&logoColor=white" alt="爱发电赞助" />
-</a>
-
-<br>
-<br>
-
-</div>
-
 ## ⭐ Star History
 
 <div align="center">
-  <a href="https://www.star-history.com/#CookSleep/gpt_image_playground&Date">
+  <a href="https://www.star-history.com/#88lin/gpt-image-studio&Date">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=CookSleep/gpt_image_playground&type=Date&theme=dark" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=CookSleep/gpt_image_playground&type=Date" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=CookSleep/gpt_image_playground&type=Date" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=88lin/gpt-image-studio&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=88lin/gpt-image-studio&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=88lin/gpt-image-studio&type=Date" />
     </picture>
   </a>
 </div>

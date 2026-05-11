@@ -130,6 +130,20 @@ input[type="number"] {
   animation: modal-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes template-library-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-template-library-in {
+  animation: template-library-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* 设置面板：从上方滑入 */
 @keyframes slide-down-in {
   from { opacity: 0; transform: translateY(-20px); }

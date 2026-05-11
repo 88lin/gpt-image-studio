@@ -18,6 +18,7 @@ function isInstalledPwa() {
 
 export default function Header() {
   const setShowSettings = useStore((s) => s.setShowSettings)
+  const setShowPromptLibrary = useStore((s) => s.setShowPromptLibrary)
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
   const { hasUpdate, latestRelease, dismiss } = useVersionCheck()
   const [showHelp, setShowHelp] = useState(false)
@@ -26,7 +27,10 @@ export default function Header() {
 
   const installTooltip = useTooltip()
   const helpTooltip = useTooltip()
+  const promptLibraryTooltip = useTooltip()
   const settingsTooltip = useTooltip()
+  const iconButtonClass =
+    'p-2 rounded-xl border border-transparent hover:border-gray-200/80 dark:hover:border-white/[0.08] hover:bg-white/80 dark:hover:bg-white/[0.06] transition-colors'
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: Event) => {
@@ -87,33 +91,41 @@ export default function Header() {
 
   return (
     <>
-      <header data-no-drag-select className="safe-area-top fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-gray-950/80 backdrop-blur border-b border-gray-200 dark:border-white/[0.08]">
+      <header data-no-drag-select className="safe-area-top fixed top-0 left-0 right-0 z-40 border-b border-gray-950/[0.07] bg-[#f8f9f4] shadow-[0_6px_18px_rgba(24,24,27,0.03)] dark:border-white/[0.08] dark:bg-[#0d0f0c] dark:shadow-[0_6px_18px_rgba(0,0,0,0.14)]">
         <div className="safe-area-x safe-header-inner max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex-1 min-w-0 pr-2">
-            <h1 className="inline-flex items-start relative">
-              <a
-                href="https://github.com/CookSleep/gpt_image_playground"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[17px] sm:text-lg font-bold tracking-tight text-gray-800 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-              >
-                GPT Image Playground
-              </a>
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-gray-950/10 bg-gray-950 text-[11px] font-black text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-gray-950">
+              G2
+            </div>
+            <div className="flex items-start gap-1.5">
+              <h1 className="text-base font-semibold tracking-tight sm:text-lg">
+                <a
+                  href="/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
+                >
+                  GPT Image 2
+                </a>
+              </h1>
+              <span className="mt-1 hidden rounded-full border border-emerald-700/15 bg-emerald-700/[0.07] px-2 py-0.5 text-[10px] font-medium text-emerald-900 dark:border-emerald-300/15 dark:bg-emerald-300/[0.08] dark:text-emerald-100 sm:inline">
+                Workspace
+              </span>
               {hasUpdate && latestRelease && (
                 <a
                   href={latestRelease.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={dismiss}
-                  className="absolute -right-1 -top-1 translate-x-full -translate-y-1/4 px-1 py-0.5 rounded-[4px] border border-red-500/30 text-[9px] font-black bg-red-500 text-white hover:bg-red-600 transition-all animate-fade-in leading-none shadow-sm"
+                  className="mt-0.5 rounded border border-red-500/30 bg-red-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white transition-colors hover:bg-red-600 animate-fade-in"
                   title={`新版本 ${latestRelease.tag}`}
                 >
                   NEW
                 </a>
               )}
-            </h1>
+            </div>
           </div>
-          <div className="flex items-center gap-1 shrink-0">
+          <div className="flex items-center gap-1.5">
             {!isPwaInstalled && (
               <div
                 className="relative"
@@ -124,7 +136,7 @@ export default function Header() {
                     dismissAllTooltips()
                     handleInstallClick()
                   }}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                  className={iconButtonClass}
                   aria-label="安装为应用"
                 >
                   <svg
@@ -155,7 +167,7 @@ export default function Header() {
                   dismissAllTooltips()
                   setShowHelp(true)
                 }}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                className={iconButtonClass}
                 aria-label="操作指南"
               >
                 <svg
@@ -178,11 +190,43 @@ export default function Header() {
             </div>
             <div
               className="relative"
+              {...promptLibraryTooltip.handlers}
+            >
+              <button
+                onClick={() => {
+                  dismissAllTooltips()
+                  setShowPromptLibrary(true)
+                }}
+                className="flex items-center gap-2 rounded-xl border border-emerald-700/15 bg-emerald-700/[0.07] px-2.5 py-2 text-emerald-900 transition-colors hover:bg-emerald-700/[0.11] dark:border-emerald-300/15 dark:bg-emerald-300/[0.08] dark:text-emerald-100 dark:hover:bg-emerald-300/[0.12]"
+                aria-label="提示词模板库"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z" />
+                  <path d="M8 7h8" />
+                  <path d="M8 11h6" />
+                </svg>
+                <span className="hidden text-xs font-medium sm:inline">模板库</span>
+              </button>
+              <ViewportTooltip visible={promptLibraryTooltip.visible} className="whitespace-nowrap">
+                提示词模板库
+              </ViewportTooltip>
+            </div>
+            <div
+              className="relative"
               {...settingsTooltip.handlers}
             >
               <button
                 onClick={() => setShowSettings(true)}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                className={iconButtonClass}
                 aria-label="设置"
               >
                 <svg

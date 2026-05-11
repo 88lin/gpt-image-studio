@@ -228,7 +228,7 @@ function handleImage(req, res, url) {
 
 function handleIndex(req, res) {
   sendJson(res, 200, {
-    name: 'gpt-image-playground mock image API',
+    name: 'gpt-image-2 mock image API',
     openaiCompatibleBaseUrls: [
       `${getBaseUrl(req)}/url-cors-block`,
       `${getBaseUrl(req)}/url-ok`,

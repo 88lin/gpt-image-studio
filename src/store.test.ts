@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { getPromptTextareaLayout } from './components/InputBar'
 import { DEFAULT_PARAMS } from './types'
 import { createDefaultFalProfile, createDefaultOpenAIProfile, DEFAULT_SETTINGS, normalizeSettings } from './lib/apiProfiles'
 import type { StoredImage, StoredImageThumbnail, TaskRecord } from './types'
@@ -177,7 +178,7 @@ describe('interrupted OpenAI running tasks', () => {
 describe('input persistence setting', () => {
   beforeEach(() => {
     useStore.setState({
-      settings: { ...DEFAULT_SETTINGS },
+      settings: { ...DEFAULT_SETTINGS, persistInputOnRestart: true },
       prompt: 'prompt',
       inputImages: [imageA],
       dismissedCodexCliPrompts: [],
@@ -207,6 +208,87 @@ describe('input persistence setting', () => {
 
     expect(persisted.prompt).toBe('')
     expect(persisted.inputImages).toEqual([])
+  })
+})
+
+describe('prompt library ui state', () => {
+  it('opens and closes the prompt template library', () => {
+    useStore.getState().setShowPromptLibrary(true)
+
+    expect(useStore.getState().showPromptLibrary).toBe(true)
+
+    useStore.getState().setShowPromptLibrary(false)
+
+    expect(useStore.getState().showPromptLibrary).toBe(false)
+  })
+})
+
+describe('modal focus management', () => {
+  it('blurs the active prompt input when opening task details', () => {
+    const blurSpy = vi.fn()
+    const previousDocumentDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'document')
+    try {
+      Object.defineProperty(globalThis, 'document', {
+        value: { activeElement: { blur: blurSpy } },
+        configurable: true,
+        writable: true,
+      })
+
+      useStore.getState().setDetailTaskId('task-1')
+
+      expect(blurSpy).toHaveBeenCalledTimes(1)
+    } finally {
+      if (previousDocumentDescriptor) Object.defineProperty(globalThis, 'document', previousDocumentDescriptor)
+      else Reflect.deleteProperty(globalThis, 'document')
+    }
+  })
+
+  it('blurs the active prompt input when opening the lightbox', () => {
+    const blurSpy = vi.fn()
+    const previousDocumentDescriptor = Object.getOwnPropertyDescriptor(globalThis, 'document')
+    try {
+      Object.defineProperty(globalThis, 'document', {
+        value: { activeElement: { blur: blurSpy } },
+        configurable: true,
+        writable: true,
+      })
+
+      useStore.getState().setLightboxImageId('image-1', ['image-1'])
+
+      expect(blurSpy).toHaveBeenCalledTimes(1)
+    } finally {
+      if (previousDocumentDescriptor) Object.defineProperty(globalThis, 'document', previousDocumentDescriptor)
+      else Reflect.deleteProperty(globalThis, 'document')
+    }
+  })
+})
+
+describe('prompt textarea layout', () => {
+  it('uses a single-line height for a short desktop prompt', () => {
+    const layout = getPromptTextareaLayout({
+      isMobile: false,
+      scrollHeight: 28,
+      windowHeight: 900,
+      imagesHeight: 0,
+      manualHeight: null,
+    })
+
+    expect(layout.minHeight).toBe(48)
+    expect(layout.targetHeight).toBe(48)
+    expect(layout.shouldScroll).toBe(false)
+  })
+
+  it('grows with desktop prompt content instead of keeping the old tall default', () => {
+    const layout = getPromptTextareaLayout({
+      isMobile: false,
+      scrollHeight: 86,
+      windowHeight: 900,
+      imagesHeight: 0,
+      manualHeight: null,
+    })
+
+    expect(layout.targetHeight).toBe(86)
+    expect(layout.shouldScroll).toBe(false)
   })
 })
 

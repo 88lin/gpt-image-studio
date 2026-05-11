@@ -258,6 +258,34 @@ function ButtonTooltip({ visible, text }: { visible: boolean; text: ReactNode })
 
 /** API 支持的最大参考图数量 */
 const API_MAX_IMAGES = 16
+const MOBILE_MIN_PROMPT_HEIGHT = 48
+const DESKTOP_MIN_PROMPT_HEIGHT = 48
+const MOBILE_MIN_PROMPT_MAX_HEIGHT = 96
+const DESKTOP_MIN_PROMPT_MAX_HEIGHT = 132
+
+export function getPromptTextareaLayout(input: {
+  isMobile: boolean
+  scrollHeight: number
+  windowHeight: number
+  imagesHeight: number
+  manualHeight: number | null
+}) {
+  const minHeight = input.isMobile ? MOBILE_MIN_PROMPT_HEIGHT : DESKTOP_MIN_PROMPT_HEIGHT
+  const minMaxHeight = input.isMobile ? MOBILE_MIN_PROMPT_MAX_HEIGHT : DESKTOP_MIN_PROMPT_MAX_HEIGHT
+  const maxHeight = Math.max(input.windowHeight * 0.56 - (input.imagesHeight + 140), minMaxHeight)
+  const desiredHeight = Math.max(
+    input.scrollHeight,
+    minHeight,
+    input.isMobile ? 0 : input.manualHeight ?? 0,
+  )
+  const targetHeight = Math.min(desiredHeight, maxHeight)
+
+  return {
+    minHeight,
+    targetHeight,
+    shouldScroll: desiredHeight > maxHeight,
+  }
+}
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640)
@@ -404,7 +432,8 @@ export default function InputBar() {
   const textareaRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<HTMLDivElement>(null)
-  const prevHeightRef = useRef(42)
+  const prevHeightRef = useRef(window.innerWidth < 640 ? 48 : 112)
+  const manualPromptHeightRef = useRef<number | null>(null)
 
   const [isDragging, setIsDragging] = useState(false)
   const [submitHover, setSubmitHover] = useState(false)
@@ -931,6 +960,26 @@ export default function InputBar() {
     e.clipboardData.setData('text/plain', copyText)
   }
 
+  const captureManualPromptHeight = useCallback(() => {
+    const el = textareaRef.current
+    if (!el) return
+
+    const nextHeight = Math.round(el.getBoundingClientRect().height)
+    const imagesHeight = imagesRef.current?.offsetHeight ?? 0
+    const { targetHeight } = getPromptTextareaLayout({
+      isMobile,
+      scrollHeight: el.scrollHeight,
+      windowHeight: window.innerHeight,
+      imagesHeight,
+      manualHeight: null,
+    })
+
+    manualPromptHeightRef.current = !isMobile && nextHeight > targetHeight + 4
+      ? nextHeight
+      : null
+    prevHeightRef.current = nextHeight
+  }, [isMobile])
+
   // 粘贴图片
   useEffect(() => {
     const handlePaste = (e: ClipboardEvent) => {
@@ -1005,33 +1054,28 @@ export default function InputBar() {
     const el = textareaRef.current
     if (!el) return
 
-    // 计算图片区域和其他固定元素占用的高度
     const imagesHeight = imagesRef.current?.offsetHeight ?? 0
-    const fixedOverhead = imagesHeight + 140
 
-    // textarea 最大高度 = 页面 40% 减去固定开销，至少保留 80px
-    const maxH = Math.max(window.innerHeight * 0.4 - fixedOverhead, 80)
-
-    // 1. 关闭过渡动画，设高度为 0 以获取真实的文本内容高度
     el.style.transition = 'none'
     el.style.height = '0'
     el.style.overflowY = 'hidden'
-    const scrollH = el.scrollHeight
-    const minH = 42
-    const desired = Math.max(scrollH, minH)
-    const targetH = desired > maxH ? maxH : desired
+    const { minHeight, targetHeight, shouldScroll } = getPromptTextareaLayout({
+      isMobile,
+      scrollHeight: el.scrollHeight,
+      windowHeight: window.innerHeight,
+      imagesHeight,
+      manualHeight: manualPromptHeightRef.current,
+    })
 
-    // 2. 将高度设回上一次的实际高度，强制重绘，准备开始动画
     el.style.height = prevHeightRef.current + 'px'
     void el.offsetHeight
 
-    // 3. 恢复平滑过渡，并设置目标高度
     el.style.transition = 'height 150ms ease, border-color 200ms, box-shadow 200ms'
-    el.style.height = targetH + 'px'
-    el.style.overflowY = desired > maxH ? 'auto' : 'hidden'
+    el.style.height = targetHeight + 'px'
+    el.style.overflowY = shouldScroll ? 'auto' : 'hidden'
 
-    prevHeightRef.current = targetH
-  }, [])
+    prevHeightRef.current = targetHeight
+  }, [isMobile])
 
   // 将 prompt 同步渲染到 contentEditable（含胶囊 tag）
   useEffect(() => {
@@ -1812,6 +1856,9 @@ export default function InputBar() {
               onKeyDown={handleKeyDown}
               onPaste={handlePromptPaste}
               onCopy={handlePromptCopy}
+              onMouseUp={captureManualPromptHeight}
+              onTouchEnd={captureManualPromptHeight}
+              onBlur={captureManualPromptHeight}
               onClick={(e) => {
                 const el = textareaRef.current
                 if (!el) return
@@ -1830,8 +1877,9 @@ export default function InputBar() {
 
                 syncMentionTagSelection(el)
               }}
+              data-prompt-input
               data-placeholder="描述你想生成的图片，可输入 @ 指定当前参考图..."
-              className="min-h-[42px] w-full whitespace-pre-wrap break-words rounded-2xl border border-gray-200/60 bg-white/50 px-4 py-3 text-sm leading-relaxed shadow-sm outline-none transition-[border-color,box-shadow] duration-200 focus:ring-1 focus:ring-blue-300/40 empty:before:pointer-events-none empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-100 dark:focus:ring-blue-500/30 dark:empty:before:text-gray-500"
+              className="min-h-[48px] w-full resize-none whitespace-pre-wrap break-words rounded-2xl border border-gray-200/60 bg-white/50 px-4 py-3 text-sm leading-relaxed shadow-sm outline-none transition-[border-color,box-shadow] duration-200 focus:ring-1 focus:ring-blue-300/40 empty:before:pointer-events-none empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-100 dark:focus:ring-blue-500/30 dark:empty:before:text-gray-500 sm:resize-y"
             />
           </div>
 

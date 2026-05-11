@@ -467,7 +467,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
     <div
       ref={containerRef}
       data-lightbox-root
-      className="fixed inset-0 z-[60] flex items-center justify-center select-none"
+      className="fixed inset-0 z-[60] flex items-center justify-center overflow-hidden px-3 pb-[calc(var(--safe-area-bottom)+1rem)] pt-[calc(var(--safe-area-top)+1rem)] select-none sm:px-6 sm:py-6"
       style={{ cursor: isZoomed ? (isDragging ? 'grabbing' : 'grab') : 'pointer' }}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
@@ -485,7 +485,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
           <img
             src={src}
             data-image-id={imageId}
-            className="saveable-image max-w-[85vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+            className="saveable-image max-w-full max-h-[calc(100dvh-var(--safe-area-top)-var(--safe-area-bottom)-5rem)] object-contain rounded-lg shadow-2xl sm:max-w-[85vw] sm:max-h-[85vh]"
             onDragStart={(e) => e.preventDefault()}
             alt=""
           />
