@@ -15,7 +15,7 @@
 
 <br>
 
-[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-black?style=for-the-badge&logo=vercel&logoColor=white)](https://gpt-image-playground-seven-psi.vercel.app)
+[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-red?style=for-the-badge&logo=vercel&logoColor=red)](https://gpt-image-studio-xi.vercel.app)
 
 </div>
 
@@ -364,12 +364,10 @@ JSON 结构示例：
 
 ## ⭐ Star History
 
-<div align="center">
-  <a href="https://www.star-history.com/#88lin/gpt-image-studio&Date">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=88lin/gpt-image-studio&type=Date&theme=dark" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=88lin/gpt-image-studio&type=Date" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=88lin/gpt-image-studio&type=Date" />
-    </picture>
-  </a>
-</div>
+<a href="https://www.star-history.com/?type=date&repos=88lin%2Fgpt-image-studio">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=88lin/gpt-image-studio&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=88lin/gpt-image-studio&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=88lin/gpt-image-studio&type=date&legend=top-left" />
+ </picture>
+</a>
