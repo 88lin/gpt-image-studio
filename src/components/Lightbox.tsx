@@ -203,6 +203,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
   const tapRef = useRef({ time: 0, x: 0, y: 0 })
   const hadMultiTouchRef = useRef(false)
   const touchStartedOnImageRef = useRef(false)
+  const touchStartedOnControlRef = useRef(false)
 
   // 判断本次 mousedown → mouseup 是否发生了拖拽，用于区分点击和拖拽
   const didDragRef = useRef(false)
@@ -350,6 +351,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
       if (e.touches.length === 2) {
         e.preventDefault()
         hadMultiTouchRef.current = true
+        touchStartedOnControlRef.current = false
         tapRef.current = { time: 0, x: 0, y: 0 }
         const [a, b] = [e.touches[0], e.touches[1]]
         const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
@@ -369,6 +371,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
         const now = Date.now()
         const prev = tapRef.current
         touchStartedOnImageRef.current = e.target instanceof HTMLImageElement
+        touchStartedOnControlRef.current = e.target instanceof HTMLElement && Boolean(e.target.closest('[data-lightbox-control]'))
 
         // 双击检测
         if (
@@ -426,20 +429,25 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
         dragRef.current.active = false
         if (hadMultiTouchRef.current) {
           hadMultiTouchRef.current = false
+          touchStartedOnControlRef.current = false
           tapRef.current = { time: 0, x: 0, y: 0 }
           return
         }
         // 单击关闭：未缩放时任意位置关闭；缩放时仅点击图片外关闭。
-        if (scaleRef.current <= 1 || !touchStartedOnImageRef.current) {
-          const prev = tapRef.current
-          if (prev.time > 0 && Date.now() - prev.time < 300) {
-            setTimeout(() => {
-              if (tapRef.current.time === prev.time) {
-                onClose()
-              }
-            }, 310)
-          }
+        const prev = tapRef.current
+        if (
+          !touchStartedOnControlRef.current &&
+          prev.time > 0 &&
+          Date.now() - prev.time < 300 &&
+          (scaleRef.current <= 1 || !touchStartedOnImageRef.current)
+        ) {
+          setTimeout(() => {
+            if (tapRef.current.time === prev.time) {
+              onClose()
+            }
+          }, 310)
         }
+        touchStartedOnControlRef.current = false
       }
     }
 
@@ -503,6 +511,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
       {showNav && !isZoomed && (
         <>
           <button
+            data-lightbox-control
             className={`${navBtnClass} left-3 sm:left-5`}
             onClick={(e) => { e.stopPropagation(); goPrev() }}
           >
@@ -511,6 +520,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
             </svg>
           </button>
           <button
+            data-lightbox-control
             className={`${navBtnClass} right-3 sm:right-5`}
             onClick={(e) => { e.stopPropagation(); goNext() }}
           >
