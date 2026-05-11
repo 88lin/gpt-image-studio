@@ -371,7 +371,11 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
         const now = Date.now()
         const prev = tapRef.current
         touchStartedOnImageRef.current = e.target instanceof HTMLImageElement
-        touchStartedOnControlRef.current = e.target instanceof HTMLElement && Boolean(e.target.closest('[data-lightbox-control]'))
+        touchStartedOnControlRef.current = e.target instanceof Element && Boolean(e.target.closest('[data-lightbox-control]'))
+        if (touchStartedOnControlRef.current) {
+          tapRef.current = { time: 0, x: 0, y: 0 }
+          return
+        }
 
         // 双击检测
         if (
