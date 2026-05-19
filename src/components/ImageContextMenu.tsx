@@ -107,7 +107,7 @@ export default function ImageContextMenu() {
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
-      URL.revokeObjectURL(url)
+      setTimeout(() => URL.revokeObjectURL(url), 1_000)
       showToast('开始下载', 'success')
     } catch (err) {
       console.error(err)

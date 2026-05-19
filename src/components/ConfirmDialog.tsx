@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useStore } from '../store'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
@@ -26,10 +26,18 @@ function renderMessage(message: string) {
   })
 }
 
+export type ConfirmDialogInitialFocusTarget = 'cancel' | 'confirm'
+
+export function getConfirmDialogInitialFocusTarget(showCancel: boolean | undefined): ConfirmDialogInitialFocusTarget {
+  return showCancel === false ? 'confirm' : 'cancel'
+}
+
 export default function ConfirmDialog() {
   const confirmDialog = useStore((s) => s.confirmDialog)
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
   const [canConfirm, setCanConfirm] = useState(true)
+  const cancelButtonRef = useRef<HTMLButtonElement>(null)
+  const confirmButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const delay = confirmDialog?.minConfirmDelayMs ?? 0
@@ -41,6 +49,17 @@ export default function ConfirmDialog() {
     setCanConfirm(false)
     const timer = window.setTimeout(() => setCanConfirm(true), delay)
     return () => window.clearTimeout(timer)
+  }, [confirmDialog])
+
+  // 有取消按钮时先聚焦取消，避免删除/清空类弹窗被 Enter 误确认。
+  useEffect(() => {
+    if (!confirmDialog) return
+    const target = getConfirmDialogInitialFocusTarget(confirmDialog.showCancel)
+    const id = window.setTimeout(() => {
+      const button = target === 'cancel' ? cancelButtonRef.current : confirmButtonRef.current
+      button?.focus()
+    }, 50)
+    return () => window.clearTimeout(id)
   }, [confirmDialog])
 
   const handleClose = () => {
@@ -73,13 +92,16 @@ export default function ConfirmDialog() {
       data-no-drag-select
       className="fixed inset-0 z-[110] flex items-center justify-center p-4"
       onClick={handleClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirm-dialog-title"
     >
       <div className="absolute inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-md animate-overlay-in" />
       <div
         className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/50 dark:border-white/[0.08] rounded-3xl shadow-[0_8px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_40px_rgb(0,0,0,0.4)] max-w-sm w-full p-6 z-10 ring-1 ring-black/5 dark:ring-white/10 animate-confirm-in"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="mb-2 flex items-center gap-2 text-base font-bold text-gray-800 dark:text-gray-100">
+        <h3 id="confirm-dialog-title" className="mb-2 flex items-center gap-2 text-base font-bold text-gray-800 dark:text-gray-100">
           {confirmDialog.icon === 'info' && (
             <svg className="h-5 w-5 shrink-0 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" />
@@ -98,20 +120,22 @@ export default function ConfirmDialog() {
         <div className="flex gap-2">
           {confirmDialog.showCancel !== false && (
             <button
+              ref={cancelButtonRef}
               onClick={handleCancel}
-              className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition"
+              className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
             >
               {cancelText}
             </button>
           )}
           <button
+            ref={confirmButtonRef}
             onClick={() => {
               if (!canConfirm) return
               confirmDialog.action()
               setConfirmDialog(null)
             }}
             disabled={!canConfirm}
-            className={`flex-1 py-2 rounded-lg text-white text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 ${confirmClassName}`}
+            className={`flex-1 py-2 rounded-lg text-white text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${confirmClassName}`}
           >
             {confirmText}
           </button>

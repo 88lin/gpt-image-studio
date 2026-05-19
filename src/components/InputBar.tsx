@@ -405,7 +405,7 @@ export default function InputBar() {
         document.body.appendChild(a)
         a.click()
         document.body.removeChild(a)
-        URL.revokeObjectURL(objUrl)
+        setTimeout(() => URL.revokeObjectURL(objUrl), 1_000)
         successCount++
         
         await new Promise(resolve => setTimeout(resolve, 100))

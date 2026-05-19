@@ -58,6 +58,8 @@ const customRecoveryTimers = new Map<string, ReturnType<typeof setTimeout>>()
 const openAIWatchdogTimers = new Map<string, ReturnType<typeof setTimeout>>()
 const OPENAI_INTERRUPTED_ERROR = '请求中断'
 
+let toastDismissTimer: ReturnType<typeof setTimeout> | null = null
+
 function createOpenAITimeoutError(timeoutSeconds: number) {
   return `请求超时：超过 ${timeoutSeconds} 秒仍未完成，请稍后重试或提高超时时间。`
 }
@@ -580,9 +582,11 @@ export const useStore = create<AppState>()(
       // Toast
       toast: null,
       showToast: (message, type = 'info') => {
+        if (toastDismissTimer != null) clearTimeout(toastDismissTimer)
         set({ toast: { message, type } })
-        setTimeout(() => {
-          set((s) => (s.toast?.message === message ? { toast: null } : s))
+        toastDismissTimer = setTimeout(() => {
+          toastDismissTimer = null
+          set({ toast: null })
         }, 3000)
       },
 
@@ -1769,7 +1773,7 @@ export async function exportData(options: ExportOptions = { exportConfig: true, 
     a.href = url
     a.download = `gpt-image-2-${formatExportFileTime(new Date(exportedAt))}.zip`
     a.click()
-    URL.revokeObjectURL(url)
+    setTimeout(() => URL.revokeObjectURL(url), 1_000)
     useStore.getState().showToast('数据已导出', 'success')
   } catch (e) {
     useStore

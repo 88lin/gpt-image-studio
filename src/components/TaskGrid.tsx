@@ -278,10 +278,10 @@ export default function TaskGrid() {
             <button
               type="button"
               onClick={() => setShowPromptLibrary(true)}
-              className="mx-auto mt-5 flex w-full max-w-xl items-center justify-between gap-3 rounded-2xl border border-emerald-200/80 bg-white/90 px-4 py-3 text-left shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:border-emerald-300 hover:shadow-[0_16px_36px_rgba(16,185,129,0.10)] dark:border-emerald-400/10 dark:bg-white/[0.04] dark:hover:border-emerald-300/20 dark:hover:bg-white/[0.06] sm:px-5"
+              className="group mx-auto mt-5 flex w-full max-w-xl items-center justify-between gap-3 rounded-2xl border border-emerald-200/80 bg-white/90 px-4 py-3 text-left shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-[0_16px_36px_rgba(16,185,129,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 dark:border-emerald-400/10 dark:bg-white/[0.04] dark:hover:border-emerald-300/20 dark:hover:bg-white/[0.06] sm:px-5"
             >
               <div className="flex min-w-0 items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-100 dark:bg-emerald-400/10 dark:text-emerald-300 dark:group-hover:bg-emerald-400/15">
                   <svg
                     className="h-5 w-5"
                     fill="none"
@@ -304,7 +304,7 @@ export default function TaskGrid() {
                   </div>
                 </div>
               </div>
-              <div className="shrink-0 rounded-xl bg-emerald-600 px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-emerald-600/20 dark:bg-emerald-400 dark:text-emerald-950">
+              <div className="shrink-0 rounded-xl bg-emerald-600 px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-emerald-600/20 transition group-hover:bg-emerald-700 dark:bg-emerald-400 dark:text-emerald-950 dark:group-hover:bg-emerald-300">
                 打开
               </div>
             </button>

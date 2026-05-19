@@ -226,6 +226,14 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
     return () => window.removeEventListener('image-context-menu-dismiss-lightbox-click', suppressClick)
   }, [])
 
+  // 卸载时清掉缩放徽标的隐藏计时器
+  useEffect(() => () => {
+    if (zoomTimerRef.current) {
+      clearTimeout(zoomTimerRef.current)
+      zoomTimerRef.current = null
+    }
+  }, [])
+
   const getCenter = useCallback(() => {
     const rect = containerRef.current?.getBoundingClientRect()
     if (!rect) return { cx: 0, cy: 0 }
@@ -537,15 +545,15 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
 
       {/* 底部指示器 */}
       {showZoomBadge && isZoomed && zoomPercent !== 100 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none">
-          <span className="px-3 py-1.5 bg-black/50 text-white/80 text-xs rounded-full backdrop-blur-sm transition-opacity duration-500">
+        <div className="absolute right-4 bottom-[calc(var(--safe-area-bottom,0px)+1.25rem)] pointer-events-none">
+          <span className="px-3 py-1.5 bg-black/55 text-white/90 text-xs rounded-full backdrop-blur-md ring-1 ring-white/10 transition-opacity duration-500 font-mono">
             {zoomPercent}%
           </span>
         </div>
       )}
       {showNav && !isZoomed && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none">
-          <span className="px-3 py-1.5 bg-black/50 text-white/80 text-xs rounded-full backdrop-blur-sm">
+        <div className="absolute bottom-[calc(var(--safe-area-bottom,0px)+1.25rem)] left-1/2 -translate-x-1/2 pointer-events-none">
+          <span className="px-3 py-1.5 bg-black/55 text-white/90 text-xs rounded-full backdrop-blur-md ring-1 ring-white/10">
             {currentIndex + 1} / {total}
           </span>
         </div>
