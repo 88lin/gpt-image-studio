@@ -3,6 +3,7 @@ import type { InputImage } from '../types'
 const MENTION_START = '\u2063'
 const MENTION_END = '\u2064'
 const SELECTED_IMAGE_MENTION_RE = /\u2063@图(\d+)\u2064/g
+const SELECTED_MENTION_RE = /\u2063(@图(\d+)|@(?:第)?\d+轮图\d+)\u2064/g
 
 export interface AtImageQuery {
   start: number
@@ -14,7 +15,11 @@ export function getImageMentionLabel(index: number) {
 }
 
 export function getSelectedImageMentionLabel(index: number) {
-  return `${MENTION_START}${getImageMentionLabel(index)}${MENTION_END}`
+  return getSelectedTextMentionLabel(getImageMentionLabel(index))
+}
+
+export function getSelectedTextMentionLabel(text: string) {
+  return `${MENTION_START}${text}${MENTION_END}`
 }
 
 export function stripImageMentionMarkers(prompt: string): string {
@@ -32,17 +37,17 @@ export function getPromptIndexFromVisibleIndex(prompt: string, visibleIndex: num
 }
 
 export function isCursorInSelectedImageMention(prompt: string, visibleCursor: number): boolean {
-  for (const match of prompt.matchAll(SELECTED_IMAGE_MENTION_RE)) {
+  for (const match of prompt.matchAll(SELECTED_MENTION_RE)) {
     if (match.index == null) continue
     const visibleStart = stripImageMentionMarkers(prompt.slice(0, match.index)).length
-    const visibleEnd = visibleStart + getImageMentionLabel(Number(match[1]) - 1).length
+    const visibleEnd = visibleStart + match[1].length
     if (visibleCursor > visibleStart && visibleCursor <= visibleEnd) return true
   }
   return false
 }
 
-export function getAtImageQuery(prompt: string, cursor: number, inputImages: InputImage[]): AtImageQuery | null {
-  if (inputImages.length === 0) return null
+export function getAtImageQuery(prompt: string, cursor: number, imageSource: Pick<InputImage[], 'length'>): AtImageQuery | null {
+  if (imageSource.length === 0) return null
 
   const beforeCursor = prompt.slice(0, cursor)
   const atIndex = beforeCursor.lastIndexOf('@')
@@ -73,13 +78,16 @@ export function insertImageMention(prompt: string, start: number, cursor: number
 }
 
 export function insertImageMentionAtVisibleRange(prompt: string, start: number, cursor: number, imageIndex: number) {
+  return insertTextMentionAtVisibleRange(prompt, start, cursor, getImageMentionLabel(imageIndex))
+}
+
+export function insertTextMentionAtVisibleRange(prompt: string, start: number, cursor: number, text: string) {
   const promptStart = getPromptIndexFromVisibleIndex(prompt, start)
   const promptCursor = getPromptIndexFromVisibleIndex(prompt, cursor)
-  const mention = getSelectedImageMentionLabel(imageIndex)
-  const visibleMention = getImageMentionLabel(imageIndex)
+  const mention = getSelectedTextMentionLabel(text)
   return {
     prompt: `${prompt.slice(0, promptStart)}${mention}${prompt.slice(promptCursor)}`,
-    cursor: start + visibleMention.length,
+    cursor: start + text.length,
   }
 }
 
@@ -101,21 +109,25 @@ export function remapImageMentionsForOrder(
 
 export type PromptMentionPart =
   | { type: 'text'; text: string }
-  | { type: 'mention'; text: string; imageIndex: number }
+  | { type: 'mention'; text: string; imageIndex: number; mentionText?: string }
+  | { type: 'mention'; text: string; mentionText: string; imageIndex?: never }
 
 export function getPromptMentionParts(prompt: string, inputImages: InputImage[]): PromptMentionPart[] {
   const parts: PromptMentionPart[] = []
   let lastIndex = 0
 
-  for (const match of prompt.matchAll(SELECTED_IMAGE_MENTION_RE)) {
-    const text = getImageMentionLabel(Number(match[1]) - 1)
-    const index = Number(match[1]) - 1
-    if (!inputImages[index] || match.index == null) continue
+  for (const match of prompt.matchAll(SELECTED_MENTION_RE)) {
+    const text = match[1]
+    const index = match[2] ? Number(match[2]) - 1 : null
+    if (match.index == null) continue
+    if (index != null && !inputImages[index]) continue
 
     if (match.index > lastIndex) {
       parts.push({ type: 'text', text: stripImageMentionMarkers(prompt.slice(lastIndex, match.index)) })
     }
-    parts.push({ type: 'mention', text, imageIndex: index })
+    parts.push(index == null
+      ? { type: 'mention', text, mentionText: getSelectedTextMentionLabel(text) }
+      : { type: 'mention', text, imageIndex: index })
     lastIndex = match.index + match[0].length
   }
 
@@ -126,10 +138,10 @@ export function getPromptMentionParts(prompt: string, inputImages: InputImage[])
   return parts.length > 0 ? parts : [{ type: 'text', text: stripImageMentionMarkers(prompt) }]
 }
 
-export function replaceImageMentionsForApi(prompt: string, imageCount?: number): string {
+export function replaceImageMentionsForApi(prompt: string, imageCount?: number, formatImage?: (index: number) => string): string {
   return prompt.replace(SELECTED_IMAGE_MENTION_RE, (text, n) => {
     const index = Number(n) - 1
     if (imageCount != null && (index < 0 || index >= imageCount)) return stripImageMentionMarkers(text)
-    return `[image ${n}]`
+    return formatImage ? formatImage(index) : `[image ${n}]`
   })
 }

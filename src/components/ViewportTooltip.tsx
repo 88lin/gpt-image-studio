@@ -34,6 +34,25 @@ export default function ViewportTooltip({ visible, children, className = '' }: V
   const effectiveVisible = visible && !suppressed
 
   useEffect(() => {
+    if (!effectiveVisible) return
+
+    const hideIfOutside = (event: PointerEvent | TouchEvent) => {
+      const target = event.target
+      const anchorParent = anchorRef.current?.parentElement
+      if (!(target instanceof Node)) return
+      if (anchorParent?.contains(target) || tooltipRef.current?.contains(target)) return
+      setSuppressed(true)
+    }
+
+    document.addEventListener('pointerdown', hideIfOutside, true)
+    document.addEventListener('touchstart', hideIfOutside, true)
+    return () => {
+      document.removeEventListener('pointerdown', hideIfOutside, true)
+      document.removeEventListener('touchstart', hideIfOutside, true)
+    }
+  }, [effectiveVisible])
+
+  useEffect(() => {
     if (!effectiveVisible) {
       setPosition(null)
       return

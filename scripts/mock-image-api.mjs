@@ -42,6 +42,21 @@ function sendJson(res, status, payload, options = {}) {
   send(res, status, appendCors({ 'Content-Type': 'application/json; charset=utf-8' }, options.cors !== false), body)
 }
 
+async function sendSse(res, events, options = {}) {
+  res.writeHead(200, appendCors({
+    'Content-Type': 'text/event-stream; charset=utf-8',
+    'Cache-Control': 'no-store',
+    Connection: 'keep-alive',
+  }, options.cors !== false))
+
+  for (const event of events) {
+    res.write(`data: ${JSON.stringify(event)}\n\n`)
+    await new Promise((resolve) => setTimeout(resolve, 250))
+  }
+  res.write('data: [DONE]\n\n')
+  res.end()
+}
+
 function readBody(req) {
   return new Promise((resolve) => {
     const chunks = []
@@ -140,8 +155,66 @@ function isOpenAIImagesPath(pathname) {
   return pathname.endsWith('/v1/images/generations') || pathname.endsWith('/v1/images/edits')
 }
 
+function isOpenAIResponsesPath(pathname) {
+  return pathname.endsWith('/v1/responses')
+}
+
 function isCustomPath(pathname) {
   return pathname === '/custom/random-image' || pathname === '/custom/generate'
+}
+
+function createImagesStreamEvents(req, mode, n, isEdit) {
+  const created = Math.floor(Date.now() / 1000)
+  const prefix = isEdit ? 'image_edit' : 'image_generation'
+  const partialCount = mode === 'empty' ? 0 : 2
+  const partials = Array.from({ length: partialCount }, (_, i) => ({
+    type: `${prefix}.partial_image`,
+    created_at: created,
+    partial_image_index: i,
+    b64_json: tinyPngBase64,
+    output_format: 'png',
+    quality: 'auto',
+    size: '1024x1024',
+  }))
+  const completed = Array.from({ length: n }, () => ({
+    type: `${prefix}.completed`,
+    created_at: created,
+    b64_json: tinyPngBase64,
+    output_format: 'png',
+    quality: 'auto',
+    size: '1024x1024',
+  }))
+  return [...partials, ...completed]
+}
+
+function createResponsesStreamEvents(mode) {
+  const partials = mode === 'empty'
+    ? []
+    : [0, 1].map((index) => ({
+        type: 'response.image_generation_call.partial_image',
+        output_index: 0,
+        item_id: 'mock-image-generation',
+        partial_image_index: index,
+        partial_image_b64: tinyPngBase64,
+      }))
+
+  return [
+    ...partials,
+    {
+      type: 'response.completed',
+      response: {
+        output: mode === 'empty' ? [] : [{
+          type: 'image_generation_call',
+          status: 'completed',
+          revised_prompt: `mock ${mode} response image`,
+          result: tinyPngBase64,
+          output_format: 'png',
+          quality: 'auto',
+          size: '1024x1024',
+        }],
+      },
+    },
+  ]
 }
 
 async function handleApi(req, res, url) {
@@ -169,7 +242,28 @@ async function handleApi(req, res, url) {
     return
   }
 
+  const wantsStream = (body.json && typeof body.json === 'object' && body.json.stream === true) ||
+    /name="stream"[\s\S]*?\r?\n\r?\ntrue/.test(body.text)
+  if (wantsStream) {
+    await sendSse(res, createImagesStreamEvents(req, mode, n, url.pathname.endsWith('/v1/images/edits')))
+    return
+  }
+
   sendJson(res, 200, createOpenAIResponse(req, mode, n))
+}
+
+async function handleResponses(req, res, url) {
+  const body = req.method === 'GET' ? { json: null } : await readBody(req)
+  const mode = getMode(url, body.json)
+
+  if (body.json && typeof body.json === 'object' && body.json.stream === true) {
+    await sendSse(res, createResponsesStreamEvents(mode))
+    return
+  }
+
+  sendJson(res, 200, {
+    output: createResponsesStreamEvents(mode).at(-1)?.response?.output ?? [],
+  })
 }
 
 async function handleCustom(req, res, url) {
@@ -254,6 +348,11 @@ const server = http.createServer(async (req, res) => {
   try {
     if (isOpenAIImagesPath(url.pathname)) {
       await handleApi(req, res, url)
+      return
+    }
+
+    if (isOpenAIResponsesPath(url.pathname)) {
+      await handleResponses(req, res, url)
       return
     }
 

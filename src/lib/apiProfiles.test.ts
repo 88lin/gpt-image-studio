@@ -529,6 +529,40 @@ describe('custom providers', () => {
     expect(profile.model).toBe(DEFAULT_IMAGES_MODEL)
   })
 
+  it('enables streaming by default and preserves partial image count', () => {
+    expect(createDefaultOpenAIProfile().streamImages).toBe(true)
+    expect(createDefaultOpenAIProfile().streamPartialImages).toBe(1)
+    expect(DEFAULT_SETTINGS.streamImages).toBe(true)
+    expect(DEFAULT_SETTINGS.streamPartialImages).toBe(1)
+    expect(DEFAULT_SETTINGS.profiles[0].streamImages).toBe(true)
+    expect(DEFAULT_SETTINGS.profiles[0].streamPartialImages).toBe(1)
+
+    const normalized = normalizeSettings({
+      profiles: [
+        createDefaultOpenAIProfile({ streamImages: false, streamPartialImages: 3 }),
+      ],
+    })
+
+    expect(normalized.streamImages).toBe(false)
+    expect(normalized.streamPartialImages).toBe(3)
+    expect(normalized.profiles[0].streamImages).toBe(false)
+    expect(normalized.profiles[0].streamPartialImages).toBe(3)
+
+    const clamped = normalizeSettings({
+      profiles: [
+        createDefaultOpenAIProfile({ streamPartialImages: 8 }),
+      ],
+    })
+
+    expect(clamped.profiles[0].streamPartialImages).toBe(3)
+  })
+
+  it('enables Agent submit auto scroll by default', () => {
+    expect(DEFAULT_SETTINGS.agentScrollToBottomAfterSubmit).toBe(true)
+    expect(normalizeSettings({}).agentScrollToBottomAfterSubmit).toBe(true)
+    expect(normalizeSettings({ agentScrollToBottomAfterSubmit: false }).agentScrollToBottomAfterSubmit).toBe(false)
+  })
+
   it('restores OpenAI-compatible URL after switching through fal.ai', () => {
     const openaiProfile = createDefaultOpenAIProfile({
       baseUrl: 'https://api.compat.example.com/v1',

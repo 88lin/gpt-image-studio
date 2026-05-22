@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { InputImage } from '../types'
-import { getAtImageQuery, getPromptMentionParts, getSelectedImageMentionLabel, insertImageMention, isCursorInSelectedImageMention, remapImageMentionsForOrder, replaceImageMentionsForApi } from './promptImageMentions'
+import { getAtImageQuery, getPromptMentionParts, getSelectedImageMentionLabel, getSelectedTextMentionLabel, insertImageMention, insertTextMentionAtVisibleRange, isCursorInSelectedImageMention, remapImageMentionsForOrder, replaceImageMentionsForApi } from './promptImageMentions'
 
 const images: InputImage[] = [
   { id: 'image-a', dataUrl: 'data:image/png;base64,a' },
@@ -38,6 +38,13 @@ describe('prompt image mentions', () => {
     })
   })
 
+  it('inserts selected agent round image mentions', () => {
+    expect(insertTextMentionAtVisibleRange('参考@生成', 2, 3, '@第1轮图2')).toEqual({
+      prompt: `参考${getSelectedTextMentionLabel('@第1轮图2')}生成`,
+      cursor: 8,
+    })
+  })
+
 
 
   it('splits valid image mentions for tag rendering', () => {
@@ -54,6 +61,14 @@ describe('prompt image mentions', () => {
     ])
   })
 
+  it('splits selected agent round image mentions for tag rendering', () => {
+    expect(getPromptMentionParts(`用${getSelectedTextMentionLabel('@第2轮图4')}生成`, images)).toEqual([
+      { type: 'text', text: '用' },
+      { type: 'mention', text: '@第2轮图4', mentionText: getSelectedTextMentionLabel('@第2轮图4') },
+      { type: 'text', text: '生成' },
+    ])
+  })
+
   it('detects cursor inside selected image mentions', () => {
     const prompt = `参考 ${getSelectedImageMentionLabel(1)} 生成`
 
@@ -61,6 +76,14 @@ describe('prompt image mentions', () => {
     expect(isCursorInSelectedImageMention(prompt, 3)).toBe(false)
     expect(isCursorInSelectedImageMention(prompt, 7)).toBe(false)
     expect(isCursorInSelectedImageMention('参考 @图2 生成', 6)).toBe(false)
+  })
+
+  it('detects cursor inside selected agent round image mentions', () => {
+    const prompt = `参考 ${getSelectedTextMentionLabel('@第1轮图2')} 生成`
+
+    expect(isCursorInSelectedImageMention(prompt, 9)).toBe(true)
+    expect(isCursorInSelectedImageMention(prompt, 3)).toBe(false)
+    expect(isCursorInSelectedImageMention(prompt, 10)).toBe(false)
   })
 
   describe('remapImageMentionsForOrder', () => {

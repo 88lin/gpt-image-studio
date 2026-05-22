@@ -1,9 +1,13 @@
 // ===== 设置 =====
 
 export type ApiMode = 'images' | 'responses'
+export type AppMode = 'gallery' | 'agent'
+export type ReferenceImageEditAction = 'ask' | 'replace-reference' | 'add-mask'
 export type BuiltInApiProvider = 'openai' | 'fal'
 export type ApiProvider = BuiltInApiProvider | string
 export type CustomProviderTemplate = 'http-image'
+export const DEFAULT_STREAM_PARTIAL_IMAGES = 1
+export const DEFAULT_AGENT_MAX_TOOL_ROUNDS = 15
 
 export type CustomProviderRequestMethod = 'GET' | 'POST'
 export type CustomProviderContentType = 'json' | 'multipart'
@@ -64,7 +68,9 @@ export interface ApiProfile {
   codexCli: boolean
   apiProxy: boolean
   responseFormatB64Json?: boolean
-  providerDrafts?: Partial<Record<ApiProvider, Partial<Pick<ApiProfile, 'baseUrl' | 'model' | 'apiMode' | 'codexCli' | 'apiProxy' | 'responseFormatB64Json'>>>>
+  streamImages?: boolean
+  streamPartialImages?: number
+  providerDrafts?: Partial<Record<ApiProvider, Partial<Pick<ApiProfile, 'baseUrl' | 'model' | 'apiMode' | 'codexCli' | 'apiProxy' | 'responseFormatB64Json' | 'streamImages' | 'streamPartialImages'>>>>
 }
 
 export interface AppSettings {
@@ -76,6 +82,8 @@ export interface AppSettings {
   apiMode: ApiMode
   codexCli: boolean
   apiProxy: boolean
+  streamImages?: boolean
+  streamPartialImages?: number
   customProviders: CustomProviderDefinition[]
   providerOrder?: string[]
   clearInputAfterSubmit: boolean
@@ -83,6 +91,10 @@ export interface AppSettings {
   reuseTaskApiProfileTemporarily: boolean
   alwaysShowRetryButton: boolean
   enterSubmit: boolean
+  referenceImageEditAction: ReferenceImageEditAction
+  agentScrollToBottomAfterSubmit: boolean
+  agentMaxToolRounds: number
+  agentWebSearch: boolean
   profiles: ApiProfile[]
   activeProfileId: string
 }
@@ -136,6 +148,8 @@ export interface TaskRecord {
   apiProfileId?: string
   /** 生成时使用的 Provider 名称 */
   apiProfileName?: string
+  /** 生成时使用的 API 模式 */
+  apiMode?: ApiMode
   /** 生成时使用的模型 ID */
   apiModel?: string
   /** fal.ai 队列请求 ID，用于连接断开后的结果恢复 */
@@ -160,6 +174,8 @@ export interface TaskRecord {
   maskImageId?: string | null
   /** 输出图片的 image store id 列表 */
   outputImages: string[]
+  /** 流式生成的中间步骤图片 id 列表，仅失败时保留供排查/下载 */
+  streamPartialImageIds?: string[]
   /** API 返回的原始图片 HTTP URL（非 base64 时记录） */
   rawImageUrls?: string[]
   /** 发生解析错误时的原始响应 JSON */
@@ -172,6 +188,66 @@ export interface TaskRecord {
   elapsed: number | null
   /** 是否收藏 */
   isFavorite?: boolean
+  /** 来源模式：画廊 / Agent */
+  sourceMode?: AppMode
+  /** Agent 对话 ID */
+  agentConversationId?: string
+  /** Agent 轮次 ID */
+  agentRoundId?: string
+  /** Agent 消息 ID */
+  agentMessageId?: string
+  /** Agent 图像工具调用 ID */
+  agentToolCallId?: string
+  /** Agent 批量图像工具调用 ID */
+  agentBatchCallId?: string
+  /** Agent 图像工具实际动作 */
+  agentToolAction?: 'generate' | 'edit' | 'auto' | string
+}
+
+// ===== Agent 模式 =====
+
+export type AgentMessageRole = 'user' | 'assistant'
+export type AgentRoundStatus = 'running' | 'done' | 'error'
+
+export interface AgentMessage {
+  id: string
+  role: AgentMessageRole
+  content: string
+  roundId: string
+  inputImageIds?: string[]
+  maskTargetImageId?: string | null
+  maskImageId?: string | null
+  outputTaskIds?: string[]
+  createdAt: number
+}
+
+export interface AgentRound {
+  id: string
+  index: number
+  parentRoundId?: string | null
+  userMessageId: string
+  assistantMessageId?: string
+  prompt: string
+  inputImageIds: string[]
+  maskTargetImageId?: string | null
+  maskImageId?: string | null
+  outputTaskIds: string[]
+  responseId?: string
+  responseOutput?: ResponsesOutputItem[]
+  status: AgentRoundStatus
+  error: string | null
+  createdAt: number
+  finishedAt: number | null
+}
+
+export interface AgentConversation {
+  id: string
+  title: string
+  activeRoundId?: string | null
+  createdAt: number
+  updatedAt: number
+  rounds: AgentRound[]
+  messages: AgentMessage[]
 }
 
 // ===== IndexedDB 存储的图片 =====
@@ -238,7 +314,36 @@ export interface ImageApiResponse {
 }
 
 export interface ResponsesOutputItem {
+  id?: string
   type?: string
+  status?: string
+  action?: string | Record<string, unknown>
+  /** function_call: unique call id for sending back function_call_output */
+  call_id?: string
+  /** function_call: function name */
+  name?: string
+  /** function_call: JSON-encoded arguments string */
+  arguments?: string
+  /** function_call_output: JSON/text output string */
+  output?: string
+  annotations?: Array<{
+    type?: string
+    start_index?: number
+    end_index?: number
+    url?: string
+    title?: string
+  }>
+  content?: Array<{
+    type?: string
+    text?: string
+    annotations?: Array<{
+      type?: string
+      start_index?: number
+      end_index?: number
+      url?: string
+      title?: string
+    }>
+  }>
   result?: string | {
     b64_json?: string
     image?: string
@@ -253,6 +358,7 @@ export interface ResponsesOutputItem {
 }
 
 export interface ResponsesApiResponse {
+  id?: string
   output?: ResponsesOutputItem[]
   tools?: Array<{
     type?: string
@@ -291,6 +397,7 @@ export interface ExportData {
   exportedAt: string
   settings?: AppSettings
   tasks?: TaskRecord[]
+  agentConversations?: AgentConversation[]
   /** imageId → 图片信息 */
   imageFiles?: Record<string, {
     path: string

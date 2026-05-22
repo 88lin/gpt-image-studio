@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useStore } from '../store'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
+import { Checkbox } from './Checkbox'
 import { CopyIcon } from './icons'
 
 function renderMessage(message: string) {
-  return message.split(/(`[^`]+`|「[^」]+」)/g).map((part, index) => {
+  return message.split(/(`[^`]+`|「[^」]+」|\*\*[^*]+\*\*)/g).map((part, index) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
         <code key={index} className="rounded bg-gray-100 px-1 py-0.5 text-[0.85em] text-gray-700 dark:bg-white/[0.06] dark:text-gray-200">
@@ -22,6 +23,14 @@ function renderMessage(message: string) {
       )
     }
 
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={index} className="font-semibold text-gray-700 dark:text-gray-200">
+          {part.slice(2, -2)}
+        </strong>
+      )
+    }
+
     return part
   })
 }
@@ -32,12 +41,22 @@ export function getConfirmDialogInitialFocusTarget(showCancel: boolean | undefin
   return showCancel === false ? 'confirm' : 'cancel'
 }
 
+function getActionButtonClass(tone: 'primary' | 'secondary' | 'danger' | 'warning' = 'primary') {
+  if (tone === 'secondary') {
+    return 'border border-gray-200 text-gray-600 hover:bg-gray-50 dark:border-white/[0.08] dark:text-gray-400 dark:hover:bg-white/[0.06]'
+  }
+  if (tone === 'warning') return 'bg-orange-500 text-white hover:bg-orange-600'
+  if (tone === 'danger') return 'bg-red-500 text-white hover:bg-red-600'
+  return 'bg-blue-500 text-white hover:bg-blue-600'
+}
+
 export default function ConfirmDialog() {
   const confirmDialog = useStore((s) => s.confirmDialog)
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
   const [canConfirm, setCanConfirm] = useState(true)
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
   const confirmButtonRef = useRef<HTMLButtonElement>(null)
+  const [checkboxChecked, setCheckboxChecked] = useState(false)
 
   useEffect(() => {
     const delay = confirmDialog?.minConfirmDelayMs ?? 0
@@ -62,13 +81,17 @@ export default function ConfirmDialog() {
     return () => window.clearTimeout(id)
   }, [confirmDialog])
 
+  useEffect(() => {
+    setCheckboxChecked(confirmDialog?.checkbox?.defaultChecked ?? false)
+  }, [confirmDialog])
+
   const handleClose = () => {
     if (!canConfirm) return
     setConfirmDialog(null)
   }
 
   const handleCancel = () => {
-    confirmDialog?.cancelAction?.()
+    confirmDialog?.cancelAction?.(checkboxChecked)
     handleClose()
   }
 
@@ -78,14 +101,10 @@ export default function ConfirmDialog() {
   if (!confirmDialog) return null
   const isDestructive = confirmDialog.title.includes('删除') || confirmDialog.title.includes('清空')
   const confirmTone = confirmDialog.tone ?? (isDestructive ? 'danger' : undefined)
-  const confirmClassName =
-    confirmTone === 'warning'
-      ? 'bg-orange-500 hover:bg-orange-600'
-      : confirmTone === 'danger'
-      ? 'bg-red-500 hover:bg-red-600'
-      : 'bg-blue-500 hover:bg-blue-600'
+  const confirmClassName = getActionButtonClass(confirmTone === 'danger' || confirmTone === 'warning' ? confirmTone : 'primary')
   const confirmText = confirmDialog.confirmText ?? (isDestructive ? '确认删除' : '确认')
   const cancelText = confirmDialog.cancelText ?? '取消'
+  const customButtons = confirmDialog.buttons?.filter((button) => button.label.trim()) ?? []
 
   return (
     <div
@@ -114,32 +133,61 @@ export default function ConfirmDialog() {
           )}
           {confirmDialog.title}
         </h3>
-        <p className={`text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed whitespace-pre-line ${confirmDialog.messageAlign === 'center' ? 'text-center' : ''}`}>
+        <p className={`text-sm text-gray-500 dark:text-gray-400 ${confirmDialog.checkbox ? 'mb-4' : 'mb-6'} leading-relaxed whitespace-pre-line ${confirmDialog.messageAlign === 'center' ? 'text-center' : ''}`}>
           {renderMessage(confirmDialog.message)}
         </p>
-        <div className="flex gap-2">
-          {confirmDialog.showCancel !== false && (
+        {confirmDialog.checkbox && (
+          <Checkbox
+            checked={checkboxChecked}
+            onChange={setCheckboxChecked}
+            label={confirmDialog.checkbox.label}
+            tone={confirmDialog.checkbox.tone}
+            disabled={confirmDialog.checkbox.disabled}
+            className="mb-6"
+          />
+        )}
+        {customButtons.length > 0 ? (
+          <div className="flex gap-2">
+            {customButtons.map((button) => (
+              <button
+                key={button.label}
+                onClick={() => {
+                  if (!canConfirm) return
+                  button.action(checkboxChecked)
+                  setConfirmDialog(null)
+                }}
+                disabled={!canConfirm}
+                className={`flex-1 py-2 rounded-lg text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 ${getActionButtonClass(button.tone)}`}
+              >
+                {button.label}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            {confirmDialog.showCancel !== false && (
+              <button
+                ref={cancelButtonRef}
+                onClick={handleCancel}
+                className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+              >
+                {cancelText}
+              </button>
+            )}
             <button
-              ref={cancelButtonRef}
-              onClick={handleCancel}
-              className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+              ref={confirmButtonRef}
+              onClick={() => {
+                if (!canConfirm) return
+                confirmDialog.action?.(checkboxChecked)
+                setConfirmDialog(null)
+              }}
+              disabled={!canConfirm}
+              className={`flex-1 py-2 rounded-lg text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${confirmClassName}`}
             >
-              {cancelText}
+              {confirmText}
             </button>
-          )}
-          <button
-            ref={confirmButtonRef}
-            onClick={() => {
-              if (!canConfirm) return
-              confirmDialog.action()
-              setConfirmDialog(null)
-            }}
-            disabled={!canConfirm}
-            className={`flex-1 py-2 rounded-lg text-white text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${confirmClassName}`}
-          >
-            {confirmText}
-          </button>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   )

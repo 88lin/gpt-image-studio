@@ -16,10 +16,10 @@ export default function TaskGrid() {
   const rootRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
   const [selectionBox, setSelectionBox] = useState<{ startPageX: number; startPageY: number; currentPageX: number; currentPageY: number } | null>(null)
-  const isDragging = useRef(false)
   const dragStart = useRef<{ pageX: number; pageY: number } | null>(null)
   const lastClientPoint = useRef<{ x: number; y: number } | null>(null)
   const hasDragged = useRef(false)
+  const isDragging = useRef(false)
   const dragScrollIntervalRef = useRef<number | null>(null)
   const dragScrollDirectionRef = useRef<-1 | 1 | null>(null)
   const lastToastTimeRef = useRef(0)
@@ -334,12 +334,10 @@ export default function TaskGrid() {
                 const isCtrl = isMac ? e.metaKey : e.ctrlKey
                 if (isCtrl) {
                   useStore.getState().toggleTaskSelection(task.id)
-                } else if (selectedTaskIds.length > 0) {
-                  clearSelection()
-                  setDetailTaskId(task.id)
-                } else {
-                  setDetailTaskId(task.id)
+                  return
                 }
+
+                setDetailTaskId(task.id)
               }}
               onReuse={() => reuseConfig(task)}
               onEditOutputs={() => editOutputs(task)}

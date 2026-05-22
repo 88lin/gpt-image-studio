@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useStore } from '../store'
 import { useVersionCheck } from '../hooks/useVersionCheck'
 import { useTooltip } from '../hooks/useTooltip'
 import { dismissAllTooltips } from '../lib/tooltipDismiss'
 import ViewportTooltip from './ViewportTooltip'
 import HelpModal from './HelpModal'
+import HistoryModal from './HistoryModal'
+import { EditIcon, HelpCircleIcon, HistoryIcon, InstallIcon, SettingsIcon } from './icons'
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>
@@ -17,13 +19,68 @@ function isInstalledPwa() {
 }
 
 export default function Header() {
+  const appMode = useStore((s) => s.appMode)
+  const setAppMode = useStore((s) => s.setAppMode)
   const setShowSettings = useStore((s) => s.setShowSettings)
   const setShowPromptLibrary = useStore((s) => s.setShowPromptLibrary)
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
+  const agentMobileHeaderVisible = useStore((s) => s.agentMobileHeaderVisible)
+  const setAgentMobileHeaderVisible = useStore((s) => s.setAgentMobileHeaderVisible)
+  const agentConversations = useStore((s) => s.agentConversations)
+  const activeAgentConversationId = useStore((s) => s.activeAgentConversationId)
+  const setAgentEditingConversationId = useStore((s) => s.setAgentEditingConversationId)
+  const setAgentSidebarCollapsed = useStore((s) => s.setAgentSidebarCollapsed)
+  const activeConversation = agentConversations.find((item) => item.id === activeAgentConversationId)
   const { hasUpdate, latestRelease, dismiss } = useVersionCheck()
   const [showHelp, setShowHelp] = useState(false)
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [isPwaInstalled, setIsPwaInstalled] = useState(isInstalledPwa)
+  const [hintVisible, setHintVisible] = useState(false)
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up')
+  const [showHistoryModal, setShowHistoryModal] = useState(false)
+  const historyButtonRef = useRef<HTMLButtonElement>(null)
+  const createConversation = useStore((s) => s.createAgentConversation)
+
+  useEffect(() => {
+    if (appMode === 'agent') {
+      setScrollDirection('up')
+      return
+    }
+
+    let lastScrollY = window.scrollY
+    let ticking = false
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
+          if (currentScrollY < 20) {
+            setScrollDirection('up')
+          } else if (currentScrollY > lastScrollY + 10) {
+            setScrollDirection('down')
+          } else if (currentScrollY < lastScrollY - 10) {
+            setScrollDirection('up')
+          }
+          lastScrollY = currentScrollY
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [appMode])
+
+  useEffect(() => {
+    if (appMode === 'agent' && !agentMobileHeaderVisible) {
+      setHintVisible(true)
+      const timer = setTimeout(() => {
+        setHintVisible(false)
+      }, 1500)
+      return () => clearTimeout(timer)
+    }
+  }, [appMode, agentMobileHeaderVisible])
 
   const installTooltip = useTooltip()
   const helpTooltip = useTooltip()
@@ -91,26 +148,21 @@ export default function Header() {
 
   return (
     <>
-      <header data-no-drag-select className="safe-area-top fixed top-0 left-0 right-0 z-40 border-b border-gray-950/[0.07] bg-[#f8f9f4]/95 backdrop-blur-md shadow-[0_6px_18px_rgba(24,24,27,0.03)] supports-[backdrop-filter]:bg-[#f8f9f4]/80 dark:border-white/[0.08] dark:bg-[#0d0f0c]/95 dark:supports-[backdrop-filter]:bg-[#0d0f0c]/80 dark:shadow-[0_6px_18px_rgba(0,0,0,0.14)]">
-        <div className="safe-area-x safe-header-inner max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-gray-950/10 bg-gray-950 text-[11px] font-black text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-gray-950">
+      <header data-no-drag-select className={`safe-area-top fixed top-0 left-0 right-0 z-40 border-b border-gray-950/[0.07] bg-[#f8f9f4]/95 backdrop-blur-md shadow-[0_6px_18px_rgba(24,24,27,0.03)] supports-[backdrop-filter]:bg-[#f8f9f4]/80 dark:border-white/[0.08] dark:bg-[#0d0f0c]/95 dark:supports-[backdrop-filter]:bg-[#0d0f0c]/80 dark:shadow-[0_6px_18px_rgba(0,0,0,0.14)] transition-transform duration-300 ease-in-out ${appMode === 'agent' && !agentMobileHeaderVisible ? '-translate-y-full sm:translate-y-0' : 'translate-y-0'}`}>
+        <div className="safe-area-x safe-header-inner max-w-7xl mx-auto flex items-center justify-between relative">
+          <div className="flex-1 min-w-0 pr-2 flex items-center gap-2">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-gray-950/10 bg-gray-950 text-[11px] font-black text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-gray-950">
               G2
             </div>
-            <div className="flex items-start gap-1.5">
-              <h1 className="text-base font-semibold tracking-tight sm:text-lg">
-                <a
-                  href="/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
-                >
-                  GPT Image 2
-                </a>
-              </h1>
-              <span className="mt-1 hidden rounded-full border border-emerald-700/15 bg-emerald-700/[0.07] px-2 py-0.5 text-[10px] font-medium text-emerald-900 dark:border-emerald-300/15 dark:bg-emerald-300/[0.08] dark:text-emerald-100 sm:inline">
-                Workspace
-              </span>
+            <h1 className="inline-flex items-start relative mr-2">
+              <a
+                href="/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[17px] sm:text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
+              >
+                GPT Image 2
+              </a>
               {hasUpdate && latestRelease && (
                 <a
                   href={latestRelease.url}
@@ -123,7 +175,65 @@ export default function Header() {
                   NEW
                 </a>
               )}
+            </h1>
+            {appMode === 'agent' && <div className="hidden sm:flex items-center gap-1 relative">
+              <button
+                ref={historyButtonRef}
+                type="button"
+                onClick={() => setShowHistoryModal((visible) => !visible)}
+                className="p-1.5 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/[0.04] rounded-lg transition-colors"
+                title="历史记录"
+              >
+                <HistoryIcon className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAppMode('agent')
+                  createConversation()
+                }}
+                className="p-1.5 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/[0.04] rounded-lg transition-colors"
+                title="新对话"
+              >
+                <EditIcon className="w-5 h-5" />
+              </button>
+              {showHistoryModal && (
+                <HistoryModal onClose={() => setShowHistoryModal(false)} ignoreOutsideClickRef={historyButtonRef} />
+              )}
+            </div>}
+          </div>
+          {appMode === 'agent' && activeConversation && (
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden sm:flex max-w-[30%]">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowHistoryModal(true)
+                  // Use setTimeout to ensure HistoryModal is mounted before setting editing id
+                  setTimeout(() => {
+                    useStore.getState().setAgentEditingConversationId(activeConversation.id)
+                  }, 0)
+                }}
+                className="text-sm font-semibold text-gray-700 dark:text-gray-300 truncate hover:bg-gray-100 dark:hover:bg-white/[0.04] px-2 py-1 rounded transition-colors"
+              >
+                {activeConversation.title || 'Agent'}
+              </button>
             </div>
+          )}
+          <div className="hidden sm:flex items-center gap-1 rounded-xl border border-gray-200 dark:border-white/[0.08] bg-gray-100/70 dark:bg-white/[0.04] p-1 mr-4">
+            <button
+              type="button"
+              onClick={() => setAppMode('gallery')}
+              className={`px-4 py-1.5 rounded-lg text-sm transition-colors ${appMode === 'gallery' ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm font-medium' : 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'}`}
+            >
+              画廊
+            </button>
+            <button
+              type="button"
+              onClick={() => setAppMode('agent')}
+              className={`px-4 py-1.5 rounded-lg text-sm transition-colors ${appMode === 'agent' ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm font-medium' : 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'}`}
+            >
+              Agent
+            </button>
           </div>
           <div className="flex items-center gap-1.5">
             {!isPwaInstalled && (
@@ -139,19 +249,7 @@ export default function Header() {
                   className={iconButtonClass}
                   aria-label="安装为应用"
                 >
-                  <svg
-                    className="w-5 h-5 text-gray-600 dark:text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
+                  <InstallIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                 </button>
                 <ViewportTooltip visible={installTooltip.visible} className="whitespace-nowrap">
                   安装为应用
@@ -170,19 +268,7 @@ export default function Header() {
                 className={iconButtonClass}
                 aria-label="操作指南"
               >
-                <svg
-                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  viewBox="0 0 24 24"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                  <path d="M12 17h.01" />
-                </svg>
+                <HelpCircleIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
               </button>
               <ViewportTooltip visible={helpTooltip.visible} className="whitespace-nowrap">
                 操作指南
@@ -229,25 +315,7 @@ export default function Header() {
                 className={iconButtonClass}
                 aria-label="设置"
               >
-                <svg
-                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
+                <SettingsIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
               </button>
               <ViewportTooltip visible={settingsTooltip.visible} className="whitespace-nowrap">
                 设置
@@ -255,11 +323,42 @@ export default function Header() {
             </div>
           </div>
         </div>
+        <div className={`safe-area-x sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${appMode === 'gallery' && scrollDirection === 'down' ? 'max-h-0 opacity-0 pb-0' : 'max-h-20 opacity-100 pb-2'}`}>
+          <div className="grid grid-cols-2 gap-1 rounded-xl border border-gray-200 dark:border-white/[0.08] bg-gray-100/70 dark:bg-white/[0.04] p-1 mx-2">
+            <button
+              type="button"
+              onClick={() => setAppMode('gallery')}
+              className={`px-4 py-1.5 rounded-lg text-sm transition-colors ${appMode === 'gallery' ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm font-medium' : 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'}`}
+            >
+              画廊
+            </button>
+            <button
+              type="button"
+              onClick={() => setAppMode('agent')}
+              className={`px-4 py-1.5 rounded-lg text-sm transition-colors ${appMode === 'agent' ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm font-medium' : 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'}`}
+            >
+              Agent
+            </button>
+          </div>
+        </div>
       </header>
-      <div className="safe-area-top invisible pointer-events-none" aria-hidden="true">
-        <div className="safe-header-inner" />
+
+      {/* Hint for sliding down */}
+      <div className={`fixed top-0 left-0 right-0 z-30 flex justify-center pointer-events-none transition-all duration-300 ease-in-out sm:hidden ${appMode === 'agent' && hintVisible && !agentMobileHeaderVisible ? 'translate-y-[env(safe-area-inset-top,0px)] opacity-100' : '-translate-y-full opacity-0'}`}>
+        <div className="bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-b-xl shadow-lg">
+          列表顶部下拉展示顶栏
+        </div>
       </div>
-      {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
+
+      <div className={`safe-area-top invisible pointer-events-none transition-all duration-300 ease-in-out ${appMode === 'agent' && !agentMobileHeaderVisible ? 'max-h-0 sm:max-h-[500px] opacity-0 sm:opacity-100 overflow-hidden sm:overflow-visible' : 'max-h-[500px] opacity-100'}`} aria-hidden="true">
+        <div className="safe-header-inner" />
+        <div className={`safe-area-x sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${appMode === 'gallery' && scrollDirection === 'down' ? 'max-h-0 pb-0' : 'max-h-20 pb-2'}`}>
+          <div className="p-1">
+            <div className="py-1.5 text-sm">占位</div>
+          </div>
+        </div>
+      </div>
+      {showHelp && <HelpModal appMode={appMode} onClose={() => setShowHelp(false)} />}
     </>
   )
 }

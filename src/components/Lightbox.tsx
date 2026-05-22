@@ -3,9 +3,16 @@ import { useStore, getCachedImage, ensureImageCached } from '../store'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
+import { suppressGlobalClicks } from '../lib/clickSuppression'
 
 const MIN_SCALE = 1
 const MAX_SCALE = 10
+const SWIPE_INTENT_THRESHOLD = 10
+const SWIPE_ACTION_THRESHOLD = 40
+const DOUBLE_TAP_DELAY = 350
+const DOUBLE_TAP_DISTANCE = 40
+
+type TouchIntent = 'none' | 'horizontal-swipe' | 'vertical-move' | 'zoom-pan' | 'pinch'
 
 function clamp(v: number, min: number, max: number) {
   return Math.max(min, Math.min(max, v))
@@ -166,6 +173,7 @@ interface LightboxInnerProps {
 /** 内部组件：保证挂载时 DOM 已经存在，所有 ref / effect 都可靠 */
 function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, currentIndex, total, onPrev, onNext }: LightboxInnerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const openedAtRef = useRef(Date.now())
 
   // 用 ref 追踪最新变换，避免闭包过期
   const scaleRef = useRef(1)
@@ -204,13 +212,21 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
   const hadMultiTouchRef = useRef(false)
   const touchStartedOnImageRef = useRef(false)
   const touchStartedOnControlRef = useRef(false)
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null)
+  const touchIntentRef = useRef<TouchIntent>('none')
+  const touchMovedRef = useRef(false)
+  const swipeHandledRef = useRef(false)
+  const doubleTapHandledRef = useRef(false)
+  const closeTapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // 判断本次 mousedown → mouseup 是否发生了拖拽，用于区分点击和拖拽
   const didDragRef = useRef(false)
   const suppressNextClickRef = useRef(false)
+  const suppressClickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // 切换图片时重置缩放
   useEffect(() => {
+    openedAtRef.current = Date.now()
     scaleRef.current = 1
     txRef.current = 0
     tyRef.current = 0
@@ -238,6 +254,30 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
     const rect = containerRef.current?.getBoundingClientRect()
     if (!rect) return { cx: 0, cy: 0 }
     return { cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2 }
+  }, [])
+
+  const cancelCloseTap = useCallback(() => {
+    if (closeTapTimerRef.current) {
+      clearTimeout(closeTapTimerRef.current)
+      closeTapTimerRef.current = null
+    }
+  }, [])
+
+  const suppressNextClickBriefly = useCallback(() => {
+    suppressNextClickRef.current = true
+    if (suppressClickTimerRef.current) clearTimeout(suppressClickTimerRef.current)
+    suppressClickTimerRef.current = setTimeout(() => {
+      suppressNextClickRef.current = false
+      suppressClickTimerRef.current = null
+    }, 350)
+  }, [])
+
+  const resetTouchGesture = useCallback(() => {
+    touchStartRef.current = null
+    touchIntentRef.current = 'none'
+    touchMovedRef.current = false
+    swipeHandledRef.current = false
+    touchStartedOnControlRef.current = false
   }, [])
 
   const apply = useCallback((s: number, tx: number, ty: number) => {
@@ -340,6 +380,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
   // ====== 鼠标双击缩放 ======
   const onDoubleClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation()
+    if (Date.now() - openedAtRef.current < DOUBLE_TAP_DELAY) return
     if (scaleRef.current > 1) {
       apply(1, 0, 0)
     } else {
@@ -358,8 +399,10 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 2) {
         e.preventDefault()
+        cancelCloseTap()
+        resetTouchGesture()
         hadMultiTouchRef.current = true
-        touchStartedOnControlRef.current = false
+        touchIntentRef.current = 'pinch'
         tapRef.current = { time: 0, x: 0, y: 0 }
         const [a, b] = [e.touches[0], e.touches[1]]
         const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)
@@ -379,19 +422,23 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
         const now = Date.now()
         const prev = tapRef.current
         touchStartedOnImageRef.current = e.target instanceof HTMLImageElement
-        touchStartedOnControlRef.current = e.target instanceof Element && Boolean(e.target.closest('[data-lightbox-control]'))
-        if (touchStartedOnControlRef.current) {
-          tapRef.current = { time: 0, x: 0, y: 0 }
-          return
-        }
+        touchStartedOnControlRef.current = e.target instanceof Element && Boolean(e.target.closest('[data-lightbox-control], button'))
+        touchStartRef.current = { x: t.clientX, y: t.clientY, time: now }
+        touchIntentRef.current = 'none'
+        touchMovedRef.current = false
+        swipeHandledRef.current = false
 
         // 双击检测
         if (
-          now - prev.time < 300 &&
-          Math.abs(t.clientX - prev.x) < 30 &&
-          Math.abs(t.clientY - prev.y) < 30
+          touchStartedOnImageRef.current &&
+          now - prev.time < DOUBLE_TAP_DELAY &&
+          Math.abs(t.clientX - prev.x) < DOUBLE_TAP_DISTANCE &&
+          Math.abs(t.clientY - prev.y) < DOUBLE_TAP_DISTANCE
         ) {
           e.preventDefault()
+          cancelCloseTap()
+          suppressNextClickBriefly()
+          doubleTapHandledRef.current = true
           if (scaleRef.current > 1) {
             apply(1, 0, 0)
           } else {
@@ -401,6 +448,7 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
             apply(3, -mx * 2, -my * 2)
           }
           tapRef.current = { time: 0, x: 0, y: 0 }
+          resetTouchGesture()
           return
         }
         tapRef.current = { time: now, x: t.clientX, y: t.clientY }
@@ -431,7 +479,30 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
         e.preventDefault()
         const t = e.touches[0]
         const d = dragRef.current
-        apply(scaleRef.current, d.baseTx + t.clientX - d.startX, d.baseTy + t.clientY - d.startY)
+        const dx = t.clientX - d.startX
+        const dy = t.clientY - d.startY
+        if (Math.abs(dx) > SWIPE_INTENT_THRESHOLD || Math.abs(dy) > SWIPE_INTENT_THRESHOLD) {
+          touchMovedRef.current = true
+          touchIntentRef.current = 'zoom-pan'
+        }
+        apply(scaleRef.current, d.baseTx + dx, d.baseTy + dy)
+      } else if (scaleRef.current <= 1 && e.touches.length === 1 && touchStartRef.current) {
+        const t = e.touches[0]
+        const dx = t.clientX - touchStartRef.current.x
+        const dy = t.clientY - touchStartRef.current.y
+        const absX = Math.abs(dx)
+        const absY = Math.abs(dy)
+
+        if (absX > SWIPE_INTENT_THRESHOLD || absY > SWIPE_INTENT_THRESHOLD) {
+          touchMovedRef.current = true
+        }
+        if (touchIntentRef.current === 'none' && (absX > SWIPE_INTENT_THRESHOLD || absY > SWIPE_INTENT_THRESHOLD)) {
+          touchIntentRef.current = absX > absY ? 'horizontal-swipe' : 'vertical-move'
+          if (touchIntentRef.current === 'horizontal-swipe') cancelCloseTap()
+        }
+        if (touchIntentRef.current === 'horizontal-swipe') {
+          e.preventDefault()
+        }
       }
     }
 
@@ -443,35 +514,94 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
           hadMultiTouchRef.current = false
           touchStartedOnControlRef.current = false
           tapRef.current = { time: 0, x: 0, y: 0 }
+          resetTouchGesture()
           return
         }
-        // 单击关闭：未缩放时任意位置关闭；缩放时仅点击图片外关闭。
-        const prev = tapRef.current
-        if (
-          !touchStartedOnControlRef.current &&
-          prev.time > 0 &&
-          Date.now() - prev.time < 300 &&
-          (scaleRef.current <= 1 || !touchStartedOnImageRef.current)
-        ) {
-          setTimeout(() => {
-            if (tapRef.current.time === prev.time) {
-              onClose()
-            }
-          }, 310)
+
+        if (doubleTapHandledRef.current) {
+          doubleTapHandledRef.current = false
+          resetTouchGesture()
+          return
         }
-        touchStartedOnControlRef.current = false
+
+        const start = touchStartRef.current
+        const changed = e.changedTouches[0]
+        const dx = start && changed ? changed.clientX - start.x : 0
+        const intent = touchIntentRef.current
+        const moved = touchMovedRef.current
+
+        if (intent === 'horizontal-swipe' && scaleRef.current <= 1) {
+          cancelCloseTap()
+          suppressNextClickBriefly()
+          swipeHandledRef.current = Math.abs(dx) >= SWIPE_ACTION_THRESHOLD
+          tapRef.current = { time: 0, x: 0, y: 0 }
+          e.preventDefault()
+          if (swipeHandledRef.current) {
+            if (dx < 0 && showNav) onNext()
+            if (dx > 0 && showNav) onPrev()
+          }
+          resetTouchGesture()
+          return
+        }
+
+        if (moved || intent === 'vertical-move' || intent === 'zoom-pan') {
+          suppressNextClickBriefly()
+          tapRef.current = { time: 0, x: 0, y: 0 }
+          resetTouchGesture()
+          return
+        }
+
+        // 触摸设备会在 touchend 后补发 click，这里接管点按，避免首个点按关闭导致双击缩放失效。
+        suppressNextClickBriefly()
+
+        // 单击关闭：未缩放时图片也可点按关闭；图片上的关闭延迟到双击窗口后，避免破坏双击缩放。
+        if (touchStartedOnControlRef.current) {
+          resetTouchGesture()
+          return
+        }
+        if (scaleRef.current <= 1 && touchStartedOnImageRef.current) {
+          cancelCloseTap()
+          closeTapTimerRef.current = setTimeout(() => {
+            closeTapTimerRef.current = null
+            suppressGlobalClicks()
+            onClose()
+          }, DOUBLE_TAP_DELAY)
+        } else if (!touchStartedOnImageRef.current) {
+          cancelCloseTap()
+          suppressGlobalClicks()
+          if (e.cancelable) e.preventDefault()
+          onClose()
+        }
+        resetTouchGesture()
       }
+    }
+
+    const onTouchCancel = () => {
+      cancelCloseTap()
+      tapRef.current = { time: 0, x: 0, y: 0 }
+      hadMultiTouchRef.current = false
+      doubleTapHandledRef.current = false
+      pinchRef.current.active = false
+      dragRef.current.active = false
+      resetTouchGesture()
     }
 
     el.addEventListener('touchstart', onTouchStart, { passive: false })
     el.addEventListener('touchmove', onTouchMove, { passive: false })
     el.addEventListener('touchend', onTouchEnd)
+    el.addEventListener('touchcancel', onTouchCancel)
     return () => {
+      cancelCloseTap()
+      if (suppressClickTimerRef.current) {
+        clearTimeout(suppressClickTimerRef.current)
+        suppressClickTimerRef.current = null
+      }
       el.removeEventListener('touchstart', onTouchStart)
       el.removeEventListener('touchmove', onTouchMove)
       el.removeEventListener('touchend', onTouchEnd)
+      el.removeEventListener('touchcancel', onTouchCancel)
     }
-  }, [apply, getCenter, onClose])
+  }, [apply, cancelCloseTap, getCenter, onClose, onNext, onPrev, resetTouchGesture, showNav, suppressNextClickBriefly])
 
   const s = scaleRef.current
   const tx = txRef.current
