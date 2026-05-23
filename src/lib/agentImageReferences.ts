@@ -2,6 +2,7 @@ import type { AgentRound, TaskRecord } from '../types'
 import { replaceImageMentionsForApi, stripImageMentionMarkers } from './promptImageMentions'
 
 const AGENT_ROUND_IMAGE_REFERENCE_RE = /@(?:第)?(\d+)轮图(\d+)/g
+const AGENT_REF_TAG_RE = /<ref\b[^>]*\bid=(["'])(round-(\d+)-(?:image|reference)-(\d+))\1[^>]*\/?>/g
 
 export function getAgentCurrentReferenceId(round: AgentRound, index: number) {
   return `round-${round.index}-reference-${index + 1}`
@@ -36,6 +37,10 @@ export function collectAgentRoundOutputImages(round: AgentRound, tasks: TaskReco
   return collectAgentRoundOutputImageSlots(round, tasks).filter((imageId): imageId is string => Boolean(imageId))
 }
 
+export function extractAgentReferenceIds(text: string) {
+  return Array.from(text.matchAll(AGENT_REF_TAG_RE), (match) => match[2]).filter((id): id is string => Boolean(id))
+}
+
 export function resolveAgentPromptImageReferences(prompt: string, rounds: AgentRound[], tasks: TaskRecord[]) {
   const refs: string[] = []
   for (const match of prompt.matchAll(AGENT_ROUND_IMAGE_REFERENCE_RE)) {
@@ -62,7 +67,7 @@ export function replaceAgentPromptImageReferencesForApi(
     (index) => getAgentReferenceTag(getAgentCurrentReferenceId(currentRound, index)),
   )
 
-  const withAgentReferences = withCurrentReferences.replace(AGENT_ROUND_IMAGE_REFERENCE_RE, (text, roundNumber, imageNumber) => {
+  const replaceGeneratedReference = (text: string, roundNumber: string, imageNumber: string) => {
     const roundIndex = Number(roundNumber) - 1
     const imageIndex = Number(imageNumber) - 1
     const sourceRound = rounds[roundIndex]
@@ -76,6 +81,7 @@ export function replaceAgentPromptImageReferencesForApi(
       ? getAgentCurrentReferenceId(currentRound, currentReferenceIndex)
       : getAgentGeneratedImageReferenceId(sourceRound, imageIndex)
     return getAgentReferenceTag(referenceId)
-  })
+  }
+  const withAgentReferences = withCurrentReferences.replace(AGENT_ROUND_IMAGE_REFERENCE_RE, replaceGeneratedReference)
   return stripImageMentionMarkers(withAgentReferences)
 }

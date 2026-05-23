@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useRef, useCallback, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
 import type { AgentConversation, AgentMessage, AgentRound, ResponsesOutputItem, TaskRecord } from '../types'
-import { editOutputs, getActiveAgentRounds, getAgentBranchLeafId, getAgentSiblingRounds, getCachedImage, ensureImageCached, regenerateAgentAssistantMessage, removeMultipleTasks, removeTask, reuseConfig, updateTaskInStore, useStore } from '../store'
+import { deleteAgentRoundFromConversation, editOutputs, getActiveAgentRounds, getAgentBranchLeafId, getAgentSiblingRounds, getCachedImage, ensureImageCached, regenerateAgentAssistantMessage, remapAgentRoundMentionsForPathChange, removeMultipleTasks, removeTask, reuseConfig, updateTaskInStore, useStore } from '../store'
 import { getPromptMentionParts } from '../lib/promptImageMentions'
 import { copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
 import { collectWebSearchCalls, getAgentRoundOutputItems, getWebSearchStatusForCalls, type AgentWebSearchStatus } from '../lib/agentWebSearch'
@@ -309,6 +309,7 @@ function getPageScrollTop() {
 
 export default function AgentWorkspace() {
   const conversations = useStore((s) => s.agentConversations)
+  const conversationsLoaded = useStore((s) => s.agentConversationsLoaded)
   const activeConversationId = useStore((s) => s.activeAgentConversationId)
   const createConversation = useStore((s) => s.createAgentConversation)
   const setActiveConversationId = useStore((s) => s.setActiveAgentConversationId)
@@ -493,6 +494,7 @@ export default function AgentWorkspace() {
 
   useEffect(() => {
     if (appMode !== 'agent') return
+    if (!conversationsLoaded) return
 
     if (conversations.length === 0) {
       createConversation()
@@ -504,7 +506,7 @@ export default function AgentWorkspace() {
         createConversation()
       }
     }
-  }, [appMode, conversations, conversation, createConversation, setActiveConversationId])
+  }, [appMode, conversationsLoaded, conversations, conversation, createConversation, setActiveConversationId])
 
   const sortedConversations = useMemo(
     () => [...conversations].sort((a, b) => b.updatedAt - a.updatedAt),
@@ -699,30 +701,32 @@ export default function AgentWorkspace() {
         if (isUserMessage) {
           if (round.outputTaskIds.length > 0) await removeMultipleTasks(round.outputTaskIds)
 
-          useStore.setState((state) => ({
-            agentConversations: state.agentConversations.map((item) =>
-              item.id === conversation?.id
-                ? (() => {
-                    const rounds = item.rounds
-                      .filter((candidate) => candidate.id !== round.id)
-                      .map((candidate) =>
-                        candidate.parentRoundId === round.id
-                          ? { ...candidate, parentRoundId: round.parentRoundId ?? null }
-                          : candidate,
-                      )
-                    const messages = item.messages.filter((candidate) => candidate.roundId !== round.id)
-                    const nextConversation = { ...item, rounds, messages, activeRoundId: item.activeRoundId === round.id ? null : item.activeRoundId ?? null }
-                    const activeRounds = getActiveAgentRounds(nextConversation)
-                    return {
-                      ...nextConversation,
-                      activeRoundId: nextConversation.activeRoundId ?? activeRounds[activeRounds.length - 1]?.id ?? null,
-                      updatedAt: Date.now(),
-                    }
-                  })()
-                : item,
-            ),
-            agentEditingRoundId: state.agentEditingRoundId === round.id ? null : state.agentEditingRoundId,
-          }))
+          useStore.setState((state) => {
+            const targetConversationId = conversation?.id
+            let oldActivePath: AgentRound[] = []
+            let newActivePath: AgentRound[] = []
+            const agentConversations = state.agentConversations.map((item) => {
+              if (item.id !== targetConversationId) return item
+              oldActivePath = getActiveAgentRounds(item)
+              const nextConversation = deleteAgentRoundFromConversation(item, round.id)
+              newActivePath = getActiveAgentRounds(nextConversation)
+              return nextConversation
+            })
+            const draft = targetConversationId ? state.agentInputDrafts[targetConversationId] : null
+            const remappedDraft = draft
+              ? { ...draft, prompt: remapAgentRoundMentionsForPathChange(draft.prompt, oldActivePath, newActivePath) }
+              : null
+            const agentInputDrafts = targetConversationId && remappedDraft
+              ? { ...state.agentInputDrafts, [targetConversationId]: remappedDraft }
+              : state.agentInputDrafts
+            const shouldRemapVisibleInput = targetConversationId && state.activeAgentConversationId === targetConversationId && state.appMode === 'agent'
+            return {
+              agentConversations,
+              agentInputDrafts,
+              ...(shouldRemapVisibleInput ? { prompt: remapAgentRoundMentionsForPathChange(state.prompt, oldActivePath, newActivePath) } : {}),
+              agentEditingRoundId: state.agentEditingRoundId === round.id ? null : state.agentEditingRoundId,
+            }
+          })
           return
         }
 

@@ -9,6 +9,7 @@ vi.mock('./lib/db', () => {
   const tasks = new Map<string, TaskRecord>()
   const images = new Map<string, StoredImage>()
   const thumbnails = new Map<string, StoredImageThumbnail>()
+  const agentConversations = new Map<string, AgentConversation>()
   let imageSeq = 0
 
   return {
@@ -23,6 +24,21 @@ vi.mock('./lib/db', () => {
     },
     clearTasks: async () => {
       tasks.clear()
+    },
+    getAllAgentConversations: async () => [...agentConversations.values()],
+    putAgentConversation: async (conversation: AgentConversation) => {
+      agentConversations.set(conversation.id, conversation)
+      return conversation.id
+    },
+    deleteAgentConversation: async (id: string) => {
+      agentConversations.delete(id)
+    },
+    clearAgentConversations: async () => {
+      agentConversations.clear()
+    },
+    replaceAgentConversations: async (conversations: AgentConversation[]) => {
+      agentConversations.clear()
+      for (const conversation of conversations) agentConversations.set(conversation.id, conversation)
     },
     getImage: async (id: string) => images.get(id),
     getImageThumbnail: async (id: string) => thumbnails.get(id),
@@ -70,20 +86,19 @@ vi.mock('./lib/agentApi', () => ({
   })),
   parseBatchImageCallArguments: vi.fn((args: string) => {
     try {
-      const parsed = JSON.parse(args) as { images?: Array<{ id?: string; prompt?: string; reference_ids?: string[] }> }
+      const parsed = JSON.parse(args) as { images?: Array<{ id?: string; prompt?: string }> }
       return parsed.images?.map((item, index) => ({
         id: item.id || `image_${index + 1}`,
         prompt: item.prompt || '',
-        reference_ids: item.reference_ids || [],
       })) ?? null
     } catch {
       return null
     }
   }),
 }))
-import { clearImages, putImage } from './lib/db'
+import { clearAgentConversations, clearImages, getAllAgentConversations, getAllTasks, putAgentConversation, putImage, putTask as putDbTask } from './lib/db'
 import { callAgentResponsesApi, callBatchImageSingle } from './lib/agentApi'
-import { cleanStaleAgentInputDrafts, editOutputs, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, markInterruptedOpenAIRunningTasks, regenerateAgentAssistantMessage, removeTask, reuseConfig, submitAgentMessage, submitTask, useStore } from './store'
+import { cleanStaleAgentInputDrafts, deleteAgentRoundFromConversation, editOutputs, getActiveAgentRounds, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, markInterruptedOpenAIRunningTasks, migratePersistedState, regenerateAgentAssistantMessage, remapAgentRoundMentionsForPathChange, removeTask, reuseConfig, submitAgentMessage, submitTask, useStore } from './store'
 
 const imageA = { id: 'image-a', dataUrl: 'data:image/png;base64,a' }
 const imageB = { id: 'image-b', dataUrl: 'data:image/png;base64,b' }
@@ -362,6 +377,157 @@ describe('prompt textarea layout', () => {
   })
 })
 
+describe('agent conversation persistence', () => {
+  beforeEach(async () => {
+    await clearAgentConversations()
+  })
+
+  it('omits agent conversations from localStorage state', () => {
+    const conversation = agentConversation({
+      rounds: [{
+        id: 'round-a',
+        index: 1,
+        parentRoundId: null,
+        userMessageId: 'user-a',
+        assistantMessageId: 'assistant-a',
+        prompt: '画一张图',
+        inputImageIds: [],
+        outputTaskIds: ['task-a'],
+        responseOutput: [
+          { type: 'message', content: [{ type: 'output_text', text: '已生成图片。' }] },
+          { type: 'image_generation_call', id: 'image-call-a', result: 'large-base64-a' },
+          { type: 'image_generation_call', id: 'image-call-b', result: { b64_json: 'large-base64-b', base64: 'large-base64-c', image: 'large-base64-d', data: 'large-base64-e' } },
+        ],
+        status: 'done',
+        error: null,
+        createdAt: 1,
+        finishedAt: 2,
+      }],
+      messages: [
+        { id: 'user-a', role: 'user', content: '画一张图', roundId: 'round-a', createdAt: 1 },
+        { id: 'assistant-a', role: 'assistant', content: '已生成图片。', roundId: 'round-a', outputTaskIds: ['task-a'], createdAt: 2 },
+      ],
+    })
+    useStore.setState({ agentConversations: [conversation] })
+
+    const persisted = getPersistedState(useStore.getState())
+    const serializedPersisted = JSON.stringify(persisted)
+
+    expect('agentConversations' in persisted).toBe(false)
+    expect(serializedPersisted).not.toContain('image_generation_call')
+    expect(serializedPersisted).not.toContain('large-base64')
+    expect(JSON.stringify(useStore.getState().agentConversations)).toContain('large-base64-a')
+  })
+
+  it('loads agent conversations from IndexedDB and migrates legacy localStorage conversations', async () => {
+    const storedConversation = agentConversation({ id: 'stored-conversation', createdAt: 1, updatedAt: 1 })
+    const legacyConversation = agentConversation({ id: 'legacy-conversation', createdAt: 2, updatedAt: 2 })
+    await putAgentConversation(storedConversation)
+    useStore.setState({ agentConversations: [legacyConversation], activeAgentConversationId: legacyConversation.id })
+
+    await initStore()
+
+    const state = useStore.getState()
+    const stored = await getAllAgentConversations()
+    expect(state.agentConversations.map((conversation) => conversation.id)).toEqual(['stored-conversation', 'legacy-conversation'])
+    expect(state.activeAgentConversationId).toBe('legacy-conversation')
+    expect(stored.map((conversation) => conversation.id)).toEqual(['stored-conversation', 'legacy-conversation'])
+  })
+
+  it('strips generated image payloads from legacy task raw payloads during startup migration', async () => {
+    await putDbTask(task({
+      id: 'legacy-task',
+      outputImages: ['image-live'],
+      rawResponsePayload: JSON.stringify({
+        output: [{ type: 'image_generation_call', id: 'image-call-a', result: 'legacy-task-base64' }],
+      }),
+    }))
+
+    await initStore()
+
+    const storedTasks = await getAllTasks()
+    const serializedStoredTasks = JSON.stringify(storedTasks)
+    expect(serializedStoredTasks).toContain('image_generation_call')
+    expect(serializedStoredTasks).not.toContain('legacy-task-base64')
+  })
+
+  it('keeps agent conversations created while initStore is loading', async () => {
+    const legacyConversation = agentConversation({ id: 'legacy-conversation', createdAt: 1, updatedAt: 1 })
+    const earlyConversation = agentConversation({ id: 'early-conversation', createdAt: 2, updatedAt: 2 })
+    useStore.setState({ agentConversations: [legacyConversation], activeAgentConversationId: legacyConversation.id })
+
+    const initPromise = initStore()
+    useStore.setState({ agentConversations: [legacyConversation, earlyConversation], activeAgentConversationId: earlyConversation.id })
+    await initPromise
+
+    const state = useStore.getState()
+    const stored = await getAllAgentConversations()
+    expect(state.agentConversations.map((conversation) => conversation.id)).toEqual(['legacy-conversation', 'early-conversation'])
+    expect(state.activeAgentConversationId).toBe('early-conversation')
+    expect(stored.map((conversation) => conversation.id)).toEqual(['legacy-conversation', 'early-conversation'])
+  })
+
+  it('restores active conversation and draft when localStorage no longer stores conversations', async () => {
+    const storedConversation = agentConversation({ id: 'stored-conversation', createdAt: 1, updatedAt: 1 })
+    useStore.setState({
+      appMode: 'agent',
+      agentConversations: [],
+      activeAgentConversationId: storedConversation.id,
+      agentInputDrafts: {
+        [storedConversation.id]: {
+          prompt: '未发送草稿',
+          inputImages: [],
+          maskDraft: null,
+          maskEditorImageId: null,
+          updatedAt: Date.now(),
+        },
+      },
+      prompt: '',
+      inputImages: [],
+      maskDraft: null,
+      maskEditorImageId: null,
+    })
+    await putAgentConversation(storedConversation)
+
+    await initStore()
+
+    const state = useStore.getState()
+    expect(state.agentConversations.map((conversation) => conversation.id)).toEqual(['stored-conversation'])
+    expect(state.activeAgentConversationId).toBe('stored-conversation')
+    expect(state.agentInputDrafts['stored-conversation']?.prompt).toBe('未发送草稿')
+    expect(state.prompt).toBe('未发送草稿')
+  })
+
+  it('strips generated image payloads when migrating old persisted state', () => {
+    const migrated = migratePersistedState({
+      settings: { ...DEFAULT_SETTINGS },
+      agentConversations: [agentConversation({
+        rounds: [{
+          id: 'round-a',
+          index: 1,
+          parentRoundId: null,
+          userMessageId: 'user-a',
+          prompt: '画一张图',
+          inputImageIds: [],
+          outputTaskIds: ['task-a'],
+          responseOutput: [
+            { type: 'image_generation_call', id: 'image-call-a', result: 'legacy-base64-a' },
+            { type: 'image_generation_call', id: 'image-call-b', result: { b64_json: 'legacy-base64-b', base64: 'legacy-base64-c' } },
+          ],
+          status: 'done',
+          error: null,
+          createdAt: 1,
+          finishedAt: 2,
+        }],
+      })],
+    })
+
+    const serializedMigrated = JSON.stringify(migrated)
+    expect(serializedMigrated).not.toContain('legacy-base64')
+    expect(serializedMigrated).toContain('image_generation_call')
+  })
+})
+
 describe('agent conversation creation', () => {
   beforeEach(() => {
     useStore.setState({
@@ -436,14 +602,140 @@ describe('agent conversation creation', () => {
   })
 })
 
+describe('agent round deletion', () => {
+  it('renumbers later rounds and remaps image mentions after deleting a middle round', () => {
+    const conversation = agentConversation({
+      activeRoundId: 'round-3',
+      rounds: [
+        {
+          id: 'round-1',
+          index: 1,
+          parentRoundId: null,
+          userMessageId: 'user-1',
+          assistantMessageId: 'assistant-1',
+          prompt: '第一轮',
+          inputImageIds: [],
+          outputTaskIds: ['task-1'],
+          status: 'done',
+          error: null,
+          createdAt: 1,
+          finishedAt: 2,
+        },
+        {
+          id: 'round-2',
+          index: 2,
+          parentRoundId: 'round-1',
+          userMessageId: 'user-2',
+          assistantMessageId: 'assistant-2',
+          prompt: '第二轮',
+          inputImageIds: [],
+          outputTaskIds: ['task-2'],
+          status: 'done',
+          error: null,
+          createdAt: 3,
+          finishedAt: 4,
+        },
+        {
+          id: 'round-3',
+          index: 3,
+          parentRoundId: 'round-2',
+          userMessageId: 'user-3',
+          assistantMessageId: 'assistant-3',
+          prompt: '第三轮',
+          inputImageIds: [],
+          outputTaskIds: ['task-3'],
+          status: 'done',
+          error: null,
+          createdAt: 5,
+          finishedAt: 6,
+        },
+      ],
+      messages: [
+        { id: 'user-1', role: 'user', content: '第一轮', roundId: 'round-1', createdAt: 1 },
+        { id: 'assistant-1', role: 'assistant', content: '完成', roundId: 'round-1', createdAt: 2 },
+        { id: 'user-2', role: 'user', content: '第二轮', roundId: 'round-2', createdAt: 3 },
+        { id: 'assistant-2', role: 'assistant', content: '完成', roundId: 'round-2', createdAt: 4 },
+        { id: 'user-3', role: 'user', content: '参考 @第1轮图1、@第2轮图1、@第3轮图1', roundId: 'round-3', createdAt: 5 },
+        { id: 'assistant-3', role: 'assistant', content: '完成', roundId: 'round-3', createdAt: 6 },
+      ],
+    })
+
+    const deleted = deleteAgentRoundFromConversation(conversation, 'round-2', 10)
+
+    expect(deleted.rounds.map((round) => ({ id: round.id, index: round.index, parentRoundId: round.parentRoundId }))).toEqual([
+      { id: 'round-1', index: 1, parentRoundId: null },
+      { id: 'round-3', index: 2, parentRoundId: 'round-1' },
+    ])
+    expect(deleted.messages.map((message) => message.id)).toEqual(['user-1', 'assistant-1', 'user-3', 'assistant-3'])
+    expect(deleted.messages.find((message) => message.id === 'user-3')?.content).toBe('参考 @第1轮图1、@已删除轮次图1、@第2轮图1')
+    expect(deleted.activeRoundId).toBe('round-3')
+    expect(deleted.updatedAt).toBe(10)
+  })
+
+  it('can remap draft mentions using the old and new active paths after deletion', () => {
+    const conversation = agentConversation({
+      activeRoundId: 'round-3',
+      rounds: [
+        {
+          id: 'round-1',
+          index: 1,
+          parentRoundId: null,
+          userMessageId: 'user-1',
+          prompt: '第一轮',
+          inputImageIds: [],
+          outputTaskIds: ['task-1'],
+          status: 'done',
+          error: null,
+          createdAt: 1,
+          finishedAt: 2,
+        },
+        {
+          id: 'round-2',
+          index: 2,
+          parentRoundId: 'round-1',
+          userMessageId: 'user-2',
+          prompt: '第二轮',
+          inputImageIds: [],
+          outputTaskIds: ['task-2'],
+          status: 'done',
+          error: null,
+          createdAt: 3,
+          finishedAt: 4,
+        },
+        {
+          id: 'round-3',
+          index: 3,
+          parentRoundId: 'round-2',
+          userMessageId: 'user-3',
+          prompt: '第三轮',
+          inputImageIds: [],
+          outputTaskIds: ['task-3'],
+          status: 'done',
+          error: null,
+          createdAt: 5,
+          finishedAt: 6,
+        },
+      ],
+      messages: [],
+    })
+    const oldPath = getActiveAgentRounds(conversation)
+    const deleted = deleteAgentRoundFromConversation(conversation, 'round-2', 10)
+    const newPath = getActiveAgentRounds(deleted)
+
+    expect(remapAgentRoundMentionsForPathChange('继续参考 @第1轮图1、@第2轮图1、@第3轮图1', oldPath, newPath))
+      .toBe('继续参考 @第1轮图1、@已删除轮次图1、@第2轮图1')
+  })
+})
+
 describe('data import', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     useStore.setState({
       tasks: [],
       agentConversations: [],
       activeAgentConversationId: null,
       showToast: vi.fn(),
     })
+    await clearAgentConversations()
   })
 
   it('skips empty agent conversations when importing task data', async () => {
@@ -526,6 +818,53 @@ describe('data import', () => {
     expect(state.agentConversations.map((conversation) => conversation.id)).toEqual(['local-conversation', 'imported-conversation'])
     expect(state.activeAgentConversationId).toBe('local-conversation')
   })
+
+  it('stores imported legacy agent conversations in IndexedDB without localStorage or image payloads', async () => {
+    const importedConversation = agentConversation({
+      id: 'legacy-imported-conversation',
+      activeRoundId: 'round-a',
+      rounds: [{
+        id: 'round-a',
+        index: 1,
+        parentRoundId: null,
+        userMessageId: 'message-a',
+        prompt: 'imported prompt',
+        inputImageIds: [],
+        outputTaskIds: ['task-a'],
+        responseOutput: [
+          { type: 'message', content: [{ type: 'output_text', text: '已生成图片。' }] },
+          { type: 'image_generation_call', id: 'image-call-a', result: { base64: 'imported-legacy-base64' } },
+        ],
+        status: 'done',
+        error: null,
+        createdAt: 2,
+        finishedAt: 3,
+      }],
+      messages: [{ id: 'message-a', role: 'user', content: 'imported prompt', roundId: 'round-a', createdAt: 2 }],
+    })
+
+    const imported = await importData(importFile({
+      version: 2,
+      exportedAt: new Date(0).toISOString(),
+      tasks: [],
+      agentConversations: [importedConversation],
+      imageFiles: {},
+    }), { importConfig: false, importTasks: true })
+
+    const indexedConversations = await getAllAgentConversations()
+    const persisted = getPersistedState(useStore.getState())
+    const serializedIndexedConversations = JSON.stringify(indexedConversations)
+    const serializedPersisted = JSON.stringify(persisted)
+
+    expect(imported).toBe(true)
+    expect(indexedConversations.map((conversation) => conversation.id)).toEqual(['legacy-imported-conversation'])
+    expect(serializedIndexedConversations).toContain('image_generation_call')
+    expect(serializedIndexedConversations).not.toContain('imported-legacy-base64')
+    expect('agentConversations' in persisted).toBe(false)
+    expect(serializedPersisted).not.toContain('image_generation_call')
+    expect(serializedPersisted).not.toContain('imported-legacy-base64')
+  })
+
 })
 
 describe('agent draft lifecycle', () => {
@@ -787,6 +1126,7 @@ describe('agent context for removed outputs', () => {
   })
 
   it('does not send removed image_generation results back to the model', async () => {
+    await putImage({ id: 'image-live', dataUrl: 'data:image/png;base64,live-base64' })
     await submitAgentMessage()
     await new Promise((resolve) => setTimeout(resolve, 0))
 
@@ -794,10 +1134,198 @@ describe('agent context for removed outputs', () => {
     const serializedInput = JSON.stringify(input)
     expect(serializedInput).not.toContain('deleted-base64')
     expect(serializedInput).toContain('live-base64')
-    expect(serializedInput).not.toContain('Generated image removed')
+    expect(serializedInput).not.toContain('deleted-call')
+    expect(serializedInput).not.toContain('live-call')
+    expect(serializedInput).not.toContain('image_generation_call')
     expect(serializedInput).toContain('removed_ref')
     expect(serializedInput).toContain('round-1-image-1')
     expect(serializedInput).toContain('round-1-image-2')
+    expect(serializedInput).toContain('input_image')
+  })
+
+  it('restores stripped image_generation results from task payloads when building context', async () => {
+    await putImage({ id: 'image-live', dataUrl: 'data:image/png;base64,live-base64' })
+    const rawResponsePayload = JSON.stringify({
+      output: [
+        { type: 'message', content: [{ type: 'output_text', text: '已生成两张图。' }] },
+        { type: 'image_generation_call', id: 'deleted-call', result: 'deleted-base64' },
+        { type: 'image_generation_call', id: 'live-call', result: 'live-base64' },
+      ],
+    }, null, 2)
+    useStore.setState((state) => ({
+      tasks: [task({
+        id: 'task-live',
+        outputImages: ['image-live'],
+        rawResponsePayload,
+        sourceMode: 'agent',
+        agentRoundId: 'round-a',
+        agentToolCallId: 'live-call',
+      })],
+      agentConversations: state.agentConversations.map((conversation) => ({
+        ...conversation,
+        rounds: conversation.rounds.map((round) => round.id === 'round-a'
+          ? {
+              ...round,
+              responseOutput: [
+                { type: 'message', content: [{ type: 'output_text', text: '已生成两张图。' }] },
+                { type: 'image_generation_call', id: 'deleted-call' },
+                { type: 'image_generation_call', id: 'live-call' },
+              ],
+            }
+          : round,
+        ),
+      })),
+    }))
+
+    await submitAgentMessage()
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    const input = vi.mocked(callAgentResponsesApi).mock.calls[0][0].input
+    const serializedInput = JSON.stringify(input)
+    expect(serializedInput).toContain('live-base64')
+    expect(serializedInput).toContain('input_image')
+    expect(serializedInput).not.toContain('deleted-base64')
+    expect(serializedInput).not.toContain('live-call')
+    expect(serializedInput).not.toContain('image_generation_call')
+  })
+
+  it('hydrates stripped task payload image results from stored images when building context', async () => {
+    await putImage({ id: 'image-hydrate', dataUrl: 'data:image/png;base64,hydrated-live-base64' })
+    const rawResponsePayload = JSON.stringify({
+      output: [{ type: 'image_generation_call' }],
+    }, null, 2)
+    useStore.setState((state) => ({
+      tasks: [task({
+        id: 'task-live',
+        outputImages: ['image-hydrate'],
+        rawResponsePayload,
+        sourceMode: 'agent',
+        agentRoundId: 'round-a',
+      })],
+      agentConversations: state.agentConversations.map((conversation) => ({
+        ...conversation,
+        rounds: conversation.rounds.map((round) => round.id === 'round-a'
+          ? {
+              ...round,
+              outputTaskIds: ['task-live'],
+              responseOutput: [{ type: 'image_generation_call' }],
+            }
+          : round,
+        ),
+      })),
+    }))
+
+    await submitAgentMessage()
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    const input = vi.mocked(callAgentResponsesApi).mock.calls[0][0].input
+    const serializedInput = JSON.stringify(input)
+    expect(serializedInput).toContain('hydrated-live-base64')
+  })
+
+  it('restores stripped image results even when legacy tasks lack tool call ids', async () => {
+    await putImage({ id: 'image-legacy', dataUrl: 'data:image/png;base64,legacy-live-base64' })
+    const rawResponsePayload = JSON.stringify({
+      output: [
+        { type: 'message', content: [{ type: 'output_text', text: '已生成图片。' }] },
+        { type: 'image_generation_call', result: { base64: 'legacy-live-base64' } },
+      ],
+    }, null, 2)
+    useStore.setState((state) => ({
+      tasks: [task({
+        id: 'legacy-task-live',
+        outputImages: ['image-legacy'],
+        rawResponsePayload,
+        sourceMode: 'agent',
+        agentRoundId: 'round-a',
+        agentToolCallId: undefined,
+      })],
+      agentConversations: state.agentConversations.map((conversation) => ({
+        ...conversation,
+        rounds: conversation.rounds.map((round) => round.id === 'round-a'
+          ? {
+              ...round,
+              outputTaskIds: ['legacy-task-live'],
+              responseOutput: [
+                { type: 'message', content: [{ type: 'output_text', text: '已生成图片。' }] },
+                { type: 'image_generation_call' },
+              ],
+            }
+          : round,
+        ),
+      })),
+    }))
+
+    await submitAgentMessage()
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    const input = vi.mocked(callAgentResponsesApi).mock.calls[0][0].input
+    const serializedInput = JSON.stringify(input)
+    expect(serializedInput).toContain('legacy-live-base64')
+    expect(serializedInput).toContain('input_image')
+    expect(serializedInput).not.toContain('image_generation_call')
+    expect(serializedInput.match(/已生成图片。/g)).toHaveLength(1)
+  })
+
+  it('restores all stripped batch image results after restart', async () => {
+    await putImage({ id: 'image-batch-1', dataUrl: 'data:image/png;base64,batch-base64-1' })
+    await putImage({ id: 'image-batch-2', dataUrl: 'data:image/png;base64,batch-base64-2' })
+    const batchOnePayload = JSON.stringify({
+      output: [{ type: 'image_generation_call', id: 'batch-call-1', result: 'batch-base64-1' }],
+    }, null, 2)
+    const batchTwoPayload = JSON.stringify({
+      output: [{ type: 'image_generation_call', id: 'batch-call-2', result: 'batch-base64-2' }],
+    }, null, 2)
+    useStore.setState((state) => ({
+      tasks: [
+        task({
+          id: 'task-batch-1',
+          outputImages: ['image-batch-1'],
+          rawResponsePayload: batchOnePayload,
+          sourceMode: 'agent',
+          agentRoundId: 'round-a',
+          agentToolCallId: 'batch-call-1',
+          agentBatchCallId: 'batch-fc-1',
+        }),
+        task({
+          id: 'task-batch-2',
+          outputImages: ['image-batch-2'],
+          rawResponsePayload: batchTwoPayload,
+          sourceMode: 'agent',
+          agentRoundId: 'round-a',
+          agentToolCallId: 'batch-call-2',
+          agentBatchCallId: 'batch-fc-1',
+        }),
+      ],
+      agentConversations: state.agentConversations.map((conversation) => ({
+        ...conversation,
+        rounds: conversation.rounds.map((round) => round.id === 'round-a'
+          ? {
+              ...round,
+              outputTaskIds: ['task-batch-1', 'task-batch-2'],
+              responseOutput: [
+                { type: 'function_call', name: 'generate_image_batch', call_id: 'batch-fc-1', arguments: '{}' },
+                { type: 'function_call_output', call_id: 'batch-fc-1', output: '{"images":[{"id":"1","status":"done"},{"id":"2","status":"done"}]}' },
+                { type: 'image_generation_call' },
+                { type: 'image_generation_call' },
+              ],
+            }
+          : round,
+        ),
+      })),
+    }))
+
+    await submitAgentMessage()
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    const input = vi.mocked(callAgentResponsesApi).mock.calls[0][0].input
+    const serializedInput = JSON.stringify(input)
+    expect(serializedInput).toContain('batch-base64-1')
+    expect(serializedInput).toContain('batch-base64-2')
+    expect(serializedInput).toContain('input_image')
+    expect(serializedInput).not.toContain('batch-call-1')
+    expect(serializedInput).not.toContain('batch-call-2')
+    expect(serializedInput).not.toContain('image_generation_call')
   })
 
   it('scrubs stored agent response payloads when deleting an output task', async () => {
@@ -1008,7 +1536,6 @@ describe('agent batch reference resolution', () => {
             images: [{
               id: 'next-image',
               prompt: '参考 <ref id="round-2-image-1" /> 生成',
-              reference_ids: ['round-2-image-1'],
             }],
           }),
         }],
@@ -1031,6 +1558,43 @@ describe('agent batch reference resolution', () => {
     expect(batchArgs.referenceImageDataUrls).toEqual([imageB.dataUrl])
     expect(batchArgs.referenceImageDataUrls).not.toContain(imageA.dataUrl)
     expect(batchArgs.referenceIds).toEqual(['round-2-image-1'])
+  })
+
+  it('resolves batch references to current round input images', async () => {
+    useStore.setState({ inputImages: [imageA] })
+    vi.mocked(callAgentResponsesApi)
+      .mockResolvedValueOnce({
+        text: '',
+        images: [],
+        outputItems: [{
+          type: 'function_call',
+          name: 'generate_image_batch',
+          call_id: 'batch-call',
+          arguments: JSON.stringify({
+            images: [{
+              id: 'variant-image',
+              prompt: '参考 <ref id="round-3-reference-1" /> 生成变体',
+            }],
+          }),
+        }],
+        responseId: 'response-1',
+      })
+      .mockResolvedValueOnce({
+        text: '完成',
+        images: [],
+        outputItems: [{ type: 'message', content: [{ type: 'output_text', text: '完成' }] }],
+        responseId: 'response-2',
+      })
+
+    await submitAgentMessage()
+
+    for (let i = 0; i < 5 && vi.mocked(callBatchImageSingle).mock.calls.length === 0; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 0))
+    }
+    expect(callBatchImageSingle).toHaveBeenCalled()
+    const batchArgs = vi.mocked(callBatchImageSingle).mock.calls[0][0]
+    expect(batchArgs.referenceImageDataUrls).toEqual([imageA.dataUrl])
+    expect(batchArgs.referenceIds).toEqual(['round-3-reference-1'])
   })
 })
 

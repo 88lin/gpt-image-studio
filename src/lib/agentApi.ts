@@ -41,12 +41,13 @@ const AGENT_IMAGE_INSTRUCTIONS = [
   '- Only generate when explicitly requested; otherwise reply with text.',
   '- Preserve the user\'s original intent faithfully. Never substitute requested subjects for copyright/trademark reasons.',
   '',
-  '## Reference tags',
-  'NEVER output `<ref>`, `<available_refs>`, or any XML reference tags in visible assistant text — the system injects them automatically and your raw output will be shown directly to the user.',
-  '- In user messages: `<ref id="..." />` point to attached/cited images.',
-  '- After assistant turns: `<available_refs>` list ids of generated images.',
-  '- In generate_image_batch tool arguments: use bare ids in `reference_ids`, and also include matching `<ref id="..." />` tags inside that image prompt when the prompt refers to a reference image.',
-  'Resolve user mentions ("the first image") to the matching id. Only use existing ids in image_generation prompts and generate_image_batch reference_ids.',
+  '## Reference tags and generated images in context',
+  'NEVER output `<ref>`, `<available_refs>`, `<removed_ref>`, or any XML reference tags in visible assistant text — the system injects them automatically and your raw output will be shown directly to the user.',
+  '- Previously generated images are injected as user messages containing the actual image (input_image) followed by a `<ref id="round-N-image-M" prompt="..." />` tag identifying it.',
+  '- Deleted images appear as `<removed_ref id="..." />` without an accompanying image — do not reference them.',
+  '- In user messages: `<ref id="..." />` may also point to user-attached/cited images.',
+  '- In generate_image_batch tool arguments, include matching `<ref id="..." />` tags inside each image prompt when the prompt refers to a reference image. Do not use separate bare reference ids.',
+  'Resolve user mentions ("the first image") to the matching id. Only use existing ids in image_generation prompts and generate_image_batch prompts.',
 ].join('\n')
 
 function createAgentInstructions(settings: AppSettings) {
@@ -122,7 +123,7 @@ function createAgentTools(params: TaskParams, profile: ApiProfile, settings: App
       '2. These images are independent of each other (none references another image in this same batch).',
       'For single images or prerequisite/base images, use the built-in image_generation tool instead.',
       'Each image prompt must be self-contained and include full visual style descriptions.',
-      'If an image needs to match a previously generated image, include its bare ref id in reference_ids AND include the corresponding XML tag (e.g. <ref id="round-1-image-1" />) inside that image prompt so the reference is unambiguous.',
+      'If an image needs to match a previously generated image, include the corresponding XML tag (e.g. <ref id="round-1-image-1" />) inside that image prompt so the app can attach the reference image automatically.',
     ].join(' '),
     parameters: {
       type: 'object',
@@ -139,15 +140,10 @@ function createAgentTools(params: TaskParams, profile: ApiProfile, settings: App
               },
               prompt: {
                 type: 'string',
-                description: 'Complete image generation prompt with all visual details. If reference_ids is non-empty, mention each referenced image using the matching XML tag, e.g. <ref id="round-1-image-1" />.',
-              },
-              reference_ids: {
-                type: 'array',
-                items: { type: 'string' },
-                description: 'Ref ids of previously generated images to use as visual reference (e.g. ["round-1-image-1"]). Pass empty array if no references needed.',
+                description: 'Complete image generation prompt with all visual details. If it refers to a previous image, include the matching XML tag, e.g. <ref id="round-1-image-1" />.',
               },
             },
-            required: ['id', 'prompt', 'reference_ids'],
+            required: ['id', 'prompt'],
             additionalProperties: false,
           },
         },
@@ -416,6 +412,8 @@ function extractImages(payload: ResponsesApiResponse, fallbackMime: string): Age
     if (result && typeof result === 'object') {
       const b64 = typeof result.b64_json === 'string'
         ? result.b64_json
+        : typeof result.base64 === 'string'
+        ? result.base64
         : typeof result.image === 'string'
         ? result.image
         : typeof result.data === 'string'
@@ -445,6 +443,8 @@ function extractImageFromOutputItem(item: ResponsesOutputItem, fallbackMime: str
     : result && typeof result === 'object'
     ? typeof result.b64_json === 'string'
       ? result.b64_json
+      : typeof result.base64 === 'string'
+      ? result.base64
       : typeof result.image === 'string'
       ? result.image
       : typeof result.data === 'string'
@@ -897,21 +897,18 @@ export async function callBatchImageSingle(opts: {
 }
 
 /** Parse the arguments of a generate_image_batch function call */
-export function parseBatchImageCallArguments(args: string): Array<{ id: string; prompt: string; reference_ids: string[] }> | null {
+export function parseBatchImageCallArguments(args: string): Array<{ id: string; prompt: string }> | null {
   try {
     const parsed = JSON.parse(args) as { images?: unknown }
     if (!parsed || !Array.isArray(parsed.images)) return null
-    const items: Array<{ id: string; prompt: string; reference_ids: string[] }> = []
+    const items: Array<{ id: string; prompt: string }> = []
     for (const raw of parsed.images) {
       if (!raw || typeof raw !== 'object') continue
       const item = raw as Record<string, unknown>
       const id = typeof item.id === 'string' ? item.id.trim() : ''
       const prompt = typeof item.prompt === 'string' ? item.prompt.trim() : ''
       if (!prompt) continue
-      const reference_ids = Array.isArray(item.reference_ids)
-        ? (item.reference_ids as unknown[]).filter((r): r is string => typeof r === 'string')
-        : []
-      items.push({ id: id || `image_${items.length + 1}`, prompt, reference_ids })
+      items.push({ id: id || `image_${items.length + 1}`, prompt })
     }
     return items.length > 0 ? items : null
   } catch {

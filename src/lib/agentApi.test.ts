@@ -79,6 +79,36 @@ describe('callAgentResponsesApi', () => {
     expect(body.tools[0].input_image_mask).toEqual({ image_url: 'data:image/png;base64,bWFzaw==' })
   })
 
+  it('extracts image_generation results from base64 object fields', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      output: [{
+        type: 'image_generation_call',
+        id: 'ig_base64',
+        result: { base64: 'ZmlsZQ==' },
+      }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+    const profile = createDefaultOpenAIProfile({
+      apiKey: 'test-key',
+      apiMode: 'responses',
+    })
+
+    const result = await callAgentResponsesApi({
+      settings: DEFAULT_SETTINGS,
+      profile,
+      params: DEFAULT_PARAMS,
+      input: [{ role: 'user', content: [{ type: 'input_text', text: 'prompt' }] }],
+    })
+
+    expect(result.images).toEqual([{
+      toolCallId: 'ig_base64',
+      dataUrl: 'data:image/png;base64,ZmlsZQ==',
+      actualParams: {},
+    }])
+  })
+
   it('stops reading a stream when the caller aborts after output starts', async () => {
     const streamBody = [
       'data: {"type":"response.output_text.delta","delta":"Hel"}',

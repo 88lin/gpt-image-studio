@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { AgentRound, TaskRecord } from '../types'
 import { DEFAULT_PARAMS } from '../types'
 import { getSelectedImageMentionLabel, getSelectedTextMentionLabel } from './promptImageMentions'
-import { replaceAgentPromptImageReferencesForApi, resolveAgentPromptImageReferences } from './agentImageReferences'
+import { extractAgentReferenceIds, replaceAgentPromptImageReferencesForApi, resolveAgentPromptImageReferences } from './agentImageReferences'
 
 const round = (patch: Partial<AgentRound>): AgentRound => ({
   id: patch.id ?? `round-${patch.index ?? 1}`,
@@ -35,6 +35,13 @@ const task = (id: string, outputImages: string[]): TaskRecord => ({
 })
 
 describe('agent image references', () => {
+  it('extracts generated and current input XML reference ids', () => {
+    expect(extractAgentReferenceIds('参考 <ref id="round-1-image-2" /> 和 <ref id="round-3-reference-1" />')).toEqual([
+      'round-1-image-2',
+      'round-3-reference-1',
+    ])
+  })
+
   it('resolves previous round image references from visible text', () => {
     const rounds = [
       round({ index: 1, outputTaskIds: ['task-a'] }),

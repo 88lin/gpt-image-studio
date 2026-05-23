@@ -742,10 +742,12 @@ export default function InputBar() {
     if (!query) return
 
     const mentionText = option.type === 'input' ? getImageMentionLabel(option.imageIndex) : option.insertText
+    const nextCursor = query.start + mentionText.length
     if (el) {
       el.focus()
       setContentEditableSelection(el, query.start, cursor)
       if (document.execCommand('insertHTML', false, getMentionTagHtml(mentionText))) {
+        setContentEditableCursor(el, nextCursor)
         syncPromptFromContentEditable()
         return
       }
