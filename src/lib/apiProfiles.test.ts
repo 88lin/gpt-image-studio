@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   DEFAULT_FAL_BASE_URL,
   DEFAULT_FAL_MODEL,
@@ -13,7 +13,32 @@ import {
   mergeImportedSettings,
   normalizeSettings,
   switchApiProfileProvider,
+  validateApiProfile,
 } from './apiProfiles'
+
+afterEach(() => {
+  vi.unstubAllEnvs()
+})
+
+describe('validateApiProfile', () => {
+  it('allows empty API URL when API proxy is enabled and available', () => {
+    vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
+
+    expect(validateApiProfile(createDefaultOpenAIProfile({
+      baseUrl: '',
+      apiKey: 'test-key',
+      apiProxy: true,
+    }))).toBeNull()
+  })
+
+  it('still requires API URL when API proxy is unavailable', () => {
+    expect(validateApiProfile(createDefaultOpenAIProfile({
+      baseUrl: '',
+      apiKey: 'test-key',
+      apiProxy: true,
+    }))).toBe('缺少 API URL')
+  })
+})
 
 describe('mergeImportedSettings', () => {
   it('replaces the default OpenAI profile with legacy imported settings when current settings are untouched', () => {

@@ -7,6 +7,7 @@ const MIN_PIXELS = 655_360
 const MAX_PIXELS = 8_294_400
 
 export type SizeTier = '1K' | '2K' | '4K'
+type PresetRatio = '1:1' | '3:2' | '2:3' | '16:9' | '9:16' | '4:3' | '3:4' | '21:9'
 
 function roundToMultiple(value: number, multiple: number) {
   return Math.max(multiple, Math.round(value / multiple) * multiple)
@@ -159,6 +160,53 @@ const TIER_PIXEL_BUDGET: Record<SizeTier, number> = {
   '4K': MAX_PIXELS,  // 8_294_400
 }
 
+/**
+ * 常用比例优先使用官方示例或通用显示标准，避免按像素预算计算出不常见尺寸。
+ * 其中 21:9 的常见显示器尺寸会按 16 倍数约束做轻微规整。
+ */
+const COMMON_SIZE_PRESETS: Record<SizeTier, Record<PresetRatio, string>> = {
+  '1K': {
+    '1:1': '1024x1024',
+    '3:2': '1536x1024',
+    '2:3': '1024x1536',
+    '16:9': '1280x720',
+    '9:16': '720x1280',
+    '4:3': '1024x768',
+    '3:4': '768x1024',
+    '21:9': '1280x544',
+  },
+  '2K': {
+    '1:1': '2048x2048',
+    '3:2': '2160x1440',
+    '2:3': '1440x2160',
+    '16:9': '2560x1440',
+    '9:16': '1440x2560',
+    '4:3': '2048x1536',
+    '3:4': '1536x2048',
+    '21:9': '2560x1088',
+  },
+  '4K': {
+    '1:1': '2880x2880',
+    '3:2': '3456x2304',
+    '2:3': '2304x3456',
+    '16:9': '3840x2160',
+    '9:16': '2160x3840',
+    '4:3': '3200x2400',
+    '3:4': '2400x3200',
+    '21:9': '3840x1600',
+  },
+}
+
+function getPresetRatioKey(ratioWidth: number, ratioHeight: number): PresetRatio | null {
+  if (!Number.isInteger(ratioWidth) || !Number.isInteger(ratioHeight)) return null
+
+  const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b)
+  const divisor = gcd(ratioWidth, ratioHeight)
+  const key = `${ratioWidth / divisor}:${ratioHeight / divisor}`
+
+  return key in COMMON_SIZE_PRESETS['1K'] ? key as PresetRatio : null
+}
+
 const MAX_RATIO_ERROR = 0.01
 
 export function calculateImageSize(tier: SizeTier, ratio: string) {
@@ -166,6 +214,9 @@ export function calculateImageSize(tier: SizeTier, ratio: string) {
   if (!parsed) return null
 
   const { width: ratioWidth, height: ratioHeight } = parsed
+  const presetRatioKey = getPresetRatioKey(ratioWidth, ratioHeight)
+  if (presetRatioKey) return COMMON_SIZE_PRESETS[tier][presetRatioKey]
+
   const targetRatio = ratioWidth / ratioHeight
   const pixelBudget = TIER_PIXEL_BUDGET[tier]
 

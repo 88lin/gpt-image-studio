@@ -8,9 +8,9 @@ describe('buildApiUrl', () => {
     )
   })
 
-  it('keeps the v1 segment when the configured API URL does not include it', () => {
+  it('leaves API versioning to the proxy target when proxying', () => {
     expect(buildApiUrl('http://api.example.com', 'images/generations', null, true)).toBe(
-      '/api-proxy/v1/images/generations',
+      '/api-proxy/images/generations',
     )
   })
 

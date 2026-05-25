@@ -436,6 +436,132 @@ describe('callImageApi', () => {
     )
   })
 
+  it('uses the same-origin API proxy path when API proxy is enabled and base URL is empty', async () => {
+    vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      data: [{ b64_json: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    await callImageApi({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        apiKey: 'test-key',
+        apiProxy: true,
+        baseUrl: '',
+      },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS },
+      inputImageDataUrls: [],
+    })
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api-proxy/images/generations',
+      expect.objectContaining({ method: 'POST' }),
+    )
+  })
+
+  it('uses the same-origin API proxy path for sync custom providers', async () => {
+    vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      data: [{ b64_json: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    await callImageApi({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        baseUrl: '',
+        apiKey: 'test-key',
+        apiProxy: true,
+        customProviders: [{
+          id: 'custom-sync',
+          name: 'Custom Sync',
+          template: 'http-image',
+          submit: {
+            path: 'custom/images',
+            method: 'POST',
+            contentType: 'json',
+            body: { model: '$profile.model', prompt: '$prompt' },
+            result: { b64JsonPaths: ['data.*.b64_json'] },
+          },
+        }],
+        profiles: [{
+          ...DEFAULT_SETTINGS.profiles[0],
+          id: 'profile-custom-sync',
+          provider: 'custom-sync',
+          baseUrl: '',
+          apiKey: 'test-key',
+          model: 'model',
+          apiProxy: true,
+        }],
+        activeProfileId: 'profile-custom-sync',
+      },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS },
+      inputImageDataUrls: [],
+    })
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api-proxy/custom/images',
+      expect.objectContaining({ method: 'POST' }),
+    )
+  })
+
+  it('rejects API proxy for async custom providers', async () => {
+    vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
+    const fetchMock = vi.spyOn(globalThis, 'fetch')
+
+    await expect(callImageApi({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        baseUrl: '',
+        apiKey: 'test-key',
+        apiProxy: true,
+        customProviders: [{
+          id: 'custom-async-proxy',
+          name: 'Custom Async Proxy',
+          template: 'http-image',
+          submit: {
+            path: 'images/generations',
+            method: 'POST',
+            contentType: 'json',
+            body: { model: '$profile.model', prompt: '$prompt' },
+            taskIdPath: 'task_id',
+          },
+          poll: {
+            path: 'images/tasks/{task_id}',
+            method: 'GET',
+            intervalSeconds: 1,
+            statusPath: 'status',
+            successValues: ['done'],
+            failureValues: ['failed'],
+            result: { b64JsonPaths: ['data.*.b64_json'] },
+          },
+        }],
+        profiles: [{
+          ...DEFAULT_SETTINGS.profiles[0],
+          id: 'profile-custom-async-proxy',
+          provider: 'custom-async-proxy',
+          baseUrl: '',
+          apiKey: 'test-key',
+          model: 'model',
+          apiProxy: true,
+        }],
+        activeProfileId: 'profile-custom-async-proxy',
+      },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS },
+      inputImageDataUrls: [],
+    })).rejects.toThrow('异步任务的自定义服务商')
+
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
   it('uses the same-origin API proxy path when API proxy is locked', async () => {
     vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
     vi.stubEnv('VITE_API_PROXY_LOCKED', 'true')

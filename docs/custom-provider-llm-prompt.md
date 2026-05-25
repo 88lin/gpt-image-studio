@@ -69,6 +69,7 @@ multipart files 示例：
 - baseUrl：API Base URL。如果文档明确给出，填入完整基础地址；否则留空字符串 ""。
 - model：模型 ID。如果 API 文档明确了默认模型，填入该值；否则留空字符串 ""。
 - apiMode：固定为 "images"。
+- apiProxy：可选。仅同步自定义服务商可以设为 true，用于配合部署端 API 代理隐藏真实上游地址；包含 taskIdPath 或 poll 的异步任务配置不要开启，应用不支持异步自定义服务商走代理。
 
 profiles 中不要包含 apiKey（用户导入后自行填写）。
 
