@@ -96,9 +96,9 @@ vi.mock('./lib/agentApi', () => ({
     }
   }),
 }))
-import { clearAgentConversations, clearImages, getAllAgentConversations, getAllTasks, putAgentConversation, putImage, putTask as putDbTask } from './lib/db'
+import { clearAgentConversations, clearImages, clearTasks, getAllAgentConversations, getAllTasks, putAgentConversation, putImage, putTask as putDbTask } from './lib/db'
 import { callAgentResponsesApi, callBatchImageSingle } from './lib/agentApi'
-import { cleanStaleAgentInputDrafts, deleteAgentRoundFromConversation, editOutputs, getActiveAgentRounds, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, markInterruptedOpenAIRunningTasks, migratePersistedState, regenerateAgentAssistantMessage, remapAgentRoundMentionsForPathChange, removeTask, reuseConfig, submitAgentMessage, submitTask, useStore } from './store'
+import { cleanStaleAgentInputDrafts, deleteAgentRoundFromConversation, deleteFavoriteCollection, editOutputs, getActiveAgentRounds, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, markInterruptedOpenAIRunningTasks, migratePersistedState, regenerateAgentAssistantMessage, remapAgentRoundMentionsForPathChange, removeTask, reuseConfig, submitAgentMessage, submitTask, useStore } from './store'
 
 const imageA = { id: 'image-a', dataUrl: 'data:image/png;base64,a' }
 const imageB = { id: 'image-b', dataUrl: 'data:image/png;base64,b' }
@@ -149,6 +149,58 @@ function importFile(data: ExportData): File {
   const buffer = zipped.buffer.slice(zipped.byteOffset, zipped.byteOffset + zipped.byteLength)
   return { arrayBuffer: async () => buffer } as File
 }
+
+describe('favorite collection deletion', () => {
+  const collectionA = { id: 'collection-a', name: '收藏夹 A', createdAt: 1, updatedAt: 1 }
+  const collectionB = { id: 'collection-b', name: '收藏夹 B', createdAt: 1, updatedAt: 1 }
+
+  beforeEach(async () => {
+    await clearTasks()
+    await clearImages()
+    useStore.setState({
+      tasks: [],
+      favoriteCollections: [collectionA, collectionB],
+      defaultFavoriteCollectionId: collectionA.id,
+      activeFavoriteCollectionId: collectionA.id,
+      selectedFavoriteCollectionIds: [collectionA.id],
+      selectedTaskIds: [],
+      inputImages: [],
+      galleryInputDraft: null,
+      agentConversations: [],
+      showToast: vi.fn(),
+    })
+  })
+
+  it('keeps tasks that are still referenced by another collection when deleting collection tasks', async () => {
+    const sharedTask = task({
+      id: 'shared-task',
+      isFavorite: true,
+      favoriteCollectionIds: [collectionA.id, collectionB.id],
+    })
+    const collectionOnlyTask = task({
+      id: 'collection-only-task',
+      isFavorite: true,
+      favoriteCollectionIds: [collectionA.id],
+    })
+    useStore.setState({ tasks: [sharedTask, collectionOnlyTask] })
+    await putDbTask(sharedTask)
+    await putDbTask(collectionOnlyTask)
+
+    await deleteFavoriteCollection(collectionA.id, true)
+
+    const state = useStore.getState()
+    expect(state.favoriteCollections.map((collection) => collection.id)).toEqual([collectionB.id])
+    expect(state.activeFavoriteCollectionId).toBeNull()
+    expect(state.selectedFavoriteCollectionIds).toEqual([])
+    expect(state.tasks).toHaveLength(1)
+    expect(state.tasks[0]).toMatchObject({
+      id: sharedTask.id,
+      isFavorite: true,
+      favoriteCollectionIds: [collectionB.id],
+    })
+    expect((await getAllTasks()).map((item) => item.id)).toEqual([sharedTask.id])
+  })
+})
 
 describe('mask draft lifecycle in store actions', () => {
   beforeEach(() => {
@@ -736,6 +788,41 @@ describe('data import', () => {
       showToast: vi.fn(),
     })
     await clearAgentConversations()
+  })
+
+  it('restores favorite collections and default collection when importing task data', async () => {
+    await clearTasks()
+    const importedCollections = [
+      { id: 'imported-collection-a', name: '导入收藏夹 A', createdAt: 1, updatedAt: 1 },
+      { id: 'imported-collection-b', name: '导入收藏夹 B', createdAt: 2, updatedAt: 2 },
+    ]
+    const importedTask = task({
+      id: 'imported-favorite-task',
+      isFavorite: true,
+      favoriteCollectionIds: [importedCollections[1].id],
+    })
+
+    const imported = await importData(importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      tasks: [importedTask],
+      favoriteCollections: importedCollections,
+      defaultFavoriteCollectionId: importedCollections[1].id,
+      imageFiles: {},
+    }), { importConfig: false, importTasks: true })
+
+    const state = useStore.getState()
+    expect(imported).toBe(true)
+    expect(state.favoriteCollections).toEqual(expect.arrayContaining(importedCollections))
+    expect(state.defaultFavoriteCollectionId).toBe(importedCollections[1].id)
+    expect(state.tasks.find((item) => item.id === importedTask.id)).toMatchObject({
+      favoriteCollectionIds: [importedCollections[1].id],
+      isFavorite: true,
+    })
+    expect((await getAllTasks()).find((item) => item.id === importedTask.id)).toMatchObject({
+      favoriteCollectionIds: [importedCollections[1].id],
+      isFavorite: true,
+    })
   })
 
   it('skips empty agent conversations when importing task data', async () => {

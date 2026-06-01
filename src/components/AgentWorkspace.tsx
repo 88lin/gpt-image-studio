@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useRef, useCallback, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
 import type { AgentConversation, AgentMessage, AgentRound, ResponsesOutputItem, TaskRecord } from '../types'
-import { deleteAgentRoundFromConversation, editOutputs, getActiveAgentRounds, getAgentBranchLeafId, getAgentSiblingRounds, getCachedImage, ensureImageCached, regenerateAgentAssistantMessage, remapAgentRoundMentionsForPathChange, removeMultipleTasks, removeTask, reuseConfig, updateTaskInStore, useStore } from '../store'
+import { deleteAgentRoundFromConversation, editOutputs, getActiveAgentRounds, getAgentBranchLeafId, getAgentSiblingRounds, getCachedImage, ensureImageCached, regenerateAgentAssistantMessage, remapAgentRoundMentionsForPathChange, removeMultipleTasks, removeTask, reuseConfig, useStore } from '../store'
 import { getPromptMentionParts } from '../lib/promptImageMentions'
 import { copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
 import { collectWebSearchCalls, getAgentRoundOutputItems, getWebSearchStatusForCalls, type AgentWebSearchStatus } from '../lib/agentWebSearch'
@@ -41,8 +41,14 @@ function AgentActionButton({
         className={className}
         disabled={disabled}
         aria-label={tooltip}
-        onClick={onClick}
-        onMouseDown={onMouseDown}
+        onClick={(e) => {
+          setTooltipVisible(false)
+          onClick?.(e)
+        }}
+        onMouseDown={(e) => {
+          setTooltipVisible(false)
+          onMouseDown?.(e)
+        }}
       >
         {children}
       </button>
@@ -335,6 +341,7 @@ export default function AgentWorkspace() {
   const setAgentEditingRoundId = useStore((s) => s.setAgentEditingRoundId)
   const setActiveAgentRoundId = useStore((s) => s.setActiveAgentRoundId)
   const showToast = useStore((s) => s.showToast)
+  const openFavoritePicker = useStore((s) => s.openFavoritePicker)
   const agentGeneratingTitleIds = useStore((s) => s.agentGeneratingTitleIds)
   const conversation = conversations.find((item) => item.id === activeConversationId) ?? null
   const [selectedRoundId, setSelectedRoundId] = useState<string | null>(null)
@@ -692,11 +699,21 @@ export default function AgentWorkspace() {
 
   const handleDeleteMessage = (message: AgentMessage, round: AgentRound) => {
     const isUserMessage = message.role === 'user'
+    const existingTaskIds = new Set(tasks.map((task) => task.id))
+    const assistantTaskIds = isUserMessage
+      ? []
+      : Array.from(new Set([
+          ...(message.outputTaskIds ?? []),
+          ...round.outputTaskIds,
+          ...tasks
+            .filter((task) => task.agentMessageId === message.id || task.agentRoundId === round.id)
+            .map((task) => task.id),
+        ])).filter((taskId) => existingTaskIds.has(taskId))
     setConfirmDialog({
       title: isUserMessage ? '删除轮次' : '删除消息',
       message: isUserMessage
-        ? '确定要删除这轮记录吗？这会删除这条消息和它的输出，后续消息会被保留。'
-        : '确定要删除这条消息吗？关联的图片任务不会从画廊中删除。',
+        ? '确定要删除这轮任务吗？这会删除这条消息和它的输出，后续消息会被保留。'
+        : '确定要删除这条消息吗？这会同时删除这条回复生成的图片。',
       action: async () => {
         if (isUserMessage) {
           if (round.outputTaskIds.length > 0) await removeMultipleTasks(round.outputTaskIds)
@@ -729,6 +746,8 @@ export default function AgentWorkspace() {
           })
           return
         }
+
+        if (assistantTaskIds.length > 0) await removeMultipleTasks(assistantTaskIds)
 
         useStore.setState((state) => ({
           agentConversations: state.agentConversations.map((item) =>
@@ -872,7 +891,7 @@ export default function AgentWorkspace() {
               <div
                 key={item.id}
                 data-agent-conversation-item
-                className="group flex items-center gap-2 rounded-lg px-2 py-2 hover:bg-gray-100 dark:hover:bg-white/[0.04]"
+                className="group flex h-14 items-center gap-2 rounded-lg px-2 hover:bg-gray-100 dark:hover:bg-white/[0.04]"
                 onPointerDown={(e) => handleConversationPointerDown(item.id, e)}
                 onPointerUp={clearConversationLongPressTimer}
                 onPointerCancel={clearConversationLongPressTimer}
@@ -885,7 +904,7 @@ export default function AgentWorkspace() {
                   <div className="min-w-0 flex-1 flex flex-col justify-center h-[38px]">
                     <input
                       type="text"
-                      className="flex-1 bg-white dark:bg-black/20 border border-blue-400/50 dark:border-white/20 rounded px-1.5 py-0.5 text-sm outline-none text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-white/40 shadow-sm min-w-0"
+                      className="h-7 flex-1 bg-white dark:bg-black/20 border border-blue-400/50 dark:border-white/20 rounded px-1.5 py-0 text-sm leading-7 outline-none text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-white/40 shadow-sm min-w-0"
                       value={editingConversationTitle}
                       onChange={(e) => setEditingConversationTitle(e.target.value)}
                       onKeyDown={handleRenameKeyDown}
@@ -904,6 +923,7 @@ export default function AgentWorkspace() {
                   {agentEditingConversationId === item.id ? (
                     <AgentActionButton
                       tooltip="确认"
+                      onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); confirmRenameConversation() }}
                       className="p-1.5 hover:bg-gray-200 dark:hover:bg-white/10 rounded-md text-green-500 hover:text-green-600 transition-colors"
                     >
@@ -1094,7 +1114,7 @@ export default function AgentWorkspace() {
                                     onClick={() => setDetailTaskId(block.task.id)}
                                     onReuse={() => handleReuse(block.task)}
                                     onEditOutputs={() => editOutputs(block.task)}
-                                    onDelete={() => setConfirmDialog({ title: '删除记录', message: '确定要删除这条记录吗？', action: () => removeTask(block.task) })}
+                                    onDelete={() => setConfirmDialog({ title: '删除任务', message: '确定要删除这个任务吗？', action: () => removeTask(block.task) })}
                                   />
                                 </div>
                               )
@@ -1159,11 +1179,9 @@ export default function AgentWorkspace() {
                             }}>
                               <RefreshIcon className="w-4 h-4" />
                             </AgentActionButton>
-                            <AgentActionButton tooltip={allRoundTasksFavorited ? '取消收藏所有图片' : '收藏所有图片'} className={`p-1.5 rounded-md transition-colors ${hasRoundFavoriteTasks ? (allRoundTasksFavorited ? 'text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-500/10') : 'text-gray-300 dark:text-gray-600 opacity-50 cursor-not-allowed'}`} disabled={!hasRoundFavoriteTasks} onClick={() => {
+                            <AgentActionButton tooltip={allRoundTasksFavorited ? '编辑收藏夹' : '收藏所有图片'} className={`p-1.5 rounded-md transition-colors ${hasRoundFavoriteTasks ? (allRoundTasksFavorited ? 'text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-500/10' : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-500/10') : 'text-gray-300 dark:text-gray-600 opacity-50 cursor-not-allowed'}`} disabled={!hasRoundFavoriteTasks} onClick={() => {
                               if (!hasRoundFavoriteTasks) return;
-                              const nextFavorite = !allRoundTasksFavorited;
-                              favoriteTasksForRound.forEach(t => updateTaskInStore(t.id, { isFavorite: nextFavorite }));
-                              useStore.getState().showToast(nextFavorite ? `已收藏 ${favoriteTasksForRound.length} 个任务的图片` : `已取消收藏 ${favoriteTasksForRound.length} 个任务的图片`, 'success');
+                              openFavoritePicker(favoriteTasksForRound.map((task) => task.id));
                             }}>
                               <FavoriteIcon className="w-4 h-4" filled={allRoundTasksFavorited} />
                             </AgentActionButton>

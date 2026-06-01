@@ -24,6 +24,7 @@ import {
   switchApiProfileProvider,
 } from '../lib/apiProfiles'
 import { copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
+import { requestBrowserNotificationPermission, type BrowserNotificationPermissionResult } from '../lib/browserNotification'
 import { DEFAULT_AGENT_MAX_TOOL_ROUNDS, DEFAULT_STREAM_PARTIAL_IMAGES, type ApiProfile, type AppSettings, type CustomProviderDefinition } from '../types'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
@@ -660,6 +661,33 @@ export default function SettingsModal() {
     if (value !== draft.agentMaxToolRounds) commitSettings({ ...draft, agentMaxToolRounds: value })
   }, [agentMaxToolRoundsInput, draft])
 
+  const showNotificationPermissionMessage = (result: Exclude<BrowserNotificationPermissionResult, { ok: true }>) => {
+    if (result.reason === 'unsupported') {
+      showToast('当前浏览器不支持系统通知', 'error')
+    } else if (result.reason === 'insecure') {
+      showToast('系统通知需要 HTTPS 或 localhost 安全上下文', 'error')
+    } else if (result.reason === 'denied') {
+      showToast('通知权限已被浏览器拒绝，请在地址栏左侧的网站设置中手动开启', 'error')
+    } else {
+      showToast('没有开启系统通知', 'info')
+    }
+  }
+
+  const toggleTaskCompletionNotification = async () => {
+    if (draft.taskCompletionNotification) {
+      commitSettings({ ...draft, taskCompletionNotification: false })
+      return
+    }
+
+    const result = await requestBrowserNotificationPermission()
+    if (result.ok) {
+      commitSettings({ ...draft, taskCompletionNotification: true })
+      showToast('任务完成通知已开启', 'success')
+    } else {
+      showNotificationPermissionMessage(result)
+    }
+  }
+
   useCloseOnEscape(showSettings, handleClose)
   usePreventBackgroundScroll(showSettings, showCustomProviderImport ? customProviderScrollBoundaryRef : settingsScrollBoundaryRef)
 
@@ -1154,15 +1182,34 @@ export default function SettingsModal() {
                         value={draft.enterSubmit ? 'enter' : 'ctrl-enter'}
                         onChange={(val) => commitSettings({ ...draft, enterSubmit: val === 'enter' })}
                         options={[
-                          { label: 'Enter', value: 'enter' },
-                          { label: navigator.userAgent.includes('Mac') ? 'Cmd + Enter' : 'Ctrl + Enter', value: 'ctrl-enter' }
+                          { label: navigator.userAgent.includes('Mac') ? '⌘ + Enter' : 'Ctrl + Enter', value: 'ctrl-enter' },
+                          { label: 'Enter', value: 'enter' }
                         ]}
                         className="w-full px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] text-xs transition-all duration-200 shadow-sm text-gray-700 dark:text-gray-200 outline-none"
                       />
                     </div>
                   </div>
                   <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
-                    选择 Enter 提交时，使用 Shift + Enter 换行；否则直接 Enter 换行。
+                    选择 {navigator.userAgent.includes('Mac') ? '⌘ + Enter' : 'Ctrl + Enter'} 时，Enter 换行；选择 Enter 时，Shift + Enter 换行。
+                  </div>
+                </div>
+                <div className="sm:hidden">
+                  <div className="mb-1 flex items-center justify-between gap-3">
+                    <span className="block text-sm text-gray-600 dark:text-gray-300">任务提交方式</span>
+                    <div className="w-36">
+                      <Select
+                        value={draft.enterSubmit ? 'enter' : 'button'}
+                        onChange={(val) => commitSettings({ ...draft, enterSubmit: val === 'enter' })}
+                        options={[
+                          { label: '发送按钮', value: 'button' },
+                          { label: '回车/发送按钮', value: 'enter' }
+                        ]}
+                        className="w-full px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] text-xs transition-all duration-200 shadow-sm text-gray-700 dark:text-gray-200 outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
+                    选择回车/发送按钮时，回车可提交；否则仅使用发送按钮提交。
                   </div>
                 </div>
                 <div className="block">
@@ -1255,6 +1302,24 @@ export default function SettingsModal() {
                   </div>
                   <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
                     开启后，即使任务成功生成，也会在任务卡片和详情页显示重试按钮。
+                  </div>
+                </div>
+                <div className="block">
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="block text-sm text-gray-600 dark:text-gray-300">任务完成后发送系统通知</span>
+                    <button
+                      type="button"
+                      onClick={() => { void toggleTaskCompletionNotification() }}
+                      className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors ${draft.taskCompletionNotification ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'}`}
+                      role="switch"
+                      aria-checked={draft.taskCompletionNotification}
+                      aria-label="任务完成后发送系统通知"
+                    >
+                      <span className={`inline-block h-3 w-3 transform rounded-full bg-white shadow transition-transform ${draft.taskCompletionNotification ? 'translate-x-[14px]' : 'translate-x-[2px]'}`} />
+                    </button>
+                  </div>
+                  <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
+                    开启后，画廊模式图像生成完成、Agent 模式回复结束时，会发送浏览器系统通知。浏览器可能会请求通知权限或默认拒绝，请查看相关提示。
                   </div>
                 </div>
                 <div className="block">
@@ -1785,7 +1850,7 @@ export default function SettingsModal() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                   <div className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-400">
-                    所有的配置、任务记录和生成的图片均仅保存在您的浏览器本地（除非您使用的服务商存储了它们）。如果您需要清理浏览器站点数据、重置浏览器或使用其他设备，请先导出备份。
+                    所有的配置、任务和生成的图片均仅保存在您的浏览器本地（除非您使用的服务商存储了它们）。如果您需要清理浏览器站点数据、重置浏览器或使用其他设备，请先导出备份。
                   </div>
                 </div>
 

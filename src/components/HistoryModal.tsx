@@ -33,7 +33,10 @@ function HistoryActionButton({
           tooltipState.dismiss()
           onClick?.(e)
         }}
-        onMouseDown={onMouseDown}
+        onMouseDown={(e) => {
+          tooltipState.dismiss()
+          onMouseDown?.(e)
+        }}
       >
         {children}
       </button>
@@ -249,7 +252,7 @@ export default function HistoryModal({ onClose, ignoreOutsideClickRef }: History
             {items.map(c => (
               <div
                 key={c.id}
-                className="group flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
+                className="group flex h-14 items-center justify-between gap-2 rounded-lg px-3 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
                 onClick={() => handleSelect(c.id)}
               >
                 <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -259,7 +262,7 @@ export default function HistoryModal({ onClose, ignoreOutsideClickRef }: History
                   {editingId === c.id ? (
                     <input
                       type="text"
-                      className="flex-1 bg-white dark:bg-black/20 border border-blue-400/50 dark:border-white/20 rounded px-1.5 py-0.5 text-sm outline-none text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-white/40 shadow-sm min-w-0"
+                      className="h-7 flex-1 bg-white dark:bg-black/20 border border-blue-400/50 dark:border-white/20 rounded px-1.5 py-0 text-sm leading-7 outline-none text-gray-900 dark:text-white focus:border-blue-500 dark:focus:border-white/40 shadow-sm min-w-0"
                       value={editingTitle}
                       onChange={(e) => setEditingTitle(e.target.value)}
                       onKeyDown={handleRenameKeyDown}
@@ -278,10 +281,11 @@ export default function HistoryModal({ onClose, ignoreOutsideClickRef }: History
                     </div>
                   )}
                 </div>
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 shrink-0 transition-opacity">
+                <div className={`flex shrink-0 items-center justify-end gap-1 overflow-hidden transition-all duration-150 ${editingId === c.id ? 'w-7 opacity-100' : 'w-0 opacity-0 group-hover:w-16 group-hover:opacity-100 group-focus-within:w-16 group-focus-within:opacity-100'}`}>
                   {editingId === c.id ? (
                     <HistoryActionButton
                       tooltip="确认"
+                      onClick={(e) => e.stopPropagation()}
                       onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); confirmRename() }}
                       className="p-1.5 hover:bg-gray-200 dark:hover:bg-white/10 rounded-md text-green-500 dark:text-green-400 hover:text-green-600 dark:hover:text-green-300 transition-colors"
                     >

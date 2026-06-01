@@ -6,6 +6,7 @@ import { dismissAllTooltips } from '../lib/tooltipDismiss'
 import ViewportTooltip from './ViewportTooltip'
 import HelpModal from './HelpModal'
 import HistoryModal from './HistoryModal'
+import { useFavoriteCollectionTitle } from './FavoriteCollections'
 import { EditIcon, HelpCircleIcon, HistoryIcon, InstallIcon, SettingsIcon } from './icons'
 
 type BeforeInstallPromptEvent = Event & {
@@ -28,9 +29,13 @@ export default function Header() {
   const setAgentMobileHeaderVisible = useStore((s) => s.setAgentMobileHeaderVisible)
   const agentConversations = useStore((s) => s.agentConversations)
   const activeAgentConversationId = useStore((s) => s.activeAgentConversationId)
+  const filterFavorite = useStore((s) => s.filterFavorite)
+  const activeFavoriteCollectionId = useStore((s) => s.activeFavoriteCollectionId)
   const setAgentEditingConversationId = useStore((s) => s.setAgentEditingConversationId)
   const setAgentSidebarCollapsed = useStore((s) => s.setAgentSidebarCollapsed)
   const activeConversation = agentConversations.find((item) => item.id === activeAgentConversationId)
+  const favoriteCollectionTitle = useFavoriteCollectionTitle()
+  const showFavoriteCollectionTitle = appMode === 'gallery' && Boolean(activeFavoriteCollectionId)
   const { hasUpdate, latestRelease, dismiss } = useVersionCheck()
   const [showHelp, setShowHelp] = useState(false)
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
@@ -154,15 +159,29 @@ export default function Header() {
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-gray-950/10 bg-gray-950 text-[11px] font-black text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-gray-950">
               G2
             </div>
-            <h1 className="inline-flex items-start relative mr-2">
-              <a
-                href="/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[17px] sm:text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
-              >
-                GPT Image 2
-              </a>
+            <h1 className="inline-flex min-w-0 items-start relative mr-2">
+              {showFavoriteCollectionTitle ? (
+                <>
+                  <span className="min-w-0 truncate text-[17px] font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:hidden" title={favoriteCollectionTitle}>{favoriteCollectionTitle}</span>
+                  <a
+                    href="/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hidden text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 sm:inline"
+                  >
+                    GPT Image 2
+                  </a>
+                </>
+              ) : (
+                <a
+                  href="/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[17px] sm:text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
+                >
+                  GPT Image 2
+                </a>
+              )}
               {hasUpdate && latestRelease && (
                 <a
                   href={latestRelease.url}
@@ -182,7 +201,7 @@ export default function Header() {
                 type="button"
                 onClick={() => setShowHistoryModal((visible) => !visible)}
                 className="p-1.5 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/[0.04] rounded-lg transition-colors"
-                title="历史记录"
+                title="历史任务"
               >
                 <HistoryIcon className="w-5 h-5" />
               </button>
@@ -217,6 +236,13 @@ export default function Header() {
               >
                 {activeConversation.title || 'Agent'}
               </button>
+            </div>
+          )}
+          {showFavoriteCollectionTitle && (
+            <div className="absolute left-1/2 top-1/2 hidden max-w-[30%] -translate-x-1/2 -translate-y-1/2 sm:flex">
+              <div className="truncate rounded px-2 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300" title={favoriteCollectionTitle}>
+                {favoriteCollectionTitle}
+              </div>
             </div>
           )}
           <div className="hidden sm:flex items-center gap-1 rounded-xl border border-gray-200 dark:border-white/[0.08] bg-gray-100/70 dark:bg-white/[0.04] p-1 mr-4">
@@ -346,7 +372,7 @@ export default function Header() {
       {/* Hint for sliding down */}
       <div className={`fixed top-0 left-0 right-0 z-30 flex justify-center pointer-events-none transition-all duration-300 ease-in-out sm:hidden ${appMode === 'agent' && hintVisible && !agentMobileHeaderVisible ? 'translate-y-[env(safe-area-inset-top,0px)] opacity-100' : '-translate-y-full opacity-0'}`}>
         <div className="bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-b-xl shadow-lg">
-          列表顶部下拉展示顶栏
+          下拉展示顶栏
         </div>
       </div>
 
@@ -358,7 +384,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      {showHelp && <HelpModal appMode={appMode} onClose={() => setShowHelp(false)} />}
+      {showHelp && <HelpModal appMode={appMode} isFavoriteCollectionOverview={appMode === 'gallery' && filterFavorite && !activeFavoriteCollectionId} onClose={() => setShowHelp(false)} />}
     </>
   )
 }
