@@ -12,7 +12,7 @@ import { getSafeBoundingClientRect } from '../lib/domRect'
 import { collectAgentRoundOutputImageSlots } from '../lib/agentImageReferences'
 import { useHintTooltip } from '../hooks/useHintTooltip'
 import { useTooltip } from '../hooks/useTooltip'
-import { downloadImageEntriesAsZip, downloadImageIds, formatExportFileTime } from '../lib/downloadImages'
+import { downloadImageEntriesAsZip, downloadImageIds, formatExportFileTime, getTaskOutputImageZipEntries } from '../lib/downloadImages'
 import Select from './Select'
 import SizePickerModal from './SizePickerModal'
 import ViewportTooltip from './ViewportTooltip'
@@ -405,20 +405,6 @@ function getFavoriteCollectionTasksForBatch(collectionId: string, tasks: TaskRec
   return favoriteTasks.filter((task) => getTaskFavoriteCollectionIds(task).includes(collectionId))
 }
 
-function getTaskOutputImageZipEntries(tasks: TaskRecord[]) {
-  return [...tasks]
-    .sort((a, b) => b.createdAt - a.createdAt)
-    .flatMap((task) => {
-      const outputImages = task.outputImages || []
-      return outputImages.map((imageId, index) => ({
-        imageId,
-        fileNameBase: outputImages.length > 1
-          ? `task-${task.id}-${String(index + 1).padStart(2, '0')}`
-          : `task-${task.id}`,
-      }))
-    })
-}
-
 function delay(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms))
 }
@@ -603,7 +589,10 @@ export default function InputBar() {
 
     try {
       const timeStr = formatExportFileTime(new Date())
-      const { successCount, failCount } = await downloadImageIds(imageIds, `batch-${timeStr}`)
+      const fileNameBase = `batch-${timeStr}`
+      const { successCount, failCount } = settings.zipDownloadRoutes.includes('task-selection')
+        ? await downloadImageEntriesAsZip(getTaskOutputImageZipEntries(selectedTasks), fileNameBase)
+        : await downloadImageIds(imageIds, fileNameBase)
 
       if (successCount === 0) {
         showToast('下载失败', 'error')
@@ -617,7 +606,7 @@ export default function InputBar() {
       showToast('下载失败', 'error')
     }
     clearSelection()
-  }, [tasks, selectedTaskIds, showToast, clearSelection])
+  }, [tasks, selectedTaskIds, settings.zipDownloadRoutes, showToast, clearSelection])
 
   const handleDownloadSelectedFavoriteCollections = useCallback(async () => {
     const selectedIdSet = new Set(selectedFavoriteCollectionIds)
@@ -627,6 +616,7 @@ export default function InputBar() {
     let successCount = 0
     let failCount = 0
     let downloadedCollectionCount = 0
+    const useZipDownload = settings.zipDownloadRoutes.includes('favorite-collection-selection')
     const timeStr = formatExportFileTime(new Date())
 
     try {
@@ -636,7 +626,9 @@ export default function InputBar() {
         const zipName = collection.id === ALL_FAVORITES_COLLECTION_ID
           ? `favorites-all-${timeStr}`
           : `favorites-${collection.name}-${timeStr}`
-        const result = await downloadImageEntriesAsZip(entries, zipName)
+        const result = useZipDownload
+          ? await downloadImageEntriesAsZip(entries, zipName)
+          : await downloadImageIds(entries.map((entry) => entry.imageId), zipName)
         successCount += result.successCount
         failCount += result.failCount
         if (result.successCount > 0) downloadedCollectionCount++
@@ -648,14 +640,14 @@ export default function InputBar() {
       } else if (failCount > 0) {
         showToast(`部分下载失败：成功 ${successCount}，失败 ${failCount}`, 'error')
       } else {
-        showToast(downloadedCollectionCount > 1 ? `下载成功：${downloadedCollectionCount} 个压缩包，${successCount} 张图片` : `下载成功：${successCount} 张图片`, 'success')
+        showToast(useZipDownload && downloadedCollectionCount > 1 ? `下载成功：${downloadedCollectionCount} 个压缩包，${successCount} 张图片` : `下载成功：${successCount} 张图片`, 'success')
       }
     } catch (err) {
       console.error(err)
       showToast('下载失败', 'error')
     }
     clearFavoriteCollectionSelection()
-  }, [clearFavoriteCollectionSelection, favoriteCollectionCards, selectedFavoriteCollectionIds, showToast])
+  }, [clearFavoriteCollectionSelection, favoriteCollectionCards, selectedFavoriteCollectionIds, settings.zipDownloadRoutes, showToast])
 
   const handleDeleteSelectedFavoriteCollections = useCallback(() => {
     const selectedIdSet = new Set(selectedFavoriteCollectionIds)

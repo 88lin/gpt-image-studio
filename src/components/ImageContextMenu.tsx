@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useStore, addImageFromUrl, ensureImageCached } from '../store'
 import { copyImageSourceToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
-import { downloadImageIds, formatExportFileTime } from '../lib/downloadImages'
+import { downloadImageEntriesAsZip, downloadImageIds, formatExportFileTime, getImageZipEntries } from '../lib/downloadImages'
 import { suppressGlobalClicks } from '../lib/clickSuppression'
 import { CopyIcon, DownloadIcon, EditIcon } from './icons'
 
@@ -146,7 +146,10 @@ export default function ImageContextMenu() {
         fileNameBase = `batch-${timeStr}`
       }
 
-      const result = await downloadImageIds(outputImageIds, fileNameBase)
+      const settings = useStore.getState().settings
+      const result = settings.zipDownloadRoutes.includes('image-context-menu-all')
+        ? await downloadImageEntriesAsZip(getImageZipEntries(outputImageIds, fileNameBase), fileNameBase)
+        : await downloadImageIds(outputImageIds, fileNameBase)
       if (result.successCount === 0) {
         showToast('下载失败', 'error')
       } else if (result.failCount > 0) {

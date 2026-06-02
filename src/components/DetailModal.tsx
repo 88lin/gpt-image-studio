@@ -8,7 +8,7 @@ import { ActualValueBadge, DetailParamValue } from '../lib/paramDisplay'
 import { copyImageSourceToClipboard, copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
 import { dismissAllTooltips } from '../lib/tooltipDismiss'
-import { downloadImageIds } from '../lib/downloadImages'
+import { downloadImageEntriesAsZip, downloadImageIds, getImageZipEntries } from '../lib/downloadImages'
 import { isAgentTaskPromptPending } from '../lib/taskPromptDisplay'
 import { replaceImageMentionsForApi } from '../lib/promptImageMentions'
 import { CloseIcon, CodeIcon, CopyIcon, DownloadIcon, EditIcon, LinkIcon, TrashIcon } from './icons'
@@ -340,7 +340,10 @@ export default function DetailModal() {
     if (!task?.outputImages?.length) return
 
     try {
-      const result = await downloadImageIds(task.outputImages, `task-${task.id}`)
+      const fileNameBase = `task-${task.id}`
+      const result = settings.zipDownloadRoutes.includes('task-detail-all')
+        ? await downloadImageEntriesAsZip(getImageZipEntries(task.outputImages, fileNameBase), fileNameBase)
+        : await downloadImageIds(task.outputImages, fileNameBase)
       if (result.successCount === 0) {
         showToast('下载失败', 'error')
       } else if (result.failCount > 0) {
@@ -358,7 +361,10 @@ export default function DetailModal() {
     if (!task || !streamPartialImageIds.length) return
 
     try {
-      const result = await downloadImageIds(streamPartialImageIds, `task-${task.id}-partial`)
+      const fileNameBase = `task-${task.id}-partial`
+      const result = settings.zipDownloadRoutes.includes('task-detail-partial')
+        ? await downloadImageEntriesAsZip(getImageZipEntries(streamPartialImageIds, fileNameBase), fileNameBase)
+        : await downloadImageIds(streamPartialImageIds, fileNameBase)
       if (result.successCount === 0) {
         showToast('下载失败', 'error')
       } else if (result.failCount > 0) {

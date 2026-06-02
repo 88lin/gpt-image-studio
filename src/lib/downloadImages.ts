@@ -1,5 +1,6 @@
 import { ensureImageCached } from '../store'
 import { zipSync } from 'fflate'
+import type { TaskRecord } from '../types'
 
 const MIME_EXTENSIONS: Record<string, string> = {
   'image/png': 'png',
@@ -17,6 +18,8 @@ export interface DownloadImageZipEntry {
   imageId: string
   fileNameBase?: string
 }
+
+type TaskOutputZipTask = Pick<TaskRecord, 'id' | 'createdAt' | 'outputImages'>
 
 export function formatExportFileTime(date: Date): string {
   const pad = (value: number) => String(value).padStart(2, '0')
@@ -86,6 +89,20 @@ export async function downloadImageEntriesAsZip(entries: DownloadImageZipEntry[]
   }
 
   return { successCount, failCount }
+}
+
+export function getTaskOutputImageZipEntries(tasks: TaskOutputZipTask[]): DownloadImageZipEntry[] {
+  return [...tasks]
+    .sort((a, b) => b.createdAt - a.createdAt)
+    .flatMap((task) => getImageZipEntries(task.outputImages || [], `task-${task.id}`))
+}
+
+export function getImageZipEntries(imageIds: string[], fileNameBase = 'image'): DownloadImageZipEntry[] {
+  const multiple = imageIds.length > 1
+  return imageIds.map((imageId, index) => ({
+    imageId,
+    fileNameBase: multiple ? `${fileNameBase}-${String(index + 1).padStart(2, '0')}` : fileNameBase,
+  }))
 }
 
 async function getImageBlob(imageIdOrUrl: string): Promise<Blob> {
