@@ -1,7 +1,6 @@
 import type { PromptTemplateInput } from './promptTemplates'
 
-const KKKM_IMAGE_BASE_URL = 'https://prompts.kkkm.cn/'
-const KKKM_JSDELIVR_IMAGE_BASE_URL = 'https://cdn.jsdelivr.net/gh/junxiaopang/all-image-prompts@main/public/'
+const KKKM_IMAGE_BASE_URL = 'https://cdn.jsdmirror.com/gh/junxiaopang/all-image-prompts@main/public/'
 const KKKM_SOURCE_URL = 'https://prompts.kkkm.cn/'
 const KKKM_SOURCE = 'prompts.kkkm.cn 精选'
 const KKKM_DESCRIPTION = '来自 prompts.kkkm.cn 的高质量中文提示词案例，保留原站中文提示词与示例图片。'
@@ -9,26 +8,6 @@ const KKKM_TIPS = [
   '直接替换提示词中的主题、品牌、地点、文字或食材即可复用。',
   '图片比例按原案例保留，生成时可按自己的发布场景调整。',
 ]
-
-const KKKM_JSDELIVR_IMAGE_PATHS = new Set([
-  'images/2026-02-08/2020337546828632155_0.jpg',
-  'images/2026-02-04/2018912386078630122_0.jpg',
-  'images/2026-02-05/2019338808009920744_0.jpg',
-  'images/2026-02-03/2018566445031137556_0.jpg',
-  'images/2026-02-05/2019342167102353672_0.jpg',
-  'images/2026-02-02/2018223863532790007_0.jpg',
-  'images/2026-02-13/2022154404888035619_0.jpg',
-  'images/2026-02-06/2019847469165896077_0.jpg',
-  'images/2026-02-11/2021588848711537027_0.jpg',
-  'images/2026-02-13/2022199501168038032_0.jpg',
-  'images/2026-01-31/2017660652219686942_0.jpg',
-  'images/2026-02-05/2019339841507643609_0.jpg',
-  'images/2026-02-12/2021802996003483948_0.jpg',
-  'images/2026-02-03/2018764499881537605_0.jpg',
-  'images/2026-02-03/2018562067033375224_0.jpg',
-  'images/2026-02-05/2019267462647439770_0.jpg',
-  'images/2026-02-01/2017820238314934756_0.jpg',
-])
 
 type KkkmPromptSeed = {
   sourceFile: string
@@ -48,10 +27,7 @@ function normalizeKkkmImagePath(imagePath: string) {
 
 function resolveKkkmImageUrl(imagePath: string) {
   const normalizedPath = normalizeKkkmImagePath(imagePath)
-  const shouldUseJsdelivr =
-    normalizedPath.startsWith('images/gpt-image-2/') || KKKM_JSDELIVR_IMAGE_PATHS.has(normalizedPath)
-
-  return `${shouldUseJsdelivr ? KKKM_JSDELIVR_IMAGE_BASE_URL : KKKM_IMAGE_BASE_URL}${normalizedPath}`
+  return `${KKKM_IMAGE_BASE_URL}${normalizedPath}`
 }
 
 function uniqueTags(tags: string[]) {
@@ -3617,7 +3593,340 @@ const KKKM_PROMPT_SEEDS: KkkmPromptSeed[] = [
   }
 ]
 
-export const KKKM_PROMPT_TEMPLATES: PromptTemplateInput[] = KKKM_PROMPT_SEEDS.map((seed) => ({
+const KKKM_UNAVAILABLE_IMAGE_SEED_KEYS = new Set([
+  'gemini:1998135786059759900',
+  'gemini:1999344734595350800',
+  'gemini:1999781038177063400',
+  'gemini:2004015740329017600',
+  'gemini:2004239718121161200',
+  'gemini:2004462228490096652',
+  'gemini:2004528545033527385',
+  'gemini:2004697850920501600',
+  'gemini:2008944996091564500',
+  'gemini:2009717451710509600',
+  'gemini:2010116114668515600',
+  'chatgpt:2010210489813680000',
+  'gemini:2012134246924648700',
+  'gemini:2012458566771204400',
+  'gemini:2013660094664446322',
+  'gemini:2015437854206529800',
+  'gemini:2015582755711861000',
+  'chatgpt:2015622019845702000',
+  'gemini:2017454291909546357',
+  'chatgpt:2020337546828632155',
+])
+
+const KKKM_REPLACEMENT_PROMPT_SEEDS: KkkmPromptSeed[] = [
+  {
+    "sourceFile": "gemini",
+    "sourceId": "2002037335161217500",
+    "title": "现实与Q版的咖啡邂逅",
+    "category": "摄影与写实",
+    "subcategory": "美食摄影",
+    "tags": [
+      "美食摄影",
+      "咖啡",
+      "3D"
+    ],
+    "imagePath": "images/2025-12-19/2002037335161217500_0.jpg",
+    "recommendedSize": "24:43",
+    "prompt": "一名年轻男子随意坐在现代咖啡馆吧台前，微笑着手持一杯冰咖啡。桌面上站着一个同人物相貌呼应的Q版3D小角色，比例夸张、头部较大、眼睛有表现力，面部特征简化，材质像光滑塑料或黏土。Q版角色也拿着一杯迷你咖啡。场景包含温暖吊灯、木质咖啡馆内景、浅景深和电影感真实光影，形成真人与风格化3D角色同框的温暖画面，竖版9:16。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "162",
+    "title": "迪士尼鸡尾酒",
+    "category": "摄影与写实",
+    "subcategory": "美食摄影",
+    "tags": [
+      "美食摄影",
+      "鸡尾酒",
+      "电影感"
+    ],
+    "imagePath": "images/143.png",
+    "recommendedSize": "800:1200",
+    "prompt": "生成一张真实高端鸡尾酒摄影：磨砂玻璃杯带闪亮盐边，杯中装满晶莹冰块，饮品以深蓝色羽衣甘蓝叶和淡粉色可食用花朵装饰。灯光阴郁而电影感，玻璃边缘有柔和高光。整体色彩、布景、背景和氛围参考指定迪士尼动画电影的视觉基调，但不要直接复制角色。底部用优雅金色衬线字体写“Disney — [MOVIE_TITLE]”。竖版9:16，超细节，摄影级真实感。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002312",
+    "title": "霓虹苏打水飞溅商业海报",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "饮品",
+      "飞溅"
+    ],
+    "imagePath": "images/gpt-image-2/case312.jpg",
+    "recommendedSize": "3:4",
+    "prompt": "生成一张高端饮品广告海报：三罐超动态苏打水在大胆影棚布置中爆发，一罐热带风味伴随戏剧性的水花和热带水果飞溅，背景是鲜艳橙粉光；一罐柠檬风味在发光绿色动态背景中被冷水泼溅。罐身布满真实冷凝水、运动模糊水滴和清爽果味能量。使用深橙、粉色、霓虹绿灯光，佳能50mm商业摄影质感，超写实纹理、锐利细节、明亮海报美学，比例3:4。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "15514",
+    "title": "意式咖啡馆菜单设计",
+    "category": "文档与教程",
+    "subcategory": "菜谱食谱",
+    "tags": [
+      "菜谱食谱",
+      "菜单",
+      "手绘"
+    ],
+    "imagePath": "images/chatgpt-images/italian-menu.png",
+    "recommendedSize": "1024:1024",
+    "prompt": "为温馨的意大利咖啡馆“Café Roma”设计一张干净迷人的单页菜单。顶部用优雅亲和的字体突出店名，列出五道菜品，并为每道菜配清晰、有吸引力、风格统一的手绘或水彩插图：玛格丽特披萨、培根蛋黄意面、卡普雷塞沙拉、提拉米苏和阿芙佳朵。整页使用传统意式藤蔓或花纹边框，配色为奶油色、橄榄绿与红棕点缀，排版清晰分级，价格以细小字体呈现。"
+  },
+  {
+    "sourceFile": "gemini",
+    "sourceId": "1997504385761329400",
+    "title": "咖啡杯中的芝加哥微缩奇境",
+    "category": "摄影与写实",
+    "subcategory": "美食摄影",
+    "tags": [
+      "美食摄影",
+      "微缩",
+      "电影感"
+    ],
+    "imagePath": "images/2025-12-07/1997504385761329400_0.jpg",
+    "recommendedSize": "1:1",
+    "prompt": "以45度俯视角呈现一个等距微型3D卡通场景：一只盛满卡布奇诺奶泡的瓷咖啡杯占据画面主体，奶泡上漂浮着[城市]的精致微缩城市景观。城市最具代表性的地标位于中心，细节清晰、柔和发光；微型街道上有细小车辆自然穿行。使用电影级灯光、浅景深虚化和梦幻氛围，整体既有咖啡特写的真实质感，也有8K微缩模型的精细建模效果。默认城市为芝加哥，比例1:1。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002358",
+    "title": "草莓能量饮料商业广告",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "饮品",
+      "运动"
+    ],
+    "imagePath": "images/gpt-image-2/case358.jpg",
+    "recommendedSize": "3:4",
+    "prompt": "生成一张超写实商业广告，将能量饮料与运动品牌视觉结合：一位充满动感的运动女性在空中跳跃，穿现代运动服，周围爆发红色草莓液体飞溅、飞散冰块和新鲜草莓。前景是一罐冰冷金属质感的草莓味能量饮料，罐身布满冷凝水滴，放在有光泽的反射表面上。使用明亮电影级灯光、强烈高光、运动特效和橙色渐变背景，整体是高对比、锐利、清爽有力量的8K广告海报。"
+  },
+  {
+    "sourceFile": "gemini",
+    "sourceId": "2001653710745739500",
+    "title": "奢华生活四宫格",
+    "category": "人物写真",
+    "subcategory": "人像写真",
+    "tags": [
+      "人像写真",
+      "时尚",
+      "生活方式"
+    ],
+    "imagePath": "images/2025-12-18/2001653710745739500_0.jpg",
+    "recommendedSize": "1529:2048",
+    "prompt": "生成一张2x2四宫格生活方式写真拼贴，四张照片都表现同一位女性主体，保持面部、发型与气质一致。画面一为夜晚户外手持蛋糕并带俏皮表情；画面二为白天高端街区从黑色豪车门边探身看向镜头；画面三为室内走廊全身镜自拍，穿深棕色两件套并搭配金色配饰；画面四为车内或户外黄金时刻近景自拍，穿浅粉色内搭和米色绒感外套。整体为奢华、潮流、网红生活方式美学，光线真实，细节高级。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002377",
+    "title": "樱花咖啡户外人像",
+    "category": "人物写真",
+    "subcategory": "生活写真",
+    "tags": [
+      "生活写真",
+      "户外人像",
+      "咖啡"
+    ],
+    "imagePath": "images/gpt-image-2/case377.jpg",
+    "recommendedSize": "9:16",
+    "prompt": "基于参考图保留同一人物身份、脸型和五官，不改变年龄、种族和面部结构。画面为年轻成年女性在户外花店街景中拍摄的生活方式全身人像，她坐在木椅上，身体侧向45到70度，双腿自然交叠，上半身微微前倾，头转向侧面，不直视镜头，双手握着一杯带吸管饮品。穿浅粉色棒球夹克、柔粉内搭、及膝百褶裙和白色运动鞋，搭配贝雷帽或报童帽、粉色肩包和小耳饰。明亮自然日光、低角度、50mm浅景深，粉色与奶油色调，竖版9:16。"
+  },
+  {
+    "sourceFile": "gemini",
+    "sourceId": "2008913659582681255",
+    "title": "空气感清透治愈的女生",
+    "category": "人物写真",
+    "subcategory": "人像写真",
+    "tags": [
+      "人像写真",
+      "空气感",
+      "胶片"
+    ],
+    "imagePath": "images/2026-01-07/2008913659582681255_0.jpg",
+    "recommendedSize": "2:3",
+    "prompt": "生成一张高端日系写真集扫描页，画面为9宫格照片布局，印在带纹理的哑光艺术纸上，底部留出宽白边用于标题排版。九张照片都保持同一位参考人物的一致性，服装可从宽松白衬衫、米色针织开衫或白色蕾丝吊带裙中选择。叙事从户外风与阳光开始，过渡到室内榻榻米、沙发阅读、局部手部或发丝细节，最后进入蒸汽浴室、浴缸和雾面镜子的私密高调画面。整体为Fujifilm Pro 400H质感，青色阴影、空气感高光、轻微暗角和纸张纹理。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002273",
+    "title": "橙红渐变中的孤独剪影",
+    "category": "摄影与写实",
+    "subcategory": "电影感摄影",
+    "tags": [
+      "电影感摄影",
+      "剪影",
+      "极简"
+    ],
+    "imagePath": "images/gpt-image-2/case273.jpg",
+    "recommendedSize": "4:5",
+    "prompt": "生成一张电影级极简肖像：一个孤独的男人站在强烈橙色到红色渐变环境中，人物以剪影方式呈现，强烈边缘光勾勒身体轮廓，深邃阴影与高对比形成戏剧张力。地面为光滑反射材质，构图居中对称，背景保持极简，只保留色彩氛围、少量空间纵深和干净的光影层次。整体像高端电影海报或专辑封面，情绪沉静、克制、孤独。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002357",
+    "title": "鱼眼镜面复古咖啡馆人像",
+    "category": "摄影与写实",
+    "subcategory": "电影感摄影",
+    "tags": [
+      "电影感摄影",
+      "咖啡馆",
+      "鱼眼镜头"
+    ],
+    "imagePath": "images/gpt-image-2/case357.jpg",
+    "recommendedSize": "4:5",
+    "prompt": "使用参考照片生成一张复古咖啡馆人像特写：人物靠近镜头，正用青绿色咖啡杯喝饮品，画面带鱼眼镜头的亲密变形感，可通过圆形镜面或靠近镜面的视角拍摄。背景是复古咖啡馆室内，包含亮面青绿色地铁砖、老式器具、吊灯和温暖阴郁的光线。人物穿黑色T恤，可佩戴黄色圆框眼镜。整体色调温暖、怀旧、有电影感，浅景深，真实摄影质感。"
+  },
+  {
+    "sourceFile": "gemini",
+    "sourceId": "2000858454580404700",
+    "title": "悬浮之环超现实肖像",
+    "category": "摄影与写实",
+    "subcategory": "电影感摄影",
+    "tags": [
+      "电影感摄影",
+      "超现实",
+      "肖像"
+    ],
+    "imagePath": "images/2025-12-16/2000858454580404700_0.jpg",
+    "recommendedSize": "825:1024",
+    "prompt": "生成一张超写实电影感棚拍肖像：基于参考图严格保留人物身份、五官、发型和整体比例。一位二十多岁的女性站在深炭黑背景前，双臂交叉，表情平静自信，周围有日常物品以完美轨道悬浮环绕，包括复古相机、皮面书、冒热气的咖啡杯、几何混凝土块、黄铜罗盘、干花、黑色墨滴、怀表和纸团。物体以不同高度和距离形成同心螺旋，有的锐利、有的轻微运动模糊。使用85mm中画幅质感、雕塑感侧光、金色点缀和复杂阴影，营造优雅、神秘、受控混乱的魔幻现实主义。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002322",
+    "title": "低角度街头饮品广告男模",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "街拍",
+      "饮品"
+    ],
+    "imagePath": "images/gpt-image-2/case322.jpg",
+    "recommendedSize": "3:4",
+    "prompt": "生成一张专业商业摄影：一位30岁男模站在街道上，正对镜头并向相机倾斜，使用低角度广角镜头拍摄。他近距离把一瓶饮料展示给镜头，手持瓶身贴近前景，瓶子标签保持笔直、清晰可读；一只白色运动鞋也进入前景，增强透视冲击。地面是湿漉漉的沥青，底部有飞溅水花。使用鲜艳色彩、电影级灯光和背后轮廓光，整体有街头广告大片感，比例3:4。"
+  },
+  {
+    "sourceFile": "gemini",
+    "sourceId": "2000553282767597800",
+    "title": "折纸艺术超精细角色雕塑",
+    "category": "摄影与写实",
+    "subcategory": "产品摄影",
+    "tags": [
+      "产品摄影",
+      "折纸",
+      "纸艺"
+    ],
+    "imagePath": "images/2025-12-15/2000553282767597800_0.jpg",
+    "recommendedSize": "1:1",
+    "prompt": "生成一个超精细的折纸版[角色]，由高品质彩色纸张折叠而成，边缘清晰，纸张纹理真实。折痕要准确捕捉角色的标志性特征、服装和轮廓，并以简化的几何形式呈现。主体放在干净的摄影棚台面上，周围有柔和阴影和清晰焦点。整体是极简收藏艺术风格，照片级细节，1080x1080方形构图。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "127",
+    "title": "品牌模切乙烯基贴纸",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "贴纸",
+      "品牌"
+    ],
+    "imagePath": "images/282.jpeg",
+    "recommendedSize": "1024:1024",
+    "prompt": "生成一个大型品牌模切乙烯基贴纸：使用[品牌]标志，外圈有厚实白色描边，贴纸完美居中放在柔和浅蓝背景上。视角为正上方平视俯拍，贴纸下方带真实投影。整体是干净平面设计，但有微妙3D厚度和真实材质感；保持品牌原本配色，贴纸占据画面大部分区域。输出1080x1080方形格式。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "1555",
+    "title": "家用音箱广告",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "家居",
+      "音箱"
+    ],
+    "imagePath": "images/chatgpt-images/speaker-output.png",
+    "recommendedSize": "1024:1024",
+    "prompt": "为家用蓝牙音箱生成一张广告图：在日式极简室内场景中，将产品置于正中的极简置物架上，背景为混凝土墙；加入绿植及其它时尚饰品，使整体氛围像高端家居摄影。右下角以 Helvetica Light 风格的小号无衬线字体低调加入文字“agi.fm”。除该文字外不包含任何多余文字、图形元素或水印。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "1556",
+    "title": "球鞋材料再创想",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "球鞋",
+      "材料"
+    ],
+    "imagePath": "images/chatgpt-images/sneakers-poster.png",
+    "recommendedSize": "1024:1024",
+    "prompt": "我正在设计一款球鞋，你是我的设计伙伴。请将这双球鞋重新想象为由[材料]制成，不需要考虑真实穿着可行性，重点探索材质带来的全新形态、纹理、结构和视觉冲击。画面应像专业产品概念海报，突出鞋身轮廓、材料细节、光影和设计灵感，为后续鞋款研发提供大胆方向。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002365",
+    "title": "科学家收藏级玩具发布板",
+    "category": "商品与电商",
+    "subcategory": "商品广告",
+    "tags": [
+      "商品广告",
+      "收藏玩具",
+      "发布板"
+    ],
+    "imagePath": "images/gpt-image-2/case365.jpg",
+    "recommendedSize": "1:1",
+    "prompt": "生成一张2x2网格的收藏级玩具发布视觉板，为4位历史著名科学家分别设计高端艺术玩具或设计师公仔。每个格子展示英雄形态主体，并搭配可替换配件、备用表情、包装设计、比例参考、贴纸细节、稀有度标识和材质特写。整体介于潮流艺术玩具与高端产品发布广告之间，摆放整洁、可开箱感强。使用柔和商业灯光、精致高光、干净高级背景、清晰阴影和超锐利细节。"
+  },
+  {
+    "sourceFile": "gemini",
+    "sourceId": "1997636224555639000",
+    "title": "3D角色设计创作流程",
+    "category": "图表与信息图",
+    "subcategory": "流程图",
+    "tags": [
+      "流程图",
+      "3D",
+      "创作流程"
+    ],
+    "imagePath": "images/2025-12-07/1997636224555639000_cover.jpg",
+    "recommendedSize": "16:9",
+    "prompt": "生成一张横版流程图海报，展示从手绘草图到3D角色成片的完整创作流程。流程包含四个清晰步骤：先在纸上画出角色草图；再套用指定的3D风格；然后搭建完整3D角色模型；最后将角色导入动画工具制作动态效果。画面应像专业创作工作流展示板，包含草图纸张、3D预览、建模界面、动画时间线和箭头连接，排版清晰，视觉统一，适合教学或案例展示。"
+  },
+  {
+    "sourceFile": "chatgpt",
+    "sourceId": "2026002362",
+    "title": "抹茶品牌触点系统视觉板",
+    "category": "品牌与空间",
+    "subcategory": "品牌 VI",
+    "tags": [
+      "品牌 VI",
+      "抹茶",
+      "视觉系统"
+    ],
+    "imagePath": "images/gpt-image-2/case362.jpg",
+    "recommendedSize": "16:9",
+    "prompt": "为现代生活方式品牌“MATCHA MODE”生成一张高级抹茶品牌触点系统视觉板，而不是单张产品图。核心画面是一杯置于自然台面上的超写实抹茶饮品，陶瓷杯中有鲜绿抹茶泡沫、微气泡，旁边放竹茶筅和轻微散落的抹茶粉。系统中同时展示纸杯、玻璃瓶、包装盒、托特包、标签、贴纸、封口贴、带价格的菜单卡、抹茶拿铁、冰抹茶、甜点和组合套餐。整体为极简日式排版、柔和绿色调、自然光、高端设计公司提案质感。"
+  },
+]
+
+const ACTIVE_KKKM_PROMPT_SEEDS = [
+  ...KKKM_PROMPT_SEEDS.filter((seed) =>
+    !KKKM_UNAVAILABLE_IMAGE_SEED_KEYS.has(`${seed.sourceFile}:${seed.sourceId}`),
+  ),
+  ...KKKM_REPLACEMENT_PROMPT_SEEDS,
+]
+
+export const KKKM_PROMPT_TEMPLATES: PromptTemplateInput[] = ACTIVE_KKKM_PROMPT_SEEDS.map((seed) => ({
   id: `kkkm-${seed.sourceFile}-${seed.sourceId}`,
   title: seed.title,
   category: seed.category,

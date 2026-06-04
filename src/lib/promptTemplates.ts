@@ -1,6 +1,11 @@
 import { EXPANDED_PROMPT_TEMPLATES } from './promptTemplateData'
 
 export const PROMPT_TEMPLATE_CATEGORIES = [
+  '运营',
+  'APP',
+  '海报',
+  '插画',
+  '卡通IP',
   'UI 与界面',
   '图表与信息图',
   '海报与排版',
@@ -16,6 +21,28 @@ type LegacyPromptTemplateCategory = '摄影与文档'
 type LegacyPromptTemplateSubcategory = '美女写真' | '男士写真'
 
 export const PROMPT_TEMPLATE_SUBCATEGORIES = [
+  '3D海报',
+  'KV海报',
+  'App 图标',
+  '金刚区图标',
+  '空状态',
+  '启动页',
+  '引导页',
+  '功能图',
+  '应用截图',
+  '电影海报',
+  '拼贴海报',
+  '艺术海报',
+  '渐变艺术',
+  '科技海报',
+  '黏土风格',
+  '多巴胺',
+  '夸张风格',
+  '扁平',
+  '情景故事',
+  '3D',
+  '治愈',
+  '卡通IP',
   '移动 App',
   '网页仪表盘',
   '社媒截图',
@@ -38,6 +65,7 @@ export const PROMPT_TEMPLATE_SUBCATEGORIES = [
   '联名 Campaign',
   '建筑空间',
   '室内场景',
+  '品牌与空间',
   '人像写真',
   '情侣写真',
   '时尚写真',
@@ -83,6 +111,25 @@ export interface PromptTemplate {
 export type PromptTemplateInput = Omit<PromptTemplate, 'category' | 'subcategory'> & {
   category: PromptTemplateCategory | LegacyPromptTemplateCategory
   subcategory?: PromptTemplateSubcategory | LegacyPromptTemplateSubcategory
+}
+
+const SOURCE_DEFINED_TEMPLATE_CATEGORIES = new Set<PromptTemplateCategory>([
+  '运营',
+  'APP',
+  '海报',
+  '插画',
+  '卡通IP',
+])
+
+function isPromptTemplateSubcategory(value: PromptTemplateInput['subcategory']): value is PromptTemplateSubcategory {
+  return Boolean(value && (PROMPT_TEMPLATE_SUBCATEGORIES as readonly string[]).includes(value))
+}
+
+function isSourceDefinedTemplate(template: Pick<PromptTemplateInput, 'category' | 'source'>) {
+  return (
+    SOURCE_DEFINED_TEMPLATE_CATEGORIES.has(template.category as PromptTemplateCategory) &&
+    template.source.includes('houshifang/image')
+  )
 }
 
 export const EXCLUDED_PROMPT_TEMPLATE_KEYWORDS = [
@@ -240,6 +287,28 @@ const BOILERPLATE_TEMPLATE_DESCRIPTION_PATTERN =
   /来自.+(?:案例|精选).*(?:可直接替换主题|已转写为中文可复用模板)|实用案例|可直接替换主题、文案、产品或场景后复用|已转写为中文可复用模板|保留原站中文提示词与示例图片/
 
 const TEMPLATE_DESCRIPTION_MEDIUMS: Record<PromptTemplateSubcategory, string> = {
+  '3D海报': '3D 运营海报',
+  'KV海报': 'KV 主视觉',
+  'App 图标': 'App 图标',
+  '金刚区图标': '入口图标',
+  '空状态': '空状态插画',
+  '启动页': '启动页视觉',
+  '引导页': '引导页视觉',
+  '功能图': '功能说明图',
+  '应用截图': '应用截图',
+  '电影海报': '电影海报',
+  '拼贴海报': '拼贴海报',
+  '艺术海报': '艺术海报',
+  '渐变艺术': '渐变海报',
+  '科技海报': '科技海报',
+  '黏土风格': '黏土风格插画',
+  '多巴胺': '多巴胺插画',
+  '夸张风格': '夸张风格插画',
+  '扁平': '扁平插画',
+  '情景故事': '情景故事插画',
+  '3D': '3D 插画',
+  '治愈': '治愈插画',
+  '卡通IP': 'IP 形象展示',
   '移动 App': '界面设计',
   '网页仪表盘': '仪表盘界面',
   '社媒截图': '社媒界面',
@@ -262,6 +331,7 @@ const TEMPLATE_DESCRIPTION_MEDIUMS: Record<PromptTemplateSubcategory, string> = 
   '联名 Campaign': 'Campaign 视觉',
   '建筑空间': '空间视觉',
   '室内场景': '室内场景',
+  '品牌与空间': '品牌空间视觉',
   '人像写真': '人像写真',
   '情侣写真': '情侣写真',
   '时尚写真': '时尚写真',
@@ -287,6 +357,28 @@ const TEMPLATE_DESCRIPTION_MEDIUMS: Record<PromptTemplateSubcategory, string> = 
 }
 
 const TEMPLATE_DESCRIPTION_USE_CASES: Record<PromptTemplateSubcategory, string> = {
+  '3D海报': '活动运营、促销传播和社媒发布',
+  'KV海报': '活动主视觉、品牌 Campaign 和横幅广告',
+  'App 图标': '应用上架、产品提案和品牌视觉起稿',
+  '金刚区图标': '移动首页导航、功能入口和产品视觉提案',
+  '空状态': 'App 空页面、组件库和产品说明',
+  '启动页': '移动应用启动视觉和品牌露出',
+  '引导页': '新手引导、功能介绍和产品流程说明',
+  '功能图': '功能讲解、产品介绍和应用商店素材',
+  '应用截图': '应用商店展示、产品提案和版本宣传',
+  '电影海报': '影视概念、故事封面和情绪海报',
+  '拼贴海报': '展览、市集、艺术节和社群活动宣传',
+  '艺术海报': '观点表达、展览封面和社媒视觉',
+  '渐变艺术': '音乐节、运动活动和年轻化品牌传播',
+  '科技海报': '技术大会、竞赛、产品发布和开发者活动',
+  '黏土风格': '产品介绍、活动封面和品牌插画',
+  '多巴胺': '年轻化活动、产品功能和社媒封面',
+  '夸张风格': '专题封面、品牌插画和创意社媒视觉',
+  '扁平': '品牌插画、产品介绍和轻量传播',
+  '情景故事': '故事表达、产品说明和品牌内容',
+  '3D': '商业插画、产品表达和视觉提案',
+  '治愈': '生活方式、品牌内容和社媒封面',
+  '卡通IP': '品牌吉祥物、潮玩周边和 IP 视觉提案',
   '移动 App': '产品展示、提案汇报和交互参考',
   '网页仪表盘': '后台展示、数据汇报和产品提案',
   '社媒截图': '社媒包装、内容展示和传播预览',
@@ -309,6 +401,7 @@ const TEMPLATE_DESCRIPTION_USE_CASES: Record<PromptTemplateSubcategory, string> 
   '联名 Campaign': '品牌联动、整合传播和活动发布',
   '建筑空间': '方案提案、空间叙事和展示图输出',
   '室内场景': '空间提案、陈列展示和氛围参考',
+  '品牌与空间': '品牌提案、空间展示和视觉规范',
   '人像写真': '人物展示、封面视觉和情绪表达',
   '情侣写真': '写真参考、社媒封面和情感表达',
   '时尚写真': '品牌大片、封面视觉和商业人像参考',
@@ -334,6 +427,11 @@ const TEMPLATE_DESCRIPTION_USE_CASES: Record<PromptTemplateSubcategory, string> 
 }
 
 const CATEGORY_DESCRIPTION_MEDIUMS: Record<PromptTemplateCategory, string> = {
+  '运营': '运营视觉',
+  'APP': 'App 视觉',
+  '海报': '海报视觉',
+  '插画': '插画视觉',
+  '卡通IP': 'IP 视觉',
   'UI 与界面': '界面设计',
   '图表与信息图': '信息图',
   '海报与排版': '海报视觉',
@@ -345,6 +443,11 @@ const CATEGORY_DESCRIPTION_MEDIUMS: Record<PromptTemplateCategory, string> = {
 }
 
 const CATEGORY_DESCRIPTION_USE_CASES: Record<PromptTemplateCategory, string> = {
+  '运营': '活动运营、促销传播和品牌主视觉',
+  'APP': '移动产品、应用商店素材和功能展示',
+  '海报': '活动宣传、封面发布和视觉包装',
+  '插画': '品牌内容、产品说明和社媒传播',
+  '卡通IP': '品牌吉祥物、潮玩周边和形象提案',
   'UI 与界面': '产品展示、提案汇报和交互参考',
   '图表与信息图': '主题讲解、知识整理和内容展示',
   '海报与排版': '活动宣传、封面发布和视觉包装',
@@ -379,7 +482,7 @@ const TEMPLATE_DESCRIPTION_KEYWORD_RULES = [
 function normalizeGithubImageUrl(url?: string) {
   if (!url) return url
 
-  const freestyleImagePrefix = 'https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/'
+  const freestyleImagePrefix = 'https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/'
   if (url.startsWith(freestyleImagePrefix)) {
     return url.replace('@main/images/', '@main/data/images/')
   }
@@ -389,14 +492,14 @@ function normalizeGithubImageUrl(url?: string) {
     const parts = url.slice(rawPrefix.length).split('/')
     const [owner, repo, branch, ...pathParts] = parts
     if (owner && repo && branch && pathParts.length > 0) {
-      return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${pathParts.join('/')}`
+      return `https://cdn.jsdmirror.com/gh/${owner}/${repo}@${branch}/${pathParts.join('/')}`
     }
   }
 
   const githubBlobMatch = url.match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/(.+)$/)
   if (githubBlobMatch) {
     const [, owner, repo, branch, path] = githubBlobMatch
-    return `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${path}`
+    return `https://cdn.jsdmirror.com/gh/${owner}/${repo}@${branch}/${path}`
   }
 
   return url
@@ -422,6 +525,11 @@ function localizeTitle(template: PromptTemplateInput) {
   if (overrideTitle) return overrideTitle
 
   if (/[\u3040-\u30ff\uac00-\ud7af]/.test(template.title) || chineseCharacterRatio(template.title) <= 0.1) {
+    if (template.category === '运营') return '运营视觉模板'
+    if (template.category === 'APP') return 'App 视觉模板'
+    if (template.category === '海报') return '海报视觉模板'
+    if (template.category === '插画') return '插画视觉模板'
+    if (template.category === '卡通IP') return 'IP 形象模板'
     if (template.category === 'UI 与界面') return '界面设计模板'
     if (template.category === '图表与信息图') return '信息图模板'
     if (template.category === '海报与排版') return '海报排版模板'
@@ -455,7 +563,7 @@ function buildChineseFallbackPrompt(template: PromptTemplateInput) {
 const SHORT_PROMPT_APPENDIX_TINY =
   '补充要求：补齐必要细节，确保中文可读，避免水印、乱码和无关装饰。'
 const SHORT_PROMPT_APPENDIX_LIGHT =
-  '补充要求：保持原始主体、构图、光线、材质和比例关系，补齐必要细节，确保中文可读，避免水印、乱码和无关装饰。'
+  '补充要求：保持原始主体、构图、光线、材质和比例关系，补齐必要细节，确保中文可读，避免水印、乱码和无关装饰，并提升成品感。'
 const SHORT_PROMPT_APPENDIX_FULL =
   '补充要求：保持原始主体、构图、光线、材质、比例和层级关系，按示例图补齐缺失细节；如果包含文字，确保中文清晰可读、排版稳定且语义准确；避免水印、乱码、重复元素、低清噪点和无关装饰；整体呈现专业、可复用、成品感强的模板效果。'
 
@@ -471,11 +579,23 @@ const PROMPT_SOURCE_CHATTER_LINE_PATTERN =
   /PromptShare|Nano Banana|nanobanana|基础提示词|谷歌 Gemini|Gemini 3|@Adobe|@AdobeFirefly|评论区|私信|提示词分享|提示词👇|完整工作流程见帖子|输入以下提示词|上传一张你的照片|启用图像生成选项|花\d+分钟|复制下方提示词|Melisa的提示词|换成黑色的头发|这些图像可能会激活你的味蕾|悉尼·斯威尼|安娜·德·阿玛斯/i
 const PROMPT_SOURCE_CHATTER_PREFIX_PATTERN =
   /^\s*(?:基础提示词|提示词|电影黄金提示词|电影级黄金提示词)[：:]\s*/
+const PROMPT_ENGLISH_SECTION_PATTERN =
+  /(?:^|\n)\s*英文提示词\s*[\s\S]*?(?=(?:\n\s*(?:输出比例|扩展要求|补充要求|画面要求|主体|主题)[：:]?)|$)/gi
+const PROMPT_CHINESE_LABEL_PATTERN = /\s*中文提示词\s*/gi
+
+function stripBilingualPromptLabels(prompt: string) {
+  return prompt
+    .replace(PROMPT_ENGLISH_SECTION_PATTERN, '\n')
+    .replace(PROMPT_CHINESE_LABEL_PATTERN, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
 
 function stripPromptSourceChatter(template: PromptTemplateInput) {
-  if (!template.source.includes('prompts.kkkm.cn')) return template.prompt.trim()
+  const prompt = stripBilingualPromptLabels(template.prompt)
+  if (!template.source.includes('prompts.kkkm.cn')) return prompt.trim()
 
-  const cleanedLines = template.prompt
+  const cleanedLines = prompt
     .split('\n')
     .map((line) => {
       const trimmed = line.trim()
@@ -592,7 +712,7 @@ function normalizeTemplateDescription(
 
 const PORTRAIT_CATEGORY_PATTERN =
   /(人像|肖像|写真|头像|portrait|selfie|自拍|美妆|美女|女孩|女性|女士|女模特|女子|女生|couple|情侣|男士|男性|模特|汉服|胶片人像|编辑人像|时尚人像|\bwoman\b|\bwomen\b|\bgirl\b|\bfemale\b|\bcouple\b|\bman\b|\bmale\b)/i
-const DOCUMENT_CATEGORY_PATTERN = /(文档|报告|教程|说明卡|说明页|使用说明|手写|笔记|notebook|白板|板书|药方|处方|鉴定|论文|paper|research|cookbook|guide|步骤|slides|幻灯|报告模板|report|analysis)/i
+const DOCUMENT_CATEGORY_PATTERN = /(文档|报告|教程|说明卡|说明页|使用说明|手写|笔记(?!本电脑)|notebook|白板|板书|药方|处方|鉴定|论文|paper|research|cookbook|guide|步骤|slides|幻灯|幻灯片|演示文稿|presentation|deck|试卷|课本|教材|教科书|报告模板|report|analysis)/i
 const PHOTO_CATEGORY_PATTERN = /(摄影|照片|photo|shot|拍摄|抓拍|街拍|纪实|实拍|手机照片|iphone photo|camera|镜头|film|胶片)/i
 const UI_INTENT_PATTERN = /(ui|界面|app|dashboard|web|screen|screenshot|mockup|mobile|手机界面|手机屏幕|浏览器|直播|feed|post|样机|组件|设计系统)/i
 const SCREEN_MOCKUP_PATTERN = /(屏幕|screen|screenshot|样机|mockup|laptop|webcam|monitor|显示器)/i
@@ -607,13 +727,19 @@ const HUMAN_PORTRAIT_PATTERN =
 const POSTER_LAYOUT_PATTERN = /(海报|poster|排版|字体|字形|宣传页|宣传海报|城市海报|杂志版式|typography)/i
 const COMMERCE_INTENT_PATTERN = /(商品|产品|product|电商|详情页|卖点|包装|packaging|营销|促销|购物|sku|amazon|taobao)/i
 const BRAND_SPACE_INTENT_PATTERN = /(品牌|brand identity|vi|空间设计|建筑|architecture|展厅|店铺|门店|showroom)/i
+const PRESENTATION_DOCUMENT_PATTERN = /(演示文稿|幻灯片|presentation cover|presentation platform|slide|slides|deck|ppt|pdf|导出为 PPT|咨询级演示)/i
+const SOCIAL_INTERFACE_PATTERN = /(社交媒体|朋友圈|微博|抖音|直播间|instagram|tiktok|x post|帖子页面|post page|feed|livestream|live stream)/i
+const ART_ILLUSTRATION_PATTERN = /(插画|工笔画|油画|绘画|水墨|曼荼罗|奇幻|超现实|拼贴|collage|illustration|painting|botanical art|key visual|主视觉)/i
+const STRONG_DOCUMENT_SURFACE_PATTERN = /(文档|报告|教程|试卷|课本|教材|教科书|论文|幻灯|幻灯片|演示文稿|presentation|deck|paper|research)/i
 const RECIPE_PATTERN = /(菜谱|食谱|配方|菜单|烹饪|recipe|cookbook|menu|分步骤菜谱)/i
 const FLOWCHART_PATTERN = /(流程图|流程|工作流|步骤图|创作流程|制作流程|pipeline|process|flowchart|workflow|journey map)/i
 const JOURNAL_PATTERN = /(手账|手帐|剪贴簿|手写笔记|学习笔记|bullet journal|scrapbook|planner|journal)/i
-const HAND_DRAWN_PATTERN = /(手绘|水彩|素描|草图|涂鸦|彩铅|线稿|hand-drawn|watercolor|sketch|doodle|ink)/i
+const HAND_DRAWN_PATTERN = /(手绘|工笔|水彩|素描|草图|涂鸦|彩铅|线稿|拼贴|hand-drawn|watercolor|sketch|doodle|ink|collage)/i
 const CARTOON_PATTERN = /(卡通|q版|贴纸|表情包|漫像|可爱|cartoon|sticker|emoji|cute)/i
 
 function normalizeTemplateCategory(template: PromptTemplateInput): PromptTemplateCategory {
+  if (isSourceDefinedTemplate(template)) return template.category as PromptTemplateCategory
+
   const haystack = getTemplateClassificationHaystack(template)
   const hasPortraitIntent = PORTRAIT_CATEGORY_PATTERN.test(haystack)
   const hasDocumentIntent = DOCUMENT_CATEGORY_PATTERN.test(haystack)
@@ -624,12 +750,64 @@ function normalizeTemplateCategory(template: PromptTemplateInput): PromptTemplat
   const hasPosterIntent = POSTER_LAYOUT_PATTERN.test(haystack)
   const hasCommerceIntent = COMMERCE_INTENT_PATTERN.test(haystack)
   const hasBrandSpaceIntent = BRAND_SPACE_INTENT_PATTERN.test(haystack)
+  const hasPresentationDocumentIntent = PRESENTATION_DOCUMENT_PATTERN.test(haystack)
+  const hasSocialInterfaceIntent = SOCIAL_INTERFACE_PATTERN.test(haystack)
+  const hasArtIllustrationIntent = ART_ILLUSTRATION_PATTERN.test(haystack)
 
   if (template.category === '摄影与文档') {
     if (hasScreenIntent) return '摄影与写实'
+    if (hasSocialInterfaceIntent || hasUiIntent) return 'UI 与界面'
     if (hasDocumentIntent) return '文档与教程'
     if (hasPortraitIntent) return '人物写真'
     return '摄影与写实'
+  }
+
+  if (hasPresentationDocumentIntent) return '文档与教程'
+
+  if (
+    template.category !== '图表与信息图' &&
+    (FLOWCHART_PATTERN.test(haystack) ||
+      KNOWLEDGE_GRAPH_PATTERN.test(haystack) ||
+      DATA_VIS_PATTERN.test(haystack) ||
+      RESEARCH_FIGURE_PATTERN.test(haystack)) &&
+    !hasUiIntent &&
+    !hasCommerceIntent
+  ) {
+    return '图表与信息图'
+  }
+
+  if (
+    template.category !== '海报与排版' &&
+    hasArtIllustrationIntent &&
+    !STRONG_DOCUMENT_SURFACE_PATTERN.test(haystack) &&
+    !hasCommerceIntent &&
+    !hasUiIntent &&
+    !hasBrandSpaceIntent &&
+    !hasPhotoIntent
+  ) {
+    return '海报与排版'
+  }
+
+  if (
+    template.category !== '文档与教程' &&
+    hasDocumentIntent &&
+    !hasUiIntent &&
+    !hasCommerceIntent &&
+    !hasBrandSpaceIntent &&
+    !hasPortraitIntent
+  ) {
+    return '文档与教程'
+  }
+
+  if (
+    template.category !== '海报与排版' &&
+    hasArtIllustrationIntent &&
+    !hasCommerceIntent &&
+    !hasUiIntent &&
+    !hasBrandSpaceIntent &&
+    !hasPhotoIntent
+  ) {
+    return '海报与排版'
   }
 
   if (
@@ -664,10 +842,12 @@ function normalizeTemplateCategory(template: PromptTemplateInput): PromptTemplat
 function inferSubcategory(template: PromptTemplateInput, category = normalizeTemplateCategory(template)): PromptTemplateSubcategory {
   const haystack = getTemplateClassificationHaystack(template)
 
+  if (category === '品牌与空间') return '品牌与空间'
+
   if (template.title.includes('通用模板') || template.tags.includes('通用模板')) return '通用模板'
 
   if (category === '人物写真') {
-    if (/(情侣|couple)/i.test(haystack)) return '情侣写真'
+    if (/(情侣|couple)/i.test(haystack)) return '生活写真'
     if (/(时尚|美妆|fashion|beauty|editorial|glam|杂志|高端|影棚肖像)/i.test(haystack)) return '时尚写真'
     if (/(日常|生活|公园|卧室|窗边|居家|家居|床边|镜自拍|自拍|胶片|街拍|纪实|抓拍|旅行|咖啡馆|镜子|room|bedroom|home|lifestyle|candid)/i.test(haystack)) return '生活写真'
     return '人像写真'
@@ -677,37 +857,30 @@ function inferSubcategory(template: PromptTemplateInput, category = normalizeTem
     if (FOOD_PHOTO_PATTERN.test(haystack)) return '美食摄影'
     if (CINEMATIC_PHOTO_PATTERN.test(haystack)) return '电影感摄影'
     if (LANDSCAPE_PHOTO_PATTERN.test(haystack)) return '风景摄影'
-    if (SCREEN_MOCKUP_PATTERN.test(haystack)) return '屏幕样机'
-    if (/(街拍|地铁|subway|纪实|抓拍|现场|手机照片|iphone|candid|发布会|人群)/i.test(haystack)) return '街拍摄影'
+    if (SCREEN_MOCKUP_PATTERN.test(haystack)) return '写实摄影'
     if (/(产品|product|棚拍|studio|still life|静物)/i.test(haystack)) return '产品摄影'
     return '写实摄影'
   }
 
   if (category === '文档与教程') {
+    if (PRESENTATION_DOCUMENT_PATTERN.test(haystack)) return '说明文档'
     if (JOURNAL_PATTERN.test(haystack)) return '手账素材'
     if (RECIPE_PATTERN.test(haystack)) return '菜谱食谱'
-    if (/(手写|笔记|notebook|白板|板书|药方|处方)/i.test(haystack)) return '手写笔记'
-    if (/(报告|report|评分|鉴定|analysis|审查|分析报告)/i.test(haystack)) return '报告模板'
-    if (RESEARCH_FIGURE_PATTERN.test(haystack)) return '研究论文图'
-    if (/(教程|步骤|step|guide|how to|cookbook|流程|使用|操作)/i.test(haystack)) return '教程步骤'
+    if (/(手写|笔记|notebook|白板|板书|药方|处方|试卷|涂鸦)/i.test(haystack)) return '手写笔记'
     return '说明文档'
   }
 
   if (category === 'UI 与界面') {
-    if (/(小红书|抖音|微博|直播|社媒|instagram|tiktok|social|feed|post|截图)/i.test(haystack)) return '社媒截图'
-    if (/(design system|设计系统|组件|component|玻璃质感|ui kit)/i.test(haystack)) return 'UI 系统'
-    if (/(dashboard|仪表盘|网页|web|后台|数据面板)/i.test(haystack)) return '网页仪表盘'
-    if (/(屏幕|screen|screenshot|样机|mockup)/i.test(haystack)) return '屏幕样机'
+    if (/(小红书|抖音|微博|朋友圈|帖子|直播|社媒|instagram|tiktok|social|feed|post|截图)/i.test(haystack)) return '社媒截图'
     return '移动 App'
   }
 
   if (category === '图表与信息图') {
-    if (FLOWCHART_PATTERN.test(haystack)) return '流程图'
     if (KNOWLEDGE_GRAPH_PATTERN.test(haystack)) return '知识图谱'
-    if (RESEARCH_FIGURE_PATTERN.test(haystack)) return '研究论文图'
+    if (FLOWCHART_PATTERN.test(haystack)) return '流程图'
+    if (RESEARCH_FIGURE_PATTERN.test(haystack)) return '技术拆解'
     if (DATA_VIS_PATTERN.test(haystack)) return '数据可视化'
     if (/(拆解|结构|技术|流程|diagram|breakdown)/i.test(haystack)) return '技术拆解'
-    if (/(地图|路线|时间线|timeline|map)/i.test(haystack)) return '地图时间线'
     return '信息图'
   }
 
@@ -716,22 +889,14 @@ function inferSubcategory(template: PromptTemplateInput, category = normalizeTem
     if (HAND_DRAWN_PATTERN.test(haystack)) return '手绘风格'
     if (/(城市|旅行|波士顿|硅谷|成都|city|travel)/i.test(haystack)) return '旅行城市'
     if (/(字体|书法|typography|字形|排版)/i.test(haystack)) return '字体排版'
-    if (/(插画|水彩|水墨|艺术|illustration)/i.test(haystack)) return '插画艺术'
-    if (/(出版|杂志|跨页|封面|画册|document|publishing|海报|poster)/i.test(haystack)) return '出版物'
+    if (ART_ILLUSTRATION_PATTERN.test(haystack)) return '手绘风格'
+    if (/(出版|杂志|跨页|画册|document|publishing)/i.test(haystack)) return '出版物'
     return '活动海报'
   }
 
   if (category === '商品与电商') {
     if (/(包装|packaging|瓶|罐|盒|成分)/i.test(haystack)) return '包装卖点'
-    if (/(详情页|amazon|电商|commerce|购物)/i.test(haystack)) return '电商详情'
     return '商品广告'
-  }
-
-  if (category === '品牌与空间') {
-    if (/(联名|campaign|活动视觉)/i.test(haystack)) return '联名 Campaign'
-    if (/(建筑|空间|architecture|城市|地图|展厅)/i.test(haystack)) return '建筑空间'
-    if (/(室内|interior|店铺|房间)/i.test(haystack)) return '室内场景'
-    return '品牌 VI'
   }
 
   if (/(手写|笔记|notebook|白板|板书)/i.test(haystack)) return '手写笔记'
@@ -740,6 +905,10 @@ function inferSubcategory(template: PromptTemplateInput, category = normalizeTem
 }
 
 function normalizeTemplateSubcategory(template: PromptTemplateInput, category: PromptTemplateCategory) {
+  if (SOURCE_DEFINED_TEMPLATE_CATEGORIES.has(category) && isPromptTemplateSubcategory(template.subcategory)) {
+    return template.subcategory
+  }
+
   return inferSubcategory(template, category)
 }
 
@@ -756,11 +925,13 @@ function normalizeTemplate(template: PromptTemplateInput): PromptTemplate {
   const category = normalizeTemplateCategory(classificationTemplate)
   const subcategory = normalizeTemplateSubcategory(classificationTemplate, category)
   const description = normalizeTemplateDescription(classificationTemplate, category, subcategory)
-  const prompt = !sourcePrompt
-    ? buildChineseFallbackPrompt({ ...overriddenTemplate, description })
-    : hasUntranslatedPromptBlock(sourcePrompt)
-      ? buildChineseFallbackPrompt({ ...overriddenTemplate, prompt: sourcePrompt, description })
-      : extendShortPrompt(sourcePrompt)
+  const prompt = isSourceDefinedTemplate(overriddenTemplate)
+    ? sourcePrompt || overriddenTemplate.prompt.trim()
+    : !sourcePrompt
+      ? buildChineseFallbackPrompt({ ...overriddenTemplate, description })
+      : hasUntranslatedPromptBlock(sourcePrompt)
+        ? buildChineseFallbackPrompt({ ...overriddenTemplate, prompt: sourcePrompt, description })
+        : extendShortPrompt(sourcePrompt)
 
   return {
     ...overriddenTemplate,
@@ -783,17 +954,18 @@ function dedupeTemplates(templates: PromptTemplateInput[]) {
   for (const template of templates) {
     if (EXCLUDED_TEMPLATE_IDS.has(template.id)) continue
     const rawHaystack = getTemplateHaystack(template)
-    if (EXCLUDED_RAW_KEYWORDS.some((keyword) => rawHaystack.includes(keyword))) continue
+    if (!isSourceDefinedTemplate(template) && EXCLUDED_RAW_KEYWORDS.some((keyword) => rawHaystack.includes(keyword))) continue
     const normalized = normalizeTemplate(template)
     const promptKey = normalizeTemplateTextForDedup(normalized.prompt)
+    const shouldDedupePrompt = !isSourceDefinedTemplate(template)
     if (seenIds.has(normalized.id)) continue
-    if (promptKey && seenPromptKeys.has(promptKey)) continue
+    if (shouldDedupePrompt && promptKey && seenPromptKeys.has(promptKey)) continue
     if (normalized.imageUrl) {
       if (seenImages.has(normalized.imageUrl)) continue
       seenImages.add(normalized.imageUrl)
     }
     seenIds.add(normalized.id)
-    if (promptKey) seenPromptKeys.add(promptKey)
+    if (shouldDedupePrompt && promptKey) seenPromptKeys.add(promptKey)
     result.push(normalized)
   }
 

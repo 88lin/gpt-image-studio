@@ -1,4 +1,5 @@
 import type { PromptTemplateInput } from './promptTemplates'
+import { HOUSHIFANG_PROMPT_TEMPLATES } from './houshifangPromptTemplates'
 import { KKKM_PROMPT_TEMPLATES } from './kkkmPromptTemplates'
 
 const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
@@ -15,7 +16,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/iam_miharbi/status/2045151354679665101",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case2/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case2/output.jpg",
     "imageAlt": "电影感极简人像示例图",
     "prompt": "Generate a cinematic minimal portrait of a solitary man standing in an intense orange to red gradient environment, strong silhouette lighting, deep shadow contrast, reflective glossy floor, symmetrical composition, minimal",
     "tips": [
@@ -36,7 +37,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/Shinning1010/status/2045002808903020962",
     "recommendedSize": "3:4",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case5/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case5/output.jpg",
     "imageAlt": "卧室镜自拍人像示例图",
     "prompt": "A stunning 18-year-old Chinese girl with a youthful, pure face and realistic skin texture, sitting on a cozy, slightly messy bed in her bedroom. She is taking a mirror selfie with a smartphone, capturing a natural and intimate moment. Wearing casual gray loungewear and neat white crew socks. Soft natural light (golden hour) streams in from a side window, creating a warm, moody, and cinematic atmosphere. 35mm lens, sharp focus on the subject in the mirror, depth of field with a beautifully blurred background (bokeh). Photorealistic, 8K, high resolution, studio quality, masterpiece.\nNegative Prompts: no extra limbs, no deformed hands, no blur, no noise, no watermark, no text, no cartoon/anime style. Aspect Ratio: 3:4.",
     "tips": [
@@ -57,7 +58,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/patrickassale/status/2044581766309060765",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case7/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case7/output.jpg",
     "imageAlt": "奢华魅力美妆人像示例图",
     "prompt": "Luxury Glam Beauty Portrait:, Beautiful Black woman, youthful spirit, creamy vanilla, silk press, mahogany red, subtle confidence, textured fabric, sapphire blue, minimal jewelry, beachside breeze, lens flare effect, nostalgic, cinematic lens, symmetrical composition, soft focus, high fashion photography, monochromatic, dewy finish, mysterious tension, layered elements\n\n*Found on Midjourney's Explore page.",
     "tips": [
@@ -78,7 +79,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/BubbleBrain/status/2045358053831172358",
     "recommendedSize": "9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case1/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case1/output.jpg",
     "imageAlt": "2026 波士顿春季城市海报示例图",
     "prompt": "A striking Spring 2026 city poster for Boston with an elegant celebratory mood and a bold contemporary design. On a clean off-white textured background with large areas of negative space, a miniature single sculler rows across the lower right corner of the image on a narrow ribbon of reflective water. The wake from the oar sweeps upward in a dynamic calligraphic curve, gradually transforming into the Charles River and then into a dreamlike hand-painted panorama of Boston. Inside this flowing river-shaped composition are iconic Boston elements: the Back Bay skyline, Beacon Hill brownstones, Acorn Street, Boston Public Garden, Swan Boats, Zakim Bridge, Fenway-inspired details, historic brick architecture, harbor ferries, and the city's waterfront atmosphere. Soft morning fog, golden spring light, subtle festive accents in crimson and gold, rich detail, layered depth, sophisticated city-poster aesthetics, fresh and refined, visually powerful but not overcrowded. Elegant typography in the lower left reads \"SPRING 2026\" with a vertical slogan \"BOSTON, A CITY OF RIVER, MEMORY, AND INVENTION\", text clear and beautifully composed, premium graphic design, 9:16",
     "tips": [
@@ -99,7 +100,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/Panda20230902/status/2045396918965285111",
     "recommendedSize": "1:1",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case3/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case3/output.jpg",
     "imageAlt": "成都美食地图插画示例图",
     "prompt": "一张手绘风格的城市美食地图，以成都为主题。画面以鸟瞰视角的手绘简化城市地图为底，标注主要道路和地标但不追求精确比例而是追求可爱的手绘感。地图上分布着 12 个美食地点的精致手绘小插画：春熙路的串串香（一把竹签插着各种食材冒着热气）、宽窄巷子的三大炮（三个糯米团子飞向铜盘）、建设路的蛋烘糕（金黄酥脆正在翻面）、玉林路的火锅（九宫格锅翻滚冒泡）等，每个插画约占地图的 5% 面积，旁边用手写体标注店名和一句推荐语\"凌晨两点还在排队的那家\"。地图边缘用手绘藤蔓和辣椒装饰形成边框。右下角有一个手绘指南针和图例说明。左上角标题\"成都·吃货暴走地图\"使用胖圆的手绘美术字配辣椒装饰。整体画风为水彩+彩铅混合的手绘质感，颜色以暖色系（辣椒红、姜黄、翠绿）为主，图片比例 1:1。",
     "tips": [
@@ -120,7 +121,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/liyue_ai/status/2045368305079447853",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case4/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case4/output.jpg",
     "imageAlt": "中式极简 S 形海报示例图",
     "prompt": "极简新中式美学风格，画面以淡雅的灰白色为底，呈现出一种纸艺剪影般的立体感。\n一条S形蜿蜒的裂痕状边缘将画面分割，仿佛撕开了一层纸面，露出内部色彩斑斓的东方山水景象。\n裂口内，一条蜿蜒的河流自上而下贯穿整个构图，河水以深浅不一的蓝色渲染，层次分明，仿佛流动的丝带。\n河岸两侧点缀着青翠的山丘与梯田，色彩柔和，绿红交织，展现出田园的宁静之美。\n沿河而建的古风建筑错落有致，飞檐翘角，白墙黛瓦，在光影的映衬下更显古朴典雅。\n岸边树木葱茏，枝叶轻盈，一艘小船静泊于水中央，增添了几分悠然意境。\n整体构图呈S形曲线，富有韵律感，仿佛自然与人文的和谐共生。\n画作边缘采用撕纸效果，营造出立体浮雕般的视觉体验。\n下方题字\"东方美学\"以黑色楷体书写，日期\"2026/04/18\"与红色印章相呼应，底部\"CHINA\"字样庄重醒目，署名\"@LIYUE\"低调收尾，整体氛围静谧深远，充满诗意与哲思。",
     "tips": [
@@ -141,7 +142,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/liyue_ai/status/2045328856937312549",
     "recommendedSize": "16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case6/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case6/output.jpg",
     "imageAlt": "创意书法字体设计示例图",
     "prompt": "创意艺术字体\"纵有疾风起\"，秀丽笔手写风格，整体文字横版排列，具有强烈视觉冲击力；\n深度融合手写书法笔意，笔触带毛笔书写的粗犷洒脱，如挥毫泼墨的肆意劲道；\n起收笔的飞白，顿挫，尽显促销的火爆张力，文字的形态打破规整，笔画的粗细变化；\ndutch angle，营造出动感冲刺的气势，字形呈奔放之势；\n重心上扬如蓄势待发，笔画的伸展，穿插毫无拘束，似全力冲刺的劲道；\n整体架构疏密交织，紧密处如促销热潮的汹涌，留白处似优惠间隙的呼吸感；\n纯净黑色背景打底，完美契合热烈氛围，艺术字的形态与色彩酣畅传递。",
     "tips": [
@@ -162,30 +163,9 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/4WEB1/status/2045390207072256179",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case8/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case8/output.jpg",
     "imageAlt": "未来感曼荼罗插画示例图",
     "prompt": "でChatGPTで画像を作成してもらって、今日また作成してもらったらGPT image 2かもしれず、出来が変わったように見えるのでメモ\n\n左の水色と黄色のが先週\n右の紫のが今日\n\n右のは透明感とか解像度、緻密さが違うような気がする…\n\nプロンプト\n曼荼羅の近未来SF版を描いて",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-ui-1",
-    "title": "单一提示词生成 UI 设计",
-    "category": "UI 与界面",
-    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "界面",
-      "截图",
-      "可复用"
-    ],
-    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
-    "sourceUrl": "https://x.com/austinit/status/2044968740782272596",
-    "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case1/output.jpg",
-    "imageAlt": "单一提示词生成 UI 设计示例图",
-    "prompt": "看到GPT 2 Image 直出 UI 图的那一刻，奥特曼坦言：被吓到眩晕瘫坐，那一刻就像看到原子弹爆炸。\n\n别再说自己审美差，前端写不好了，现在 GPT 2 Image 一个 prompt 直出UI设计图，不满意还可以再编辑，或者继续让它以同样风格渲染其他页面。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -204,7 +184,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/patrickassale/status/2044687244368441742",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case2/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case2/output.jpg",
     "imageAlt": "业余感 iPhone 发布会快照示例图",
     "prompt": "Amateur iPhone photo at Apple Park during the iPhone 20 keynote, Tim Cook presenting on stage. Shot from the crowd at a distance",
     "tips": [
@@ -225,7 +205,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/patrickassale/status/2044569086013718958",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case3/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case3/output.jpg",
     "imageAlt": "手写笔记本照片示例图",
     "prompt": "Amateur photo of an open notebook lying flat, filled with handwritten notes in black ballpoint pen. The handwriting is casual and slightly messy, like personnal notes, natural imperfections, crossed out words, underlined headings. Shot from slightly above, natural daylight from a window, no flash. Casual desk setting, shot on iPhone",
     "tips": [
@@ -246,7 +226,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/Panda20230902/status/2045385588065313057",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case4/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case4/output.jpg",
     "imageAlt": "宋朝社交媒体动态页示例图",
     "prompt": "\"宋朝人的朋友圈\"/\"SONG DYNASTY SOCIAL MEDIA FEED\"，古今穿越幽默融合界面设计风格，画面模拟手机社交媒体界面，但内容全部是宋朝场景头像是宋代文人画像，用户名\"苏东坡SuShi_Official\"，发布内容\"刚到黄州，被贬了但心情还行。今天自己做了东坡肉，味道绝了，附菜谱：\"，配图为工笔画风格的东坡肉特写，点赞列表\"黄庭坚、秦观、佛印等126人\"，评论区\"王安石：呵呵\"\"司马光：还是那个味道\"，界面元素如点赞图标用宋代花纹替代，状态栏显示\"大宋移动 5G\"和\"元丰三年\"，配色为手机深色模式搭配宋代雅致色调，历史与社交媒体的趣味碰撞杰作",
     "tips": [
@@ -267,7 +247,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/MrLarus/status/2045373105041007013",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case5/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case5/output.jpg",
     "imageAlt": "多平台内容截图示例图",
     "prompt": "1、生成视频号内容截图，主题：中老年不要盲目催婚，iPhone尺寸\n2、生成抖音内容截图，主题：跟上AI浪潮9.9包教会，iPhone尺寸\n3、生成小红书内容截图，主题：精致女孩背后都有网贷，iPhone尺寸\n4、生成快手内容截图：主题：直播离婚预告，iPhone尺寸",
     "tips": [
@@ -288,7 +268,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/SKA_Neotype/status/2044637900978217334",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case8/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case8/output.jpg",
     "imageAlt": "太祖李成桂的 X 页面示例图",
     "prompt": "以「太祖李成桂的 X 页面」为目标生成图像。\n\n核心提示词：👍프롬프트 :\n태조 이성계의 X  페이지(위화도 회군을 벌이기 직전- 최영 장군과 서로 디스하는 내용이 담긴 게시글들)을 만들어 주세요.\ngpt-image-2\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -309,7 +289,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/liyue_ai/status/2045000106919997637",
     "recommendedSize": "3:4",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case10/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case10/output.jpg",
     "imageAlt": "GPT-Image-2 细节展示示例图",
     "prompt": "以眼部特写图片为基础，生成3:4的四屏构图超写实眼部特写，四屏按春夏秋冬上下排序。\n\n第一屏：眼眸中带着绽粉樱色的美瞳，睫毛缀满迷你春花，脸颊散落樱瓣与黄蕊小花，粉蝶萦绕眉眼，浅金发丝轻垂，下方簇簇樱花怒放，画面中央\"SPRING\"白色艺术字点缀，风格细腻唯美，光影柔和，色彩粉嫩治愈，下面用书法体写着春；\n\n第二屏：眼眸中带着着清荷色的美瞳，睫毛饰以粉莲与绿荷，脸颊挂着晶莹水珠，粉瓣、绿荷点缀其间，蜻蜓轻绕，浅金发丝若隐若现，画面中央\"Summer\"白色艺术字凸显，光影通透流光感，色彩清透凉爽，下面用书法体写着夏；\n\n第三屏：眼眸中带着金黄红相间的美瞳，睫毛饰以橙红枫叶，脸颊散落金红秋叶，橙蝶翩跹眉眼间，浅金发丝隐约可见，画面中央\"AUTUMN\"白色艺术字醒目，光影暖金流光，色彩浓郁温暖，下面用书法笔写着秋；\n\n第四屏：眼眸中带着雪花蓝色的美瞳，睫毛覆满冰晶雪片，脸颊散落白色雪花与红色腊梅，银白蝴蝶翩跹眉眼，浅金发丝朦胧似雪，画面中央\"WINTER\"白色艺术字亮眼，光影冷冽蓝白流光，色彩清透纯净，下面用书法体写着冬。\n\n整体呈现梦幻眼眸四季交替的唯美梦幻治愈画面，微调各屏的光影强度，让画面氛围感更浓郁。",
     "tips": [
@@ -330,7 +310,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/linxiaobei888/status/2044947911495336262",
     "recommendedSize": "9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case11/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case11/output.jpg",
     "imageAlt": "GPT vs Banana 盲测比较示例图",
     "prompt": "绘制一张色彩鲜艳、竖版（9:16）手绘风格的《新疆旅行手账插画》，画风仿佛由一位充满好奇心的孩子用蜡笔创作，整体使用柔和温暖的浅色背景（如浅黄色），搭配红色、蓝色、绿色等明亮色调，营造温馨、童趣、满满旅行气息的氛围。\n一、主画面：手账式旅行路线\n在插画中央绘制一条“蜿蜒曲折的旅行路线”，路线用箭头 + 虚线连接多个地点，由 {天数} 日行程自动生成推荐景点：\n示例格式（自动替换为{城市名}相关）：\n- “第 1 站：{景点 1 推荐 + 简短趣味描述}”\n- “第 2 站：{景点 2 推荐 + 简短趣味描述}”\n- “第 3 站：{景点 3 推荐 + 简短趣味描述}”\n- …\n- “最终站：{当地招牌美食/纪念品 + 温馨结束语}”\n> 旅程站点数量随天数自动生成：\n> 若用户未输入天数，则按默认 1 日 / 精华线路生成。\n---\n二、周围趣味元素（全部根据城市自动替换）\n在路线周围加入大量充满童趣的小元素，例如：\n- 可爱的旅行角色：\n“拿着当地特色小吃的小朋友”、\n“背着旅行包的冒险小孩”等。\n- 当地标志性建筑的童趣 Q 版手绘：\n如 “{城市地标1}”、“{城市地标2}”、“{城市地标3}”。\n- 有趣的提示牌：\n“小心迷路！”、“注意人流！”、“前方好吃的！”（可根据城市语境调整）。\n- 贴纸式小标语：\n“{城市名}旅行记忆已解锁！”\n“{城市名}美食大冒险！”\n“下一站去哪儿？”\n- 当地美食的可爱小图标：\n如 “{城市美食1}”、“{城市美食2}”、“{城市美食3}”。\n- 感叹句（保持童真风）：\n“原来{城市名}这么好玩！”\n“我要再来一次！”\n---\n三、整体风格要求\n- 手绘蜡笔风 / 儿童旅行日志风格\n- 色彩鲜艳、构图饱满但温暖\n- 强调旅行的欢乐与探索感\n- 所有文字采用可爱的手写字体\n- 让整个画面像一本童趣满满的旅行手账页面",
     "tips": [
@@ -351,7 +331,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/saskr_13/status/2044744396932079934",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case16/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case16/output.jpg",
     "imageAlt": "A/B 测试签名输出示例图",
     "prompt": "をシェアします💗🤣\nGPT Image 2 はまだ正式リリースされてないと言っておりましたが、添付した 2 枚は「 A / B どちらが良いか」選ばせるタイプでした。\nよく見ると右下にサインまで…！\nこれが噂の 2 なのでしょうか？\n懐かしの「私がどんなふうに扱ったか」シリーズです(笑)\n--------------------\n✅#prompt : \n私があなたをどんなふうに扱ってきたか、4 コマ漫画風に描いてください。まずは 800 字くらいのプロットをテキストで出して、私が「描いて」と言ったらプロットに沿った 4 コマ漫画を描いてください。\n--------------------\nまずテキストを生成しますので、そのあと「描いて」と送ってください。その前に画風など指定するのも良いかと思います。\n\n画風は「アクリル水彩の油絵＋現代風の大人の成熟したカップルで、実写じゃなくて少女漫画風に描いて欲しい」とお願いしました☺\n間違えて「アクリル水彩の油絵」と書いちゃいましたが…(笑)\nおなじタッチが出て来るか分かりませんが、いろいろなシチュエーションで試してみようと思います(^^♪\n大事なところに線をひいておきました🤣",
     "tips": [
@@ -372,7 +352,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/kawai_design/status/2044739028420079840",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case17/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case17/output.jpg",
     "imageAlt": "duct-tape-1 文字渲染展示示例图",
     "prompt": "以「duct-tape-1 文字渲染展示」为目标生成图像。\n\n核心提示词：を試し続けたらGPT Image 2だと噂される「duct-tape-1」が登場しました。文字の描画とレイアウトのユニークさが特徴だと感じます。\n\nこれをデフォルトで使えるとなると...\nたくさん実験したくてウズウズします。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -393,7 +373,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/old_pgmrs_will/status/2044356515751231527",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case19/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case19/output.jpg",
     "imageAlt": "MAI-Image-2 vs GPT vs Nano Banana ...示例图",
     "prompt": "以「MAI-Image-2 vs GPT vs Nano Banana ...」为目标生成图像。\n\n核心提示词：で\n☝️MAI-Image-2-Efficient\n👉GPT-Image-2️\n👇Nano Banana Pro\n個人的好みは GPT-Image-2\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -414,7 +394,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
     "sourceUrl": "https://x.com/jrpj2010/status/2044817134761767306",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case20/output.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case20/output.jpg",
     "imageAlt": "白板绘图展示示例图",
     "prompt": "以「白板绘图展示」为目标生成图像。\n\n核心提示词：もこのレベル📷\nやべ〜\nいよいよ当人のYoutube板書レベルに・・・いや超えてね！？\n\n1.5年前はこのレベルで発狂してたかと思うと感慨深い・・・\n→\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -3543,7 +3523,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-ui",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case17.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case17.jpg",
     "imageAlt": "UI 截图系统模板示例图",
     "prompt": "使用「UI 截图系统」模板生成一张可直接用于生产流程的图像。\n\n用途：用于 App 截图、仪表盘、社媒截图和直播界面。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 锁定平台、比例、层级和画面文字。\n2. 明确状态栏、Tab、操作区、评论层等 UI 元素。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免平台描述过泛。\n2. 约束文字可读性和平台特征。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3564,7 +3544,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-infographic",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case334.png",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case334.png",
     "imageAlt": "信息图引擎模板示例图",
     "prompt": "使用「信息图引擎」模板生成一张可直接用于生产流程的图像。\n\n用途：用于解释图、技术图解、时间线和知识卡片。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义 3-5 个模块、信息流、层级和短标签。\n2. 用色块、箭头、图标和留白控制复杂度。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免把长段正文塞进画面。\n2. 先限制模块数量，再补视觉细节。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3585,7 +3565,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-infographic",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case341.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case341.jpg",
     "imageAlt": "科学尺度缩放图模板示例图",
     "prompt": "使用「科学尺度缩放图」模板生成一张可直接用于生产流程的图像。\n\n用途：用于需要从微观到宏观展示尺度变化的科普主题。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 使用 6-8 个尺度框，每个标签保持短句。\n2. 展示单位、倍率和不同尺度的细节。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免所有尺度框长得一样。\n2. 避免通用放大镜式布局。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3606,7 +3586,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case345.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case345.jpg",
     "imageAlt": "海报排版系统模板示例图",
     "prompt": "使用「海报排版系统」模板生成一张可直接用于生产流程的图像。\n\n用途：用于活动海报、电影海报、封面和社媒传播视觉。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 锁定主体、标题、版式、配色和比例。\n2. 突出标题层级和主视觉。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 需要成品海报时，避免生成拼贴展示板。\n2. 约束多余文字和装饰符号。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3627,7 +3607,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case350.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case350.jpg",
     "imageAlt": "运动商业 Campaign模板示例图",
     "prompt": "使用「运动商业 Campaign」模板生成一张可直接用于生产流程的图像。\n\n用途：用于运动品牌 Campaign、运动员海报和运动产品视觉。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义运动项目、姿态、核心道具、标题和品牌色。\n2. 使用强光影、干净构图和可读数据层。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免错误运动器材和杂乱拼贴。\n2. 让运动员和核心道具占据主导。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3648,7 +3628,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case355.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case355.jpg",
     "imageAlt": "概念字体海报模板示例图",
     "prompt": "使用「概念字体海报」模板生成一张可直接用于生产流程的图像。\n\n用途：用于标题文字需要成为主视觉结构的海报。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 让字体成为画面主角，并保证标题拼写准确。\n2. 人物、物体或风景需要服务标题含义。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免默认字效、无关图标和标题错字。\n2. 控制配色数量，保持克制。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3669,7 +3649,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case359.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case359.jpg",
     "imageAlt": "水墨双重曝光海报模板示例图",
     "prompt": "使用「水墨双重曝光海报」模板生成一张可直接用于生产流程的图像。\n\n用途：用于诗意人像海报、水墨氛围和文化主题视觉。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 融合人像剪影、水墨质感、氛围和留白。\n2. 保持构图克制、高级、可读。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免廉价奇幻拼贴和景物堆叠。\n2. 非必要时减少文字。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3690,7 +3670,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case339.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case339.jpg",
     "imageAlt": "自然科普海报模板示例图",
     "prompt": "使用「自然科普海报」模板生成一张可直接用于生产流程的图像。\n\n用途：用于自然主题的高级、干净科普海报。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 使用清晰主体、少量文案、柔和阴影和充足留白。\n2. 让科普标签短而清楚。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免广告感太重。\n2. 避免密集百科正文。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3711,7 +3691,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-product",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case373.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case373.jpg",
     "imageAlt": "商品商业视觉模板示例图",
     "prompt": "使用「商品商业视觉」模板生成一张可直接用于生产流程的图像。\n\n用途：用于商品主图、包装视觉、详情页和销售卖点排版。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义商品、卖点、材质、场景、光线和版块。\n2. 区分主商品、卖点标签和辅助道具。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免无关道具削弱商品识别。\n2. 约束包装文字和卖点表达。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3732,7 +3712,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-product",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case353.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case353.jpg",
     "imageAlt": "个性化美妆报告模板示例图",
     "prompt": "使用「个性化美妆报告」模板生成一张可直接用于生产流程的图像。\n\n用途：用于美妆推荐、肤质报告、导购助手和生活方式商品卡片。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 使用诊断、推荐和商品卡片的报告层级。\n2. 对齐商品图、标签和评分。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免医疗化结论和难读小字。\n2. 保持推荐逻辑清楚。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3753,7 +3733,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-brand",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case354.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case354.jpg",
     "imageAlt": "品牌身份包模板示例图",
     "prompt": "使用「品牌身份包」模板生成一张可直接用于生产流程的图像。\n\n用途：用于 Logo 系统、品牌板、VI 套件和应用样机。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义品牌名、定位、配色、字体、Logo 用法和触点。\n2. 要求视觉板中的应用统一对齐。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免无关 Logo 变体和混乱配色。\n2. 保持品牌文字准确。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3774,7 +3754,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-brand",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case362.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case362.jpg",
     "imageAlt": "品牌触点视觉板模板示例图",
     "prompt": "使用「品牌触点视觉板」模板生成一张可直接用于生产流程的图像。\n\n用途：用于多触点 Campaign 展示和品牌落地预览。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 指定触点清单、统一视觉规则和样机排列。\n2. 让所有面板共享配色和字体逻辑。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免混入多个无关 Campaign 风格。\n2. 可读性下降时减少触点数量。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3795,7 +3775,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-architecture",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case331.png",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case331.png",
     "imageAlt": "建筑与空间模板示例图",
     "prompt": "使用「建筑与空间」模板生成一张可直接用于生产流程的图像。\n\n用途：用于室内、建筑表现、城市地图、空间规划和环境概念图。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义视角、尺度、材质、光线和空间功能。\n2. 地图需要指定地标、标签、边框装饰和准确度。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 概念图之外要避免不合理透视。\n2. 锁定地图标签语言和相对位置。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3816,7 +3796,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-photo",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case377.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case377.jpg",
     "imageAlt": "写实摄影模板示例图",
     "prompt": "使用「写实摄影」模板生成一张可直接用于生产流程的图像。\n\n用途：用于人像、街拍、商品摄影和电影感写实。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 指定机位、镜头、光源、质感、背景和动作。\n2. 加入可信的小瑕疵增强纪实感。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 商业美妆之外，避免过度磨皮。\n2. 需要时加入手部、文字、结构类负面约束。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3837,7 +3817,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-photo",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case376.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case376.jpg",
     "imageAlt": "街头意外瞬间摄影模板示例图",
     "prompt": "使用「街头意外瞬间摄影」模板生成一张可直接用于生产流程的图像。\n\n用途：用于街头抓拍、意外泼洒、手机纪实和快速动作。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 描述具体瞬间、机位高度、运动模糊和街景。\n2. 加入避免摆拍和广告棚拍感的限制。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免画面过于干净。\n2. 让事件看起来可信。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3858,7 +3838,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-illustration",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case346.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case346.jpg",
     "imageAlt": "插画与艺术风格模板示例图",
     "prompt": "使用「插画与艺术风格」模板生成一张可直接用于生产流程的图像。\n\n用途：用于插画、水彩、水墨、装饰画和风格实验。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义构图、主体、配色、笔触材质、情绪和完成度。\n2. 参考图任务需要说明保留哪些特征。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免只写风格，不写构图。\n2. 使用参考图时锁定角色识别。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3879,7 +3859,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-scene",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case330.png",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case330.png",
     "imageAlt": "场景叙事模板示例图",
     "prompt": "使用「场景叙事」模板生成一张可直接用于生产流程的图像。\n\n用途：用于分镜、世界观、直播场景和情绪叙事画面。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义人物、地点、时间、冲突、情绪和机位。\n2. 让场景细节服务故事。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免通用幻想背景。\n2. 让故事线索在画面里可见。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3900,7 +3880,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-history",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case375.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case375.jpg",
     "imageAlt": "历史与古风题材模板示例图",
     "prompt": "使用「历史与古风题材」模板生成一张可直接用于生产流程的图像。\n\n用途：用于古风题材、长卷、朝代服饰、诗词视觉和历史场景。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 指定朝代、服饰制度、器物参考、版式和文化气质。\n2. 明确长卷、册页或海报形式。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 需要历史准确时，避免朝代混搭。\n2. 约束随机现代物件。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3921,7 +3901,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-document",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case360.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case360.jpg",
     "imageAlt": "文档与出版物模板示例图",
     "prompt": "使用「文档与出版物」模板生成一张可直接用于生产流程的图像。\n\n用途：用于白皮书、手册、百科图鉴、报告页面和出版系统。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义页面尺寸、分栏、目录、图表系统和字体层级。\n2. 使用可读标题、表格、标签和页面节奏。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免密集小字。\n2. 让图表和说明对齐页面网格。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3942,7 +3922,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-other",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/case370.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case370.jpg",
     "imageAlt": "概念产品研发拆解模板示例图",
     "prompt": "使用「概念产品研发拆解」模板生成一张可直接用于生产流程的图像。\n\n用途：用于实验型任务、研发视觉板、拆解图和特殊视觉系统。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义产物类型、组件、标签、材质逻辑和展示格式。\n2. 使用清晰标注和受控技术风格。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免任务边界过泛。\n2. 标签要短，组件关系要清楚。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3963,7 +3943,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-ui",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/ui.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/ui.jpg",
     "imageAlt": "UI 与界面分类示例图",
     "prompt": "围绕「[主题]」生成一张UI 与界面方向的高质量图片。\n\n使用场景：App、网页、仪表盘、社媒截图与产品界面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -3984,7 +3964,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-infographic",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/infographic.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/infographic.jpg",
     "imageAlt": "图表与信息可视化分类示例图",
     "prompt": "围绕「[主题]」生成一张图表与信息可视化方向的高质量图片。\n\n使用场景：信息图、知识图谱、技术解释与结构化图解。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4005,7 +3985,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-poster",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/poster.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/poster.jpg",
     "imageAlt": "海报与排版分类示例图",
     "prompt": "围绕「[主题]」生成一张海报与排版方向的高质量图片。\n\n使用场景：活动海报、封面、字体视觉和强排版画面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4026,7 +4006,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-product",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/product.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/product.jpg",
     "imageAlt": "商品与电商分类示例图",
     "prompt": "围绕「[主题]」生成一张商品与电商方向的高质量图片。\n\n使用场景：商品图、详情页、包装卖点和商业广告。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4047,7 +4027,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-brand",
     "recommendedSize": "16:9 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/brand.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/brand.jpg",
     "imageAlt": "品牌与标志分类示例图",
     "prompt": "围绕「[主题]」生成一张品牌与标志方向的高质量图片。\n\n使用场景：Logo、VI、品牌触点和 Campaign 视觉系统。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4068,7 +4048,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-architecture",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/architecture.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/architecture.jpg",
     "imageAlt": "建筑与空间分类示例图",
     "prompt": "围绕「[主题]」生成一张建筑与空间方向的高质量图片。\n\n使用场景：建筑表现、室内空间、城市地图和空间概念。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4089,7 +4069,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-photo",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/photo.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/photo.jpg",
     "imageAlt": "摄影与写实分类示例图",
     "prompt": "围绕「[主题]」生成一张摄影与写实方向的高质量图片。\n\n使用场景：人像、手机纪实、胶片质感和商业摄影。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4110,7 +4090,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-illustration",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/illustration.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/illustration.jpg",
     "imageAlt": "插画与艺术分类示例图",
     "prompt": "围绕「[主题]」生成一张插画与艺术方向的高质量图片。\n\n使用场景：插画、艺术风格、材质实验和装饰画面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4131,7 +4111,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-scene",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/scene.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/scene.jpg",
     "imageAlt": "场景与叙事分类示例图",
     "prompt": "围绕「[主题]」生成一张场景与叙事方向的高质量图片。\n\n使用场景：分镜、故事场景、直播画面和世界观叙事。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4152,7 +4132,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-history",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/history.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/history.jpg",
     "imageAlt": "历史与古风题材分类示例图",
     "prompt": "围绕「[主题]」生成一张历史与古风题材方向的高质量图片。\n\n使用场景：古风长卷、历史人物、传统题材和诗词画面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4173,7 +4153,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-document",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/document.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/document.jpg",
     "imageAlt": "文档与出版物分类示例图",
     "prompt": "围绕「[主题]」生成一张文档与出版物方向的高质量图片。\n\n使用场景：白皮书、手册、百科图鉴和出版页设计。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4194,7 +4174,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-other",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdelivr.net/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/other.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/other.jpg",
     "imageAlt": "其他应用场景分类示例图",
     "prompt": "围绕「[主题]」生成一张其他应用场景方向的高质量图片。\n\n使用场景：创意实验、特殊任务、混合玩法和实用场景。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4221,13 +4201,13 @@ const CURATED_SOURCE_META: Record<CuratedSourceKey, {
     source: 'wuyoscar/gpt_image_2_skill 精选',
     description: '来自 wuyoscar/gpt_image_2_skill 的实用案例精选，已转写为中文可复用模板。',
     sourceBaseUrl: 'https://github.com/wuyoscar/gpt_image_2_skill/blob/main/',
-    imageBaseUrl: 'https://cdn.jsdelivr.net/gh/wuyoscar/gpt_image_2_skill@main/',
+    imageBaseUrl: 'https://cdn.jsdmirror.com/gh/wuyoscar/gpt_image_2_skill@main/',
   },
   evolink: {
     source: 'EvoLinkAI/awesome-gpt-image-2-API-and-Prompts 精选',
     description: '来自 EvoLinkAI/awesome-gpt-image-2-API-and-Prompts 的高质量商业案例精选，已转写为中文可复用模板。',
     sourceBaseUrl: 'https://github.com/EvoLinkAI/awesome-gpt-image-2-API-and-Prompts/blob/main/',
-    imageBaseUrl: 'https://cdn.jsdelivr.net/gh/EvoLinkAI/awesome-gpt-image-2-API-and-Prompts@main/',
+    imageBaseUrl: 'https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-API-and-Prompts@main/',
   },
   youmind: {
     source: 'YouMind-OpenLab/awesome-gpt-image-2 精选',
@@ -4239,7 +4219,7 @@ const CURATED_SOURCE_META: Record<CuratedSourceKey, {
     source: 'prompts.kkkm.cn / all-image-prompts 精选',
     description: '来自 prompts.kkkm.cn 与 junxiaopang/all-image-prompts 的实用案例精选，已转写为中文可复用模板。',
     sourceBaseUrl: 'https://github.com/junxiaopang/all-image-prompts/blob/main/',
-    imageBaseUrl: 'https://cdn.jsdelivr.net/gh/junxiaopang/all-image-prompts@main/public/',
+    imageBaseUrl: 'https://cdn.jsdmirror.com/gh/junxiaopang/all-image-prompts@main/public/',
   },
 }
 
@@ -5101,6 +5081,7 @@ const EXTRA_CURATED_PROMPT_TEMPLATES: PromptTemplateInput[] = [
 ]
 
 export const EXPANDED_PROMPT_TEMPLATES: PromptTemplateInput[] = [
+  ...HOUSHIFANG_PROMPT_TEMPLATES,
   ...BASE_PROMPT_TEMPLATES,
   ...EXTRA_CURATED_PROMPT_TEMPLATES,
   ...KKKM_PROMPT_TEMPLATES,

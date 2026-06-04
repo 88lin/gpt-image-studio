@@ -128,6 +128,8 @@ function TemplateDetailPanel({
   onZoom: (template: PromptTemplate) => void
   onClose?: () => void
 }) {
+  const showSubcategoryBadge = template.subcategory !== template.category
+
   return (
     <div className={`flex min-h-full flex-col ${compact ? 'relative px-4 pb-4 pt-3' : 'p-4 sm:p-5'}`}>
       {compact && (
@@ -144,7 +146,7 @@ function TemplateDetailPanel({
       <div className={`mb-4 ${compact ? 'pr-12' : ''}`}>
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <TemplateBadge>{template.category}</TemplateBadge>
-          <TemplateBadge tone="ink">{template.subcategory}</TemplateBadge>
+          {showSubcategoryBadge && <TemplateBadge tone="ink">{template.subcategory}</TemplateBadge>}
           <TemplateBadge tone="warm">{template.recommendedSize}</TemplateBadge>
         </div>
         <h3 className={`${compact ? 'text-lg' : 'text-xl'} font-bold leading-tight text-zinc-950 dark:text-zinc-50`}>{template.title}</h3>
@@ -251,11 +253,6 @@ function TemplateDetailPanel({
           ))}
         </div>
       </div>
-
-      <div className="mt-5 rounded-2xl border border-zinc-200/70 bg-zinc-50/80 p-3 text-xs leading-relaxed text-zinc-500 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-zinc-400">
-        <div className="mb-1 font-bold text-zinc-800 dark:text-zinc-100">来源整理</div>
-        {template.source}
-      </div>
     </div>
   )
 }
@@ -307,6 +304,7 @@ export default function PromptLibraryModal() {
   }, [])
 
   const availableSubcategories = useMemo(() => getPromptTemplateSubcategories(category), [category])
+  const showSubcategoryFilter = category === ALL_CATEGORY || availableSubcategories.length > 1
 
   useEffect(() => {
     if (subcategory !== ALL_SUBCATEGORY && !availableSubcategories.includes(subcategory)) {
@@ -456,7 +454,7 @@ export default function PromptLibraryModal() {
               </div>
             </label>
 
-            <div className="mt-4 grid grid-cols-2 gap-2 lg:hidden">
+            <div className={`mt-4 grid gap-2 lg:hidden ${showSubcategoryFilter ? 'grid-cols-2' : 'grid-cols-1'}`}>
               <label className="block">
                 <span className="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">分类</span>
                 <select
@@ -476,20 +474,22 @@ export default function PromptLibraryModal() {
                 </select>
               </label>
 
-              <label className="block">
-                <span className="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">细分</span>
-                <select
-                  aria-label="模板细分"
-                  value={subcategory}
-                  onChange={(event) => setSubcategory(event.target.value as SubcategoryFilter)}
-                  className="w-full rounded-2xl border border-zinc-200/80 bg-white px-3 py-2.5 text-sm text-zinc-800 shadow-sm outline-none transition focus:border-emerald-400 dark:border-white/[0.08] dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-400"
-                >
-                  <option value={ALL_SUBCATEGORY}>全部细分</option>
-                  {availableSubcategories.map((item) => (
-                    <option key={item} value={item}>{item}</option>
-                  ))}
-                </select>
-              </label>
+              {showSubcategoryFilter && (
+                <label className="block">
+                  <span className="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">细分</span>
+                  <select
+                    aria-label="模板细分"
+                    value={subcategory}
+                    onChange={(event) => setSubcategory(event.target.value as SubcategoryFilter)}
+                    className="w-full rounded-2xl border border-zinc-200/80 bg-white px-3 py-2.5 text-sm text-zinc-800 shadow-sm outline-none transition focus:border-emerald-400 dark:border-white/[0.08] dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-400"
+                  >
+                    <option value={ALL_SUBCATEGORY}>全部细分</option>
+                    {availableSubcategories.map((item) => (
+                      <option key={item} value={item}>{item}</option>
+                    ))}
+                  </select>
+                </label>
+              )}
             </div>
 
             <div className="mt-5 hidden lg:block">
@@ -535,6 +535,7 @@ export default function PromptLibraryModal() {
               </div>
             </div>
 
+            {showSubcategoryFilter && (
             <div className="mt-5 hidden lg:block">
               <div className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400">Subcategory</div>
               <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-1">
@@ -571,6 +572,7 @@ export default function PromptLibraryModal() {
                 ))}
               </div>
             </div>
+            )}
 
             <div className="mt-5 hidden rounded-2xl border border-emerald-200/70 bg-white/70 p-3 text-xs leading-relaxed text-zinc-500 dark:border-emerald-400/10 dark:bg-white/[0.03] dark:text-zinc-400 lg:block">
               <div className="mb-1 font-bold text-zinc-800 dark:text-zinc-100">筛选原则</div>
@@ -610,6 +612,7 @@ export default function PromptLibraryModal() {
                 <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
                   {filteredTemplates.map((template, index) => {
                     const selected = selectedTemplate?.id === template.id
+                    const showSubcategoryBadge = template.subcategory !== template.category
 
                     return (
                       <button
@@ -634,7 +637,7 @@ export default function PromptLibraryModal() {
                           <div className="min-w-0">
                             <div className="mb-2 flex flex-wrap items-center gap-1.5">
                               <TemplateBadge>{template.category}</TemplateBadge>
-                              <TemplateBadge tone="ink">{template.subcategory}</TemplateBadge>
+                              {showSubcategoryBadge && <TemplateBadge tone="ink">{template.subcategory}</TemplateBadge>}
                               <TemplateBadge tone="warm">{template.recommendedSize}</TemplateBadge>
                             </div>
                             <h3 className="text-[15px] font-bold leading-snug text-zinc-950 dark:text-zinc-50">
