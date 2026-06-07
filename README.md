@@ -27,6 +27,19 @@
 
 ---
 
+## ❤️ 赞助商
+
+<table>
+<tr>
+<td width="180" align="center" valign="middle">
+  <a href="https://www.5cookie.cc"><img src="https://github.com/user-attachments/assets/c2a1e98e-c172-49ff-b361-60bb32601daa" alt="5Cookie Code" width="150"></a>
+</td>
+<td valign="middle"><b><a href="https://www.5cookie.cc">5Cookie Code</a></b>是一家稳定高速的 API 中继服务提供商，为 Image-2、Claude Code、Codex 等平台或模型提供 API 中继服务。面向个人、团队和企业用户提供 AI 编码服务和 AI 生图服务。</td>
+</tr>
+</table>
+
+---
+
 ## 📸 界面预览
 
 <details>
@@ -119,10 +132,6 @@
 - **提示词防改写**：Responses API 会始终在请求文本前加入强制指令防止提示词被改写；开启 Codex CLI 模式后，Images API 也会获得同等保护。
 - **智能诊断提示**：当检测到接口异常改写行为或缺少常规参数时，自动提示开启相应的兼容模式。
 - **习惯配置**：支持设置提交后清空输入、重启后保留历史输入、任务提交方式、临时复用历史任务 API 配置等。
-
----
-
-
 
 ---
 
