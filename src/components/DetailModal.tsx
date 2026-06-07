@@ -52,6 +52,7 @@ export default function DetailModal() {
   const downloadPartialImagesTooltip = useTooltip()
   const retryTooltip = useTooltip()
   const downloadImageTooltip = useTooltip()
+  const downloadOriginalImageTooltip = useTooltip()
   const downloadAllTooltip = useTooltip()
 
   const clearTextSelection = () => {
@@ -143,6 +144,7 @@ export default function DetailModal() {
   }, [task])
 
   const currentOutputImageId = task?.outputImages?.[imageIndex] || ''
+  const currentOriginalOutputImageId = task?.transparentOriginalImages?.[imageIndex] || ''
   const currentOutputPreviewSrc = currentOutputImageId ? outputPreviewSrcs[currentOutputImageId] || '' : ''
   const maskTargetId = task?.maskTargetImageId || null
   const maskTargetSrc = maskTargetId ? imageSrcs[maskTargetId] || '' : ''
@@ -209,9 +211,12 @@ export default function DetailModal() {
   const currentImageSize = currentOutputImageId ? imageSizes[currentOutputImageId] : ''
   const currentActualParams = currentOutputImageId ? task.actualParamsByImage?.[currentOutputImageId] : undefined
   const currentRevisedPrompt = currentOutputImageId ? task.revisedPromptByImage?.[currentOutputImageId]?.trim() : ''
-  // 将 @图N 等 mention 标记转换为实际发送给 API 的形式（如 [image 1]）后再比较，
-  // 这样仅由标签渲染差异导致的不一致不会被当作“被改写”。
-  const promptSentToApi = replaceImageMentionsForApi(task.prompt, task.inputImageIds.length).trim()
+  // 将 @图N 等 mention 标记和透明背景追加提示词都按实际请求内容比较，
+  // 避免仅由本地请求预处理导致的不一致被当作“API 改写”。
+  const requestPrompt = task.transparentOutput && task.transparentPrompt
+    ? task.transparentPrompt
+    : task.prompt
+  const promptSentToApi = replaceImageMentionsForApi(requestPrompt, task.inputImageIds.length).trim()
   const showRevisedPrompt = Boolean(currentRevisedPrompt && currentRevisedPrompt !== promptSentToApi)
   const codexCliPromptKey = getCodexCliPromptKey(settings)
   const hasHandledPromptWarning = settings.codexCli || dismissedCodexCliPrompts.includes(codexCliPromptKey)
@@ -228,6 +233,10 @@ export default function DetailModal() {
   const streamPreviewLen = streamPreviewItems.length
   const currentStreamPreviewSrc = activeStreamPreviewSrc
   const streamPartialImageIds = task.streamPartialImageIds ?? []
+  const isPngOutput = task.params.output_format === 'png'
+  const transparentOutputText = task.transparentOutput || task.params.transparent_output ? 'true' : 'false'
+  const currentTransparentOutputFailed = Boolean(currentOutputImageId && task.transparentOutput && task.transparentOriginalImages?.[imageIndex] === '')
+  const outputCompressionText = task.params.output_compression == null ? '未设置' : String(task.params.output_compression)
 
   const formatTime = (ts: number | null) => {
     if (!ts) return ''
@@ -328,6 +337,23 @@ export default function DetailModal() {
         showToast('下载失败', 'error')
       } else {
         showToast('下载成功', 'success')
+      }
+    } catch (err) {
+      console.error(err)
+      showToast('下载失败', 'error')
+    }
+  }
+
+  const handleDownloadCurrentOriginalOutput = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!currentOriginalOutputImageId || !task) return
+
+    try {
+      const result = await downloadImageIds([currentOriginalOutputImageId], `task-${task.id}-orig`)
+      if (result.successCount === 0) {
+        showToast('下载失败', 'error')
+      } else {
+        showToast('原图下载成功', 'success')
       }
     } catch (err) {
       console.error(err)
@@ -521,6 +547,26 @@ export default function DetailModal() {
                     {imageIndex + 1} / {outputLen}
                   </span>
                 </>
+              )}
+              {currentOriginalOutputImageId && (
+                <div className="absolute bottom-4 right-4 z-20 flex">
+                  <button
+                    type="button"
+                    {...downloadOriginalImageTooltip.handlers}
+                    onClick={(e) => {
+                      downloadOriginalImageTooltip.handlers.onClick()
+                      handleDownloadCurrentOriginalOutput(e)
+                    }}
+                    className="flex items-center justify-center gap-0.5 rounded bg-black/50 py-0.5 pl-1.5 pr-2 text-white backdrop-blur-sm transition hover:bg-black/70 focus:outline-none focus:ring-1 focus:ring-white/50"
+                    aria-label="下载原图"
+                  >
+                    <DownloadIcon className="h-4 w-4" />
+                    <span className="text-[9px] font-bold leading-none mt-[1px] uppercase">orig</span>
+                  </button>
+                  <ViewportTooltip visible={downloadOriginalImageTooltip.visible} className="whitespace-nowrap">
+                    下载原图
+                  </ViewportTooltip>
+                </div>
               )}
             </>
           )}
@@ -868,6 +914,24 @@ export default function DetailModal() {
                 <br />
                 <DetailParamValue task={task} paramKey="output_format" className="font-medium" actualParams={currentActualParams} />
               </div>
+              {isPngOutput ? (
+                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+                  <span className="text-gray-400 dark:text-gray-500">透明背景</span>
+                  <br />
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{transparentOutputText}</span>
+                  {currentTransparentOutputFailed && (
+                    <span className="ml-1.5 rounded bg-red-50 px-1 py-0.5 text-[10px] font-medium uppercase leading-none text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                      failed
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+                  <span className="text-gray-400 dark:text-gray-500">压缩率</span>
+                  <br />
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{outputCompressionText}</span>
+                </div>
+              )}
               <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
                 <span className="text-gray-400 dark:text-gray-500">审核</span>
                 <br />
@@ -878,13 +942,6 @@ export default function DetailModal() {
                   <span className="text-gray-400 dark:text-gray-500">数量</span>
                   <br />
                   <DetailParamValue task={task} paramKey="n" className="font-medium" />
-                </div>
-              )}
-              {task.params.output_compression != null && (
-                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
-                  <span className="text-gray-400 dark:text-gray-500">压缩率</span>
-                  <br />
-                  <DetailParamValue task={task} paramKey="output_compression" className="font-medium" actualParams={currentActualParams} />
                 </div>
               )}
             </div>

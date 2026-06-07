@@ -120,6 +120,7 @@ export interface TaskParams {
   output_compression: number | null
   moderation: 'auto' | 'low'
   n: number
+  transparent_output: boolean
 }
 
 export const DEFAULT_PARAMS: TaskParams = {
@@ -129,6 +130,7 @@ export const DEFAULT_PARAMS: TaskParams = {
   output_compression: null,
   moderation: 'auto',
   n: 1,
+  transparent_output: false,
 }
 
 // ===== 输入图片（UI 层面） =====
@@ -180,6 +182,12 @@ export interface TaskRecord {
   actualParamsByImage?: Record<string, Partial<TaskParams>>
   /** 输出图片对应的 API 改写提示词，key 为 outputImages 中的图片 id */
   revisedPromptByImage?: Record<string, string>
+  /** 是否启用透明背景后处理 */
+  transparentOutput?: boolean
+  /** 实际发送给 API 的透明背景辅助提示词 */
+  transparentPrompt?: string
+  /** 透明背景后处理前的原始输出图片 id，顺序对应 outputImages */
+  transparentOriginalImages?: string[]
   /** 输入图片的 image store id 列表 */
   inputImageIds: string[]
   maskTargetImageId?: string | null
