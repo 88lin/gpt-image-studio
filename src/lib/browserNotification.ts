@@ -15,11 +15,6 @@ function isSecureNotificationContext() {
   return typeof window !== 'undefined' && window.isSecureContext
 }
 
-export function getBrowserNotificationPermission(): BrowserNotificationPermission {
-  const NotificationConstructor = getNotificationConstructor()
-  return NotificationConstructor ? NotificationConstructor.permission : 'unsupported'
-}
-
 export function getBrowserNotificationReadiness(): BrowserNotificationReadiness {
   const NotificationConstructor = getNotificationConstructor()
   if (!NotificationConstructor) return { ok: false, reason: 'unsupported' }

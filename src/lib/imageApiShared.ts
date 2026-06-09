@@ -94,6 +94,25 @@ async function blobToDataUrl(blob: Blob, fallbackMime: string): Promise<string> 
 }
 
 export const IMAGE_FETCH_CORS_HINT = ' 可点链接按钮复制结果链接，或尝试开启「返回 Base64 图片数据」避免此问题。'
+export const STREAMING_UNSUPPORTED_HINT = '提示：当前使用的 API 可能不支持流式传输，请尝试关闭「流式传输」功能。'
+export const STREAMING_FORMAT_HINT = '提示：API 返回了无法解析的流式数据格式，请尝试关闭「流式传输」功能。'
+
+export function appendStreamingUnsupportedHint(message: string): string {
+  return message ? `${message}\n${STREAMING_UNSUPPORTED_HINT}` : STREAMING_UNSUPPORTED_HINT
+}
+
+export function appendStreamingFormatHint(message: string): string {
+  return message ? `${message}\n${STREAMING_FORMAT_HINT}` : STREAMING_FORMAT_HINT
+}
+
+/** 排除明确与流式无关的状态码后追加提示 */
+export function maybeAppendStreamingHint(message: string, status: number, streamImages?: boolean): string {
+  if (!streamImages) return message
+  if (status === 401 || status === 403 || status === 404 || status === 408 || status === 429 || status >= 500) {
+    return message
+  }
+  return appendStreamingUnsupportedHint(message)
+}
 
 async function probeNoCorsReachability(url: string, timeoutMs = 8000): Promise<'opaque' | 'reachable' | 'failed'> {
   const controller = new AbortController()
@@ -146,6 +165,7 @@ export async function fetchImageUrlAsDataUrl(url: string, fallbackMime: string, 
 
 export async function getApiErrorMessage(response: Response): Promise<string> {
   let errorMsg = `HTTP ${response.status}`
+  const textResponse = response.clone()
   try {
     const errJson = await response.json()
     if (errJson.error?.message) errorMsg = errJson.error.message
@@ -155,7 +175,7 @@ export async function getApiErrorMessage(response: Response): Promise<string> {
     else if (errJson.message) errorMsg = errJson.message
   } catch {
     try {
-      errorMsg = await response.text()
+      errorMsg = await textResponse.text()
     } catch {
       /* ignore */
     }

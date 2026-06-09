@@ -306,19 +306,6 @@ export interface StoredImageThumbnail {
   thumbnailVersion?: number
 }
 
-// ===== API 请求体 =====
-
-export interface ImageGenerationRequest {
-  model: string
-  prompt: string
-  size: string
-  quality: string
-  output_format: string
-  moderation: string
-  output_compression?: number
-  n?: number
-}
-
 // ===== API 响应 =====
 
 export interface ImageResponseItem {

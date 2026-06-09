@@ -80,10 +80,6 @@ export function putAgentConversation(conversation: AgentConversation): Promise<I
   return dbTransaction(STORE_AGENT_CONVERSATIONS, 'readwrite', (s) => s.put(conversation))
 }
 
-export function deleteAgentConversation(id: string): Promise<undefined> {
-  return dbTransaction(STORE_AGENT_CONVERSATIONS, 'readwrite', (s) => s.delete(id))
-}
-
 export function clearAgentConversations(): Promise<undefined> {
   return dbTransaction(STORE_AGENT_CONVERSATIONS, 'readwrite', (s) => s.clear())
 }

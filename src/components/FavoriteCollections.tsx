@@ -18,7 +18,7 @@ import { useDragSelect } from '../hooks/useDragSelect'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { useTooltip } from '../hooks/useTooltip'
 import { Checkbox } from './Checkbox'
-import { EditIcon, FavoriteIcon, PlusIcon, TrashIcon, CloseIcon, DragHandleIcon } from './icons'
+import { EditIcon, FavoriteIcon, TrashIcon, CloseIcon, DragHandleIcon } from './icons'
 import ViewportTooltip from './ViewportTooltip'
 
 function FolderIcon(props: SVGProps<SVGSVGElement>) {

@@ -1,12 +1,6 @@
 import { DEFAULT_AGENT_MAX_TOOL_ROUNDS, DEFAULT_STREAM_PARTIAL_IMAGES, type ApiProfile, type AppSettings, type ResponsesApiResponse, type ResponsesOutputItem, type TaskParams } from '../types'
 import { buildApiUrl, readClientDevProxyConfig, shouldUseApiProxy } from './devProxy'
-import { getApiErrorMessage, MIME_MAP, normalizeBase64Image, pickActualParams } from './imageApiShared'
-
-export interface AgentApiMessage {
-  role: 'user' | 'assistant'
-  text: string
-  imageDataUrls?: string[]
-}
+import { appendStreamingFormatHint, maybeAppendStreamingHint, getApiErrorMessage, MIME_MAP, normalizeBase64Image, pickActualParams } from './imageApiShared'
 
 export interface AgentApiResultImage {
   toolCallId?: string
@@ -281,6 +275,7 @@ async function readJsonServerSentEvents(response: Response, onEvent: (event: Rec
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
   let buffer = ''
+  let hasDataLine = false
   const cancelReader = () => {
     void reader.cancel().catch(() => undefined)
   }
@@ -288,6 +283,7 @@ async function readJsonServerSentEvents(response: Response, onEvent: (event: Rec
   for (const signal of signals) signal?.addEventListener('abort', cancelReader, { once: true })
 
   const processBlock = async (block: string) => {
+    if (block.split(/\r?\n/).some((line) => line.startsWith('data:'))) hasDataLine = true
     const data = parseServerSentEventBlock(block)
     if (!data) return
 
@@ -295,7 +291,7 @@ async function readJsonServerSentEvents(response: Response, onEvent: (event: Rec
     try {
       event = JSON.parse(data)
     } catch {
-      throw new Error('Agent 流式响应包含无法解析的 JSON 事件')
+      throw new Error(appendStreamingFormatHint(data))
     }
     if (!isRecordValue(event)) return
 
@@ -329,28 +325,10 @@ async function readJsonServerSentEvents(response: Response, onEvent: (event: Rec
     buffer += decoder.decode()
     throwIfAborted(...signals)
     if (buffer.trim()) await processBlock(buffer)
+    if (!hasDataLine) throw new Error(appendStreamingFormatHint('未从流式响应中解析到有效的 data 事件'))
   } finally {
     for (const signal of signals) signal?.removeEventListener('abort', cancelReader)
   }
-}
-
-function createInput(messages: AgentApiMessage[]) {
-  return messages.map((message) => {
-    const content: Array<Record<string, string>> = [
-      { type: message.role === 'user' ? 'input_text' : 'output_text', text: message.text },
-    ]
-
-    if (message.role === 'user') {
-      for (const dataUrl of message.imageDataUrls ?? []) {
-        content.push({ type: 'input_image', image_url: dataUrl })
-      }
-    }
-
-    return {
-      role: message.role,
-      content,
-    }
-  })
 }
 
 function extractText(payload: ResponsesApiResponse) {
@@ -644,7 +622,8 @@ export async function callAgentResponsesApi(opts: {
     })
 
     if (!response.ok) {
-      throw new Error(await getApiErrorMessage(response))
+      const errorMessage = await getApiErrorMessage(response)
+      throw new Error(maybeAppendStreamingHint(errorMessage, response.status, profile.streamImages))
     }
 
     if (profile.streamImages && isEventStreamResponse(response)) {
@@ -817,7 +796,7 @@ export async function callBatchImageSingle(opts: {
 
     if (!response.ok) {
       const errorMsg = await getApiErrorMessage(response)
-      return { batchItemId, image: null, error: errorMsg }
+      return { batchItemId, image: null, error: maybeAppendStreamingHint(errorMsg, response.status, profile.streamImages) }
     }
 
     // Handle streaming
