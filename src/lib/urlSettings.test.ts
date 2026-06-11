@@ -43,6 +43,21 @@ describe('URL settings params', () => {
     })
   })
 
+  it('uses profile name from URL params for OpenAI profiles', () => {
+    const current = normalizeSettings(DEFAULT_SETTINGS)
+    const next = normalizeSettings({
+      ...current,
+      ...buildSettingsFromUrlParams(current, new URLSearchParams('apiUrl=https://api.example.com/v1&apiKey=test-key&profileName=测试配置')),
+    })
+
+    expect(next.profiles.find((profile) => profile.id === next.activeProfileId)).toMatchObject({
+      name: '测试配置',
+      provider: 'openai',
+      baseUrl: 'https://api.example.com/v1',
+      apiKey: 'test-key',
+    })
+  })
+
   it('does not create a duplicate profile for matching legacy URL params', () => {
     const existingProfile = createDefaultOpenAIProfile({
       id: 'existing-openai',
@@ -62,6 +77,63 @@ describe('URL settings params', () => {
 
     expect(next.profiles).toHaveLength(2)
     expect(next.activeProfileId).toBe(existingProfile.id)
+  })
+
+  it('creates a separate profile when URL profile name differs', () => {
+    const existingProfile = createDefaultOpenAIProfile({
+      id: 'existing-openai',
+      name: 'Existing OpenAI',
+      baseUrl: 'https://api.example.com/v1',
+      apiKey: 'test-key',
+    })
+    const current = normalizeSettings({
+      ...DEFAULT_SETTINGS,
+      profiles: [createDefaultOpenAIProfile(), existingProfile],
+      activeProfileId: DEFAULT_SETTINGS.activeProfileId,
+    })
+    const next = normalizeSettings({
+      ...current,
+      ...buildSettingsFromUrlParams(current, new URLSearchParams('apiUrl=https://api.example.com/v1/&apiKey=test-key&profileName=URL Profile')),
+    })
+    const activeProfile = next.profiles.find((profile) => profile.id === next.activeProfileId)
+
+    expect(next.profiles).toHaveLength(3)
+    expect(next.activeProfileId).not.toBe(existingProfile.id)
+    expect(activeProfile).toMatchObject({
+      name: 'URL Profile',
+      provider: 'openai',
+      baseUrl: 'https://api.example.com/v1',
+      apiKey: 'test-key',
+    })
+  })
+
+  it('creates a separate profile when URL codex CLI option differs', () => {
+    const existingProfile = createDefaultOpenAIProfile({
+      id: 'existing-openai',
+      name: 'Existing OpenAI',
+      baseUrl: 'https://api.example.com/v1',
+      apiKey: 'test-key',
+      codexCli: false,
+    })
+    const current = normalizeSettings({
+      ...DEFAULT_SETTINGS,
+      profiles: [createDefaultOpenAIProfile(), existingProfile],
+      activeProfileId: DEFAULT_SETTINGS.activeProfileId,
+    })
+    const next = normalizeSettings({
+      ...current,
+      ...buildSettingsFromUrlParams(current, new URLSearchParams('apiUrl=https://api.example.com/v1/&apiKey=test-key&codexCli=true')),
+    })
+    const activeProfile = next.profiles.find((profile) => profile.id === next.activeProfileId)
+
+    expect(next.profiles).toHaveLength(3)
+    expect(next.activeProfileId).not.toBe(existingProfile.id)
+    expect(activeProfile).toMatchObject({
+      provider: 'openai',
+      baseUrl: 'https://api.example.com/v1',
+      apiKey: 'test-key',
+      codexCli: true,
+    })
   })
 
   it('creates a separate profile when URL streaming options differ', () => {
@@ -116,7 +188,7 @@ describe('URL settings params', () => {
   })
 
   it('clears known URL setting params without touching unrelated params', () => {
-    const params = new URLSearchParams('apiUrl=https://api.example.com/v1&apiKey=test-key&model=test-model&streamImages=false&streamPartialImages=3&foo=bar')
+    const params = new URLSearchParams('apiUrl=https://api.example.com/v1&apiKey=test-key&model=test-model&profileName=test-profile&streamImages=false&streamPartialImages=3&foo=bar')
 
     expect(hasUrlSettingParams(params)).toBe(true)
     clearUrlSettingParams(params)

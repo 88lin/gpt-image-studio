@@ -21,7 +21,7 @@
 
 <br>
 
-> 💡 **提示**：若需调用非 HTTPS 的内网或本地 HTTP API，建议自行部署到支持 HTTP API 的环境，或开启同源 API 代理。浏览器直连第三方接口时可能遇到 CORS 限制。
+> 💡 **提示**：若需调用非 HTTPS 的内网或本地 HTTP API，请使用 GitHub Pages 版本或自行部署，Vercel 部署的体验版绑定的 `.dev` 域名因安全策略通常要求接口必须为 HTTPS。
 
 > 🔁 **二次开发说明**：本项目基于 [CookSleep/gpt_image_playground](https://github.com/CookSleep/gpt_image_playground) 二次开发。核心生成、编辑、多服务商和本地历史能力来自上游；本分支保留网页端显示名 **GPT Image 2**，并额外加入提示词模板库、工作台式首页入口、`@图N` 图片引用体验、配置复制等增强。为避免影响创作流程，已移除上游「生成超过 50 张图片后自动弹出赞助提示」的弹窗。
 
@@ -333,7 +333,10 @@ npm run build
 - `?apiKey=sk-xxxx`
 - `?apiMode=images` 或 `?apiMode=responses`（未传时默认为 `images`）
 - `?model=gpt-image-2`（未传时按 `apiMode` 使用默认模型）
+- `?profileName=我的配置`（设置配置名称，未传时默认为 `URL 参数配置`）
 - `?codexCli=true`（开启 Codex CLI 兼容模式）
+- `?streamImages=true`（开启流式传输）
+- `?streamPartialImages=2`（请求中间步骤图像数，需配合 `streamImages=true` 使用）
 
 例如，集成到 New API 的聊天系统：
 

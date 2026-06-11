@@ -528,6 +528,7 @@ export function normalizeSettings(input: Partial<AppSettings> | unknown): AppSet
     agentScrollToBottomAfterSubmit: typeof record.agentScrollToBottomAfterSubmit === 'boolean' ? record.agentScrollToBottomAfterSubmit : true,
     agentMaxToolRounds: normalizeAgentMaxToolRounds(record.agentMaxToolRounds),
     agentWebSearch: typeof record.agentWebSearch === 'boolean' ? record.agentWebSearch : false,
+    agentMathFormattingPrompt: typeof record.agentMathFormattingPrompt === 'boolean' ? record.agentMathFormattingPrompt : true,
     profiles,
     activeProfileId,
   }
@@ -819,4 +820,5 @@ export const DEFAULT_SETTINGS: AppSettings = normalizeSettings({
   agentScrollToBottomAfterSubmit: true,
   agentMaxToolRounds: DEFAULT_AGENT_MAX_TOOL_ROUNDS,
   agentWebSearch: false,
+  agentMathFormattingPrompt: true,
 })

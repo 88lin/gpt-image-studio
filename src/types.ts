@@ -107,6 +107,7 @@ export interface AppSettings {
   agentScrollToBottomAfterSubmit: boolean
   agentMaxToolRounds: number
   agentWebSearch: boolean
+  agentMathFormattingPrompt: boolean
   profiles: ApiProfile[]
   activeProfileId: string
 }
@@ -194,6 +195,8 @@ export interface TaskRecord {
   maskImageId?: string | null
   /** 输出图片的 image store id 列表 */
   outputImages: string[]
+  /** 并发多图中失败的输出槽位，requestIndex 为从 0 开始的请求序号 */
+  outputErrors?: Array<{ requestIndex: number; error: string }>
   /** 流式生成的中间步骤图片 id 列表，仅失败时保留供排查/下载 */
   streamPartialImageIds?: string[]
   /** API 返回的原始图片 HTTP URL（非 base64 时记录） */

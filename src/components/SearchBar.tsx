@@ -1,7 +1,49 @@
-import { useEffect, useRef } from 'react'
-import { ALL_FAVORITES_COLLECTION_ID, clearFailedTasks, getTaskFavoriteCollectionIds, useStore } from '../store'
+import { useEffect, useRef, type ReactNode } from 'react'
+import { ALL_FAVORITES_COLLECTION_ID, clearFailedTasks, getTaskFavoriteCollectionIds, useStore, taskMatchesFilterStatus, taskMatchesSearchQuery } from '../store'
+import { useTooltip } from '../hooks/useTooltip'
 import Select from './Select'
 import { ChevronLeftIcon, CollectionManageIcon, FavoriteIcon, TrashIcon } from './icons'
+import ViewportTooltip from './ViewportTooltip'
+
+function SearchActionButton({
+  tooltip,
+  className,
+  disabled = false,
+  pressed,
+  onClick,
+  children,
+}: {
+  tooltip: string
+  className: string
+  disabled?: boolean
+  pressed?: boolean
+  onClick: () => void
+  children: ReactNode
+}) {
+  const tooltipState = useTooltip()
+
+  return (
+    <span className="relative inline-flex" {...tooltipState.handlers}>
+      <button
+        type="button"
+        onClick={() => {
+          tooltipState.dismiss()
+          if (disabled) return
+          onClick()
+        }}
+        disabled={disabled}
+        className={className}
+        aria-label={tooltip}
+        aria-pressed={pressed}
+      >
+        {children}
+      </button>
+      <ViewportTooltip visible={tooltipState.visible} className="whitespace-nowrap">
+        {tooltip}
+      </ViewportTooltip>
+    </span>
+  )
+}
 
 export default function SearchBar() {
   const rootRef = useRef<HTMLDivElement>(null)
@@ -19,20 +61,18 @@ export default function SearchBar() {
   const failedCount = useStore((s) => {
     const q = s.searchQuery.trim().toLowerCase()
     return s.tasks.filter((task) => {
-      if (task.status !== 'error') return false
+      if (!taskMatchesFilterStatus(task, 'error')) return false
       if (s.filterFavorite) {
         if (!task.isFavorite) return false
         if (s.activeFavoriteCollectionId && s.activeFavoriteCollectionId !== ALL_FAVORITES_COLLECTION_ID && !getTaskFavoriteCollectionIds(task).includes(s.activeFavoriteCollectionId)) return false
       }
-      if (!q) return true
-      const prompt = (task.prompt || '').toLowerCase()
-      const paramStr = JSON.stringify(task.params).toLowerCase()
-      return prompt.includes(q) || paramStr.includes(q)
+      return taskMatchesSearchQuery(task, q)
     }).length
   })
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
   const inCollectionOverview = filterFavorite && !activeFavoriteCollectionId
   const isFailedFilter = filterStatus === 'error'
+  const favoriteTooltip = activeFavoriteCollectionId ? '返回收藏夹' : filterFavorite ? '退出收藏夹' : '收藏夹'
 
   useEffect(() => {
     const handleDocumentMouseDown = (event: MouseEvent) => {
@@ -64,15 +104,12 @@ export default function SearchBar() {
     const q = state.searchQuery.trim().toLowerCase()
     const failedTaskIds = state.tasks
       .filter((task) => {
-        if (task.status !== 'error') return false
+        if (!taskMatchesFilterStatus(task, 'error')) return false
         if (state.filterFavorite) {
           if (!task.isFavorite) return false
           if (state.activeFavoriteCollectionId && state.activeFavoriteCollectionId !== ALL_FAVORITES_COLLECTION_ID && !getTaskFavoriteCollectionIds(task).includes(state.activeFavoriteCollectionId)) return false
         }
-        if (!q) return true
-        const prompt = (task.prompt || '').toLowerCase()
-        const paramStr = JSON.stringify(task.params).toLowerCase()
-        return prompt.includes(q) || paramStr.includes(q)
+        return taskMatchesSearchQuery(task, q)
       })
       .map((task) => task.id)
     const failedTaskCount = failedTaskIds.length
@@ -80,8 +117,8 @@ export default function SearchBar() {
 
     setConfirmDialog({
       title: '清除失败记录',
-      message: `确定清除筛选范围内的失败记录吗？\n将删除 ${failedTaskCount} 条失败记录，关联的孤立图片资源也会被清理。`,
-      confirmText: '删除',
+      message: `确定清除筛选范围内的失败记录吗？\n纯失败任务会被删除；部分失败任务只会清除失败标记，保留已成功图片。共 ${failedTaskCount} 条记录。`,
+      confirmText: '清除',
       cancelText: '取消',
       tone: 'danger',
       action: () => clearFailedTasks(failedTaskIds),
@@ -97,26 +134,26 @@ export default function SearchBar() {
   return (
     <div ref={rootRef} data-no-drag-select className="mt-6 mb-4 flex gap-3">
       <div className="flex gap-2 flex-shrink-0 z-20">
-        <button
+        <SearchActionButton
+          tooltip={favoriteTooltip}
           onClick={handleFavoriteClick}
           className={`p-2.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/40 ${
             filterFavorite
               ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-500/10 text-yellow-500 shadow-[0_0_0_3px_rgba(250,204,21,0.12)]'
               : 'border-gray-200 dark:border-white/[0.08] bg-white dark:bg-gray-900 text-gray-400 hover:text-yellow-500 hover:border-yellow-300/70 hover:bg-yellow-50/60 dark:hover:bg-yellow-500/[0.06]'
           }`}
-          title={activeFavoriteCollectionId ? '返回收藏夹' : filterFavorite ? '退出收藏夹视图' : '收藏夹'}
-          aria-pressed={filterFavorite}
+          pressed={filterFavorite}
         >
           {activeFavoriteCollectionId ? <ChevronLeftIcon className="w-5 h-5" /> : <FavoriteIcon filled={filterFavorite} className="w-5 h-5" />}
-        </button>
+        </SearchActionButton>
         {inCollectionOverview && (
-          <button
+          <SearchActionButton
+            tooltip="管理收藏夹"
             onClick={openManageCollectionsModal}
             className="p-2.5 rounded-xl border border-gray-200 dark:border-white/[0.08] bg-white dark:bg-gray-900 text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition-all"
-            title="管理收藏夹"
           >
             <CollectionManageIcon className="w-5 h-5" />
-          </button>
+          </SearchActionButton>
         )}
         {!inCollectionOverview && (
           <>

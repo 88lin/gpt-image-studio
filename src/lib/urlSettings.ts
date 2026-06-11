@@ -10,15 +10,16 @@ import {
   normalizeStreamPartialImages,
 } from './apiProfiles'
 
-const URL_SETTING_KEYS = ['settings', 'apiUrl', 'apiKey', 'codexCli', 'apiMode', 'model', 'streamImages', 'streamPartialImages']
+const URL_SETTING_KEYS = ['settings', 'apiUrl', 'apiKey', 'codexCli', 'apiMode', 'model', 'profileName', 'streamImages', 'streamPartialImages']
 
-function getProfileDedupKey(profile: Pick<AppSettings['profiles'][number], 'provider' | 'baseUrl' | 'apiKey' | 'model' | 'apiMode' | 'streamImages' | 'streamPartialImages'>) {
+function getProfileDedupKey(profile: Pick<AppSettings['profiles'][number], 'provider' | 'baseUrl' | 'apiKey' | 'model' | 'apiMode' | 'codexCli' | 'streamImages' | 'streamPartialImages'>) {
   return JSON.stringify([
     profile.provider,
     profile.baseUrl.trim().replace(/\/+$/, '').toLowerCase(),
     profile.apiKey.trim(),
     profile.model.trim(),
     profile.apiMode,
+    profile.codexCli === true,
     profile.streamImages === true,
     profile.streamPartialImages ?? 0,
   ])
@@ -89,11 +90,13 @@ export function buildSettingsFromUrlParams(currentSettings: Partial<AppSettings>
   const codexCliParam = searchParams.get('codexCli')
   const apiModeParam = searchParams.get('apiMode')
   const modelParam = searchParams.get('model')
+  const profileNameParam = searchParams.get('profileName')
+  const profileName = profileNameParam?.trim() ?? ''
   const streamImagesParam = searchParams.get('streamImages')
   const streamPartialImagesParam = searchParams.get('streamPartialImages')
   const apiMode: ApiMode | undefined = apiModeParam === 'images' || apiModeParam === 'responses' ? apiModeParam : undefined
 
-  const hasLegacyOpenAIParams = apiUrlParam !== null || apiKeyParam !== null || codexCliParam !== null || apiMode !== undefined || modelParam !== null || streamImagesParam !== null || streamPartialImagesParam !== null
+  const hasLegacyOpenAIParams = apiUrlParam !== null || apiKeyParam !== null || codexCliParam !== null || apiMode !== undefined || modelParam !== null || profileNameParam !== null || streamImagesParam !== null || streamPartialImagesParam !== null
   const settings = importedSettings == null
     ? normalizeSettings(currentSettings)
     : activateFirstImportedProfile(mergeImportedSettings(currentSettings, importedSettings), importedSettings)
@@ -109,11 +112,15 @@ export function buildSettingsFromUrlParams(currentSettings: Partial<AppSettings>
     if (apiUrlParam !== null) profile.baseUrl = normalizeBaseUrl(apiUrlParam.trim())
     if (apiKeyParam !== null) profile.apiKey = apiKeyParam.trim()
     if (modelParam !== null && modelParam.trim()) profile.model = modelParam.trim()
+    if (profileName) profile.name = profileName
     if (codexCliParam !== null) profile.codexCli = codexCliParam.trim().toLowerCase() === 'true'
     if (streamImagesParam !== null) profile.streamImages = streamImagesParam.trim().toLowerCase() === 'true'
     if (streamPartialImagesParam !== null) profile.streamPartialImages = normalizeStreamPartialImages(streamPartialImagesParam)
 
-    const existingProfile = settings.profiles.find((item) => getProfileDedupKey(item) === getProfileDedupKey(profile))
+    const existingProfile = settings.profiles.find((item) =>
+      getProfileDedupKey(item) === getProfileDedupKey(profile) &&
+      (!profileName || item.name.trim() === profileName)
+    )
     if (existingProfile) {
       return normalizeSettings({ ...settings, activeProfileId: existingProfile.id })
     }

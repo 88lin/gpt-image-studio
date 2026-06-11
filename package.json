@@ -1,7 +1,7 @@
 {
   "name": "gpt-image-studio",
   "private": true,
-  "version": "0.6.2",
+  "version": "0.6.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@fal-ai/client": "^1.10.0",
+    "@streamdown/math": "^1.0.2",
     "core-js": "^3.49.0",
     "fflate": "^0.8.2",
+    "katex": "^0.16.47",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-markdown": "^10.1.0",

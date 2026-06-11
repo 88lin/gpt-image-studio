@@ -10,6 +10,11 @@ export interface AgentApiResultImage {
   revisedPrompt?: string
 }
 
+export interface AgentApiImageToolFailure {
+  toolCallId: string
+  error: string
+}
+
 export interface AgentApiResult {
   responseId?: string
   text: string
@@ -44,11 +49,19 @@ const AGENT_IMAGE_INSTRUCTIONS = [
   'Resolve user mentions ("the first image") to the matching id. Only use existing ids in image_generation prompts and generate_image_batch prompts.',
 ].join('\n')
 
+const AGENT_MATH_FORMATTING_INSTRUCTIONS = [
+  '## Math formatting',
+  '- When a response contains mathematical formulas, output them using Markdown math delimiters supported by this app.',
+  '- Use `$...$` for inline formulas.',
+  '- Use block math with opening and closing `$$` on their own lines for display formulas.',
+  '- Do not use LaTeX delimiters like `\\(...\\)` or `\\[...\\]` in visible assistant text.',
+].join('\n')
+
 function createAgentInstructions(settings: AppSettings) {
   const maxToolRounds = Number.isFinite(settings.agentMaxToolRounds)
     ? Math.max(1, Math.trunc(settings.agentMaxToolRounds))
     : DEFAULT_AGENT_MAX_TOOL_ROUNDS
-  return [
+  const instructions = [
     AGENT_IMAGE_INSTRUCTIONS,
     '',
     '## Tool policy',
@@ -56,7 +69,11 @@ function createAgentInstructions(settings: AppSettings) {
     '- Call continue_generation ONLY when you have generated a prerequisite image and need another round to generate dependent images. Do NOT call it when the task is complete.',
     '- When web_search is available, use it only when current external information would improve the answer or the user asks for research/news/facts.',
     '- When the requested task is complete, stop calling tools and provide the final response.',
-  ].join('\n')
+  ]
+
+  if (settings.agentMathFormattingPrompt) instructions.push('', AGENT_MATH_FORMATTING_INSTRUCTIONS)
+
+  return instructions.join('\n')
 }
 
 const AGENT_TITLE_INSTRUCTIONS = [
@@ -244,6 +261,34 @@ function getStreamEventErrorMessage(event: Record<string, unknown>): string | nu
   const type = getStringValue(event, 'type')
   if (type?.endsWith('.failed')) return getStringValue(event, 'message') ?? 'Agent 流式请求失败'
   return null
+}
+
+function getErrorMessageFromValue(value: unknown): string | null {
+  if (typeof value === 'string' && value.trim()) return value.trim()
+  if (!isRecordValue(value)) return null
+
+  return getStringValue(value, 'message')
+    ?? getStringValue(value, 'code')
+    ?? null
+}
+
+function getImageToolFailureFromOutputItem(event: Record<string, unknown>, item?: ResponsesOutputItem): AgentApiImageToolFailure | null {
+  if (item?.type !== 'image_generation_call' || item.status !== 'failed') return null
+
+  const toolCallId = (typeof item?.id === 'string' && item.id)
+    || getStringValue(event, 'item_id')
+  if (!toolCallId) return null
+
+  const itemRecord = item as Record<string, unknown> | undefined
+  const error = getErrorMessageFromValue(itemRecord?.error)
+    ?? getErrorMessageFromValue(event.error)
+    ?? getStringValue(event, 'message')
+    ?? '内置 image_generation 工具调用失败'
+
+  return {
+    toolCallId,
+    error,
+  }
 }
 
 function parseServerSentEventBlock(block: string): string | null {
@@ -460,6 +505,7 @@ async function parseAgentStreamResponse(
   onImageToolStarted?: (event: { toolCallId: string; outputIndex?: number }) => void | Promise<void>,
   onImagePartialImage?: (event: { toolCallId: string; image: string; partialImageIndex?: number; outputIndex?: number }) => void | Promise<void>,
   onImageToolCompleted?: (image: AgentApiResultImage) => void | Promise<void>,
+  onImageToolFailed?: (event: AgentApiImageToolFailure) => void | Promise<void>,
 ): Promise<AgentApiResult> {
   let completedPayload: ResponsesApiResponse | null = null
   const outputItems: ResponsesOutputItem[] = []
@@ -555,6 +601,12 @@ async function parseAgentStreamResponse(
 
     if (type === 'response.output_item.done') {
       const item = payload.output?.[0]
+      const imageFailure = getImageToolFailureFromOutputItem(event, item)
+      if (imageFailure) {
+        await onImageToolFailed?.(imageFailure)
+        return
+      }
+
       const image = item ? extractImageFromOutputItem(item, mime) : null
       if (image) await onImageToolCompleted?.(image)
       return
@@ -591,8 +643,9 @@ export async function callAgentResponsesApi(opts: {
   onImageToolStarted?: (event: { toolCallId: string; outputIndex?: number }) => void | Promise<void>
   onImagePartialImage?: (event: { toolCallId: string; image: string; partialImageIndex?: number; outputIndex?: number }) => void | Promise<void>
   onImageToolCompleted?: (image: AgentApiResultImage) => void | Promise<void>
+  onImageToolFailed?: (event: AgentApiImageToolFailure) => void | Promise<void>
 }): Promise<AgentApiResult> {
-  const { settings, profile, params, input, maskDataUrl, signal, onTextDelta, onOutputItems, onImageToolStarted, onImagePartialImage, onImageToolCompleted } = opts
+  const { settings, profile, params, input, maskDataUrl, signal, onTextDelta, onOutputItems, onImageToolStarted, onImagePartialImage, onImageToolCompleted, onImageToolFailed } = opts
   const mime = MIME_MAP[params.output_format] || 'image/png'
   const proxyConfig = readClientDevProxyConfig()
   const useApiProxy = shouldUseApiProxy(profile.apiProxy, proxyConfig)
@@ -627,7 +680,7 @@ export async function callAgentResponsesApi(opts: {
     }
 
     if (profile.streamImages && isEventStreamResponse(response)) {
-      return parseAgentStreamResponse(response, mime, controller.signal, signal, onTextDelta, onOutputItems, onImageToolStarted, onImagePartialImage, onImageToolCompleted)
+      return parseAgentStreamResponse(response, mime, controller.signal, signal, onTextDelta, onOutputItems, onImageToolStarted, onImagePartialImage, onImageToolCompleted, onImageToolFailed)
     }
 
     const payload = await response.json() as ResponsesApiResponse

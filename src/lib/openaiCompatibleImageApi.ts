@@ -101,6 +101,10 @@ function getStringValue(source: Record<string, unknown>, key: string): string | 
   return typeof value === 'string' && value.trim() ? value : undefined
 }
 
+function getErrorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : String(err)
+}
+
 function getNumberValue(source: Record<string, unknown>, key: string): number | undefined {
   const value = source[key]
   return typeof value === 'number' && Number.isFinite(value) ? value : undefined
@@ -513,6 +517,9 @@ async function callImagesApiConcurrent(opts: CallApiOptions, profile: ApiProfile
   const successfulResults = results
     .filter((r): r is PromiseFulfilledResult<CallApiResult> => r.status === 'fulfilled')
     .map((r) => r.value)
+  const failedRequests = results.flatMap((r, requestIndex) =>
+    r.status === 'rejected' ? [{ requestIndex, error: getErrorMessage(r.reason) }] : [],
+  )
 
   if (successfulResults.length === 0) {
     const firstError = results.find((r): r is PromiseRejectedResult => r.status === 'rejected')
@@ -533,7 +540,14 @@ async function callImagesApiConcurrent(opts: CallApiOptions, profile: ApiProfile
     { n: images.length },
   )
 
-  return { images, actualParams, actualParamsList, revisedPrompts, ...(rawImageUrls.length ? { rawImageUrls } : {}) }
+  return {
+    images,
+    actualParams,
+    actualParamsList,
+    revisedPrompts,
+    ...(rawImageUrls.length ? { rawImageUrls } : {}),
+    ...(failedRequests.length ? { failedRequests } : {}),
+  }
 }
 
 async function callImagesApiSingle(opts: CallApiOptions, profile: ApiProfile): Promise<CallApiResult> {
@@ -988,6 +1002,9 @@ async function callResponsesImageApi(opts: CallApiOptions, profile: ApiProfile):
   const successfulResults = results
     .filter((r): r is PromiseFulfilledResult<CallApiResult> => r.status === 'fulfilled')
     .map((r) => r.value)
+  const failedRequests = results.flatMap((r, requestIndex) =>
+    r.status === 'rejected' ? [{ requestIndex, error: getErrorMessage(r.reason) }] : [],
+  )
 
   if (successfulResults.length === 0) {
     const firstError = results.find((r): r is PromiseRejectedResult => r.status === 'rejected')
@@ -1008,7 +1025,14 @@ async function callResponsesImageApi(opts: CallApiOptions, profile: ApiProfile):
     images.length === opts.params.n ? { n: opts.params.n } : { n: images.length },
   )
 
-  return { images, actualParams, actualParamsList, revisedPrompts, ...(rawImageUrls.length ? { rawImageUrls } : {}) }
+  return {
+    images,
+    actualParams,
+    actualParamsList,
+    revisedPrompts,
+    ...(rawImageUrls.length ? { rawImageUrls } : {}),
+    ...(failedRequests.length ? { failedRequests } : {}),
+  }
 }
 
 async function callResponsesImageApiSingle(opts: CallApiOptions, profile: ApiProfile): Promise<CallApiResult> {

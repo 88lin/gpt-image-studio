@@ -51,6 +51,49 @@ describe('callAgentResponsesApi', () => {
     })
   })
 
+  it('reports failed image output item without aborting the ongoing stream', async () => {
+    const streamBody = [
+      'data: {"type":"response.output_item.added","item":{"id":"ig_fail","type":"image_generation_call","status":"in_progress"},"output_index":0}',
+      '',
+      'data: {"type":"response.output_item.done","item":{"id":"ig_fail","type":"image_generation_call","status":"failed","error":{"message":"safety rejected"}},"output_index":0}',
+      '',
+      'data: {"type":"response.output_text.delta","delta":"已跳过失败图片"}',
+      '',
+      'data: {"type":"response.completed","response":{"id":"resp_1","output":[{"id":"ig_fail","type":"image_generation_call","status":"failed","error":{"message":"safety rejected"}},{"type":"message","content":[{"type":"output_text","text":"已跳过失败图片"}]}]}}',
+      '',
+      'data: [DONE]',
+      '',
+    ].join('\n')
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(streamBody, {
+      status: 200,
+      headers: { 'Content-Type': 'text/event-stream' },
+    }))
+    const failures: Array<{ toolCallId: string; error: string }> = []
+    const profile = createDefaultOpenAIProfile({
+      apiKey: 'test-key',
+      apiMode: 'responses',
+      streamImages: true,
+    })
+
+    const result = await callAgentResponsesApi({
+      settings: DEFAULT_SETTINGS,
+      profile,
+      params: DEFAULT_PARAMS,
+      input: [{ role: 'user', content: [{ type: 'input_text', text: 'prompt' }] }],
+      onImageToolFailed: (event) => {
+        failures.push(event)
+      },
+    })
+
+    expect(failures).toEqual([{ toolCallId: 'ig_fail', error: 'safety rejected' }])
+    expect(result).toMatchObject({
+      responseId: 'resp_1',
+      text: '已跳过失败图片',
+      images: [],
+    })
+    expect(result.rawResponsePayload).toContain('resp_1')
+  })
+
   it('passes mask data to the Agent image tool', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
       output: [{
@@ -224,5 +267,43 @@ describe('callAgentResponsesApi', () => {
     expect(body.tools).toEqual(expect.arrayContaining([{ type: 'web_search' }]))
     expect(result.text).toBe('See [OpenAI docs](https://platform.openai.com/docs).')
     expect(result.outputItems?.[0]).toMatchObject({ type: 'web_search_call', status: 'completed' })
+  })
+
+  it('injects configurable math formatting instructions', async () => {
+    const createResponse = () => new Response(JSON.stringify({
+      output: [{
+        type: 'message',
+        content: [{ type: 'output_text', text: 'OK' }],
+      }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    })
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => createResponse())
+    const profile = createDefaultOpenAIProfile({
+      apiKey: 'test-key',
+      apiMode: 'responses',
+    })
+
+    await callAgentResponsesApi({
+      settings: DEFAULT_SETTINGS,
+      profile,
+      params: DEFAULT_PARAMS,
+      input: [{ role: 'user', content: [{ type: 'input_text', text: 'prompt' }] }],
+    })
+
+    let body = JSON.parse(String((fetchMock.mock.calls[0][1] as RequestInit).body))
+    expect(body.instructions).toContain('## Math formatting')
+    expect(body.instructions).toContain('Use `$...$` for inline formulas.')
+
+    await callAgentResponsesApi({
+      settings: { ...DEFAULT_SETTINGS, agentMathFormattingPrompt: false },
+      profile,
+      params: DEFAULT_PARAMS,
+      input: [{ role: 'user', content: [{ type: 'input_text', text: 'prompt' }] }],
+    })
+
+    body = JSON.parse(String((fetchMock.mock.calls[1][1] as RequestInit).body))
+    expect(body.instructions).not.toContain('## Math formatting')
   })
 })
