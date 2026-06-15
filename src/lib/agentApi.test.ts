@@ -306,4 +306,48 @@ describe('callAgentResponsesApi', () => {
     body = JSON.parse(String((fetchMock.mock.calls[1][1] as RequestInit).body))
     expect(body.instructions).not.toContain('## Math formatting')
   })
+
+  it("does not duplicate the assistant message item when response.completed lacks an item id", async () => {
+    // `response.completed` can repeat the streamed item without id; it should merge, not append.
+    const itemId = "msg_abc123"
+    const streamBody = [
+      `data: {"type":"response.created","response":{"id":"resp_1","output":[]}}`,
+      ``,
+      `data: {"type":"response.output_item.added","item":{"id":"${itemId}","type":"message","status":"in_progress","content":[],"role":"assistant"}}`,
+      ``,
+      `data: {"type":"response.output_text.delta","delta":"hi","item_id":"${itemId}"}`,
+      ``,
+      `data: {"type":"response.output_text.delta","delta":"!","item_id":"${itemId}"}`,
+      ``,
+      `data: {"type":"response.output_item.done","item":{"id":"${itemId}","type":"message","status":"completed","content":[{"type":"output_text","text":"hi!"}],"role":"assistant"}}`,
+      ``,
+      `data: {"type":"response.completed","response":{"id":"resp_1","output":[{"type":"message","role":"assistant","content":[{"type":"output_text","text":"hi!"}]}]}}`,
+      ``,
+      `data: [DONE]`,
+      ``,
+    ].join("\n")
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(streamBody, {
+      status: 200,
+      headers: { "Content-Type": "text/event-stream" },
+    }))
+    const outputItemSnapshots: number[] = []
+    const profile = createDefaultOpenAIProfile({
+      apiKey: "test-key",
+      apiMode: "responses",
+      streamImages: true,
+    })
+
+    const result = await callAgentResponsesApi({
+      settings: DEFAULT_SETTINGS,
+      profile,
+      params: DEFAULT_PARAMS,
+      input: [{ role: "user", content: [{ type: "input_text", text: "hi" }] }],
+      onOutputItems: (items) => outputItemSnapshots.push(items.length),
+    })
+
+    const messageItems = (result.outputItems ?? []).filter((item) => item.type === "message")
+    expect(messageItems).toHaveLength(1)
+    expect(result.text).toBe("hi!")
+    expect(outputItemSnapshots[outputItemSnapshots.length - 1]).toBe(1)
+  })
 })

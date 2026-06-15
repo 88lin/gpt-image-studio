@@ -511,9 +511,23 @@ async function parseAgentStreamResponse(
   const outputItems: ResponsesOutputItem[] = []
   let streamedText = ''
 
-  const publishOutputItems = (items: ResponsesOutputItem[]) => {
-    for (const item of items) {
-      const index = item.id ? outputItems.findIndex((existing) => existing.id === item.id) : -1
+  const publishOutputItems = (items: ResponsesOutputItem[], outputIndices?: Array<number | undefined>) => {
+    for (let i = 0; i < items.length; i += 1) {
+      const item = items[i]
+      const outputIndex = outputIndices?.[i]
+      let index = item.id ? outputItems.findIndex((existing) => existing.id === item.id) : -1
+      // `response.completed` snapshots can omit item ids; match by output slot before appending.
+      if (index < 0 && !item.id && typeof outputIndex === "number" && outputIndex >= 0 && outputIndex < outputItems.length) {
+        const candidate = outputItems[outputIndex]
+        if (candidate?.type === item.type) index = outputIndex
+      }
+      if (index < 0 && !item.id && item.type) {
+        // Fallback for snapshots that do not expose output indices.
+        const sameTypeIndices = outputItems
+          .map((existing, idx) => existing.type === item.type ? idx : -1)
+          .filter((idx) => idx >= 0)
+        if (sameTypeIndices.length === 1) index = sameTypeIndices[0]
+      }
       if (index >= 0) outputItems[index] = item
       else outputItems.push(item)
     }
@@ -585,7 +599,9 @@ async function parseAgentStreamResponse(
     if (!payload) return
 
     if (Array.isArray(payload.output)) {
-      publishOutputItems(payload.output)
+      // `response.completed` uses the output array position as the implicit output index.
+      const indices = type === "response.completed" ? payload.output.map((_, idx) => idx) : undefined
+      publishOutputItems(payload.output, indices)
     }
 
     if (type === 'response.output_item.added') {

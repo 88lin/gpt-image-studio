@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import { initStore } from './store'
 import { useStore } from './store'
-import { buildSettingsFromUrlParams, clearUrlSettingParams, hasUrlSettingParams } from './lib/urlSettings'
-import { mergeImportedSettings } from './lib/apiProfiles'
+import { activateFirstImportedProfile, buildSettingsFromUrlParams, clearUrlSettingParams, hasUrlSettingParams } from './lib/urlSettings'
+import { isDefaultConfigOnlyEnabled, mergeImportedSettings } from './lib/apiProfiles'
 import { getCustomProviderConfigUrl, loadCustomProviderSettingsFromUrl } from './lib/customProviderConfigUrl'
 import { useDockerApiUrlMigrationNotice } from './hooks/useDockerApiUrlMigrationNotice'
+import type { AppSettings } from './types'
 import Header from './components/Header'
 import SearchBar from './components/SearchBar'
 import TaskGrid from './components/TaskGrid'
@@ -33,11 +34,17 @@ export default function App() {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
-    const nextSettings = buildSettingsFromUrlParams(useStore.getState().settings, searchParams)
+    const customProviderConfigUrl = getCustomProviderConfigUrl()
+    const defaultConfigOnly = isDefaultConfigOnlyEnabled()
 
-    setSettings(nextSettings)
+    const applyUrlSettings = (baseSettings: Partial<AppSettings>) => {
+      const nextSettings = buildSettingsFromUrlParams(baseSettings, searchParams)
+      return Object.keys(nextSettings).length ? nextSettings : baseSettings
+    }
 
-    if (hasUrlSettingParams(searchParams)) {
+    const clearAppliedUrlSettings = () => {
+      if (!hasUrlSettingParams(searchParams)) return
+
       clearUrlSettingParams(searchParams)
 
       const nextSearch = searchParams.toString()
@@ -45,7 +52,34 @@ export default function App() {
       window.history.replaceState(null, '', nextUrl)
     }
 
-    const customProviderConfigUrl = getCustomProviderConfigUrl()
+    if (customProviderConfigUrl && defaultConfigOnly && !customProviderConfigUrlImportStarted) {
+      customProviderConfigUrlImportStarted = true
+      void loadCustomProviderSettingsFromUrl(customProviderConfigUrl)
+        .then((importedSettings) => {
+          const state = useStore.getState()
+          const baseSettings = importedSettings
+            ? activateFirstImportedProfile(mergeImportedSettings(state.settings, importedSettings), importedSettings)
+            : state.settings
+          state.setSettings(applyUrlSettings(baseSettings))
+          clearAppliedUrlSettings()
+        })
+        .catch((error) => {
+          console.warn('Failed to import custom provider config URL:', error)
+          const state = useStore.getState()
+          state.setSettings(applyUrlSettings(state.settings))
+          clearAppliedUrlSettings()
+        })
+
+      initStore()
+      return
+    }
+
+    const nextSettings = buildSettingsFromUrlParams(useStore.getState().settings, searchParams)
+
+    setSettings(nextSettings)
+
+    clearAppliedUrlSettings()
+
     if (customProviderConfigUrl && !customProviderConfigUrlImportStarted) {
       customProviderConfigUrlImportStarted = true
       void loadCustomProviderSettingsFromUrl(customProviderConfigUrl)

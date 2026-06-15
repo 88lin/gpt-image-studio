@@ -15,6 +15,7 @@ import {
   getApiProviderLabel,
   getActiveApiProfile,
   importCustomProviderSettingsFromJson,
+  isDefaultConfigOnlyEnabled,
   isOpenAICompatibleProvider,
   mergeImportedSettings,
   normalizeAgentMaxToolRounds,
@@ -355,6 +356,7 @@ export default function SettingsModal() {
   const apiProxyConfig = readClientDevProxyConfig()
   const apiProxyAvailable = isApiProxyAvailable(apiProxyConfig)
   const apiProxyLocked = isApiProxyLocked(apiProxyConfig)
+  const defaultConfigOnly = isDefaultConfigOnlyEnabled()
   const activeProfile = draft.profiles.find((profile) => profile.id === draft.activeProfileId) ?? draft.profiles[0] ?? getActiveApiProfile(draft)
   const activeProviderIsOpenAICompatible = isOpenAICompatibleProvider(draft, activeProfile.provider)
   const activeProviderUsesApiUrl = activeProviderIsOpenAICompatible || activeProfile.provider === 'fal'
@@ -465,6 +467,10 @@ export default function SettingsModal() {
       window.removeEventListener('scroll', updateProfileMenuMaxHeight, true)
     }
   }, [showProfileMenu, updateProfileMenuMaxHeight])
+
+  useEffect(() => {
+    if (defaultConfigOnly) setShowProfileMenu(false)
+  }, [defaultConfigOnly])
 
   useEffect(() => () => {
     if (profileImportUrlTooltipTimerRef.current != null) window.clearTimeout(profileImportUrlTooltipTimerRef.current)
@@ -752,6 +758,7 @@ export default function SettingsModal() {
   }
 
   const createNewProfile = () => {
+    if (defaultConfigOnly) return
     setReusedTaskApiProfile(null)
     const profile = createDefaultOpenAIProfile({ id: newId('openai'), name: '新配置' })
     const nextDraft = normalizeSettings({
@@ -764,6 +771,7 @@ export default function SettingsModal() {
   }
 
   const duplicateActiveProfile = () => {
+    if (defaultConfigOnly) return
     setReusedTaskApiProfile(null)
     setDuplicateProfileTooltipVisible(false)
     const profile: ApiProfile = {
@@ -781,6 +789,7 @@ export default function SettingsModal() {
   }
 
   const switchProfile = (id: string) => {
+    if (defaultConfigOnly) return
     setReusedTaskApiProfile(null)
     const nextDraft = normalizeSettings({ ...draft, activeProfileId: id })
     commitSettings(nextDraft)
@@ -956,6 +965,7 @@ export default function SettingsModal() {
   }
 
   const handleProviderTypeChange = (value: string | number) => {
+    if (defaultConfigOnly) return
     if (value === ADD_CUSTOM_PROVIDER_VALUE) {
       setEditingCustomProviderId(null)
       setCustomProviderForm(createDefaultCustomProviderForm())
@@ -1482,7 +1492,7 @@ export default function SettingsModal() {
                         复制导入 URL
                       </ViewportTooltip>
                     </span>
-                    <span className="relative inline-flex">
+                    {!defaultConfigOnly && <span className="relative inline-flex">
                       <button
                         type="button"
                         onClick={duplicateActiveProfile}
@@ -1507,17 +1517,19 @@ export default function SettingsModal() {
                       <ViewportTooltip visible={duplicateProfileTooltipVisible} className="whitespace-nowrap">
                         复制当前配置
                       </ViewportTooltip>
-                    </span>
+                    </span>}
                   </div>
                   <div ref={profileMenuRef} className="relative">
                     <button
                       ref={profileMenuTriggerRef}
                       type="button"
                       onClick={() => {
+                        if (defaultConfigOnly) return
                         if (!showProfileMenu) updateProfileMenuMaxHeight()
                         setShowProfileMenu(!showProfileMenu)
                       }}
-                      className="flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2 text-sm text-gray-700 outline-none transition hover:bg-gray-50 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:hover:bg-white/[0.06]"
+                      disabled={defaultConfigOnly}
+                      className={`flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2 text-sm text-gray-700 outline-none transition dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 ${defaultConfigOnly ? 'cursor-not-allowed opacity-70' : 'hover:bg-gray-50 dark:hover:bg-white/[0.06]'}`}
                       title={activeProfile.name}
                     >
                       <span className="flex min-w-0 items-center gap-2">
@@ -1528,8 +1540,7 @@ export default function SettingsModal() {
                       </span>
                       <ChevronDownIcon className={`w-3.5 h-3.5 flex-shrink-0 text-gray-400 dark:text-gray-500 transition-transform duration-200 ${showProfileMenu ? 'rotate-180' : ''}`} />
                     </button>
-
-                    {showProfileMenu && (
+                    {showProfileMenu && !defaultConfigOnly && (
                       <>
                         <div
                           className="absolute right-0 top-full z-50 mt-1.5 w-full overflow-hidden overflow-y-auto rounded-xl border border-gray-200/60 bg-white/95 py-1 shadow-[0_8px_30px_rgb(0,0,0,0.12)] ring-1 ring-black/5 backdrop-blur-xl animate-dropdown-down dark:border-white/[0.08] dark:bg-gray-900/95 dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] dark:ring-white/10 custom-scrollbar"
@@ -1654,6 +1665,7 @@ export default function SettingsModal() {
                   onChange={handleProviderTypeChange}
                   onReorder={handleProviderReorder}
                   options={providerOptions}
+                  disabled={defaultConfigOnly}
                   className="w-full rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50"
                 />
               </div>
