@@ -237,7 +237,12 @@ export default function DetailModal() {
   const outputLen = outputSlots.length
   const currentImageRatio = currentOutputImageId ? imageRatios[currentOutputImageId] : ''
   const currentImageSize = currentOutputImageId ? imageSizes[currentOutputImageId] : ''
-  const currentActualParams = currentOutputImageId ? task.actualParamsByImage?.[currentOutputImageId] : undefined
+  const baseActualParams = currentOutputImageId
+    ? task.actualParamsByImage?.[currentOutputImageId] ?? task.actualParams
+    : task.actualParams
+  const currentActualParams = (baseActualParams?.size || !currentImageSize)
+    ? baseActualParams
+    : { ...(baseActualParams ?? {}), size: currentImageSize.replace('×', 'x') }
   const currentRevisedPrompt = currentOutputImageId ? task.revisedPromptByImage?.[currentOutputImageId]?.trim() : ''
   // 将 @图N 等 mention 标记和透明背景追加提示词都按实际请求内容比较，
   // 避免仅由本地请求预处理导致的不一致被当作“API 改写”。
@@ -955,57 +960,73 @@ export default function DetailModal() {
               参数配置
             </h3>
             {showSourceInfo && (
-              <div className="mb-2 rounded-lg bg-gray-50 px-3 py-2 text-xs dark:bg-white/[0.03]">
+              <div className="mb-2 min-w-0 overflow-hidden rounded-lg bg-gray-50 px-3 py-2 text-xs dark:bg-white/[0.03]">
                 <span className="text-gray-400 dark:text-gray-500">来源</span>
                 <br />
-                <span className="font-medium text-gray-700 dark:text-gray-200">{taskProviderName}</span>
-                <span className="text-gray-400 dark:text-gray-500"> · {taskProfileName} · {taskModel}</span>
+                <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                  <span className="font-medium text-gray-700 dark:text-gray-200">{taskProviderName}</span>
+                  <span className="text-gray-400 dark:text-gray-500"> · {taskProfileName} · {taskModel}</span>
+                </div>
               </div>
             )}
-            <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+            <div className="grid grid-cols-2 gap-2 text-xs mb-4 min-w-0">
+              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                 <span className="text-gray-400 dark:text-gray-500">尺寸</span>
                 <br />
-                <DetailParamValue task={task} paramKey="size" className="font-medium" actualParams={currentActualParams} />
+                <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                  <DetailParamValue task={task} paramKey="size" className="font-medium" actualParams={currentActualParams} />
+                </div>
               </div>
-              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                 <span className="text-gray-400 dark:text-gray-500">质量</span>
                 <br />
-                <DetailParamValue task={task} paramKey="quality" className="font-medium" actualParams={currentActualParams} />
+                <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                  <DetailParamValue task={task} paramKey="quality" className="font-medium" actualParams={currentActualParams} />
+                </div>
               </div>
-              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                 <span className="text-gray-400 dark:text-gray-500">格式</span>
                 <br />
-                <DetailParamValue task={task} paramKey="output_format" className="font-medium" actualParams={currentActualParams} />
+                <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                  <DetailParamValue task={task} paramKey="output_format" className="font-medium" actualParams={currentActualParams} />
+                </div>
               </div>
               {isPngOutput ? (
-                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                   <span className="text-gray-400 dark:text-gray-500">透明背景</span>
                   <br />
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{transparentOutputText}</span>
-                  {currentTransparentOutputFailed && (
-                    <span className="ml-1.5 rounded bg-red-50 px-1 py-0.5 text-[10px] font-medium uppercase leading-none text-red-600 dark:bg-red-500/10 dark:text-red-400">
-                      failed
-                    </span>
-                  )}
+                  <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">{transparentOutputText}</span>
+                    {currentTransparentOutputFailed && (
+                      <span className="ml-1.5 rounded bg-red-50 px-1 py-0.5 text-[10px] font-medium uppercase leading-none text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                        failed
+                      </span>
+                    )}
+                  </div>
                 </div>
               ) : (
-                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                   <span className="text-gray-400 dark:text-gray-500">压缩率</span>
                   <br />
-                  <span className="font-medium text-gray-700 dark:text-gray-300">{outputCompressionText}</span>
+                  <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">{outputCompressionText}</span>
+                  </div>
                 </div>
               )}
-              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+              <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                 <span className="text-gray-400 dark:text-gray-500">审核</span>
                 <br />
-                <DetailParamValue task={task} paramKey="moderation" className="font-medium" actualParams={currentActualParams} />
+                <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                  <DetailParamValue task={task} paramKey="moderation" className="font-medium" actualParams={currentActualParams} />
+                </div>
               </div>
               {!isAgentTask && (
-                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2">
+                <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                   <span className="text-gray-400 dark:text-gray-500">数量</span>
                   <br />
-                  <DetailParamValue task={task} paramKey="n" className="font-medium" />
+                  <div className="mt-0.5 overflow-x-auto hide-scrollbar whitespace-nowrap mask-edge-r pr-2">
+                    <DetailParamValue task={task} paramKey="n" className="font-medium" />
+                  </div>
                 </div>
               )}
             </div>

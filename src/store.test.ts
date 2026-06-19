@@ -66,6 +66,14 @@ vi.mock('./lib/db', () => {
       images.set(id, { id, dataUrl, source, createdAt: Date.now() })
       return id
     },
+    storeImageWithSize: async (dataUrl: string, source: StoredImage['source'] = 'upload') => {
+      const id = `stored-image-${++imageSeq}`
+      const size = dataUrl.match(/(\d+)x(\d+)/)
+      const width = size ? Number(size[1]) : undefined
+      const height = size ? Number(size[2]) : undefined
+      images.set(id, { id, dataUrl, source, createdAt: Date.now(), width, height })
+      return { id, width, height }
+    },
   }
 })
 vi.mock('./lib/api', () => ({
@@ -286,6 +294,54 @@ describe('mask draft lifecycle in store actions', () => {
     const state = useStore.getState()
     expect(state.tasks).toHaveLength(1)
     expect(state.showToast).toHaveBeenCalledWith('任务已提交', 'success')
+  })
+
+  it('stores decoded image size as actual size when the API omits size', async () => {
+    const { callImageApi } = await import('./lib/api')
+    vi.mocked(callImageApi).mockClear()
+    vi.mocked(callImageApi).mockResolvedValueOnce({
+      images: ['data:image/png;base64,actual-1254x1254'],
+      actualParams: { output_format: 'png' },
+      actualParamsList: [{ output_format: 'png' }],
+      revisedPrompts: [],
+    })
+    useStore.setState({
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, size: '2048x2048' },
+    })
+
+    await submitTask()
+    for (let i = 0; i < 5; i += 1) await new Promise((resolve) => setTimeout(resolve, 0))
+
+    const [task] = useStore.getState().tasks
+    expect(task.actualParams).toMatchObject({ size: '1254x1254', output_format: 'png', n: 1 })
+    expect(task.actualParamsByImage?.[task.outputImages[0]]).toMatchObject({ size: '1254x1254', output_format: 'png' })
+    await clearTasks()
+    await clearImages()
+  })
+
+  it('keeps API-returned actual size over decoded image size', async () => {
+    const { callImageApi } = await import('./lib/api')
+    vi.mocked(callImageApi).mockClear()
+    vi.mocked(callImageApi).mockResolvedValueOnce({
+      images: ['data:image/png;base64,actual-1254x1254'],
+      actualParams: { output_format: 'png', size: '1024x1024' },
+      actualParamsList: [{ output_format: 'png', size: '1024x1024' }],
+      revisedPrompts: [],
+    })
+    useStore.setState({
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, size: '2048x2048' },
+    })
+
+    await submitTask()
+    for (let i = 0; i < 5; i += 1) await new Promise((resolve) => setTimeout(resolve, 0))
+
+    const [task] = useStore.getState().tasks
+    expect(task.actualParams?.size).toBe('1024x1024')
+    expect(task.actualParamsByImage?.[task.outputImages[0]].size).toBe('1024x1024')
+    await clearTasks()
+    await clearImages()
   })
 
   it('stores transparent background output after local post-processing', async () => {

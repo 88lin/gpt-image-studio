@@ -3,6 +3,7 @@ import type {
   ApiProfile,
   ApiProvider,
   AppSettings,
+  AgentApiConfigMode,
   CustomProviderContentType,
   CustomProviderDefinition,
   CustomProviderFileMapping,
@@ -91,6 +92,26 @@ function normalizeZipDownloadRoutes(value: unknown) {
   if (!Array.isArray(value)) return [...DEFAULT_ZIP_DOWNLOAD_ROUTES]
   const allowed = new Set<string>(ZIP_DOWNLOAD_ROUTE_VALUES)
   return value.filter((item): item is typeof ZIP_DOWNLOAD_ROUTE_VALUES[number] => typeof item === 'string' && allowed.has(item))
+}
+
+function normalizeProviderOrder(value: unknown, customProviders: CustomProviderDefinition[]): string[] | undefined {
+  if (!Array.isArray(value)) return undefined
+
+  const providerIds = ['openai', 'fal', ...customProviders.map((provider) => provider.id)]
+  const knownIds = new Set(providerIds)
+  const ordered = value
+    .map(String)
+    .filter((id, idx, list) => knownIds.has(id) && list.indexOf(id) === idx)
+
+  return [...ordered, ...providerIds.filter((id) => !ordered.includes(id))]
+}
+
+function normalizeAgentApiConfigMode(value: unknown): AgentApiConfigMode {
+  return value === 'native' || value === 'hybrid' ? value : 'off'
+}
+
+export function isAgentTextApiProfile(profile: ApiProfile): boolean {
+  return profile.provider === 'openai' && profile.apiMode === 'responses'
 }
 
 function isCustomProviderTemplate(value: unknown): value is CustomProviderTemplate {
@@ -509,6 +530,14 @@ export function normalizeSettings(input: Partial<AppSettings> | unknown): AppSet
     ? record.activeProfileId
     : profiles[0].id
   const active = profiles.find((p) => p.id === activeProfileId) ?? profiles[0]
+  const agentApiConfigMode = normalizeAgentApiConfigMode(record.agentApiConfigMode)
+  const firstAgentTextProfile = profiles.find(isAgentTextApiProfile)
+  const agentTextProfileId = typeof record.agentTextProfileId === 'string' && profiles.some((p) => p.id === record.agentTextProfileId && isAgentTextApiProfile(p))
+    ? record.agentTextProfileId
+    : (isAgentTextApiProfile(active) ? active.id : firstAgentTextProfile?.id ?? null)
+  const agentImageProfileId = typeof record.agentImageProfileId === 'string' && profiles.some((p) => p.id === record.agentImageProfileId)
+    ? record.agentImageProfileId
+    : active.id
 
   return {
     baseUrl: active.baseUrl,
@@ -521,11 +550,12 @@ export function normalizeSettings(input: Partial<AppSettings> | unknown): AppSet
     streamImages: active.streamImages,
     streamPartialImages: active.streamPartialImages,
     customProviders,
-    providerOrder: Array.isArray(record.providerOrder) ? record.providerOrder.map(String) : undefined,
+    providerOrder: normalizeProviderOrder(record.providerOrder, customProviders),
     clearInputAfterSubmit: typeof record.clearInputAfterSubmit === 'boolean' ? record.clearInputAfterSubmit : false,
     persistInputOnRestart: typeof record.persistInputOnRestart === 'boolean' ? record.persistInputOnRestart : true,
     reuseTaskApiProfileTemporarily: typeof record.reuseTaskApiProfileTemporarily === 'boolean' ? record.reuseTaskApiProfileTemporarily : false,
     alwaysShowRetryButton: typeof record.alwaysShowRetryButton === 'boolean' ? record.alwaysShowRetryButton : false,
+    allowPromptRewrite: typeof record.allowPromptRewrite === 'boolean' ? record.allowPromptRewrite : false,
     taskCompletionNotification: typeof record.taskCompletionNotification === 'boolean' ? record.taskCompletionNotification : false,
     enterSubmit: typeof record.enterSubmit === 'boolean' ? record.enterSubmit : false,
     referenceImageEditAction: normalizeReferenceImageEditAction(record.referenceImageEditAction),
@@ -534,9 +564,24 @@ export function normalizeSettings(input: Partial<AppSettings> | unknown): AppSet
     agentMaxToolRounds: normalizeAgentMaxToolRounds(record.agentMaxToolRounds),
     agentWebSearch: typeof record.agentWebSearch === 'boolean' ? record.agentWebSearch : false,
     agentMathFormattingPrompt: typeof record.agentMathFormattingPrompt === 'boolean' ? record.agentMathFormattingPrompt : true,
+    agentApiConfigMode,
+    agentTextProfileId,
+    agentImageProfileId,
     profiles,
     activeProfileId,
   }
+}
+
+export function getAgentTextApiProfile(settings: Partial<AppSettings> | unknown): ApiProfile | null {
+  const normalized = normalizeSettings(settings)
+  if (normalized.agentApiConfigMode === 'off') return getActiveApiProfile(normalized)
+  return normalized.profiles.find((profile) => profile.id === normalized.agentTextProfileId) ?? null
+}
+
+export function getAgentImageApiProfile(settings: Partial<AppSettings> | unknown): ApiProfile | null {
+  const normalized = normalizeSettings(settings)
+  if (normalized.agentApiConfigMode !== 'hybrid') return getAgentTextApiProfile(normalized)
+  return normalized.profiles.find((profile) => profile.id === normalized.agentImageProfileId) ?? null
 }
 
 export function getCustomProviderDefinition(settings: Partial<AppSettings> | unknown, provider: ApiProvider): CustomProviderDefinition | null {
@@ -818,6 +863,7 @@ export const DEFAULT_SETTINGS: AppSettings = normalizeSettings({
   persistInputOnRestart: true,
   reuseTaskApiProfileTemporarily: false,
   alwaysShowRetryButton: false,
+  allowPromptRewrite: false,
   taskCompletionNotification: false,
   enterSubmit: false,
   referenceImageEditAction: 'ask',
@@ -826,4 +872,7 @@ export const DEFAULT_SETTINGS: AppSettings = normalizeSettings({
   agentMaxToolRounds: DEFAULT_AGENT_MAX_TOOL_ROUNDS,
   agentWebSearch: false,
   agentMathFormattingPrompt: true,
+  agentApiConfigMode: 'off',
+  agentTextProfileId: null,
+  agentImageProfileId: null,
 })

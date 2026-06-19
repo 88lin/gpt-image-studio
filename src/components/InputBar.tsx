@@ -1,22 +1,22 @@
-import { useRef, useEffect, useCallback, useState, useMemo, useLayoutEffect, type ReactNode } from 'react'
+import { useRef, useEffect, useCallback, useState, useMemo, useLayoutEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { ALL_FAVORITES_COLLECTION_ID, deleteFavoriteCollection, getTaskFavoriteCollectionIds, useStore, submitTask, submitAgentMessage, stopAgentResponse, addImageFromFile, createInputImageFromFile, deleteImageIfUnreferenced, removeMultipleTasks, getCachedImage, ensureImageCached, getActiveAgentRounds, taskMatchesFilterStatus, taskMatchesSearchQuery } from '../store'
 import { DEFAULT_PARAMS, type TaskRecord } from '../types'
-import { getActiveApiProfile, normalizeSettings } from '../lib/apiProfiles'
+import { getActiveApiProfile, getAgentImageApiProfile, normalizeSettings } from '../lib/apiProfiles'
 import { DEFAULT_FAL_IMAGE_SIZE, getChangedParams, getOutputImageLimitForSettings, normalizeParamsForSettings } from '../lib/paramCompatibility'
 import { getAtImageQuery, getImageMentionLabel, getPromptIndexFromVisibleIndex, getPromptMentionParts, getSelectedImageMentionLabel, getSelectedTextMentionLabel, imageMentionMatches, insertImageMentionAtVisibleRange, insertTextMentionAtVisibleRange, isCursorInSelectedImageMention, stripImageMentionMarkers } from '../lib/promptImageMentions'
 import { normalizeImageSize } from '../lib/size'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
-import { dismissAllTooltips } from '../lib/tooltipDismiss'
 import { getSafeBoundingClientRect } from '../lib/domRect'
 import { collectAgentRoundOutputImageSlots } from '../lib/agentImageReferences'
 import { useHintTooltip } from '../hooks/useHintTooltip'
-import { useTooltip } from '../hooks/useTooltip'
 import { downloadImageEntriesAsZip, downloadImageIds, formatExportFileTime, getTaskOutputImageZipEntries } from '../lib/downloadImages'
-import Select from './Select'
 import SizePickerModal from './SizePickerModal'
-import ViewportTooltip from './ViewportTooltip'
 import { CloseIcon } from './icons'
+import ButtonTooltip from './input/buttonTooltip'
+import DragUploadOverlay from './input/dragUploadOverlay'
+import InputBatchBars from './input/inputBatchBars'
+import InputParamsPanel from './input/inputParamsPanel'
 
 
 function getMentionTagTextLength(el: Element) {
@@ -322,50 +322,6 @@ function setContentEditableSelection(el: HTMLElement, start: number, end: number
   applyBoundary(range, endBoundary, 'end')
   sel.removeAllRanges()
   sel.addRange(range)
-}
-
-/** 通用悬浮气泡提示 */
-function ButtonTooltip({ visible, text }: { visible: boolean; text: ReactNode }) {
-  if (!visible) return null
-
-  return (
-    <ViewportTooltip visible className="z-10 whitespace-nowrap">
-      {text}
-    </ViewportTooltip>
-  )
-}
-
-function BatchActionButton({
-  tooltip,
-  className,
-  onClick,
-  children,
-}: {
-  tooltip: string
-  className: string
-  onClick: () => void | Promise<void>
-  children: ReactNode
-}) {
-  const tooltipState = useTooltip()
-
-  return (
-    <span className="relative inline-flex" {...tooltipState.handlers}>
-      <button
-        type="button"
-        onClick={() => {
-          tooltipState.dismiss()
-          void onClick()
-        }}
-        className={className}
-        aria-label={tooltip}
-      >
-        {children}
-      </button>
-      <ViewportTooltip visible={tooltipState.visible} className="whitespace-nowrap">
-        {tooltip}
-      </ViewportTooltip>
-    </span>
-  )
 }
 
 /** API 支持的最大参考图数量 */
@@ -763,21 +719,26 @@ export default function InputBar() {
   const dragCounter = useRef(0)
   const isMobile = useIsMobile()
 
-  const currentActiveProfile = useMemo(() => getActiveApiProfile(settings), [settings])
+  const settingsActiveProfile = useMemo(() => getActiveApiProfile(settings), [settings])
+  const currentActiveProfile = useMemo(() => (
+    appMode === 'agent'
+      ? getAgentImageApiProfile(settings) ?? settingsActiveProfile
+      : settingsActiveProfile
+  ), [appMode, settings, settingsActiveProfile])
   const activeProfile = useMemo(() => (
-    settings.reuseTaskApiProfileTemporarily && reusedTaskApiProfileId
+    appMode !== 'agent' && settings.reuseTaskApiProfileTemporarily && reusedTaskApiProfileId
       ? settings.profiles.find((profile) => profile.id === reusedTaskApiProfileId) ?? currentActiveProfile
       : currentActiveProfile
-  ), [currentActiveProfile, reusedTaskApiProfileId, settings])
+  ), [appMode, currentActiveProfile, reusedTaskApiProfileId, settings])
   const activeAgentConversation = appMode === 'agent'
     ? agentConversations.find((conversation) => conversation.id === activeAgentConversationId) ?? null
     : null
   const activeAgentIsRunning = Boolean(activeAgentConversation?.rounds.some((round) => round.status === 'running'))
   const effectiveSettings = useMemo(() => (
-    activeProfile.id === currentActiveProfile.id
+    activeProfile.id === settingsActiveProfile.id
       ? settings
       : normalizeSettings({ ...settings, activeProfileId: activeProfile.id })
-  ), [activeProfile.id, currentActiveProfile.id, settings])
+  ), [activeProfile.id, settingsActiveProfile.id, settings])
   const hasSubmitApiConfig = Boolean(activeProfile.apiKey)
   const canSubmit = Boolean(prompt.trim() && hasSubmitApiConfig && !activeAgentIsRunning)
   const submitButtonAriaLabel = activeAgentIsRunning
@@ -808,7 +769,7 @@ export default function InputBar() {
   }, [setPrompt])
   const activeProvider = activeProfile.provider
   const isFalProvider = activeProvider === 'fal'
-  const agentAutoImageCount = appMode === 'agent' && activeProfile.provider === 'openai' && activeProfile.apiMode === 'responses'
+  const agentAutoImageCount = appMode === 'agent'
   const moderationDisabled = isFalProvider
   const transparentOutputAvailable = appMode === 'gallery'
   const showTransparentOutputControl = transparentOutputAvailable && params.output_format === 'png'
@@ -849,8 +810,9 @@ export default function InputBar() {
   const compressionHint = useHintTooltip({ enabled: () => compressionDisabled })
   const moderationHint = useHintTooltip({ enabled: () => moderationDisabled })
   const sizeHint = useHintTooltip({ enabled: () => isFalTextToImage })
-  const qualityHint = useHintTooltip({ enabled: () => settings.codexCli || isFalProvider })
+  const qualityHint = useHintTooltip({ enabled: () => activeProfile.codexCli || isFalProvider })
   const nLimitHint = useHintTooltip({ autoHideMs: 2000 })
+  const streamConcurrentHint = useHintTooltip({ enabled: () => streamConcurrentByN })
   const maskTargetImage = maskDraft
     ? inputImages.find((img) => img.id === maskDraft.targetImageId) ?? null
     : null
@@ -1960,209 +1922,47 @@ export default function InputBar() {
   }
 
   const renderParams = (cols: string) => (
-    <div className={`grid ${cols} gap-2 text-xs flex-1`}>
-      <label
-        className="relative flex flex-col gap-0.5"
-        onMouseEnter={sizeHint.show}
-        onMouseLeave={sizeHint.hide}
-        onTouchStart={sizeHint.startTouch}
-        onTouchEnd={sizeHint.clearTimer}
-        onTouchCancel={sizeHint.hide}
-        onClick={sizeHint.show}
-      >
-        <span className="text-gray-400 dark:text-gray-500 ml-1">尺寸</span>
-        <button
-          type="button"
-          onClick={() => { dismissAllTooltips(); setShowSizePicker(true) }}
-          className="px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] focus:outline-none text-xs text-left transition-all duration-200 shadow-sm font-mono"
-          title="选择尺寸"
-        >
-          {displaySize}
-        </button>
-        <ButtonTooltip
-          visible={isFalTextToImage && sizeHint.visible}
-          text={<>fal.ai 的文生图模式不支持 <code className="rounded bg-white/10 px-1 py-0.5 font-mono">auto</code> 参数</>}
-        />
-      </label>
-      <label
-        className="relative flex flex-col gap-0.5"
-        onMouseEnter={qualityHint.show}
-        onMouseLeave={qualityHint.hide}
-        onTouchStart={qualityHint.startTouch}
-        onTouchEnd={qualityHint.clearTimer}
-        onTouchCancel={qualityHint.hide}
-        onClick={qualityHint.show}
-      >
-        <span className="text-gray-400 dark:text-gray-500 ml-1">质量</span>
-        <Select
-          value={settings.codexCli ? 'auto' : isFalProvider && params.quality === 'auto' ? 'high' : params.quality}
-          onChange={(val) => {
-            if (!settings.codexCli) setParams({ quality: val as any })
-          }}
-          options={qualityOptions}
-          disabled={settings.codexCli}
-          className={settings.codexCli
-            ? 'px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-gray-100/50 dark:bg-white/[0.05] opacity-50 cursor-not-allowed text-xs transition-all duration-200 shadow-sm'
-            : selectClass}
-        />
-        <ButtonTooltip
-          visible={(settings.codexCli || isFalProvider) && qualityHint.visible}
-          text={isFalProvider ? <>fal.ai 不支持 <code className="rounded bg-white/10 px-1 py-0.5 font-mono">auto</code> 质量参数</> : 'Codex CLI 不支持质量参数'}
-        />
-      </label>
-      <label className="flex flex-col gap-0.5">
-        <span className="text-gray-400 dark:text-gray-500 ml-1">格式</span>
-        <Select
-          value={params.output_format}
-          onChange={(val) => {
-            setParams({
-              output_format: val as any,
-              ...(val === 'png' ? { output_compression: null } : { transparent_output: false }),
-            })
-          }}
-          options={[
-            { label: 'PNG', value: 'png' },
-            { label: 'JPEG', value: 'jpeg' },
-            { label: 'WebP', value: 'webp' },
-          ]}
-          className={selectClass}
-        />
-      </label>
-      {showTransparentOutputControl ? (
-        <label
-          className="relative flex flex-col gap-0.5"
-          onMouseEnter={transparentOutputHint.show}
-          onMouseLeave={transparentOutputHint.hide}
-          onTouchStart={transparentOutputHint.startTouch}
-          onTouchEnd={transparentOutputHint.clearTimer}
-          onTouchCancel={transparentOutputHint.hide}
-          onClick={transparentOutputHint.show}
-        >
-          <span className="text-gray-400 dark:text-gray-500 ml-1">透明背景</span>
-          <Select
-            value={transparentOutputEnabled ? 'on' : 'off'}
-            onChange={(val) => {
-              if (!transparentOutputAvailable) return
-              setParams({ transparent_output: val === 'on', output_compression: null })
-            }}
-            options={[
-              { label: 'false', value: 'off' },
-              { label: 'true', value: 'on' },
-            ]}
-            className={selectClass}
-            onOpenChange={handleTransparentOutputMenuOpenChange}
-          />
-          <ButtonTooltip
-            visible={transparentOutputHint.visible}
-            text="基于提示词与后处理，并非模型原生生成"
-          />
-        </label>
-      ) : (
-        <label
-          className="relative flex flex-col gap-0.5"
-          onMouseEnter={compressionHint.show}
-          onMouseLeave={compressionHint.hide}
-          onTouchStart={compressionHint.startTouch}
-          onTouchEnd={compressionHint.clearTimer}
-          onTouchCancel={compressionHint.hide}
-          onClick={compressionHint.show}
-        >
-          <span className="text-gray-400 dark:text-gray-500 ml-1">压缩率</span>
-          <input
-            value={outputCompressionInput}
-            onChange={(e) => setOutputCompressionInput(e.target.value)}
-            onBlur={commitOutputCompression}
-            disabled={compressionDisabled}
-            type="number"
-            min={0}
-            max={100}
-            placeholder="0-100"
-            className={`px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] focus:outline-none text-xs transition-all duration-200 shadow-sm ${
-              compressionDisabled
-                ? 'bg-gray-100/50 dark:bg-white/[0.05] opacity-50 cursor-not-allowed'
-                : 'bg-white/50 dark:bg-white/[0.03]'
-              }`}
-          />
-          <ButtonTooltip
-            visible={compressionHint.visible}
-            text={isFalProvider ? 'fal.ai 不支持压缩率参数' : '仅 JPEG 和 WebP 支持压缩率'}
-          />
-        </label>
-      )}
-      <label
-        className="relative flex flex-col gap-0.5"
-        onMouseEnter={moderationHint.show}
-        onMouseLeave={moderationHint.hide}
-        onTouchStart={moderationHint.startTouch}
-        onTouchEnd={moderationHint.clearTimer}
-        onTouchCancel={moderationHint.hide}
-        onClick={moderationHint.show}
-      >
-        <span className="text-gray-400 dark:text-gray-500 ml-1">审核</span>
-        <Select
-          value={moderationDisabled ? 'auto' : params.moderation}
-          onChange={(val) => {
-            if (!moderationDisabled) setParams({ moderation: val as any })
-          }}
-          options={[
-            { label: 'auto', value: 'auto' },
-            { label: 'low', value: 'low' },
-          ]}
-          disabled={moderationDisabled}
-          className={moderationDisabled
-            ? 'px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-gray-100/50 dark:bg-white/[0.05] opacity-50 cursor-not-allowed text-xs transition-all duration-200 shadow-sm'
-            : selectClass}
-        />
-        <ButtonTooltip
-          visible={moderationDisabled && moderationHint.visible}
-          text="fal.ai 不支持审核参数"
-        />
-      </label>
-      <label
-        className="relative flex flex-col gap-0.5"
-        onMouseEnter={showAgentNHint}
-        onMouseLeave={hideNLimitHint}
-        onTouchStart={startAgentNHintTouch}
-        onTouchEnd={clearAgentNHintTouchTimer}
-        onTouchCancel={() => {
-          clearAgentNHintTouchTimer()
-          hideNLimitHint()
-        }}
-        onClick={showAgentNHint}
-      >
-        <span className="text-gray-400 dark:text-gray-500 ml-1">数量</span>
-        <input
-          value={nInput}
-          onChange={(e) => handleNInputChange(e.target.value)}
-          onFocus={() => setNInputFocused(true)}
-          onBlur={() => {
-            setNInputFocused(false)
-            commitN()
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'ArrowUp') {
-              handleNLimitIncreaseAttempt(() => e.preventDefault())
-            }
-          }}
-          onWheel={(e) => {
-            if (e.deltaY < 0) {
-              handleNLimitIncreaseAttempt(() => e.preventDefault())
-            }
-          }}
-          disabled={agentAutoImageCount}
-          type={agentAutoImageCount ? 'text' : 'number'}
-          min={agentAutoImageCount ? undefined : 1}
-          max={agentAutoImageCount ? undefined : outputImageLimit}
-          className={`px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] focus:outline-none text-xs transition-all duration-200 shadow-sm ${
-            agentAutoImageCount
-              ? 'bg-gray-100/50 dark:bg-white/[0.05] opacity-50 cursor-not-allowed'
-              : 'bg-white/50 dark:bg-white/[0.03]'
-          }`}
-        />
-        <ButtonTooltip visible={nLimitHint.visible} text={nLimitHintText} />
-        <ButtonTooltip visible={streamConcurrentByN && !nLimitHint.visible} text="数量大于 1 时会将多图生成拆分为并发单图" />
-      </label>
-    </div>
+    <InputParamsPanel
+      cols={cols}
+      params={params}
+      setParams={setParams}
+      activeProfile={activeProfile}
+      isFalProvider={isFalProvider}
+      isFalTextToImage={isFalTextToImage}
+      displaySize={displaySize}
+      qualityOptions={qualityOptions}
+      selectClass={selectClass}
+      transparentOutputAvailable={transparentOutputAvailable}
+      showTransparentOutputControl={showTransparentOutputControl}
+      transparentOutputEnabled={transparentOutputEnabled}
+      transparentOutputHint={transparentOutputHint}
+      onTransparentOutputMenuOpenChange={handleTransparentOutputMenuOpenChange}
+      compressionHint={compressionHint}
+      compressionDisabled={compressionDisabled}
+      outputCompressionInput={outputCompressionInput}
+      setOutputCompressionInput={setOutputCompressionInput}
+      commitOutputCompression={commitOutputCompression}
+      moderationHint={moderationHint}
+      moderationDisabled={moderationDisabled}
+      agentAutoImageCount={agentAutoImageCount}
+      outputImageLimit={outputImageLimit}
+      nInput={nInput}
+      setNInputFocused={setNInputFocused}
+      commitN={commitN}
+      handleNInputChange={handleNInputChange}
+      handleNLimitIncreaseAttempt={handleNLimitIncreaseAttempt}
+      showAgentNHint={showAgentNHint}
+      hideNLimitHint={hideNLimitHint}
+      startAgentNHintTouch={startAgentNHintTouch}
+      clearAgentNHintTouchTimer={clearAgentNHintTouchTimer}
+      nLimitHint={nLimitHint}
+      nLimitHintText={nLimitHintText}
+      streamConcurrentByN={streamConcurrentByN}
+      streamConcurrentHint={streamConcurrentHint}
+      sizeHint={sizeHint}
+      qualityHint={qualityHint}
+      onOpenSizePicker={() => setShowSizePicker(true)}
+    />
   )
 
   const showFavoriteCollectionBatchBar = inCollectionOverview && selectedFavoriteCollectionIds.length > 0
@@ -2170,39 +1970,7 @@ export default function InputBar() {
 
   return (
     <>
-      {/* 全屏拖拽遮罩 */}
-      {isDragging && (
-        <div className="fixed inset-0 z-[100] bg-white/60 dark:bg-gray-900/60 backdrop-blur-md flex flex-col items-center justify-center pointer-events-none">
-          <div className="flex flex-col items-center gap-4 p-8 rounded-3xl">
-            <div className={`w-20 h-20 rounded-full border-2 border-dashed flex items-center justify-center ${
-              atImageLimit ? 'bg-red-50 dark:bg-red-500/10 border-red-300' : 'bg-blue-50 dark:bg-blue-500/10 border-blue-400'
-            }`}>
-              {atImageLimit ? (
-                <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                </svg>
-              ) : (
-                <svg className="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              )}
-            </div>
-            <div className="text-center">
-              {atImageLimit ? (
-                <>
-                  <p className="text-lg font-semibold text-red-500">已达上限 {API_MAX_IMAGES} 张</p>
-                  <p className="text-sm text-gray-400 mt-1">请先移除部分参考图后再添加</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">释放以上传图片</p>
-                  <p className="text-sm text-gray-400 mt-1">支持 JPG、PNG、WebP 等格式</p>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <DragUploadOverlay visible={isDragging} atImageLimit={atImageLimit} maxImages={API_MAX_IMAGES} />
 
       {showSizePicker && (
         <SizePickerModal
@@ -2214,134 +1982,23 @@ export default function InputBar() {
       )}
 
       <div data-input-bar className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl px-3 sm:px-4 transition-all duration-300">
-        {showFavoriteCollectionBatchBar && (
-          <div className="flex justify-center mb-3">
-            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-lg rounded-full flex items-center p-1 border border-gray-200/50 dark:border-white/10 pointer-events-auto">
-              <BatchActionButton
-                onClick={clearFavoriteCollectionSelection}
-                className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                tooltip="取消选择"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleSelectAllVisibleFavoriteCollections}
-                className="p-2 text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
-                tooltip="全选收藏夹"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <path d="M9 12l2 2 4-4" />
-                </svg>
-              </BatchActionButton>
-              <BatchActionButton
-                onClick={handleInvertVisibleFavoriteCollections}
-                className="p-2 text-purple-500 dark:text-purple-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
-                tooltip="反选收藏夹"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path strokeDasharray="4 4" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
-                  <path d="M8 12h8M13 9l3 3-3 3" />
-                </svg>
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleDownloadSelectedFavoriteCollections}
-                className="p-2 text-green-500 dark:text-green-400 hover:text-green-600 dark:hover:text-green-300 transition-colors"
-                tooltip="下载选中"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleDeleteSelectedFavoriteCollections}
-                className="p-2 text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors"
-                tooltip="删除选中"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </BatchActionButton>
-            </div>
-          </div>
-        )}
-        {showTaskBatchBar && (
-          <div className="flex justify-center mb-3">
-            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-lg rounded-full flex items-center p-1 border border-gray-200/50 dark:border-white/10 pointer-events-auto">
-              <BatchActionButton
-                onClick={clearSelection}
-                className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                tooltip="取消选择"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleSelectAllVisibleTasks}
-                className="p-2 text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
-                tooltip="全选任务"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <path d="M9 12l2 2 4-4" />
-                </svg>
-              </BatchActionButton>
-              <BatchActionButton
-                onClick={handleInvertVisibleTasks}
-                className="p-2 text-purple-500 dark:text-purple-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
-                tooltip="反选任务"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path strokeDasharray="4 4" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
-                  <path d="M8 12h8M13 9l3 3-3 3" />
-                </svg>
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleToggleFavorite}
-                className="p-2 text-yellow-500 dark:text-yellow-400 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors"
-                tooltip="编辑收藏夹"
-              >
-                {selectedTaskIds.length > 0 && selectedTaskIds.every((id) => tasks.find((t) => t.id === id)?.isFavorite) ? (
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
-                )}
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleDownloadSelected}
-                className="p-2 text-green-500 dark:text-green-400 hover:text-green-600 dark:hover:text-green-300 transition-colors"
-                tooltip="下载选中"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </BatchActionButton>
-              <div className="w-px h-5 bg-gray-200 dark:bg-white/20 mx-1"></div>
-              <BatchActionButton
-                onClick={handleDeleteSelected}
-                className="p-2 text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors"
-                tooltip="删除选中"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </BatchActionButton>
-            </div>
-          </div>
-        )}
+        <InputBatchBars
+          showFavoriteCollectionBatchBar={showFavoriteCollectionBatchBar}
+          showTaskBatchBar={showTaskBatchBar}
+          selectedTaskIds={selectedTaskIds}
+          tasks={tasks}
+          clearFavoriteCollectionSelection={clearFavoriteCollectionSelection}
+          onSelectAllVisibleFavoriteCollections={handleSelectAllVisibleFavoriteCollections}
+          onInvertVisibleFavoriteCollections={handleInvertVisibleFavoriteCollections}
+          onDownloadSelectedFavoriteCollections={handleDownloadSelectedFavoriteCollections}
+          onDeleteSelectedFavoriteCollections={handleDeleteSelectedFavoriteCollections}
+          clearSelection={clearSelection}
+          onSelectAllVisibleTasks={handleSelectAllVisibleTasks}
+          onInvertVisibleTasks={handleInvertVisibleTasks}
+          onToggleFavorite={handleToggleFavorite}
+          onDownloadSelected={handleDownloadSelected}
+          onDeleteSelected={handleDeleteSelected}
+        />
         <div ref={cardRef} className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border border-white/50 dark:border-white/[0.08] shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] rounded-2xl sm:rounded-3xl p-3 sm:p-4 ring-1 ring-black/5 dark:ring-white/10">
           {/* 移动端拖动条 */}
           <div
