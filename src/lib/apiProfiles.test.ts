@@ -41,6 +41,44 @@ describe('validateApiProfile', () => {
   })
 })
 
+describe('default API URL env', () => {
+  it('applies shared URL params from VITE_DEFAULT_API_URL to the default profile', async () => {
+    vi.resetModules()
+    vi.stubEnv('VITE_DEFAULT_API_URL', 'https://app.example.com/?apiUrl=https%3A%2F%2Fapi.example.com&apiMode=images&model=test-image-model&profileName=URL%20Profile&codexCli=true&streamImages=true&streamPartialImages=3')
+
+    const { DEFAULT_SETTINGS, createDefaultOpenAIProfile } = await import('./apiProfiles')
+
+    expect(createDefaultOpenAIProfile()).toMatchObject({
+      name: 'URL Profile',
+      baseUrl: 'https://api.example.com',
+      model: 'test-image-model',
+      apiMode: 'images',
+      codexCli: true,
+      streamImages: true,
+      streamPartialImages: 3,
+    })
+    expect(DEFAULT_SETTINGS.profiles[0]).toMatchObject({
+      name: 'URL Profile',
+      baseUrl: 'https://api.example.com',
+      model: 'test-image-model',
+      apiMode: 'images',
+      codexCli: true,
+      streamImages: true,
+      streamPartialImages: 3,
+    })
+  })
+
+  it('keeps settings URLs out of the default API base URL', async () => {
+    vi.resetModules()
+    vi.stubEnv('VITE_DEFAULT_API_URL', 'https://example.com/?settings={}')
+
+    const { DEFAULT_SETTINGS } = await import('./apiProfiles')
+
+    expect(DEFAULT_SETTINGS.baseUrl).toBe('')
+    expect(DEFAULT_SETTINGS.profiles[0].baseUrl).toBe('')
+  })
+})
+
 describe('mergeImportedSettings', () => {
   it('replaces the default OpenAI profile with legacy imported settings when current settings are untouched', () => {
     const merged = mergeImportedSettings(DEFAULT_SETTINGS, {

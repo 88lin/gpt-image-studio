@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from 'react'
-import { removeMultipleTasks, useStore } from '../store'
+import { getAgentConversationTaskIds, removeMultipleTasks, useStore } from '../store'
 import type { AgentConversation } from '../types'
 import { useTooltip } from '../hooks/useTooltip'
 import { CloseIcon, EditIcon, TrashIcon } from './icons'
@@ -164,14 +164,7 @@ export default function HistoryModal({ onClose, ignoreOutsideClickRef }: History
   const handleDelete = (e: React.MouseEvent, id: string) => {
     e.stopPropagation()
     const targetConversation = conversations.find((item) => item.id === id) ?? null
-    const roundIds = new Set(targetConversation?.rounds.map((round) => round.id) ?? [])
-    const roundTaskIds = targetConversation?.rounds.flatMap((round) => round.outputTaskIds) ?? []
-    const relatedTasks = tasks.filter((task) =>
-      task.agentConversationId === id || Boolean(task.agentRoundId && roundIds.has(task.agentRoundId)),
-    )
-    const existingTaskIds = new Set(tasks.map((task) => task.id))
-    const relatedTaskIds = Array.from(new Set([...roundTaskIds, ...relatedTasks.map((task) => task.id)]))
-      .filter((taskId) => existingTaskIds.has(taskId))
+    const relatedTaskIds = getAgentConversationTaskIds(targetConversation, tasks)
     const relatedTaskIdSet = new Set(relatedTaskIds)
     const generatedImageCount = new Set(
       tasks
@@ -182,15 +175,17 @@ export default function HistoryModal({ onClose, ignoreOutsideClickRef }: History
     setConfirmDialog({
       title: '删除对话',
       message: '确定要删除这个 Agent 对话吗？',
-      checkbox: generatedImageCount > 0
+      checkbox: relatedTaskIds.length > 0
         ? {
-            label: `同时删除对话中生成的图片（${generatedImageCount} 张）`,
+            label: generatedImageCount > 0
+              ? `同时删除对话中生成的图片（${generatedImageCount} 张）和关联任务`
+              : `同时删除对话关联任务（${relatedTaskIds.length} 个）`,
             tone: 'danger',
           }
         : undefined,
       action: async (deleteGeneratedImages = false) => {
-        deleteConversation(id)
         if (deleteGeneratedImages && relatedTaskIds.length > 0) await removeMultipleTasks(relatedTaskIds)
+        deleteConversation(id)
         if (conversations.length <= 1) {
           onClose()
         }
