@@ -15,6 +15,8 @@ import type {
   FavoriteCollection,
   ResponsesApiResponse,
   ResponsesOutputItem,
+  StoredImage,
+  StoredImageThumbnail,
 } from './types'
 import { DEFAULT_AGENT_MAX_TOOL_ROUNDS, DEFAULT_PARAMS } from './types'
 import { DEFAULT_SETTINGS, getActiveApiProfile, getAgentImageApiProfile, getAgentTextApiProfile, getCustomProviderDefinition, mergeImportedSettings, normalizeSettings, validateApiProfile } from './lib/apiProfiles'
@@ -33,7 +35,6 @@ import {
   getImageThumbnail,
   getStoredFreshImageThumbnail,
   getAllImageIds,
-  getAllImages,
   putImage,
   putImageThumbnail,
   deleteImage,
@@ -53,8 +54,9 @@ import { orderInputImagesForMask } from './lib/mask'
 import { getChangedParams, normalizeParamsForSettings } from './lib/paramCompatibility'
 import { createTransparentOutputMeta, getTransparentRequestParams, removeKeyedBackgroundFromDataUrl } from './lib/transparentImage'
 import { blobToDataUrl, fileToDataUrl } from './lib/dataUrl'
+import { hasActiveDataOperations } from './lib/dataOperations'
 import { formatExportFileTime } from './lib/exportFileName'
-import { buildExportZip, readExportZip, readExportZipFileAsDataUrl } from './lib/exportZip'
+import { buildExportZip, createExportBlob, getExportImageEstimatedBytes, getExportZipPlan, MAX_EXPORT_ZIP_BYTES, readExportZip, readExportZipFileAsDataUrl, readExportZipManifest } from './lib/exportZip'
 
 export const ALL_FAVORITES_COLLECTION_ID = '__all_favorites__'
 export const DEFAULT_FAVORITE_COLLECTION_ID = '__default_favorites__'
@@ -5365,53 +5367,77 @@ export interface ExportOptions {
 /** 导出数据为 ZIP */
 export async function exportData(options: ExportOptions = { exportConfig: true, exportTasks: true }) {
   try {
+    const state = useStore.getState()
+    if (options.exportTasks && hasActiveDataOperations(state.tasks, state.agentConversations)) throw new Error('当前有任务正在进行，请完成或停止后再导出。')
     const tasks = options.exportTasks ? await getAllTasks() : []
-    const images = options.exportTasks ? await getAllImages() : []
-    const { settings, agentConversations, favoriteCollections, defaultFavoriteCollectionId } = useStore.getState()
+    const imageIds = options.exportTasks ? await getAllImageIds() : []
+    const { settings, agentConversations, favoriteCollections, defaultFavoriteCollectionId } = state
     const exportedAt = Date.now()
-    const thumbnailsByImageId = new Map<string, NonNullable<Awaited<ReturnType<typeof getImageThumbnail>>>>()
-
-    if (options.exportTasks) {
-      for (const img of images) {
-        const thumbnail = await getImageThumbnail(img.id)
-        if (thumbnail?.thumbnailDataUrl) {
-          thumbnailsByImageId.set(img.id, thumbnail)
-          cacheThumbnail(img.id, {
-            dataUrl: thumbnail.thumbnailDataUrl,
-            width: thumbnail.width,
-            height: thumbnail.height,
-            thumbnailVersion: thumbnail.thumbnailVersion,
-          })
-        }
-      }
-    }
-
-    const { bytes: zipped } = buildExportZip({
+    const params = {
       options,
       exportedAt,
       settings,
       tasks,
-      images,
-      thumbnailsByImageId,
+      imageTasks: tasks,
       favoriteCollections,
       defaultFavoriteCollectionId,
-      agentConversations: getPersistableAgentConversations(agentConversations),
-    })
-    const blob = new Blob([zipped.buffer as ArrayBuffer], { type: 'application/zip' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `gpt-image-2-backup_${formatExportFileTime(new Date(exportedAt))}.zip`
-    a.click()
-    setTimeout(() => URL.revokeObjectURL(url), 1_000)
-    useStore.getState().showToast('数据已导出', 'success')
+      agentConversations: options.exportTasks ? getPersistableAgentConversations(agentConversations) : [],
+    }
+    const imageSizes = []
+    for (const id of imageIds) {
+      const image = await getImage(id)
+      if (!image) continue
+      const thumbnail = await getImageThumbnail(id)
+      imageSizes.push({ id, bytes: getExportImageEstimatedBytes(image, thumbnail) })
+    }
+    const plan = getExportZipPlan(params, imageSizes)
+    const backupId = `${exportedAt}`
+
+    for (let index = 0; index < plan.length; index++) {
+      const images: StoredImage[] = []
+      const thumbnailsByImageId = new Map<string, StoredImageThumbnail>()
+      for (const id of plan[index].imageIds) {
+        const image = await getImage(id)
+        if (!image) continue
+        images.push(image)
+        const thumbnail = await getImageThumbnail(id)
+        if (!thumbnail?.thumbnailDataUrl) continue
+        thumbnailsByImageId.set(id, thumbnail)
+        cacheThumbnail(id, {
+          dataUrl: thumbnail.thumbnailDataUrl,
+          width: thumbnail.width,
+          height: thumbnail.height,
+          thumbnailVersion: thumbnail.thumbnailVersion,
+        })
+      }
+
+      const partNumber = index + 1
+      const result = await buildExportZip({
+        ...params,
+        tasks: plan[index].tasks,
+        agentConversations: plan[index].agentConversations,
+        images,
+        thumbnailsByImageId,
+        includeManifestData: plan[index].includeBaseData,
+        backupPart: plan.length > 1 ? { id: backupId, index: partNumber, total: plan.length } : undefined,
+      })
+      const blob = createExportBlob(result.bytes)
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      const suffix = plan.length > 1 ? `_${String(plan.length).padStart(2, '0')}parts_part${String(partNumber).padStart(2, '0')}` : ''
+      a.href = url
+      a.download = `gpt-image-2-backup_${formatExportFileTime(new Date(exportedAt))}${suffix}.zip`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      if (partNumber < plan.length) await new Promise((resolve) => setTimeout(resolve, 150))
+    }
+    useStore.getState().showToast(plan.length > 1 ? `已请求下载 ${plan.length} 个 ZIP，请确认浏览器已允许多文件下载` : '数据已导出', 'success')
   } catch (e) {
-    useStore
-      .getState()
-      .showToast(
-        `导出失败：${e instanceof Error ? e.message : String(e)}`,
-        'error',
-      )
+    console.error('exportData failed', e)
+    const detail = e instanceof Error ? e.message.trim() : String(e).trim()
+    useStore.getState().showToast(detail ? `导出失败，${detail}` : '导出失败，未知错误', 'error')
   }
 }
 
@@ -5422,48 +5448,84 @@ export interface ImportOptions {
 }
 
 /** 导入 ZIP 数据 */
-export async function importData(file: File, options: ImportOptions = { importConfig: true, importTasks: true }): Promise<boolean> {
+export async function importData(input: File | File[], options: ImportOptions = { importConfig: true, importTasks: true }): Promise<boolean> {
   try {
-    const buffer = await file.arrayBuffer()
-    const { manifest: data, files } = readExportZip(new Uint8Array(buffer))
+    const state = useStore.getState()
+    if (options.importTasks && hasActiveDataOperations(state.tasks, state.agentConversations)) throw new Error('当前有任务正在进行，请完成或停止后再导入。')
+    const files = Array.isArray(input) ? input : [input]
+    if (!files.length) throw new Error('没有选择备份文件。')
+    if (files.some((file) => file.size >= MAX_EXPORT_ZIP_BYTES)) {
+      throw new Error('单个 ZIP 不能达到或超过 2 GB，请选择分片备份。')
+    }
+
+    const selected = [] as Array<{ file: File; manifest: Awaited<ReturnType<typeof readExportZipManifest>> }>
+    for (const file of files) {
+      const manifest = await readExportZipManifest(new Uint8Array(await file.arrayBuffer()), options.importTasks)
+      selected.push({ file, manifest })
+    }
+    const multipart = selected.some((part) => part.manifest.backupPart != null)
+    if (multipart) {
+      if (selected.some((part) => !part.manifest.backupPart)) throw new Error('不能混合选择分片备份和普通备份。')
+      const first = selected[0].manifest.backupPart!
+      const indexes = new Set(selected.map((part) => part.manifest.backupPart!.index))
+      const validSet = selected.every((part) => {
+        const backupPart = part.manifest.backupPart!
+        return backupPart.id === first.id && backupPart.total === first.total && backupPart.index >= 1 && backupPart.index <= first.total
+      })
+      if (!validSet || indexes.size !== selected.length) throw new Error('所选分片不属于同一批备份或包含重复分片。')
+      if (options.importTasks && (selected.length !== first.total || indexes.size !== first.total)) {
+        throw new Error(`分片备份不完整，请一次选择同一备份的全部 ${first.total} 个 ZIP。`)
+      }
+      selected.sort((a, b) => a.manifest.backupPart!.index - b.manifest.backupPart!.index)
+    } else if (selected.length > 1) {
+      throw new Error('多个普通备份不能同时导入，请每次选择一个 ZIP。')
+    }
+
+    const data = selected.find((part) => part.manifest.settings)?.manifest ?? selected[0].manifest
+    if (options.importConfig && !options.importTasks && !data.settings) throw new Error('所选分片不包含配置数据。')
+    const importedTasks = selected.flatMap((part) => part.manifest.tasks ?? [])
+    const importedAgentConversations = selected.flatMap((part) => part.manifest.agentConversations ?? [])
+    const hasTaskData = selected.some((part) => part.manifest.tasks != null || part.manifest.imageFiles != null)
 
     const importedImageIds: string[] = []
-    if (options.importTasks && data.tasks && data.imageFiles) {
-      // 还原图片
-      for (const [id, info] of Object.entries(data.imageFiles)) {
-        const dataUrl = readExportZipFileAsDataUrl(files, info.path)
-        if (!dataUrl) continue
-        await putImage({
-          id,
-          dataUrl,
-          createdAt: info.createdAt,
-          source: info.source,
-          width: info.width,
-          height: info.height,
-        })
-        cacheImage(id, dataUrl)
-        importedImageIds.push(id)
+    if (options.importTasks && hasTaskData) {
+      for (const part of selected) {
+        const { manifest, files: zipFiles } = await readExportZip(new Uint8Array(await part.file.arrayBuffer()))
+        for (const [id, info] of Object.entries(manifest.imageFiles ?? {})) {
+          const dataUrl = readExportZipFileAsDataUrl(zipFiles, info.path)
+          if (!dataUrl) continue
+          await putImage({
+            id,
+            dataUrl,
+            createdAt: info.createdAt,
+            source: info.source,
+            width: info.width,
+            height: info.height,
+          })
+          cacheImage(id, dataUrl)
+          importedImageIds.push(id)
+        }
+
+        for (const [id, info] of Object.entries(manifest.thumbnailFiles ?? {})) {
+          const thumbnailDataUrl = readExportZipFileAsDataUrl(zipFiles, info.path)
+          if (!thumbnailDataUrl) continue
+          await putImageThumbnail({
+            id,
+            thumbnailDataUrl,
+            width: info.width,
+            height: info.height,
+            thumbnailVersion: info.thumbnailVersion,
+          })
+          cacheThumbnail(id, {
+            dataUrl: thumbnailDataUrl,
+            width: info.width,
+            height: info.height,
+            thumbnailVersion: info.thumbnailVersion,
+          })
+        }
       }
 
-      for (const [id, info] of Object.entries(data.thumbnailFiles ?? {})) {
-        const thumbnailDataUrl = readExportZipFileAsDataUrl(files, info.path)
-        if (!thumbnailDataUrl) continue
-        await putImageThumbnail({
-          id,
-          thumbnailDataUrl,
-          width: info.width,
-          height: info.height,
-          thumbnailVersion: info.thumbnailVersion,
-        })
-        cacheThumbnail(id, {
-          dataUrl: thumbnailDataUrl,
-          width: info.width,
-          height: info.height,
-          thumbnailVersion: info.thumbnailVersion,
-        })
-      }
-
-      for (const task of data.tasks) {
+      for (const task of importedTasks) {
         await putTask(task)
       }
 
@@ -5483,13 +5545,13 @@ export async function importData(file: File, options: ImportOptions = { importCo
         defaultFavoriteCollectionId: normalizedFavorites.defaultFavoriteCollectionId,
       })
       if (normalizedFavorites.changed) await Promise.all(normalizedFavorites.tasks.map((task) => putTask(task)))
-      const importedAgentConversations = normalizeAgentConversations(data.agentConversations)
+      const normalizedAgentConversations = normalizeAgentConversations(importedAgentConversations)
         .filter((conversation) => !isEmptyAgentConversation(conversation))
       useStore.setState((state) => {
-        const agentConversations = mergeImportedAgentConversations(state.agentConversations, importedAgentConversations)
+        const agentConversations = mergeImportedAgentConversations(state.agentConversations, normalizedAgentConversations)
         const activeAgentConversationId = state.activeAgentConversationId && agentConversations.some((conversation) => conversation.id === state.activeAgentConversationId)
           ? state.activeAgentConversationId
-          : importedAgentConversations[0]?.id ?? agentConversations[0]?.id ?? null
+          : normalizedAgentConversations[0]?.id ?? agentConversations[0]?.id ?? null
         return {
           agentConversations,
           activeAgentConversationId,
@@ -5505,8 +5567,8 @@ export async function importData(file: File, options: ImportOptions = { importCo
     }
 
     let msg = '数据已成功导入'
-    if (options.importTasks && data.tasks) {
-      msg = `已导入 ${data.tasks.length} 个任务`
+    if (options.importTasks && hasTaskData) {
+      msg = `已导入 ${importedTasks.length} 个任务`
     } else if (options.importConfig && data.settings) {
       msg = '配置已成功导入'
     }
@@ -5514,12 +5576,9 @@ export async function importData(file: File, options: ImportOptions = { importCo
     useStore.getState().showToast(msg, 'success')
     return true
   } catch (e) {
-    useStore
-      .getState()
-      .showToast(
-        `导入失败：${e instanceof Error ? e.message : String(e)}`,
-        'error',
-      )
+    console.error('importData failed', e)
+    const detail = e instanceof Error ? e.message.trim() : String(e).trim()
+    useStore.getState().showToast(detail ? `导入失败，${detail}` : '导入失败，未知错误', 'error')
     return false
   }
 }

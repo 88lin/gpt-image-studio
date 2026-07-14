@@ -5,6 +5,7 @@ import { DEFAULT_PARAMS } from './types'
 import { createDefaultFalProfile, createDefaultOpenAIProfile, DEFAULT_RESPONSES_MODEL, DEFAULT_SETTINGS, normalizeSettings } from './lib/apiProfiles'
 import type { AgentConversation, ExportData, StoredImage, StoredImageThumbnail, TaskRecord } from './types'
 import { getSelectedImageMentionLabel } from './lib/promptImageMentions'
+import { hasActiveDataOperations } from './lib/dataOperations'
 vi.mock('./lib/db', () => {
   const tasks = new Map<string, TaskRecord>()
   const images = new Map<string, StoredImage>()
@@ -178,11 +179,33 @@ function task(overrides: Partial<TaskRecord> = {}): TaskRecord {
   }
 }
 
-function importFile(data: ExportData): File {
-  const zipped = zipSync({ 'manifest.json': strToU8(JSON.stringify(data)) })
+function importFile(data: ExportData, files: Record<string, Uint8Array> = {}): File {
+  const zipped = zipSync({ ...files, 'manifest.json': strToU8(JSON.stringify(data)) })
   const buffer = zipped.buffer.slice(zipped.byteOffset, zipped.byteOffset + zipped.byteLength)
-  return { arrayBuffer: async () => buffer } as File
+  return { name: 'backup.zip', size: zipped.byteLength, arrayBuffer: async () => buffer.slice(0) } as File
 }
+
+describe('data operation locking', () => {
+  it('detects running and recoverable work before import or export', () => {
+    expect(hasActiveDataOperations([task({ status: 'running' })], [])).toBe(true)
+    expect(hasActiveDataOperations([task({ falRecoverable: true })], [])).toBe(true)
+    expect(hasActiveDataOperations([], [agentConversation({
+      rounds: [{
+        id: 'round-a',
+        index: 1,
+        userMessageId: 'message-a',
+        prompt: 'prompt',
+        inputImageIds: [],
+        outputTaskIds: [],
+        status: 'running',
+        error: null,
+        createdAt: 1,
+        finishedAt: null,
+      }],
+    })])).toBe(true)
+    expect(hasActiveDataOperations([task()], [])).toBe(false)
+  })
+})
 
 describe('favorite collection deletion', () => {
   const collectionA = { id: 'collection-a', name: '收藏夹 A', createdAt: 1, updatedAt: 1 }
@@ -1740,6 +1763,90 @@ describe('data import', () => {
     expect('agentConversations' in persisted).toBe(false)
     expect(serializedPersisted).not.toContain('image_generation_call')
     expect(serializedPersisted).not.toContain('imported-legacy-base64')
+  })
+
+  it('imports a complete multipart backup selected in any order', async () => {
+    await clearTasks()
+    await clearImages()
+    const importedTask = task({ id: 'multipart-task', outputImages: ['multipart-image-a', 'multipart-image-b'] })
+    const part1 = importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      backupPart: { id: 'backup-a', index: 1, total: 2 },
+      tasks: [importedTask],
+      favoriteCollections: [],
+      agentConversations: [],
+      imageFiles: { 'multipart-image-a': { path: 'images/image-a.png' } },
+    }, { 'images/image-a.png': new Uint8Array([1, 2]) })
+    const part2 = importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      backupPart: { id: 'backup-a', index: 2, total: 2 },
+      tasks: [task({ id: 'multipart-task-2' })],
+      imageFiles: { 'multipart-image-b': { path: 'images/image-b.png' } },
+    }, { 'images/image-b.png': new Uint8Array([3, 4]) })
+
+    const imported = await importData([part2, part1], { importConfig: false, importTasks: true })
+
+    expect(imported).toBe(true)
+    expect((await getAllTasks()).some((item) => item.id === importedTask.id)).toBe(true)
+    expect((await getAllTasks()).some((item) => item.id === 'multipart-task-2')).toBe(true)
+    expect(await getImage('multipart-image-a')).toMatchObject({ dataUrl: 'data:image/png;base64,AQI=' })
+    expect(await getImage('multipart-image-b')).toMatchObject({ dataUrl: 'data:image/png;base64,AwQ=' })
+  })
+
+  it('rejects an incomplete multipart backup before importing data', async () => {
+    await clearTasks()
+    const part1 = importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      backupPart: { id: 'backup-a', index: 1, total: 2 },
+      tasks: [task({ id: 'incomplete-task' })],
+      imageFiles: {},
+    })
+
+    const imported = await importData([part1], { importConfig: false, importTasks: true })
+
+    expect(imported).toBe(false)
+    expect((await getAllTasks()).some((item) => item.id === 'incomplete-task')).toBe(false)
+  })
+
+  it('validates image entries in every part before writing earlier parts', async () => {
+    await clearImages()
+    const part1 = importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      backupPart: { id: 'backup-a', index: 1, total: 2 },
+      tasks: [],
+      imageFiles: { 'preflight-image-a': { path: 'images/image-a.png' } },
+    }, { 'images/image-a.png': new Uint8Array([1, 2]) })
+    const part2 = importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      backupPart: { id: 'backup-a', index: 2, total: 2 },
+      imageFiles: { 'preflight-image-b': { path: 'images/missing.png' } },
+    })
+
+    const imported = await importData([part1, part2], { importConfig: false, importTasks: true })
+
+    expect(imported).toBe(false)
+    expect(await getImage('preflight-image-a')).toBeUndefined()
+  })
+
+  it('imports config with running tasks without requiring image parts', async () => {
+    useStore.setState({ tasks: [task({ status: 'running' })] })
+    const part1 = importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      backupPart: { id: 'config-backup', index: 1, total: 3 },
+      settings: DEFAULT_SETTINGS,
+      tasks: [],
+      imageFiles: { 'unused-image': { path: 'images/missing.png' } },
+    })
+
+    const imported = await importData([part1], { importConfig: true, importTasks: false })
+
+    expect(imported).toBe(true)
   })
 
 })
