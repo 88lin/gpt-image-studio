@@ -4,11 +4,11 @@ import type { FavoriteCollection } from '../../types'
 import {
   createFavoriteCollection,
   deleteFavoriteCollection,
-  getTaskFavoriteCollectionIds,
   renameFavoriteCollection,
   updateTasksFavoriteCollections,
   useStore,
 } from '../../store'
+import { getTaskFavoriteCollectionIds } from '../../lib/favoriteState'
 import { useCloseOnEscape } from '../../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../../hooks/usePreventBackgroundScroll'
 import { Checkbox } from '../Checkbox'
@@ -274,7 +274,7 @@ export function FavoriteCollectionPickerModal() {
     e.preventDefault()
     e.stopPropagation()
     if (collections.length <= 1) return
-    const collectionTasks = tasks.filter(t => getTaskFavoriteCollectionIds(t).includes(collection.id))
+    const collectionTasks = tasks.filter(t => getTaskFavoriteCollectionIds(t, defaultFavoriteCollectionId).includes(collection.id))
     const imageCount = new Set(collectionTasks.flatMap((task) => task.outputImages || [])).size
     setConfirmDialog({
       title: '删除收藏夹',

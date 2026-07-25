@@ -1,7 +1,39 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
 import { createDefaultOpenAIProfile, DEFAULT_SETTINGS } from './apiProfiles'
-import { callAgentConversationTitleApi, callAgentResponsesApi } from './agentApi'
+import { callAgentConversationTitleApi, callAgentResponsesApi, parseBatchImageCallArguments } from './agentApi'
+
+describe('parseBatchImageCallArguments', () => {
+  it('trims ids and prompts, fills missing ids, and skips empty prompts', () => {
+    expect(parseBatchImageCallArguments(JSON.stringify({ images: [
+      { id: ' hero ', prompt: ' first prompt ' },
+      { id: '   ', prompt: 'blank id' },
+      { prompt: 'missing id' },
+      { id: 'skipped', prompt: '   ' },
+    ] }))).toEqual([
+      { id: 'hero', prompt: 'first prompt' },
+      { id: 'image_2', prompt: 'blank id' },
+      { id: 'image_3', prompt: 'missing id' },
+    ])
+  })
+
+  it('makes duplicate and colliding ids deterministically unique', () => {
+    const args = JSON.stringify({ images: [
+      { id: 'same', prompt: 'one' },
+      { id: ' same ', prompt: 'two' },
+      { id: 'same_2', prompt: 'three' },
+      { id: 'same', prompt: 'four' },
+    ] })
+
+    expect(parseBatchImageCallArguments(args)).toEqual([
+      { id: 'same', prompt: 'one' },
+      { id: 'same_2', prompt: 'two' },
+      { id: 'same_2_2', prompt: 'three' },
+      { id: 'same_3', prompt: 'four' },
+    ])
+    expect(parseBatchImageCallArguments(args)).toEqual(parseBatchImageCallArguments(args))
+  })
+})
 
 describe('callAgentResponsesApi', () => {
   afterEach(() => {

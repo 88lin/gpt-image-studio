@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from 'react'
-import { getAgentConversationTaskIds, removeMultipleTasks, useStore } from '../store'
+import { removeMultipleTasks, useStore } from '../store'
 import type { AgentConversation } from '../types'
+import { getAgentConversationTaskIds, getConversationSearchText } from '../lib/agentConversationState'
 import { useTooltip } from '../hooks/useTooltip'
 import { CloseIcon, EditIcon, TrashIcon } from './icons'
 import ViewportTooltip from './ViewportTooltip'
@@ -74,14 +75,6 @@ function formatDetailTime(value: number) {
     hour12: false,
   })
   return formatter.format(date).replace(/\//g, '-')
-}
-
-function getConversationSearchText(conversation: AgentConversation) {
-  return [
-    conversation.title,
-    ...conversation.messages.map((message) => message.content),
-    ...conversation.rounds.map((round) => round.prompt),
-  ].join('\n').toLocaleLowerCase()
 }
 
 type HistoryModalProps = {

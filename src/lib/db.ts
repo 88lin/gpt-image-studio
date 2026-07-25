@@ -66,6 +66,23 @@ export function deleteTask(id: string): Promise<undefined> {
   return dbTransaction(STORE_TASKS, 'readwrite', (s) => s.delete(id))
 }
 
+export function commitTaskDeletion(deletedTaskIds: string[], updatedTasks: TaskRecord[], updatedConversations: AgentConversation[]): Promise<undefined> {
+  return openDB().then(
+    (db) =>
+      new Promise((resolve, reject) => {
+        const tx = db.transaction([STORE_TASKS, STORE_AGENT_CONVERSATIONS], 'readwrite')
+        const taskStore = tx.objectStore(STORE_TASKS)
+        const conversationStore = tx.objectStore(STORE_AGENT_CONVERSATIONS)
+        for (const id of deletedTaskIds) taskStore.delete(id)
+        for (const task of updatedTasks) taskStore.put(task)
+        for (const conversation of updatedConversations) conversationStore.put(conversation)
+        tx.oncomplete = () => resolve(undefined)
+        tx.onerror = () => reject(tx.error)
+        tx.onabort = () => reject(tx.error)
+      }),
+  )
+}
+
 export function clearTasks(): Promise<undefined> {
   return dbTransaction(STORE_TASKS, 'readwrite', (s) => s.clear())
 }

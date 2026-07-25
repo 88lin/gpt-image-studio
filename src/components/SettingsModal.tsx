@@ -29,6 +29,10 @@ import {
 import { copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
 import { requestBrowserNotificationPermission, type BrowserNotificationPermissionResult } from '../lib/browserNotification'
 import { DEFAULT_AGENT_MAX_TOOL_ROUNDS, DEFAULT_STREAM_PARTIAL_IMAGES, type AgentApiConfigMode, type ApiProfile, type AppSettings, type CustomProviderDefinition, type ZipDownloadRoute } from '../types'
+import {
+  CUSTOM_PROVIDER_LLM_PROMPT,
+  DEFAULT_CUSTOM_PROVIDER_JSON,
+} from '../lib/settingsCustomProvider'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { DEFAULT_DROPDOWN_MAX_HEIGHT, getDropdownMaxHeight } from '../lib/dropdown'
@@ -38,6 +42,9 @@ import ViewportTooltip from './ViewportTooltip'
 import { ChevronDownIcon, CloseIcon, CopyIcon, PlusIcon, TrashIcon, GithubIcon, ExportIcon, ImportIcon, DragHandleIcon, LinkIcon } from './icons'
 import GeneralSettingsTab from './settings/GeneralSettingsTab'
 import AgentSettingsTab from './settings/AgentSettingsTab'
+import CustomProviderModal from './settings/CustomProviderModal'
+import ProfileImportUrlModal, { type CopyImportUrlOptions } from './settings/ProfileImportUrlModal'
+import ZipDownloadRouteModal, { ZIP_DOWNLOAD_ROUTE_OPTIONS } from './settings/ZipDownloadRouteModal'
 
 function newId(prefix: string) {
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
@@ -47,22 +54,12 @@ const ADD_CUSTOM_PROVIDER_VALUE = '__add_custom_provider__'
 const COPY_IMPORT_URL_OPTIONS_STORAGE_KEY = 'gpt-image-playground.copy-import-url-options'
 
 const DEFAULT_COPY_IMPORT_URL_OPTIONS = {
-  includeApiKey: false,
   useNewApiAddress: false,
   useNewApiKey: true,
   useNewApiModel: false,
 }
 
-type CopyImportUrlOptions = typeof DEFAULT_COPY_IMPORT_URL_OPTIONS
-
-const ZIP_DOWNLOAD_ROUTE_OPTIONS: Array<{ route: ZipDownloadRoute; label: string; description: string }> = [
-  { route: 'task-selection', label: '任务列表 > 多选', description: '主页或收藏夹详情中框选、Ctrl/⌘ 点选或移动端滑动选中任务后的“下载选中”。' },
-  { route: 'favorite-collection-selection', label: '收藏夹列表 > 多选', description: '收藏夹概览页选中一个或多个收藏夹后的“下载选中”。' },
-  { route: 'image-context-menu-all', label: '图片右键菜单 > 下载全部', description: '右键图片时下载同一组输出图片。' },
-  { route: 'task-detail-all', label: '任务详情 > 下载全部', description: '任务详情弹窗中下载当前任务的所有输出图。' },
-  { route: 'task-detail-partial', label: '任务详情 > 下载中间步骤图', description: '任务详情弹窗中下载流式生成保留的中间步骤图。' },
-  { route: 'agent-round-all', label: 'Agent 对话轮次 > 下载所有图片', description: 'Agent 对话中下载某轮回复关联的全部图片。' },
-]
+type ProfileImportUrlOptions = CopyImportUrlOptions & { includeApiKey: boolean }
 
 function readCopyImportUrlOptions(): CopyImportUrlOptions {
   if (typeof window === 'undefined') return DEFAULT_COPY_IMPORT_URL_OPTIONS
@@ -76,7 +73,6 @@ function readCopyImportUrlOptions(): CopyImportUrlOptions {
 
 
     return {
-      includeApiKey: false,
       useNewApiAddress: Boolean(parsed.useNewApiAddress),
       useNewApiKey: parsed.useNewApiKey === undefined ? true : Boolean(parsed.useNewApiKey),
       useNewApiModel: Boolean(parsed.useNewApiModel),
@@ -98,77 +94,6 @@ function saveCopyImportUrlOptions(options: CopyImportUrlOptions) {
   } catch {
     // localStorage 不可用时只保留当前会话状态。
   }
-}
-
-interface CustomProviderForm {
-  json: string
-}
-
-const DEFAULT_CUSTOM_PROVIDER_MANIFEST = {
-  name: '自定义服务商',
-  submit: {
-    path: 'images/generations',
-    method: 'POST',
-    contentType: 'json',
-    body: {
-      model: '$profile.model',
-      prompt: '$prompt',
-      size: '$params.size',
-      quality: '$params.quality',
-      output_format: '$params.output_format',
-      moderation: '$params.moderation',
-      output_compression: '$params.output_compression',
-      n: '$params.n',
-    },
-    result: {
-      imageUrlPaths: ['data.*.url'],
-      b64JsonPaths: ['data.*.b64_json'],
-    },
-  },
-  editSubmit: {
-    path: 'images/edits',
-    method: 'POST',
-    contentType: 'multipart',
-    body: {
-      model: '$profile.model',
-      prompt: '$prompt',
-      size: '$params.size',
-      quality: '$params.quality',
-      output_format: '$params.output_format',
-      moderation: '$params.moderation',
-      output_compression: '$params.output_compression',
-      n: '$params.n',
-    },
-    files: [
-      { field: 'image[]', source: 'inputImages', array: true },
-      { field: 'mask', source: 'mask' },
-    ],
-    result: {
-      imageUrlPaths: ['data.*.url'],
-      b64JsonPaths: ['data.*.b64_json'],
-    },
-  },
-}
-
-function createDefaultCustomProviderForm(): CustomProviderForm {
-  return {
-    json: JSON.stringify(DEFAULT_CUSTOM_PROVIDER_MANIFEST, null, 2),
-  }
-}
-
-function customProviderToForm(provider: CustomProviderDefinition): CustomProviderForm {
-  return {
-    json: JSON.stringify({
-      name: provider.name,
-      submit: provider.submit,
-      editSubmit: provider.editSubmit,
-      poll: provider.poll,
-    }, null, 2),
-  }
-}
-
-function customProviderFormToInput(form: CustomProviderForm) {
-  return JSON.parse(form.json)
 }
 
 function isPristineNewOpenAIProfile(profile: ApiProfile) {
@@ -209,93 +134,6 @@ function isProfileApiProxyEligible(settings: AppSettings, profile: ApiProfile) {
   return !isAsyncCustomProvider(customProvider)
 }
 
-const CUSTOM_PROVIDER_LLM_PROMPT = `# 角色
-你是 API 文档解析助手。你的任务是根据用户提供的图像生成 API 文档，生成本应用可导入的自定义服务商配置 JSON。
-
-# 工作流程
-1. 先向用户索要 API 文档链接或完整文档文本。
-2. 如果当前环境支持读取链接，主动读取；否则要求用户粘贴文档内容。
-3. 在未获得文档前不要猜测，不要生成占位配置。
-4. 从文档中判断提交接口、图生图接口、异步任务查询接口、状态值、结果图片路径。
-5. 如果文档中明确了默认模型 ID 或 API Base URL，在 profiles 中填入；如果未明确模型 ID，model 使用 "gpt-image-2"；如果未明确 API Base URL，baseUrl 留空，由用户稍后填写。
-6. 输出最终 JSON；不要索要 API Key。
-
-# 输出结构
-输出 JSON 包含两个顶层字段：
-- customProviders：自定义服务商 Manifest 数组，每项描述一个服务商的接口映射规则。
-- profiles：API 配置数组，每项描述一个可直接使用的连接配置，引用 customProviders 中的服务商。
-
-## customProviders 元素（Manifest）
-每个元素的顶层字段：id、name、submit、editSubmit、poll。
-id 是服务商的唯一标识，用于 profiles 中的 provider 字段引用，建议使用 custom-{英文短名} 格式。
-submit 是文生图提交配置，必填。
-editSubmit 是图生图或局部重绘提交配置，可选。如果文生图和图生图使用同一个 JSON 接口，可以省略 editSubmit，并在 submit.body 中加入 image_urls。
-poll 是异步任务查询配置，可选；同步接口不要写 poll。
-
-submit/editSubmit 字段：
-- path：接口路径，不带开头斜杠，不带 /v1/ 前缀，例如 images/generations 或 tasks/{task_id}。
-- method：GET 或 POST，默认 POST。
-- contentType：json 或 multipart。
-- query：提交 query 参数对象，可选，例如 {"async":"true"}。
-- body：请求体模板对象。
-- files：multipart 文件字段数组，仅 contentType=multipart 时使用。
-- taskIdPath：提交响应里的任务 ID JSON 路径；同步接口不要写。
-- result：同步响应图片提取规则。
-
-poll 字段：
-- path：任务查询路径，使用 {task_id} 占位，例如 images/tasks/{task_id} 或 tasks/{task_id}。
-- method：GET 或 POST，默认 GET。
-- query：查询 query 参数对象，可选。
-- intervalSeconds：轮询间隔秒数。
-- statusPath：查询响应状态字段路径。
-- successValues：成功状态值数组。
-- failureValues：失败状态值数组。
-- errorPath：失败原因路径，可选。
-- result：成功后图片提取规则。
-
-result 字段：
-- imageUrlPaths：图片 URL 路径数组，支持 * 通配数组。例如 data.*.url、data.result.images.*.url.*。
-- b64JsonPaths：base64 图片路径数组，支持 * 通配数组。例如 data.*.b64_json。
-
-body 模板变量：
-- $profile.model：用户在设置里填写的模型 ID。
-- $prompt：当前提示词。
-- $params.size、$params.quality、$params.output_format、$params.output_compression、$params.moderation、$params.n：应用内参数。
-- $inputImages.dataUrls：参考图 data URL 数组；没有参考图时会自动省略该字段。
-- $mask.dataUrl：遮罩图 data URL；没有遮罩时会自动省略该字段。
-
-multipart files 示例：
-- {"field":"image[]","source":"inputImages","array":true}
-- {"field":"mask","source":"mask"}
-
-## profiles 元素
-每个元素的字段：
-- name：配置名称，方便用户识别。
-- provider：对应 customProviders 中某个元素的 id。
-- baseUrl：API Base URL。如果文档明确给出，填入完整基础地址；否则留空字符串 ""。
-- model：模型 ID。如果 API 文档明确了默认模型，填入该值；否则使用 "gpt-image-2"。
-- apiMode：固定为 "images"。
-- apiProxy：可选。仅同步自定义服务商可以设为 true，用于配合部署端 API 代理隐藏真实上游地址；包含 taskIdPath 或 poll 的异步任务配置不要开启，应用不支持异步自定义服务商走代理。
-
-profiles 中不要包含 apiKey（用户导入后自行填写）。
-
-# 输出要求
-- 最终回复只包含一个 \`\`\`json 代码块，代码块内是 JSON 对象。
-- JSON 对象必须包含 customProviders 和 profiles 两个顶层字段。
-- 代码块外不要附加解释文字。
-- 不要输出 API Key、Authorization header。
-- 如果文档返回 task_id，就必须配置 taskIdPath 和 poll。
-- 如果结果 URL 是数组，路径必须写到数组元素，例如 data.result.images.*.url.*。
-
-## 同步接口示例
-{"customProviders":[{"id":"custom-example-sync","name":"示例同步服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","quality":"$params.quality","output_format":"$params.output_format","moderation":"$params.moderation","output_compression":"$params.output_compression","n":"$params.n"},"result":{"imageUrlPaths":["data.*.url"],"b64JsonPaths":["data.*.b64_json"]}},"editSubmit":{"path":"images/edits","method":"POST","contentType":"multipart","body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","quality":"$params.quality","output_format":"$params.output_format","moderation":"$params.moderation","output_compression":"$params.output_compression","n":"$params.n"},"files":[{"field":"image[]","source":"inputImages","array":true},{"field":"mask","source":"mask"}],"result":{"imageUrlPaths":["data.*.url"],"b64JsonPaths":["data.*.b64_json"]}}}],"profiles":[{"name":"示例同步服务商","provider":"custom-example-sync","baseUrl":"https://api.example.com/v1","model":"example-model-v1","apiMode":"images"}]}
-
-## 异步接口示例
-{"customProviders":[{"id":"custom-example-async","name":"示例异步服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","query":{"async":"true"},"body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","n":"$params.n"},"taskIdPath":"data"},"editSubmit":{"path":"images/edits","method":"POST","contentType":"multipart","query":{"async":"true"},"body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","n":"$params.n"},"files":[{"field":"image[]","source":"inputImages","array":true}],"taskIdPath":"data"},"poll":{"path":"images/tasks/{task_id}","method":"GET","intervalSeconds":5,"statusPath":"data.status","successValues":["SUCCESS"],"failureValues":["FAILURE"],"errorPath":"data.fail_reason","result":{"imageUrlPaths":["data.data.data.*.url"],"b64JsonPaths":["data.data.data.*.b64_json"]}}}],"profiles":[{"name":"示例异步服务商","provider":"custom-example-async","baseUrl":"","model":"gpt-image-2","apiMode":"images"}]}
-
-## 统一任务接口示例
-{"customProviders":[{"id":"custom-example-task","name":"示例任务服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","body":{"model":"$profile.model","prompt":"$prompt","n":"$params.n","size":"$params.size","resolution":"2k","quality":"$params.quality","image_urls":"$inputImages.dataUrls"},"taskIdPath":"data.0.task_id"},"poll":{"path":"tasks/{task_id}","method":"GET","query":{"language":"zh"},"intervalSeconds":5,"statusPath":"data.status","successValues":["completed"],"failureValues":["failed","cancelled"],"errorPath":"data.error.message","result":{"imageUrlPaths":["data.result.images.*.url.*"],"b64JsonPaths":[]}}}],"profiles":[{"name":"示例任务服务商","provider":"custom-example-task","baseUrl":"","model":"gpt-image-2","apiMode":"images"}]}`
-
 export default function SettingsModal() {
   const showSettings = useStore((s) => s.showSettings)
   const settingsTabRequest = useStore((s) => s.settingsTabRequest)
@@ -314,7 +152,6 @@ export default function SettingsModal() {
 
   const profileImportUrlTooltipTimerRef = useRef<number | null>(null)
   const duplicateProfileTooltipTimerRef = useRef<number | null>(null)
-  const llmPromptTooltipTimerRef = useRef<number | null>(null)
   const settingsScrollBoundaryRef = useRef<HTMLDivElement>(null)
   const customProviderScrollBoundaryRef = useRef<HTMLDivElement>(null)
   const zipDownloadRouteScrollBoundaryRef = useRef<HTMLDivElement>(null)
@@ -328,11 +165,10 @@ export default function SettingsModal() {
   const [showCustomProviderImport, setShowCustomProviderImport] = useState(false)
   const [showZipDownloadRouteManager, setShowZipDownloadRouteManager] = useState(false)
   const [editingCustomProviderId, setEditingCustomProviderId] = useState<string | null>(null)
-  const [customProviderForm, setCustomProviderForm] = useState<CustomProviderForm>(createDefaultCustomProviderForm())
+  const [customProviderJson, setCustomProviderJson] = useState(DEFAULT_CUSTOM_PROVIDER_JSON)
   const [customProviderImportError, setCustomProviderImportError] = useState<string | null>(null)
   const [profileImportUrlTooltipVisible, setProfileImportUrlTooltipVisible] = useState(false)
   const [duplicateProfileTooltipVisible, setDuplicateProfileTooltipVisible] = useState(false)
-  const [llmPromptTooltipVisible, setLlmPromptTooltipVisible] = useState(false)
   const [activeTab, setActiveTab] = useState<SettingsTab>('api')
   const [exportConfig, setExportConfig] = useState(true)
   const [exportTasks, setExportTasks] = useState(true)
@@ -497,7 +333,6 @@ export default function SettingsModal() {
   useEffect(() => () => {
     if (profileImportUrlTooltipTimerRef.current != null) window.clearTimeout(profileImportUrlTooltipTimerRef.current)
     if (duplicateProfileTooltipTimerRef.current != null) window.clearTimeout(duplicateProfileTooltipTimerRef.current)
-    if (llmPromptTooltipTimerRef.current != null) window.clearTimeout(llmPromptTooltipTimerRef.current)
   }, [])
 
   useEffect(() => {
@@ -532,13 +367,6 @@ export default function SettingsModal() {
     if (duplicateProfileTooltipTimerRef.current != null) {
       window.clearTimeout(duplicateProfileTooltipTimerRef.current)
       duplicateProfileTooltipTimerRef.current = null
-    }
-  }
-
-  const clearLlmPromptTooltipTimer = () => {
-    if (llmPromptTooltipTimerRef.current != null) {
-      window.clearTimeout(llmPromptTooltipTimerRef.current)
-      llmPromptTooltipTimerRef.current = null
     }
   }
 
@@ -583,13 +411,13 @@ export default function SettingsModal() {
 
   const updateCopyImportUrlOptions = (patch: Partial<CopyImportUrlOptions>) => {
     setCopyImportUrlOptions((previous) => {
-      const next = { ...previous, ...patch, includeApiKey: false }
+      const next = { ...previous, ...patch }
       saveCopyImportUrlOptions(next)
       return next
     })
   }
 
-  const createProfileImportUrl = (profile: ApiProfile, options: CopyImportUrlOptions) => {
+  const createProfileImportUrl = (profile: ApiProfile, options: ProfileImportUrlOptions) => {
     const url = new URL(window.location.href)
     url.search = ''
     url.hash = ''
@@ -643,7 +471,7 @@ export default function SettingsModal() {
     return result
   }
 
-  const copyProfileImportUrl = async (profile: ApiProfile, options: CopyImportUrlOptions) => {
+  const copyProfileImportUrl = async (profile: ApiProfile, options: ProfileImportUrlOptions) => {
     try {
       await copyTextToClipboard(createProfileImportUrl(profile, options))
       showToast(options.includeApiKey ? '导入 URL 已复制（包含 API Key）' : '导入 URL 已复制', 'success')
@@ -1055,7 +883,7 @@ export default function SettingsModal() {
     if (defaultConfigOnly) return
     if (value === ADD_CUSTOM_PROVIDER_VALUE) {
       setEditingCustomProviderId(null)
-      setCustomProviderForm(createDefaultCustomProviderForm())
+      setCustomProviderJson(DEFAULT_CUSTOM_PROVIDER_JSON)
       setShowCustomProviderImport(true)
       setCustomProviderImportError(null)
       return
@@ -1066,13 +894,13 @@ export default function SettingsModal() {
     updateActiveProfile(switchApiProfileProvider(activeProfile, provider, customProvider), true)
   }
 
-  const updateCustomProviderForm = (patch: Partial<CustomProviderForm>) => {
-    setCustomProviderForm((current) => ({ ...current, ...patch }))
-    setCustomProviderImportError(null)
+  const closeCustomProviderModal = () => {
+    setShowCustomProviderImport(false)
+    setEditingCustomProviderId(null)
   }
 
-  const buildCustomProviderFromForm = () => {
-    const input = customProviderFormToInput(customProviderForm)
+  const buildCustomProviderFromJson = () => {
+    const input = JSON.parse(customProviderJson)
     const usedIds = new Set(
       draft.customProviders
         .filter((item) => item.id !== editingCustomProviderId)
@@ -1090,14 +918,19 @@ export default function SettingsModal() {
 
   function openEditCustomProvider(provider: CustomProviderDefinition) {
     setEditingCustomProviderId(provider.id)
-    setCustomProviderForm(customProviderToForm(provider))
+    setCustomProviderJson(JSON.stringify({
+      name: provider.name,
+      submit: provider.submit,
+      editSubmit: provider.editSubmit,
+      poll: provider.poll,
+    }, null, 2))
     setShowCustomProviderImport(true)
     setCustomProviderImportError(null)
   }
 
   const saveCustomProvider = () => {
     try {
-      const customProvider = buildCustomProviderFromForm()
+      const customProvider = buildCustomProviderFromJson()
       if (editingCustomProviderId) {
         const nextDraft = normalizeSettings({
           ...draft,
@@ -1196,7 +1029,12 @@ export default function SettingsModal() {
       }
 
       const provider = imported.customProviders[0]
-      setCustomProviderForm(customProviderToForm(provider))
+      setCustomProviderJson(JSON.stringify({
+        name: provider.name,
+        submit: provider.submit,
+        editSubmit: provider.editSubmit,
+        poll: provider.poll,
+      }, null, 2))
       setCustomProviderImportError(null)
       showToast('JSON 配置已导入', 'success')
     } catch (err) {
@@ -1846,7 +1684,7 @@ export default function SettingsModal() {
                     <ImportIcon className="w-4 h-4 text-gray-700 dark:text-gray-300" />
                     <h4 className="text-sm font-bold text-gray-800 dark:text-gray-100">导入数据</h4>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">支持选择多个 ZIP 文件，分片备份请一次性选中同一批次的全部分片</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">支持一次导入多个普通备份；分片备份请一次性选中同一批次的全部分片</p>
                   <div className="flex flex-wrap gap-x-6 gap-y-3">
                     <Checkbox
                       checked={importConfig}
@@ -2002,207 +1840,32 @@ export default function SettingsModal() {
       </div>
       </div>
 
-        {showZipDownloadRouteManager && createPortal(
-          <div
-            data-no-drag-select
-            className="fixed inset-0 z-[110] flex items-center justify-center p-4"
-            onClick={() => setShowZipDownloadRouteManager(false)}
-          >
-            <div className="absolute inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-md animate-overlay-in" />
-            <div
-              className="relative z-10 w-full max-w-md rounded-3xl bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/50 dark:border-white/[0.08] shadow-[0_8px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_40px_rgb(0,0,0,0.4)] ring-1 ring-black/5 dark:ring-white/10 animate-confirm-in flex flex-col max-h-[85vh] sm:max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="shrink-0 p-6 pb-2">
-                <div className="mb-3 flex items-center justify-between gap-4">
-                  <h3 className="text-base font-bold text-gray-800 dark:text-gray-100">使用压缩包进行批量下载</h3>
-                  <button
-                    type="button"
-                    onClick={() => setShowZipDownloadRouteManager(false)}
-                    className="shrink-0 rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/[0.06] dark:hover:text-gray-200"
-                    aria-label="关闭"
-                  >
-                    <CloseIcon className="h-5 w-5" />
-                  </button>
-                </div>
-
-                <div data-selectable-text className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                  开启后，在对应途径进行批量下载时会将结果下载为一个 ZIP，而不是多个图片文件。
-                </div>
-              </div>
-
-              <div ref={zipDownloadRouteScrollBoundaryRef} className="flex-1 overflow-y-auto px-6 space-y-3 custom-scrollbar min-h-0 py-2">
-                {ZIP_DOWNLOAD_ROUTE_OPTIONS.map((option) => {
-                  const isChecked = draft.zipDownloadRoutes.includes(option.route)
-                  return (
-                    <div
-                      key={option.route}
-                      role="checkbox"
-                      aria-checked={isChecked}
-                      tabIndex={0}
-                      onClick={() => setZipDownloadRouteEnabled(option.route, !isChecked)}
-                      onKeyDown={(event) => {
-                        if (event.key !== 'Enter' && event.key !== ' ') return
-                        event.preventDefault()
-                        setZipDownloadRouteEnabled(option.route, !isChecked)
-                      }}
-                      className={`cursor-pointer rounded-2xl border p-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20 ${isChecked ? 'border-blue-500/30 bg-blue-50/50 dark:border-blue-400/30 dark:bg-blue-500/[0.05]' : 'border-gray-100 bg-gray-50/70 hover:bg-gray-100/70 dark:border-white/[0.06] dark:bg-white/[0.03] dark:hover:bg-white/[0.05]'}`}
-                    >
-                      <div onClick={(event) => event.stopPropagation()}>
-                        <Checkbox
-                          checked={isChecked}
-                          onChange={(checked) => setZipDownloadRouteEnabled(option.route, checked)}
-                          label={<span className="text-sm font-medium text-gray-700 dark:text-gray-200">{option.label}</span>}
-                        />
-                      </div>
-                      <div data-selectable-text className="mt-1.5 pl-6 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-                        {option.description}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-
-              <div className="shrink-0 p-6 pt-4 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setShowZipDownloadRouteManager(false)}
-                  className="flex-1 rounded-lg bg-blue-500 py-2 text-sm font-medium text-white transition hover:bg-blue-600"
-                >
-                  完成
-                </button>
-              </div>
-            </div>
-          </div>,
-          document.body,
+        {showZipDownloadRouteManager && (
+          <ZipDownloadRouteModal
+            routes={draft.zipDownloadRoutes}
+            scrollBoundaryRef={zipDownloadRouteScrollBoundaryRef}
+            onSetEnabled={setZipDownloadRouteEnabled}
+            onClose={() => setShowZipDownloadRouteManager(false)}
+          />
         )}
 
-        {showCustomProviderImport && createPortal(
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-sm animate-overlay-in" onClick={() => {
-              setShowCustomProviderImport(false)
-              setEditingCustomProviderId(null)
-            }} />
-            <div className="relative z-10 w-full max-w-md rounded-3xl border border-white/50 bg-white/95 p-5 shadow-2xl ring-1 ring-black/5 animate-modal-in dark:border-white/[0.08] dark:bg-gray-900/95 dark:ring-white/10 flex flex-col h-[85vh] sm:h-[680px] max-h-[90vh] overflow-hidden">
-              <div className="mb-5 flex items-center justify-between gap-4 shrink-0">
-                <h3 className="text-base font-bold text-gray-800 dark:text-gray-100">
-                  {editingCustomProviderId ? '编辑自定义服务商' : '创建自定义服务商'}
-                </h3>
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowCustomProviderImport(false)
-                      setEditingCustomProviderId(null)
-                    }}
-                    className="rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/[0.06] dark:hover:text-gray-200"
-                    aria-label="关闭"
-                  >
-                    <CloseIcon className="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-
-              <div ref={customProviderScrollBoundaryRef} className="flex-1 flex flex-col min-h-0 px-1 -mx-1 pb-2">
-                <div className="mb-6 shrink-0 rounded-2xl bg-gray-50/80 p-4 border border-gray-200/60 dark:bg-white/[0.02] dark:border-white/[0.05]">
-                  <div className="mb-1.5 flex items-center gap-1.5 text-sm font-medium text-gray-800 dark:text-gray-200">
-                    <svg className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    AI 一键生成与导入
-                  </div>
-                  <div data-selectable-text className="mb-4 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-                    复制提示词发给 LLM，可根据 API 文档自动生成完整的配置（包含服务商、模型、URL 等）。复制 LLM 输出的 JSON 后，点击“从剪贴板粘贴并导入”即可一键生效。
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="relative inline-flex">
-                      <button
-                        type="button"
-                        onClick={copyCustomProviderLlmPrompt}
-                        aria-label="复制用于生成完整导入 JSON 的 LLM 提示词"
-                        onMouseEnter={() => setLlmPromptTooltipVisible(true)}
-                        onMouseLeave={() => setLlmPromptTooltipVisible(false)}
-                        onFocus={() => setLlmPromptTooltipVisible(true)}
-                        onBlur={() => setLlmPromptTooltipVisible(false)}
-                        onTouchStart={() => {
-                          clearLlmPromptTooltipTimer()
-                          llmPromptTooltipTimerRef.current = window.setTimeout(() => {
-                            setLlmPromptTooltipVisible(true)
-                            llmPromptTooltipTimerRef.current = null
-                          }, 450)
-                        }}
-                        onTouchEnd={clearLlmPromptTooltipTimer}
-                        onTouchCancel={clearLlmPromptTooltipTimer}
-                        className="flex items-center gap-1.5 rounded-xl bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm border border-gray-200/80 transition hover:bg-gray-50 hover:text-gray-900 dark:bg-white/[0.05] dark:border-white/[0.08] dark:text-gray-300 dark:hover:bg-white/[0.08] dark:hover:text-white"
-                      >
-                        <LinkIcon className="h-3.5 w-3.5" />
-                        复制生成提示词
-                      </button>
-                      <ViewportTooltip visible={llmPromptTooltipVisible} className="w-56 whitespace-normal text-center">
-                        生成完整的服务商和配置信息，包含模型和接口地址，导入后只需填入 API Key。
-                      </ViewportTooltip>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleCustomProviderJsonPaste}
-                      disabled={isImportingJson}
-                      className="flex items-center gap-1.5 rounded-xl bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm border border-gray-200/80 transition hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-white/[0.05] dark:border-white/[0.08] dark:text-gray-300 dark:hover:bg-white/[0.08] dark:hover:text-white"
-                    >
-                    {isImportingJson ? (
-                      <>
-                        <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        导入中...
-                      </>
-                    ) : (
-                      '从剪贴板粘贴并导入'
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex-1 flex flex-col min-h-0">
-                <label className="flex-1 flex flex-col min-h-0">
-                  <span className="mb-1 shrink-0 block text-xs text-gray-500 dark:text-gray-400">手动编辑 (仅接口映射 Manifest)</span>
-                  <textarea
-                    value={customProviderForm.json}
-                    onChange={(e) => updateCustomProviderForm({ json: e.target.value })}
-                    spellCheck={false}
-                    className="flex-1 min-h-[150px] w-full resize-none rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2 font-mono text-xs leading-relaxed text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50 custom-scrollbar"
-                  />
-                </label>
-              </div>
-
-                {customProviderImportError && (
-                  <div data-selectable-text className="shrink-0 mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-500 dark:bg-red-500/10 dark:text-red-300">
-                    {customProviderImportError}
-                  </div>
-                )}
-              </div>
-              <div className="mt-4 flex justify-end gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowCustomProviderImport(false)
-                    setEditingCustomProviderId(null)
-                  }}
-                  className="rounded-xl bg-gray-100 px-4 py-2 text-sm text-gray-600 transition hover:bg-gray-200 dark:bg-white/[0.06] dark:text-gray-300 dark:hover:bg-white/[0.1]"
-                >
-                  取消
-                </button>
-                <button
-                  type="button"
-                  onClick={saveCustomProvider}
-                  className="rounded-xl bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-600"
-                >
-                  {editingCustomProviderId ? '保存修改' : '创建并使用'}
-                </button>
-              </div>
-            </div>
-          </div>
-          , document.body)}
+        {showCustomProviderImport && (
+          <CustomProviderModal
+            editing={Boolean(editingCustomProviderId)}
+            json={customProviderJson}
+            error={customProviderImportError}
+            isImportingJson={isImportingJson}
+            scrollBoundaryRef={customProviderScrollBoundaryRef}
+            onClose={closeCustomProviderModal}
+            onCopyLlmPrompt={copyCustomProviderLlmPrompt}
+            onImportJson={handleCustomProviderJsonPaste}
+            onJsonChange={(json) => {
+              setCustomProviderJson(json)
+              setCustomProviderImportError(null)
+            }}
+            onSave={saveCustomProvider}
+          />
+        )}
         {profileTouchDragPreview && createPortal(
           <div
             className="fixed pointer-events-none z-[110] flex items-center justify-between gap-2 rounded-xl bg-white/95 px-3 py-2 text-xs text-gray-700 shadow-xl ring-1 ring-black/5 backdrop-blur-xl dark:bg-gray-900/95 dark:text-gray-300 dark:ring-white/10"
@@ -2223,80 +1886,14 @@ export default function SettingsModal() {
           </div>,
           document.body,
         )}
-        {copyImportUrlProfile && createPortal(
-          <div
-            data-no-drag-select
-            className="fixed inset-0 z-[110] flex items-center justify-center p-4"
-            onClick={() => setCopyImportUrlProfile(null)}
-          >
-            <div className="absolute inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-md animate-overlay-in" />
-            <div
-              className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/50 dark:border-white/[0.08] rounded-3xl shadow-[0_8px_40px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_40px_rgb(0,0,0,0.4)] max-w-sm w-full p-6 z-10 ring-1 ring-black/5 dark:ring-white/10 animate-confirm-in"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                onClick={() => setCopyImportUrlProfile(null)}
-                className="absolute right-4 top-4 shrink-0 rounded-full p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/[0.06] dark:hover:text-gray-200"
-                aria-label="关闭"
-              >
-                <CloseIcon className="h-5 w-5" />
-              </button>
-
-              <h3 className="mb-3 pr-8 flex items-start gap-2.5 text-base font-bold text-gray-800 dark:text-gray-100 leading-snug">
-                <CopyIcon className="h-5 w-5 shrink-0 text-blue-500 mt-0.5" />
-                <span>复制导入配置「{copyImportUrlProfile.name}」的 URL</span>
-              </h3>
-              <div className="text-[13px] text-gray-500 dark:text-gray-400 mb-5 leading-relaxed">
-                是否包含 API Key？如果选择「不包含」，可额外配置是否使用 New API 变量。
-              </div>
-
-              {!copyImportUrlOptions.includeApiKey && (
-                <div className="mb-6 rounded-2xl bg-gray-50/80 p-4 dark:bg-white/[0.03] ring-1 ring-black/5 dark:ring-white/5">
-                  <div className="text-[13px] font-bold text-gray-700 dark:text-gray-300 mb-3.5">New API 变量配置</div>
-                  <div className="space-y-3">
-                    <Checkbox
-                      checked={copyImportUrlOptions.useNewApiAddress}
-                      onChange={(checked) => updateCopyImportUrlOptions({ useNewApiAddress: checked })}
-                      label={<>使用 <code className="mx-0.5 rounded bg-gray-100 px-1.5 py-0.5 text-[0.85em] font-mono text-gray-700 dark:bg-white/[0.08] dark:text-gray-200">{"{address}"}</code> (不含 /v1)</>}
-                    />
-                    <Checkbox
-                      checked={copyImportUrlOptions.useNewApiKey}
-                      onChange={(checked) => updateCopyImportUrlOptions({ useNewApiKey: checked })}
-                      label={<>使用 <code className="mx-0.5 rounded bg-gray-100 px-1.5 py-0.5 text-[0.85em] font-mono text-gray-700 dark:bg-white/[0.08] dark:text-gray-200">{"{key}"}</code></>}
-                    />
-                    <Checkbox
-                      checked={copyImportUrlOptions.useNewApiModel}
-                      onChange={(checked) => updateCopyImportUrlOptions({ useNewApiModel: checked })}
-                      label={<>使用 <code className="mx-0.5 rounded bg-gray-100 px-1.5 py-0.5 text-[0.85em] font-mono text-gray-700 dark:bg-white/[0.08] dark:text-gray-200">{"{model}"}</code></>}
-                    />
-                  </div>
-                </div>
-              )}
-
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    const options = { ...copyImportUrlOptions, includeApiKey: false }
-                    copyProfileImportUrl(copyImportUrlProfile, options)
-                  }}
-                  className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition"
-                >
-                  不包含
-                </button>
-                <button
-                  onClick={() => {
-                    const options = { ...copyImportUrlOptions, includeApiKey: true }
-                    copyProfileImportUrl(copyImportUrlProfile, options)
-                  }}
-                  className="flex-1 py-2 rounded-xl bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition shadow-sm shadow-blue-500/20"
-                >
-                  包含 API Key
-                </button>
-              </div>
-            </div>
-          </div>,
-          document.body,
+        {copyImportUrlProfile && (
+          <ProfileImportUrlModal
+            profile={copyImportUrlProfile}
+            options={copyImportUrlOptions}
+            onOptionsChange={updateCopyImportUrlOptions}
+            onCopy={(includeApiKey) => copyProfileImportUrl(copyImportUrlProfile, { ...copyImportUrlOptions, includeApiKey })}
+            onClose={() => setCopyImportUrlProfile(null)}
+          />
         )}
     </div>
   )

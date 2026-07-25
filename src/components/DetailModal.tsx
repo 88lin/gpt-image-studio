@@ -1,8 +1,9 @@
 import { useEffect, useState, useMemo, useRef } from 'react'
-import { useStore, getCachedImage, ensureImageCached, reuseConfig, editOutputs, removeTask, showCodexCliPrompt, getCodexCliPromptKey, retryTask } from '../store'
+import { useStore, reuseConfig, editOutputs, removeTask, showCodexCliPrompt, getCodexCliPromptKey, retryTask } from '../store'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { useTooltip } from '../hooks/useTooltip'
+import { ensureImageCached, getCachedImage } from '../lib/imageCache'
 import { formatImageRatio } from '../lib/size'
 import { ActualValueBadge, DetailParamValue } from '../lib/paramDisplay'
 import { copyImageSourceToClipboard, copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
@@ -909,47 +910,41 @@ export default function DetailModal() {
                     </button>
                   )}
                 </div>
-                {allInputImageIds.length > 0 ? (
-                  <>
-                    <div className="flex gap-2 flex-wrap">
-                      {allInputImageIds.map((imgId) => {
-                        const isMaskTarget = imgId === maskTargetId
-                        const displaySrc = (isMaskTarget && maskPreviewSrc) ? maskPreviewSrc : (imageSrcs[imgId] || '')
-                        return (
-                          <div key={imgId} className="relative group inline-block">
-                            <div
-                              className={`relative w-16 h-16 rounded-lg overflow-hidden border cursor-pointer hover:opacity-80 transition ${
-                                isMaskTarget ? 'border-blue-500 border-2 shadow-sm' : 'border-gray-200 dark:border-white/[0.08]'
-                              }`}
-                              onClick={() => setLightboxImageId(imgId, allInputImageIds)}
-                            >
-                              {displaySrc && (
-                                <img
-                                  src={displaySrc}
-                                  data-image-id={imgId}
-                                  className="w-full h-full object-cover"
-                                  alt=""
-                                />
-                              )}
-                              {isMaskTarget && (
-                                <span className="absolute left-1 top-1 rounded bg-blue-500/90 px-1.5 py-0.5 text-[8px] leading-none text-white font-bold tracking-wider backdrop-blur-sm z-10 pointer-events-none">
-                                  MASK
-                                </span>
-                              )}
-                            </div>
+                {allInputImageIds.length > 0 && (
+                  <div className="flex gap-2 flex-wrap">
+                    {allInputImageIds.map((imgId) => {
+                      const isMaskTarget = imgId === maskTargetId
+                      const displaySrc = (isMaskTarget && maskPreviewSrc) ? maskPreviewSrc : (imageSrcs[imgId] || '')
+                      return (
+                        <div key={imgId} className="relative group inline-block">
+                          <div
+                            className={`relative w-16 h-16 rounded-lg overflow-hidden border cursor-pointer hover:opacity-80 transition ${
+                              isMaskTarget ? 'border-blue-500 border-2 shadow-sm' : 'border-gray-200 dark:border-white/[0.08]'
+                            }`}
+                            onClick={() => setLightboxImageId(imgId, allInputImageIds)}
+                          >
+                            {displaySrc && (
+                              <img
+                                src={displaySrc}
+                                data-image-id={imgId}
+                                className="w-full h-full object-cover"
+                                alt=""
+                              />
+                            )}
+                            {isMaskTarget && (
+                              <span className="absolute left-1 top-1 rounded bg-blue-500/90 px-1.5 py-0.5 text-[8px] leading-none text-white font-bold tracking-wider backdrop-blur-sm z-10 pointer-events-none">
+                                MASK
+                              </span>
+                            )}
                           </div>
-                        )
-                      })}
-                    </div>
-                    {isAgentEditTool && (
-                      <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                        由模型自主选择，可能包含其他图片
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    由模型自主选择
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+                {isAgentTask && (
+                  <div className={`${allInputImageIds.length > 0 ? 'mt-2 ' : ''}text-xs text-gray-500 dark:text-gray-400`}>
+                    {allInputImageIds.length > 0 ? '由模型自主选择，可能包含其他图片' : '由模型自主选择'}
                   </div>
                 )}
               </div>

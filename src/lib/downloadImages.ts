@@ -1,7 +1,7 @@
 import { zipSync } from 'fflate'
 import type { TaskRecord } from '../types'
-import { ensureImageCached } from '../store'
 import { getNumberedFileNameBase, sanitizeFileNamePart } from './exportFileName'
+import { ensureImageCached } from './imageCache'
 
 const MIME_EXTENSIONS: Record<string, string> = {
   'image/png': 'png',

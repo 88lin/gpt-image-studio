@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import type { TaskRecord, FavoriteCollection } from '../../types'
 import {
-  ALL_FAVORITES_COLLECTION_ID,
   deleteFavoriteCollection,
   renameFavoriteCollection,
   useStore,
 } from '../../store'
+import { ALL_FAVORITES_COLLECTION_ID } from '../../lib/favoriteState'
 import { useDragSelect } from '../../hooks/useDragSelect'
 import { FavoriteIcon } from '../icons'
 import { FavoriteCollectionOverviewCard } from './FavoriteCollectionOverviewCard'
@@ -27,17 +27,17 @@ export function FavoriteCollectionsView() {
   const suppressClickUntilRef = useRef(0)
 
   const cards = useMemo<CollectionCard[]>(() => {
-    const allTasks = getCollectionTasks(ALL_FAVORITES_COLLECTION_ID, tasks)
+    const allTasks = getCollectionTasks(ALL_FAVORITES_COLLECTION_ID, tasks, defaultFavoriteCollectionId)
     return [
       { id: ALL_FAVORITES_COLLECTION_ID, name: '全部', tasks: allTasks },
       ...collections.map((collection) => ({
         id: collection.id,
         name: collection.name,
         collection,
-        tasks: getCollectionTasks(collection.id, tasks),
+        tasks: getCollectionTasks(collection.id, tasks, defaultFavoriteCollectionId),
       })),
     ]
-  }, [collections, tasks])
+  }, [collections, defaultFavoriteCollectionId, tasks])
 
   const filteredCards = useMemo(() => {
     if (!searchQuery.trim()) return cards

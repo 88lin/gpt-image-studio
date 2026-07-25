@@ -57,6 +57,7 @@ export default function ConfirmDialog() {
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
   const confirmButtonRef = useRef<HTMLButtonElement>(null)
   const [checkboxChecked, setCheckboxChecked] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const delay = confirmDialog?.minConfirmDelayMs ?? 0
@@ -86,7 +87,7 @@ export default function ConfirmDialog() {
   }, [confirmDialog])
 
   const handleClose = () => {
-    if (!canConfirm) return
+    if (!canConfirm || isSubmitting) return
     setConfirmDialog(null)
   }
 
@@ -157,7 +158,7 @@ export default function ConfirmDialog() {
                   setConfirmDialog(null)
                 }}
                 disabled={!canConfirm}
-                className={`flex-1 py-2 rounded-lg text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 ${getActionButtonClass(button.tone)}`}
+                className={`flex-1 py-2 rounded-xl text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 ${getActionButtonClass(button.tone)}`}
               >
                 {button.label}
               </button>
@@ -169,7 +170,8 @@ export default function ConfirmDialog() {
               <button
                 ref={cancelButtonRef}
                 onClick={handleCancel}
-                className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+                disabled={isSubmitting}
+                className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
               >
                 {cancelText}
               </button>
@@ -177,12 +179,24 @@ export default function ConfirmDialog() {
             <button
               ref={confirmButtonRef}
               onClick={() => {
-                if (!canConfirm) return
-                confirmDialog.action?.(checkboxChecked)
-                setConfirmDialog(null)
+                if (!canConfirm || isSubmitting) return
+                if (!confirmDialog.awaitAction) {
+                  confirmDialog.action?.(checkboxChecked)
+                  setConfirmDialog(null)
+                  return
+                }
+                setIsSubmitting(true)
+                void (async () => {
+                  try {
+                    const shouldClose = await confirmDialog.action?.(checkboxChecked)
+                    if (shouldClose !== false) setConfirmDialog(null)
+                  } finally {
+                    setIsSubmitting(false)
+                  }
+                })()
               }}
-              disabled={!canConfirm}
-              className={`flex-1 py-2 rounded-lg text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${confirmClassName}`}
+              disabled={!canConfirm || isSubmitting}
+              className={`flex-1 py-2 rounded-xl text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${confirmClassName}`}
             >
               {confirmText}
             </button>

@@ -151,7 +151,7 @@
 1. 在 Vercel 项目设置 **Settings -> Git** 的 **Deploy Hooks** 中创建一个名为 `Release` 的 Hook（Branch 填 `main`）并复制生成的 URL。
 2. 在你 Fork 的 GitHub 仓库设置 **Settings -> Secrets and variables -> Actions** 中，新建 Secret `VERCEL_DEPLOY_HOOK`，填入刚才的 URL。
 
-此后，每次在 GitHub 点击 **Sync fork** 同步上游，都会自动触发 Vercel 构建部署最新版。
+此后，每次在 GitHub 点击 **Sync fork** 同步包含新 Release 的上游代码时，都会自动触发 Vercel 构建部署。普通提交不会触发部署。
 
 </details>
 

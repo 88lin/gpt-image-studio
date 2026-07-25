@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type SVGProps } from 'react'
 import type { TaskRecord, FavoriteCollection } from '../../types'
-import { ensureImageThumbnailCached, subscribeImageThumbnail } from '../../store'
+import { ensureImageThumbnailCached, subscribeImageThumbnail } from '../../lib/imageCache'
 import { TooltipButton as FavoriteActionButton } from '../TooltipButton'
 import { EditIcon, FavoriteIcon, TrashIcon } from '../icons'
 import type { CollectionCard } from './favoriteUtils'
