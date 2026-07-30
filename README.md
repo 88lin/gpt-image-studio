@@ -13,17 +13,31 @@
 提供简洁精美的 Web UI，支持 OpenAI / OpenAI 兼容接口、fal.ai 与可导入的自定义 HTTP 服务商。<br>
 支持文本生图、参考图、遮罩编辑、提示词模板库和本地化历史记录，适合 GPT Image 2 的高频创作与调试。
 
-<br>
-
-[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-red?style=for-the-badge&logo=vercel&logoColor=red)](https://gpt-image-studio-xi.vercel.app)
-
 </div>
 
 <br>
 
-> 💡 **提示**：若需调用非 HTTPS 的内网或本地 HTTP API，请使用 GitHub Pages 版本或自行部署，Vercel 部署的体验版绑定的 `.dev` 域名因安全策略通常要求接口必须为 HTTPS。
+> [!TIP]
+> 若需调用非 HTTPS 的内网或本地 HTTP API，请使用 GitHub Pages 版本或自行部署，Vercel 部署的体验版绑定的 `.dev` 域名因安全策略通常要求接口必须为 HTTPS。
 
-> 🔁 **二次开发说明**：本项目基于 [CookSleep/gpt_image_playground](https://github.com/CookSleep/gpt_image_playground) 二次开发。核心生成、编辑、多服务商和本地历史能力来自上游；本分支保留网页端显示名 **GPT Image 2**，并额外加入提示词模板库、工作台式首页入口、`@图N` 图片引用体验、配置复制等增强。为避免影响创作流程，已移除上游「生成超过 50 张图片后自动弹出赞助提示」的弹窗。
+---
+
+## ❤️ 赞助商
+
+<table>
+<tr>
+<td width="180" align="center" valign="middle">
+  <a href="https://www.workbuddy.cn/events/invite?inviteCode=w0x2ic45z"><img src="https://download.codebuddy.cn/web/workbuddy/0bebf86e38e7d71ff0c313d661e7753ff996c54e/assets/workbuddy-logo-WhgOvEF7.png" alt="WorkBuddy" width="150"></a>
+</td>
+<td valign="middle"><b><a href="https://www.workbuddy.cn/events/invite?inviteCode=w0x2ic45z">WorkBuddy</a></b>&nbsp;是腾讯出品的全能 AI 工作台，是中国最受欢迎的效率 AI 智能体服务，说出要求、开始执行任务、交付完整成果。其中Hy3模型限时免费使用，注册即可获取2000积分，每月再赠送500积分，可用Kimi-K3、GLM-5.2等模型。</td>
+</tr>
+<tr>
+<td width="180" align="center" valign="middle">
+  <a href="https://ps.air-outer.com/register?aff=ugVO"><img src="https://cdn.jsdmirror.com/gh/88lin/picx-images-hosting@master/90C5FAD072EA247822CB88BB32512A41.webp" alt="JuCodex" width="150"></a>
+</td>
+<td valign="middle"><b><a href="https://ps.air-outer.com/register?aff=ugVO">Agent Router</a></b>&nbsp;是免费公益大模型API平台，支持GPT-5.6、Claude Opus 5 等主流模型，国内直连。注册送＄125，每日签到得＄25，被邀得＄50，支持GitHub/LinuxDo登录（GitHub需2025.12.3前注册）</td>
+</tr>
+</table>
 
 ---
 
