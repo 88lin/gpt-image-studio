@@ -66,6 +66,7 @@ import { cleanStaleAgentInputDrafts, clearInputDraftState, isEmptyAgentInputDraf
 import { ALL_FAVORITES_COLLECTION_ID, DEFAULT_FAVORITE_COLLECTION_ID, createDefaultFavoriteCollection, deleteFavoriteCollectionState, ensureDefaultFavoriteCollection, getTaskFavoriteCollectionIds, mergeFavoriteCollections, normalizeFavoriteCollectionIds, normalizeFavoriteCollectionName, normalizeFavoriteCollections, normalizeFavoritePatch, normalizeLoadedFavoriteState, resolveDefaultFavoriteCollectionId, sameFavoriteCollectionIds } from './lib/favoriteState'
 import { createPersistedState, mergePersistedAgentConversations, migratePersistedState, normalizePersistedState } from './lib/persistedState'
 import { addImageSizeParam, createTaskDonePatch, createTaskErrorPatch, deriveAgentImageActualParams, deriveGalleryActualParams, firstActualParams, hasActualParams, hasActualSizeParam, mapActualParamsByImage, mapRevisedPromptsByImage, markInterruptedOpenAIRunningTasks } from './lib/taskState'
+import { stripInjectedCodexCliSizePrompt } from './lib/size'
 
 const FAL_RECOVERY_POLL_MS = 10_000
 const CUSTOM_RECOVERY_POLL_MS = 10_000
@@ -2140,7 +2141,7 @@ async function continueRecoveredAgentRound(taskId: string) {
     }
     const roundTasks = updatedState.tasks.filter((item) => item.agentRoundId === round.id)
     const resumeParams = roundTasks.find((item) => item.params)?.params
-      ?? normalizeParamsForSettings(updatedState.params, createSettingsForApiProfile(normalizedSettings, activeProfile), { hasInputImages: round.inputImageIds.length > 0 })
+      ?? normalizeParamsForSettings(updatedState.params, createSettingsForApiProfile(normalizedSettings, imageProfile), { hasInputImages: round.inputImageIds.length > 0 })
     const maxToolCalls = Number.isFinite(normalizedSettings.agentMaxToolRounds)
       ? Math.max(1, Math.trunc(normalizedSettings.agentMaxToolRounds))
       : DEFAULT_AGENT_MAX_TOOL_ROUNDS
@@ -2228,6 +2229,7 @@ export async function submitAgentMessage() {
   }
 
   const requestSettings = createSettingsForApiProfile(normalizedSettings, activeProfile)
+  const imageRequestSettings = createSettingsForApiProfile(normalizedSettings, imageProfile)
   const now = Date.now()
   const editingRound = state.agentEditingRoundId
     ? conversation.rounds.find((item) => item.id === state.agentEditingRoundId) ?? null
@@ -2252,7 +2254,7 @@ export async function submitAgentMessage() {
   const parentRoundId = editingRound ? editingRound.parentRoundId ?? null : activeLeafId
   const parentPath = parentRoundId ? getAgentRoundPath(conversation, parentRoundId) : []
   const normalizedParams = {
-    ...normalizeParamsForSettings(params, requestSettings, { hasInputImages: inputImageIds.length > 0 }),
+    ...normalizeParamsForSettings(params, imageRequestSettings, { hasInputImages: inputImageIds.length > 0 }),
     n: DEFAULT_PARAMS.n,
     transparent_output: false,
   }
@@ -2355,8 +2357,9 @@ export async function regenerateAgentAssistantMessage(conversationId: string, ro
 
   const inputImageIds = uniqueIds(sourceRound.inputImageIds)
   const requestSettings = createSettingsForApiProfile(normalizedSettings, activeProfile)
+  const imageRequestSettings = createSettingsForApiProfile(normalizedSettings, imageProfile)
   const normalizedParams = {
-    ...normalizeParamsForSettings(params, requestSettings, { hasInputImages: inputImageIds.length > 0 }),
+    ...normalizeParamsForSettings(params, imageRequestSettings, { hasInputImages: inputImageIds.length > 0 }),
     n: DEFAULT_PARAMS.n,
     transparent_output: false,
   }
@@ -2468,6 +2471,7 @@ async function executeAgentRound(
     const resumedAssistantContent = resume ? existingAssistantMessage?.content.trim() ?? '' : ''
     const shouldStreamAssistantMessage = activeProfile.streamImages === true
     const imageRequestSettings = createSettingsForApiProfile(requestSettings, imageProfile)
+    const imageParams = normalizeParamsForSettings(params, imageRequestSettings, { hasInputImages: round.inputImageIds.length > 0 })
     const streamingTaskIds: string[] = resume ? [...round.outputTaskIds] : []
     const taskIdByToolCallId = new Map<string, string>()
     const taskByToolCallId = new Map<string, TaskRecord>()
@@ -2525,7 +2529,7 @@ async function executeAgentRound(
       const task: TaskRecord = {
         id: genId(),
         prompt: taskPrompt,
-        params: options.taskParams ?? { ...params, n: 1 },
+        params: options.taskParams ?? { ...imageParams, n: 1 },
         apiProvider: imageProfile.provider,
         apiProfileId: imageProfile.id,
         apiProfileName: imageProfile.name,
@@ -2738,6 +2742,7 @@ async function executeAgentRound(
         prompt: replaceImageMentionsForApi(opts.prompt, opts.referenceImageDataUrls.length),
         params: opts.taskParams,
         inputImageDataUrls: opts.referenceImageDataUrls,
+        skipCodexCliSizePrompt: true,
         onPartialImage: opts.onPartialImage
           ? (partial) => {
               void opts.onPartialImage?.({ image: partial.image, partialImageIndex: partial.partialImageIndex ?? partial.requestIndex })
@@ -2786,7 +2791,7 @@ async function executeAgentRound(
       const references = await resolveReferenceImages(referenceIds)
       const toolCallId = callId || genId()
       const taskParams = {
-        ...normalizeParamsForSettings(params, imageRequestSettings, { hasInputImages: references.dataUrls.length > 0 }),
+        ...normalizeParamsForSettings(imageParams, imageRequestSettings, { hasInputImages: references.dataUrls.length > 0 }),
         n: 1,
       }
 
@@ -2853,10 +2858,10 @@ async function executeAgentRound(
         const batchToolCallId = genId()
         const taskParams = requestSettings.agentApiConfigMode === 'hybrid'
           ? {
-              ...normalizeParamsForSettings(params, imageRequestSettings, { hasInputImages: references.dataUrls.length > 0 }),
+              ...normalizeParamsForSettings(imageParams, imageRequestSettings, { hasInputImages: references.dataUrls.length > 0 }),
               n: 1,
             }
-          : { ...params, n: 1 }
+          : { ...imageParams, n: 1 }
         await ensureStreamingAgentTask(batchToolCallId, item.prompt, references.imageIds, {
           createdAt: Date.now(),
           taskParams,
@@ -2986,7 +2991,8 @@ async function executeAgentRound(
       const result = await callAgentResponsesApi({
         settings: requestSettings,
         profile: activeProfile,
-        params,
+        imageProfile,
+        params: imageParams,
         input: apiInputForTurn,
         maskDataUrl,
         signal: controller.signal,
@@ -3105,7 +3111,7 @@ async function executeAgentRound(
         const task: TaskRecord = {
           id: genId(),
           prompt: image.revisedPrompt ?? round?.prompt ?? userMessage.content,
-          params,
+          params: imageParams,
           apiProvider: imageProfile.provider,
           apiProfileId: imageProfile.id,
           apiProfileName: imageProfile.name,
@@ -3445,6 +3451,7 @@ async function executeTask(taskId: string) {
       params: task.params,
       inputImageDataUrls: inputDataUrls,
       maskDataUrl,
+      skipCodexCliSizePrompt: task.sourceMode === 'agent',
       onFalRequestEnqueued: (request) => {
         falRequestInfo = request
         updateTaskInStore(taskId, {
@@ -3483,11 +3490,14 @@ async function executeTask(taskId: string) {
     const actualParams = deriveGalleryActualParams(taskProvider, isAsyncCustomTask, result.actualParams, actualParamsList, outputIds.length)
     const shouldStoreRevisedPrompts = taskProvider !== 'fal' && !isAsyncCustomTask
     const actualParamsByImage = mapActualParamsByImage(outputIds, actualParamsList)
-    const revisedPromptByImage = shouldStoreRevisedPrompts ? mapRevisedPromptsByImage(outputIds, result.revisedPrompts) : undefined
-    const promptWasRevised = shouldStoreRevisedPrompts && result.revisedPrompts?.some(
+    const revisedPrompts = activeProfile.codexCli && task.sourceMode !== 'agent'
+      ? result.revisedPrompts?.map((prompt) => prompt == null ? prompt : stripInjectedCodexCliSizePrompt(prompt, requestPrompt, task.params.size))
+      : result.revisedPrompts
+    const revisedPromptByImage = shouldStoreRevisedPrompts ? mapRevisedPromptsByImage(outputIds, revisedPrompts) : undefined
+    const promptWasRevised = shouldStoreRevisedPrompts && revisedPrompts?.some(
       (revisedPrompt) => revisedPrompt?.trim() && revisedPrompt.trim() !== requestPrompt.trim(),
     )
-    const hasRevisedPromptValue = shouldStoreRevisedPrompts && result.revisedPrompts?.some((revisedPrompt) => revisedPrompt?.trim())
+    const hasRevisedPromptValue = shouldStoreRevisedPrompts && revisedPrompts?.some((revisedPrompt) => revisedPrompt?.trim())
     if (taskProvider === 'openai' && activeProfile.apiMode === 'responses' && !activeProfile.codexCli) {
       if (promptWasRevised) {
         showCodexCliPrompt()

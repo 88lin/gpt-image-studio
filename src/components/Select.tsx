@@ -28,7 +28,7 @@ interface SelectProps {
   showValueTooltips?: boolean
 }
 
-export default function Select({ value, onChange, onReorder, options, disabled, className, onOpenChange, showValueTooltips = true }: SelectProps) {
+export default function Select({ value, onChange, onReorder, options, disabled, className, onOpenChange, showValueTooltips = false }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [menuMaxHeight, setMenuMaxHeight] = useState(DEFAULT_DROPDOWN_MAX_HEIGHT)
   const [placement, setPlacement] = useState<'bottom' | 'top'>('bottom')

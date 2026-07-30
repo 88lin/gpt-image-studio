@@ -1,6 +1,6 @@
 import { DEFAULT_AGENT_MAX_TOOL_ROUNDS, DEFAULT_STREAM_PARTIAL_IMAGES, type ApiProfile, type AppSettings, type ResponsesApiResponse, type ResponsesOutputItem, type TaskParams } from '../types'
 import { buildApiUrl, readClientDevProxyConfig, shouldUseApiProxy } from './devProxy'
-import { appendStreamingFormatHint, getApiErrorMessage, getResponsesImageResultBase64, maybeAppendStreamingHint, MIME_MAP, normalizeBase64Image, pickActualParams } from './imageApiShared'
+import { appendStreamingFormatHint, getApiErrorMessage, getResponsesImageResultBase64, maybeAppendStreamingHint, MIME_MAP, normalizeBase64Image, pickActualParams, PROMPT_REWRITE_GUARD_PREFIX } from './imageApiShared'
 import { normalizeResponsesOutputItems } from './responsesOutputState'
 import { isEventStreamResponse, readJsonServerSentEvents, throwIfAborted } from './serverSentEvents'
 
@@ -59,7 +59,7 @@ const AGENT_MATH_FORMATTING_INSTRUCTIONS = [
   '- Do not use LaTeX delimiters like `\\(...\\)` or `\\[...\\]` in visible assistant text.',
 ].join('\n')
 
-function createAgentInstructions(settings: AppSettings) {
+function createAgentInstructions(settings: AppSettings, codexCliSize?: string) {
   const maxToolRounds = Number.isFinite(settings.agentMaxToolRounds)
     ? Math.max(1, Math.trunc(settings.agentMaxToolRounds))
     : DEFAULT_AGENT_MAX_TOOL_ROUNDS
@@ -79,6 +79,10 @@ function createAgentInstructions(settings: AppSettings) {
     '- When web_search is available, use it only when current external information would improve the answer or the user asks for research/news/facts.',
     '- When the requested task is complete, stop calling tools and provide the final response.',
   ]
+
+  if (codexCliSize && codexCliSize !== 'auto') {
+    instructions.push('', `- Start every image prompt with exactly "Generate at ${codexCliSize} resolution." followed by a space.`)
+  }
 
   if (settings.agentMathFormattingPrompt) instructions.push('', AGENT_MATH_FORMATTING_INSTRUCTIONS)
 
@@ -106,9 +110,12 @@ function createImageTool(params: TaskParams, profile: ApiProfile, maskDataUrl?: 
   const tool: Record<string, unknown> = {
     type: 'image_generation',
     action: 'auto',
-    size: params.size,
     output_format: params.output_format,
     moderation: params.moderation,
+  }
+
+  if (!profile.codexCli) {
+    tool.size = params.size
   }
 
   tool.quality = params.quality
@@ -583,6 +590,7 @@ async function parseAgentStreamResponse(
 export async function callAgentResponsesApi(opts: {
   settings: AppSettings
   profile: ApiProfile
+  imageProfile?: ApiProfile
   params: TaskParams
   input: unknown
   maskDataUrl?: string
@@ -594,7 +602,7 @@ export async function callAgentResponsesApi(opts: {
   onImageToolCompleted?: (image: AgentApiResultImage) => void | Promise<void>
   onImageToolFailed?: (event: AgentApiImageToolFailure) => void | Promise<void>
 }): Promise<AgentApiResult> {
-  const { settings, profile, params, input, maskDataUrl, signal, onTextDelta, onOutputItems, onImageToolStarted, onImagePartialImage, onImageToolCompleted, onImageToolFailed } = opts
+  const { settings, profile, imageProfile, params, input, maskDataUrl, signal, onTextDelta, onOutputItems, onImageToolStarted, onImagePartialImage, onImageToolCompleted, onImageToolFailed } = opts
   const mime = MIME_MAP[params.output_format] || 'image/png'
   const proxyConfig = readClientDevProxyConfig()
   const useApiProxy = shouldUseApiProxy(profile.apiProxy, proxyConfig)
@@ -607,10 +615,11 @@ export async function callAgentResponsesApi(opts: {
   try {
     const body: Record<string, unknown> = {
       model: profile.model || settings.model,
-      instructions: createAgentInstructions(settings),
+      instructions: createAgentInstructions(settings, (imageProfile ?? profile).codexCli ? params.size : undefined),
       input,
       tools: createAgentTools(params, profile, settings, maskDataUrl),
     }
+    if (profile.reasoningEffort) body.reasoning = { effort: profile.reasoningEffort }
     if (profile.streamImages) {
       body.stream = true
     }
@@ -673,16 +682,18 @@ export async function callAgentConversationTitleApi(opts: {
       content.push({ type: 'input_image', image_url: dataUrl })
     }
 
+    const body: Record<string, unknown> = {
+      model: profile.model || settings.model,
+      instructions: AGENT_TITLE_INSTRUCTIONS,
+      input: [{ role: 'user', content }],
+    }
+    if (profile.reasoningEffort) body.reasoning = { effort: profile.reasoningEffort }
+
     const response = await fetch(buildApiUrl(profile.baseUrl, 'responses', proxyConfig, useApiProxy), {
       method: 'POST',
       headers: createHeaders(profile),
       cache: 'no-store',
-      body: JSON.stringify({
-        model: profile.model || settings.model,
-        instructions: AGENT_TITLE_INSTRUCTIONS,
-        input: [{ role: 'user', content }],
-        max_output_tokens: 32,
-      }),
+      body: JSON.stringify(body),
       signal: controller.signal,
     })
 
@@ -703,8 +714,6 @@ export async function callAgentConversationTitleApi(opts: {
 // Batch image generation: execute a single image via Responses API.
 // Uses the same pattern as gallery Responses API mode.
 // ---------------------------------------------------------------------------
-
-const PROMPT_REWRITE_GUARD_PREFIX = 'Use the following text as the complete prompt. Do not rewrite it:'
 
 export interface BatchImageCallResult {
   /** The batch item id from the model's function call */
@@ -767,10 +776,12 @@ export async function callBatchImageSingle(opts: {
     const tool: Record<string, unknown> = {
       type: 'image_generation',
       action: referenceImageDataUrls.length > 0 ? 'auto' : 'generate',
-      size: params.size,
       output_format: params.output_format,
       moderation: params.moderation,
       quality: params.quality,
+    }
+    if (!profile.codexCli) {
+      tool.size = params.size
     }
     if (params.output_format !== 'png' && params.output_compression != null) {
       tool.output_compression = params.output_compression
@@ -785,6 +796,7 @@ export async function callBatchImageSingle(opts: {
       tools: [tool],
       tool_choice: 'required',
     }
+    if (profile.reasoningEffort) body.reasoning = { effort: profile.reasoningEffort }
     if (profile.streamImages) {
       body.stream = true
     }

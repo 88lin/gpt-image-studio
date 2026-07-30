@@ -61,6 +61,7 @@ describe('callAgentResponsesApi', () => {
       apiMode: 'responses',
       streamImages: true,
       streamPartialImages: 2,
+      reasoningEffort: 'xhigh',
     })
 
     const result = await callAgentResponsesApi({
@@ -74,6 +75,7 @@ describe('callAgentResponsesApi', () => {
     const [, init] = fetchMock.mock.calls[0]
     const body = JSON.parse(String((init as RequestInit).body))
     expect(body.stream).toBe(true)
+    expect(body.reasoning).toEqual({ effort: 'xhigh' })
     expect(body.tools[0].partial_images).toBe(2)
     expect(textDeltas).toEqual(['Hel', 'lo'])
     expect(result).toMatchObject({
@@ -152,6 +154,32 @@ describe('callAgentResponsesApi', () => {
     const [, init] = fetchMock.mock.calls[0]
     const body = JSON.parse(String((init as RequestInit).body))
     expect(body.tools[0].input_image_mask).toEqual({ image_url: 'data:image/png;base64,bWFzaw==' })
+  })
+
+  it('requires resolution in Agent prompts and omits the Codex CLI size parameter', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      output: [{ type: 'message', content: [{ type: 'output_text', text: 'OK' }] }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+    const profile = createDefaultOpenAIProfile({
+      apiKey: 'test-key',
+      apiMode: 'responses',
+      codexCli: true,
+    })
+
+    await callAgentResponsesApi({
+      settings: DEFAULT_SETTINGS,
+      profile,
+      params: { ...DEFAULT_PARAMS, size: '1024x1024' },
+      input: 'prompt',
+    })
+
+    const [, init] = fetchMock.mock.calls[0]
+    const body = JSON.parse(String((init as RequestInit).body))
+    expect(body.tools[0].size).toBeUndefined()
+    expect(body.instructions).toContain('Start every image prompt with exactly "Generate at 1024x1024 resolution." followed by a space.')
   })
 
   it('extracts image_generation results from base64 object fields', async () => {
@@ -236,6 +264,7 @@ describe('callAgentResponsesApi', () => {
       apiKey: 'test-key',
       apiMode: 'responses',
       streamImages: true,
+      reasoningEffort: 'max',
     })
 
     const title = await callAgentConversationTitleApi({
@@ -247,6 +276,8 @@ describe('callAgentResponsesApi', () => {
     const [, init] = fetchMock.mock.calls[0]
     const body = JSON.parse(String((init as RequestInit).body))
     expect(body.instructions).toContain('<title>short title</title>')
+    expect(body.reasoning).toEqual({ effort: 'max' })
+    expect(body.max_output_tokens).toBeUndefined()
     expect(body.tools).toBeUndefined()
     expect(body.stream).toBeUndefined()
     expect(body.input[0].content[0].text).toContain('帮我生成一张橘猫头像，要赛博朋克风格')

@@ -3841,6 +3841,75 @@ describe('agent built-in image tool failure', () => {
     })
   })
 
+  it('normalizes Agent image params with the Hybrid image profile', async () => {
+    const imageProfile = createDefaultOpenAIProfile({
+      id: 'codex-image-profile',
+      apiKey: 'image-key',
+      apiMode: 'images',
+      codexCli: true,
+    })
+    useStore.setState({
+      settings: normalizeSettings({
+        ...useStore.getState().settings,
+        profiles: [responsesProfile, imageProfile],
+        activeProfileId: responsesProfile.id,
+        agentApiConfigMode: 'hybrid',
+        agentTextProfileId: responsesProfile.id,
+        agentImageProfileId: imageProfile.id,
+      }),
+      params: { ...DEFAULT_PARAMS, size: '2048x2048' },
+    })
+    vi.mocked(callAgentResponsesApi).mockResolvedValueOnce({
+      text: '',
+      images: [],
+      outputItems: [],
+      responseId: 'response-normalized-params',
+    })
+
+    await submitAgentMessage()
+    await vi.waitFor(() => expect(callAgentResponsesApi).toHaveBeenCalledTimes(1))
+
+    expect(vi.mocked(callAgentResponsesApi).mock.calls[0][0].params.size).toBe('1024x1024')
+  })
+
+  it('does not apply Codex text-profile limits to a non-Codex image profile', async () => {
+    const textProfile = createDefaultOpenAIProfile({
+      ...responsesProfile,
+      id: 'codex-text-profile',
+      codexCli: true,
+    })
+    const imageProfile = createDefaultOpenAIProfile({
+      id: 'standard-image-profile',
+      apiKey: 'image-key',
+      apiMode: 'images',
+    })
+    useStore.setState({
+      settings: normalizeSettings({
+        ...useStore.getState().settings,
+        profiles: [textProfile, imageProfile],
+        activeProfileId: textProfile.id,
+        agentApiConfigMode: 'hybrid',
+        agentTextProfileId: textProfile.id,
+        agentImageProfileId: imageProfile.id,
+      }),
+      params: { ...DEFAULT_PARAMS, size: '2048x2048', quality: 'high' },
+    })
+    vi.mocked(callAgentResponsesApi).mockResolvedValueOnce({
+      text: '',
+      images: [],
+      outputItems: [],
+      responseId: 'response-standard-image-params',
+    })
+
+    await submitAgentMessage()
+    await vi.waitFor(() => expect(callAgentResponsesApi).toHaveBeenCalledTimes(1))
+
+    expect(vi.mocked(callAgentResponsesApi).mock.calls[0][0].params).toMatchObject({
+      size: '2048x2048',
+      quality: 'high',
+    })
+  })
+
   it('does not commit or report a deleted Hybrid single-image result', async () => {
     const imageProfile = createDefaultOpenAIProfile({ id: 'image-profile', apiKey: 'image-key', apiMode: 'images' })
     const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()

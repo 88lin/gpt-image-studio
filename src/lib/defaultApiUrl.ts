@@ -1,5 +1,5 @@
-import type { ApiMode } from '../types'
-import { DEFAULT_STREAM_PARTIAL_IMAGES } from '../types'
+import type { ApiMode, ReasoningEffort } from '../types'
+import { DEFAULT_STREAM_PARTIAL_IMAGES, REASONING_EFFORT_VALUES } from '../types'
 
 import { normalizeBaseUrl } from './devProxy'
 
@@ -10,11 +10,18 @@ export function normalizeStreamPartialImages(value: unknown, fallback: number | 
   return Math.min(3, Math.max(0, Math.trunc(numeric)))
 }
 
+export function normalizeReasoningEffort(value: unknown, fallback?: ReasoningEffort): ReasoningEffort | undefined {
+  return typeof value === 'string' && REASONING_EFFORT_VALUES.includes(value as ReasoningEffort)
+    ? value as ReasoningEffort
+    : fallback
+}
+
 export interface DefaultApiUrlPatch {
   baseUrl: string
   apiKey?: string
   apiMode?: ApiMode
   model?: string
+  reasoningEffort?: ReasoningEffort
   name?: string
   codexCli?: boolean
   streamImages?: boolean
@@ -35,6 +42,7 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
     const apiKeyParam = parsed.searchParams.get('apiKey')
     const apiModeParam = parsed.searchParams.get('apiMode')
     const modelParam = parsed.searchParams.get('model')
+    const reasoningEffortParam = parsed.searchParams.get('reasoningEffort')
     const profileNameParam = parsed.searchParams.get('profileName')
     const codexCliParam = parsed.searchParams.get('codexCli')
     const streamImagesParam = parsed.searchParams.get('streamImages')
@@ -44,6 +52,7 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
     if (apiKeyParam !== null) patch.apiKey = apiKeyParam.trim()
     if (apiModeParam === 'images' || apiModeParam === 'responses') patch.apiMode = apiModeParam
     if (modelParam !== null && modelParam.trim()) patch.model = modelParam.trim()
+    if (reasoningEffortParam !== null) patch.reasoningEffort = normalizeReasoningEffort(reasoningEffortParam)
     if (profileNameParam?.trim()) patch.name = profileNameParam.trim()
     if (codexCliParam !== null) patch.codexCli = codexCliParam.trim().toLowerCase() === 'true'
     if (streamImagesParam !== null) patch.streamImages = streamImagesParam.trim().toLowerCase() === 'true'

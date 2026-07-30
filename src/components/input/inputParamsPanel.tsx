@@ -108,13 +108,14 @@ export default function InputParamsPanel({
           type="button"
           onClick={() => { dismissAllTooltips(); onOpenSizePicker() }}
           className="px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] focus:outline-none text-xs text-left transition-all duration-200 shadow-sm font-mono"
-          title="选择尺寸"
         >
           {displaySize}
         </button>
         <ButtonTooltip
-          visible={isFalTextToImage && sizeHint.visible}
-          text={<>fal.ai 的文生图模式不支持 <code className="rounded bg-white/10 px-1 py-0.5 font-mono">auto</code> 参数</>}
+          visible={(isFalTextToImage || activeProfile.codexCli) && sizeHint.visible}
+          text={isFalTextToImage
+            ? <>fal.ai 的文生图模式不支持 <code className="rounded bg-white/10 px-1 py-0.5 font-mono">auto</code> 参数</>
+            : 'Codex CLI 不支持尺寸参数，此处设置仅基于提示词工程'}
         />
       </label>
       <label

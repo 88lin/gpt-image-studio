@@ -44,7 +44,7 @@ describe('validateApiProfile', () => {
 describe('default API URL env', () => {
   it('applies shared URL params from VITE_DEFAULT_API_URL to the default profile', async () => {
     vi.resetModules()
-    vi.stubEnv('VITE_DEFAULT_API_URL', 'https://app.example.com/?apiUrl=https%3A%2F%2Fapi.example.com&apiMode=images&model=test-image-model&profileName=URL%20Profile&codexCli=true&streamImages=true&streamPartialImages=3')
+    vi.stubEnv('VITE_DEFAULT_API_URL', 'https://app.example.com/?apiUrl=https%3A%2F%2Fapi.example.com&apiMode=responses&model=test-image-model&profileName=URL%20Profile&reasoningEffort=xhigh&codexCli=true&streamImages=true&streamPartialImages=3')
 
     const { DEFAULT_SETTINGS, createDefaultOpenAIProfile } = await import('./apiProfiles')
 
@@ -52,7 +52,8 @@ describe('default API URL env', () => {
       name: 'URL Profile',
       baseUrl: 'https://api.example.com',
       model: 'test-image-model',
-      apiMode: 'images',
+      apiMode: 'responses',
+      reasoningEffort: 'xhigh',
       codexCli: true,
       streamImages: true,
       streamPartialImages: 3,
@@ -61,7 +62,8 @@ describe('default API URL env', () => {
       name: 'URL Profile',
       baseUrl: 'https://api.example.com',
       model: 'test-image-model',
-      apiMode: 'images',
+      apiMode: 'responses',
+      reasoningEffort: 'xhigh',
       codexCli: true,
       streamImages: true,
       streamPartialImages: 3,
@@ -621,6 +623,18 @@ describe('custom providers', () => {
     })
 
     expect(clamped.profiles[0].streamPartialImages).toBe(3)
+  })
+
+  it('normalizes supported reasoning efforts and ignores invalid values', () => {
+    const supported = normalizeSettings({
+      profiles: [createDefaultOpenAIProfile({ apiMode: 'responses', reasoningEffort: 'max' })],
+    })
+    const invalid = normalizeSettings({
+      profiles: [{ ...createDefaultOpenAIProfile({ apiMode: 'responses' }), reasoningEffort: 'extreme' }],
+    })
+
+    expect(supported.profiles[0].reasoningEffort).toBe('max')
+    expect(invalid.profiles[0].reasoningEffort).toBeUndefined()
   })
 
   it('normalizes custom providers to Images API mode', () => {

@@ -72,6 +72,7 @@ export default function AgentSettingsTab({
                     value={selectedAgentTextProfile?.id ?? ''}
                     onChange={(value) => commitSettings({ ...draft, agentTextProfileId: String(value) })}
                     options={agentTextProfileOptions}
+                    showValueTooltips
                     className="w-full px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] text-xs transition-all duration-200 shadow-sm text-gray-700 dark:text-gray-200 outline-none"
                   />
                 ) : (
@@ -95,6 +96,7 @@ export default function AgentSettingsTab({
                     value={selectedAgentImageProfile?.id ?? ''}
                     onChange={(value) => commitSettings({ ...draft, agentImageProfileId: String(value) })}
                     options={agentImageProfileOptions}
+                    showValueTooltips
                     className="w-full px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] text-xs transition-all duration-200 shadow-sm text-gray-700 dark:text-gray-200 outline-none"
                   />
                 </div>
