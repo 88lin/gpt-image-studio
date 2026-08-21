@@ -2,6 +2,17 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
 import { DEFAULT_SETTINGS } from './apiProfiles'
 import { callImageApi } from './api'
+import { maybeAppendStreamingHint } from './imageApiShared'
+
+describe('API error hints', () => {
+  it.each([false, true])('uses the transparent background hint when streaming is %s', (streamImages) => {
+    const message = 'Transparent background is not supported for this model.'
+
+    expect(maybeAppendStreamingHint(message, 400, streamImages)).toBe(
+      `${message}\n提示：当前使用的 API 不支持为该模型使用原生透明背景，请将「透明背景实现方式」切换为「本地后处理」。`,
+    )
+  })
+})
 
 describe('callImageApi', () => {
   afterEach(() => {
@@ -84,6 +95,70 @@ describe('callImageApi', () => {
     const [, init] = fetchMock.mock.calls[0]
     const body = JSON.parse(String((init as RequestInit).body))
     expect(body.prompt).toBe('prompt')
+  })
+
+  it('requests a transparent background from the Images API', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      data: [{ b64_json: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    await callImageApi({
+      settings: { ...DEFAULT_SETTINGS, apiKey: 'test-key' },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, output_format: 'webp', transparent_output: true },
+      nativeTransparentBackground: true,
+      inputImageDataUrls: [],
+    })
+
+    const [, init] = fetchMock.mock.calls[0]
+    const body = JSON.parse(String((init as RequestInit).body))
+    expect(body.background).toBe('transparent')
+    expect(body.output_format).toBe('webp')
+  })
+
+  it('requests a transparent background from the Images edit API', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(JSON.stringify({
+      data: [{ b64_json: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    await callImageApi({
+      settings: { ...DEFAULT_SETTINGS, apiKey: 'test-key' },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, transparent_output: true },
+      nativeTransparentBackground: true,
+      inputImageDataUrls: ['data:image/png;base64,aW1hZ2U='],
+    })
+
+    const [, init] = fetchMock.mock.calls.find(([, request]) => (request as RequestInit | undefined)?.body instanceof FormData)!
+    const body = (init as RequestInit).body as FormData
+    expect(body.get('background')).toBe('transparent')
+  })
+
+  it('requests a transparent background from the Responses API image tool', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      output: [{ type: 'image_generation_call', result: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    await callImageApi({
+      settings: { ...DEFAULT_SETTINGS, apiKey: 'test-key', apiMode: 'responses' },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, transparent_output: true },
+      nativeTransparentBackground: true,
+      inputImageDataUrls: [],
+    })
+
+    const [, init] = fetchMock.mock.calls[0]
+    const body = JSON.parse(String((init as RequestInit).body))
+    expect(body.tools[0].background).toBe('transparent')
   })
 
   it('uses prompt engineering instead of the size parameter in Codex CLI mode', async () => {
@@ -767,7 +842,7 @@ describe('callImageApi', () => {
             path: 'custom/images',
             method: 'POST',
             contentType: 'json',
-            body: { model: '$profile.model', prompt: '$prompt' },
+            body: { model: '$profile.model', prompt: '$prompt', background: '$params.background' },
             result: { b64JsonPaths: ['data.*.b64_json'] },
           },
         }],
@@ -784,6 +859,7 @@ describe('callImageApi', () => {
       },
       prompt: 'prompt',
       params: { ...DEFAULT_PARAMS },
+      nativeTransparentBackground: true,
       inputImageDataUrls: [],
     })
 
@@ -791,6 +867,8 @@ describe('callImageApi', () => {
       '/api-proxy/custom/images',
       expect.objectContaining({ method: 'POST' }),
     )
+    const body = JSON.parse(String((fetchMock.mock.calls[0][1] as RequestInit).body))
+    expect(body.background).toBe('transparent')
   })
 
   it('splits Codex CLI sync custom provider output count into concurrent n=1 requests', async () => {
@@ -951,7 +1029,7 @@ describe('callImageApi', () => {
           },
           editSubmit: {
             path: 'images/edits',
-            body: { prompt: '$prompt', size: '$params.size', quality: '$params.quality', n: '$params.n' },
+            body: { prompt: '$prompt', size: '$params.size', quality: '$params.quality', n: '$params.n', background: '$params.background' },
             result: { b64JsonPaths: ['data.*.b64_json'] },
           },
           poll: {
@@ -971,6 +1049,7 @@ describe('callImageApi', () => {
       },
       prompt: 'prompt',
       params: { ...DEFAULT_PARAMS, size: '1024x768', quality: 'high', n: 3 },
+      nativeTransparentBackground: true,
       inputImageDataUrls: ['data:image/png;base64,aW1hZ2U='],
     })
 
@@ -983,6 +1062,7 @@ describe('callImageApi', () => {
       expect(body.get('size')).toBeNull()
       expect(body.get('quality')).toBeNull()
       expect(body.get('n')).toBe('1')
+      expect(body.get('background')).toBe('transparent')
     }
   })
 
@@ -1050,6 +1130,49 @@ describe('callImageApi', () => {
     expect(submitBody).not.toHaveProperty('quality')
     expect(onCustomTaskEnqueued).toHaveBeenCalledOnce()
     expect(result.images).toHaveLength(3)
+  })
+
+  it('adds the transparent background hint when an async custom task rejects it', async () => {
+    vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(new Response(JSON.stringify({ task_id: 'task-1' }), { status: 200 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({
+        status: 'failed',
+        error: 'Transparent background is not supported for this model.',
+      }), { status: 200 }))
+
+    await expect(callImageApi({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        customProviders: [{
+          id: 'custom-async-background',
+          name: 'Custom Async Background',
+          submit: {
+            path: 'images/generations',
+            body: { prompt: '$prompt', background: '$params.background' },
+            taskIdPath: 'task_id',
+          },
+          poll: {
+            path: 'images/tasks/{task_id}',
+            statusPath: 'status',
+            successValues: ['completed'],
+            failureValues: ['failed'],
+            errorPath: 'error',
+            result: { b64JsonPaths: ['result.data.*.b64_json'] },
+          },
+        }],
+        profiles: [{
+          ...DEFAULT_SETTINGS.profiles[0],
+          id: 'profile-custom-async-background',
+          provider: 'custom-async-background',
+          baseUrl: 'https://api.example.com/v1',
+        }],
+        activeProfileId: 'profile-custom-async-background',
+      },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS },
+      nativeTransparentBackground: true,
+      inputImageDataUrls: [],
+    })).rejects.toThrow('请将「透明背景实现方式」切换为「本地后处理」')
   })
 
   it('rejects API proxy for async custom providers', async () => {

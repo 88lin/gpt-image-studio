@@ -113,8 +113,8 @@ vi.mock('./lib/transparentImage', () => ({
   })),
   getTransparentRequestParams: vi.fn((params: typeof DEFAULT_PARAMS) => ({
     ...params,
-    output_format: 'png',
-    output_compression: null,
+    output_format: params.output_format === 'webp' ? 'webp' : 'png',
+    output_compression: params.output_format === 'webp' ? params.output_compression : null,
     transparent_output: true,
   })),
   removeKeyedBackgroundFromDataUrl: vi.fn(async (dataUrl: string) => `transparent:${dataUrl}`),
@@ -283,7 +283,12 @@ describe('mask draft lifecycle in store actions', () => {
     vi.mocked(callImageApi).mockReset().mockResolvedValue({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
     vi.mocked(removeKeyedBackgroundFromDataUrl).mockReset().mockImplementation(async (dataUrl) => `transparent:${dataUrl}`)
     useStore.setState({
-      settings: { ...DEFAULT_SETTINGS, apiKey: 'test-key' },
+      settings: {
+        ...DEFAULT_SETTINGS,
+        baseUrl: 'https://api.example.com/v1',
+        apiKey: 'test-key',
+        profiles: DEFAULT_SETTINGS.profiles.map((profile) => ({ ...profile, transparentBackgroundMethod: 'local' })),
+      },
       prompt: 'prompt',
       inputImages: [],
       maskDraft: null,
@@ -479,6 +484,81 @@ describe('mask draft lifecycle in store actions', () => {
     await clearImages()
   })
 
+  it('stores locally post-processed transparent output as WebP', async () => {
+    const { callImageApi } = await import('./lib/api')
+    vi.mocked(callImageApi).mockResolvedValueOnce({
+      images: ['data:image/webp;base64,generated'],
+      actualParams: { output_format: 'webp' },
+      actualParamsList: [{ output_format: 'webp' }],
+      revisedPrompts: [],
+    })
+    useStore.setState({
+      prompt: '单主体贴纸素材',
+      params: {
+        ...DEFAULT_PARAMS,
+        output_format: 'webp',
+        output_compression: 25,
+        transparent_output: true,
+      },
+    })
+
+    await submitTask()
+    await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('done'))
+
+    expect(callImageApi).toHaveBeenCalledWith(expect.objectContaining({
+      params: expect.objectContaining({
+        output_format: 'webp',
+        output_compression: 25,
+        transparent_output: true,
+      }),
+    }))
+    expect(removeKeyedBackgroundFromDataUrl).toHaveBeenCalledWith(
+      'data:image/webp;base64,generated',
+      undefined,
+      'webp',
+      25,
+    )
+    await clearTasks()
+    await clearImages()
+  })
+
+  it('keeps native transparent output unchanged and requests API transparency', async () => {
+    const { callImageApi } = await import('./lib/api')
+    vi.mocked(callImageApi).mockClear()
+    vi.mocked(removeKeyedBackgroundFromDataUrl).mockClear()
+    vi.mocked(callImageApi).mockResolvedValueOnce({
+      images: ['data:image/png;base64,native-transparent'],
+      actualParams: { output_format: 'png' },
+      actualParamsList: [{ output_format: 'png' }],
+      revisedPrompts: [],
+    })
+    useStore.setState({
+      settings: { ...DEFAULT_SETTINGS, baseUrl: 'https://api.example.com/v1', apiKey: 'test-key' },
+      prompt: '透明玻璃瓶',
+      params: {
+        ...DEFAULT_PARAMS,
+        output_format: 'png',
+        transparent_output: true,
+      },
+    })
+
+    await submitTask()
+    await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('done'))
+
+    expect(callImageApi).toHaveBeenCalledWith(expect.objectContaining({
+      prompt: '透明玻璃瓶',
+      nativeTransparentBackground: true,
+    }))
+    expect(removeKeyedBackgroundFromDataUrl).not.toHaveBeenCalled()
+    const [task] = useStore.getState().tasks
+    expect(task.transparentOutput).toBeUndefined()
+    expect(task.transparentPrompt).toBeUndefined()
+    expect(task.transparentOriginalImages).toBeUndefined()
+    expect((await getImage(task.outputImages[0]))?.dataUrl).toBe('data:image/png;base64,native-transparent')
+    await clearTasks()
+    await clearImages()
+  })
+
   it('falls back to the original output when transparent post-processing fails', async () => {
     const { callImageApi } = await import('./lib/api')
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
@@ -531,7 +611,7 @@ describe('mask draft lifecycle in store actions', () => {
     useStore.setState({
       settings: normalizeSettings({
         ...DEFAULT_SETTINGS,
-        profiles: [falProfile],
+        profiles: [{ ...falProfile, transparentBackgroundMethod: 'local' }],
         activeProfileId: falProfile.id,
       }),
       prompt: '单主体图标素材',
@@ -3915,7 +3995,11 @@ describe('task deletion', () => {
     })
     vi.mocked(removeKeyedBackgroundFromDataUrl).mockImplementationOnce(() => postProcess.promise)
     useStore.setState({
-      settings: { ...DEFAULT_SETTINGS, apiKey: 'test-key' },
+      settings: {
+        ...DEFAULT_SETTINGS,
+        apiKey: 'test-key',
+        profiles: DEFAULT_SETTINGS.profiles.map((profile) => ({ ...profile, transparentBackgroundMethod: 'local' })),
+      },
       appMode: 'gallery',
       prompt: 'prompt',
       params: { ...DEFAULT_PARAMS, output_format: 'png', transparent_output: true },

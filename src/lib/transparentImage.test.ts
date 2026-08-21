@@ -20,7 +20,7 @@ describe('transparent image prompt and params', () => {
     expect(prompt).toContain('禁止')
   })
 
-  it('forces transparent requests to PNG without mutating the original params', () => {
+  it('forces unsupported transparent formats to PNG without mutating the original params', () => {
     const params = {
       ...DEFAULT_PARAMS,
       output_format: 'jpeg' as const,
@@ -36,6 +36,21 @@ describe('transparent image prompt and params', () => {
     })
     expect(params.output_format).toBe('jpeg')
     expect(params.output_compression).toBe(80)
+  })
+
+  it('preserves WebP and its compression for transparent requests', () => {
+    const next = getTransparentRequestParams({
+      ...DEFAULT_PARAMS,
+      output_format: 'webp',
+      output_compression: 25,
+      transparent_output: true,
+    })
+
+    expect(next).toMatchObject({
+      output_format: 'webp',
+      output_compression: 25,
+      transparent_output: true,
+    })
   })
 })
 

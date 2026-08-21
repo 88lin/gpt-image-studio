@@ -16,10 +16,12 @@ import {
   getDefaultApiProfileId,
   mergePresetImportedSettings as mergeDefaultImportedSettings,
   mergeImportedSettings,
+  normalizeApiProfile,
   normalizeSettings,
   switchApiProfileProvider,
   validateApiProfile,
 } from './apiProfiles'
+import { CUSTOM_PROVIDER_LLM_PROMPT, DEFAULT_CUSTOM_PROVIDER_JSON } from './settingsCustomProvider'
 
 afterEach(() => {
   vi.unstubAllEnvs()
@@ -45,6 +47,18 @@ describe('validateApiProfile', () => {
   })
 })
 
+describe('normalizeApiProfile', () => {
+  it('uses provider defaults and preserves explicit transparent background methods', () => {
+    expect(normalizeApiProfile({}).transparentBackgroundMethod).toBe('api')
+    expect(normalizeApiProfile({ transparentBackgroundMethod: 'local' }).transparentBackgroundMethod).toBe('local')
+    expect(normalizeApiProfile({}, { transparentBackgroundMethod: 'local' }).transparentBackgroundMethod).toBe('local')
+    expect(normalizeApiProfile({ transparentBackgroundMethod: 'invalid' }).transparentBackgroundMethod).toBe('api')
+    expect(normalizeApiProfile({ provider: 'fal' }).transparentBackgroundMethod).toBe('local')
+    expect(normalizeApiProfile({ provider: 'fal', transparentBackgroundMethod: 'api' }).transparentBackgroundMethod).toBe('api')
+    expect(normalizeApiProfile({ provider: 'fal', transparentBackgroundMethod: 'invalid' }).transparentBackgroundMethod).toBe('local')
+  })
+})
+
 describe('normalizeSettings', () => {
   it('preserves a non-empty profile description and removes an empty one', () => {
     const settings = normalizeSettings({
@@ -62,7 +76,7 @@ describe('normalizeSettings', () => {
 describe('default API URL env', () => {
   it('applies shared URL params from VITE_DEFAULT_API_URL to the default profile', async () => {
     vi.resetModules()
-    vi.stubEnv('VITE_DEFAULT_API_URL', 'https://app.example.com/?apiUrl=https%3A%2F%2Fapi.example.com&apiMode=responses&model=test-image-model&profileName=URL%20Profile&reasoningEffort=xhigh&codexCli=true&streamImages=true&streamPartialImages=3')
+    vi.stubEnv('VITE_DEFAULT_API_URL', 'https://app.example.com/?apiUrl=https%3A%2F%2Fapi.example.com&apiMode=responses&model=test-image-model&profileName=URL%20Profile&reasoningEffort=xhigh&codexCli=true&streamImages=true&streamPartialImages=3&transparentBackgroundMethod=local')
 
     const { DEFAULT_SETTINGS, createDefaultOpenAIProfile } = await import('./apiProfiles')
 
@@ -76,6 +90,7 @@ describe('default API URL env', () => {
       codexCli: true,
       streamImages: true,
       streamPartialImages: 3,
+      transparentBackgroundMethod: 'local',
     })
     expect(DEFAULT_SETTINGS.profiles[0]).toMatchObject({
       id: DEFAULT_OPENAI_PROFILE_ID,
@@ -87,6 +102,7 @@ describe('default API URL env', () => {
       codexCli: true,
       streamImages: true,
       streamPartialImages: 3,
+      transparentBackgroundMethod: 'local',
     })
   })
 
@@ -138,6 +154,21 @@ describe('mergeImportedSettings', () => {
       codexCli: true,
       apiProxy: true,
     })
+  })
+
+  it('does not replace a default profile whose transparent background method was changed', () => {
+    const current = normalizeSettings({
+      ...DEFAULT_SETTINGS,
+      profiles: DEFAULT_SETTINGS.profiles.map((profile) => ({ ...profile, transparentBackgroundMethod: 'local' })),
+    })
+
+    const merged = mergeImportedSettings(current, {
+      baseUrl: 'https://api.example.com/v1',
+      apiKey: 'imported-key',
+      model: 'imported-model',
+    })
+
+    expect(merged.profiles.find((profile) => profile.id === DEFAULT_OPENAI_PROFILE_ID)?.transparentBackgroundMethod).toBe('local')
   })
 
   it('replaces the default provider list with imported profiles when current settings are untouched', () => {
@@ -1208,10 +1239,12 @@ describe('custom providers', () => {
       name: 'sub2api（异步）',
       submit: {
         path: 'images/generations/async',
+        body: { background: '$params.background' },
         taskIdPath: 'task_id',
       },
       editSubmit: {
         path: 'images/edits/async',
+        body: { background: '$params.background' },
         taskIdPath: 'task_id',
       },
       poll: {
@@ -1225,6 +1258,47 @@ describe('custom providers', () => {
       },
     })
     expect(getApiProviderLabel(settings, 'sb2api-async')).toBe('sub2api（异步）')
+  })
+
+  it('includes native transparent backgrounds in the default custom provider templates', () => {
+    const provider = JSON.parse(DEFAULT_CUSTOM_PROVIDER_JSON)
+
+    expect(provider.submit.body.background).toBe('$params.background')
+    expect(provider.editSubmit.body.background).toBe('$params.background')
+    expect(CUSTOM_PROVIDER_LLM_PROMPT).toContain('$params.background')
+  })
+
+  it('defaults custom profiles based on their native transparent background mapping', () => {
+    const settings = normalizeSettings({
+      customProviders: [
+        { id: 'custom-local', name: 'Custom Local', submit: { path: 'generate', body: { prompt: '$prompt' } } },
+        { id: 'custom-native', name: 'Custom Native', submit: { path: 'generate', body: { background: '$params.background' } } },
+        {
+          id: 'custom-partial',
+          name: 'Custom Partial',
+          submit: { path: 'generate', body: { background: '$params.background' } },
+          editSubmit: { path: 'edit', body: { prompt: '$prompt' } },
+        },
+      ],
+      profiles: [
+        { ...createDefaultOpenAIProfile({ id: 'local-profile' }), provider: 'custom-local', transparentBackgroundMethod: 'api' },
+        { ...createDefaultOpenAIProfile({ id: 'native-profile' }), provider: 'custom-native', transparentBackgroundMethod: undefined },
+        { ...createDefaultOpenAIProfile({ id: 'partial-profile' }), provider: 'custom-partial', transparentBackgroundMethod: undefined },
+        {
+          ...createDefaultOpenAIProfile({ id: 'draft-profile' }),
+          providerDrafts: {
+            'custom-local': { transparentBackgroundMethod: 'api' },
+            'custom-native': {},
+          },
+        },
+      ],
+    })
+
+    expect(settings.profiles.find((profile) => profile.id === 'local-profile')?.transparentBackgroundMethod).toBe('local')
+    expect(settings.profiles.find((profile) => profile.id === 'native-profile')?.transparentBackgroundMethod).toBe('api')
+    expect(settings.profiles.find((profile) => profile.id === 'partial-profile')?.transparentBackgroundMethod).toBe('local')
+    expect(settings.profiles.find((profile) => profile.id === 'draft-profile')?.providerDrafts?.['custom-local']?.transparentBackgroundMethod).toBe('local')
+    expect(settings.profiles.find((profile) => profile.id === 'draft-profile')?.providerDrafts?.['custom-native']?.transparentBackgroundMethod).toBe('api')
   })
 
   it('normalizes custom provider definitions and keeps custom profiles', () => {
@@ -1396,6 +1470,7 @@ describe('custom providers', () => {
     expect(profile.provider).toBe(provider.id)
     expect(profile.baseUrl).toBe(DEFAULT_SETTINGS.baseUrl)
     expect(profile.model).toBe(DEFAULT_IMAGES_MODEL)
+    expect(profile.transparentBackgroundMethod).toBe('api')
   })
 
   it('rejects task mappings without poll configuration', () => {
@@ -1408,15 +1483,18 @@ describe('custom providers', () => {
     }))).toThrow('配置了 taskIdPath，但缺少 poll')
   })
 
-  it('restores a custom provider Codex CLI draft', () => {
+  it('restores custom provider draft settings', () => {
     const provider = importCustomProviderDefinitionFromJson(JSON.stringify({
       name: 'Custom Provider',
       submit: { path: 'images/generations' },
     }))
     const customProfile = switchApiProfileProvider(createDefaultOpenAIProfile(), provider.id, provider)
-    const openAIProfile = switchApiProfileProvider({ ...customProfile, codexCli: true }, 'openai')
+    const openAIProfile = switchApiProfileProvider({ ...customProfile, codexCli: true, transparentBackgroundMethod: 'local' }, 'openai')
+    const restoredProfile = switchApiProfileProvider(openAIProfile, provider.id, provider)
 
-    expect(switchApiProfileProvider(openAIProfile, provider.id, provider).codexCli).toBe(true)
+    expect(restoredProfile.codexCli).toBe(true)
+    expect(restoredProfile.transparentBackgroundMethod).toBe('local')
+    expect(openAIProfile.transparentBackgroundMethod).toBe('api')
   })
 
   it('uses API-mode specific streaming defaults and preserves partial image count', () => {
@@ -1522,7 +1600,7 @@ describe('custom providers', () => {
     const falProfile = switchApiProfileProvider(openaiProfile, 'fal')
     const customProfile = switchApiProfileProvider(openaiProfile, provider.id, provider)
 
-    expect(falProfile).toMatchObject({ provider: 'fal', apiMode: 'images', streamImages: false })
+    expect(falProfile).toMatchObject({ provider: 'fal', apiMode: 'images', streamImages: false, transparentBackgroundMethod: 'local' })
     expect(customProfile).toMatchObject({ provider: provider.id, apiMode: 'images', streamImages: false })
   })
 

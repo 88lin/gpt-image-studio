@@ -16,6 +16,7 @@ import {
   isDataUrl,
   isHttpUrl,
   mergeActualParams,
+  maybeAppendTransparentBackgroundHint,
   MIME_MAP,
   normalizeBase64Image,
   pickActualParams,
@@ -128,6 +129,7 @@ function createResponsesImageTool(
   isEdit: boolean,
   profile: ApiProfile,
   maskDataUrl?: string,
+  nativeTransparentBackground?: boolean,
 ): Record<string, unknown> {
   const tool: Record<string, unknown> = {
     type: 'image_generation',
@@ -150,6 +152,10 @@ function createResponsesImageTool(
 
   if (params.output_format !== 'png' && params.output_compression != null) {
     tool.output_compression = params.output_compression
+  }
+
+  if (nativeTransparentBackground) {
+    tool.background = 'transparent'
   }
 
   if (maskDataUrl) {
@@ -500,6 +506,9 @@ async function callImagesApiSingle(opts: CallApiOptions, profile: ApiProfile): P
       }
       formData.append('output_format', params.output_format)
       formData.append('moderation', params.moderation)
+      if (opts.nativeTransparentBackground) {
+        formData.append('background', 'transparent')
+      }
 
       if (!profile.codexCli) {
         formData.append('quality', params.quality)
@@ -560,6 +569,10 @@ async function callImagesApiSingle(opts: CallApiOptions, profile: ApiProfile): P
         prompt,
         output_format: params.output_format,
         moderation: params.moderation,
+      }
+
+      if (opts.nativeTransparentBackground) {
+        body.background = 'transparent'
       }
 
       if (!profile.codexCli) {
@@ -672,9 +685,11 @@ function createCustomProviderContext(opts: CallApiOptions, profile: ApiProfile) 
   const prompt = profile.codexCli && !opts.settings.allowPromptRewrite
     ? `${PROMPT_REWRITE_GUARD_PREFIX}\n${sizePrompt}`
     : sizePrompt
-  const params = profile.codexCli
-    ? { ...opts.params, size: undefined, quality: undefined }
-    : opts.params
+  const params = {
+    ...opts.params,
+    ...(profile.codexCli ? { size: undefined, quality: undefined } : {}),
+    ...(opts.nativeTransparentBackground ? { background: 'transparent' } : {}),
+  }
 
   return {
     profile,
@@ -813,7 +828,10 @@ async function submitCustomRequest(mapping: CustomProviderSubmitMapping, opts: C
     signal: controller.signal,
   })
 
-  if (!response.ok) throw new Error(await getApiErrorMessage(response))
+  if (!response.ok) {
+    const errorMessage = await getApiErrorMessage(response)
+    throw new Error(maybeAppendStreamingHint(errorMessage, response.status, profile.streamImages))
+  }
   return response.json()
 }
 
@@ -861,7 +879,8 @@ async function pollCustomTaskResult(
     const state = getTaskState(taskPayload, poll)
     if (state === 'failure') {
       const message = getByPath(taskPayload, poll.errorPath) || getByPath(taskPayload, 'message') || getByPath(taskPayload, 'data.fail_reason') || getByPath(taskPayload, 'error.message')
-      throw new Error(typeof message === 'string' && message.trim() ? message : '异步任务失败')
+      const errorMessage = typeof message === 'string' && message.trim() ? message : '异步任务失败'
+      throw new Error(maybeAppendTransparentBackgroundHint(errorMessage))
     }
     if (state === 'success') {
       try {
@@ -1008,7 +1027,7 @@ async function callResponsesImageApiSingle(opts: CallApiOptions, profile: ApiPro
     const body: Record<string, unknown> = {
       model: profile.model,
       input: createResponsesInput(requestPrompt, inputImageDataUrls, opts.settings.allowPromptRewrite),
-      tools: [createResponsesImageTool(params, inputImageDataUrls.length > 0, profile, opts.maskDataUrl)],
+      tools: [createResponsesImageTool(params, inputImageDataUrls.length > 0, profile, opts.maskDataUrl, opts.nativeTransparentBackground)],
       tool_choice: 'required',
     }
     if (profile.reasoningEffort) body.reasoning = { effort: profile.reasoningEffort }

@@ -1,22 +1,10 @@
 import type { ImportedProviderSettings } from './apiProfiles'
 import { importCustomProviderSettingsFromJson } from './apiProfiles'
+import { EMBEDDED_CONFIG_PREFIX, isImportableConfigUrl } from './importableConfigUrl'
 import { readRuntimeEnv } from './runtimeEnv'
 
 const DEFAULT_API_URL = readRuntimeEnv(import.meta.env.VITE_DEFAULT_API_URL)
-const EMBEDDED_CONFIG_PREFIX = 'embedded-config:'
-
-export function isImportableConfigUrl(value: string): boolean {
-  const url = value.trim()
-  if (!url) return false
-  if (url.startsWith(EMBEDDED_CONFIG_PREFIX)) return true
-
-  try {
-    const parsed = new URL(url)
-    return parsed.searchParams.has('settings') || parsed.pathname.toLowerCase().endsWith('.json')
-  } catch {
-    return false
-  }
-}
+export { isImportableConfigUrl } from './importableConfigUrl'
 
 export function getCustomProviderConfigUrl(defaultApiUrl = DEFAULT_API_URL): string {
   const url = defaultApiUrl.trim()

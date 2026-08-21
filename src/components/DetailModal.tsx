@@ -268,7 +268,7 @@ export default function DetailModal() {
   const streamPreviewLen = streamPreviewItems.length
   const currentStreamPreviewSrc = activeStreamPreviewSrc
   const streamPartialImageIds = task.streamPartialImageIds ?? []
-  const isPngOutput = task.params.output_format === 'png'
+  const supportsTransparentOutput = task.params.output_format === 'png' || task.params.output_format === 'webp'
   const transparentOutputText = task.transparentOutput || task.params.transparent_output ? 'true' : 'false'
   const currentTransparentOutputFailed = Boolean(currentOutputImageId && task.transparentOutput && task.transparentOriginalImages?.[currentOutputImageIndex] === '')
   const outputCompressionText = task.params.output_compression == null ? '未设置' : String(task.params.output_compression)
@@ -987,7 +987,7 @@ export default function DetailModal() {
                   <DetailParamValue task={task} paramKey="output_format" className="font-medium" actualParams={currentActualParams} />
                 </div>
               </div>
-              {isPngOutput ? (
+              {supportsTransparentOutput && (
                 <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                   <span className="text-gray-400 dark:text-gray-500">透明背景</span>
                   <br />
@@ -1000,7 +1000,8 @@ export default function DetailModal() {
                     )}
                   </div>
                 </div>
-              ) : (
+              )}
+              {task.params.output_format !== 'png' && (
                 <div className="bg-gray-50 dark:bg-white/[0.03] rounded-lg px-3 py-2 min-w-0 overflow-hidden">
                   <span className="text-gray-400 dark:text-gray-500">压缩率</span>
                   <br />

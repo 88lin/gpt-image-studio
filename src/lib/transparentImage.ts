@@ -29,8 +29,8 @@ export function buildTransparentPrompt(prompt: string) {
 export function getTransparentRequestParams(params: TaskParams): TaskParams {
   return {
     ...params,
-    output_format: 'png',
-    output_compression: null,
+    output_format: params.output_format === 'webp' ? 'webp' : 'png',
+    output_compression: params.output_format === 'webp' ? params.output_compression : null,
     transparent_output: true,
   }
 }
@@ -42,7 +42,12 @@ export function createTransparentOutputMeta(prompt: string): TransparentOutputMe
   }
 }
 
-export async function removeKeyedBackgroundFromDataUrl(dataUrl: string, keyColor?: string): Promise<string> {
+export async function removeKeyedBackgroundFromDataUrl(
+  dataUrl: string,
+  keyColor?: string,
+  outputFormat: 'png' | 'webp' = 'png',
+  outputCompression?: number | null,
+): Promise<string> {
   const image = await loadImage(dataUrl)
   const canvas = document.createElement('canvas')
   canvas.width = image.naturalWidth
@@ -55,7 +60,10 @@ export async function removeKeyedBackgroundFromDataUrl(dataUrl: string, keyColor
   const effectiveKeyColor = keyColor || detectKeyColorFromPixels(pixels.data, canvas.width, canvas.height)
   removeKeyedBackgroundFromPixels(pixels.data, canvas.width, canvas.height, effectiveKeyColor)
   ctx.putImageData(pixels, 0, 0)
-  return canvas.toDataURL('image/png')
+  const quality = outputFormat === 'webp' && outputCompression != null
+    ? Math.max(0, Math.min(1, 1 - outputCompression / 100))
+    : undefined
+  return canvas.toDataURL(`image/${outputFormat}`, quality)
 }
 
 export function detectKeyColorFromPixels(data: Uint8ClampedArray, width: number, height: number): string {

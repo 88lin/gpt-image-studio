@@ -335,8 +335,42 @@ describe('URL settings params', () => {
     expect(next.profiles[0]).toMatchObject({ provider: 'custom-provider', codexCli: true })
   })
 
+  it('applies the transparent background method to the active fal profile', () => {
+    const falProfile = createDefaultFalProfile({ id: 'fal-profile' })
+    const current = normalizeSettings({
+      ...DEFAULT_SETTINGS,
+      profiles: [falProfile],
+      activeProfileId: falProfile.id,
+    })
+    const next = normalizeSettings({
+      ...current,
+      ...buildSettingsFromUrlParams(current, new URLSearchParams('transparentBackgroundMethod=local')),
+    })
+
+    expect(next.profiles[0].transparentBackgroundMethod).toBe('local')
+  })
+
+  it('applies the transparent background method to a requested custom profile', () => {
+    const current = normalizeSettings({
+      ...DEFAULT_SETTINGS,
+      customProviders: [{ id: 'custom-provider', name: 'Custom Provider', submit: { path: 'images/generations' } }],
+      profiles: [{
+        ...createDefaultOpenAIProfile({ id: 'custom-profile' }),
+        provider: 'custom-provider',
+      }],
+      activeProfileId: 'custom-profile',
+    })
+    const next = normalizeSettings({
+      ...current,
+      ...buildSettingsFromUrlParams(current, new URLSearchParams('profileId=custom-profile&transparentBackgroundMethod=local')),
+    })
+
+    expect(next.activeProfileId).toBe('custom-profile')
+    expect(next.profiles[0].transparentBackgroundMethod).toBe('local')
+  })
+
   it('clears known URL setting params without touching unrelated params', () => {
-    const params = new URLSearchParams('reasoningEffort=high&foo=bar')
+    const params = new URLSearchParams('reasoningEffort=high&transparentBackgroundMethod=local&foo=bar')
 
     expect(hasUrlSettingParams(params)).toBe(true)
     clearUrlSettingParams(params)
@@ -733,6 +767,7 @@ describe('URL settings params', () => {
         provider: 'openai',
         model: 'patched-model-b',
         timeout: 240,
+        transparentBackgroundMethod: 'local',
       }],
     }))
 
@@ -753,7 +788,19 @@ describe('URL settings params', () => {
       apiKey: 'key-b',
       model: 'patched-model-b',
       timeout: 240,
+      transparentBackgroundMethod: 'local',
     })
+  })
+
+  it('applies the transparent background method in preset-only mode', async () => {
+    const { buildSettingsFromUrlParams } = await importPresetConfigOnlyUrlSettings()
+    const current = normalizeSettings(DEFAULT_SETTINGS)
+    const next = normalizeSettings({
+      ...current,
+      ...buildSettingsFromUrlParams(current, new URLSearchParams('transparentBackgroundMethod=local')),
+    })
+
+    expect(next.profiles[0].transparentBackgroundMethod).toBe('local')
   })
 
   it('preserves a trailing slash when overriding a custom preset API URL', async () => {
@@ -862,7 +909,7 @@ describe('URL settings params', () => {
     const next = normalizeSettings({
       ...current,
       ...buildSettingsFromUrlParams(current, new URLSearchParams(
-        'apiUrl=https://changed.example.com/v1&apiKey=changed-key&model=changed-model',
+        'apiUrl=https://changed.example.com/v1&apiKey=changed-key&model=changed-model&transparentBackgroundMethod=local',
       )),
     })
 
@@ -870,6 +917,7 @@ describe('URL settings params', () => {
       baseUrl: current.profiles[0].baseUrl,
       apiKey: 'changed-key',
       model: current.profiles[0].model,
+      transparentBackgroundMethod: 'api',
     })
   })
 

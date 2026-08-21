@@ -1,4 +1,4 @@
-import type { ApiMode, ReasoningEffort } from '../types'
+import type { ApiMode, ApiProfile, ReasoningEffort } from '../types'
 import { DEFAULT_STREAM_PARTIAL_IMAGES, REASONING_EFFORT_VALUES } from '../types'
 
 import { normalizeBaseUrl } from './devProxy'
@@ -26,6 +26,7 @@ export interface DefaultApiUrlPatch {
   codexCli?: boolean
   streamImages?: boolean
   streamPartialImages?: number
+  transparentBackgroundMethod?: ApiProfile['transparentBackgroundMethod']
 }
 
 export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
@@ -49,6 +50,7 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
     const codexCliParam = parsed.searchParams.get('codexCli')
     const streamImagesParam = parsed.searchParams.get('streamImages')
     const streamPartialImagesParam = parsed.searchParams.get('streamPartialImages')
+    const transparentBackgroundMethodParam = parsed.searchParams.get('transparentBackgroundMethod')
 
     if (apiUrlParam !== null) patch.baseUrl = normalizeBaseUrl(apiUrlParam.trim())
     if (apiKeyParam !== null) patch.apiKey = apiKeyParam.trim()
@@ -59,6 +61,9 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
     if (codexCliParam !== null) patch.codexCli = codexCliParam.trim().toLowerCase() === 'true'
     if (streamImagesParam !== null) patch.streamImages = streamImagesParam.trim().toLowerCase() === 'true'
     if (streamPartialImagesParam !== null) patch.streamPartialImages = normalizeStreamPartialImages(streamPartialImagesParam)
+    if (transparentBackgroundMethodParam === 'api' || transparentBackgroundMethodParam === 'local') {
+      patch.transparentBackgroundMethod = transparentBackgroundMethodParam
+    }
 
     return patch
   } catch {

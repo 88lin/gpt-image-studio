@@ -1672,11 +1672,11 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
   }
 
   const normalizedParams = normalizeParamsForSettings(params, requestSettings, { hasInputImages: orderedInputImages.length > 0 })
-  const shouldUseTransparentOutput = normalizedParams.output_format === 'png' && normalizedParams.transparent_output
+  const shouldUseTransparentOutput = (normalizedParams.output_format === 'png' || normalizedParams.output_format === 'webp') && normalizedParams.transparent_output
   const taskParams = shouldUseTransparentOutput
     ? getTransparentRequestParams(normalizedParams)
     : { ...normalizedParams, transparent_output: false }
-  const transparentMeta = taskParams.transparent_output
+  const transparentMeta = taskParams.transparent_output && activeProfile.transparentBackgroundMethod === 'local'
     ? createTransparentOutputMeta(prompt.trim())
     : null
   const normalizedParamPatch = getChangedParams(params, taskParams)
@@ -1982,7 +1982,9 @@ async function storeTaskOutputImages(task: TaskRecord, images: string[]) {
         cacheImage(original.id, dataUrl)
 
         try {
-          outputDataUrl = await removeKeyedBackgroundFromDataUrl(dataUrl)
+          outputDataUrl = task.params.output_format === 'webp'
+            ? await removeKeyedBackgroundFromDataUrl(dataUrl, undefined, 'webp', task.params.output_compression)
+            : await removeKeyedBackgroundFromDataUrl(dataUrl)
           transparentOriginalImageIds.push(original.id)
         } catch (err) {
           console.warn('透明背景后处理失败，已回退为原始输出', err)
@@ -3517,6 +3519,7 @@ async function executeTask(taskId: string) {
       settings: requestSettings,
       prompt: replaceImageMentionsForApi(requestPrompt, inputDataUrls.length),
       params: task.params,
+      nativeTransparentBackground: task.params.transparent_output && !task.transparentOutput,
       inputImageDataUrls: inputDataUrls,
       maskDataUrl,
       skipCodexCliSizePrompt: task.sourceMode === 'agent',
@@ -3774,11 +3777,11 @@ export async function retryTask(task: TaskRecord) {
   const { settings } = useStore.getState()
   const activeProfile = getActiveApiProfile(settings)
   const normalizedParams = normalizeParamsForSettings(task.params, settings, { hasInputImages: task.inputImageIds.length > 0 })
-  const shouldUseTransparentOutput = normalizedParams.output_format === 'png' && normalizedParams.transparent_output
+  const shouldUseTransparentOutput = (normalizedParams.output_format === 'png' || normalizedParams.output_format === 'webp') && normalizedParams.transparent_output
   const taskParams = shouldUseTransparentOutput
     ? getTransparentRequestParams(normalizedParams)
     : { ...normalizedParams, transparent_output: false }
-  const transparentMeta = taskParams.transparent_output
+  const transparentMeta = taskParams.transparent_output && activeProfile.transparentBackgroundMethod === 'local'
     ? createTransparentOutputMeta(task.prompt.trim())
     : null
   const taskId = genId()

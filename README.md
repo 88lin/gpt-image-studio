@@ -2,11 +2,13 @@
 
 # 🎨 GPT Image Studio
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/88lin/gpt-image-studio?style=flat-square&color=eab308)](https://github.com/88lin/gpt-image-studio/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/88lin/gpt-image-studio?style=flat-square&color=3b82f6)](https://github.com/88lin/gpt-image-studio/network/members)
-[![License](https://img.shields.io/badge/license-MIT-10b981?style=flat-square)](LICENSE)
-[![React](https://img.shields.io/badge/React-19-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![GitHub stars](https://img.shields.io/github/stars/88lin/gpt-image-studio?style=flat-square&logo=github&logoColor=white&color=FFB300)](https://github.com/88lin/gpt-image-studio/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/88lin/gpt-image-studio?style=flat-square&logo=github&logoColor=white&color=60A5FA)](https://github.com/88lin/gpt-image-studio/network/members)
+[![License](https://img.shields.io/badge/License-MIT-34D399?style=flat-square)](LICENSE)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7-B73BFE?style=flat-square&logo=vite&logoColor=FFD62E)](https://vite.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
 **基于 OpenAI gpt-image-2 API 的图片生成、编辑与提示词工作台**
 
@@ -15,9 +17,9 @@
 
 <br>
 
-[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-black?style=for-the-badge&logo=vercel&logoColor=white)](https://gpt-image-2.88lin.eu.org/)
+[![GitHub Pages 在线体验](https://img.shields.io/badge/GitHub%20Pages-%E2%9C%85%20%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-3FB950?style=for-the-badge&logo=github&logoColor=white)](https://88lin.github.io/gpt-image-studio)
 &nbsp;&nbsp;&nbsp;
-[![GitHub Pages 在线体验](https://img.shields.io/badge/GitHub%20Pages-%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-222222?style=for-the-badge&logo=github&logoColor=white)](https://88lin.github.io/gpt-image-studio)
+[![Vercel 在线体验](https://img.shields.io/badge/Vercel-%E2%9A%A1%20%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-8B5CF6?style=for-the-badge&logo=vercel&logoColor=white)](https://gpt-image-2.88lin.eu.org/)
 
 </div>
 
@@ -25,6 +27,18 @@
 
 > [!TIP]
 > 若需调用非 HTTPS 的内网或本地 HTTP API，请使用 GitHub Pages 版本或自行部署，Vercel 部署的体验版绑定的 `.dev` 域名因安全策略通常要求接口必须为 HTTPS。
+
+## 🌟 二次开发增强
+
+本项目基于 [GPT Image Playground](https://github.com/CookSleep/gpt_image_playground) 二次开发，额外增加了以下功能：
+
+- **570+ 内置提示词模板**：聚合三个中文提示词来源，支持按标题、描述、来源和标签搜索，一键套用：
+  - [EvoLinkAI/awesome-gpt-image-2-prompts](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) — 199 个 GPT-Image-2 实用案例
+  - [prompts.kkkm.cn](https://prompts.kkkm.cn/) — 274 个高质量中文提示词
+  - 厚十方精选 — 97 个电商 / 海报 / 封面 / 产品图模板
+- **提示词模板库弹窗**：独立 UI 组件，支持分类浏览、关键词检索、示例图预览和一键填入输入框
+- **移除上游赞助弹窗**：去掉原项目的赞助提示，界面更干净
+- **焦点管理优化**：打开 / 关闭弹窗时自动释放焦点，避免移动端键盘残留
 
 ## 💖 赞助商
 
@@ -117,13 +131,14 @@
 - **参考图与遮罩**：支持上传最多 16 张参考图（支持剪贴板和拖拽）。内置可视化遮罩编辑器，自动预处理以符合官方分辨率限制。
 - **批量与迭代**：支持单次多图生成；一键将满意结果转为参考图，无缝开启下一轮修改。
 - **流式生成预览**：`Images API` 与 `Responses API` 模式均支持流式接收中间步骤图像，缓解连接超时问题。
-- **透明背景后处理**：画廊模式下选择 PNG 格式后可开启透明背景功能，自动在提示词末尾追加工作流说明，要求模型使用纯绿色或纯洋红色背景，并在结果返回后本地去除原图中的背景色，保存为带透明通道的 PNG。
+- **透明背景（API 原生 / 本地后处理双模式）**：画廊模式下选择 PNG 或 WebP 格式后可开启透明背景功能，每个 API 配置可独立选择实现方式（设置入口在 API 配置页）。API 原生模式会直接请求模型返回透明通道（需当前接口和模型支持；fal.ai 暂无对应参数），本地后处理模式则会要求模型使用纯绿色或纯洋红色背景，并在结果返回后于浏览器中去除背景色，按所选 PNG 或 WebP 格式保存透明结果。
 
-  > 透明背景后处理功能为本地后处理流程，适用于图标、贴纸、单主体素材等场景，并非 API 原生透明通道（GPT-Image-2 不支持）。若主体边缘存在复杂发丝、半透明材质、强反光或与背景色接近的颜色，可能出现边缘残留或误抠。
+  > [!NOTE]
+  > 本地后处理流程适用于图标、贴纸、单主体素材等场景；若主体边缘存在复杂发丝、半透明材质、强反光或与背景色接近的颜色，可能出现边缘残留或误抠。若使用 API 原生模式时接口返回“不支持透明背景”类错误，应用会提示切换为本地后处理。
 
 ### 🧠 提示词模板库
-- **内置精选模板**：内置来自 prompts.kkkm.cn、all-image-prompts 等来源的中文提示词模板，适合电商图、海报、封面、产品图、摄影风格和视觉概念图。
-- **搜索与套用**：支持按标题、描述、来源和提示词内容检索，一键填入输入框并继续二次编辑。
+- **570+ 内置精选模板**：聚合 prompts.kkkm.cn、awesome-gpt-image-2-prompts、厚十方精选三个中文提示词来源，覆盖电商图、海报、封面、产品图、摄影风格和视觉概念图等场景。
+- **搜索与套用**：支持按标题、描述、来源和标签检索，一键填入输入框并继续二次编辑。
 - **示例图辅助判断**：部分模板保留示例图，便于快速判断构图、画风和适用场景。
 
 ### 🤖 Agent 多轮对话模式
@@ -184,6 +199,7 @@
 | `VITE_PREVENT_PRESET_CONFIG_DELETION=true` | `PREVENT_PRESET_CONFIG_DELETION=true` | 禁止删除预置配置和预置供应商，不锁定参数；普通项不受影响 |
 | `VITE_SHOW_PRESET_CONFIG_ONLY=true` | `SHOW_PRESET_CONFIG_ONLY=true` | 只允许使用当前预置配置，禁止创建、复制、删除、拖动、切换供应商和管理自定义供应商；未同时开启锁定时参数仍可编辑，API Key 始终可编辑 |
 
+> [!NOTE]
 > **未开启上述限制时的默认行为**：
 > - **参数更新**：API 地址、模型、超时等参数会与上一次部署快照比较；部署值发生变化时覆盖一次本地值，之后保留用户的本地修改，直到部署值再次变更。
 > - **API Key**：始终由用户在本地管理，重新部署不覆盖。
@@ -191,6 +207,7 @@
 > - **下线预置清理**：部署端移除某个预置后，若用户从未修改过该配置且没有历史生成任务引用，会自动从本地删除；若已被修改或仍被历史任务引用，则保留并转为普通配置。
 > - **失效供应商清理**：随预置引入的自定义供应商在不再被任何配置使用、且从未被用户修改时，也会自动清理。
 
+> [!NOTE]
 > 兼容提示：旧变量 `VITE_SHOW_DEFAULT_CONFIG_ONLY`／`SHOW_DEFAULT_CONFIG_ONLY` 仍可使用，等同于对应的 `SHOW_PRESET_CONFIG_ONLY`。
 
 ### 部署方式
@@ -223,7 +240,7 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 1. 在 Vercel 项目设置 **Settings -> Git** 的 **Deploy Hooks** 中创建一个名为 `Release` 的 Hook（Branch 填 `main`）并复制生成的 URL。
 2. 在你 Fork 的 GitHub 仓库设置 **Settings -> Secrets and variables -> Actions** 中，新建 Secret `VERCEL_DEPLOY_HOOK`，填入刚才的 URL。
 
-此后，只有在上游发布了正式版本（即包含新 Release / 版本号变动）时，在 GitHub 点击 **Sync fork** 才会自动触发 Vercel 构建部署；日常的普通代码提交不会触发部署。
+此后，只有在本仓库发布了正式版本（即包含新 Release / 版本号变动）时，在你的 Fork 页面点击 **Sync fork** 才会自动触发 Vercel 构建部署；日常的普通代码提交不会触发部署。
 
 </details>
 
@@ -295,8 +312,10 @@ npm run deploy:cf
 | `LOCK_API_PROXY=true` | 强制锁定代理为开启，用户无法关闭 |
 | `HOST` / `PORT` | Nginx 监听地址和端口，默认 `0.0.0.0:80` |
 
+> [!WARNING]
 > 开启 API 代理后，任何人都能将你的服务器作为代理来请求目标 API。建议仅在有访问控制（如 IP 白名单）或本地网络中开启。
 
+> [!NOTE]
 > 旧版 `API_URL` 已拆分为 `DEFAULT_API_URL` 和 `API_PROXY_URL`，容器启动时自动兼容，无需立即修改。
 
 **隐藏真实 API 地址**
@@ -429,6 +448,7 @@ npm run build
 | `streamImages` | 流式传输 | `?streamImages=true` |
 | `streamPartialImages` | 中间步骤图像数（需配合 streamImages） | `?streamPartialImages=2` |
 | `profileId` | 目标配置 ID；匹配到同 ID 配置时直接更新 | `?profileId=my-service` |
+| `transparentBackgroundMethod` | 透明背景实现方式：`api`（原生）或 `local`（本地后处理） | `?transparentBackgroundMethod=local` |
 
 集成示例（New API 聊天系统）：
 
@@ -444,6 +464,7 @@ https://88lin.github.io/gpt-image-studio?apiUrl={address}&apiKey={key}&model={mo
 如果需要导入自定义格式的 API 配置，请使用 `settings` 参数并传入 URL 编码后的完整 JSON：
 - `?settings={URL编码后的JSON}`（只读取 `customProviders` 和 `profiles` 列表）
 
+> [!TIP]
 > 推荐先在项目内完成配置生成与导入：
 >
 > **设置 - API 配置 - 供应商类型 - 创建自定义供应商 - AI 一键生成与导入**
@@ -532,6 +553,7 @@ JSON 结构示例：
 | `isDefault` | 否 | 有多个配置时，为默认项设置 `true`（只能有一个）；只有一个配置时不填。默认项决定首次使用时自动选中的配置；允许拖动排序和删除（受保护策略控制）。 |
 | `timeout` | 否 | 请求超时秒数，默认 600。 |
 | `apiProxy` | 否 | 是否走部署端 API 代理，默认 `false`。 |
+| `transparentBackgroundMethod` | 否 | 透明背景实现方式：`"api"`（API 原生）或 `"local"`（本地后处理）。OpenAI 兼容配置默认 `"api"`，fal.ai 默认 `"local"`，自定义服务商若生成和编辑请求都映射了 `$params.background` 模板变量则默认 `"api"`，否则默认 `"local"`。 |
 
 ### 示例：仅 OpenAI 兼容
 
@@ -584,7 +606,8 @@ JSON 结构示例：
 
 在项目的 [Vercel 在线体验](https://gpt-image-2.88lin.eu.org/) 或 [GitHub Pages 在线体验](https://88lin.github.io/gpt-image-studio) 中配置好某个条目后，点击"链接"按钮复制含 `?settings=` 参数的 URL（请勿勾选任何"New API 变量配置"选项），直接填入环境变量即可。
 
-> 💡 **提示**：页面中的"复制导入配置 URL"按钮导出的是**当前选中的单个配置**及其关联的自定义供应商。如需一次性预置包含多个供应商的列表，请使用下方的本地/仓库文件或远程 URL 方式。
+> [!TIP]
+> 页面中的"复制导入配置 URL"按钮导出的是**当前选中的单个配置**及其关联的自定义供应商。如需一次性预置包含多个供应商的列表，请使用下方的本地/仓库文件或远程 URL 方式。
 
 ```dotenv
 VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22customProviders%22%3A%5B...%5D%2C%22profiles%22%3A%5B...%5D%7D
@@ -607,6 +630,7 @@ docker run -d -p 8080:80 \
   ghcr.io/88lin/gpt-image-studio:latest
 ```
 
+> [!NOTE]
 > Docker 环境变量名为 `DEFAULT_API_URL`（不含 `VITE_` 前缀）。
 
 **3. HTTP／HTTPS 远程配置文件**
@@ -619,18 +643,14 @@ VITE_DEFAULT_API_URL=https://example.com/gpt-image-config.json
 
 ---
 
-## 💻 技术栈
+## ⭐ Star History
 
-<div align="center">
-  <br>
-  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" /></a>
-  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
-  <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite" /></a>
-  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS_3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS 3" /></a>
-  <a href="https://zustand.docs.pmnd.rs/"><img src="https://img.shields.io/badge/Zustand-764ABC?style=for-the-badge&logo=react&logoColor=white" alt="Zustand" /></a>
-  <br>
-  <br>
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/88lin/gpt-image-studio/star-history/assets/my-star-history/star-history-dark.svg">
+  <img alt="Star history" src="https://raw.githubusercontent.com/88lin/gpt-image-studio/star-history/assets/my-star-history/star-history-light.svg">
+</picture>
+
+---
 
 ## 📄 许可证
 

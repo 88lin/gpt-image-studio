@@ -15,6 +15,7 @@ export interface CallApiOptions {
   settings: AppSettings
   prompt: string
   params: TaskParams
+  nativeTransparentBackground?: boolean
   /** 输入图片的 data URL 列表 */
   inputImageDataUrls: string[]
   maskDataUrl?: string
@@ -107,6 +108,7 @@ export function assertMaskEditFileSize(label: string, bytes: number) {
 export const IMAGE_FETCH_CORS_HINT = ' 可点链接按钮复制结果链接，或尝试开启「返回 Base64 图片数据」避免此问题。'
 export const STREAMING_UNSUPPORTED_HINT = '提示：当前使用的 API 可能不支持流式传输，请尝试关闭「流式传输」功能。'
 export const STREAMING_FORMAT_HINT = '提示：API 返回了无法解析的流式数据格式，请尝试关闭「流式传输」功能。'
+export const TRANSPARENT_BACKGROUND_UNSUPPORTED_HINT = '提示：当前使用的 API 不支持为该模型使用原生透明背景，请将「透明背景实现方式」切换为「本地后处理」。'
 
 export function appendStreamingUnsupportedHint(message: string): string {
   return message ? `${message}\n${STREAMING_UNSUPPORTED_HINT}` : STREAMING_UNSUPPORTED_HINT
@@ -116,8 +118,15 @@ export function appendStreamingFormatHint(message: string): string {
   return message ? `${message}\n${STREAMING_FORMAT_HINT}` : STREAMING_FORMAT_HINT
 }
 
+export function maybeAppendTransparentBackgroundHint(message: string): string {
+  if (!/transparent background is not supported for this model\.?/i.test(message)) return message
+  return `${message}\n${TRANSPARENT_BACKGROUND_UNSUPPORTED_HINT}`
+}
+
 /** 排除明确与流式无关的状态码后追加提示 */
 export function maybeAppendStreamingHint(message: string, status: number, streamImages?: boolean): string {
+  const transparentMessage = maybeAppendTransparentBackgroundHint(message)
+  if (transparentMessage !== message) return transparentMessage
   if (!streamImages) return message
   if (status === 401 || status === 403 || status === 404 || status === 408 || status === 429 || status >= 500) {
     return message

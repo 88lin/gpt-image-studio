@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { normalizeBaseUrl } from '../lib/api'
+import { customProviderSupportsNativeTransparentBackground } from '../lib/customProviderCapabilities'
 import { hasActiveDataOperations } from '../lib/dataOperations'
 import { isApiProxyAvailable, isApiProxyLocked, readClientDevProxyConfig } from '../lib/devProxy'
 import { useStore, exportData, importData, clearData, type SettingsTab } from '../store'
@@ -124,7 +125,8 @@ function isPristineNewOpenAIProfile(profile: ApiProfile) {
     profile.codexCli === false &&
     profile.apiProxy === defaultProfile.apiProxy &&
     profile.streamImages === defaultProfile.streamImages &&
-    profile.streamPartialImages === defaultProfile.streamPartialImages
+    profile.streamPartialImages === defaultProfile.streamPartialImages &&
+    profile.transparentBackgroundMethod === defaultProfile.transparentBackgroundMethod
 }
 
 function getImportedProfileFromMergedSettings(
@@ -232,6 +234,7 @@ export default function SettingsModal() {
   const activeProviderIsOpenAICompatible = isOpenAICompatibleProvider(draft, activeProfile.provider)
   const activeProviderUsesApiUrl = activeProviderIsOpenAICompatible || activeProfile.provider === 'fal'
   const activeCustomProvider = getCustomProviderDefinition(draft, activeProfile.provider)
+  const activeCustomProviderSupportsNativeTransparentBackground = !activeCustomProvider || customProviderSupportsNativeTransparentBackground(activeCustomProvider)
   const activeProfileApiProxyEligible = isProfileApiProxyEligible(draft, activeProfile)
   const activeCustomProviderAsync = isAsyncCustomProvider(activeCustomProvider)
   const apiProxyChecked = activeProfileApiProxyEligible && (apiProxyLocked || activeProfile.apiProxy)
@@ -476,6 +479,7 @@ export default function SettingsModal() {
       if (profile.codexCli) url.searchParams.set('codexCli', 'true')
       if (profile.streamImages !== DEFAULT_SETTINGS.streamImages) url.searchParams.set('streamImages', String(Boolean(profile.streamImages)))
       if (profile.streamPartialImages !== DEFAULT_STREAM_PARTIAL_IMAGES) url.searchParams.set('streamPartialImages', String(normalizeStreamPartialImages(profile.streamPartialImages)))
+      if (profile.transparentBackgroundMethod !== 'api') url.searchParams.set('transparentBackgroundMethod', profile.transparentBackgroundMethod)
 
       let result = url.toString()
       if (!options.includeApiKey) {
@@ -1660,7 +1664,31 @@ export default function SettingsModal() {
                 </div>
               )}
 
-              {/* 9. 返回 Base64 图片数据 */}
+              {/* 9. 透明背景实现方式 */}
+              <div className="block">
+                <div className="mb-1.5 flex items-center justify-between gap-3">
+                  <span className="block text-sm text-gray-600 dark:text-gray-300">透明背景实现方式</span>
+                  <div className="w-28 shrink-0">
+                    <Select
+                      value={activeProfile.transparentBackgroundMethod}
+                      onChange={(value) => updateActiveProfile({ transparentBackgroundMethod: value as ApiProfile['transparentBackgroundMethod'] }, true)}
+                      options={[
+                        { label: 'API 原生', value: 'api' },
+                        { label: '本地后处理', value: 'local' },
+                      ]}
+                      disabled={activeProfileLocked || !activeCustomProviderSupportsNativeTransparentBackground}
+                      className="w-full rounded-xl border border-gray-200/70 bg-white/60 px-3 py-1.5 text-xs text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50"
+                    />
+                  </div>
+                </div>
+                <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
+                  {activeCustomProviderSupportsNativeTransparentBackground
+                    ? 'API 原生会请求接口直接生成透明背景，需当前接口支持；本地后处理会生成纯色背景并在浏览器中去除。'
+                    : <>当前自定义服务商 Manifest 未映射 <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">$params.background</code>，无法使用 API 原生透明背景。</>}
+                </div>
+              </div>
+
+              {/* 10. 返回 Base64 图片数据 */}
               {activeProviderIsOpenAICompatible && (
                 <div className="block">
                   <div className="mb-1.5 flex items-center justify-between">
@@ -1683,7 +1711,7 @@ export default function SettingsModal() {
                 </div>
               )}
 
-              {/* 10. Codex CLI 兼容模式 */}
+              {/* 11. Codex CLI 兼容模式 */}
               {activeProviderIsOpenAICompatible && (
                 <div className="block">
                   <div className="mb-1.5 flex items-center justify-between">
@@ -1706,7 +1734,7 @@ export default function SettingsModal() {
                 </div>
               )}
 
-              {/* 11. 请求超时 */}
+              {/* 12. 请求超时 */}
               {activeProviderIsOpenAICompatible && (
                 <label className="block">
                   <span className="mb-1.5 block text-sm text-gray-600 dark:text-gray-300">请求超时 (秒)</span>

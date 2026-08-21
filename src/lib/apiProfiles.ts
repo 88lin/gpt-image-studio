@@ -14,10 +14,11 @@ import type {
   CustomProviderTemplate,
 } from '../types'
 import { DEFAULT_AGENT_MAX_TOOL_ROUNDS, DEFAULT_STREAM_PARTIAL_IMAGES, DEFAULT_ZIP_DOWNLOAD_ROUTES, ZIP_DOWNLOAD_ROUTE_VALUES } from '../types'
+import { customProviderSupportsNativeTransparentBackground } from './customProviderCapabilities'
 import { shouldUseApiProxy } from './devProxy'
 import { normalizeReasoningEffort, normalizeStreamPartialImages, parseDefaultApiUrl } from './defaultApiUrl'
 import { readRuntimeEnv } from './runtimeEnv'
-import { isImportableConfigUrl } from './customProviderConfigUrl'
+import { isImportableConfigUrl } from './importableConfigUrl'
 
 const OPENAI_DEFAULT_BASE_URL = 'https://api.openai.com/v1'
 const RAW_DEFAULT_API_URL = readRuntimeEnv(import.meta.env.VITE_DEFAULT_API_URL)
@@ -49,6 +50,7 @@ const DEFAULT_GENERATE_BODY = {
   moderation: '$params.moderation',
   output_compression: '$params.output_compression',
   n: '$params.n',
+  background: '$params.background',
 }
 const DEFAULT_EDIT_BODY = DEFAULT_GENERATE_BODY
 const DEFAULT_OPENAI_RESULT: CustomProviderResultMapping = {
@@ -59,6 +61,7 @@ const DEFAULT_EDIT_FILES: CustomProviderFileMapping[] = [
   { field: 'image[]', source: 'inputImages', array: true },
   { field: 'mask', source: 'mask' },
 ]
+
 const SUB2API_PROVIDER: CustomProviderDefinition = {
   id: 'sb2api-async',
   name: 'sub2api（异步）',
@@ -366,6 +369,7 @@ export function createDefaultOpenAIProfile(overrides: Partial<ApiProfile> = {}):
     codexCli: DEFAULT_API_URL_PATCH?.codexCli ?? false,
     apiProxy: DEFAULT_OPENAI_API_PROXY,
     streamPartialImages: DEFAULT_API_URL_PATCH?.streamPartialImages ?? DEFAULT_STREAM_PARTIAL_IMAGES,
+    transparentBackgroundMethod: DEFAULT_API_URL_PATCH?.transparentBackgroundMethod ?? 'api',
     ...overrides,
     apiMode,
     streamImages,
@@ -386,6 +390,7 @@ export function createDefaultFalProfile(overrides: Partial<ApiProfile> = {}): Ap
     apiProxy: false,
     streamImages: false,
     streamPartialImages: DEFAULT_STREAM_PARTIAL_IMAGES,
+    transparentBackgroundMethod: 'local',
     ...overrides,
   }
 }
@@ -403,6 +408,7 @@ export function switchApiProfileProvider(profile: ApiProfile, provider: ApiProvi
       responseFormatB64Json: profile.responseFormatB64Json,
       streamImages: profile.streamImages,
       streamPartialImages: profile.streamPartialImages,
+      transparentBackgroundMethod: profile.transparentBackgroundMethod,
     },
   }
   const savedDraft = providerDrafts[provider]
@@ -420,12 +426,14 @@ export function switchApiProfileProvider(profile: ApiProfile, provider: ApiProvi
       responseFormatB64Json: savedDraft?.responseFormatB64Json,
       streamImages: false,
       streamPartialImages: savedDraft?.streamPartialImages ?? DEFAULT_STREAM_PARTIAL_IMAGES,
+      transparentBackgroundMethod: 'local',
       providerDrafts,
     }
   }
 
   if (customProvider) {
     const shouldUseOpenAIDefaults = profile.provider === 'fal'
+    const supportsNativeTransparentBackground = customProviderSupportsNativeTransparentBackground(customProvider)
     return {
       ...profile,
       provider: customProvider.id,
@@ -438,6 +446,7 @@ export function switchApiProfileProvider(profile: ApiProfile, provider: ApiProvi
       responseFormatB64Json: savedDraft?.responseFormatB64Json,
       streamImages: false,
       streamPartialImages: savedDraft?.streamPartialImages ?? DEFAULT_STREAM_PARTIAL_IMAGES,
+      transparentBackgroundMethod: supportsNativeTransparentBackground ? savedDraft?.transparentBackgroundMethod ?? 'api' : 'local',
       providerDrafts,
     }
   }
@@ -462,13 +471,23 @@ export function switchApiProfileProvider(profile: ApiProfile, provider: ApiProvi
     responseFormatB64Json: savedDraft?.responseFormatB64Json,
     streamImages: nextStreamImages,
     streamPartialImages: nextStreamPartialImages,
+    transparentBackgroundMethod: savedDraft?.transparentBackgroundMethod ?? 'api',
     providerDrafts,
   }
 }
 
-function normalizeProviderDraft(input: unknown, provider: ApiProvider, customProviderIds: Set<string>): ApiProfileProviderDraft {
+function normalizeProviderDraft(
+  input: unknown,
+  provider: ApiProvider,
+  customProviderIds: Set<string>,
+  nativeTransparentProviderIds: Set<string>,
+): ApiProfileProviderDraft {
   if (!isRecord(input)) return undefined
-  const fallback = provider === 'fal' ? createDefaultFalProfile() : createDefaultOpenAIProfile()
+  const nativeTransparentBackgroundUnavailable = customProviderIds.has(provider) && !nativeTransparentProviderIds.has(provider)
+  const transparentBackgroundMethod = nativeTransparentBackgroundUnavailable ? 'local' : 'api'
+  const fallback = provider === 'fal'
+    ? createDefaultFalProfile()
+    : createDefaultOpenAIProfile({ transparentBackgroundMethod })
   const baseUrl = typeof input.baseUrl === 'string' ? input.baseUrl : undefined
   const model = typeof input.model === 'string' && input.model.trim() ? input.model : undefined
   const apiMode = input.apiMode === 'responses' ? 'responses' : input.apiMode === 'images' ? 'images' : undefined
@@ -487,30 +506,46 @@ function normalizeProviderDraft(input: unknown, provider: ApiProvider, customPro
     responseFormatB64Json: input.responseFormatB64Json === true ? true : undefined,
     streamImages: typeof input.streamImages === 'boolean' ? input.streamImages : fallback.streamImages,
     streamPartialImages: normalizeStreamPartialImages(input.streamPartialImages, fallback.streamPartialImages),
+    transparentBackgroundMethod: !nativeTransparentBackgroundUnavailable && (input.transparentBackgroundMethod === 'api' || input.transparentBackgroundMethod === 'local')
+      ? input.transparentBackgroundMethod
+      : fallback.transparentBackgroundMethod,
   }
 }
 
-function normalizeProviderDrafts(input: unknown, customProviderIds: Set<string>): ApiProfile['providerDrafts'] {
+function normalizeProviderDrafts(
+  input: unknown,
+  customProviderIds: Set<string>,
+  nativeTransparentProviderIds: Set<string>,
+): ApiProfile['providerDrafts'] {
   if (!isRecord(input)) return undefined
   const entries = Object.entries(input)
-    .map(([provider, draft]) => [provider, normalizeProviderDraft(draft, provider, customProviderIds)] as const)
+    .map(([provider, draft]) => [provider, normalizeProviderDraft(draft, provider, customProviderIds, nativeTransparentProviderIds)] as const)
     .filter((entry): entry is [ApiProvider, NonNullable<ApiProfileProviderDraft>] => Boolean(entry[1]))
 
   return entries.length ? Object.fromEntries(entries) : undefined
 }
 
-export function normalizeApiProfile(input: unknown, fallback?: Partial<ApiProfile>, customProviderIds = new Set<string>()): ApiProfile {
+export function normalizeApiProfile(
+  input: unknown,
+  fallback?: Partial<ApiProfile>,
+  customProviderIds = new Set<string>(),
+  nativeTransparentProviderIds = new Set<string>(),
+): ApiProfile {
   const record = input && typeof input === 'object' ? input as Record<string, unknown> : {}
   const rawProvider = typeof record.provider === 'string' ? record.provider : ''
   const provider: ApiProvider = BUILT_IN_PROVIDER_IDS.has(rawProvider) || customProviderIds.has(rawProvider) ? rawProvider : 'openai'
   const apiMode: ApiMode = provider === 'openai' && record.apiMode === 'responses' ? 'responses' : 'images'
+  const providerFallback = customProviderIds.has(provider)
+    ? { transparentBackgroundMethod: 'local' as const, ...fallback }
+    : fallback
   const defaults = provider === 'fal'
-    ? createDefaultFalProfile(fallback)
-    : createDefaultOpenAIProfile({ ...fallback, apiMode })
+    ? createDefaultFalProfile(providerFallback)
+    : createDefaultOpenAIProfile({ ...providerFallback, apiMode })
   const rawBaseUrl = typeof record.baseUrl === 'string' ? record.baseUrl : defaults.baseUrl
   const streamImages = provider === 'openai'
     ? typeof record.streamImages === 'boolean' ? record.streamImages : defaults.streamImages
     : false
+  const nativeTransparentBackgroundUnavailable = customProviderIds.has(provider) && !nativeTransparentProviderIds.has(provider)
 
   return {
     ...defaults,
@@ -530,7 +565,10 @@ export function normalizeApiProfile(input: unknown, fallback?: Partial<ApiProfil
     responseFormatB64Json: record.responseFormatB64Json === true ? true : undefined,
     streamImages,
     streamPartialImages: normalizeStreamPartialImages(record.streamPartialImages, defaults.streamPartialImages),
-    providerDrafts: normalizeProviderDrafts(record.providerDrafts, customProviderIds),
+    transparentBackgroundMethod: !nativeTransparentBackgroundUnavailable && (record.transparentBackgroundMethod === 'api' || record.transparentBackgroundMethod === 'local')
+      ? record.transparentBackgroundMethod
+      : defaults.transparentBackgroundMethod,
+    providerDrafts: normalizeProviderDrafts(record.providerDrafts, customProviderIds, nativeTransparentProviderIds),
   }
 }
 
@@ -564,7 +602,7 @@ function validateDeploymentProviderIds(input: unknown) {
   }
 }
 
-function normalizeDeploymentProfileEntries(input: unknown, customProviderIds: Set<string>, deploymentConfig = false) {
+function normalizeDeploymentProfileEntries(input: unknown, customProviderIds: Set<string>, nativeTransparentProviderIds = new Set<string>(), deploymentConfig = false) {
   const records = Array.isArray(input)
     ? input.flatMap((item) => {
         validateImportedProfileRecord(item)
@@ -599,13 +637,14 @@ function normalizeDeploymentProfileEntries(input: unknown, customProviderIds: Se
 
   return records.map((record) => {
     const rawId = typeof record.id === 'string' ? record.id.trim() : ''
-    if (rawId) return { source: record, profile: normalizeApiProfile({ ...record, id: rawId }, undefined, customProviderIds) }
+    const fallback = nativeTransparentProviderIds.has(record.provider as string) ? { transparentBackgroundMethod: 'api' as const } : undefined
+    if (rawId) return { source: record, profile: normalizeApiProfile({ ...record, id: rawId }, fallback, customProviderIds, nativeTransparentProviderIds) }
 
     const provider = record.provider as string
     const id = deploymentConfig
       ? createPresetProfileId(provider, record, usedIds)
       : createImportedProfileId(provider, usedIds)
-    return { source: record, profile: normalizeApiProfile({ ...record, id }, undefined, customProviderIds) }
+    return { source: record, profile: normalizeApiProfile({ ...record, id }, fallback, customProviderIds, nativeTransparentProviderIds) }
   })
 }
 
@@ -613,6 +652,7 @@ export function normalizeSettings(input: Partial<AppSettings> | unknown): AppSet
   const record = input && typeof input === 'object' ? input as Record<string, unknown> : {}
   const customProviders = normalizeCustomProviderDefinitions(record.customProviders)
   const customProviderIds = new Set(customProviders.map((provider) => provider.id))
+  const nativeTransparentProviderIds = new Set(customProviders.filter(customProviderSupportsNativeTransparentBackground).map((provider) => provider.id))
   const legacyApiMode: ApiMode = record.apiMode === 'responses' ? 'responses' : 'images'
   const legacyProfile = createDefaultOpenAIProfile({
     baseUrl: typeof record.baseUrl === 'string' ? record.baseUrl : DEFAULT_BASE_URL,
@@ -627,7 +667,11 @@ export function normalizeSettings(input: Partial<AppSettings> | unknown): AppSet
     streamPartialImages: normalizeStreamPartialImages(record.streamPartialImages),
   })
   const normalizedProfiles = Array.isArray(record.profiles) && record.profiles.length
-    ? record.profiles.map((profile) => normalizeApiProfile(profile, undefined, customProviderIds))
+    ? record.profiles.map((profile) => {
+        const provider = isRecord(profile) && typeof profile.provider === 'string' ? profile.provider : ''
+        const fallback = nativeTransparentProviderIds.has(provider) ? { transparentBackgroundMethod: 'api' as const } : undefined
+        return normalizeApiProfile(profile, fallback, customProviderIds, nativeTransparentProviderIds)
+      })
     : [legacyProfile]
   const defaultProfileId = getDefaultApiProfileId({ profiles: normalizedProfiles })
   const profiles = normalizedProfiles.map((profile) => ({
@@ -754,14 +798,17 @@ export function importCustomProviderSettingsFromJson(
     }
     validateCustomProviderTaskMappings(customProviders)
     const customProviderIds = new Set(customProviders.map((provider) => provider.id))
-    const profileEntries = normalizeDeploymentProfileEntries(record.profiles, customProviderIds, options.deploymentConfig)
+    const nativeTransparentProviderIds = new Set(customProviders.filter(customProviderSupportsNativeTransparentBackground).map((provider) => provider.id))
+    const profileEntries = normalizeDeploymentProfileEntries(record.profiles, customProviderIds, nativeTransparentProviderIds, options.deploymentConfig)
     const profiles = profileEntries.map((entry) => entry.profile)
     if (!options.deploymentConfig) return { customProviders, profiles }
 
     return {
       customProviders,
       profiles,
-      presetProfileFields: Object.fromEntries(profileEntries.map((entry) => [entry.profile.id, Object.keys(entry.source)])),
+      ...(profileEntries.length
+        ? { presetProfileFields: Object.fromEntries(profileEntries.map((entry) => [entry.profile.id, Object.keys(entry.source)])) }
+        : {}),
     }
   }
 
@@ -825,7 +872,8 @@ function isDefaultOpenAIProfile(profile: ApiProfile): boolean {
     profile.codexCli === false &&
     profile.apiProxy === DEFAULT_OPENAI_API_PROXY &&
     profile.streamImages === false &&
-    profile.streamPartialImages === DEFAULT_STREAM_PARTIAL_IMAGES
+    profile.streamPartialImages === DEFAULT_STREAM_PARTIAL_IMAGES &&
+    profile.transparentBackgroundMethod === 'api'
 }
 
 function hasOnlyDefaultProfiles(settings: AppSettings): boolean {
@@ -1016,6 +1064,7 @@ const PRESET_PROFILE_DEPLOYMENT_KEYS = [
   'responseFormatB64Json',
   'streamImages',
   'streamPartialImages',
+  'transparentBackgroundMethod',
   'providerDrafts',
 ] as const
 
@@ -1050,7 +1099,8 @@ export function mergePresetImportedSettings(
   const normalizedImported = normalizeSettings(importedSettings)
   const current = normalizeSettings(currentSettings)
   const customProviderIds = new Set(normalizedImported.customProviders.map((provider) => provider.id))
-  const allSourceProfileEntries = normalizeDeploymentProfileEntries(importedRecord.profiles, customProviderIds, true).map((entry) => ({
+  const nativeTransparentProviderIds = new Set(normalizedImported.customProviders.filter(customProviderSupportsNativeTransparentBackground).map((provider) => provider.id))
+  const allSourceProfileEntries = normalizeDeploymentProfileEntries(importedRecord.profiles, customProviderIds, nativeTransparentProviderIds, true).map((entry) => ({
     profile: entry.profile,
     source: entry.source,
     isDefault: entry.source.isDefault === true,

@@ -1,4 +1,4 @@
-import type { ApiMode, AppSettings } from '../types'
+import type { ApiMode, ApiProfile, AppSettings } from '../types'
 import { normalizeBaseUrl } from './devProxy'
 import {
   createDefaultOpenAIProfile,
@@ -12,9 +12,9 @@ import {
 } from './apiProfiles'
 import { isPresetConfigOnlyEnabled, isPresetConfigParamsLocked, isPresetProfile } from './presetConfig'
 
-const URL_SETTING_KEYS = ['settings', 'profileId', 'apiUrl', 'apiKey', 'codexCli', 'apiMode', 'model', 'profileName', 'reasoningEffort', 'streamImages', 'streamPartialImages']
+const URL_SETTING_KEYS = ['settings', 'profileId', 'apiUrl', 'apiKey', 'codexCli', 'apiMode', 'model', 'profileName', 'reasoningEffort', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod']
 
-function getProfileDedupKey(profile: Pick<AppSettings['profiles'][number], 'provider' | 'baseUrl' | 'apiKey' | 'model' | 'apiMode' | 'reasoningEffort' | 'codexCli' | 'streamImages' | 'streamPartialImages'>) {
+function getProfileDedupKey(profile: Pick<AppSettings['profiles'][number], 'provider' | 'baseUrl' | 'apiKey' | 'model' | 'apiMode' | 'reasoningEffort' | 'codexCli' | 'streamImages' | 'streamPartialImages' | 'transparentBackgroundMethod'>) {
   return JSON.stringify([
     profile.provider,
     profile.baseUrl.trim().toLowerCase(),
@@ -25,6 +25,7 @@ function getProfileDedupKey(profile: Pick<AppSettings['profiles'][number], 'prov
     profile.codexCli === true,
     profile.streamImages === true,
     profile.streamPartialImages ?? 0,
+    profile.transparentBackgroundMethod,
   ])
 }
 
@@ -172,6 +173,9 @@ function buildPresetConfigOnlySettingsFromUrlParams(currentSettings: Partial<App
           if (typeof matched.timeout === 'number' && Number.isFinite(matched.timeout)) patch.timeout = matched.timeout
           if (typeof matched.apiProxy === 'boolean') patch.apiProxy = matched.apiProxy
           if (matched.responseFormatB64Json === true) patch.responseFormatB64Json = true
+          if (matched.transparentBackgroundMethod === 'api' || matched.transparentBackgroundMethod === 'local') {
+            patch.transparentBackgroundMethod = matched.transparentBackgroundMethod
+          }
           if (targetProfile.provider !== 'fal' && typeof matched.codexCli === 'boolean') patch.codexCli = matched.codexCli
           if (isOpenAI) {
             if (matched.apiMode === 'images' || matched.apiMode === 'responses') patch.apiMode = matched.apiMode
@@ -189,11 +193,15 @@ function buildPresetConfigOnlySettingsFromUrlParams(currentSettings: Partial<App
   const apiKeyParam = searchParams.get('apiKey')
   const modelParam = searchParams.get('model')
   const profileNameParam = searchParams.get('profileName')
+  const transparentBackgroundMethodParam = searchParams.get('transparentBackgroundMethod')
   if (apiKeyParam !== null) patch.apiKey = apiKeyParam.trim()
   if (!apiKeyOnly) {
     if (profileNameParam?.trim()) patch.name = profileNameParam.trim()
     if (apiUrlParam !== null) patch.baseUrl = normalizeBaseUrl(apiUrlParam.trim())
     if (modelParam !== null && modelParam.trim()) patch.model = modelParam.trim()
+    if (transparentBackgroundMethodParam === 'api' || transparentBackgroundMethodParam === 'local') {
+      patch.transparentBackgroundMethod = transparentBackgroundMethodParam
+    }
   }
   if (targetProfile.provider !== 'fal' && !apiKeyOnly) {
     const codexCliParam = searchParams.get('codexCli')
@@ -242,6 +250,10 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
   const profileName = profileNameParam?.trim() ?? ''
   const streamImagesParam = searchParams.get('streamImages')
   const streamPartialImagesParam = searchParams.get('streamPartialImages')
+  const transparentBackgroundMethodParam = searchParams.get('transparentBackgroundMethod')
+  const transparentBackgroundMethod: ApiProfile['transparentBackgroundMethod'] | undefined = transparentBackgroundMethodParam === 'api' || transparentBackgroundMethodParam === 'local'
+    ? transparentBackgroundMethodParam
+    : undefined
   const apiMode: ApiMode | undefined = apiModeParam === 'images' || apiModeParam === 'responses' ? apiModeParam : undefined
 
   const hasLegacyOpenAIParams = apiUrlParam !== null || apiKeyParam !== null || codexCliParam !== null || apiMode !== undefined || modelParam !== null || profileNameParam !== null || reasoningEffortParam !== null || streamImagesParam !== null || streamPartialImagesParam !== null
@@ -250,20 +262,31 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
     : activateFirstImportedProfile(mergeImportedSettings(currentSettings, importedSettings), importedSettings)
 
   const requestedProfileId = profileIdParam?.trim() ?? ''
-  const requestedCustomProfile = requestedProfileId
-    ? settings.profiles.find((item) => item.id === requestedProfileId && item.provider !== 'openai' && item.provider !== 'fal')
+  const requestedNonOpenAIProfile = requestedProfileId
+    ? settings.profiles.find((item) => item.id === requestedProfileId && item.provider !== 'openai')
     : undefined
-  if (requestedCustomProfile && codexCliParam !== null) {
+  if (requestedNonOpenAIProfile && (transparentBackgroundMethod !== undefined || (requestedNonOpenAIProfile.provider !== 'fal' && codexCliParam !== null))) {
     return normalizeSettings({
       ...settings,
       profiles: settings.profiles.map((item) => item.id === requestedProfileId
-        ? { ...item, codexCli: codexCliParam.trim().toLowerCase() === 'true' }
+        ? {
+            ...item,
+            ...(requestedNonOpenAIProfile.provider !== 'fal' && codexCliParam !== null ? { codexCli: codexCliParam.trim().toLowerCase() === 'true' } : {}),
+            ...(transparentBackgroundMethod ? { transparentBackgroundMethod } : {}),
+          }
         : item),
       activeProfileId: requestedProfileId,
     })
   }
 
-  if (hasLegacyOpenAIParams) {
+  if (!requestedProfileId && transparentBackgroundMethod !== undefined && !hasLegacyOpenAIParams) {
+    return normalizeSettings({
+      ...settings,
+      profiles: settings.profiles.map((item) => item.id === settings.activeProfileId ? { ...item, transparentBackgroundMethod } : item),
+    })
+  }
+
+  if (hasLegacyOpenAIParams || transparentBackgroundMethod !== undefined) {
     const existingById = requestedProfileId
       ? settings.profiles.find((item) => item.id === requestedProfileId && item.provider === 'openai')
       : undefined
@@ -278,6 +301,7 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
       if (codexCliParam !== null) patch.codexCli = codexCliParam.trim().toLowerCase() === 'true'
       if (streamImagesParam !== null) patch.streamImages = streamImagesParam.trim().toLowerCase() === 'true'
       if (streamPartialImagesParam !== null) patch.streamPartialImages = normalizeStreamPartialImages(streamPartialImagesParam)
+      if (transparentBackgroundMethod !== undefined) patch.transparentBackgroundMethod = transparentBackgroundMethod
 
       return normalizeSettings({
         ...settings,
@@ -301,6 +325,7 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
     if (codexCliParam !== null) profile.codexCli = codexCliParam.trim().toLowerCase() === 'true'
     if (streamImagesParam !== null) profile.streamImages = streamImagesParam.trim().toLowerCase() === 'true'
     if (streamPartialImagesParam !== null) profile.streamPartialImages = normalizeStreamPartialImages(streamPartialImagesParam)
+    if (transparentBackgroundMethod !== undefined) profile.transparentBackgroundMethod = transparentBackgroundMethod
 
     const conflictingById = requestedProfileId ? settings.profiles.find((item) => item.id === requestedProfileId) : null
     if (conflictingById) {
