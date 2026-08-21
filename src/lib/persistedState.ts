@@ -7,6 +7,9 @@ import { getPersistableAgentConversations, stripPersistedAgentConversations } fr
 
 export interface PersistedAppState {
   settings: AppSettings
+  previousPresetConfig?: Pick<AppSettings, 'customProviders' | 'profiles'> | null
+  dismissedPresetProfileIds?: string[]
+  dismissedPresetProviderIds?: string[]
   params: TaskParams
   prompt?: string
   inputImages?: InputImage[]
@@ -33,12 +36,15 @@ type PersistedStateSource = Omit<PersistedAppState, 'prompt' | 'inputImages' | '
 
 type PersistedStateFallback = Pick<
   PersistedAppState,
-  'settings' | 'params' | 'dismissedCodexCliPrompts' | 'favoriteCollections' | 'defaultFavoriteCollectionId'
+  'settings' | 'params' | 'dismissedPresetProfileIds' | 'dismissedPresetProviderIds' | 'dismissedCodexCliPrompts' | 'favoriteCollections' | 'defaultFavoriteCollectionId'
 > & {
   agentConversations: AgentConversation[]
 }
 
 export type NormalizedPersistedAppState = PersistedAppState & {
+  previousPresetConfig: Pick<AppSettings, 'customProviders' | 'profiles'> | null
+  dismissedPresetProfileIds: string[]
+  dismissedPresetProviderIds: string[]
   prompt: string
   inputImages: InputImage[]
   maskDraft: MaskDraft | null
@@ -83,6 +89,9 @@ export function createPersistedState(state: PersistedStateSource, includeLegacyA
   const galleryInputDraft = saveGalleryInputDraft(state)
   return {
     settings,
+    previousPresetConfig: state.previousPresetConfig ?? null,
+    dismissedPresetProfileIds: state.dismissedPresetProfileIds ?? [],
+    dismissedPresetProviderIds: state.dismissedPresetProviderIds ?? [],
     params: state.params,
     ...(settings.persistInputOnRestart && (state.appMode === 'gallery' || galleryInputDraft)
       ? {
@@ -124,6 +133,15 @@ export function normalizePersistedState(
   if (!isRecord(persistedState)) return null
 
   const settings = normalizeSettings(persistedState.settings ?? fallback.settings)
+  const previousPresetConfig = isRecord(persistedState.previousPresetConfig) && Array.isArray(persistedState.previousPresetConfig.profiles)
+    ? (() => {
+        const normalized = normalizeSettings(persistedState.previousPresetConfig)
+        return {
+          customProviders: normalized.customProviders,
+          profiles: persistedState.previousPresetConfig.profiles.length ? normalized.profiles : [],
+        }
+      })()
+    : null
   const hasLegacyAgentConversations = Array.isArray(persistedState.agentConversations)
   const agentConversations = hasLegacyAgentConversations
     ? normalizeAgentConversations(persistedState.agentConversations)
@@ -172,6 +190,9 @@ export function normalizePersistedState(
   return {
     state: {
       settings,
+      previousPresetConfig,
+      dismissedPresetProfileIds: normalizeStringArray(persistedState.dismissedPresetProfileIds, fallback.dismissedPresetProfileIds ?? []),
+      dismissedPresetProviderIds: normalizeStringArray(persistedState.dismissedPresetProviderIds, fallback.dismissedPresetProviderIds ?? []),
       params: normalizeParams(persistedState.params, fallback.params),
       dismissedCodexCliPrompts: normalizeStringArray(persistedState.dismissedCodexCliPrompts, fallback.dismissedCodexCliPrompts),
       appMode,

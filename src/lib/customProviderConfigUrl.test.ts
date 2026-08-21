@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import {
   getCustomProviderConfigUrl,
+  hasEmbeddedDefaultConfig,
   isImportableConfigUrl,
   loadCustomProviderSettingsFromUrl,
+  loadEmbeddedDefaultConfig,
 } from './customProviderConfigUrl'
 
 describe('custom provider config URL', () => {
-  it('returns config URL when default API URL points to .json', () => {
+  it('does not expose a JSON config URL to the browser loader', () => {
     expect(getCustomProviderConfigUrl('https://example.com/custom-provider.json'))
-      .toBe('https://example.com/custom-provider.json')
+      .toBe('')
   })
 
   it('returns empty when default API URL is a normal API endpoint', () => {
@@ -28,42 +30,29 @@ describe('custom provider config URL', () => {
     expect(result).toBeNull()
   })
 
-  it('loads custom provider settings from URL', async () => {
-    const payload = {
-      customProviders: [{
-        id: 'custom-url',
-        name: 'URL Custom',
-        submit: {
-          path: 'images/generations',
-          method: 'POST',
-          contentType: 'json',
-          body: { model: '$profile.model', prompt: '$prompt' },
-          result: { imageUrlPaths: ['data.*.url'], b64JsonPaths: [] },
-        },
-      }],
-      profiles: [{
-        id: 'url-profile',
-        name: 'URL Profile',
-        provider: 'custom-url',
-        baseUrl: 'https://api.example.com/v1',
-        apiKey: 'url-key',
-        model: 'url-model',
-        timeout: 300,
-        apiMode: 'images',
-        codexCli: false,
-        apiProxy: false,
-      }],
-    }
-    const calls: Array<[RequestInfo | URL, RequestInit | undefined]> = []
-
-    const result = await loadCustomProviderSettingsFromUrl('https://example.com/provider.json', async (input, init) => {
-      calls.push([input, init])
-      return new Response(JSON.stringify(payload), { status: 200 })
+  it('loads an embedded default config without fetching a URL', () => {
+    const payload = JSON.stringify({
+      customProviders: [{ id: 'embedded', name: '内嵌服务商', submit: { path: 'generate' } }],
+      profiles: [],
     })
+    const bytes = new TextEncoder().encode(payload)
+    const base64 = btoa(Array.from(bytes, (byte) => String.fromCharCode(byte)).join(''))
 
-    expect(calls).toEqual([['https://example.com/provider.json', { cache: 'no-store' }]])
-    expect(result?.customProviders[0]).toMatchObject({ id: 'custom-url', name: 'URL Custom' })
-    expect(result?.profiles[0]).toMatchObject({ id: 'url-profile', provider: 'custom-url', model: 'url-model' })
+    expect(hasEmbeddedDefaultConfig(`embedded-config:${base64}`)).toBe(true)
+    expect(loadEmbeddedDefaultConfig(`embedded-config:${base64}`)?.customProviders[0]).toMatchObject({
+      id: 'embedded',
+      name: '内嵌服务商',
+    })
+  })
+
+  it('accepts an empty embedded deployment snapshot', () => {
+    const bytes = new TextEncoder().encode(JSON.stringify({ customProviders: [], profiles: [] }))
+    const base64 = btoa(Array.from(bytes, (byte) => String.fromCharCode(byte)).join(''))
+
+    expect(loadEmbeddedDefaultConfig(`embedded-config:${base64}`)).toEqual({
+      customProviders: [],
+      profiles: [],
+    })
   })
 
   it('imports settings directly from URL settings param', async () => {
@@ -94,17 +83,9 @@ describe('custom provider config URL', () => {
     }
     const url = `https://example.com/?settings=${encodeURIComponent(JSON.stringify({ version: 1, settings }))}`
 
-    const result = await loadCustomProviderSettingsFromUrl(url, async () => {
-      throw new Error('should not fetch settings URLs')
-    })
+    const result = await loadCustomProviderSettingsFromUrl(url)
 
     expect(result?.customProviders[0]).toMatchObject({ id: 'custom-share-url', name: 'Share URL Custom' })
     expect(result?.profiles[0]).toMatchObject({ id: 'share-url-profile', provider: 'custom-share-url' })
-  })
-
-  it('throws when URL request fails', async () => {
-    await expect(loadCustomProviderSettingsFromUrl('https://example.com/missing.json', async () => (
-      new Response('not found', { status: 404 })
-    ))).rejects.toThrow('HTTP 404')
   })
 })

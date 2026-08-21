@@ -69,7 +69,7 @@ export default function AgentSettingsTab({
               <div className="w-40 shrink-0">
                 {agentTextProfileOptions.length > 0 ? (
                   <Select
-                    value={selectedAgentTextProfile?.id ?? ''}
+                    value={selectedAgentTextProfile?.id ?? '请选择配置'}
                     onChange={(value) => commitSettings({ ...draft, agentTextProfileId: String(value) })}
                     options={agentTextProfileOptions}
                     showValueTooltips
@@ -92,13 +92,19 @@ export default function AgentSettingsTab({
               <div className="mb-1 flex items-center justify-between gap-3">
                 <span className="block text-sm text-gray-600 dark:text-gray-300">图像模型 API 配置</span>
                 <div className="w-40 shrink-0">
-                  <Select
-                    value={selectedAgentImageProfile?.id ?? ''}
-                    onChange={(value) => commitSettings({ ...draft, agentImageProfileId: String(value) })}
-                    options={agentImageProfileOptions}
-                    showValueTooltips
-                    className="w-full px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] text-xs transition-all duration-200 shadow-sm text-gray-700 dark:text-gray-200 outline-none"
-                  />
+                  {agentImageProfileOptions.length > 0 ? (
+                    <Select
+                      value={selectedAgentImageProfile?.id ?? '请选择配置'}
+                      onChange={(value) => commitSettings({ ...draft, agentImageProfileId: String(value) })}
+                      options={agentImageProfileOptions}
+                      showValueTooltips
+                      className="w-full px-3 py-1.5 rounded-xl border border-gray-200/60 dark:border-white/[0.08] bg-white/50 dark:bg-white/[0.03] hover:bg-white dark:hover:bg-white/[0.06] text-xs transition-all duration-200 shadow-sm text-gray-700 dark:text-gray-200 outline-none"
+                    />
+                  ) : (
+                    <div className="w-full rounded-xl border border-gray-200/60 bg-white/50 px-3 py-1.5 text-center text-xs text-gray-700 shadow-sm transition-all duration-200 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200">
+                      没有可用配置
+                    </div>
+                  )}
                 </div>
               </div>
               <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">

@@ -3,12 +3,12 @@ import { importCustomProviderSettingsFromJson } from './apiProfiles'
 import { readRuntimeEnv } from './runtimeEnv'
 
 const DEFAULT_API_URL = readRuntimeEnv(import.meta.env.VITE_DEFAULT_API_URL)
-
-type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
+const EMBEDDED_CONFIG_PREFIX = 'embedded-config:'
 
 export function isImportableConfigUrl(value: string): boolean {
   const url = value.trim()
   if (!url) return false
+  if (url.startsWith(EMBEDDED_CONFIG_PREFIX)) return true
 
   try {
     const parsed = new URL(url)
@@ -20,7 +20,29 @@ export function isImportableConfigUrl(value: string): boolean {
 
 export function getCustomProviderConfigUrl(defaultApiUrl = DEFAULT_API_URL): string {
   const url = defaultApiUrl.trim()
-  return isImportableConfigUrl(url) ? url : ''
+  if (hasEmbeddedDefaultConfig(url)) return ''
+  try {
+    return new URL(url).searchParams.has('settings') ? url : ''
+  } catch {
+    return ''
+  }
+}
+
+export function hasEmbeddedDefaultConfig(
+  defaultApiUrl = DEFAULT_API_URL,
+): boolean {
+  const value = defaultApiUrl.trim()
+  return value.startsWith(EMBEDDED_CONFIG_PREFIX)
+}
+
+export function loadEmbeddedDefaultConfig(
+  defaultApiUrl = DEFAULT_API_URL,
+): ImportedProviderSettings | null {
+  const value = defaultApiUrl.trim()
+  if (!value.startsWith(EMBEDDED_CONFIG_PREFIX)) return null
+
+  const bytes = Uint8Array.from(atob(value.slice(EMBEDDED_CONFIG_PREFIX.length)), (char) => char.charCodeAt(0))
+  return importCustomProviderSettingsFromJson(new TextDecoder().decode(bytes), [], { deploymentConfig: true })
 }
 
 function getSettingsJsonTextFromUrl(value: string): string | null {
@@ -38,20 +60,11 @@ function getSettingsJsonTextFromUrl(value: string): string | null {
   }
 }
 
-export async function loadCustomProviderSettingsFromUrl(
-  configUrl: string,
-  fetcher: FetchLike = fetch,
-): Promise<ImportedProviderSettings | null> {
+export async function loadCustomProviderSettingsFromUrl(configUrl: string): Promise<ImportedProviderSettings | null> {
   const url = configUrl.trim()
   if (!url) return null
 
   const settingsJsonText = getSettingsJsonTextFromUrl(url)
-  if (settingsJsonText) return importCustomProviderSettingsFromJson(settingsJsonText)
-
-  const response = await fetcher(url, { cache: 'no-store' })
-  if (!response.ok) {
-    throw new Error(`自定义服务商配置 URL 请求失败：HTTP ${response.status}`)
-  }
-
-  return importCustomProviderSettingsFromJson(await response.text())
+  if (settingsJsonText) return importCustomProviderSettingsFromJson(settingsJsonText, [], { deploymentConfig: true })
+  return null
 }

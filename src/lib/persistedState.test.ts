@@ -136,8 +136,13 @@ describe('persisted state codec', () => {
   })
 
   it('persists gallery and Agent drafts only when input persistence is enabled', () => {
+    const previousPresetConfig = {
+      customProviders: [],
+      profiles: [DEFAULT_SETTINGS.profiles[0]],
+    }
     const enabled = createPersistedState({
       ...source(),
+      previousPresetConfig,
       agentInputDrafts: {
         'conversation-a': {
           prompt: 'Agent 草稿',
@@ -184,11 +189,26 @@ describe('persisted state codec', () => {
     expect(enabled.inputImages).toEqual([{ id: imageA.id, dataUrl: '' }])
     expect(enabled.galleryInputDraft?.inputImages).toEqual([{ id: imageA.id, dataUrl: '' }])
     expect(enabled.agentInputDrafts['conversation-a'].inputImages).toEqual([{ id: imageA.id, dataUrl: '' }])
+    expect(enabled.previousPresetConfig).toEqual(previousPresetConfig)
     expect(disabled).not.toHaveProperty('prompt')
     expect(disabled).not.toHaveProperty('inputImages')
     expect(disabled.galleryInputDraft).toBeNull()
     expect(disabled.agentInputDrafts).toEqual({})
     expect(JSON.stringify(withLegacyConversation.agentConversations)).not.toContain('legacy-conversation-base64')
+  })
+
+  it('preserves an empty deployed profile snapshot when restoring persisted state', () => {
+    const result = normalizePersistedState({
+      previousPresetConfig: {
+        customProviders: [{ id: 'provider-a', name: 'Provider A', submit: { path: 'generate' } }],
+        profiles: [],
+      },
+    }, fallback())!
+
+    expect(result.state.previousPresetConfig?.profiles).toEqual([])
+    expect(result.state.previousPresetConfig?.customProviders).toEqual([
+      expect.objectContaining({ id: 'provider-a' }),
+    ])
   })
 
   it('does not restore Agent drafts or legacy top-level input when input persistence is disabled', () => {

@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "gpt-image-playground",
+  "name": "gpt-image-studio",
   "compatibility_date": "2026-05-07",
   "assets": {
     "directory": "./dist",

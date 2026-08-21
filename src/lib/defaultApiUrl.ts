@@ -34,8 +34,10 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
 
   try {
     const parsed = new URL(url)
+    const queryIndex = url.search(/[?#]/)
+    const baseUrl = queryIndex >= 0 ? url.slice(0, queryIndex) : url
     const patch: DefaultApiUrlPatch = {
-      baseUrl: normalizeBaseUrl(parsed.origin + parsed.pathname),
+      baseUrl: normalizeBaseUrl(baseUrl),
     }
 
     const apiUrlParam = parsed.searchParams.get('apiUrl')

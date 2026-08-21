@@ -86,5 +86,5 @@ export function useTooltip(delay = 500) {
     },
   }
 
-  return { visible, handlers, dismiss }
+  return { visible, handlers, show, dismiss }
 }

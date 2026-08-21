@@ -38,7 +38,7 @@ jobs:
             exit 0
           fi
 
-          if gh api --silent "repos/CookSleep/gpt_image_playground/releases/tags/v$version"; then
+          if gh api --silent "repos/88lin/gpt-image-studio/releases/tags/v$version"; then
             echo "deploy=true" >> "$GITHUB_OUTPUT"
           else
             echo "Upstream release v$version does not exist. Skipping Vercel deployment."

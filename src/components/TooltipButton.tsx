@@ -7,6 +7,8 @@ export function TooltipButton({
   className,
   wrapperClassName = 'relative inline-flex',
   disabled = false,
+  showOnClick = false,
+  stopPropagation = false,
   onClick,
   onMouseDown,
   children,
@@ -15,6 +17,8 @@ export function TooltipButton({
   className: string
   wrapperClassName?: string
   disabled?: boolean
+  showOnClick?: boolean
+  stopPropagation?: boolean
   onClick?: (e: ReactMouseEvent<HTMLButtonElement>) => void
   onMouseDown?: (e: ReactMouseEvent<HTMLButtonElement>) => void
   children: ReactNode
@@ -27,9 +31,12 @@ export function TooltipButton({
         type="button"
         className={className}
         aria-label={tooltip}
-        disabled={disabled}
+        aria-disabled={disabled}
+        disabled={disabled && !showOnClick}
         onClick={(e) => {
-          tooltipState.dismiss()
+          if (stopPropagation) e.stopPropagation()
+          if (showOnClick) tooltipState.show()
+          else tooltipState.dismiss()
           if (disabled) return
           onClick?.(e)
         }}
