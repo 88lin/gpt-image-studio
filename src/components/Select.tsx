@@ -402,7 +402,7 @@ export default function Select({ value, onChange, onReorder, options, disabled, 
                 clearOptionTooltipTimer()
                 setHoveredOptionTooltip(null)
               }}
-              className={`relative flex cursor-pointer items-center justify-between gap-2 px-3 py-2 text-xs transition-colors ${
+              className={`relative flex min-h-9 cursor-pointer items-center justify-between gap-2 px-3 py-2 text-xs transition-colors ${
                 draggedValue === option.value
                   ? 'opacity-40 bg-gray-100 dark:bg-white/[0.04]'
                   : option.variant === 'action'
@@ -454,7 +454,7 @@ export default function Select({ value, onChange, onReorder, options, disabled, 
                         action.onClick()
                         setIsOpen(false)
                       }}
-                      className={`rounded-md p-1.5 transition flex items-center justify-center ${action.variant === 'danger'
+                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded transition ${action.variant === 'danger'
                         ? 'text-red-500 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10'
                         : 'text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-white/[0.08] dark:hover:text-gray-200'}`}
                     >
