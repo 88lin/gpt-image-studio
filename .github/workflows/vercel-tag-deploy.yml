@@ -1,4 +1,4 @@
-name: Trigger Vercel Release Deploy
+name: Deploy to Vercel
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
       - 'v*'
     paths:
       - package.json
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -19,13 +20,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Check release version
+      - name: Check version change
         id: release
         env:
           BEFORE_SHA: ${{ github.event.before }}
-          GH_TOKEN: ${{ github.token }}
         run: |
-          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch || "$GITHUB_REF" == refs/tags/v* ]]; then
             echo "deploy=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -38,12 +38,8 @@ jobs:
             exit 0
           fi
 
-          if gh api --silent "repos/88lin/gpt-image-studio/releases/tags/v$version"; then
-            echo "deploy=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "Upstream release v$version does not exist. Skipping Vercel deployment."
-            echo "deploy=false" >> "$GITHUB_OUTPUT"
-          fi
+          echo "Package version changed to $version. Proceeding with Vercel deployment."
+          echo "deploy=true" >> "$GITHUB_OUTPUT"
       - name: Call Vercel Deploy Hook
         if: ${{ steps.release.outputs.deploy == 'true' && env.VERCEL_DEPLOY_HOOK != '' }}
         run: |

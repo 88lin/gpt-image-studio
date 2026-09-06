@@ -26,16 +26,17 @@
 <br>
 
 > [!TIP]
-> 若需调用非 HTTPS 的内网或本地 HTTP API，请使用 GitHub Pages 版本或自行部署，Vercel 部署的体验版绑定的 `.dev` 域名因安全策略通常要求接口必须为 HTTPS。
+> 若需调用非 HTTPS 的内网或本地 HTTP API，请注意 Vercel 与 GitHub Pages 均通过 HTTPS 提供页面，浏览器会拦截页面发起的 HTTP 请求（混合内容限制），两者都无法直接使用。此类场景建议本地部署后通过 `localhost` 访问，或使用 Docker / 本地开发代理提供的同源 `/api-proxy/` 转发。
 
 ## 🌟 二次开发增强
 
 本项目基于 [GPT Image Playground](https://github.com/CookSleep/gpt_image_playground) 二次开发，额外增加了以下功能：
 
-- **570+ 内置提示词模板**：聚合三个中文提示词来源，支持按标题、描述、来源和标签搜索，一键套用：
-  - [EvoLinkAI/awesome-gpt-image-2-prompts](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) — 199 个 GPT-Image-2 实用案例
-  - [prompts.kkkm.cn](https://prompts.kkkm.cn/) — 274 个高质量中文提示词
+- **593 内置提示词模板**：聚合 10 个中英文提示词来源，支持按标题、描述、来源和标签搜索，一键套用：
   - 厚十方精选 — 97 个电商 / 海报 / 封面 / 产品图模板
+  - [prompts.kkkm.cn](https://prompts.kkkm.cn/) — 251 个高质量中文提示词
+  - GPT-Image-2 案例观摩馆（[EvoLinkAI](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) / OpenNana）— 112 个实用案例
+  - 社区精选合集（ZeroLu、freestylefly、wuyoscar、YouMind-OpenLab 等）— 133 个模板
 - **提示词模板库弹窗**：独立 UI 组件，支持分类浏览、关键词检索、示例图预览和一键填入输入框
 - **移除上游赞助弹窗**：去掉原项目的赞助提示，界面更干净
 - **焦点管理优化**：打开 / 关闭弹窗时自动释放焦点，避免移动端键盘残留
@@ -131,7 +132,7 @@
   > 本地后处理流程适用于图标、贴纸、单主体素材等场景；若主体边缘存在复杂发丝、半透明材质、强反光或与背景色接近的颜色，可能出现边缘残留或误抠。若使用 API 原生模式时接口返回“不支持透明背景”类错误，应用会提示切换为本地后处理。
 
 ### 🧠 提示词模板库
-- **570+ 内置精选模板**：聚合 prompts.kkkm.cn、awesome-gpt-image-2-prompts、厚十方精选三个中文提示词来源，覆盖电商图、海报、封面、产品图、摄影风格和视觉概念图等场景。
+- **593 内置精选模板**：聚合厚十方精选、prompts.kkkm.cn、GPT-Image-2 案例观摩馆与多个社区精选来源，覆盖电商图、海报、封面、产品图、摄影风格和视觉概念图等场景。
 - **搜索与套用**：支持按标题、描述、来源和标签检索，一键填入输入框并继续二次编辑。
 - **示例图辅助判断**：部分模板保留示例图，便于快速判断构图、画风和适用场景。
 
@@ -219,7 +220,7 @@
 VITE_DEFAULT_API_URL=https://api.openai.com/v1
 ```
 
-**部署**
+**初始部署**
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F88lin%2Fgpt-image-studio&project-name=gpt-image-studio&repository-name=gpt-image-studio)
 
@@ -227,21 +228,26 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 
 **绑定自定义域名 (国内直连)**：Vercel 默认分配的 `.vercel.app` 域名在国内通常无法直接访问。如果你希望在国内直连访问，请在 Vercel 项目的 **Settings → Domains** 中绑定你自己的域名。
 
-**配置自动更新**：
+**更新方式**
 
-本项目默认开启 Vercel 自动部署，每次推送 `main` 分支都会自动触发构建。若希望仅在上游发布正式版本时才部署，可在 `vercel.json` 中将 `deploymentEnabled` 改为 `false`，然后配置 Deploy Hook：
+导入仓库后，Vercel 默认会在每次推送 `main` 分支时自动构建部署。若希望仅在版本号更新时才部署，可在 `vercel.json` 中将 `deploymentEnabled` 改为 `false`，改由仓库内的 Actions 工作流控制：
 
-1. 在 Vercel 项目设置 **Settings -> Git** 的 **Deploy Hooks** 中创建一个名为 `Release` 的 Hook（Branch 填 `main`）并复制生成的 URL。
-2. 在你 Fork 的 GitHub 仓库设置 **Settings -> Secrets and variables -> Actions** 中，新建 Secret `VERCEL_DEPLOY_HOOK`，填入刚才的 URL。
+1. 在 Vercel 项目的 **Settings → Git → Deploy Hooks** 中创建一个名为 `Release` 的 Hook（Branch 填 `main`）并复制生成的 URL。
+2. 在你 Fork 的 GitHub 仓库 **Settings → Secrets and variables → Actions** 中，新建 Secret `VERCEL_DEPLOY_HOOK`，填入刚才的 URL。
 
-此后，只有在本仓库发布了正式版本（即包含新 Release / 版本号变动）时，在你的 Fork 页面点击 **Sync fork** 才会自动触发 Vercel 构建部署；日常的普通代码提交不会触发部署。
+配置完成后：
+
+- **自动更新**：在 Fork 页面点击 **Sync fork** 同步本仓库的更新时，工作流会比对推送前后 `package.json` 中的版本号；只有版本号发生变化才会调用 Deploy Hook 触发构建部署，日常的普通代码提交不会触发。
+- **手动触发**：如需立即部署当前代码（不受版本号与 Release 限制），进入仓库顶部的 **Actions** 标签页，在左侧选择 **Deploy to Vercel**，点击右侧的 **Run workflow** 下拉按钮（分支选择 `main`），再点击绿色的 **Run workflow** 按钮即可。
+
+> 未配置 `VERCEL_DEPLOY_HOOK` 时工作流会自动跳过，不会影响其他部署方式，可按需启用。
 
 </details>
 
 <details>
 <summary><strong>🌐 方式二：GitHub Pages 部署</strong></summary>
 
-支持通过 GitHub Actions 工作流将静态页面一键发布至 GitHub Pages。
+支持通过 GitHub Actions 工作流将静态页面发布至 GitHub Pages。
 
 **预置配置**
 
@@ -251,11 +257,17 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 VITE_DEFAULT_API_URL=https://api.openai.com/v1
 ```
 
-**部署**
+**初始部署**
 
 1. 在 GitHub 仓库的 **Settings → Pages** 中，将 **Build and deployment → Source** 设置为 **GitHub Actions**。
-2. 进入仓库顶部的 **Actions** 标签页，在左侧工作流列表中选择 **Deploy to GitHub Pages**。
-3. 点击右侧的 **Run workflow** 下拉按钮，分支选择 `main`，然后点击绿色的 **Run workflow** 按钮开始构建部署。
+2. 进入仓库顶部的 **Actions** 标签页，在左侧选择 **Deploy to GitHub Pages**，点击右侧的 **Run workflow** 下拉按钮（分支选择 `main`），点击绿色的 **Run workflow** 按钮完成首次构建部署。
+
+**更新方式**
+
+仓库内已内置发布校验逻辑，无需额外配置：
+
+- **自动更新**：在 Fork 页面点击 **Sync fork** 同步本仓库的更新时，工作流会比对推送前后 `package.json` 中的版本号；只有版本号发生变化才会自动构建并部署至 GitHub Pages，日常的普通代码提交不会触发。
+- **手动触发**：如需立即部署当前代码（不受版本号与 Release 限制），进入仓库顶部的 **Actions** 标签页，在左侧选择 **Deploy to GitHub Pages**，点击右侧的 **Run workflow** 下拉按钮（分支选择 `main`），再点击绿色的 **Run workflow** 按钮即可。
 
 </details>
 

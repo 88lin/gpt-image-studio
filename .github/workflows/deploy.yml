@@ -2,7 +2,11 @@ name: Deploy to GitHub Pages
 
 on:
   push:
+    branches:
+      - main
     tags: ['v*']
+    paths:
+      - package.json
   workflow_dispatch:
 
 permissions:
@@ -15,7 +19,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.release.outputs.deploy }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check version change
+        id: release
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch || "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          version=$(jq -r .version package.json)
+          previous_version=$(git show "$BEFORE_SHA:package.json" 2>/dev/null | jq -r .version || true)
+          if [[ -n "$previous_version" && "$version" == "$previous_version" ]]; then
+            echo "Package version did not change. Skipping GitHub Pages deployment."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Package version changed to $version. Proceeding with GitHub Pages deployment."
+          echo "deploy=true" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: release
+    if: ${{ needs.release.outputs.deploy == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
