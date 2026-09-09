@@ -209,7 +209,7 @@ export function pickActualParams(source: unknown): Partial<TaskParams> {
   const actualParams: Partial<TaskParams> = {}
 
   if (typeof record.size === 'string') actualParams.size = record.size
-  if (record.quality === 'auto' || record.quality === 'low' || record.quality === 'medium' || record.quality === 'high') {
+  if (record.quality === 'auto' || record.quality === 'low' || record.quality === 'medium' || record.quality === 'high' || record.quality === 'xhigh' || record.quality === 'max') {
     actualParams.quality = record.quality
   }
   if (record.output_format === 'png' || record.output_format === 'jpeg' || record.output_format === 'webp') {

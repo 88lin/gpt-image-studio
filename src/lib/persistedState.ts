@@ -73,7 +73,9 @@ function normalizeParams(value: unknown, fallback: TaskParams): TaskParams {
   if (!isRecord(value)) return fallback
   return {
     size: typeof value.size === 'string' ? value.size : fallback.size,
-    quality: value.quality === 'auto' || value.quality === 'low' || value.quality === 'medium' || value.quality === 'high' ? value.quality : fallback.quality,
+    quality: value.quality === 'auto' || value.quality === 'low' || value.quality === 'medium' || value.quality === 'high' || value.quality === 'xhigh' || value.quality === 'max'
+      ? value.quality
+      : fallback.quality,
     output_format: value.output_format === 'png' || value.output_format === 'jpeg' || value.output_format === 'webp' ? value.output_format : fallback.output_format,
     output_compression: value.output_compression === null || (typeof value.output_compression === 'number' && Number.isFinite(value.output_compression))
       ? value.output_compression

@@ -3,6 +3,7 @@ import {
   DEFAULT_FAL_BASE_URL,
   DEFAULT_FAL_MODEL,
   DEFAULT_IMAGES_MODEL,
+  DEFAULT_RESPONSES_MODEL,
   DEFAULT_OPENAI_PROFILE_ID,
   DEFAULT_SETTINGS,
   createDefaultOpenAIProfile,
@@ -48,14 +49,32 @@ describe('validateApiProfile', () => {
 })
 
 describe('normalizeApiProfile', () => {
+  it('uses the mode default and preserves the external model field', () => {
+    expect(normalizeApiProfile({ apiMode: 'responses' }).model).toBe(DEFAULT_RESPONSES_MODEL)
+    expect(normalizeSettings({ apiMode: 'responses' }).model).toBe(DEFAULT_RESPONSES_MODEL)
+    expect(normalizeApiProfile({ apiMode: 'responses', model: 'vendor/text' }).model).toBe('vendor/text')
+    expect(normalizeApiProfile({ model: 'legacy' }).model).toBe('legacy')
+  })
+
+  it('keeps missing restored tool models empty while defaulting newly created profiles', () => {
+    expect(normalizeApiProfile({ apiMode: 'responses' }).imageGenerationModel).toBe('')
+    expect(normalizeApiProfile(createDefaultOpenAIProfile({ apiMode: 'responses' })).imageGenerationModel).toBe(DEFAULT_IMAGES_MODEL)
+    expect(DEFAULT_SETTINGS.profiles[0].imageGenerationModel).toBe(DEFAULT_IMAGES_MODEL)
+    expect(normalizeApiProfile({
+      apiMode: 'responses',
+      imageGenerationModel: 'gpt-image-2.5-flare',
+    }).imageGenerationModel).toBe('gpt-image-2.5-flare')
+    expect(normalizeApiProfile({ apiMode: 'responses', imageGenerationModel: '   ' }).imageGenerationModel).toBe('')
+  })
+
   it('uses provider defaults and preserves explicit transparent background methods', () => {
     expect(normalizeApiProfile({}).transparentBackgroundMethod).toBe('api')
     expect(normalizeApiProfile({ transparentBackgroundMethod: 'local' }).transparentBackgroundMethod).toBe('local')
     expect(normalizeApiProfile({}, { transparentBackgroundMethod: 'local' }).transparentBackgroundMethod).toBe('local')
     expect(normalizeApiProfile({ transparentBackgroundMethod: 'invalid' }).transparentBackgroundMethod).toBe('api')
-    expect(normalizeApiProfile({ provider: 'fal' }).transparentBackgroundMethod).toBe('local')
+    expect(normalizeApiProfile({ provider: 'fal' }).transparentBackgroundMethod).toBe('api')
     expect(normalizeApiProfile({ provider: 'fal', transparentBackgroundMethod: 'api' }).transparentBackgroundMethod).toBe('api')
-    expect(normalizeApiProfile({ provider: 'fal', transparentBackgroundMethod: 'invalid' }).transparentBackgroundMethod).toBe('local')
+    expect(normalizeApiProfile({ provider: 'fal', transparentBackgroundMethod: 'invalid' }).transparentBackgroundMethod).toBe('api')
   })
 })
 
@@ -74,6 +93,19 @@ describe('normalizeSettings', () => {
 })
 
 describe('default API URL env', () => {
+  it.each([undefined, 'runtime-image-model', ''])('uses runtime tool model %s only for new defaults, not old inputs', async (imageGenerationModel) => {
+    vi.resetModules()
+    const params = new URLSearchParams({ apiMode: 'responses' })
+    if (imageGenerationModel !== undefined) params.set('imageGenerationModel', imageGenerationModel)
+    vi.stubEnv('VITE_DEFAULT_API_URL', `https://api.example.com?${params}`)
+    const apiProfiles = await import('./apiProfiles')
+
+    expect(apiProfiles.createDefaultOpenAIProfile().imageGenerationModel).toBe(imageGenerationModel ?? DEFAULT_IMAGES_MODEL)
+    expect(apiProfiles.DEFAULT_SETTINGS.profiles[0].imageGenerationModel).toBe(imageGenerationModel ?? DEFAULT_IMAGES_MODEL)
+    expect(apiProfiles.normalizeApiProfile({ apiMode: 'responses' }).imageGenerationModel).toBe('')
+    expect(apiProfiles.normalizeSettings({ apiMode: 'responses' }).profiles[0].imageGenerationModel).toBe('')
+  })
+
   it('applies shared URL params from VITE_DEFAULT_API_URL to the default profile', async () => {
     vi.resetModules()
     vi.stubEnv('VITE_DEFAULT_API_URL', 'https://app.example.com/?apiUrl=https%3A%2F%2Fapi.example.com&apiMode=responses&model=test-image-model&profileName=URL%20Profile&reasoningEffort=xhigh&codexCli=true&streamImages=true&streamPartialImages=3&transparentBackgroundMethod=local')
@@ -1600,7 +1632,7 @@ describe('custom providers', () => {
     const falProfile = switchApiProfileProvider(openaiProfile, 'fal')
     const customProfile = switchApiProfileProvider(openaiProfile, provider.id, provider)
 
-    expect(falProfile).toMatchObject({ provider: 'fal', apiMode: 'images', streamImages: false, transparentBackgroundMethod: 'local' })
+    expect(falProfile).toMatchObject({ provider: 'fal', apiMode: 'images', streamImages: false, transparentBackgroundMethod: 'api' })
     expect(customProfile).toMatchObject({ provider: provider.id, apiMode: 'images', streamImages: false })
   })
 

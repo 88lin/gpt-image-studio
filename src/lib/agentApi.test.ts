@@ -62,6 +62,7 @@ describe('callAgentResponsesApi', () => {
       streamImages: true,
       streamPartialImages: 2,
       reasoningEffort: 'xhigh',
+      imageGenerationModel: 'gpt-image-2.5-flare',
     })
 
     const result = await callAgentResponsesApi({
@@ -76,6 +77,7 @@ describe('callAgentResponsesApi', () => {
     const body = JSON.parse(String((init as RequestInit).body))
     expect(body.stream).toBe(true)
     expect(body.reasoning).toEqual({ effort: 'xhigh' })
+    expect(body.tools[0].model).toBe('gpt-image-2.5-flare')
     expect(body.tools[0].partial_images).toBe(2)
     expect(textDeltas).toEqual(['Hel', 'lo'])
     expect(result).toMatchObject({

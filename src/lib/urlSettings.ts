@@ -12,14 +12,15 @@ import {
 } from './apiProfiles'
 import { isPresetConfigOnlyEnabled, isPresetConfigParamsLocked, isPresetProfile } from './presetConfig'
 
-const URL_SETTING_KEYS = ['settings', 'profileId', 'apiUrl', 'apiKey', 'codexCli', 'apiMode', 'model', 'profileName', 'reasoningEffort', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod']
+const URL_SETTING_KEYS = ['settings', 'profileId', 'apiUrl', 'apiKey', 'codexCli', 'apiMode', 'model', 'imageGenerationModel', 'profileName', 'reasoningEffort', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod']
 
-function getProfileDedupKey(profile: Pick<AppSettings['profiles'][number], 'provider' | 'baseUrl' | 'apiKey' | 'model' | 'apiMode' | 'reasoningEffort' | 'codexCli' | 'streamImages' | 'streamPartialImages' | 'transparentBackgroundMethod'>) {
+function getProfileDedupKey(profile: ApiProfile) {
   return JSON.stringify([
     profile.provider,
     profile.baseUrl.trim().toLowerCase(),
     profile.apiKey.trim(),
     profile.model.trim(),
+    profile.imageGenerationModel?.trim(),
     profile.apiMode,
     profile.reasoningEffort,
     profile.codexCli === true,
@@ -170,6 +171,7 @@ function buildPresetConfigOnlySettingsFromUrlParams(currentSettings: Partial<App
           if (typeof matched.name === 'string' && matched.name.trim()) patch.name = matched.name.trim()
           if (typeof matched.baseUrl === 'string') patch.baseUrl = matched.baseUrl
           if (typeof matched.model === 'string' && matched.model.trim()) patch.model = matched.model.trim()
+          if (typeof matched.imageGenerationModel === 'string') patch.imageGenerationModel = matched.imageGenerationModel.trim()
           if (typeof matched.timeout === 'number' && Number.isFinite(matched.timeout)) patch.timeout = matched.timeout
           if (typeof matched.apiProxy === 'boolean') patch.apiProxy = matched.apiProxy
           if (matched.responseFormatB64Json === true) patch.responseFormatB64Json = true
@@ -192,13 +194,15 @@ function buildPresetConfigOnlySettingsFromUrlParams(currentSettings: Partial<App
   const apiUrlParam = searchParams.get('apiUrl')
   const apiKeyParam = searchParams.get('apiKey')
   const modelParam = searchParams.get('model')
+  const imageGenerationModelParam = searchParams.get('imageGenerationModel')
   const profileNameParam = searchParams.get('profileName')
   const transparentBackgroundMethodParam = searchParams.get('transparentBackgroundMethod')
   if (apiKeyParam !== null) patch.apiKey = apiKeyParam.trim()
   if (!apiKeyOnly) {
     if (profileNameParam?.trim()) patch.name = profileNameParam.trim()
     if (apiUrlParam !== null) patch.baseUrl = normalizeBaseUrl(apiUrlParam.trim())
-    if (modelParam !== null && modelParam.trim()) patch.model = modelParam.trim()
+    if (modelParam?.trim()) patch.model = modelParam.trim()
+    if (imageGenerationModelParam !== null) patch.imageGenerationModel = imageGenerationModelParam.trim()
     if (transparentBackgroundMethodParam === 'api' || transparentBackgroundMethodParam === 'local') {
       patch.transparentBackgroundMethod = transparentBackgroundMethodParam
     }
@@ -245,6 +249,7 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
   const codexCliParam = searchParams.get('codexCli')
   const apiModeParam = searchParams.get('apiMode')
   const modelParam = searchParams.get('model')
+  const imageGenerationModelParam = searchParams.get('imageGenerationModel')
   const reasoningEffortParam = searchParams.get('reasoningEffort')
   const profileNameParam = searchParams.get('profileName')
   const profileName = profileNameParam?.trim() ?? ''
@@ -256,7 +261,7 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
     : undefined
   const apiMode: ApiMode | undefined = apiModeParam === 'images' || apiModeParam === 'responses' ? apiModeParam : undefined
 
-  const hasLegacyOpenAIParams = apiUrlParam !== null || apiKeyParam !== null || codexCliParam !== null || apiMode !== undefined || modelParam !== null || profileNameParam !== null || reasoningEffortParam !== null || streamImagesParam !== null || streamPartialImagesParam !== null
+  const hasLegacyOpenAIParams = apiUrlParam !== null || apiKeyParam !== null || codexCliParam !== null || apiMode !== undefined || modelParam !== null || imageGenerationModelParam !== null || profileNameParam !== null || reasoningEffortParam !== null || streamImagesParam !== null || streamPartialImagesParam !== null
   const settings = importedSettings == null
     ? normalizeSettings(currentSettings)
     : activateFirstImportedProfile(mergeImportedSettings(currentSettings, importedSettings), importedSettings)
@@ -295,7 +300,8 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
       if (apiUrlParam !== null) patch.baseUrl = normalizeBaseUrl(apiUrlParam.trim())
       if (apiKeyParam !== null) patch.apiKey = apiKeyParam.trim()
       if (apiMode !== undefined) patch.apiMode = apiMode
-      if (modelParam !== null && modelParam.trim()) patch.model = modelParam.trim()
+      if (modelParam?.trim()) patch.model = modelParam.trim()
+      if (imageGenerationModelParam !== null) patch.imageGenerationModel = imageGenerationModelParam.trim()
       if (reasoningEffortParam !== null) patch.reasoningEffort = normalizeReasoningEffort(reasoningEffortParam)
       if (profileName) patch.name = profileName
       if (codexCliParam !== null) patch.codexCli = codexCliParam.trim().toLowerCase() === 'true'
@@ -315,11 +321,11 @@ function buildRegularSettingsFromUrlParams(currentSettings: Partial<AppSettings>
       id: requestedProfileId || createUrlProfileId(new Set(settings.profiles.map((item) => item.id))),
       name: 'URL 参数配置',
       apiMode: profileApiMode,
-      model: profileApiMode === 'responses' ? DEFAULT_RESPONSES_MODEL : DEFAULT_IMAGES_MODEL,
+      model: modelParam?.trim() || (profileApiMode === 'responses' ? DEFAULT_RESPONSES_MODEL : DEFAULT_IMAGES_MODEL),
     })
     if (apiUrlParam !== null) profile.baseUrl = normalizeBaseUrl(apiUrlParam.trim())
     if (apiKeyParam !== null) profile.apiKey = apiKeyParam.trim()
-    if (modelParam !== null && modelParam.trim()) profile.model = modelParam.trim()
+    if (imageGenerationModelParam !== null) profile.imageGenerationModel = imageGenerationModelParam.trim()
     if (reasoningEffortParam !== null) profile.reasoningEffort = normalizeReasoningEffort(reasoningEffortParam)
     if (profileName) profile.name = profileName
     if (codexCliParam !== null) profile.codexCli = codexCliParam.trim().toLowerCase() === 'true'

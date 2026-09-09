@@ -66,4 +66,58 @@ describe('callFalAiImageApi', () => {
       proxyUrl: 'https://fal-proxy.example.com/api/fal',
     })
   })
+
+  it('uses the GPT Image 2.5 text-to-image endpoint and preserves max quality', async () => {
+    falMock.subscribe.mockResolvedValue({
+      requestId: 'req-1',
+      data: { images: [{ b64_json: 'aW1hZ2U=' }] },
+    })
+
+    await callFalAiImageApi({
+      settings: DEFAULT_SETTINGS,
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, quality: 'max' },
+      inputImageDataUrls: [],
+    }, createDefaultFalProfile({ model: 'openai/gpt-image-2.5/sunburst', apiKey: 'fal-key' }))
+
+    expect(falMock.subscribe).toHaveBeenCalledWith('openai/gpt-image-2.5/sunburst/text-to-image', expect.objectContaining({
+      input: expect.objectContaining({ quality: 'max' }),
+    }))
+  })
+
+  it('uses the GPT Image 2.5 edit endpoint', async () => {
+    falMock.subscribe.mockResolvedValue({
+      requestId: 'req-1',
+      data: { images: [{ b64_json: 'aW1hZ2U=' }] },
+    })
+
+    await callFalAiImageApi({
+      settings: DEFAULT_SETTINGS,
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS },
+      inputImageDataUrls: ['data:image/png;base64,aW1hZ2U='],
+    }, createDefaultFalProfile({ model: 'openai/gpt-image-2.5/flare', apiKey: 'fal-key' }))
+
+    expect(falMock.subscribe).toHaveBeenCalledWith('openai/gpt-image-2.5/flare/edit', expect.anything())
+  })
+
+  it('requests a native transparent background', async () => {
+    falMock.subscribe.mockResolvedValue({
+      requestId: 'req-1',
+      data: { images: [{ b64_json: 'aW1hZ2U=' }] },
+    })
+
+    await callFalAiImageApi({
+      settings: DEFAULT_SETTINGS,
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, output_format: 'webp', transparent_output: true },
+      nativeTransparentBackground: true,
+      inputImageDataUrls: [],
+    }, createDefaultFalProfile({ apiKey: 'fal-key' }))
+
+    expect(falMock.subscribe).toHaveBeenCalledWith('openai/gpt-image-2', expect.objectContaining({
+      input: expect.objectContaining({ background: 'transparent' }),
+    }))
+  })
+
 })

@@ -10,7 +10,7 @@
 [![Vite](https://img.shields.io/badge/Vite-7-B73BFE?style=flat-square&logo=vite&logoColor=FFD62E)](https://vite.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-**基于 OpenAI gpt-image-2 API 的图片生成、编辑与提示词工作台**
+**基于 OpenAI gpt-image-2.5 API 的图片生成、编辑与提示词工作台**
 
 提供简洁精美的 Web UI，支持 OpenAI / OpenAI 兼容接口、sub2api（异步）、fal.ai 与可导入的自定义 HTTP 供应商。<br>
 支持文本生图、参考图与遮罩编辑，数据纯本地化存储，带来流畅的历史记录与参数管理体验。
@@ -192,7 +192,7 @@
 | 填写方式 | 说明 | 示例 |
 |------|------|------|
 | **直接填写 API 地址** | 自动创建一个 OpenAI 兼容的默认预置配置（ID 为 `default-openai`）并注入 API URL，其余参数（模型、超时等）使用应用默认值，用户只需补充 API Key。末尾带 `/` 时直接拼接接口，不补 `/v1` 前缀。适合只提供一个配置的部署。后续如需通过 JSON 或链接更新此配置，指定 `id` 为 `default-openai` 即可。 | `https://api.openai.com/v1` |
-| **API 地址 + 查询参数** | 在地址后追加参数，可同时预填 Key、模型等字段。 | `https://api.openai.com/v1?model=gpt-image-2&apiMode=responses` |
+| **API 地址 + 查询参数** | 在地址后追加参数，可同时预填 Key、模型等字段。 | `https://api.openai.com/v1?model=gpt-image-2.5-sunburst&apiMode=images` |
 | **JSON 配置文件 / 导入链接** | 通过仓库内或本地的 JSON 文件路径（如 `./config.json`）、远程 URL 或含 `?settings=` 参数的导入链接提供完整预置配置，支持预置多个配置（OpenAI 兼容、sub2api（异步）、fal.ai 或自定义供应商）。 | 详见 [预置配置 JSON 格式](#preset-config-json) |
 
 **环境变量一览**
@@ -458,7 +458,8 @@ npm run build
 |------|------|------|
 | `apiUrl` | API Base URL | `?apiUrl=https://api.example.com/v1` |
 | `apiKey` | API Key | `?apiKey=sk-xxxx` |
-| `model` | 模型 ID（未传时按 apiMode 使用默认模型） | `?model=gpt-image-2` |
+| `model` | 模型 ID | `?model=gpt-image-2.5-sunburst` |
+| `imageGenerationModel` | Responses API 的图像生成工具模型，留空使用 API 默认值 | `?imageGenerationModel=gpt-image-2.5-sunburst` |
 | `apiMode` | `images` 或 `responses`，默认 `images` | `?apiMode=responses` |
 | `profileName` | 配置名称，默认“URL 参数配置” | `?profileName=我的配置` |
 | `reasoningEffort` | Responses API 推理强度 | `?reasoningEffort=high` |
@@ -537,7 +538,7 @@ JSON 结构示例：
       "name": "示例异步任务供应商",
       "provider": "custom-example-task",
       "baseUrl": "https://api.example.com/v1",
-      "model": "gpt-image-2",
+      "model": "gpt-image-2.5-sunburst",
       "apiMode": "images"
     }
   ]
@@ -567,6 +568,7 @@ JSON 结构示例：
 | `baseUrl` | 是 | API 基础地址（Base URL）。未以 `/` 结尾时遵循 OpenAI 规则自动补齐 `/v1` 前缀；以 `/` 结尾时直接基于该地址请求接口，不补 `/v1`；fal.ai 可留空。 |
 | `apiKey` | 否 | API Key。建议省略，让用户导入后自行填写。 |
 | `model` | 是 | 默认模型 ID。 |
+| `imageGenerationModel` | 否 | Responses API 的 `image_generation` 工具模型，默认 `gpt-image-2.5-sunburst`；也可使用 `gpt-image-2.5-flare`。留空时不发送工具模型 ID，保持 API 默认值。 |
 | `apiMode` | 否 | `"images"` 或 `"responses"`，默认 `"images"`。 |
 | `isDefault` | 否 | 有多个配置时，为默认项设置 `true`（只能有一个）；只有一个配置时不填。默认项决定首次使用时自动选中的配置；允许拖动排序和删除（受保护策略控制）。 |
 | `timeout` | 否 | 请求超时秒数，默认 600。 |
@@ -585,7 +587,7 @@ JSON 结构示例：
       "description": "使用前请阅读 [接口说明](https://example.com/docs)。",
       "provider": "openai",
       "baseUrl": "https://api.openai.com/v1",
-      "model": "gpt-image-2"
+      "model": "gpt-image-2.5-sunburst"
     }
   ]
 }
@@ -602,7 +604,7 @@ JSON 结构示例：
       "name": "OpenAI",
       "provider": "openai",
       "baseUrl": "https://api.openai.com/v1",
-      "model": "gpt-image-2",
+      "model": "gpt-image-2.5-sunburst",
       "isDefault": true
     },
     {
@@ -610,7 +612,7 @@ JSON 结构示例：
       "name": "sub2api 异步",
       "provider": "sb2api-async",
       "baseUrl": "https://api.example.com/v1",
-      "model": "gpt-image-2"
+      "model": "gpt-image-2.5-sunburst"
     },
     {
       "id": "fal-profile",

@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
-import { DEFAULT_SETTINGS } from './apiProfiles'
+import { createDefaultOpenAIProfile, DEFAULT_IMAGES_MODEL, DEFAULT_SETTINGS } from './apiProfiles'
+import { normalizePersistedState } from './persistedState'
 import { callImageApi } from './api'
 import { maybeAppendStreamingHint } from './imageApiShared'
 
@@ -75,6 +76,102 @@ describe('callImageApi', () => {
     const [, init] = fetchMock.mock.calls[0]
     const body = JSON.parse(String((init as RequestInit).body))
     expect(body.input).toBe('prompt')
+  })
+
+  it('sends the selected GPT Image 2.5 model and max quality to the Responses image tool', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      output: [{ type: 'image_generation_call', result: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    await callImageApi({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        apiKey: 'test-key',
+        apiMode: 'responses',
+        profiles: DEFAULT_SETTINGS.profiles.map((profile) => ({
+          ...profile,
+          apiMode: 'responses' as const,
+          imageGenerationModel: 'gpt-image-2.5-flare',
+        })),
+      },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, quality: 'max' },
+      inputImageDataUrls: [],
+    })
+
+    const body = JSON.parse(String((fetchMock.mock.calls[0][1] as RequestInit).body))
+    expect(body.tools[0]).toMatchObject({
+      type: 'image_generation',
+      model: 'gpt-image-2.5-flare',
+      quality: 'max',
+    })
+  })
+
+  it.each([undefined, '', 'custom-image-model', DEFAULT_IMAGES_MODEL])('sends the restored Responses tool model %s without autofilling', async (imageGenerationModel) => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      output: [{ type: 'image_generation_call', result: 'aW1hZ2U=' }],
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    const profile = imageGenerationModel === DEFAULT_IMAGES_MODEL
+      ? createDefaultOpenAIProfile({ apiMode: 'responses', apiKey: 'test-key', streamImages: false })
+      : { apiMode: 'responses', apiKey: 'test-key', model: 'legacy-text-model', streamImages: false, ...(imageGenerationModel === undefined ? {} : { imageGenerationModel }) }
+    const restored = normalizePersistedState({ settings: { profiles: [profile] } }, {
+      settings: DEFAULT_SETTINGS,
+      params: DEFAULT_PARAMS,
+      dismissedCodexCliPrompts: [],
+      agentConversations: [],
+      favoriteCollections: [],
+      defaultFavoriteCollectionId: null,
+    })!
+
+    await callImageApi({
+      settings: restored.state.settings,
+      prompt: 'prompt',
+      params: DEFAULT_PARAMS,
+      inputImageDataUrls: [],
+    })
+
+    const body = JSON.parse(String((fetchMock.mock.calls[0][1] as RequestInit).body))
+    if (imageGenerationModel) expect(body.tools[0].model).toBe(imageGenerationModel)
+    else expect(body.tools[0]).not.toHaveProperty('model')
+  })
+
+  it('sends a GPT Image 2.5 model and xhigh quality to the Images API', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      data: [{ b64_json: 'aW1hZ2U=' }],
+      quality: 'xhigh',
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }))
+
+    const result = await callImageApi({
+      settings: {
+        ...DEFAULT_SETTINGS,
+        model: 'gpt-image-2.5-sunburst',
+        profiles: DEFAULT_SETTINGS.profiles.map((profile) => ({
+          ...profile,
+          apiKey: 'test-key',
+          model: 'gpt-image-2.5-sunburst',
+        })),
+      },
+      prompt: 'prompt',
+      params: { ...DEFAULT_PARAMS, quality: 'xhigh' },
+      inputImageDataUrls: [],
+    })
+
+    const body = JSON.parse(String((fetchMock.mock.calls[0][1] as RequestInit).body))
+    expect(body).toMatchObject({
+      model: 'gpt-image-2.5-sunburst',
+      quality: 'xhigh',
+    })
+    expect(result.actualParams).toMatchObject({ quality: 'xhigh' })
   })
 
   it('does not add the prompt rewrite guard on Codex CLI Images API when prompt rewrite is allowed', async () => {
@@ -1424,7 +1521,7 @@ describe('callImageApi', () => {
 
     expect(fetchMock.mock.calls[0][0]).toBe('https://sub2api.example.com/v1/images/generations/async')
     expect(JSON.parse(String((fetchMock.mock.calls[0][1] as RequestInit).body))).toMatchObject({
-      model: 'gpt-image-2',
+      model: 'gpt-image-2.5-sunburst',
       prompt: 'prompt',
       n: 1,
     })

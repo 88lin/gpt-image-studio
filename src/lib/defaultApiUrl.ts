@@ -21,6 +21,7 @@ export interface DefaultApiUrlPatch {
   apiKey?: string
   apiMode?: ApiMode
   model?: string
+  imageGenerationModel?: string
   reasoningEffort?: ReasoningEffort
   name?: string
   codexCli?: boolean
@@ -45,6 +46,7 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
     const apiKeyParam = parsed.searchParams.get('apiKey')
     const apiModeParam = parsed.searchParams.get('apiMode')
     const modelParam = parsed.searchParams.get('model')
+    const imageGenerationModelParam = parsed.searchParams.get('imageGenerationModel')
     const reasoningEffortParam = parsed.searchParams.get('reasoningEffort')
     const profileNameParam = parsed.searchParams.get('profileName')
     const codexCliParam = parsed.searchParams.get('codexCli')
@@ -56,6 +58,7 @@ export function parseDefaultApiUrl(rawUrl: string): DefaultApiUrlPatch {
     if (apiKeyParam !== null) patch.apiKey = apiKeyParam.trim()
     if (apiModeParam === 'images' || apiModeParam === 'responses') patch.apiMode = apiModeParam
     if (modelParam !== null && modelParam.trim()) patch.model = modelParam.trim()
+    if (imageGenerationModelParam !== null) patch.imageGenerationModel = imageGenerationModelParam.trim()
     if (reasoningEffortParam !== null) patch.reasoningEffort = normalizeReasoningEffort(reasoningEffortParam)
     if (profileNameParam?.trim()) patch.name = profileNameParam.trim()
     if (codexCliParam !== null) patch.codexCli = codexCliParam.trim().toLowerCase() === 'true'
