@@ -27,7 +27,6 @@ import {
   normalizeStreamPartialImages,
   switchApiProfileProvider,
 } from '../lib/apiProfiles'
-import { GPT_IMAGE_25_MODELS } from '../lib/imageModels'
 import {
   getDefaultPresetBaseUrl,
   getDefaultPresetProfileId,
@@ -1573,16 +1572,10 @@ export default function SettingsModal() {
                   onChange={(e) => updateActiveProfile({ model: e.target.value })}
                   onBlur={(e) => commitActiveProfilePatch({ model: e.target.value })}
                   type="text"
-                  list={activeProfile.provider !== 'fal' && activeProfile.apiMode === 'images' ? 'gpt-image-models' : undefined}
                   disabled={activeProfileLocked}
                   placeholder={activeProfile.provider === 'fal' ? DEFAULT_FAL_MODEL : getDefaultModelForMode(activeProfile.apiMode ?? DEFAULT_SETTINGS.apiMode)}
                   className="w-full rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50"
                 />
-                {activeProfile.provider !== 'fal' && activeProfile.apiMode === 'images' && (
-                  <datalist id="gpt-image-models">
-                    {GPT_IMAGE_25_MODELS.map((model) => <option key={model} value={model} />)}
-                  </datalist>
-                )}
                   <div data-selectable-text className="mt-1.5 text-xs text-gray-500 dark:text-gray-500">
                   {activeProfile.provider === 'fal' ? (
                     <>
@@ -1611,14 +1604,10 @@ export default function SettingsModal() {
                     onChange={(e) => updateActiveProfile({ imageGenerationModel: e.target.value })}
                     onBlur={(e) => commitActiveProfilePatch({ imageGenerationModel: e.target.value })}
                     type="text"
-                    list="responses-image-models"
                     disabled={activeProfileLocked}
                     placeholder={DEFAULT_IMAGES_MODEL}
                     className="w-full rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50"
                   />
-                  <datalist id="responses-image-models">
-                    {GPT_IMAGE_25_MODELS.map((model) => <option key={model} value={model} />)}
-                  </datalist>
                   <div data-selectable-text className="mt-1.5 text-xs text-gray-500 dark:text-gray-500">
                     Responses API 的 <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">image_generation</code> 工具需要使用 GPT Image 模型，例如 <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">{DEFAULT_IMAGES_MODEL}</code>。
                     留空时不发送工具模型 ID，保持 API 默认值。

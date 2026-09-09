@@ -1,6 +1,5 @@
 import type { ApiProfile } from '../types'
 
-export const GPT_IMAGE_25_MODELS = ['gpt-image-2.5-sunburst', 'gpt-image-2.5-flare'] as const
 export const DEFAULT_IMAGES_MODEL = 'gpt-image-2.5-sunburst'
 
 export function getImageGenerationModel(profile: ApiProfile) {
