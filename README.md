@@ -70,9 +70,9 @@
 </tr>
 <tr>
 <td width="180" align="center" valign="middle">
-  <a href="https://api.justwoker.icu/register?aff=wpiO"><img src="https://cdn.jsdmirror.com/gh/88lin/picx-images-hosting@master/ScreenShot_2026-09-01_130420_632.webp" alt="JustDoWork" width="150"></a>
+  <a href="https://github.com/88lin/workbuddy-auto-signin"><img src="https://download.codebuddy.cn/web/workbuddy/0bebf86e38e7d71ff0c313d661e7753ff996c54e/assets/workbuddy-logo-WhgOvEF7.png" alt="JustDoWork" width="150"></a>
 </td>
-<td valign="middle"><b><a href="https://api.justwoker.icu/register?aff=wpiO">JustDoWork</a></b>&nbsp;是免费公益大模型API平台，可用Claude Opus 5 模型。注册送＄100（每日签到得＄30左右），支持GitHub登录。</td>
+<td valign="middle"><b><a href="https://github.com/88lin/workbuddy-auto-signin">workbuddy-auto-signin</a></b>&nbsp;是一个可以自动领取 WorkBuddy 每日签到积分、Buddy 旅行礼物、派 Buddy 出发、开盲盒、领任务奖励、连登兑换、断登补签的自动化脚本。Windows / macOS 定时任务，一句话交给 AI 自动配好，零 Token 静默运行。</td>
 </tr>
 </table>
 
