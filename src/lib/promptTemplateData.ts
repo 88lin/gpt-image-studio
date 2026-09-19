@@ -415,7 +415,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/MrLarus/status/2046201836525302032",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGWPzvxXYAAUbsn.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case32/output.jpg",
     "imageAlt": "帮我生成xxxx真迹图片示例图",
     "prompt": "以「帮我生成xxxx真迹图片」为目标生成图像。\n\n核心提示词：帮我生成xxxx真迹图片\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -436,7 +436,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/Kashiko_AIart/status/2046154976159035613",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGVi-N3bgAAMqi-.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case27/output.jpg",
     "imageAlt": "この画像からゲームのステータス画面を作ってください。情報量多め。言語...示例图",
     "prompt": "以「この画像からゲームのステータス画面を作ってください。情報量多め。言語...」为目标生成图像。\n\n核心提示词：この画像からゲームのステータス画面を作ってください。情報量多め。言語は日本語。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -457,7 +457,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/MrLarus/status/2046231542817497392",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGWr_g5W8AAfcpm.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case39/output.jpg",
     "imageAlt": "请根据【主题】生成一张高质量竖版「科普百科图」。示例图",
     "prompt": "请根据【主题】生成一张高质量竖版「科普百科图」。 \n\n这张图不是普通海报，也不是单纯插画，而是一张兼具“图鉴感、百科感、信息结构感、收藏感”的模块化科普信息图。整体风格参考高级博物图鉴、现代百科书页、生活方式知识卡和社交媒体高传播信息图的结合。\n\n请让画面包含：\n- 一个清晰漂亮的主题主视觉\n- 若干局部特征放大细节\n- 多个圆角模块化信息分区\n- 清楚的标题层级与重点标签\n- 简洁但丰富的百科内容\n- 可视化评分、要点总结或Top 5模块\n\n内容栏目请根据主题自动适配，优先从这些方向中选择并合理组合：\n基础档案、分类信息、外观特征、习性/生态、形成机制/结构组成、生长或使用条件、养护或维护建议、风险与注意事项、适合人群或适用场景、优缺点对比、快速评分卡。\n\n视觉要求：\n浅色干净背景，柔和配色，轻阴影，精致小图标，圆角信息框，整洁排版，信息密度高但不拥挤，阅读体验好。整体必须像真正可以发布、阅读、收藏、系列化生产的科普百科卡，而不是广告图。\n\n请不要做成普通商业宣传海报。要突出“知识整理 + 模块信息 + 图鉴式展示”的特征。",
     "tips": [
@@ -478,7 +478,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/BubbleBrain/status/2046115431144902732",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGVC87TaIAAYLc8.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case6/output.jpg",
     "imageAlt": "Analog 35mm film photography, soft...示例图",
     "prompt": "Analog 35mm film photography, soft airy Japanese-style aesthetic, gentle diffused natural window light, slight overexposure, pastel tones, low contrast, soft highlights,  minimal indoor setting near a window with white curtains, clean light-colored wall, natural composition, eye-level, slightly closer full-body framing (mid-thigh to head),  young East Asian woman, natural minimal makeup, soft realistic skin texture, long slightly messy dark hair,  oversized white button-up shirt, light casual shorts, barefoot, simple and relaxed styling,  standing naturally with relaxed posture, arms loosely at sides or slightly behind, facing camera, gentle soft smile, subtle stillness,  focus on light, air, and quiet everyday mood, soft film grain, dreamy and understated atmosphere --ar 9:16",
     "tips": [
@@ -499,7 +499,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/BubbleBrain/status/2046434670724907395",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGZlWQiakAAAlF_.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case14/output.jpg",
     "imageAlt": "9:16 vertical — editorial portrait...示例图",
     "prompt": "9:16 vertical — editorial portrait, single subject  soft black mist filter, subtle haze, gentle highlight bloom, muted tones  minimal indoor space, clean background, slight texture  young Korean woman, minimal makeup, natural skin texture  outfit: fitted ribbed knit top or soft camisole layered under a loose shirt, paired with high-waisted shorts or skirt; fabric slightly clings to body shape, soft and natural, no revealing elements  hair: slightly messy, natural volume  pose: sitting on floor with one leg bent and the other relaxed, body slightly leaning, shoulders not aligned, head tilted  composition: subject slightly off-center, negative space present  expression: calm, slightly distant, natural lips  lighting: soft side light, gentle shadow falloff  mood: understated, quiet, subtly sensual through natural body lines, relaxed and unposed  quality: fine grain, slight softness, realistic look",
     "tips": [
@@ -520,7 +520,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/seiiiiiiiiiiru/status/2046509734954741780",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGao-GgakAAooqf.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case40/output.jpg",
     "imageAlt": "架空のアニメ映画のポスターをGPT image2で作成。示例图",
     "prompt": "以「架空のアニメ映画のポスターをGPT image2で作成。」为目标生成图像。\n\n核心提示词：架空のアニメ映画のポスターをGPT image2で作成。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -541,7 +541,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/genel_ai/status/2046498264774791514",
     "recommendedSize": "4:5 / 1:1",
-    "imageUrl": "https://pbs.twimg.com/media/HGafRaKbAAADlrb.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case41/output.jpg",
     "imageAlt": "この商品広告をプロのデザイナー目線でリデザインして。示例图",
     "prompt": "以「この商品広告をプロのデザイナー目線でリデザインして。」为目标生成图像。\n\n核心提示词：この商品広告をプロのデザイナー目線でリデザインして。\n今のトレンド、ターゲットに合わせた洗練されたデザインで。\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -562,7 +562,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/liyue_ai/status/2046215276249993720",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGWd3PRbAAA0IZ3.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case35/output.jpg",
     "imageAlt": "新中式水墨山水海报，竖版9:16构图，东方极简美学风格，示例图",
     "prompt": "新中式水墨山水海报，竖版9:16构图，东方极简美学风格，\n大面积留白，整体色调为春日清晨氛围（青绿色、雾蓝、淡灰、浅墨），低饱和、清透柔和，高级质感。\n画面主体为奇峻巍峨的群山，从中间平静湖面的两侧拔地而起，占据左右两侧画面，\n山体以水墨晕染表现，浓淡干湿变化丰富，局部融入淡青绿色渲染，体现春意生机。\n山峰被湿润轻柔的晨雾包裹，雾气层层递进，与浅青蓝天空自然融合，形成空气透视与空间纵深。\n\n湖面如镜面般平静，呈现微青绿色调，倒映山体与天空，反射略带柔焦与雾化扩散效果，增强春日湿润与梦幻氛围。\n中景一艘带弧形篷顶的小木舟缓慢漂浮，船桨轻触水面形成细腻涟漪，水纹自然扩散，整体保持极静状态。\n\n船上为一位红衣渔女，体量较小（远景比例），人物简化处理为水墨剪影 + 轻微设色，\n身着低饱和朱砂红传统服饰（非鲜艳红），颜色略被雾气柔化，\n人物面部不刻画细节，仅保留轮廓与姿态（如轻扶船篷或执桨），\n红色在水面形成淡淡倒影，作为画面唯一暖色视觉焦点。\n\n岸边点缀疏林与春季新生植被，采用淡墨 + 淡青绿点染，虚实结合，增强节奏与生命气息。\n\n少量飞鸟在远空掠过，轻盈疏散分布，增强空间层次与灵动感。\n\n画面顶部居中竖排书法：“东方美学”，采用传统手写行书或行草风格（王羲之笔意），\n笔触自然起伏、提按分明，带飞白与墨韵扩散效果，避免字体感。\n书法颜色为深墨青或柔和墨黑，与整体画面统一。\n整体风格：水墨 + 现代极简设计融合，春日禅意、空灵湿润、宁静氛围，\n冷暖对比克制，电影感光影，高级艺术海报质感，8K超清细节。",
     "tips": [
@@ -583,7 +583,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/old_pgmrs_will/status/2046144801071079612",
     "recommendedSize": "16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGVdySnbQAANZ0i.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case7/output.jpg",
     "imageAlt": "A mecha girl mid-teens, pale skin ...示例图",
     "prompt": "A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar , standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind , a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes , moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor , 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes , cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic . Format 16:9.",
     "tips": [
@@ -604,7 +604,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/agi_aibusi/status/2046530758190440928",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGa7kSwbUAAIuaV.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046530758190440928.jpg",
     "imageAlt": "やり方とプロンプトはツリー↓示例图",
     "prompt": "以「やり方とプロンプトはツリー↓」为目标生成图像。\n\n核心提示词：やり方とプロンプトはツリー↓\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -625,7 +625,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/tebasaki3D/status/2046371076402503709",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGYrpGwaIAAPUzE.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case38/output.jpg",
     "imageAlt": "「神層37区 特級執行官 神巫サバト」この名称のキャラクターと世界観...示例图",
     "prompt": "以「「神層37区 特級執行官 神巫サバト」この名称のキャラクターと世界観...」为目标生成图像。\n\n核心提示词：「神層37区　特級執行官　神巫サバト」この名称のキャラクターと世界観に合ったビジュアルイメージを、プロのデザイナーとして縦長のポスターイメージとして制作して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -646,7 +646,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/liyue_ai/status/2046243132774494607",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGW3PphaIAEANfl.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case42/output.jpg",
     "imageAlt": "平面插画，东方幻想风格高端城市海报设计，竖版9:16构图，整体采用对...示例图",
     "prompt": "平面插画，东方幻想风格高端城市海报设计，竖版9:16构图，整体采用对角线+S型流动构图，从左下向右上延展，画面以深邃黑色为背景，自上而下渐变至浓烈暗红色，形成强烈冷暖对比与空间纵深，背景带微弱星尘与颗粒质感。画面中央一条金色流动能量线条如火焰般蜿蜒贯穿，自底部向上延伸，具有流体质感、粒子光效与渐变高光，局部带细微能量碎屑与体积光。\n\n金色流光中逐层浮现广州城市地标建筑群：广州塔为视觉核心，比例突出，周围融合珠江新城高楼群、猎德大桥及现代与岭南建筑元素，建筑采用“精细线描 + 金色发光体块”表现，轮廓清晰、细节丰富，在金色光晕映衬下仿佛悬浮于虚空，形成超现实空间层次，远景轻微雾化增强纵深感。\n\n画面底部为一位东方白发女性形象，长发飘逸，如烟似雾，与金色流光自然衔接并逐渐融合，发丝半透明带渐变光感，姿态柔美，双目微闭，神情宁静，怀抱一束多彩鲜花，花间点缀微光粒子与星点效果，象征人与城市能量的精神连接，人物细节适度简化以突出整体设计感。\n\n光影集中于金色流线、建筑与人物轮廓，形成强烈明暗对比与视觉聚焦，整体氛围宏大、神秘、具有东方神话意境且略带治愈感。色彩以黑与暗红为基底，高亮鎏金为主视觉强调，金色具备丰富明暗层次，辅以小面积高饱和花束色彩点缀，整体高级克制。\n\n页面文字与画面融合排版：顶部居中宋体大字“广州·中国”，下方小字“2026/04/20”，再下方小字“LIYUE”，文字采用淡金色或柔和暖白色，与整体光影统一。高品质细节，电影级光影表现，体积光与粒子细节丰富，画面干净无噪点，超高清8K分辨率，商业级海报质感。",
     "tips": [
@@ -667,7 +667,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/BubbleBrain/status/2046502288102170757",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGai4GebkAAfesB.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case17/output.jpg",
     "imageAlt": "9:16 vertical — Japanese Fuji film...示例图",
     "prompt": "9:16 vertical — Japanese Fuji film style couple portrait, two subjects  Fujifilm analog aesthetic (Pro 400H / Superia feel), soft pastel tones, slight green-magenta shift, low contrast, gentle highlight roll-off, fine film grain, subtle halation  bright natural daylight, diffused sunlight through window, soft shadows, airy atmosphere  young Japanese couple, natural minimal makeup, realistic skin texture, slight imperfections  female outfit: oversized button-up shirt with loose shorts, relaxed fit, soft casual styling   male outfit: simple t-shirt or light shirt, clean and understated  hair: natural, slightly tousled for both  pose: close intimate distance — sitting or standing close together; the girl gently leaning toward him, one hand lightly resting on his shoulder or chest; the boy slightly leaning in, faces close, almost touching, capturing the moment just before a kiss  expression: soft smiles or gentle gaze toward each other, relaxed and natural, emotional connection visible  camera: close framing (waist-up), eye-level, intimate distance, slight handheld feel  setting: minimal indoor near window, light curtains, clean soft background  lighting: diffused daylight, gentle highlight bloom, soft shadow transitions  mood: warm, romantic, intimate everyday moment, natural affection  quality: ultra-realistic, analog film look, fine grain, slight softness, natural imperfections",
     "tips": [
@@ -688,7 +688,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/itnavi2022/status/2046494262158930154",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGabrymaUAAoDXS.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case43/output.jpg",
     "imageAlt": "バックプロパゲーションについて詳しく図解して示例图",
     "prompt": "以「バックプロパゲーションについて詳しく図解して」为目标生成图像。\n\n核心提示词：バックプロパゲーションについて詳しく図解して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -709,7 +709,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/itnavi2022/status/2046500429786402973",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGahSugbEAA0yOv.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case44/output.jpg",
     "imageAlt": "デメニギスの体の構造を解説するカラー図鑑のページ示例图",
     "prompt": "以「デメニギスの体の構造を解説するカラー図鑑のページ」为目标生成图像。\n\n核心提示词：デメニギスの体の構造を解説するカラー図鑑のページ\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -730,7 +730,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/xiaohu/status/2046536551681954207",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGbB4--bAAAfGnL.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case200.jpg",
     "imageAlt": "生成一个抖音直播的截图 里面是一个美女在直播，在卖丝袜和内衣，她的在...示例图",
     "prompt": "以「生成一个抖音直播的截图 里面是一个美女在直播，在卖丝袜和内衣，她的在...」为目标生成图像。\n\n核心提示词：生成一个抖音直播的截图 里面是一个美女在直播，在卖丝袜和内衣，她的在线人数是99996，热度是18+，有个叫小互的大哥，给她刷了一个飞机礼物\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -751,7 +751,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/FixlationAI/status/2046272578705068476",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGXRG3IbUAA4iTM.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case34/output.jpg",
     "imageAlt": "an ingame screenshot of rust示例图",
     "prompt": "以「an ingame screenshot of rust」为目标生成图像。\n\n核心提示词：an ingame screenshot of rust\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -772,7 +772,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/yudotanaka/status/2046188377524076915",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGV__0DakAAdaZR.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046188377524076915.jpg",
     "imageAlt": "画像のプロンプトはALTに載せてます。示例图",
     "prompt": "以「画像のプロンプトはALTに載せてます。」为目标生成图像。\n\n核心提示词：画像のプロンプトはALTに載せてます。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -793,7 +793,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/underwoodxie96/status/2046514205529088501",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGatt-VasAAVQq2.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case45/output.jpg",
     "imageAlt": "Create a Science fiction movie pos...示例图",
     "prompt": "以「Create a Science fiction movie pos...」为目标生成图像。\n\n核心提示词：Create a Science fiction movie poster\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -814,7 +814,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/genel_ai/status/2046501692246470871",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGag91IbAAAo4du.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case46/output.jpg",
     "imageAlt": "少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ...示例图",
     "prompt": "以「少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ...」为目标生成图像。\n\n核心提示词：少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ、みたいなところをもっと強く感じたい。冷たいうどんやナス、つゆを口に含んだ時の爽快感、みたいなものをもっと感じるように\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -835,7 +835,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/Tz_2022/status/2046523491940225366",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGa2ROUX0AAadhO.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case28/output.jpg",
     "imageAlt": "玄武门之变的朋友圈示例图",
     "prompt": "以「玄武门之变的朋友圈」为目标生成图像。\n\n核心提示词：玄武门之变的朋友圈\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -856,7 +856,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/MrLarus/status/2046514998965371144",
     "recommendedSize": "1:1",
-    "imageUrl": "https://pbs.twimg.com/media/HGaqaO2W4AA2W-6.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case47/output.jpg",
     "imageAlt": "生成一张手写中/西医药方图示例图",
     "prompt": "以「生成一张手写中/西医药方图」为目标生成图像。\n\n核心提示词：生成一张手写中/西医药方图\n\n输出比例：1:1。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -877,7 +877,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/songguoxiansen/status/2046476566537080849",
     "recommendedSize": "16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGaLQTfbkAA3xpN.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case8/output.jpg",
     "imageAlt": "生成圣斗士星矢12个黄金圣斗士的12宫格卡牌图片，每张卡牌上写上对应...示例图",
     "prompt": "以「生成圣斗士星矢12个黄金圣斗士的12宫格卡牌图片，每张卡牌上写上对应...」为目标生成图像。\n\n核心提示词：生成圣斗士星矢12个黄金圣斗士的12宫格卡牌图片，每张卡牌上写上对应的中文名，每行4个，宽高比16:9。\n\n输出比例：16:9。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -898,7 +898,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/MrLarus/status/2046523494003851300",
     "recommendedSize": "16:9 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGa2KbFXMAAv9Wh.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case29/output.jpg",
     "imageAlt": "生成【城市】三天旅游攻略，就这么简单一句话示例图",
     "prompt": "以「生成【城市】三天旅游攻略，就这么简单一句话」为目标生成图像。\n\n核心提示词：生成【城市】三天旅游攻略，就这么简单一句话\n\n输出比例：16:9 / 4:5。\n\n扩展要求：请展示品牌识别、空间结构、材质、触点物料或环境氛围，让画面像真实提案图。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -919,7 +919,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/carsonyungos/status/2046523198116889064",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGa1gocaAAAqVzg.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case48/output.jpg",
     "imageAlt": "A refined 2026 Silicon Valley city...示例图",
     "prompt": "A refined 2026 Silicon Valley city promotional poster with a futuristic yet elegant atmosphere.\n\nDouble exposure composition, preserving an S-shaped sense of flowing movement. On a pure white textured background, in the lower-right corner, a miniature figure dressed in sleek modern techwear is releasing a long ribbon of luminous silver-blue light. The ribbon flows gracefully through the air, showing a soft silk-like texture, and as it drifts toward the upper-left, it magically transforms into a grand landscape of rolling hills, coastline, data streams, and illuminated urban terrain.\n\nWithin this flowing “river of light,” overlay a hand-drawn panoramic map of Silicon Valley, blending technology, nature, innovation, and California sunlight. The scene feels visionary, expansive, sophisticated, and inspiring.\n\nInclude iconic Silicon Valley and Bay Area elements: Stanford University arches, Apple Park, Google campus-inspired buildings, Meta-like glass offices, Tesla-style innovation imagery, venture capital offices on Sand Hill Road, Palo Alto tree-lined streets, San Jose skyline, the Santa Cruz Mountains, San Francisco Bay, highways, autonomous vehicles, startup labs, semiconductor patterns, AI data centers, and subtle circuit-board textures.\n\nSurrounded by soft mist, golden California light, floating clouds, and delicate digital particles. Rich colors, complex structure, highly detailed, grand and breathtaking, yet still fresh and minimal because of the large areas of white space.\n\nIn the lower-left corner, elegant typography reads “SILICON VALLEY 2026” with a vertical promotional slogan: “Where Ideas Shape Tomorrow.” Beautiful editorial layout, graceful spacing, clear and complete lettering, premium city branding poster, cinematic lighting, sophisticated details, 9:16 aspect ratio.",
     "tips": [
@@ -940,7 +940,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/GoSailGlobal/status/2046491397424111659",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGaYpIJbIAE8rsz.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case30/output.jpg",
     "imageAlt": "创作一幅超逼真的 3D 插画，描绘一个略微倾斜的 Twitter/X...示例图",
     "prompt": "创作一幅超逼真的 3D 插画，描绘一个略微倾斜的 Twitter/X 个人资料页面，背景为简洁的灰色。保留原有的卡通头像。界面必须与真实的 X 截图相似，包含真实的布局、认证徽章、粉丝统计、个人资料横幅和推文部分。\n\n个人资料详情：\n\n一位时尚的年轻男子，有着蓬松的亮黑色短发和白皙的皮肤，从个人资料页面的右侧撕开的纸片中跃然而出。他保留了原有的面部特征，只是将表情改为自然自信的微笑。他握着撕开的纸片边缘，纸屑四处飞溅，营造出强烈的 3D 突破效果。\n\n柔和的影棚灯光、电影级的阴影、景深、超高细节、清晰的焦点、逼真的皮肤、逼真的 UI 反射、优质的构图、4K 分辨率、逼真与微妙的皮克斯风格融合。\n\n重要提示：\n\n- 请勿更改头像\n\n- 保持 X UI 界面准确\n\n- 保留原有的面部特征\n\n- 角色为男性\n\n- 仅增强笑容\n\n- 确保所有中文文字清晰易读",
     "tips": [
@@ -961,7 +961,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/pfanis/status/2046413660147314714",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGZSJzFbEAAc0IO.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case32/output.jpg",
     "imageAlt": "Generate a high-quality vertical \"...示例图",
     "prompt": "Generate a high-quality vertical \"science popularization encyclopedia image\" based on [Theme].  \n\n This image is not an ordinary poster, nor is it purely an illustration; it's a modular science information graphic that combines \"atlas-like feel, encyclopedic feel, information structure, and collectible appeal.\" The overall style references a blend of advanced natural history atlases, modern encyclopedia pages, lifestyle knowledge cards, and highly shareable social media infographics.  Please include in the image: - A clear and beautiful main visual of the theme - Several magnified close-up details of partial features - Multiple rounded modular information sections - Clear title hierarchy and key labels - Concise yet rich encyclopedic content - Visualized ratings, key point summaries, or Top 5 modules  Content sections should automatically adapt based on the theme, prioritizing selection and reasonable combination from these directions: Basic profile, classification info, appearance features, habits/ecology, formation mechanism/structure composition, growth or usage conditions, care or maintenance tips, risks and precautions, suitable people or application scenarios, pros and cons comparison, quick rating card.  Visual requirements: Light, clean background; soft color palette; subtle shadows; refined small icons; rounded info boxes; neat typography; high information density without clutter; excellent reading experience. The overall design must feel like a genuine science encyclopedia card that can be published, read, collected, and produced in series—not like an ad graphic.  Please don't make it into an ordinary commercial promotional poster. Emphasize the features of \"knowledge organization + modular info + atlas-style presentation.",
     "tips": [
@@ -982,7 +982,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/minesan_ai/status/2046215187678790140",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGWdr8RagAAhg6x.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046215187678790140.jpg",
     "imageAlt": "プロンプトはリプに最終ページとまとめて掲載します↓示例图",
     "prompt": "以「プロンプトはリプに最終ページとまとめて掲載します↓」为目标生成图像。\n\n核心提示词：プロンプトはリプに最終ページとまとめて掲載します↓\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1003,7 +1003,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/Cryptohaifeng_/status/2046165776055546341",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGVw2JUbQAAG9Bn.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case31/output.jpg",
     "imageAlt": "生成一张慈禧的X主页示例图",
     "prompt": "以「生成一张慈禧的X主页」为目标生成图像。\n\n核心提示词：生成一张慈禧的X主页\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1024,7 +1024,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/agi_aibusi/status/2046530764871696750",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGa8bFSbsAA6rpa.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case32/output.jpg",
     "imageAlt": "GPT-image-2でこの手相を診断して詳細な鑑定書を作って示例图",
     "prompt": "以「GPT-image-2でこの手相を診断して詳細な鑑定書を作って」为目标生成图像。\n\n核心提示词：GPT-image-2でこの手相を診断して詳細な鑑定書を作って\n生命線・知能線・感情線・運命線・太陽線・財運線・結婚線を、線の形状・濃淡・枝分かれ・起点終点まで分析すること。\n助言を重点的に高品質な占い鑑定書にまとめること。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1045,7 +1045,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/XiaohuiAI666/status/2046515319947354603",
     "recommendedSize": "16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGaumsnbYAAxaPl.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case37/output.jpg",
     "imageAlt": "在计算机博物馆里，一个程序员在展厅中央，正在演示C语言编程，很多参观...示例图",
     "prompt": "以「在计算机博物馆里，一个程序员在展厅中央，正在演示C语言编程，很多参观...」为目标生成图像。\n\n核心提示词：在计算机博物馆里，一个程序员在展厅中央，正在演示C语言编程，很多参观者在围观，屏幕上的代码清晰可见。旁边的牌子写着：古法编程，现场表演。2D卡通画风，16:9\n\n输出比例：16:9。\n\n扩展要求：请展示品牌识别、空间结构、材质、触点物料或环境氛围，让画面像真实提案图。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1066,7 +1066,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/MrLarus/status/2046510310253539764",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGapfCrW4AAO_HH.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case33/output.jpg",
     "imageAlt": "生成一张【字体】书法临摹字帖示例图",
     "prompt": "以「生成一张【字体】书法临摹字帖」为目标生成图像。\n\n核心提示词：生成一张【字体】书法临摹字帖\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1087,7 +1087,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/loglogrog/status/2046437230127034774",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGZnLqbboAAGFRB.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case34/output.jpg",
     "imageAlt": "GPT Image 2を使って、OpenClawの情報を調べてドンキ...示例图",
     "prompt": "以「GPT Image 2を使って、OpenClawの情報を調べてドンキ...」为目标生成图像。\n\n核心提示词：GPT Image 2を使って、OpenClawの情報を調べてドンキの広告ポップ風に実際のドンキに貼っているような感じで画像生成してください\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1108,7 +1108,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/weel_corp/status/2046514558064586782",
     "recommendedSize": "4:5 / 1:1",
-    "imageUrl": "https://pbs.twimg.com/media/HGatbcobIAAuNfa.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case49/output.jpg",
     "imageAlt": "『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には...示例图",
     "prompt": "以「『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には...」为目标生成图像。\n\n核心提示词：『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には「特売」の大きな文字と今週の日付。カラフルな商品写真（野菜・果物・牛肉・鮮魚）、赤枠の価格タグ、「超目玉商品」「家計応援」のキャッチ…』\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1129,7 +1129,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/MrLarus/status/2046263153546174935",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGXHhQcbAAAFcYA.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case34/output.jpg",
     "imageAlt": "请根据【主题】，生成一张高设计感的人物关系图海报。要求这张图不是普通...示例图",
     "prompt": "请根据【主题】，生成一张高设计感的人物关系图海报。要求这张图不是普通插画，而是兼具信息可视化、叙事结构、海报设计感和作品风格还原度的人物关系图。\n\n请自动完成以下内容：\n- 识别该主题对应的作品及其核心设定\n- 提取最具代表性的 6–12 位关键人物，必要时不超过 15 位\n- 识别并展示关键人物关系，包括血缘、爱情、友情、联盟、敌对、师徒、主从、操控、背叛、秘密关系等\n- 自动按作品特点选择合适的构图方式，如主角中心型、双核心对峙型、阵营分区型、家族谱系型或时间演变型\n- 自动提炼作品的风格DNA，包括色彩、世界观符号、材质纹理、情绪氛围、排版语言和代表性元素\n- 将这些风格元素转化为人物关系图的整体视觉设计，而不是简单复制某张官方海报\n- 用不同颜色、线型、箭头区分不同关系，保证线条清晰、层次分明、不杂乱\n- 核心人物最突出，重要人物次之，次级人物弱化，形成明确视觉层级\n- 每个人物名称清晰可读，必要时可加入身份或阵营标签\n\n最终成品应满足：\n- 一眼看懂人物主次和关键关系\n- 具有明显的原作品气质与设定感\n- 兼具信息图的清晰度与海报的高级设计感\n- 画面统一、精致、完整、适合社交媒体传播或海报展示\n- 避免廉价流程图感、避免杂乱堆砌、避免信息过载",
     "tips": [
@@ -1150,7 +1150,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/loglogrog/status/2046448773162033240",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGZxpguaEAA1qcc.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case9/output.jpg",
     "imageAlt": "# 混沌としたメモ書き・記号の集合体からキャラクターの顔を浮かび上が...示例图",
     "prompt": "# 混沌としたメモ書き・記号の集合体からキャラクターの顔を浮かび上がらせるアート\n\n--- スタイル\n- 白い紙の上に黒インクで描かれた大量の手書きメモ、数式、記号、ランダムな線。\n- 紙いっぱいに散らばる書き殴り風のカオス。\n- 所々に赤インクの強調（ライン、塗り潰し、マーカー風の塊）。\n- アナログのノート落書きのような質感。\n\n--- 構図\n- ランダムなメモや記号が全体を覆い尽くす。\n- 黒インクの線や文字の密度が「キャラクターの顔」の位置に集中する。\n- 結果として、混沌の中から「与えられたキャラクターの顔のシルエット・表情」がうっすら浮かび上がる。\n- 顔は写実的ではなく、カオスの断片が集まって形を成す。\n\n--- 色彩\n- モノクロ（黒・白）を主体に構成。\n- 赤インクをアクセントとして散発的に配置。\n- 彩度は抑えめ、アナログの紙とインク感を重視。\n\n--- 表現要素\n- 読めるようで読めない文字列、日本語や英数字が混在。\n- 数式記号、矢印、点、斜線、クロス、ドリップ（インクの飛び散り）。\n- キャラクターの顔の目や髪の輪郭は、メモや記号の配置の「余白」や「濃淡」で浮かび上がる。\n\n--- 禁止事項\n- 顔を直接的に描き込む写実ポートレート。\n- デジタル処理的で整然とした幾何学模様。\n- カラフルな彩色や過飽和表現。\n- ロゴ、透かし、人工的なCG感。\n\n--- Definition of Done (DoD)\n- 全体は「混沌としたメモ・記号の集合体」として成立している。  \n- 与えられたキャラクターの顔が、混沌の濃淡・配置から自然に浮かび上がる。  \n- 色はモノクロ＋赤アクセントのみ。  \n- 紙とインクの手描き的質感を保持している。",
     "tips": [
@@ -1171,7 +1171,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/pfanis/status/2046414546378584558",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGZTLbuaUAAczIJ.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046414546378584558.jpg",
     "imageAlt": "Generate for me a UI design system...示例图",
     "prompt": "Generate for me a UI design system with a very cutting-edge, bold, and unique theme that includes glassy visuals and transparencies",
     "tips": [
@@ -1192,7 +1192,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/RitaStar1128/status/2046406024303976904",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGZLYdWaMAAQScz.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case31/output.jpg",
     "imageAlt": "戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画...示例图",
     "prompt": "以「戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画...」为目标生成图像。\n\n核心提示词：戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画像を作成して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1213,7 +1213,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/80vul/status/2046218165961753047",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGWgkSvasAAuW2B.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case18/output.jpg",
     "imageAlt": "根据你对我的认知 给我生成一个“你认识的我”的 图片示例图",
     "prompt": "以「根据你对我的认知 给我生成一个“你认识的我”的 图片」为目标生成图像。\n\n核心提示词：根据你对我的认知 给我生成一个“你认识的我”的 图片\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1234,7 +1234,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/hiro_ai_auto/status/2046542225358917945",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGbGRIibQAAjAV3.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046542225358917945.jpg",
     "imageAlt": "この画像のプロンプト↓示例图",
     "prompt": "以「この画像のプロンプト↓」为目标生成图像。\n\n核心提示词：この画像のプロンプト↓\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1255,7 +1255,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/EurekaLuyao/status/2046540642634047868",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGbF3GpakAE9nWN.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046540642634047868.jpg",
     "imageAlt": "Prompt见评论。示例图",
     "prompt": "以「Prompt见评论。」为目标生成图像。\n\n核心提示词：Prompt见评论。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1276,7 +1276,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/ck_igarashi/status/2046528889124728993",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGa68yAawAA1aEE.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case51/output.jpg",
     "imageAlt": "ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録を...示例图",
     "prompt": "以「ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録を...」为目标生成图像。\n\n核心提示词：ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録をするのに惹かれるような文言にし、画像内には女性がピラティスを実際に行っている様子を映して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1297,7 +1297,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/the_wheel_2024/status/2046519658166317160",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGayF3iagAARTZ1.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case35/output.jpg",
     "imageAlt": "日本のソシャゲのガチャ画面を生成して、示例图",
     "prompt": "以「日本のソシャゲのガチャ画面を生成して、」为目标生成图像。\n\n核心提示词：日本のソシャゲのガチャ画面を生成して、\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1318,7 +1318,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/RainHuangapp/status/2046507931907080330",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGaoFjmW8AAfZlw.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case53/output.jpg",
     "imageAlt": "用可爱的风格讲述中国远征军的历史故事示例图",
     "prompt": "以「用可爱的风格讲述中国远征军的历史故事」为目标生成图像。\n\n核心提示词：用可爱的风格讲述中国远征军的历史故事\n用波普风格讲述金刚经\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1339,7 +1339,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/16kthir0GRXgNqn/status/2046507362266259832",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGanmTua8AAnw3k.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case39/output.jpg",
     "imageAlt": "サムアルトマンがメジャーリーガーでバットを構えている。よくあるような...示例图",
     "prompt": "以「サムアルトマンがメジャーリーガーでバットを構えている。よくあるような...」为目标生成图像。\n\n核心提示词：サムアルトマンがメジャーリーガーでバットを構えている。よくあるようなテレビ画面の構図\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1360,7 +1360,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/Shinning1010/status/2046501587762188535",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGaiU_8XoAAAkaS.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case36/output.jpg",
     "imageAlt": "A 9:16 vertical version, high-deta...示例图",
     "prompt": "A 9:16 vertical version, high-detail realistic style Chinese TikTok live screenshot, Elon Musk is talking to the mobile phone camera in the live broadcast room, excited, smiling, and the live atmosphere is warm and real. He held a white handwritten sign in one hand, which clearly said: \"Thank you Shinning\". There are obvious Chinese TikTok interface elements in the live broadcast screen, including likes, comments and share icons arranged vertically on the right, scrolling Chinese bullet screens and interactive comments below, and the \"live broadcast\" logo at the top, which looks like a real mobile phone screenshot. There is an eye-catching gift prompt special effect in the screen: \"Shinning sent TikTok No. 1\", with gift animation light effect and platform-style prompt box. Musk is in a professional live broadcast environment, with a mobile phone holder, a ring fill light and a desktop microphone in front of him. The background is a modern technology live broadcast room with bright lights and a slight neon atmosphere. The composition is real and natural, like the ongoing live screenshot of the Chinese short video platform. The interface information is rich but not messy, the characters are clear, the expression is vivid, the details are rich, the sense of real photography, the depth of field, high definition, cinematic, photorealistic, realistic livestream screenshot, social media UI, Chinese Douyin live room, detailed lighting, natural skin texture.\n\nNegative prompts:\n\nLow definition, blur, cartoon, illustration, too strong CG sense, two-dimensional, deformed fingers, wrong text, scrambled code, multiple mobile phones, multiple brands, character repetition, face collapse, facial features distortion, excessive skin polishing, overexposure, too dark, messy background, wrong UI, non-Chinese short video interface, too many English bullet screens, gift special effects are not obvious, cropping error, proportional error\n\nSupplementary reinforcement words:\n\nReal mobile phone screen recording screenshot feeling, the live broadcast UI is complete, the gift prompt box conforms to the style of the Chinese short video platform, the Chinese comment area is active, the number of people online in the live broadcast room is clearly displayed, and the time, power and signal bar are visible.",
     "tips": [
@@ -1381,7 +1381,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/AZLnfvp/status/2046468976092533180",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGaD4PcbUAAOTRf.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case38/output.jpg",
     "imageAlt": "用未来都市风格生成UI设计系统，灵感来自赛博朋克城市夜景，包含霓虹灯...示例图",
     "prompt": "以「用未来都市风格生成UI设计系统，灵感来自赛博朋克城市夜景，包含霓虹灯...」为目标生成图像。\n\n核心提示词：用未来都市风格生成UI设计系统，灵感来自赛博朋克城市夜景，包含霓虹灯、玻璃建筑反射、高对比光影，配色以紫色、蓝色、粉色霓虹为主，设计网页Dashboard、移动端界面、卡片、按钮、控件等，视觉炫酷、层次丰富、科技感极强\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1402,7 +1402,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/yssrski/status/2046410519595348397",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGZPY4FbAAAljq3.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case30/output.jpg",
     "imageAlt": "counter strike in game screenshot,...示例图",
     "prompt": "以「counter strike in game screenshot,...」为目标生成图像。\n\n核心提示词：counter strike in game screenshot, mixed with Terraria\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1423,7 +1423,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/alanlovelq/status/2046378199681257920",
     "recommendedSize": "9:16",
-    "imageUrl": "https://pbs.twimg.com/media/HGYyHmBaQAA6qFD.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case54/output.jpg",
     "imageAlt": "请根据【主题】生成一张高质量竖版「科普百科图」。示例图",
     "prompt": "请根据【主题】生成一张高质量竖版「科普百科图」。 \n\n这张图不是普通海报，也不是单纯插画，而是一张兼具“图鉴感、百科感、信息结构感、收藏感”的模块化科普信息图。整体风格参考高级博物图鉴、现代百科书页、生活方式知识卡和社交媒体高传播信息图的结合。\n\n请让画面包含：\n- 一个清晰漂亮的主题主视觉\n- 若干局部特征放大细节\n- 多个圆角模块化信息分区\n- 清楚的标题层级与重点标签\n- 简洁但丰富的百科内容\n- 可视化评分、要点总结或Top 5模块\n\n内容栏目请根据主题自动适配，优先从这些方向中选择并合理组合：\n基础档案、分类信息、外观特征、习性/生态、形成机制/结构组成、生长或使用条件、养护或维护建议、风险与注意事项、适合人群或适用场景、优缺点对比、快速评分卡。\n\n视觉要求：\n浅色干净背景，柔和配色，轻阴影，精致小图标，圆角信息框，整洁排版，信息密度高但不拥挤，阅读体验好。整体必须像真正可以发布、阅读、收藏、系列化生产的科普百科卡，而不是广告图。\n\n请不要做成普通商业宣传海报。要突出“知识整理 + 模块信息 + 图鉴式展示”的特征。",
     "tips": [
@@ -1444,7 +1444,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/overseas58/status/2046271877577097376",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://pbs.twimg.com/media/HGXRKyKacAAdYwl.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case33/output.jpg",
     "imageAlt": "以中国连环画（小人书）的风格帮我绘制大闹天空示例图",
     "prompt": "以「以中国连环画（小人书）的风格帮我绘制大闹天空」为目标生成图像。\n\n核心提示词：以中国连环画（小人书）的风格帮我绘制大闹天空\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1465,7 +1465,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/Kurt_Rousey466/status/2046267707881029934",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGXNeVCaAAQ7dMa.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case55/output.jpg",
     "imageAlt": "帮我制作辣椒炒肉这道菜的详细制作流程图，真实风格，适用于小红书图文比例示例图",
     "prompt": "以「帮我制作辣椒炒肉这道菜的详细制作流程图，真实风格，适用于小红书图文比例」为目标生成图像。\n\n核心提示词：帮我制作辣椒炒肉这道菜的详细制作流程图，真实风格，适用于小红书图文比例\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
@@ -1486,7 +1486,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/A9Quant/status/2046228485841334559",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGWoYypbYAE7oiM.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case56/output.jpg",
     "imageAlt": "请围绕【主题】自动生成一张顶级概念海报 / 信息图式电影海报。示例图",
     "prompt": "请围绕【主题】自动生成一张顶级概念海报 / 信息图式电影海报。\n\n唯一输入变量只有：\n【主题】：__中国历史上的皇帝排名_         \n\n要求 AI 根据这个主题，自动推导并统一设计以下全部视觉系统，不需要我额外指定：\n- 核心主体（可以自动判断更适合人物、产品、建筑、器物、符号、场景或抽象意象）\n- 底部支撑结构\n- 上方悬浮符号或精神象征\n- 场景包裹元素\n- 隐喻系统\n- 色彩层级\n- 材质对比\n- 光影逻辑\n- 标题、副标题、辅助文案\n- 品牌感与高级感表达方式\n\n最终画面必须是：\n一张震撼、精密、统一、电影级、超高细节、可用于高端印刷的概念主视觉海报。\n\n【总风格】\n超写实 3D 商业 CGI 渲染，融合电影级布光、奢侈品视觉语言、未来感概念设计与史诗级构图。画面必须具有“唯一主视觉核心”，不能杂乱，不能像拼贴，不能像普通电商海报。\n\n【自动推导规则】\nAI 必须依据【主题】自动决定最合适的：\n1. 核心视觉隐喻\n2. 主体类型与姿态\n3. 支撑结构形式\n4. 悬浮元素形式\n5. 场景外壳与空间氛围\n6. 主色、辅色、强调色\n7. 材质组合\n8. 文字气质与版式风格\n\n例如：\n- 如果主题偏权力、秩序、资本、统治，则自动偏向王座、冠冕、机械、神殿、红幕、金属、权力结构\n- 如果主题偏科技、AI、芯片、未来，则自动偏向机械结构、能量核心、光束、深色金属、全息感\n- 如果主题偏奢侈品、高定、稀缺、收藏，则自动偏向珠宝、镜面材质、黑金体系、展台、博物馆式布光\n- 如果主题偏人物、IP、角色，则自动以人物为主视觉核心，并自动匹配对应世界观与象征系统\n- 如果主题偏城市、文明、史诗、命运，则自动转化为宏大叙事型空间结构与仪式感场景\n\n【构图规则】\n- 绝对高级感\n- 强烈中心秩序，整体统一\n- 允许中轴对称或接近中轴的史诗级构图\n- 视觉重力明确，从上到下形成清晰的层级落点\n- 边缘负空间干净、克制、有呼吸感\n- 不允许无意义装饰，不允许风格污染，不允许多个系统互相打架\n\n【视觉质量】\n- 超高细节\n- 体积光清晰\n- 材质真实\n- 反射、折射、阴影、雾气、景深自然\n- 每个元素都像经过工业级视觉总监审美控制\n- 整体达到高端品牌 campaign key visual / luxury invitation poster / conceptual editorial poster 水准\n\n【排版系统】\n- 整体为 90% 视觉，10% 文字\n- AI 根据【主题】自动生成最匹配的主标题和副标题\n- 标题必须简洁、锋利、有气势\n- 文案分布在安全负空间内，不压主体\n- 若主题适合中文，则优先生成中文标题；若主题更适合英文，则自动生成英文标题；也可中英结合，但必须统一高级\n- 文字必须尽量少而准，不要堆字\n\n【署名要求】\n在画面底部角落自然加入作者署名：\n@a9quant\n署名要小，但清晰、精致、高级，不喧宾夺主，像顶级视觉作品中的正式作者落款。\n\n【输出要求】\n输出为单张统一构图海报。\n自动根据【主题】完成全部视觉决策。\n画面必须具备史诗感、秩序感、控制力、仪式感、商业完成度。\n最大细节密度，超清，电影级，印刷级，高端成片质感。",
     "tips": [
@@ -1507,7 +1507,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "ZeroLu/awesome-gpt-image 社区案例",
     "sourceUrl": "https://x.com/opc_8838/status/2046162334440448339",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://pbs.twimg.com/media/HGVtZCHaEAAGxYP.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case36/output.jpg",
     "imageAlt": "以涂鸦速写风表现【一个厉害的AI builder】，整体呈现快速勾勒...示例图",
     "prompt": "以涂鸦速写风表现【一个厉害的AI builder】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性，而不是严谨写实或精细刻画。  颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹、刷痕、飞白与覆盖感，色彩根据【主题/主体】自动适配，但整体保持涂鸦式、速写式、概括式的表达。不要透明水彩晕染效果，不要细腻水彩过渡，不要纸纹理，不要柔和雾化，不要梦幻质感。  背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号、圈画、重复线、随手写的文字或其他涂鸦元素，以增强速写本或随笔式视觉语言，但不可过于拥挤，不可破坏主体和留白气质。  画面内容不需要预先写清楚，由【一个厉害的AI builder】自动推演并生成最适合的主体形象、动作、相关元素、符号或简化场景，整体保持统一的涂鸦速写风和夸张概括的表现方式，避免复杂写实背景和过度铺陈。 画面中需自然加入专属签名\"BlanPlan\"，作为画面的一部分，位置低调但清晰，可放在左下角、右下角或标题附近，风格需与整体版式统一，像作品署名或设计落款；签名字体精致、克制、高级，不可过大，不可破坏主体构图，不可显得突兀或廉价。",
     "tips": [
@@ -3523,7 +3523,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-ui",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case17.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case17.jpg",
     "imageAlt": "UI 截图系统模板示例图",
     "prompt": "使用「UI 截图系统」模板生成一张可直接用于生产流程的图像。\n\n用途：用于 App 截图、仪表盘、社媒截图和直播界面。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 锁定平台、比例、层级和画面文字。\n2. 明确状态栏、Tab、操作区、评论层等 UI 元素。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免平台描述过泛。\n2. 约束文字可读性和平台特征。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3544,7 +3544,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-infographic",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case334.png",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case334.png",
     "imageAlt": "信息图引擎模板示例图",
     "prompt": "使用「信息图引擎」模板生成一张可直接用于生产流程的图像。\n\n用途：用于解释图、技术图解、时间线和知识卡片。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义 3-5 个模块、信息流、层级和短标签。\n2. 用色块、箭头、图标和留白控制复杂度。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免把长段正文塞进画面。\n2. 先限制模块数量，再补视觉细节。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3565,7 +3565,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-infographic",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case341.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case341.jpg",
     "imageAlt": "科学尺度缩放图模板示例图",
     "prompt": "使用「科学尺度缩放图」模板生成一张可直接用于生产流程的图像。\n\n用途：用于需要从微观到宏观展示尺度变化的科普主题。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 使用 6-8 个尺度框，每个标签保持短句。\n2. 展示单位、倍率和不同尺度的细节。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免所有尺度框长得一样。\n2. 避免通用放大镜式布局。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3586,7 +3586,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case345.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case345.jpg",
     "imageAlt": "海报排版系统模板示例图",
     "prompt": "使用「海报排版系统」模板生成一张可直接用于生产流程的图像。\n\n用途：用于活动海报、电影海报、封面和社媒传播视觉。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 锁定主体、标题、版式、配色和比例。\n2. 突出标题层级和主视觉。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 需要成品海报时，避免生成拼贴展示板。\n2. 约束多余文字和装饰符号。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3607,7 +3607,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case350.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case350.jpg",
     "imageAlt": "运动商业 Campaign模板示例图",
     "prompt": "使用「运动商业 Campaign」模板生成一张可直接用于生产流程的图像。\n\n用途：用于运动品牌 Campaign、运动员海报和运动产品视觉。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义运动项目、姿态、核心道具、标题和品牌色。\n2. 使用强光影、干净构图和可读数据层。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免错误运动器材和杂乱拼贴。\n2. 让运动员和核心道具占据主导。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3628,7 +3628,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case355.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case355.jpg",
     "imageAlt": "概念字体海报模板示例图",
     "prompt": "使用「概念字体海报」模板生成一张可直接用于生产流程的图像。\n\n用途：用于标题文字需要成为主视觉结构的海报。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 让字体成为画面主角，并保证标题拼写准确。\n2. 人物、物体或风景需要服务标题含义。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免默认字效、无关图标和标题错字。\n2. 控制配色数量，保持克制。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3649,7 +3649,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case359.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case359.jpg",
     "imageAlt": "水墨双重曝光海报模板示例图",
     "prompt": "使用「水墨双重曝光海报」模板生成一张可直接用于生产流程的图像。\n\n用途：用于诗意人像海报、水墨氛围和文化主题视觉。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 融合人像剪影、水墨质感、氛围和留白。\n2. 保持构图克制、高级、可读。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免廉价奇幻拼贴和景物堆叠。\n2. 非必要时减少文字。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3670,7 +3670,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-poster",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case339.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case339.jpg",
     "imageAlt": "自然科普海报模板示例图",
     "prompt": "使用「自然科普海报」模板生成一张可直接用于生产流程的图像。\n\n用途：用于自然主题的高级、干净科普海报。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 使用清晰主体、少量文案、柔和阴影和充足留白。\n2. 让科普标签短而清楚。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免广告感太重。\n2. 避免密集百科正文。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3691,7 +3691,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-product",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case373.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case373.jpg",
     "imageAlt": "商品商业视觉模板示例图",
     "prompt": "使用「商品商业视觉」模板生成一张可直接用于生产流程的图像。\n\n用途：用于商品主图、包装视觉、详情页和销售卖点排版。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义商品、卖点、材质、场景、光线和版块。\n2. 区分主商品、卖点标签和辅助道具。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免无关道具削弱商品识别。\n2. 约束包装文字和卖点表达。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3712,7 +3712,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-product",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case353.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case353.jpg",
     "imageAlt": "个性化美妆报告模板示例图",
     "prompt": "使用「个性化美妆报告」模板生成一张可直接用于生产流程的图像。\n\n用途：用于美妆推荐、肤质报告、导购助手和生活方式商品卡片。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 使用诊断、推荐和商品卡片的报告层级。\n2. 对齐商品图、标签和评分。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免医疗化结论和难读小字。\n2. 保持推荐逻辑清楚。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3733,7 +3733,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-brand",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case354.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case354.jpg",
     "imageAlt": "品牌身份包模板示例图",
     "prompt": "使用「品牌身份包」模板生成一张可直接用于生产流程的图像。\n\n用途：用于 Logo 系统、品牌板、VI 套件和应用样机。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义品牌名、定位、配色、字体、Logo 用法和触点。\n2. 要求视觉板中的应用统一对齐。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免无关 Logo 变体和混乱配色。\n2. 保持品牌文字准确。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3754,7 +3754,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-brand",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case362.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case362.jpg",
     "imageAlt": "品牌触点视觉板模板示例图",
     "prompt": "使用「品牌触点视觉板」模板生成一张可直接用于生产流程的图像。\n\n用途：用于多触点 Campaign 展示和品牌落地预览。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 指定触点清单、统一视觉规则和样机排列。\n2. 让所有面板共享配色和字体逻辑。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免混入多个无关 Campaign 风格。\n2. 可读性下降时减少触点数量。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3775,7 +3775,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-architecture",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case331.png",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case331.png",
     "imageAlt": "建筑与空间模板示例图",
     "prompt": "使用「建筑与空间」模板生成一张可直接用于生产流程的图像。\n\n用途：用于室内、建筑表现、城市地图、空间规划和环境概念图。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义视角、尺度、材质、光线和空间功能。\n2. 地图需要指定地标、标签、边框装饰和准确度。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 概念图之外要避免不合理透视。\n2. 锁定地图标签语言和相对位置。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3796,7 +3796,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-photo",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case377.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case377.jpg",
     "imageAlt": "写实摄影模板示例图",
     "prompt": "使用「写实摄影」模板生成一张可直接用于生产流程的图像。\n\n用途：用于人像、街拍、商品摄影和电影感写实。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 指定机位、镜头、光源、质感、背景和动作。\n2. 加入可信的小瑕疵增强纪实感。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 商业美妆之外，避免过度磨皮。\n2. 需要时加入手部、文字、结构类负面约束。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3817,7 +3817,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-photo",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case376.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case376.jpg",
     "imageAlt": "街头意外瞬间摄影模板示例图",
     "prompt": "使用「街头意外瞬间摄影」模板生成一张可直接用于生产流程的图像。\n\n用途：用于街头抓拍、意外泼洒、手机纪实和快速动作。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 描述具体瞬间、机位高度、运动模糊和街景。\n2. 加入避免摆拍和广告棚拍感的限制。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免画面过于干净。\n2. 让事件看起来可信。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3838,7 +3838,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-illustration",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case346.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case346.jpg",
     "imageAlt": "插画与艺术风格模板示例图",
     "prompt": "使用「插画与艺术风格」模板生成一张可直接用于生产流程的图像。\n\n用途：用于插画、水彩、水墨、装饰画和风格实验。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义构图、主体、配色、笔触材质、情绪和完成度。\n2. 参考图任务需要说明保留哪些特征。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免只写风格，不写构图。\n2. 使用参考图时锁定角色识别。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3859,7 +3859,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-scene",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case330.png",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case330.png",
     "imageAlt": "场景叙事模板示例图",
     "prompt": "使用「场景叙事」模板生成一张可直接用于生产流程的图像。\n\n用途：用于分镜、世界观、直播场景和情绪叙事画面。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义人物、地点、时间、冲突、情绪和机位。\n2. 让场景细节服务故事。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免通用幻想背景。\n2. 让故事线索在画面里可见。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3880,7 +3880,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-history",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case375.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case375.jpg",
     "imageAlt": "历史与古风题材模板示例图",
     "prompt": "使用「历史与古风题材」模板生成一张可直接用于生产流程的图像。\n\n用途：用于古风题材、长卷、朝代服饰、诗词视觉和历史场景。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 指定朝代、服饰制度、器物参考、版式和文化气质。\n2. 明确长卷、册页或海报形式。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 需要历史准确时，避免朝代混搭。\n2. 约束随机现代物件。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3901,7 +3901,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-document",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case360.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case360.jpg",
     "imageAlt": "文档与出版物模板示例图",
     "prompt": "使用「文档与出版物」模板生成一张可直接用于生产流程的图像。\n\n用途：用于白皮书、手册、百科图鉴、报告页面和出版系统。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义页面尺寸、分栏、目录、图表系统和字体层级。\n2. 使用可读标题、表格、标签和页面节奏。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免密集小字。\n2. 让图表和说明对齐页面网格。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3922,7 +3922,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 工业级模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/docs/templates.md#tpl-other",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/case370.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case370.jpg",
     "imageAlt": "概念产品研发拆解模板示例图",
     "prompt": "使用「概念产品研发拆解」模板生成一张可直接用于生产流程的图像。\n\n用途：用于实验型任务、研发视觉板、拆解图和特殊视觉系统。\n\n请先填写这些变量：\n- 主题：[主题或项目名称]\n- 目标受众：[目标受众]\n- 核心内容：[必须准确呈现的信息]\n- 视觉风格：[品牌气质、材质、光线、色彩]\n- 画面比例：[输出比例]\n\n生成要求：\n1. 定义产物类型、组件、标签、材质逻辑和展示格式。\n2. 使用清晰标注和受控技术风格。\n\n画面必须具备清晰的信息层级、真实可用的构图、准确可读的关键文字，以及统一的字体、色彩和间距系统。不要生成空泛的概念图，不要把无意义文字塞进画面。\n\n避坑约束：\n1. 避免任务边界过泛。\n2. 标签要短，组件关系要清楚。\n\n输出一张完成度高、可作为参考样张或工作流模板复用的图片。",
     "tips": [
@@ -3943,7 +3943,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-ui",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/ui.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/ui.jpg",
     "imageAlt": "UI 与界面分类示例图",
     "prompt": "围绕「[主题]」生成一张UI 与界面方向的高质量图片。\n\n使用场景：App、网页、仪表盘、社媒截图与产品界面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -3964,7 +3964,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-infographic",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/infographic.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/infographic.jpg",
     "imageAlt": "图表与信息可视化分类示例图",
     "prompt": "围绕「[主题]」生成一张图表与信息可视化方向的高质量图片。\n\n使用场景：信息图、知识图谱、技术解释与结构化图解。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -3985,7 +3985,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-poster",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/poster.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/poster.jpg",
     "imageAlt": "海报与排版分类示例图",
     "prompt": "围绕「[主题]」生成一张海报与排版方向的高质量图片。\n\n使用场景：活动海报、封面、字体视觉和强排版画面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4006,7 +4006,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-product",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/product.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/product.jpg",
     "imageAlt": "商品与电商分类示例图",
     "prompt": "围绕「[主题]」生成一张商品与电商方向的高质量图片。\n\n使用场景：商品图、详情页、包装卖点和商业广告。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4027,7 +4027,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-brand",
     "recommendedSize": "16:9 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/brand.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/brand.jpg",
     "imageAlt": "品牌与标志分类示例图",
     "prompt": "围绕「[主题]」生成一张品牌与标志方向的高质量图片。\n\n使用场景：Logo、VI、品牌触点和 Campaign 视觉系统。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4048,7 +4048,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-architecture",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/architecture.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/architecture.jpg",
     "imageAlt": "建筑与空间分类示例图",
     "prompt": "围绕「[主题]」生成一张建筑与空间方向的高质量图片。\n\n使用场景：建筑表现、室内空间、城市地图和空间概念。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4069,7 +4069,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-photo",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/photo.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/photo.jpg",
     "imageAlt": "摄影与写实分类示例图",
     "prompt": "围绕「[主题]」生成一张摄影与写实方向的高质量图片。\n\n使用场景：人像、手机纪实、胶片质感和商业摄影。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4090,7 +4090,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-illustration",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/illustration.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/illustration.jpg",
     "imageAlt": "插画与艺术分类示例图",
     "prompt": "围绕「[主题]」生成一张插画与艺术方向的高质量图片。\n\n使用场景：插画、艺术风格、材质实验和装饰画面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4111,7 +4111,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-scene",
     "recommendedSize": "9:16 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/scene.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/scene.jpg",
     "imageAlt": "场景与叙事分类示例图",
     "prompt": "围绕「[主题]」生成一张场景与叙事方向的高质量图片。\n\n使用场景：分镜、故事场景、直播画面和世界观叙事。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4132,7 +4132,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-history",
     "recommendedSize": "4:5 / 9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/history.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/history.jpg",
     "imageAlt": "历史与古风题材分类示例图",
     "prompt": "围绕「[主题]」生成一张历史与古风题材方向的高质量图片。\n\n使用场景：古风长卷、历史人物、传统题材和诗词画面。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4153,7 +4153,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-document",
     "recommendedSize": "4:5 / 16:9",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/document.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/document.jpg",
     "imageAlt": "文档与出版物分类示例图",
     "prompt": "围绕「[主题]」生成一张文档与出版物方向的高质量图片。\n\n使用场景：白皮书、手册、百科图鉴和出版页设计。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
@@ -4174,14 +4174,4719 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "source": "freestylefly/awesome-gpt-image-2 分类模板",
     "sourceUrl": "https://github.com/freestylefly/awesome-gpt-image-2/blob/main/README.zh-CN.md#cat-other",
     "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/images/category-covers/other.jpg",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/category-covers/other.jpg",
     "imageAlt": "其他应用场景分类示例图",
     "prompt": "围绕「[主题]」生成一张其他应用场景方向的高质量图片。\n\n使用场景：创意实验、特殊任务、混合玩法和实用场景。\n\n请补充这些变量：\n- 主题或项目：[主题]\n- 目标用途：[投放/汇报/社媒/课程/商品页/品牌提案]\n- 必须出现的文字：[标题、栏目名、短标签]\n- 视觉风格：[材质、光线、色彩、参考行业]\n- 输出比例：[比例]\n\n画面要求：主体明确、信息层级清楚、边距和留白稳定，关键文字可读，风格统一且可复用。根据用途自动补齐标题、副标题、图例、标注、产品或场景细节。不要使用乱码、水印、重复元素或与主题无关的装饰。",
     "tips": [
       "适合不知道从哪个具体案例开始时作为基础模板。",
       "先确定用途和必须出现的文字，再补充行业、品牌和画面比例。"
     ]
-  }
+  },
+  {
+    "id": "gallery-evo-poster_case341",
+    "title": "涂鸦涂乱真人照片肖像",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Shorelyn_/status/2063235707632533954",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case341/output.jpg",
+    "imageAlt": "涂鸦涂乱真人照片肖像示例图",
+    "prompt": "Turn this photo into a chaotic funny doodle illustration, intentionally messy and low-skill, as if drawn quickly with a cheap marker, crayon, or worn-out felt pen on paper.\n\nCreate exaggerated facial features with awkward proportions, uneven eyes, oversized head, tiny body, crooked smile, and clumsy anatomy while still keeping the person recognizable. Use rough childish sketch lines, shaky hand-drawn strokes, visible scribbles, overlapping outlines, accidental marks, and random doodles around the scene. Add a simple cartoon-style background with badly drawn buildings, trees, clouds, street elements, and uneven perspective. Coloring should look careless and imperfect, with visible stroke texture, inconsistent fill areas, wax crayon texture, marker bleed, and irregular shading. Include playful imperfections like crossed-out lines, unfinished details, random arrows, tiny notes, stars, swirls, and abstract scribbles. Overall aesthetic should feel humorous, spontaneous, handmade, energetic, goofy, and intentionally unpolished, resembling a child's sketchbook mixed with absurd internet meme art. High texture detail, paper grain visible, asymmetrical composition, awkward framing, expressive doodle chaos, raw sketch energy.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case342",
+    "title": "半3D时尚大片头像",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/AIwithSynthia/status/2063299903582003607",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case342/output.jpg",
+    "imageAlt": "半3D时尚大片头像示例图",
+    "prompt": "Create a premium high-resolution vector-cartoon / semi-3D illustration of the person from the reference image. Reimagine them in a stylish modern fashion-editorial look, sitting confidently on a sleek designer chair. Outfit: trendy T-shirt, fashionable skirt/pants, stylish sneakers, and bold sunglasses as the hero accessory. Exaggerate key facial features while maintaining recognizable likeness. Clean flat-colored background (single vibrant color), smooth lines, sharp details, soft studio lighting, luxury advertising aesthetic, centered composition with ample negative space for branding and headlines. Ultra-detailed, print-ready, billboard-quality, modern eyewear campaign style.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case94",
+    "title": "90年代情景喜剧时装角色阵容",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Taaruk_/status/2063300353588879444",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case94/output.jpg",
+    "imageAlt": "90年代情景喜剧时装角色阵容示例图",
+    "prompt": "Full-body character lineup showcasing the same person transformed through six iconic 1990s fashion aesthetics, standing side-by-side in a clean studio composition. Each version features a unique outfit inspired by classic 90s sitcom culture: varsity college student, sophisticated business casual professional, colorful patterned sweater enthusiast, streetwear trendsetter, nerdy intellectual with suspenders and glasses, and vibrant hip-hop fashion icon. Consistent facial features across all versions, expressive poses, detailed clothing textures, oversized silhouettes, retro sneakers, loafers, accessories, layered outfits, bold color palettes, fashion illustration style, character design sheet, clean white background, highly detailed linework, modern cartoon realism, concept art, fashion reference board, full-body view, professional character turnaround, ultra-sharp details, vibrant colors, 4K, masterpiece.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case267",
+    "title": "黑白身份拼贴网格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/mehvishs25/status/2063293613514330224",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case267/output.jpg",
+    "imageAlt": "黑白身份拼贴网格示例图",
+    "prompt": "Edit the photo while preserving the subject’s exact facial features and identity. Create a high-resolution vertical portrait composition (9:16), ultra-detailed, sharp focus throughout, no background blur, rendered with a premium 8K editorial finish.\n\nDesign the image as a sophisticated black-and-white fashion portrait collage arranged in a 2×3 grid, featuring six unique frames of the same young woman in a clean, minimalist indoor studio environment. The overall aesthetic should feel elegant, cinematic, intimate, and effortlessly stylish, inspired by timeless monochrome fashion editorials and luxury magazine photography.\n\nHair is long, reaching the waist, colored a cool ash-brown with subtle gray undertones. Styled in a Korean-inspired hush cut with soft face-framing layers, airy see-through bangs, and sleek straight lengths that gently curve outward at the ends. The texture appears silky, healthy, and glossy, with a few natural flyaway strands for realism.\n\nBeauty styling remains refined and understated: luminous hydrated skin, naturally feathered brows, subtle brown eyeliner, soft mascara, muted nude lips with a velvety finish, and barely-there blush for a fresh editorial appearance.\n\nWardrobe consists of a fitted white rib-knit tank top paired with relaxed high-waisted vintage-wash denim jeans, visible in selected frames. Accessories include matte black nail art, delicate silver hoop earrings, multiple silver rings, and a slim silver wristwatch, contributing to a contemporary fashion-editorial mood.\n\nCollage Frame Concepts:\n\n• Frame 1 — Tight portrait crop, fingertips resting softly against the cheek, direct eye contact, confident yet gentle expression.\n\n• Frame 2 — Casual seated pose on a sofa, body turned slightly to one side, gaze directed away from the camera in a contemplative moment.\n\n• Frame 3 — Relaxed reclining position with one knee bent, leaning comfortably into an arm, creating a graceful editorial silhouette.\n\n• Frame 4 — Arms lifted behind the head, posture open and self-assured, subtle lean backward conveying effortless confidence.\n\n• Frame 5 — Emotional close portrait with a slight head tilt and closed eyes, emphasizing calmness and quiet introspection.\n\n• Frame 6 — Front-facing seated composition with composed expression and subtle movement through the hair for a natural, candid feel.\n\nEnvironment remains intentionally simple: a light-toned studio wall with a neutral sofa appearing selectively across certain frames. The background should support the subject without drawing attention away from her.\n\nLighting is soft and diffused, resembling natural window light in a professional studio. Gentle directional shadows create depth and dimensionality, while a faint rim light subtly separates the hair from the background. Avoid harsh flash or strong contrast.\n\nCaptured with the quality and detail associated with professional mirrorless cameras such as a Canon EOS R5 or Sony A7R IV. Use a combination of intimate close-ups and medium-length portraits, primarily at eye level with occasional slightly elevated angles. Emphasize balanced magazine-style compositions and natural visual flow across the collage.\n\nFinal processing should feature a rich monochrome conversion with smooth tonal transitions, lifted shadows, restrained contrast, delicate 35mm film grain, a soft matte finish, and exceptional detail retention in both skin texture and hair, echoing the look of classic high-fashion editorial photography.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case343",
+    "title": "复古汽车旅行海报模板",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063276384924111329",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case343/output.jpg",
+    "imageAlt": "复古汽车旅行海报模板示例图",
+    "prompt": "prompt:\n\nCreate a vertical retro automotive travel poster featuring [CAR MODEL] either parked or driving through [SCENERY]. Use a bold 1970s printmaking style with a strict 4-color palette only: [COLORS]. Build the image with flat silkscreen-style color blocking, strong contrast shadows, simplified geometric reflections, slight ink misregistration, subtle paper grain, distressed print texture, and graphic halftone shading.\n\nAvoid gradients, photorealism, glossy 3D rendering, and modern digital polish. The car should feel iconic and graphic, with thick simplified contour shapes and a warm nostalgic travel-ad atmosphere.\n\nInclude vintage advertisement typography that reads \"[TITLE]\" and integrate an authentic [BRAND LOGO] naturally into the layout. Add stylized trees, buildings, road signs, landscape shapes, or location details in the background so the setting clearly supports the travel-poster story.\n\nThe composition should feel like a strong mid-century tourism poster: balanced, editorial, poster-ready, and visually bold. Keep the design clean and intentional, with no stamp border.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case344",
+    "title": "全家福水彩时装速写",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/AiwithZohaib/status/2063277611409879452",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case344/output.jpg",
+    "imageAlt": "全家福水彩时装速写示例图",
+    "prompt": "A stylish family standing together, digital watercolor and ink sketch illustration, fashion illustration style, white clean background with abstract beige brush strokes, soft lighting, expressive line art, casual modern clothing, denim jeans, black hijabs, relaxed happy pose, elegant minimal aesthetic, high detail, editorial sketch look.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case164",
+    "title": "土耳其烤肉商业美食摄影组图",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063094917774086510",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case164/output.jpg",
+    "imageAlt": "土耳其烤肉商业美食摄影组图示例图",
+    "prompt": "prompt:\n\n8K UHD hyper-realistic commercial food photography, 3:4 aspect ratio. 6 scenes, each on its own solid or gradient background:\n\nScene 1, Döner slice explosion: Traditional Turkish döner (beef and lamb mix), paper-thin ribbons spiraling outward mid-air, white garlic sauce and red chili sauce splashing, fresh parsley leaves floating. Deep crimson red background.\n\nScene 2, Dürüm wrap floating: Premium dürüm cut in half and floating vertically, cross-section revealing döner meat, lettuce, tomatoes, onions layered inside, white garlic yogurt sauce drizzling elegantly, subtle spice particles drifting. Warm terracotta orange background.\n\nScene 3, Sauce pour drama: Mound of freshly sliced döner with crispy charred edges, thick creamy garlic yogurt sauce pouring from above frozen mid-flow, spicy red chili sauce drizzling alongside in thin crimson streams, sliced tomatoes and parsley below, heat vapor rising. Dark charcoal black background.\n\nScene 4, Deconstructed composition: Toasted lavash bread pieces, döner slices, tomato slices, lettuce leaves, and onion rings all suspended separately at varying heights, glossy sauce ribbons connecting elements artistically, ultra-fine spice dust in the air. Muted sage green background.\n\nScene 5, Rotating spit close-up: Extreme close-up of vertical döner tower on spit, large döner knife frozen mid-slice, fresh slice falling away, charred bits and seasoning particles in air, heat vapor rising from the fresh cut. Rich golden amber background.\n\nScene 6, Overhead plate explosion: Top-down view, all ingredients bursting upward in circular pattern, döner slices, french fries, grilled peppers and tomatoes, fresh parsley, sumac, lemon wedges, sauce droplets spraying, elements at varying heights with some rotating. Deep burgundy red background with vignette.\n\nGlobal: controlled studio lighting emphasizing meat texture and char marks, shallow to medium depth of field, rich contrast, warm savory tones, natural shine, appetizing color grading. No text, logos, people, hands, cartoon style, or plastic-looking food.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case268",
+    "title": "毛绒吉祥物伙伴肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/doctorwasif/status/2063304967218475072",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case268/output.jpg",
+    "imageAlt": "毛绒吉祥物伙伴肖像示例图",
+    "prompt": "Use the uploaded portrait as the identity reference and preserve the person's recognizable facial features, hairstyle, skin tone, expression, fashion sense, and overall presence. Create a premium full-body portrait of the same person alongside a large custom-designed plush companion that feels like their mascot alter ego. The plush should be inspired by the subject's mood, facial impression, styling, posture, and overall energy rather than being a generic animal or mascot. Automatically choose a creature concept that best matches the person's unique vibe, avoiding predictable or stereotype-based selections. The mascot must clearly be an oversized plush toy with soft fuzzy fabrics, rounded shapes, detailed stitching, premium textures, and a collectible designer-toy aesthetic. Its design, expression, silhouette, and proportions should subtly reflect the person's character and visual identity. Build a harmonious color palette using cues from the subject's hair, skin tone, clothing, and atmosphere so the person, mascot, and scene feel naturally connected. Show both the person and plush fully visible from head to toe, including shoes and all parts of the mascot, with balanced framing and comfortable spacing. Choose a natural interaction that suits the subject, such as standing beside, sitting with, leaning on, lightly hugging, or casually engaging with the plush companion. Keep the person's expression relaxed, warm, and authentic with a subtle smile or calm gaze, avoiding stiff poses or mannequin-like appearances. If the original image only shows part of the outfit, intelligently complete the full look in a believable and stylish way. Place the scene in a clean, aesthetically pleasing environment such as a minimalist studio, cozy lifestyle setting, or refined editorial backdrop that complements both the person and mascot without distractions. The final image should feel charming, cozy, stylish, emotionally engaging, visually cohesive, and suitable for a high-end character campaign or social-media editorial. Avoid cropped bodies, hidden shoes, incomplete mascot visibility, generic animal choices, real animals, horror elements, cheap toy aesthetics, awkward poses, cluttered backgrounds, distorted anatomy, extra limbs, text, logos, or watermarks.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case95",
+    "title": "SQL收藏玩具包装网格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Gdgtify/status/2063254078269137330",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case95/output.jpg",
+    "imageAlt": "SQL收藏玩具包装网格示例图",
+    "prompt": "SELECT * FROM Collectible_Toy_Packaging  WHERE layout_format = '2x2_Quadrant_Grid' AND targets = ARRAY['[IP_1]', '[IP_2]', '[IP_3]', '[IP_4]'] AND quadrant_structure = ARRAY[     (Zone: 'Left_Column', Material: 'Printed_Cardboard', Content: 'Massive_Typography_Title_And_Inferred_Creator_Metadata'),     (Zone: 'Center_Stage', Material: 'confection candy', Content: 'infer_main_character_and_diorama(target)'),      (Zone: 'Right_Column', Material: 'Transparent_Glossy_Vacuum_Plastic_Blister_Pack', Content: 'infer_three_iconic_props(target)_As_3D_Miniatures_With_Text_Labels') ] AND color_grading = 'Vintage_Retro_Palette_Matching_Inferred_IP_Era' AND camera = 'Product_Photography_Front_Orthographic_View';",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case175",
+    "title": "杂志风解剖信息图海报",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063202176344932732",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case175/output.jpg",
+    "imageAlt": "杂志风解剖信息图海报示例图",
+    "prompt": "prompt:\n\nUltra-clean editorial infographic poster (1080x1080 square), blending premium magazine design with lifestyle illustration and photography.\n\n**HEADLINE:**\nBold, large sans-serif type centered at top: \"HUMAN LIVER\"\n\n**MAIN IMAGE:**\nHigh-detail 3D illustration of the human liver, showing the Right Lobe, Left Lobe, and Gallbladder. Color palette: terracotta, deep brownish-red, and soft coral tones. Background: clean, soft beige or off-white. Lighting: soft studio style.\n\n**POSTER SECTIONS:**\n\n* **Floating Fact Bubbles (top corners):**\n    * \"Weight: ~1.5 kg (Heaviest internal organ)\"\n    * \"Regeneration: Can regrow from just 25%\"\n    * \"Location: Upper Right Abdomen\"\n    * \"Blood Flow: Filters 1.4 L/min\"\n\n* **Organ Labels (arrows pointing to anatomy):**\n    * Right Lobe\n    * Left Lobe\n    * Gallbladder (greenish sac below)\n    * Common Bile Duct\n    * Hepatic Portal Vein\n\n* **Key Functions (left column, small icons):**\n    * **Detox:** Filters toxins from blood\n    * **Bile:** Aids fat digestion\n    * **Metabolism:** Processes carbs and protein\n    * **Storage:** Holds glycogen, iron, vitamins\n\n* **Highlights (right column, small icons):**\n    * **Chemical Factory:** 500+ vital functions\n    * **Immunity:** Fights blood-borne infections\n    * **Clotting:** Makes blood-clotting proteins\n\n* **Health Tips (bottom cards):**\n    1. **Limit Alcohol** - Prevents cirrhosis\n    2. **Stay Hydrated** - Flushes toxins\n    3. **Balanced Diet** - Low sugar, high fiber\n    4. **Vaccinate** - Hepatitis A & B protection\n    5. **Exercise** - Burns fat and triglycerides\n\n**STYLE:** Glassmorphism frosted-glass text boxes, soft drop shadows, medical accuracy meets high-end graphic design.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case345",
+    "title": "日系时尚封面插画",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063291615205314737",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case345/output.jpg",
+    "imageAlt": "日系时尚封面插画示例图",
+    "prompt": "prompt:\n\nCreate a high-end Japanese fashion magazine cover illustration. The subject is [XXX]. Use a minimalist, modern fashion-digital-illustration style with refined cel shading, crisp clean large color-block modeling, almost no visible linework, and elegant sharp edges.\n\nKeep a blue-and-white structural palette as the foundation, with restrained accents of coral red, misty purple, pale yellow, ash pink, sage green, silver gray, or similar soft secondary tones. The final image should stay minimal, premium, cohesive, and not flashy.\n\nUse a clean background, such as cobalt blue, royal blue, misty blue, or another pure large color field, with generous negative space. Strong sunlight enters from the upper left. White areas should be bright and close to overexposed, while shadows are built from hard-edged planes of cool blue, gray-blue, and blue-purple.\n\nGive the subject a slender silhouette and a quiet, aloof posture. Simplify details while keeping the form accurate. The overall mood should feel translucent, cool, elegant, fashionable, and suitable for a premium magazine cover poster.\n\nAvoid text, watermarks, complex backgrounds, photorealistic photography, 3D, heavy impasto, childish cartoon styling, and cluttered decoration.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case165",
+    "title": "3D像素食物变身",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063171137685569561",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case165/output.jpg",
+    "imageAlt": "3D像素食物变身示例图",
+    "prompt": "A minimalist food photograph featuring a single [FOOD] on a clean matte white surface, caught mid-transformation into a 3D pixel art style. The left half is perfectly photorealistic while the right half dissolves into large floating geometric cubes, each cube exposing the food's vibrant colors, textures, and inner details. Soft studio lighting, gentle shadows, shallow depth of field, hyperrealistic meets geometric abstraction, subtle motion blur on the cubes. High resolution cinematic close-up composition.\n\nFull prompt:",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case166",
+    "title": "古宫香水广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063187221730185227",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case166/output.jpg",
+    "imageAlt": "古宫香水广告示例图",
+    "prompt": "Full prompt:\n\nAncient Chinese palace perfume advertisement inspired by the legendary dancer Zhao Feiyan. A bronze bottle with gold-inlaid twisting lotus vines. Mysterious, cold, and haunting imperial harem atmosphere. Vertical portrait format, 9:16 ratio.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case167",
+    "title": "毛绒质感汽水罐产品图",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063261665207239055",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case167/output.jpg",
+    "imageAlt": "毛绒质感汽水罐产品图示例图",
+    "prompt": "prompt:\n\nA soda can featuring the label [BRAND NAME], constructed entirely from soft, colorful plush material, centered against a matching plush background in [BRAND NAME]'s brand colors.\n\nPop Art and Memphis-inspired style, vibrant and premium at the same time.\n\nCrisp studio lighting that highlights every fiber, the plush texture, and the tactile softness of the material.\n\nRazor-sharp focus, vivid color saturation, clean shadows, sleek commercial product photography, minimalist composition, ultra-high resolution.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case176",
+    "title": "石墨铅笔风咖啡馆分镜",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/insmind_com/status/2063252153612017766",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case176/output.jpg",
+    "imageAlt": "石墨铅笔风咖啡馆分镜示例图",
+    "prompt": "Create a rough black-and-white graphite pencil storyboard in a 3x3 grid, nine 16:9 panels, with hand-drawn borders, panel numbers, motion arrows, music notes, and handwritten director notes.\n\nStoryboard for a premium animated coffee-shop hip-hop commercial for insMind. Keep the same young female barista throughout: expressive eyes, high messy bun with loose curls, white barista shirt with tiny pale-blue details, black neck scarf with a small insMind logo, dark fitted trousers, white flat shoes. Warm modern cafe interior, espresso machine, wooden counter, pastry case, large windows, soft daylight.\n\nShow these beats: opening push-in with the barista singing, steam wand frothing milk like stage smoke, wide hip-hop side-step, body wave with scarf logo visible, overhead latte pour, macro foam rings, delighted reaction, top-down latte art spelling “insMind”, and final hero reveal as she offers the cup to camera.\n\nUse rough pencil lines, grayscale shading, sketch texture, cinematic storyboard composition, expressive unfinished production-board style. Avoid polished color render, photorealistic stills, vector art, extra characters, subtitles, UI, or unreadable brand spelling.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case177",
+    "title": "威尼斯旅行Vlog拼贴",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/ZaraIrahh/status/2063432414945591594",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case177/output.jpg",
+    "imageAlt": "威尼斯旅行Vlog拼贴示例图",
+    "prompt": "Young female travel vlogger exploring Venice, Italy across 13 wildly candid, chaotic, funny, and uniquely Venetian moments, stunning with long windswept hair, effortless luxury European summer fashion, playful adventurous personality, authentic handheld iPhone collage aesthetic with natural imperfections, unfiltered travel energy, social media realism, spontaneous vacation chaos.\n\nFrame Breakdown Includes: — accidentally boarding the wrong vaporetto and enthusiastically waving at the dock before realizing she's headed in the opposite direction — struggling to drag an oversized suitcase over a steep stone canal bridge, laughing at the absurdity of it — getting completely lost in Venice's labyrinth of narrow alleys and emerging into a deserted hidden courtyard with a confused expression — chasing a paper city map as the wind sends it flying toward a canal — being unexpectedly surrounded by a massive flock of pigeons in Piazza San Marco while clutching a half-eaten pastry — attempting an elegant gondola selfie but getting caught off guard when the gondola suddenly rocks — discovering a tiny hidden bookstore and reacting dramatically to a sleeping cat curled up among the books — squeezing through an impossibly narrow Venetian alleyway and realizing halfway through that it's much tighter than expected — trying to pose gracefully in a beautiful Venetian carnival mask while struggling not to laugh — caught in a sudden rain shower as historic squares become reflective and crowded with umbrellas — confidently following a shortcut only to reach a dead-end canal with no bridge, staring in disbelief — accidentally walking into the background of an extravagant luxury wedding photoshoot near a historic palace — Final frame: sitting beside a quiet canal at blue hour, surrounded by shopping bags, a melting gelato, and a crumpled city map, laughing uncontrollably after spending the entire day hopelessly lost, candid shaky capture, motion blur, authentic Venice travel chaos\n\nStyle: ultra-realistic travel vlog collage, Venice street photography, handheld smartphone camera aesthetic, imperfect framing, accidental photobombs, candid expressions, genuine laughter, iconic Venetian architecture, canals, gondolas, historic bridges, hidden alleyways, European summer atmosphere, natural lighting, motion blur, lens flares, overexposed highlights, authentic memories, cinematic storytelling, high-detail realism, viral travel content, no studio polish, no posing, spontaneous documentary-style moments, social media realism, chaotic vacation energy, luxury travel influencer aesthetic.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case346",
+    "title": "爱意咬痕赛博朋克漫画封面",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/her19845/status/2063310953475678229",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case346/output.jpg",
+    "imageAlt": "爱意咬痕赛博朋克漫画封面示例图",
+    "prompt": "Generate a vintage vinyl album cover with a cyberpunk and manga aesthetic, grainy and worn. The background is dark and textured, with scratches and dust. At the top, the title \"LOVE BITES\" appears in large white and gray capital letters, with two red lines crossed out. To the left of the title is a red six-pointed star symbol with a central asterisk. Below the title is the text: \"BEAUTY IS POWER, SILENCE IS WAR.\"\n\nIn the center is a monochrome manga-style illustration of the attached image. Behind it is a monochrome illustration of a 1990s JDM sports car.\n\nIncludes multiple graphic details and logos:\n\nTop left: logos for \"STEREOPHONIC HIGH FIDELITY RECORDING,\" \"33 ⅓ RPM,\" and \"LP.\"\n\nTop right: a red circle that reads \"VOL. 01.\"\n\nOn the left: the text \"HER19845\", a barcode, and a tracklist with 6 numbered songs (e.g., \"01. SILENT GAZE\", \"02. LOVE BITES\", \"03. NIGHT DRIVE\", \"04. EMPTY PROMISES\", \"05. FAKE SMILE\", \"06. BLEED QUIET\").\n\nOn the right: a red square with a globe logo, the text \"YOU CAN WATCH BUT YOU WON'T UNDERSTAND\", asterisks, and \"@IMAGE_5\".\n\nBottom left: the Japanese text \"美しさは力である\" and a barcode \"0025\".\n\nBottom right: a silver \"PARENTAL ADVISORY EXPLICIT CONTENT\" label and red graffiti \"DON'T FALL IN LOVE\" with a crossed-out heart.\n\nCopyright text \"ALL RIGHTS RESERVED\" at the bottom edge.\n\nThe overall aesthetic should be nostalgic, underground, and raw, with the grain and texture of a real vinyl record. The color scheme is monochromatic with red accents.\n\nUse a 3:4 aspect ratio.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case269",
+    "title": "大片感Y2K身份网格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Ciri_ai/status/2063592048150909396",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case269/output.jpg",
+    "imageAlt": "大片感Y2K身份网格示例图",
+    "prompt": "A vertical collage of three YZK photos. Using the uploaded selfie as the ONLY and exclusive face reference, keep the facial features, and facial structure exactly the same as the reference image. The character poses against a neutral light background. A girl with a beautiful, voluminous hairstyle, seemingly styled with a brush, wearing foxy makeup and pronounced, angled lashes. In the first photo, she's very close to the camera, looking at it with one eye and winking. In the second photo, she's turned away, her head coquettishly turned toward the lens, her hairstyle slightly covering her face, but not too much. In the third photo, she's looking very close to the lens, her hair to the side, thus covering her left eye, pouting and looking forward. Close-up and medium shot, minimalist composition, vintage digital texture, slight blur, glamorous atmosphere. Photo taken on iPhone 17 Pro Max with flash.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case168",
+    "title": "VOLT进球庆祝广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/RuzainaMeer/status/2063513621754491039",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case168/output.jpg",
+    "imageAlt": "VOLT进球庆祝广告示例图",
+    "prompt": "Prompt 1:\nA high-energy commercial product advertisement for VOLT Energy Drink. A beautiful young woman in her mid-20s, wearing a green and white football jersey, is caught in a euphoric goal celebration — arms wide open, head thrown back, screaming with pure joy. She is holding a sleek VOLT Energy Drink can in one raised hand, electric blue liquid splashing dramatically around it. Stadium packed with roaring fans, golden confetti raining down, floodlights blazing. Bold text \"FEEL THE VOLT\" in electric yellow. Cinematic lighting, photorealistic commercial quality, 9:16 vertical format.\n\nPrompt 2:\nA beautiful young woman in a green and white football jersey is sitting in a packed stadium, casually drinking from a sleek VOLT Energy Drink can. Suddenly a goal is scored — she explodes into euphoric celebration, jumping up, arms wide open, screaming with pure joy, still holding the VOLT can high in the air. Electric blue liquid splashes dramatically around the can in slow motion. Golden confetti rains down from above. Camera starts wide on stadium, pushes in close on her face mid-celebration, then pulls back to reveal VOLT can glowing with electric blue energy trails and sparks. Bold text \"FEEL THE VOLT\" flashes on screen at the end. Sound: stadium ambient noise building → crowd erupting into massive roar at goal moment → electric bass hit when VOLT can is revealed → crowd cheer fading out. Cinematic quality, slow-motion moments mixed with real-time, 9:16 vertical format, 15 seconds.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case348",
+    "title": "目的地微缩胶片式胶卷海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Naiknelofar788/status/2063582448689336690",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case348/output.jpg",
+    "imageAlt": "目的地微缩胶片式胶卷海报示例图",
+    "prompt": "[LOCATION]\nGenerate all landmarks, scenery, cultural elements, architecture, wildlife, transportation, food, and local experiences automatically based on the destination.\n\nSTYLE DIRECTION\nCombine three visual styles:\n\n1. Photorealistic cinematic background\n2. Premium stylized 3D traveler character\n3. Handcrafted papercut diorama film-strip scenes\n\nThe contrast between these styles should feel intentional, premium, and editorial.\n\nLAYOUT\n\nVertical 4:5 poster format.\n\nLEFT SIDE:\nA large vintage black film strip running vertically from top to bottom.\n\nRIGHT SIDE:\nA highly detailed 3D traveler character walking confidently toward the viewer.\n\nCENTER/TOP:\nLarge hand-lettered headline:\n\n\"Every Frame a Destination\"\n\nGenerate a destination-inspired subtitle automatically.\n\nCHARACTER\n\nCreate a premium stylized 3D travel creator.\n\nThe character should automatically suit the destination:\n\nExamples:\n\n- Travel photographer\n- Travel vlogger\n- Adventure explorer\n- Wildlife photographer\n- Luxury traveler\n- Backpacker\n- Cultural storyteller\n\nCharacter requirements:\n\n- High-end 3D rendering\n- Photorealistic materials\n- Natural human proportions\n- Attractive and relatable\n- Walking confidently\n- Holding a professional camera\n- Wearing destination-appropriate clothing\n- Backpack or camera bag\n- Strong visual presence\n- Social-media-friendly appearance\n\nThe traveler should be the main focal point of the poster.\n\nFILM STRIP\n\nPopulate the film strip with 5 iconic destination highlights automatically selected from the location.\n\nIMPORTANT:\n\nDo NOT use photographs inside the film strip\n\nEach film frame should contain a handcrafted papercut diorama version of the destination.\n\nPapercut Diorama Style:\n\n- Layered paper artwork\n- Multiple depth layers\n- Paper-cut architecture\n- Paper-cut landscapes\n- Paper-cut vegetation\n- Miniature handcrafted appearance\n- Rich paper textures\n- Soft shadowing between layers\n- Premium paper sculpture craftsmanship\n- Editorial-quality design\n\nEach frame should feel like a miniature handcrafted world.\n\nOne or two elements may slightly extend outside the film frame for depth.\n\nExamples:\n\n- Landmark extending beyond border\n- Wildlife partially escaping frame\n- Local transportation overlapping frame edge\n- Natural elements extending outside frame\n\nOne frame should contain:\n\n- Travel journal page\n- Vintage stamp\n- Passport marks\n- Handwritten travel note\n- Destination-inspired quote\n\nBACKGROUND\n\nCreate a photorealistic blurred background inspired by the destination.\n\nExamples:\n\n- Historic city streets\n- Coastal roads\n- Mountain scenery\n- Safari landscapes\n- Tropical settings\n- Cultural neighborhoods\n\nRequirements:\n\n- Cinematic golden-hour lighting\n- Soft depth of field\n- Photographic realism\n- Warm color grading\n- Background remains blurred enough to keep focus on character and film strip\n\nTRAVEL MEMORABILIA\n\nAdd destination-specific:\n\n- Vintage stamps\n- Passport stamps\n- Travel tickets\n- Postcards\n- Travel badges\n- Local cultural symbols\n\nDOODLES\n\nAdd minimal black-and-white travel doodles.\n\nExamples:\n\n- Airplane flight path\n- Camera icon\n- Location pin\n- Compass\n- Local transportation icon\n- Local food or drink icon\n- Small destination-themed symbols\n\nKeep doodles subtle and premium.\n\nVISUAL STYLE\n\n- Viral Instagram travel poster\n- Luxury tourism campaign\n- National Geographic meets modern Instagram\n- Editorial magazine cover\n- Premium travel branding\n- Award-winning design\n- Cinematic storytelling\n- Rich golden-hour lighting\n- Ultra-detailed textures\n- Professional typography\n- Strong visual hierarchy\n\nPRIORITY ORDER\n\n1. 3D traveler character\n2. Papercut diorama film strip\n3. Typography\n4. Travel memorabilia\n5. Minimal doodles\n\nAvoid cartoon styling.\nAvoid low-poly aesthetics.\nAvoid stock-photo appearance\n\nThe final result should feel like a premium travel campaign that is instantly understandable on Instagram while rewarding viewers with intricate papercut details when they zoom in.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case270",
+    "title": "高级灰杂志感九宫格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Mind_Boticni/status/2063587170519314754",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case270/output.jpg",
+    "imageAlt": "高级灰杂志感九宫格示例图",
+    "prompt": "Editorial 3x3 grid in a cool-grey seamless backdrop. Character (face characteristics 100% same as uploaded image) wearing a charcoal sleeveless dress. Lighting: large overhead softbox, faint side bounce.\n\nShots include: 1. tight cheek + neck close-up with blurred finger foreground (85mm, f/1.8); 2. eyes locked to lens, top-light reflection visible (85mm, f/2.0); 3. monochrome chin-on-hand portrait with strong frame fill (50mm, f/2.2); 4. half-obscured over-shoulder shot through blurred dress strap (85mm, f/2.0); 5. head-on close-up with intersecting shadows across face (50mm, f/2.5); 6. angled raw portrait with tousled hair (85mm, f/2.2); 7. tight detail of hands resting near collarbone (50mm, f/3.2); 8. seated half-body profile with blurred frame edges (35mm, f/4.5); 9. profile macro with single water droplet highlight (85mm, f/1.9). RAW, smooth contrast, editorial softness.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case349",
+    "title": "睡眠不足Q版形象生成",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/john_my07/status/2063556594671964302",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case349/output.jpg",
+    "imageAlt": "睡眠不足Q版形象生成示例图",
+    "prompt": "Use my uploaded photo as the sole facial reference. Preserve my exact identity, facial proportions, eye shape, skin tone, lip shape, nose structure, and all distinctive features with exceptional accuracy and no facial drift.\n\nCreate a highly detailed cinematic 3D chibi-style character portrait inspired by top-tier animated films, luxury collectible figurines, and contemporary designer toy aesthetics. The character represents a brilliant AI-powered digital creator running on pure creativity and almost no sleep after a marathon night of editing and designing.\n\nScene:\nEarly morning inside a cozy creative studio. She sits drowsily on the edge of a weathered wooden workbench, legs gently swinging, looking exhausted yet irresistibly charming. Her fluffy hair is gathered into a loose messy bun with flyaway strands escaping in every direction. Sleepy half-open eyes, subtle under-eye shadows, a tiny rosy nose, and an expression that perfectly captures \"I've been awake for way too long but I still have ideas.\"\n\nOutfit:\n\nOversized soft-cream pajama set\n\nTiny embroidered logo reading \"Pixel & Coffee Club\"\n\nRelaxed knitted cardigan casually slipping from one shoulder\n\nPlush cloud-shaped slippers\n\nMinimal pearl stud earrings\n\nCozy oversized sleeves partially covering her hands\n\nEnvironment:\nWarm sunrise light fills the room through large studio windows. A steaming mug of coffee rests beside her. The background is softly blurred, filled with artistic clutter, creative tools, and subtle storytelling details that suggest endless projects in progress.\n\nPersonality Elements Floating Around Her:\n\nMini holographic editing timelines\n\nTiny floating storyboard frames\n\nDigital sketch concepts\n\nGlowing location pins and travel stickers\n\nSticky notes filled with random ideas\n\nCompact laptop displaying an unfinished creative project\n\nPencil sketches and concept doodles\n\nFloating play-button icons\n\nSmall animated stars, clouds, and creative symbols\n\nTiny productivity meters running dangerously low\n\nExpression & Mood:\n\nBrilliant but overworked creator energy\n\nLovably exhausted\n\nChronic \"one last revision\" mindset\n\nQuietly chaotic genius\n\nSoft humor mixed with creative burnout\n\nDreamy, relatable, and emotionally expressive\n\nArt Style:\nUltra-premium stylized realism, luxury designer collectible quality, highly detailed hair fibers, realistic fabric textures, soft skin rendering, cinematic depth of field, subtle emotional storytelling, cozy lifestyle aesthetic, handcrafted figurine finish, social-media-worthy presentation.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case350",
+    "title": "春日花园水彩情侣",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/NoOneIsHere2603/status/2063599542843723983",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case350/output.jpg",
+    "imageAlt": "春日花园水彩情侣示例图",
+    "prompt": "Fashion editorial watercolor portrait illustration of a romantic young Korean couple in a blooming spring garden, standing close together in a soft intimate moment — the boy gently holding the girl's hand while she leans slightly toward him with a warm shy smile. The woman wears an elegant flowing blush-pink dress with delicate fabric movement, while the man wears a soft ivory-beige shirt layered with a light pastel cardigan, creating a dreamy romantic harmony. Soft Korean facial features, healthy glowing skin texture, subtle natural makeup, calm affectionate expressions, relaxed posture, gentle head tilt, slight three-quarter angle, waist-up framing.\n\nSet in a glowing May flower garden filled with delicate pastel blossoms, fluttering petals, and warm spring sunlight filtering softly through flowers and greenery. Romantic atmosphere with soft emotional chemistry, dreamy yet elegant mood.\n\nRendered in a minimalist contemporary watercolor fashion sketch aesthetic, featuring fine delicate ink and pencil linework layered over translucent watercolor washes, loose fluid brush strokes, wet-on-wet blending, soft bleeding edges, unfinished artistic brush textures, visible premium watercolor paper grain, elegant negative space. Soft blush pinks, warm peach tones, creamy whites, faded sage greens, and delicate floral hues naturally melting into the background.\n\nFlat editorial lighting, refined luxury magazine illustration feel, poetic spring romance atmosphere. No photorealism, no 3D render, no bokeh, no depth-of-field blur, no harsh outlines, no caricature, no cluttered background, no over-detailing.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case351",
+    "title": "宇宙系幻想反派海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Taaruk_/status/2063651919596568876",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case351/output.jpg",
+    "imageAlt": "宇宙系幻想反派海报示例图",
+    "prompt": "Ultra-detailed anime villain portrait poster, dark cosmic background, legendary antagonist standing front-facing, one hand covering the lower face in a sinister pose, glowing eyes staring directly at the viewer, powerful aura exploding around the body, energy particles, nebula clouds, ink splashes, cosmic dust, dramatic rim lighting, high contrast shadows, cinematic anime illustration, sharp facial details, muscular physique, premium manga cover aesthetic, vibrant monochromatic color theme matching the character, giant distressed typography behind the character displaying the name in huge bold letters, Japanese kanji and English subtitles, character quote on the side, power stats panel, classification section, signature abilities list, collectible trading-card layout, magazine infographic design, luxury poster composition, white and black graphic elements, ultra-clean typography, layered visual hierarchy, glowing effects, dynamic atmosphere, masterpiece anime artwork, poster design, highly detailed, 8K, vertical wallpaper, trending on ArtStation.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case272",
+    "title": "夜市餐厅闪光灯拼贴",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/ZephyraLeigh/status/2063656432864842045",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case272/output.jpg",
+    "imageAlt": "夜市餐厅闪光灯拼贴示例图",
+    "prompt": "Using the provided reference image, create an ultra-realistic candid nightlife fashion photoshoot of a beautiful young woman at a trendy upscale restaurant lounge at night.\n\nShe has a slim figure, long voluminous dark brown hair, flawless glowing skin, soft glam makeup, glossy nude lips, subtle eyeliner, and an effortlessly confident expression.\n\nShe is wearing a fitted deep red halter-neck crop top with a plunging neckline, paired with low-rise charcoal gray vintage-wash denim jeans. Accessories include a small black quilted shoulder bag with a silver chain strap, delicate bracelets, and minimal jewelry.\n\nCreate a 3-photo vertical collage capturing different candid poses:\n\n1. Looking down with eyes closed, one hand resting on her chest.\n\n2. Side pose with hair tied into a loose ponytail, looking over her shoulder.\n\n3. Standing confidently with one hand raised near her hair, showing the outfit clearly.\n\nThe setting is a crowded luxury restaurant with rattan chairs, candlelit tables, warm ambient lighting, arched windows, hanging greenery, and guests dining in the background. Shot using direct on-camera flash, creating a nostalgic early-2000s paparazzi aesthetic with slightly overexposed highlights and authentic nightlife energy.\n\nPinterest aesthetic, Instagram nightlife photography, candid fashion editorial, luxury restaurant atmosphere, realistic skin texture, film-camera flash look, subtle grain, warm tones, shallow depth of field, trendy influencer style, photorealistic, Vogue nightlife editorial, DSLR flash photography, 35mm lens, high-fashion social media content, masterpiece, best quality, ultra realistic, 8K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case169",
+    "title": "闪电暴风雨超跑广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamrealsnow/status/2063649073819959502",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case169/output.jpg",
+    "imageAlt": "闪电暴风雨超跑广告示例图",
+    "prompt": "Sports Car Made of Lightning\nPrompt: Supercar emerging from a storm cloud, body formed entirely from blue lightning bolts, wet reflective road, thunder exploding in background, cinematic action advertising, high-speed energy trails, ultra-detailed automotive render, luxury commercial photography, 8K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case96",
+    "title": "碎裂石材风格迁移",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Samann_ai/status/2063606958188265880",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case96/output.jpg",
+    "imageAlt": "碎裂石材风格迁移示例图",
+    "prompt": "{\n  \"task\": \"image_to_image_style_transfer\",\n  \"input_image\": \"{{USER_IMAGE}}\",\n  \"prompt\": \"Create a hyper-real 3D studio composition that recreates the main subject from the provided image as a fragmented stone assemblage. The subject must be built from separate, clearly detached rock pieces with small visible gaps between shards (no pieces merging). Material look: fragmented slate + sandstone shards with chiseled edges, crisp fractures, visible stone grain, micro-scratches, and realistic roughness. Color palette: predominantly dark slate with subtle warm-ochre sandstone accents. Lighting: soft studio key light from top-left, gentle fill, subtle contact shadows under each shard, realistic ambient occlusion in crevices, clean reflections kept minimal. Background: minimal off-white seamless backdrop, no texture. Framing: centered, clean, straight-on, subject fully readable. Add a few tiny debris chips floating or resting near the base for depth. Preserve the subject’s identity, proportions, and recognizable silhouette from the input image while transforming all surfaces into stone fragments. Hyper-real, high detail, sharp focus, 8k render quality.\",\n  \"negative_prompt\": \"text, typography, logo, watermark, signature, extra props, busy background, fog, heavy bloom, cartoon, illustration, lowpoly, plastic, metal, glossy paint, melted shapes, merged fragments, unreadable subject, blur, noise, low resolution, oversharpening halos, distorted face/body, extra limbs, deformed geometry\",\n  \"output\": {\n    \"aspect_ratio\": \"use_input_aspect_ratio\",\n    \"background\": \"off_white\",\n    \"camera\": {\n      \"angle\": \"straight_on\",\n      \"framing\": \"centered\",\n      \"distance\": \"medium\"\n    }\n  },\n  \"params\": {\n    \"style_strength\": 0.75,\n    \"identity_preservation\": 0.9,\n    \"detail_level\": \"very_high\",\n    \"lighting_preset\": \"soft_studio_top_left\",\n    \"shadow_intensity\": \"subtle\",\n    \"gap_visibility\": \"clear\",\n    \"debris_chips\": \"few_tiny\",\n    \"no_text\": true\n  }\n}",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case273",
+    "title": "复古报刊亭双重曝光",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/AiwithZohaib/status/2063754827017101475",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case273/output.jpg",
+    "imageAlt": "复古报刊亭双重曝光示例图",
+    "prompt": "The generated image uses the uploaded image as a reference for the character, wearing a high-necked, tight-fitting black long-sleeved dress. A cluster of withered wood and orange-pink flowers lies beside an old newsstand, the grainy texture of vintage film interwoven, the blurred background with noticeable trailing shadows, and the double-image effect creating a fantastical atmosphere. A bewitchingly beautiful girl, carrying flowers, is shown in profile, her fair skin delicate and translucent.\n\nHer exquisite face is blurred with motion, the outline of her figure slightly swaying with the panning camera, the soft focus making the image even more hazy and languid. A warm-toned, low-saturation filter enhances the effect, her long, backlit hair glowing with a soft glow, the messy strands sweeping wildly across her jawline, the details concealing a captivating yet dangerous allure.Cute movements add dynamism, the motion blur blending with the film grain, creating a trendy, Instagram-worthy image while the blurred image outlines a dynamic scene full of story, cleverly balancing bewitching and sweetness.\nFollow : @AiwithZohaib",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case170",
+    "title": "奢华珠宝对比大片",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/aziz4ai/status/2063737218003333288",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case170/output.jpg",
+    "imageAlt": "奢华珠宝对比大片示例图",
+    "prompt": "Use the uploaded image as the one and only product reference. Preserve the jewelry exactly as it is, with high fidelity to its original design, shape, proportions, gemstone arrangement, metal tone, craftsmanship, setting, texture, and identity. Do not redesign, simplify, or alter the jewelry itself in any way. Keep the product accurate, luxurious, and instantly recognizable.\n\nCreate an extraordinary luxury jewelry campaign image where the product is the absolute visual hero. Build a bold, artistic, and premium scene around it that feels cinematic, elegant, and visually unforgettable. The result must never feel like a basic catalog shot or a repetitive product render.\n\nFor every generation, create a different visual concept so the outputs do not look similar to one another. Vary the composition, environment, supporting element, texture, background structure, framing, angle, and styling approach each time. Each image should feel unique, fresh, and creatively elevated while still maintaining a refined luxury identity.\n\nInclude one or more strong supporting natural or tactile elements that help frame and enhance the jewelry, such as a branch, hand, leaf, stone, bark, flower petal, sand texture, silk fold, glass reflection, water ripple, smoke, shell, or sculptural organic form. These elements should not distract from the product, but should artistically support it and make it feel more premium, emotional, and visually magnetic.\n\nUse color contrast intelligently. Place the jewelry within a scene that uses an opposite or contrasting color tone to make the piece stand out strongly, while still keeping the palette harmonious, tasteful, and luxurious. The contrast should feel intentional and sophisticated, never random or harsh. The product must pop clearly from the scene through contrast in color, texture, light, or material.\n\nUse strong visual hierarchy, elegant negative space, and a striking focal composition that makes the jewelry dominate the frame. The product should feel iconic, powerful, and highly desirable. Emphasize macro-level detail, realistic sparkle, gemstone brilliance, polished metal reflections, fine craftsmanship, prongs, edges, texture, and premium material depth.\n\nLighting should be cinematic and refined, with soft directional light, controlled highlights, elegant shadows, subtle rim light, atmospheric glow, and beautiful depth. Use shallow depth of field and macro product-photography aesthetics to keep the jewelry crisp and visually commanding.\n\nThe final image should feel like a world-class luxury editorial ad from a top creative studio: visually bold, highly refined, emotionally captivating, and far beyond ordinary product photography.\n\nAvoid repeated concepts, repeated props, repeated backgrounds, flat lighting, weak framing, visual clutter, cheap styling, generic catalog presentation, text, watermark, and logos.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case178",
+    "title": "现代食谱信息图看板",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063724080717783194",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case178/output.jpg",
+    "imageAlt": "现代食谱信息图看板示例图",
+    "prompt": "Ultra-clean modern recipe infographic. Showcase your dish in a visually appealing finished form, sliced, plated, or portioned, floating slightly in perspective or angled view. Arrange ingredients, steps, and tips around the dish in a dynamic editorial layout, not top-down. Ingredients: include icons or mini illustrations for each ingredient with quantities, arranged in clusters, lists, or circular flows connected visually to the dish. Steps: show preparation steps with numbered panels, arrows, or lines forming a logical flow. Include small cooking icons (knife, pan, oven, timer) where helpful. Optional info: total calories, prep/cook time, servings, spice level displayed as clean bubbles or badges. Visual style: editorial infographic meets lifestyle food photography. Vibrant natural food colors, subtle drop shadows, clean vector icons, modern typography, soft gradients or glassmorphism for step panels. Accent colors highlight key info. Composition: finished meal as hero visual (perspective or angled), ingredients and steps flow dynamically around the dish, clear visual hierarchy, enough negative space to keep design airy and readable. Lighting: soft natural studio lighting, minimal textured or gradient background for premium editorial feel. Output: 1080x1080, ultra-crisp, social-feed optimized.\n\nFull prompt:",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case97",
+    "title": "连续奔跑故障风分镜",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/aimikoda/status/2063688774324981798",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case97/output.jpg",
+    "imageAlt": "连续奔跑故障风分镜示例图",
+    "prompt": "Use @[storyboard ref]  as the authoritative director-approved storyboard blueprint for the sequence. Treat every storyboard panel as a consecutive shot within a single cinematic sequence. Follow panel order exactly and do not invent alternative coverage. Do not render the storyboard sheet itself. Preserve camera placement, framing, lens intent, shot scale, character staging, screen direction, environmental geography, prop placement, action choreography, continuity and emotional escalation shown by the storyboard. The storyboard is the primary source of truth for visual storytelling. Recreate the filmed sequence implied by the panels rather than the physical storyboard artwork.\nThe entire video must play as one continuous developing master shot with no visible cuts; each panel is a sampled phase of the same uninterrupted camera move, not a separate shot.\nUse one virtual lens / same-lens move; angle changes come from backward front-track, push-in, shallow front-side orbit, and pullback only. Never pass behind Rand.\nUse @[char1 ref] as starting Rand/C1. Use @[char2 ref]  as final RAN.\n\nENVIRONMENT: Vivid daytime street into quiet passage: colorful storefront glass, crosswalk, posters, bollards, hard shadows, unaware crowd, right-side escape. Rand runs toward the camera as it retreats in front of her.\nEMOTIONAL GUIDANCE: Valence: vulnerable public appeal into private panic, then altered control. Arousal: urgent run -> \"I can't control this\" flicker -> false heads -> palm-slap snapbacks -> hidden roulette -> RAN lock. Crowd never notices.\nVISUAL STYLE: Match @[char1 ref] : faceted semi-real concept art, vivid daylight, crisp skin, polygon texture, hard shadows, vertical black-gray pixels stuck to Rand's whole head until final body lock; no side faces.\nTRANSFORMATION RULE: P03-P07 must not show face fragments beside Rand or as floating panels. Each temporary identity replaces the actual head attached to Rand's neck for a readable instant, like a broken TV channel. Body keeps running/bracing while the head swaps. Original Rand head returns only after each open-palm slap. Only final @[char1 ref] lock spreads below the neck.\nAUDIO: No music. Use crowd, footsteps, breath, clothing rustle, pixel tearing, palm-head slaps, glitch snaps, dialogue.\n\nPANEL BEATS:\nP01: Wide backward front-track. Rand runs toward camera through unaware crowd, original identity intact, colorful storefronts behind her.\nP02: Camera retreats in front of her as she looks into the lens, breathing hard: \"You're probably wondering why I'm running.\"\nP03: Camera keeps retreating front-side as she spots the passage: \"I need to get away before it starts. I can't control this.\" On that line, she looks to lens; her whole head starts vertical glitching, still attached to her neck.\nP04: Camera pushes closer. Three human heads replace her actual head one after another, each in the same skull position, never beside it. She open-palm slaps side of head like fixing a TV, no pointing; original Rand head snaps back.\nP05: More whole-head swaps cycle on the neck: older man, pale mask-like face, shaved head, then a clear animal head as rejected option. Rand gives another open-palm slap; Rand head briefly returns.\nP06: Camera backs into passage with her as she ducks into cover; first dense whole-head roulette shows readable heads replacing her actual head in micro-freezes, body/clothes still Rand's.\nP07: Still front-side in cover, second roulette beat shows different readable heads replacing the same head volume; no side faces, no floating panels, no clones, no detached masks.\nP08: At the wall, closest front-side orbit: roulette stops on @[char2 ref] RAN. Only now the glitch runs down the body as cap, braids, sunglasses, blue jacket, hoodie, pink cargos, chains, sneakers lock in.\nP09: Camera pulls wider in passage. RAN lowers his hand, fully changed into @[char2 ref], looks to lens, says, \"See? I told you. I can't control it.\"\n\n---\n\nI shared the storyboard skill file I use for these prompts with my subscribers.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case179",
+    "title": "INNER SIGNAL品牌海报系列",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/bmx_ai13/status/2063726489905123489",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case179/output.jpg",
+    "imageAlt": "INNER SIGNAL品牌海报系列示例图",
+    "prompt": "👇\n{\n  \"project_title\": \"INNER SIGNAL\",\n  \"concept_type\": \"Brand Identity Poster Series\",\n  \"brand_name\": \"SIGNAL\",\n  \"tagline\": \"FEED THE INNER SIGNAL\",\n  \"style\": {\n    \"look\": \"bold experimental editorial branding\",\n    \"mood\": \"mysterious, powerful, rebellious, premium\",\n    \"colors\": [\"black\", \"crimson red\", \"white\"],\n    \"lighting\": \"hard red light, deep shadows, high contrast\",\n    \"texture\": \"film grain, halftone, motion blur\"\n  },\n  \"design_rules\": {\n    \"typography\": \"bold uppercase sans-serif, Swiss-style layout\",\n    \"layout\": \"clean grid, strong negative space, recurring minimal logo mark\",\n    \"visual_language\": \"cinematic, fashion-forward, dark, sharp, minimal\"\n  },\n  \"brand_message\": \"Build identities that do not blend in. Designed for ambitious brands that want presence, confidence, and creative impact.\",\n  \"poster_series\": [\n    {\n      \"title\": \"The Two Selves\",\n      \"subject\": \"dark human silhouette with two blurred side profiles behind the head\",\n      \"meaning\": \"inner conflict, identity, duality\",\n      \"text_overlay\": \"FEED THE INNER SIGNAL.\",\n      \"prompt\": \"A bold branding poster with a lone dark silhouette against a glowing crimson red background. Two blurred shadow profiles appear behind the head, suggesting dual identity and inner voices. High contrast red and black lighting, minimal white logo mark, bold uppercase typography, cinematic editorial style, film grain, clean Swiss layout.\"\n    },\n    {\n      \"title\": \"The Crowd Signal\",\n      \"subject\": \"crowd silhouettes facing a giant glowing red screen\",\n      \"meaning\": \"presence, influence, voice rising above noise\",\n      \"text_overlay\": \"SIGNALS RISE ABOVE NOISE.\",\n      \"prompt\": \"A premium poster showing a dark crowd in silhouette facing a large glowing red screen with abstract geometric shapes. The scene feels cinematic and intense, with black shadows, crimson atmosphere, subtle haze, white typography, and a modern branding layout.\"\n    },\n    {\n      \"title\": \"The Focused Face\",\n      \"subject\": \"close-up portrait with a red line crossing the eyes\",\n      \"meaning\": \"clarity, vision, self-definition\",\n      \"text_overlay\": \"DESIGNED TO BE SEEN.\",\n      \"prompt\": \"A close-up fashion portrait of a person in deep shadow against a solid crimson background. A thin red band crosses the eyes, creating a futuristic and psychological feel. High-end editorial lighting, minimal white text, black clothing, premium poster design.\"\n    },\n    {\n      \"title\": \"The Instinct\",\n      \"subject\": \"aggressive black dog or wolf under red light\",\n      \"meaning\": \"raw creative power, instinct, fearless energy\",\n      \"text_overlay\": \"RAISING THE STANDARD OF CREATIVE INSTINCT.\",\n      \"prompt\": \"A dark animal portrait poster featuring a black dog or wolf emerging from shadow under intense red lighting. Teeth visible, powerful expression, black background, white typography, bold brand aesthetic, gritty film texture, luxury editorial composition.\"\n    },\n    {\n      \"title\": \"The Connection\",\n      \"subject\": \"black carabiner linking thick ropes\",\n      \"meaning\": \"systems, structure, trust, connection\",\n      \"text_overlay\": \"BRAND SYSTEMS. CREATIVE DIRECTION.\",\n      \"prompt\": \"A clean branding poster with a black metal carabiner connecting two thick ropes against a pure crimson red background. Glossy highlights, product-style lighting, centered composition, minimal white logo mark, Swiss typography, sleek premium design.\"\n    },\n    {\n      \"title\": \"The Hidden Beast\",\n      \"subject\": \"abstract halftone tiger or leopard face\",\n      \"meaning\": \"ambition, hidden force, controlled danger\",\n      \"text_overlay\": \"FOR AMBITIOUS BRANDS THAT MOVE WITH INTENT.\",\n      \"prompt\": \"An abstract poster showing a tiger or leopard face formed with red halftone texture emerging from deep black space. Mysterious and intense mood, experimental print look, minimal white typography, strong contrast, premium creative studio identity.\"\n    }\n  ],\n  \"master_prompt\": \"Create a 6-poster brand identity series for a fictional creative studio named SIGNAL. Use only black, crimson red, and white. The posters should feel cinematic, premium, rebellious, and intelligent. Use high-contrast editorial visuals, deep shadows, red lighting, film grain, halftone texture, bold uppercase typography, and minimal logo repetition. Themes include dual identity, influence, vision, instinct, connection, and ambition.\"\n}",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case99",
+    "title": "灰尘团自然纪录片",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/NeuralAIInsight/status/2063638281976189102",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case99/output.jpg",
+    "imageAlt": "灰尘团自然纪录片示例图",
+    "prompt": "Create a 16:9 image.\n\n[PROJECT CARD]\nCreate a compact designed masthead, not a table.\nTITLE: THE DUST BUNNY NATURE DOCUMENTARY\nMETA LINE: macro wildlife realism / under-couch survival ecosystem / dry documentary comedy / 15-second natural-history chase\nPRIORITY: real nature-documentary seriousness, under-couch wilderness, dust bunny herd, fragile main dust bunny, household objects as landmarks, vacuum cleaner apex predator, survival chase, calm noble ending\nMICRO BRIEF: Eighteen-panel storyboard of a small dust bunny under a couch filmed like a wild animal surviving in a dangerous natural habitat.\n[CONTINUITY HEADER]\nSEQUENCE ID: DUST-BUNNY-DOC-18\nREFERENCE PRIORITY: This storyboard controls C1 dust bunny identity, under-couch geography, macro household scale, documentary lens language, herd behavior, vacuum predator logic, survival chase continuity, and dry comedic realism.\n[SCENE PACKET]\nPREMISE: Beneath an ordinary living-room couch exists a hidden wilderness. Dust bunnies drift and gather like a small herd in a shadowed ecosystem of carpet fibers, long hair strands, crumbs, lost objects, and canyon-like sofa legs. One small fragile dust bunny explores the terrain, moving through the under-couch world like a wild animal foraging in a hostile habitat. The peace breaks when the ground begins to tremble. The vacuum cleaner arrives like an apex predator: part lion, part shark, part sandstorm. Its suction pulls dust, crumbs, and debris into a violent vortex. C1 races through the under-sofa wilderness, dodges household dangers, tumbles past a lost LEGO brick, coin, pen cap, crumbs, and hair-strand forests, then finds cover just in time. The vacuum passes. Calm returns. The herd remains. Against all odds, life continues under the couch.\nLOCATION:\nThe underside of a couch in a real home, filmed at extreme macro scale.\nEnvironment: dark sofa underside, canyon-like couch shadows, carpet fibers like tall grass, dust motes drifting like desert particles, long hair strands like tangled vines or forest roots, crumbs like boulders, a lost LEGO brick like a red stone ruin, a coin like a metallic moon-disc, a pen cap like a fallen cylinder monument, deep shadow pockets used as cover.\nWorld scale: everything is household-sized in reality but filmed like a vast natural ecosystem.\nSTART -> END:\nC1 and a small dust bunny herd rest calmly in the hidden under-couch habitat -> C1 explores and forages -> the vacuum arrives and creates a suction storm -> C1 survives by finding cover -> C1 returns to the herd as the habitat settles back into quiet.\nACTION CHAIN:\ncalm under-couch ecosystem -> dust bunny herd drifting -> main dust bunny emerges -> foraging through carpet grass -> LEGO ruin pass -> coin reflection -> pen cap tunnel -> crumbs and hair forest -> ground tremor -> vacuum shadow appears -> suction storm begins -> debris vortex pulls everything -> C1 tumbles and runs -> near miss at nozzle edge -> cover behind LEGO brick -> vacuum passes -> dust settles -> C1 returns to herd -> life continues.\n\nPROP / EFFECT STATE:\nC1 is a believable dust bunny creature made from dust, fuzz, hair, lint, and tiny fibers. It has subtle expressive movement but no human face, no speech, no limbs like a cartoon mascot, no clothes, and no exaggerated cuteness.\nDust bunny herd members are soft drifting clumps of dust and lint with tiny natural movement, not characters with faces.\nThe vacuum cleaner is the apex predator. It should be introduced through shadow, vibration, low mechanical presence, nozzle movement, suction wind, and debris being pulled into darkness. It should feel genuinely threatening in documentary terms, not like a villain with personality.\nThe household objects are landmarks: LEGO brick, coin, pen cap, crumbs, hair strands, carpet fibers. They should feel like real objects seen at extreme macro scale.\nMUST READ:\nThe style must stay committed to real documentary seriousness. This is not a cartoon parody. The joke is that a dirty forgotten corner of a home is treated like a majestic wildlife ecosystem.\n[CHARACTER SANITIZATION]\nC1: small dust bunny, fragile rounded irregular shape, soft grey-beige lint body, slightly shaggy edges, tiny tangled hair fibers, dust particles clinging to its surface, delicate movement like a windblown creature, subtle readable orientation without a cartoon face. It should feel alive but still plausibly made from household dust and fuzz.\nC2: dust bunny herd, several smaller and larger dust clumps drifting and resting in shadow, fragile, quiet, non-human, no obvious faces, no mascot design.\nC3: vacuum cleaner apex predator, seen mostly as a large dark nozzle, rotating brush shadow, vibrating floor presence, harsh suction wind, low mechanical threat. It should feel enormous from dust-bunny scale.\nC4: household landmarks — lost LEGO brick, coin, pen cap, old crumbs, long hair strands, carpet fibers, couch legs, dark sofa underside. These are environmental features, not props to be played for slapstick.\n\n[IDENTITY CONSISTENCY]\nKeep C1’s small grey-beige shaggy dust-and-lint body, fragile irregular shape, hair-fiber texture, and subtle movement consistent across every panel. Keep the under-couch geography consistent: couch underside above, carpet fibers below, lost objects as landmarks, vacuum entering from one side. Preserve face, identity, skin tone, body shape, hair, outfit, and proportions exactly across every panel. No identity drift. No redesign.\n[STORYBOARD PURITY]\nCreate a clean professional storyboard sheet with 18 panels arranged in a compact 3x6 grid. Full-color cinematic documentary panel artwork. Put panel numbers, beat names, and lens tags in a clean header strip outside each panel image. No captions, no subtitles, no speech bubbles, no logos, no watermarks, no arrows inside the artwork, no technical overlays. Do not make the dust bunny too cute or anthropomorphic. Do not overcrowd panels. Each panel must have one clear wildlife-documentary visual idea.\n\n[MASTER SHOT RULE]\nP01 must clearly establish the under-couch ecosystem in calm documentary beauty: sofa underside overhead, carpet fibers like grass, dust motes in shallow focus, lost objects in the distance, herd visible but subtle. P10 must clearly introduce the vacuum as an enormous apex predator presence. P13-P15 must be the clearest survival-chase section. P18 must return to calm, noble life continuing under the couch.\n[EMOTIONAL ARC]\nHidden natural beauty -> fragile creature life -> strange majestic household wilderness -> first tremor -> predator arrival -> survival panic -> near consumption -> shelter and endurance -> dust settles -> noble absurd continuity of life.\n[STYLE LOCKS]\nSTYLE LOCK: National Geographic / BBC Earth macro documentary realism, cinematic natural-history lens language, shallow depth of field, extreme macro photography, realistic household textures, dust motes in volumetric light, tactile carpet fibers, muted earth tones, soft documentary contrast, serious wildlife cinematography.\nREALISM LOCK: the dust bunny should feel like a believable dust-and-lint organism, not a cartoon character. Movement is subtle, fragile, and wind-driven. No talking, no human gestures, no mascot design.\nDOCUMENTARY LOCK: camera treats the under-couch world like a real ecosystem: patient observation, macro tracking, hidden-life beauty, predator dread, survival stakes.\nPREDATOR LOCK: the vacuum is shot like a natural threat: shadow first, vibration second, then nozzle and suction vortex. It should feel like a lion, shark, and sandstorm combined, but still clearly a household vacuum cleaner.\nCOMEDY LOCK: dry seriousness is the joke. Do not wink at the audience. Do not exaggerate into slapstick.\nENVIRONMENT LOCK: underside of couch remains the same wilderness throughout: couch shadow canopy above, carpet fiber grass below, lost LEGO brick, coin, pen cap, crumbs, and hair strands as landmarks.\n[SPATIAL CONTINUITY LOCK]\nP01-P04 establish the calm under-couch ecosystem and C1 among the dust bunny herd.\nP05-P08 follow C1 exploring through the household landmark terrain.\nP09-P10 introduce vibration and vacuum predator arrival from one side of the couch.\nP11-P15 stage the suction chase through the same under-couch geography.\nP16 shows C1 finding cover and surviving the vacuum pass.\nP17-P18 restore calm and return C1 to the herd.\nThe vacuum always enters from one consistent direction. C1’s survival path moves from the open carpet-fiber field toward cover behind the LEGO brick or pen cap.\n\n[DIRECTOR STRIP]\nBottom animatic track board aligned to panel columns. Tracks: BEAT LINE, CAMERA PATH, ACTION PATH, RHYTHM TRACK, ESCALATION MAP, STATE TRACK, STYLE TRACK. Use clean shot chips, thin lines, small rhythm blocks, and short labels. No timestamps.\nPANEL HEADERS:\nP01 / macro 35mm / Hidden ecosystem\nP02 / macro 100mm / Herd drifts\nP03 / 85mm close / C1 emerges\nP04 / low macro / Carpet grass\nP05 / 70mm track / Foraging path\nP06 / macro wide / LEGO ruin\nP07 / 100mm insert / Coin moon\nP08 / 50mm tunnel / Pen cap shelter\nP09 / 85mm tremor / Ground warning\nP10 / low 24mm / Predator shadow\nP11 / 35mm storm / Suction begins\nP12 / macro chaos / Debris vortex\nP13 / 70mm chase / C1 runs\nP14 / 100mm danger / Nozzle near miss\nP15 / low 35mm / Hair forest escape\nP16 / 50mm cover / Survives pass\nP17 / macro calm / Dust settles\nP18 / 35mm wide / Life continues\n\nCAMERA + LENS PLAN:\nP01 wide macro establishing shot under the couch, sofa underside like canyon ceiling, carpet fibers like grass, dust motes floating in light.\nP02 patient macro shot of several dust bunnies drifting and gathering like a herd in a hidden ecosystem.\nP03 close documentary shot of C1 emerging from shadow, fragile and shaggy, subtly alive.\nP04 low carpet-level shot as C1 moves through tall carpet fibers like grassland.\nP05 tracking macro shot following C1 foraging through crumbs and lint.\nP06 wider macro shot of C1 passing a lost LEGO brick framed like an ancient red stone ruin.\nP07 insert shot of a coin reflecting dim light like a metallic moon in the under-couch world.\nP08 tunnel-like shot of C1 passing near a pen cap, treated like a fallen hollow log or shelter.\nP09 tense close shot as carpet fibers vibrate and dust trembles from an approaching force.\nP10 low dramatic shot of the vacuum nozzle shadow entering the habitat like an apex predator.\nP11 wide macro chaos shot as suction begins pulling dust motes, crumbs, and lint into a directional wind.\nP12 extreme macro shot of debris spinning in a suction vortex, realistic and tactile.\nP13 fast documentary chase shot of C1 tumbling and racing through the carpet-fiber field.\nP14 intense near-miss shot: vacuum nozzle edge passes dangerously close as C1 is almost pulled in.\nP15 low tracking shot as C1 escapes through long hair strands like a tangled forest.\nP16 still tense shot as C1 wedges behind the LEGO brick or pen cap, surviving as the vacuum passes.\nP17 quiet macro shot as dust settles back onto the carpet and the predator sound fades.\nP18 wide macro final shot of C1 returning to the dust bunny herd, calm restored, life continuing under the couch.\nACTION PATH:\nP01 The under-couch wilderness is revealed in calm documentary beauty.\nP02 Dust bunnies drift and gather like a quiet herd.\nP03 C1 emerges carefully from shadow.\nP04 C1 moves through carpet fibers like tall grass.\nP05 C1 forages among crumbs, dust, and lint.\nP06 C1 passes the lost LEGO brick landmark.\nP07 C1 crosses near the coin, its reflection looming huge.\nP08 C1 explores beside the pen cap shelter.\nP09 The ground trembles; dust particles shake.\nP10 The vacuum cleaner shadow appears at the edge of the habitat.\nP11 Suction begins, pulling dust and crumbs into a violent wind.\nP12 Debris spins into a vortex.\nP13 C1 races away through the under-couch wilderness.\nP14 C1 narrowly avoids the vacuum nozzle.\nP15 C1 tumbles through hair strands and carpet fibers.\nP16 C1 finds cover behind the LEGO brick or pen cap and survives the pass.\nP17 The vacuum leaves; dust settles; silence returns.\nP18 C1 rejoins the herd. Against all odds, life continues.\n\nRHYTHM TRACK:\nP01 hold / hidden beauty / patient beat\nP02 observe / calm life / documentary beat\nP03 reveal / fragile subject / clean beat\nP04 move / quiet exploration / slow beat\nP05 forage / natural behavior / measured beat\nP06 landmark / scale reveal / held beat\nP07 detail / world texture / quiet beat\nP08 shelter / ecosystem detail / clean beat\nP09 warning / tremor / tension beat\nP10 predator reveal / dread / held beat\nP11 attack / suction wind / impact beat\nP12 vortex / chaos / storm beat\nP13 chase / survival run / driving beat\nP14 near miss / danger spike / smash beat\nP15 escape / tangled path / whip beat\nP16 cover / survival pause / suspended beat\nP17 settle / predator gone / release beat\nP18 continue / noble calm / final hold\nESCALATION MAP:\nP01 L1 calm / flat\nP02 L1 ecosystem / hold\nP03 L2 subject reveal / rise\nP04 L2 exploration / hold\nP05 L2 foraging / hold\nP06 L2 scale wonder / rise\nP07 L2 texture wonder / hold\nP08 L2 shelter / hold\nP09 L3 warning / spike\nP10 L4 predator / rise\nP11 L5 attack / spike\nP12 L5 vortex / surge\nP13 L5 chase / sustained\nP14 L5 near death / spike\nP15 L4 escape / unresolved\nP16 L3 survival / drop\nP17 L2 calm returns / release\nP18 L1 life continues / resolved\nSTATE TRACK:\nP01 hidden habitat\nP02 herd calm\nP03 C1 emerges\nP04 carpet grass\nP05 foraging\nP06 LEGO ruin\nP07 coin moon\nP08 pen cap shelter\nP09 tremor\nP10 vacuum shadow\nP11 suction begins\nP12 debris vortex\nP13 survival chase\nP14 nozzle near miss\nP15 hair forest escape\nP16 cover survives\nP17 dust settles\nP18 herd remains\nSTYLE TRACK:\nP01 BBC Earth macro\nP02 fragile herd\nP03 wild subject\nP04 grassland scale\nP05 natural behavior\nP06 household ruin\nP07 metallic landmark\nP08 hidden shelter\nP09 predator omen\nP10 apex dread\nP11 sandstorm suction\nP12 debris cyclone\nP13 survival sprint\nP14 shark-mouth danger\nP15 forest escape\nP16 sheltered life\nP17 quiet aftermath\nP18 noble absurdity\n[NEGATIVE / AVOID]\nDo not make the dust bunny too cute in a Pixar way.\nDo not give the dust bunny a cartoon face, human eyes, arms, legs, clothing, speech, or mascot behavior.\nDo not turn the vacuum into a character with a face.\nDo not make the scene loud, colorful, or cartoonish.\nDo not lose the realism of the household environment.\nDo not make the couch world clean or magical.\nDo not overcrowd panels with too many objects.\nDo not add narration text, captions inside panels, speech bubbles, logos, watermarks, UI, or arrows inside the artwork.\nDo not make the dust bunny herd look like plush toys.\nDo not make the ending sentimental; make it calm, dry, and weirdly noble.\n\n[SEQUENCE]\nGrid: 18 panels in a compact 3x6 cinematic storyboard sheet. The sequence must read as a serious macro nature documentary: a small dust bunny lives under a couch, explores its household wilderness, faces the vacuum cleaner apex predator, survives the suction storm, and returns to the herd as calm life continues. National Geographic / BBC Earth documentary realism, macro household scale, dry absurd comedy, tense survival framing, and committed visual seriousness throughout.\n\nSeedance 2.0 Prompt:\n\nUse as the authoritative director-approved storyboard blueprint for the sequence. Treat every storyboard panel as a consecutive shot within a single cinematic survival-documentary sequence. Follow panel order exactly and do not invent alternative coverage. Do not render the storyboard sheet itself. Preserve camera placement, framing, lens intent, shot scale, under-couch geography, dust-bunny scale, household landmark placement, vacuum-predator approach, suction-storm escalation, survival chase logic, and quiet final recovery shown by the storyboard. The storyboard is the primary source of truth for visual storytelling. Recreate the filmed sequence implied by the panels rather than the physical storyboard artwork.\n\nREFERENCE PRIORITY:  controls the under-couch ecosystem, dust bunny design, dust herd behavior, LEGO ruin, coin sun, pen cap tunnel, crumb boulders, hair forest, vacuum predator staging, suction vortex physics, shelter beat, documentary realism, and panel purity.\n\nTITLE: THE DUST BUNNY NATURE DOCUMENTARY\n\nFORMAT: 15-second macro survival nature documentary. Serious wildlife tone applied to household dust. No dialogue from characters. No faces. No cartoon behavior.\n\nMAIN SUBJECT:\nThe main dust bunny is a small tangled ball of grey dust, hair fibers, lint, tiny crumbs, and loose fuzz. It must feel like a real physical dust clump, not a cute creature. It has no eyes, no mouth, no limbs, no facial expressions, and no human behavior. Its personality is created only through camera framing, movement, danger, and survival context.\n\nENVIRONMENT:\nA hidden ecosystem under a couch. The underside of the couch forms a dark ceiling; couch legs feel like giant trees; carpet fibers become grassland; dust particles hang in the air like desert haze. Household debris becomes wilderness landmarks: a red LEGO brick as an ancient ruin, a coin standing like a glowing sun disk, a pen cap as a tunnel, crumbs as boulders, tangled hair strands as a forest. The under-couch geography must remain consistent and readable.\n\nPREDATOR:\nThe vacuum cleaner is the predator. It appears at the edge of the couch as a dark, heavy mechanical threat. It should not look silly or friendly. The danger comes from vibration, shadow, proximity, suction wind, debris movement, and the violent pull of the vortex.\n\nEMOTIONAL GUIDANCE:\nValence: quiet hidden ecosystem → strange natural beauty → discovery → distant threat → predator reveal → violent survival chase → last-second shelter → calm continuation.\nArousal: slow observational opening, gentle exploration, sudden ground tremor, rising threat, intense suction storm, near-miss danger, shelter release, quiet survival.\nThe comedy comes from the seriousness of the documentary language. The scene should feel funny because it is played completely straight.\n\nVISUAL STYLE:\nNational Geographic / BBC Earth macro survival documentary. Low macro camera, shallow depth of field, realistic dust texture, floating dust motes, dramatic naturalistic light shafts, tactile carpet fibers, realistic household debris, cinematic macro wildlife framing, earthy brown-grey palette, occasional warm highlights from distant room light. The world should feel vast, ancient, and dangerous even though it is only under a couch. Documentary realism first; no Pixar-cute expression, no anthropomorphic design.\n\nAUDIO:\nNo character dialogue. Optional serious nature-documentary style narration is allowed only if the platform supports voice, but the visuals must work without it. Use diegetic survival-documentary sound design: low room tone, tiny dust movement, faint fiber crackle, distant household hum, subtle rumble before the vacuum appears, heavy mechanical approach, carpet vibration, suction wind, debris rattling, crumbs scraping, hair strands whipping, vortex rush, sudden muffled shelter silence, vacuum fading away, then calm dust-settling ambience. Music, if used, should be restrained wildlife-documentary tension: minimal low drone, rising pulse during predator approach, intense swell during suction chase, cut down to quiet after shelter.\n\nPANEL BEATS:\nP01: Hidden World; wide shot. Under the couch, a vast dark ecosystem stretches across the dusty carpet floor. Couch legs rise like trees. Dust motes drift in distant light.\nP02: The Herd; close-up. Multiple dust bunnies gather and drift like a small herd across the under-couch terrain. Natural, slow, observational.\nP03: Our Dust Bunny; MCU. Introduce the main dust bunny as a tangled grey clump of lint, hair, and dust. It feels like a wild animal only because of the camera treatment.\nP04: Exploring; close-up. The main dust bunny moves through dense carpet fibers and dust formations, exploring the hidden wilderness.\nP05: LEGO Ruin; close-up. A red LEGO brick rises like an ancient ruin in the dust landscape. The main dust bunny passes nearby, establishing it as future shelter.\nP06: Coin Sun; close-up. A coin stands upright or glints in light like a huge metallic sun. The dust bunny is tiny against it.\nP07: Pen Cap Tunnel; close-up. The dust bunny approaches or passes a dark pen cap opening, framed like a cave or tunnel.\nP08: Crumb Boulders; close-up. Crumbs loom like large boulders around the dust bunny. Keep the scale serious and naturalistic.\nP09: Hair Forest; close-up. Long strands of hair curve through the frame like tall grass or a forest. The dust bunny passes through the tangled terrain.\nP10: The Ground Trembles; wide shot. The under-couch world vibrates. Dust shifts. The herd becomes unsettled. The threat is felt before it is fully seen.\nP11: Predator Approaches; close-up. The vacuum cleaner enters at the edge of the couch like an apex predator. Dark, heavy, mechanical, dangerous.\nP12: Suction Storm Begins; close-up. The suction pulls dust, hair, crumbs, and loose fibers into motion. The first vortex forms around the dust bunny.\nP13: Debris Vortex; close-up. The storm intensifies. Dust, crumbs, hair, and debris spiral violently through the frame. The main dust bunny resists the pull.\nP14: Survival Chase; close-up. The dust bunny is dragged and rolled across the carpet by the suction wind, racing through the terrain as debris streaks past.\nP15: Near Miss; close-up. The dust bunny is almost sucked into the vacuum path. The vortex curls around it. Survival hangs by a tiny margin.\nP16: Last Second Shelter; close-up. The dust bunny reaches the red LEGO brick and tucks behind it at the last possible second. The brick blocks the suction like a rock shelter.\nP17: Danger Passes; wide shot. The vacuum moves away. The suction fades. Dust settles. The under-couch world is still again.\nP18: Life Continues; wide shot. The hidden ecosystem returns to quiet. Dust bunnies remain under the couch. The main dust bunny has survived. Life continues.\n\nKEY INSTRUCTIONS:\n\n* Keep the tone serious and documentary-real, not cute cartoon.\n* Do not give the dust bunny eyes, face, mouth, limbs, or human gestures.\n* The dust bunny must remain a real dust clump made of lint, hair, crumbs, and fuzz.\n* The vacuum must feel like a genuine predator, not a joke machine.\n* Keep the under-couch geography clear and consistent.\n* The LEGO brick must read clearly as the final shelter.\n* The chase must feel like survival, not slapstick.\n* Protect the macro scale at all times.\n* Keep household debris beautiful, tactile, and wilderness-like.\n* Do not add dialogue between objects.\n* Do not make the vacuum silly.\n* Do not make the world bright and clean; it should be dusty, shadowed, and cinematic.\n* End with quiet survival and life continuing under the couch.\n* Do not show panel boxes, labels, numbers, captions, storyboard borders, or camera notes.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case352",
+    "title": "动画角色三视图模板",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/0kncn/status/2063734037928452120",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case352/output.jpg",
+    "imageAlt": "动画角色三视图模板示例图",
+    "prompt": "Create a highly detailed full-color character design sheet in 16:9 horizontal format for an original [CHARACTER TYPE / HERO / CREATURE / VILLAIN].\n\nSTYLE:\nstylized cinematic character design,\nhigh-quality animated feature look,\nclean readable shapes,\nstrong silhouette,\npremium concept art presentation,\nbold graphic color palette,\ncomic-book inspired energy,\npolished but production-ready design,\nclear anatomy and costume readability.\nCHARACTER IDENTITY:\n[CHARACTER NAME / ROLE]\n[AGE / SPECIES / BODY TYPE]\n[PERSONALITY ARCHETYPE]\n[POWER / SKILL / SPECIAL EQUIPMENT]\nMAIN DESIGN:\nThe character should have a distinctive, memorable silhouette.\nUse a clear costume language with recognizable shapes, strong color blocking, and functional details.\nThe design must feel original, not based on any existing franchise character.\nNo copyrighted logos, no recognizable existing superhero symbols, no direct imitation of known characters.\nOUTFIT / ARMOR:\n[DESCRIBE COSTUME OR ARMOR]\nInclude practical design details:\ngloves / wrist devices\nboots / shoes\nbelt gear\narmor plates\nfabric folds\nglowing elements if needed\n\nutility tools or weapons if needed\nCOLOR PALETTE:\n[MAIN COLOR]\n[SECONDARY COLOR]\n[ACCENT COLOR]\nUse a bold cinematic palette with strong contrast.\nThe colors should be clear enough for animation and video generation consistency.\nCHARACTER SHEET LAYOUT:\nShow the same character in multiple views on one clean sheet:\nfront view full body\nside view full body\n\nback view full body\nthree-quarter action pose\nclose-up face / mask expression\nhand / glove / equipment detail\nspecial ability or weapon detail\n\nPOSES:\nUse confident readable poses.\nThe action pose should show the character’s main movement style:\n[RUNNING / JUMPING / FLYING / SWINGING / FIGHTING / CASTING POWER / USING EQUIPMENT]\nEQUIPMENT / POWER DETAIL:\nShow how the character’s signature equipment or power works.\nExample:\nmagnetic grappling cables,\nenergy gauntlets,\nkinetic boots,\nutility belt,\nglowing power core,\nmechanical wings,\nelemental weapon,\nor custom ability system.\nBACKGROUND:\nclean light neutral background,\nminimal graphic design,\nno complex environment,\nno text-heavy poster design,\nsmall visual notes allowed only if clean and readable.\n\nQUALITY:\nhigh detail,\nsharp clean rendering,\nconsistent proportions across all views,\nsame face and body structure in every pose,\nclear costume continuity,\nproduction-ready character sheet,\nsuitable as a reference image for storyboard and AI video generation.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case180",
+    "title": "工业风包装设计版式",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063735848257167383",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case180/output.jpg",
+    "imageAlt": "工业风包装设计版式示例图",
+    "prompt": "Full prompt: \n\nUsing the attached image, create a professional industrial packaging design illustration sheet.\n\nFeature a centered hero 3D render with realistic materials, soft studio lighting, and commercial-grade finish quality. Surround the hero render with technical views: front, side, top, bottom, angled perspective, and flat layout.\n\nInclude structural construction sketches, fold lines, seam details, and dimension arrows with measurements in millimeters. Show materials and finishes (matte, glossy print, plastic, paper, glass, etc.) using handwritten-style annotations. Add color swatches, realistic product illustrations, and subtle shadows.\n\nBackground should resemble clean sketchbook paper, combining realistic rendering with pencil sketch overlays. Modern industrial design aesthetic, ultra-detailed, portfolio-ready presentation.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case181",
+    "title": "镀铬LOGO杂志风系统",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063644125510217787",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case181/output.jpg",
+    "imageAlt": "镀铬LOGO杂志风系统示例图",
+    "prompt": "prompt:\n\n[BRAND NAME]. You are a Senior 3D Product Visualization Artist and Cinematic Art Director specializing in luxury brand key visuals for high-end editorial and streetwear campaigns.\n\nPHASE 1: LOGO SUBJECT\n\nIdentify the official logo/logotype of [BRAND NAME]. Render it with maximum fidelity to the original silhouette, proportions, and geometry — no distortion, no stylization. Extrude the logo into a solid 3D object with depth approximately 15–20% of its height. Coat all surfaces — front face, side extrusion, beveled edges — in hyper-polished liquid chrome (reflectance 0.98, near-perfect mirror). Apply full ray-traced environment reflections so the logo mirrors the surrounding sky gradient, flower field, and light sources. Moderate bevel radius on all hard edges to catch sharp specular highlights. Add Subsurface Scattering on thin structural parts (fine lines, serifs, icon details) for a subtle inner glow. Place 4–8 prismatic 4-point star lens-flare sparkles at highest specular peaks — corners, tips, curved peaks. Organic distribution, not uniform. Zero matte surfaces. Zero plastic look. The entire logo must read as cast from liquid silver.\n\nPHASE 2: ENVIRONMENT & BACKGROUND\n\nBackground: wide cinematic landscape at golden-lilac hour (just after sunset). Dense flower field fills the lower third — lavender and white wildflowers with realistic micro-texture and subtle wind motion-blur on far clusters. Middle ground fades to soft purple-grey bokeh. Sky gradient: warm blush rose ( at horizon through lilac ( to cool powder blue ( at top. Add 3–5 silhouetted bird clusters in upper quadrants. Volumetric atmospheric haze on the horizon. Shift the environment's color palette to reflect [BRAND NAME]'s iconic brand identity — introduce the brand's signature hue as a tonal wash in the sky gradient or dominant flower color. The environment must feel art-directed specifically for this brand.\n\nPHASE 3: COMPOSITION & LAYOUT\n\nFormat: 1:1 square. Chrome logo centered horizontally at vertical midpoint, monumental scale spanning 65–80% of frame width. Subtle 2–4 degree forced perspective tilt for dynamic energy without distorting logo recognition. Bottom edge of the logo grazes or slightly overlaps the top of the flower field, integrating the 3D object naturally. Logo casts a soft diffused shadow into the flowers. Lower-left corner: 2–3 lines of micro-copy in clean white sans-serif at minimal optical size — a poetic 3-line brand statement relevant to [BRAND NAME]'s heritage and aesthetic. Bottom-left: \"[BRAND NAME]\" in small caps logotype label. Bottom-right: a secondary flat 2D chrome version of the same logo as a finishing mark.\n\nPHASE 4: LIGHTING\n\nPrimary: large soft area light from upper-left simulating post-sunset overcast sky — fully diffused, no hard shadows, 5800K with lilac tint overlay. Secondary: warm 3200K rim light grazing bottom and side edges from behind — golden separation halo between object and field. Global Illumination enabled — chrome logo realistically bounces and absorbs landscape ambient color. The field's purple tones should be faintly visible in the lower reflective surfaces. Volumetric god rays faintly visible through any logo negative space or cutouts.\n\nTECH SPECS\n\nOctane Render aesthetic. Ray Tracing: 16+ bounces. Depth of Field: f/11 equivalent — full logo sharp, far background in soft bokeh only. Tone mapping: lifted blacks, compressed highlights, filmic S-curve. Color grade: desaturated midtones, preserved pastels, cool shadow tones. Film grain: subtle (ISO 200 equivalent). Chromatic Aberration: 0.2–0.3px on peripheral logo edges only. Anti-aliasing: maximum. No AI-plastic normals. No smooth uniform shading. Microscopic surface imperfections on chrome required — micro-scratches, 0.5% roughness noise map. Mood: luxury brand retrospective editorial for Highsnobiety or AnOther Magazine.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case182",
+    "title": "护肤UGC种草分镜板",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/WanderingC76/status/2063797516731294055",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case182/output.jpg",
+    "imageAlt": "护肤UGC种草分镜板示例图",
+    "prompt": "(Luxury AI UGC skincare campaign board), warm beige aesthetic, beautiful female influencer with glowing healthy skin, holding a skincare serum bottle toward the camera, natural smile, cozy bedroom environment, soft natural daylight, realistic home setting, elegant neutral decor.\n\nLarge hero portrait on the left side.\n\nRight side featuring (6 UGC storyboard panels):\n(Hook Shot),\n(Product Introduction),\n(Product Application),\n(Lifestyle Shot),\n(Results Shot),\n(Call To Action).\n\nEach panel showing realistic influencer actions and natural expressions.\n\nBottom section featuring (Key Ingredients Box) with elegant skincare icons and ingredient highlights.\n\nAdditional product close-ups, serum texture shots, lifestyle B-roll images, premium beauty advertising layout.\n\n(Soft Natural Lighting),\n(Real & Relatable),\n(Clean Editorial Design),\n(UGC Creator Style),\n(Premium Skincare Branding),\n(Warm Beige Color Palette),\n(Photorealistic),\n(Ultra Detailed),\n(Vertical 9:16),\n(8K Quality).\n\nNegative Prompt:\nwatermark, logo, low quality, blurry, bad anatomy, distorted hands, cluttered layout, dark lighting, cartoon, CGI.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case353",
+    "title": "北欧文学杂志插画",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063670695020868046",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case353/output.jpg",
+    "imageAlt": "北欧文学杂志插画示例图",
+    "prompt": "prompt:\n\nA minimalist modern editorial illustration. Style: Nordic lifestyle magazine meets Korean literary book cover meets indie architectural sketch. Natural eye-level composition, everyday setting. Color palette: creamy white, ivory, gray-beige, sage green, deep olive, ink black, tiny touches of grayish-pink. Thin black ink outlines, slightly hand-drawn feel. Highly abstracted shapes, elongated quiet silhouettes. Background textures: aged paper grain, scratches, ink spots, print noise. Shadows rendered as solid blocks of pure black or dark green, no gradients, no realistic lighting, no 3D rendering. Quiet, cool, literary, restrained aesthetic. High-end editorial and independent publication finish. No text, no watermark, no high-saturation colors, no photographic feel.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case285",
+    "title": "绘本感粉彩卫衣肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/de_mon010/status/2065247896287744162",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case285/output.jpg",
+    "imageAlt": "绘本感粉彩卫衣肖像示例图",
+    "prompt": "Semi-realistic anime-inspired portrait of a stylish man, delicate round-frame glasses, and a gentle confident expression. he wears an oversized pastel lilac hoodie with rolled sleeves paired with a flowing ivory joggers. Full-body composition, standing casually with relaxed posture. Behind his is an artistic collage of hand-drawn monochrome character studies, loose pencil sketches, manga panels, playful doodles, and handwritten notes scattered organically across the backdrop.Contemporary anime fashion illustration with mixed ink-and-pencil textures, clean linework, subtle cel shading, bright white background, magazine-cover aesthetic, highly detailed, ultra-sharp, vibrant yet elegant, 8K masterpiece.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case382",
+    "title": "旅行美食明信片模板",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Naiknelofar788/status/2065241908327378969",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case382/output.jpg",
+    "imageAlt": "旅行美食明信片模板示例图",
+    "prompt": "Create a hyper-realistic travel-food postcard scene.\nINPUTS:\nCity: [CITY NAME]\nLocal Delicacy: [LOCAL DELICACY]\nBackground Location: [BACKGROUND LOCATION OR LANDMARK]\nSCENE:\nA real human hand is holding a vintage travel postcard in the foreground.\nInside the postcard is a large, beautifully styled, ultra-realistic food photograph of [LOCAL DELICACY], captured like premium food advertising. The dish should appear larger than life, with rich textures, realistic details, appetizing presentation, natural lighting, subtle steam, shallow depth of field, and cinematic food photography.\nA single miniature traveler wearing a backpack sits naturally on the top edge of the postcard with legs dangling over the front. The traveler should be realistic, highly detailed, and positioned so they appear to be admiring the local delicacy. The miniature traveler acts as the emotional focal point and creates a strong sense of scale and wonder.\nOutside the postcard is the authentic destination environment of [BACKGROUND LOCATION OR LANDMARK] in [CITY NAME]. The background should feature recognizable local architecture, streets, scenery, cultural elements, landmarks, atmosphere, colors, and visual details unique to the destination.\nInclude a rustic wooden directional signpost naturally integrated into the environment. The signpost must automatically generate four short destination-specific labels based on the city, culture, attractions, food scene, landmarks, neighborhoods, natural features, or travel experiences associated with the location.\nThe generated signboards should feel authentic to the destination and enhance the travel storytelling.\nComposition hierarchy:\nMiniature traveler\nLocal delicacy inside postcard\nDestination background\nDestination signpost\nStyle: Hyper-realistic photography, luxury tourism campaign aesthetic, cinematic storytelling, authentic destination atmosphere, realistic hand, realistic miniature traveler, highly detailed food photography, natural golden-hour lighting, shallow depth of field, rich colors, editorial travel magazine quality, Instagram-worthy social media content, visual wow factor, vertical 4:5 aspect ratio, extremely detailed, premium commercial advertising.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case383",
+    "title": "卫星地形字母地形图",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065224886734438454",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case383/output.jpg",
+    "imageAlt": "卫星地形字母地形图示例图",
+    "prompt": "Ultra-realistic overhead satellite view from orbit, a crisp modern editorial layout featuring 9 vertical panels arranged side by side on a white background, together spelling \"MADPENCIL\", each panel containing a single letter formed entirely from real Earth terrain and natural topography, no text overlays:\n\nPanel 1 (M): jagged mountain ridges and deep ravines composing a sharp angular \"M\", dramatic shadows, rocky surface\nPanel 2 (A): a meandering river through thick tropical forest shaping an \"A\", vivid contrast between water and canopy\nPanel 3 (D): vast desert sand dunes sculpted by wind into a smooth \"D\", warm earthy tones, gentle gradients\nPanel 4 (P): patchwork cropland and geometric farm fields arranged into a structured \"P\", clean grid patterns\nPanel 5 (E): glacial formations and ice sheets carving a crisp \"E\", pure whites and deep icy blues, cracked textures\nPanel 6 (N): a braided floodplain river system forming \"N\", branching channels and natural flow patterns\nPanel 7 (C): a curved coastline and ocean meeting point shaping \"C\", wave breaks and sediment visible\nPanel 8 (I): a narrow slot canyon or straight waterway forming a minimal \"I\", strong vertical line\nPanel 9 (L): volcanic landscape with hardened lava flows forming an \"L\", dark basalt with glowing lava accents\n\nstraight-down satellite perspective, NASA Earth imagery aesthetic, hyper-detailed terrain, realistic geography, consistent lighting and scale across panels, minimal cloud cover, high contrast, sharp resolution, subtle atmospheric haze, true-color grading, ultra high resolution 8K, clean panel spacing, gallery-style composition, visually unified but each panel a distinct biome, letters legible yet organically merged with the landscape\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case286",
+    "title": "意大利夏日午后肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065209349132501265",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case286/output.jpg",
+    "imageAlt": "意大利夏日午后肖像示例图",
+    "prompt": "prompt:\n\nUltra photorealistic portrait of a young woman with long straight dark brown hair, sun-kissed glowing skin, seated at an outdoor cafe table. She's wearing a white vintage Swiss dot corset mini dress with a sweetheart neckline, ruffled cap sleeves, front lace-up ribbon detailing, fitted bodice, and slightly sheer ruffled hem. Hands raised playfully covering her eyes, head tilted back laughing, red manicured nails, thin bracelet and ring on left hand. Setting: luxury outdoor hotel terrace at Hotel Florence, historic yellow building with \"HOTEL FLORENCE\" signage, lush green mountains in the background, cloudy blue sky, vintage globe street lamps, round glass-top table with two white ceramic coffee cups and a paperback book. Coquette cottagecore soft feminine luxury aesthetic. Natural bright afternoon sunlight, high contrast, sharp shadows on the table, backlighting creates a hair halo effect, warm vibrant color grading. DSLR 85mm portrait lens, f/2.8 shallow depth of field, 1/500s shutter, ISO 100, 8k RAW photo.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case19",
+    "title": "40K动力装甲小队肖像",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/EvaGlitchAI/status/2065204081363435604",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case19/output.jpg",
+    "imageAlt": "40K动力装甲小队肖像示例图",
+    "prompt": "Prompt of the Day: 40K POWER ARMOUR SQUAD ⚔️🛡️💜💚\n\nToday’s Prompt of the Day turns your characters into a 40K-inspired warriors. Yes this was done before but i wanted to see how much better GPT 2 can do it now\n\nUse one character reference for a solo warrior, or attach multiple character references to create a full squad. The prompt is built to count every reference image and turn each one into a separate visible character, with no helmets covering their faces.\n\nType your chosen scene into the SCENE SELECTOR at the top, then attach your character reference image or images.\n\nTry scenes like:\n\na brutal battlefield charge\na gothic starship boarding action\na candlelit shrine world cathedral\nan industrial forge world\na grim underhive alley\na quiet off-duty barracks scene\na solemn prayer before battle\n\nHave fun with this one ⚔️🛡️\n\n............................PROMPT STARTS HERE............................\n\nSCENE SELECTOR:\n[Type the 40K-inspired scene you want here.]\nExamples:\n\nbrutal battlefield charge through smoke, fire, shell craters, and ruined gothic architecture\n\nboarding action inside a colossal warship corridor\ncathedral-like shrine world interior filled with candles, banners, stained glass, and incense haze\nindustrial forge world with sparks, chains, molten metal, pipes, and huge machinery\ncommand deck before battle with tactical holograms and vast void windows\ngrim underhive alleyway with pipes, neon grime, metal walkways, and urban decay\nheroic last stand surrounded by wreckage, fallen enemies, burning vehicles, and drifting ash\nquiet off-duty scene inside a fortress barracks, armoury, workshop, canteen, or hangar\nsolemn prayer before battle with relics, banners, candles, incense smoke, and sacred war symbols\neveryday-life scene in a gothic sci-fi military stronghold, training yard, armoury, repair bay, or mess hall\nUse the typed scene selector as the main scene concept.\nIf no custom scene is typed, choose one of the example scenes that best fits the attached character reference image or images and the overall character vibe.\nAdapt the environment, action, pose, props, camera, and mood to match the selected scene.\nKeep the final scene clearly inspired by 40K-style grimdark far-future gothic military sci-fi.\n\nSTRICT REFERENCE COUNT RULE:\nBefore creating the image, count the number of attached character reference images.\nCreate exactly one main character from each attached character reference image.\nThe number of main characters in the final image must exactly match the number of attached character reference images.\nIf 1 character reference image is attached, create exactly 1 main character.\nIf 2 character reference images are attached, create exactly 2 main characters.\nIf 3 character reference images are attached, create exactly 3 main characters.\nIf 4 character reference images are attached, create exactly 4 main characters.\nIf more character reference images are attached, create exactly that same number of main characters.\nEach attached character reference image is a separate person.\nEach attached character reference image must appear once and only once as their own distinct main character.\nDo not treat any attached character reference image as optional.\nDo not ignore, drop, replace, combine, or simplify any attached character reference image.\n\nMULTI-CHARACTER IDENTITY RULE:\nUse every attached character reference image as its own separate character identity source.\nCharacter 1 must be based only on the first attached character reference image.\nCharacter 2 must be based only on the second attached character reference image.\nCharacter 3 must be based only on the third attached character reference image.\nCharacter 4 must be based only on the fourth attached character reference image.\nContinue this pattern for any additional attached character reference images.\n\nDo not use the first attached character reference image to create multiple characters.\nDo not duplicate the first character to fill the group.\nDo not create variations, twins, clones, alternate outfits, mirrored copies, recolours, or slightly edited versions of the same character.\nDo not merge two or more attached character references into one design.\nDo not let one character’s face, hairstyle, colours, outfit motifs, body type, species traits, or accessories replace another character’s identity.\nSINGLE-CHARACTER FALLBACK RULE:\nIf only one character reference image is attached, create one main character only.\nDo not create a squad, clone group, twin, alternate version, second warrior, companion, or duplicate of the character.\nThe single character should remain the only main subject.\n\nTHREE-CHARACTER PRIORITY RULE:\nIf three character reference images are attached, this is a three-character squad image.\nAll three referenced characters must appear together in the same scene.\nAll three faces must be visible.\nAll three armour designs must be distinct.\nAll three characters must be clearly separated in the composition.\nUse a readable left-center-right squad arrangement unless the selected scene needs another clear formation.\nCHARACTER REFERENCE RULES:\nPreserve each attached character’s face shape, hairstyle, hair colour, eye colour, expression, body language, signature colour palette, outfit motifs, accessories, silhouette, species traits, proportions, and overall character vibe.\nThe final image must clearly show every attached character as a separate, recognizable individual.\nEvery character must still clearly look like their own attached reference image.\n\nKeep each character’s head uncovered with no helmet, full face mask, or visor covering the face.\nThe face, hair, and identity of every referenced character must remain clearly visible.\nHard style rule:\nUse the attached character reference image or images as the visual style reference for the final image.\nPreserve the visual art style, rendering language, line quality, colour handling, facial stylization, shading style, texture treatment, background treatment, and overall stylization of the attached reference image or images while transforming the character or characters into 40K-inspired power-armoured warriors.\nIf the references are anime, keep them anime. If they are stylized, keep that stylization.\nDo not turn the final image photorealistic unless specifically requested.\nScene concept:\nCreate a 16:9 horizontal widescreen cinematic illustration based on the scene written in the SCENE SELECTOR.\nShow the attached character or characters transformed into custom 40K-inspired grimdark far-future power-armoured warriors.\nThe image should feel heavy, dramatic, mythic, warlike, and character-driven, with strong atmosphere, clear storytelling, and a powerful sense of scale.\n\nCharacter transformation:\nTransform every attached reference character into a custom 40K-inspired power-armoured version of themselves while preserving their original identity.\nThe redesign should center on massive stylized power armour with broad shoulder plates, reinforced chest armour, heavy gauntlets, armoured boots, thick mechanical joints, gothic sci-fi military detailing, sacred-warrior ornamentation, battlefield wear, and an oversized futuristic weapon.\nThe armour must feel imposing, brutal, ceremonial, expensive, and engineered for endless war.\nKeep the head uncovered so each character’s original face, hair, and expression remain visible.\nUse each attached character’s colours, motifs, accessories, outfit shapes, symbols, materials, personality, and overall vibe as the foundation for their armour redesign.\nThe armour should feel like it belongs in a 40K-inspired universe, but it must be custom-built from the attached character’s own identity.\nIf multiple characters are present, each one must have a distinct armour design based on their own original reference rather than all wearing identical suits.\nArmour design:\nGive each character huge futuristic power armour inspired by 40K-style grimdark gothic sci-fi warfare.\nInclude broad pauldrons, a strong chest plate, layered armour segments, mechanical joints, reinforced thighs, heavy boots, thick gauntlets, power cables, vents, seals, relic-like details, engraved plates, purity-scroll-like decorations, battle damage, and character-specific symbols.\nAdapt each armour design to that character’s original style, colour palette, outfit motifs, accessories, personality, and silhouette.\nKeep the armour stylized to match the attached reference image or images rather than realistic.\n\nWeapon design:\nGive each character a fitting oversized futuristic weapon inspired by 40K-style grimdark sci-fi warfare.\nThe weapon can be a heavy explosive sci-fi rifle, massive energy weapon, brutal motorized serrated melee weapon, glowing power blade, ceremonial war hammer, plasma-like cannon, heavy pistol, or other far-future battlefield weapon appropriate to their vibe and role.\nEach character’s weapon should be different and should match that character’s identity, armour design, and role in the scene.\nIf the selected scene is calm, ceremonial, or off-duty, the weapon may be held at rest, slung, holstered, leaned nearby, placed on a table, or carried ceremonially, but it should still be visible.\nIf the selected scene is battle-heavy, make each weapon active, weighty, readable, and integrated into the pose.\nScene adaptation rules:\nIf the selected scene is battle-heavy, make the action dynamic but readable, with strong poses, clear silhouettes, environmental destruction, smoke, fire, debris, and a strong sense of momentum.\nIf the selected scene is solemn, sacred, or ceremonial, focus on mood, scale, banners, relics, candles, incense, stained glass, and reverent atmosphere.\nIf the selected scene is indoors, use gothic sci-fi architecture, industrial machinery, cathedral-scale interiors, fortress spaces, armouries, barracks, command rooms, or military infrastructure that fit the selected location.\nIf the selected scene is everyday-life or off-duty, keep the armour and 40K-inspired universe intact, but show the character or characters in a grounded moment such as maintenance, briefing, prayer, conversation, eating, resting, training, repairing gear, or preparing equipment.\nIf multiple characters are present, make their interaction clear and readable, with each one contributing to the scene rather than standing as vague duplicates.\nEnvironment and composition:\nBuild the environment around the selected scene.\nThe setting should feel like the kind of place the character or characters naturally belong in once translated into a 40K-inspired grimdark far-future war universe.\nUse a wide 16:9 horizontal cinematic composition.\nKeep the main subject or subjects clearly visible, central or compositionally dominant, and easy to read at a glance.\nIf one character is present, give them a strong hero composition with a clear silhouette and dominant visual presence.\nIf multiple characters are present, arrange them so every character remains readable and identifiable with clean silhouette separation.\nFor three attached references, use a clear three-person squad composition with all three faces visible.\nUse background architecture, smoke, debris, banners, machinery, sparks, haze, relics, gothic shapes, or cathedral-like scale to support the scene without overpowering the characters.\nLighting and mood:\nUse lighting that matches the selected scene.\nThe image should feel grim, cinematic, epic, and immersive, with dramatic contrast and strong atmosphere.\nUse battlefield firelight, smoky haze, stained-glass glow, cold ship lighting, industrial sparks, moody rim light, incense haze, harsh military illumination, glowing machinery, or distant explosions where appropriate.\nThe mood should feel powerful, warlike, sacred, brutal, and character-specific while still reflecting each original character’s personality.\nQuality and rendering:\nPolished, premium-quality stylized illustration with clean linework, crisp rendering, readable forms, powerful armour design, expressive visible faces, strong weapon design, and clear composition.\nKeep the strongest detail concentrated on the referenced character or characters, their armour, their faces, and their weapons.\nMaintain strong visual hierarchy and readability.\nThe background should support the characters rather than becoming busier than them.\n\nDo not:\nDo not ignore the SCENE SELECTOR.\nDo not create more or fewer main characters than the number of attached character reference images.\nDo not create only two characters if three character reference images are attached.\nDo not duplicate the first attached character instead of using the second or third reference.\n\nDo not merge multiple attached references into fewer characters.\nDo not make any referenced character a clone, twin, recolour, armour variant, or alternate version of another referenced character.\nDo not hide, crop, mask, or cover any referenced character’s face.\nDo not make every character wear the same identical armour if multiple references are provided.\n\nDo not make the weapon tiny, modern, toy-like, or visually unimportant.\nDo not make the background busier than the characters.\nDo not make the main subjects blurry, tiny, hidden, or unreadable.\nDo not create messy anatomy, extra limbs, malformed hands, distorted faces, or muddy textures.\nDo not use photorealism unless specifically requested.\n\n..............................END OF PROMPT..................................\n#POTD #promptoftheday #AI #AiArt #Art #AnimeArt #40K #Grimdark #PowerArmour #SciFi #CharacterDesign #DigitalArt #AnimeStyle #CommunityPrompt",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case287",
+    "title": "雨夜电影感人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065194222408577258",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case287/output.jpg",
+    "imageAlt": "雨夜电影感人像示例图",
+    "prompt": "Full prompt:\n\nPhotorealistic cinematic close-up of a young woman in her early 30s, standing in a downpour at night with arms stretched wide and head tilted back, eyes shut, embracing the rain. Warm golden-orange backlight from the left side catches each raindrop, turning them into glowing particles around her silhouette. Soaking wet black tee clinging to her figure, water beading on her skin. Deep contrast between the dark background and the fiery orange sidelight. Expression radiates liberation and calm. Shot on an 85mm lens, f/1.8, 8K, shallow depth of field, vertical framing, dramatic cinematic atmosphere.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case384",
+    "title": "波兰PRL年代杂志跨页",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Riccardo_Nero/status/2065193845222944844",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case384/output.jpg",
+    "imageAlt": "波兰PRL年代杂志跨页示例图",
+    "prompt": "Create a full two-page spread from a fictional Polish color weekly magazine from the PRL era, late 1950s to early 1960s. The image should look like an authentic vintage printed magazine: yellowed paper, offset printing, halftone dots, slight ink misregistration, muted aged colors, retro Polish typography, visible center gutter, margins, page numbers, captions and column layout.\nTheme: a Syrena 105 proudly showcased in modern-day North Korea, presented as a satirical alternate-history Polish PRL magazine artifact.\nThe spread must be clearly split into two pages.\nLEFT PAGE:\nA Polish illustrated magazine article about the official presentation of the Syrena 105 in Pyongyang. Show a large main photo of the Syrena 105 on a ceremonial platform or red carpet, surrounded by officials, spectators, North Korean flags, banners and monumental North Korean architecture.\nThe car must clearly look like a classic Syrena 105: compact body, rounded Eastern Bloc styling, simple practical proportions, modest chrome trim, characteristic front fascia, small wheels, realistic Polish car design language, slightly heroic but still humble and utilitarian.\nUse a bold Polish headline:\n“SYRENA zza ŻELAZNEJ KURTYNY”\nAdd a subheadline:\n“Sensacyjna prezentacja w Pjongjangu: polska legenda motoryzacji w niezwykłej odsłonie.”\nAdd several columns of Polish-looking article text, a red drop cap, small captions, and one or two inset images showing the rear of the Syrena 105 and the interior. The page should feel like a serious but slightly absurd PRL-era illustrated report. Include a believable Polish magazine masthead similar to a 1960s illustrated weekly.\nRIGHT PAGE:\nA classic 1950s-1960s Polish print advertisement for the same Syrena 105. Show the car large, heroic and glamorous, in a polished three-quarter view, with a dramatic retro city background inspired by Pyongyang. Use bold vintage ad typography, decorative colored blocks, stars, slogans and product badges.\nMain ad headline:\n“Nowa SYRENA 105 — duma nowoczesnej motoryzacji!”\nAdd smaller Polish advertising copy:\n“Niezawodny silnik”\n“Praktyczna i oszczędna”\n“Komfort i elegancja”\n“Solidność konstrukcji”\n“Przyjaźń narodów”\nAdd a fictional manufacturer line:\n“FSO”\n“Fabryka Samochodów Osobowych, Warszawa-Żerań”\n“Produkt przyjaźni Polska — Korea”\nThe right page should look cleaner and more aspirational than the article page, like a period car advertisement. The whole image should feel like a convincing satirical alternate-history artifact: Polish PRL magazine design, Syrena 105 automotive fantasy, North Korean ceremonial propaganda and vintage print realism.\nMake all visible Polish text as clean and readable as possible.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case288",
+    "title": "七宫格情绪肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065179623697306098",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case288/output.jpg",
+    "imageAlt": "七宫格情绪肖像示例图",
+    "prompt": "Full prompt:\n\nGrid layout with thin white gaps between panels and a subtle outer white border around the entire composition. Clean, modern UI aesthetic with slight rounded corners on every tile.\n\nPanel 1: Joyful (Yellow). Warm yellow gradient. Arms raised overhead. Eyes shut. Wide open laugh. High-energy pose.\nPanel 2: Shocked (Blue). Blue gradient. Both hands cupping cheeks. Eyes wide open. Mouth agape. Eyebrows arched high.\nPanel 3: Stern (Red). Solid red background. Arms folded. Brows furrowed. Lips pressed tight. Dark hoodie.\nPanel 4: Affectionate (Pink). Soft pink gradient. Cradling a small brown dog. Gentle smile. Cozy knit sweater.\nPanel 5: Confident (Purple). Purple gradient. One hand resting on hip. Slight smirk. Graphic tee. Easy, relaxed stance.\nPanel 6: Approving (Green). Green gradient. Baseball cap and denim jacket. Thumbs up. Relaxed smile.\nPanel 7: Melancholy (Gray). Gray gradient. Eyes angled slightly downward. Inner brows slightly raised. Lips gently curved down.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case386",
+    "title": "国别风情感旅行海报拼贴",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065164435237613822",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case386/output.jpg",
+    "imageAlt": "国别风情感旅行海报拼贴示例图",
+    "prompt": "Full prompt:\n\nDesign a stylized travel poster / graphic collage featuring [ALGERIA]. The central figure is a fashionable international tourist in [ALGERIA], visually distinct as a visitor rather than a local. Show the tourist in modern travel attire, with accessories like a camera, backpack, sunglasses, map, or suitcase, immersed in the culture and vibe of [ALGERIA]. Arrange the tourist in a bold composition surrounded by iconic buildings, streets, scenery, landmarks, transport, cuisine, signage, and cultural details specific to [ALGERIA]. Combine realistic character rendering with a graphic collage background featuring layered paper textures, torn poster edges, sticker accents, halftone dots, editorial typography, and strong geometric shapes. Weave in authentic Algerian visual motifs while keeping the tourist's look globally stylish and clearly from abroad. Include a large, legible headline: \"VISIT [ALGERIA]\". Aim for a modern, artistic, premium editorial travel poster feel, with a balanced layout and a print-ready composition.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case289",
+    "title": "治愈粉彩清晨俯拍生活照",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065149291099021650",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case289/output.jpg",
+    "imageAlt": "治愈粉彩清晨俯拍生活照示例图",
+    "prompt": "prompt:\n\nOverhead lifestyle photo shot from a slightly tilted high angle, looking down at a cozy bed. A slim young woman lies on her back with a relaxed, lazy weekend morning energy. She has long, slightly tousled straight black hair with subtle pink highlights spread softly across a purple pillow, tidy bangs framing her face. Her makeup is a soft East Asian aesthetic with noticeable pink blush and lightly parted glossy lips, her gaze directed softly up into the camera. She wears a white ribbed cotton camisole with front buttons and lace trim, slightly raised at the waist, paired with light pink satin pajama shorts. Her right arm rests casually behind her head, exposing her smooth underarm and shoulder, while her left knee is gently bent, revealing a fair soft upper thigh. The skin on her arms, chest, stomach, and legs looks smooth and luminous, lit by soft diffused daylight spilling through a window on the left. A silver charm bracelet sits on her left wrist. The bedroom is styled throughout in pastel tones. She rests on ruffled pastel purple pillows and a white blanket with subtle purple floral patterns. Two white plush bunnies are placed near her head. In the slightly blurred lower right foreground, a wooden nightstand holds a glass of lemon water, a small pink digital clock showing 8:47, an earbuds case, and an ELLE magazine. Shot on a 35mm lens at a moderate aperture for a natural, slightly imperfect snapshot aesthetic with soft daylight and gentle shadows, capturing the tranquil slow morning mood.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case103",
+    "title": "老照片修复对比",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/CuriousRefuge/status/2065139340486045905",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case103/output.jpg",
+    "imageAlt": "老照片修复对比示例图",
+    "prompt": "Transform the attached image into a high resolution digital photo that looks like it was taken yesterday. Make it look like it was taken with a Canon EOS R6. Cinematic color grading and lighting. Keep details the same, only change the quality and resolution.\n\nOnce GPT-Image 2 gives you the first ultra high quality image, upload the rest of your stills and input the following prompt: do the same for these attached photos  Download all the ultra high quality images",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case387",
+    "title": "Risograph印刷雨林信息图小志",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/92digitalartArt/status/2065135532875645242",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case387/output.jpg",
+    "imageAlt": "Risograph印刷雨林信息图小志示例图",
+    "prompt": "A risograph zine print style infographic poster in 16:9 horizontal format exploring the biodiversity of tropical rainforests, designed to look exactly like an indie science zine printed with overlapping risograph ink layers; the entire composition should show the characteristic risograph printing imperfections: ink grain, slight misregistration between color layers, halftone dot patterns visible in midtones, and a tactile paper texture underneath everything; use a strict three-color risograph palette of fluorescent green, deep navy blue, and warm yellow, with rich overprinting where colors overlap creating unexpected secondary tones like teal where green meets blue and olive where green meets yellow; the main illustration fills the center: a lush vertical cross-section of a rainforest showing all four layers — emergent layer at the top with giant canopy trees and toucans, canopy layer with howler monkeys and orchids, understory with poison dart frogs and ferns, and forest floor with mushrooms, beetles, and anacondas — each layer labeled with a handwritten-style annotation in the risograph aesthetic; surrounding the central forest illustration, organize zine-style content panels with irregular hand-cut border aesthetics, including sections titled HOW MANY SPECIES?, THE WATER CYCLE, THREATS TO THE FOREST, and WHY FORESTS MATTER, each with small lo-fi icons and concise punchy text in a mix of bold grotesque sans-serif and typewriter-style fonts; include a dramatic zine-style header reading RAINFOREST: EARTH'S LUNGS in large stencil-style all-caps lettering; add a small DID YOU KNOW? box with three striking facts, and a bottom strip reading issue no. 7 — field guide series to make it feel like a real indie publication; the overall mood should feel urgent, indie, ecologically passionate, beautifully imperfect, and visually electric, high quality, aspect ratio 16:9",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case184",
+    "title": "阿迪达斯未来感球鞋发布海报 9:16",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065133774413906004",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case184/output.jpg",
+    "imageAlt": "阿迪达斯未来感球鞋发布海报 9:16示例图",
+    "prompt": "Full prompt:\n\nDesign a striking premium vertical advertising poster (9:16 format) for a fictional ultra-limited Adidas sneaker called \"ADIDAS AEROBLADE X - LIMITED DROP\". The creative direction should feel like a world-class agency campaign — original, futuristic, visually explosive.\n\nMain visual:\nA single hero sneaker floating center-frame, captured at a dramatic low angle as if levitating above a dark obsidian running track split by glowing energy cracks. The shoe combines knit mesh, sculpted foam, translucent panels, reflective stripes, and a carbon-fiber sole plate. Neon light trails swirl around it like captured speed. Particles and mist add motion and intensity. Background features faint silhouettes of elite sprinters frozen mid-dash, blurred enough to keep focus on the shoe.\n\nColor palette:\nMatte black, electric red, silver, deep charcoal, with subtle neon blue highlights.\n\nTypography and copy (sharp, clean, strong visual hierarchy):\nMain headline: \"OWN THE SPEED\"\nProduct title: \"ADIDAS AEROBLADE X\"\nSubheadline: \"Built for the ones who never run ordinary.\"\nFeature callouts in elegant boxed layout:\n- \"Featherlight Adaptive Knit Upper\"\n- \"Carbon Energy Return Plate\"\n- \"Precision Grip Traction\"\n- \"Limited Collector Release\"\nPrice: \"$280\"\nPrimary CTA: \"DROP LIVE NOW\"\nSecondary CTA: \"Only at\nFooter text: \"Performance innovation meets futuristic street identity.\"\n\nLayout:\nBold oversized headline partially integrated into background. Product name near shoe in refined premium placement. Feature callouts stacked vertically along one side. Add a \"LIMITED SERIES\" badge. The composition blends luxury sports campaign with futuristic editorial design.\n\nStyle: Ultra-detailed hyper-realistic product photography, cinematic studio lighting, premium advertising aesthetics, sharp focus, rich textures, subtle atmosphere, dynamic motion energy, high-end commercial poster feel. Aspect ratio 9:16.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case185",
+    "title": "奢品亚麻质感杂志风海报",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/ZephyraLeigh/status/2065123985713700925",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case185/output.jpg",
+    "imageAlt": "奢品亚麻质感杂志风海报示例图",
+    "prompt": "GPT Image 2 on ChatGPT 🪄\n\nPROMPT ⬇\n\nA photorealistic luxury editorial poster, 3:4 portrait ratio. Full frame covered in premium off-white Italian linen paper wall texture — warm ivory tone, subtle grain, ultra-tactile surface. Center of wall features a large precision-carved football-shaped archway with deep architectural relief — visible carved edges, realistic inner shadow depth, sculptural beveled detailing, premium craftsmanship aesthetic.\nInside the carved football frame: cinematic stadium atmosphere — deep blue and white luxury smoke trails drifting elegantly, gold and silver championship confetti cascading, white orchid and rose floral arrangements with dark green foliage accents, premium celebration balloons in royal blue and pearl white, championship trophy silhouettes subtly embedded in background haze. Atmosphere: elite sports gala, UEFA Champions League victory night energy.\n\nSubject: Cristiano Ronaldo, full figure, standing powerfully inside the carved frame. Wearing Portugal's premium crimson and green national kit — authentic jersey fabric with realistic textile folds, fitted athletic shorts, premium Adidas/Nike high-performance football boots. Iconic athletic build — broad shoulders, defined physique, elite footballer anatomy. Signature confident expression — sharp jaw, focused dark eyes, short textured dark hair, photorealistic skin texture with natural pore detail.\n\nChampionship celebration pose — chest slightly forward, chin raised, one hand slightly relaxed, football resting precisely at his right boot.\n\n3D Breakout Effect: Face, right shoulder, right arm below elbow, and right football boot extend realistically beyond the carved frame boundary onto the wall surface — casting soft natural drop shadows onto the paper texture. Depth of field creates believable dimensional layering.\nLighting: Premium stadium tungsten lighting blended with warm golden-hour cinematic sunlight entering from the upper left. Soft white rim light wrapping around shoulders and jawline. Subtle fill light on the wall from the right. No harsh overexposure, no fake neon — only warm, editorial luxury light grading.\n\nWall Typography — Clean Minimalist Luxury Layout:\n\nCRISTIANO RONALDO — large, bold, high-end serif font (Didot or Bodoni style), embossed gold foil effect, positioned above the carved frame\n\nCHAPTER 41 — medium weight elegant tracking, warm bronze metallic tone, centered below the name\n\n365 MORE DAYS OF GREATNESS — refined thin uppercase sans-serif, spaced wide, cream-gold color, placed below Chapter line\nTechnical: Ultra-photorealistic rendering, 8K detail sharpness, professional commercial sports photography quality, luxury magazine cover art direction, natural color grading — warm ivory + deep blue + gold palette, authentic shadow physics, zero AI artifacts, correct human anatomy, no extra limbs, no tree shadows, no distorted proportions, award-winning editorial masterpiece quality.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case388",
+    "title": "世界杯国家队时装海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Just_sharon7/status/2065123619844333737",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case388/output.jpg",
+    "imageAlt": "世界杯国家队时装海报示例图",
+    "prompt": "Who's gonna win tonight? Are you team Mexico or team South Africa?\n\nGPT Image 2\n\nPrompt\n\nSOUTH AFRICA NATIONAL TEAM\n\n\"NEW UNIFORM\"\n\nFORMAT\n\nUltra-Premium Football Fashion SMM Promotional Poster\nVertical 4:5\nInstagram Hero Creative\nGlobal Sportswear Advertising\nCommercial Football Graphic Design\nAgency-Level Art Direction\nBehance Front Page Quality\n8K UHD\nHyper-Realistic\nFootball × Fashion × Graphic Design Fusion\nZero AI Slop\nZero Generic Sports Posters\nZero Match-Day Graphics\nZero Editorial-Only Aesthetic\n\nCORE STRATEGY\n\nThis is not a football poster.\n\nThis is a national identity statement disguised as a uniform campaign.\n\nThe design should feel like South Africa's biggest football billboard, a luxury sportswear campaign, and a continental football legacy poster merged into one visual.\n\nThe graphic design is equally important as the athlete.\n\nTypography is not decoration.\n\nTypography is architecture.\n\nCAMPAIGN IDEA\n\n\"NEW UNIFORM\"\n\nNot just a jersey.\n\nA symbol of unity.\n\nA symbol of resilience.\n\nA symbol worn by those who carry a nation's pride forward.\n\nThe uniform isn't being sold.\n\nThe identity is.\n\nMASTER VISUAL\n\nMassive oversized SOUTH AFRICA typography dominates the entire composition.\n\nThe words:\n\nSOUTH AFRICA\n\noccupy nearly 75% of the canvas.\n\nTypography is integrated into the design.\n\nLetters extend beyond frame edges.\n\nSome letters cropped.\n\nSome hidden behind the player.\n\nSome functioning as compositional structures.\n\nThe typography should feel monumental.\n\nThe official federation crest appears subtly integrated into the layout.\n\nHERO SUBJECT\n\nElite female footballer.\n\nNatural beauty.\n\nConfident expression.\n\nMinimal makeup.\n\nChampion mentality.\n\nNo smiling.\n\nNo dramatic celebration.\n\nRelaxed confidence.\n\nWardrobe:\n\nSouth Africa 2026 home jersey.\n\nGolden yellow base.\n\nGreen detailing.\n\nBlack accents.\n\nMatching shorts.\n\nPremium football socks.\n\nModern football styling.\n\nClean elite-athlete aesthetic.\n\nPOSE\n\nPlayer stepping through the giant typography.\n\nOne foot slightly forward.\n\nDirect eye contact.\n\nHands relaxed.\n\nBody partially intersecting typography.\n\nThe feeling:\n\nShe carries the spirit of champions effortlessly.\n\nCOMPOSITION\n\nTypography occupies 70%.\n\nPlayer occupies 20%.\n\nPromotional elements occupy 10%.\n\nVisual hierarchy:\n\nSOUTH AFRICA\n↓\nPlayer\n↓\nPromotion\n↓\nCTA\n\nEverything feels intentional.\n\nCOLOR SYSTEM\n\nPrimary:\n\nSouth Africa Gold\n\nDeep Green\n\nWhite\n\nSilver\n\nSoft Grey\n\nAccent:\n\nBlack Heritage Details\n\nFederation Crest Gold\n\nSubtle Flag-Inspired Color Accents\n\nNo neon colors.\n\nNo trend-chasing palettes.\n\nTimeless sporting elegance.\n\nBACKGROUND\n\nClean premium sports backdrop.\n\nLarge soft gradient.\n\nMinimal studio environment.\n\nSubtle premium texture.\n\nNo stadium.\n\nNo crowd.\n\nNo scenery.\n\nThe design itself creates the environment.\n\nGRAPHIC DESIGN SYSTEM\n\nFloating collection cards.\n\nHeritage-inspired labels.\n\nMinimal grid system.\n\nThin lines.\n\nMicro typography.\n\nPremium global football campaign hierarchy.\n\nInternational flagship-store energy.\n\nPROMOTIONAL ELEMENTS\n\nNEW UNIFORM\n\nSOUTH AFRICA 2026\n\nREADY FOR THE WORLD STAGE\n\nLIMITED RELEASE\n\nOFFICIAL COLLECTION\n\nMEMBERS EARLY ACCESS\n\nFREE SHIPPING\n\nIntegrated naturally into layout.\n\nNot banner spam.\n\nTYPOGRAPHY HIERARCHY\n\nTop Left\n\nSOUTH AFRICA\n\nsmall premium wordmark\n\nCenter Massive Typography\n\nS\nO\nU\nT\nH\n\nA\nF\nR\nI\nC\nA\n\noccupying most of composition\n\nbold heritage typography\n\nextremely large scale\n\npartially cropped\n\nCampaign Title\n\nNEW\nUNIFORM\n\nbold elegant typography\n\nSupporting Copy\n\nDesigned for those who carry greatness forward.\n\nPROMOTIONAL CTA BLOCK\n\nSHOP NOW →\n\nExplore the Official South Africa Collection\n\nBOTTOM FEATURE STRIP\n\nOFFICIAL JERSEYS\n\nNATIONAL COLLECTION\n\nMATCH ESSENTIALS\n\nLIMITED RELEASE\n\nBottom Right\n\nStarting From $89\n\nBottom Center\n\n\n\nVertical Edge Text\n\nSOUTH AFRICA 2026\n\nLIGHTING\n\nLuxury sports studio lighting.\n\nLarge soft source.\n\nEditorial contrast.\n\nNatural skin rendering.\n\nPremium fabric highlights.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case389",
+    "title": "世界杯国家队徽章",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Goodmanprotocol/status/2065121892550558018",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case389/output.jpg",
+    "imageAlt": "世界杯国家队徽章示例图",
+    "prompt": "Create a FIFA World Cup 2026 country variant emblem in a bold, flat, typographic illustration style. Preserve the official FIFA World Cup 2026 stacked identity exactly: the digit “2” occupies the upper half and the digit “6” occupies the lower half, both center-aligned and forming one unified vertical portrait block, with the FIFA World Cup Trophy integrated through the center in the same arrangement as the official emblem. The numerals must be outline-only, never filled, rendered with thick bold strokes in a single color taken from the national flag palette of [COUNTRY NAME], with fully transparent interiors so the trophy remains visible.\n\nSTRICTLY use a 9:16 vertical aspect ratio.\n\nDo not alter the composition, proportions, or visual hierarchy. The result must closely resemble the official stacked 26 emblem and maintain the same graphic balance seen in premium country adaptations.\n\nThe FIFA World Cup Trophy must follow the real trophy silhouette exactly and remain instantly recognizable, with two human figures lifting a faceted globe, a twisting narrow body, and a flared banded base. Render it as a flat vector illustration with zero gradients, zero textures, and no painterly effects, resembling an enamel badge or screen-print poster.\n\nDivide the trophy into clean flat sections following its natural contours. The globe and raised figures should use the darkest color from the national flag palette, with the official football federation crest of [COUNTRY NAME] placed prominently on the globe face. Add one floating star for each FIFA World Cup title won by [COUNTRY NAME], positioned to the right of the globe and colored with a flag accent color. ([NUMBER OF WORLD CUP TITLES WON]). Countries with zero World Cup titles must have no stars and no winning years.\n\nThe central body section should use a contrasting flag color and contain the country's FIFA World Cup winning years stacked vertically in large ultra-bold condensed numerals. If [COUNTRY NAME] has never won the FIFA World Cup, leave this section blank with no years. The lower neck and flared base should use the primary flag color, with “[COUNTRY NAME]” written in massive ultra-bold condensed capital letters naturally fitted to the tapering base shape.\n\nUse thick black outlines throughout to separate every section and define the entire trophy silhouette. Maintain a highly graphic, iconic, and immediately country-identifiable appearance. Use a pure black background with no gradients or textures. The final result should feel exactly like a premium enamel pin, screen-print poster, or modern sports identity mark while preserving the official FIFA World Cup 2026 stacked emblem structure and central trophy integration, with no unnecessary stylistic deviations and no changes to the established layout.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case290",
+    "title": "温馨咖啡馆门前时尚女性肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/sakshi___007/status/2065118696788631921",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case290/output.jpg",
+    "imageAlt": "温馨咖啡馆门前时尚女性肖像示例图",
+    "prompt": "An ultra-realistic lifestyle portrait of a stylish young woman standing outside a modern cozy café during daytime, smiling warmly at the camera with a soft natural expression. She has short wavy platinum blonde hair styled in a soft messy bob, glowing skin, minimal natural makeup, and a fresh effortless beauty aesthetic. She wears an elegant oversized white blouse with soft flowing sleeves, tucked into high-waisted beige wide-leg trousers with a black belt, creating a classy minimalist fashion look. In one hand she holds an iced latte in a transparent cup, and in the other she gently carries a small adorable apricot toy poodle dog wearing a cute dark bandana. Warm natural sunlight, cozy café storefront background with glass windows, soft bokeh lighting, aesthetic urban lifestyle atmosphere, calm and wholesome mood, photorealistic details, fashionable Korean street style, soft neutral color palette, editorial portrait photography, realistic skin texture, cozy café culture vibe, luxury casual fashion, soft cinematic color grading, high detail, elegant modern aesthetic, Pinterest-inspired photography, ultra detailed, 8k quality.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case20",
+    "title": "竖版角色概念设定表",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065118633198829601",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case20/output.jpg",
+    "imageAlt": "竖版角色概念设定表示例图",
+    "prompt": "prompt:\n\nDesign a high-resolution vertical character concept poster with a luxurious pink and white aesthetic that blends elegance with edgy modern fashion. The layout should feel like a premium magazine profile with clean sections and precise grid alignment.\n\nMain subject: An original young woman (not based on any real person), with long silky dark hair featuring subtle pink highlights. She has a confident, calm expression with a slightly mysterious aura. She wears a black and pink hybrid outfit (merging streetwear with idol fashion) featuring glossy textures, lace details, and metallic accents. Lighting is soft but dramatic, with a neon pink glow set against dark tones.\n\nTop section:\nLarge hero portrait on one side. On the opposite side, a sleek profile panel with refined English text:\n\nName: Nyra Vale\nAge: 23\nHeight: 170 cm\nStyle: Dark Elegance\n\nShort bio:\n\"She doesn't follow trends, she sets them. Quiet strength, sharp vision, and a presence that speaks without words.\"\n\nInclude a Traits section with stylized progress bars:\n\nConfidence\nCreativity\nDiscipline\nCharisma\nEmotional Depth\n\nMiddle section:\nA grid of 5-6 small portraits capturing different expressions (soft smile, intense gaze, playful smirk, thoughtful, confident).\n\nLower sections:\n\nFull-body poses (front view, side view, walking pose, power stance, casual stance).\nOutfit variations (street luxe, stage outfit, minimal chic).\nAccessories panel (heels, boots, chains, rings, handbags, hairstyles).\n\nText tone:\nBold, meaningful, and confident, emphasizing individuality, self-worth, and quiet power. No filler text.\n\nStyle:\nUltra-detailed, 4K quality, glossy magazine finish, cinematic lighting, sharp focus, balanced contrast, modern editorial layout, perfectly aligned grid.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case291",
+    "title": "奢牌街头镀铬座椅肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/AiwithLariab/status/2065115460820218326",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case291/output.jpg",
+    "imageAlt": "奢牌街头镀铬座椅肖像示例图",
+    "prompt": "Ultra-premium fashion editorial poster, luxury streetwear aesthetic, 4:5 portrait composition. A confident young woman sitting casually on a modern chrome chair, wearing an oversized black leather bomber jacket, black oversized t-shirt, baggy black cargo pants, and black-and-white luxury sneakers. Relaxed but powerful pose with one arm resting on the chair and direct eye contact with the camera.\n\nMassive bold typography in the background reading:\n\nI AM A\nCREATOR\n\nLarge beige typography integrated into the composition, partially behind and around the model, creating a premium magazine-cover design. Dark charcoal black studio background with subtle texture and depth.\n\nProfessional fashion campaign photography, cinematic studio lighting, dramatic spotlight from upper right corner, soft shadows, luxury fashion branding aesthetic, high-end streetwear advertisement, strong visual hierarchy.\n\nNatural voluminous hair with soft waves, realistic skin texture, sharp facial details, crystal clear eyes, premium color grading, shallow depth of field, ultra-realistic photography, Vogue magazine quality, luxury campaign poster, modern creative entrepreneur branding.\n\nMinimalist design, clean composition, bold typography, premium editorial layout, luxury fashion poster aesthetic, masterpiece, 8K, hyper-realistic, professional retouching, high contrast, ultra detailed.\n\nSmall text in bottom left:\n\"CREATIVITY IS NOT JUST WHAT YOU MAKE IT'S WHO YOU ARE\"\n\"ESTD. 2024\"\n\nFace preservation priority: maximum.\nIdentity consistency: maximum.\nText accuracy: high.\nPoster design quality: luxury fashion campaign level.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case292",
+    "title": "韩国涂鸦街头艺术肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Kashberg_0/status/2065112085269504508",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case292/output.jpg",
+    "imageAlt": "韩国涂鸦街头艺术肖像示例图",
+    "prompt": "Create a viral CapCut-style\nSouth korea graffiti image from\nthe uploaded person. Keep\nthe face consistent. Add\nSouth korea jersey, full-body pose,\ngiant hand-painted mural\nportrait in the background,\nSouth korea logo, South korea 2026 text,\nyellow and green football\ncolors, concrete wall, clean\nposter composition, realistic 闪\nphoto foreground, illustrated\nthelifeafptfiti b--'ground,TikTok",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case293",
+    "title": "韩漫风情侣自拍",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Taaruk_/status/2065105428862886301",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case293/output.jpg",
+    "imageAlt": "韩漫风情侣自拍示例图",
+    "prompt": "Transform the uploaded photo into a cute hand-painted Korean webtoon illustration of a happy couple taking a selfie outdoors. Soft pastel color palette, round expressive eyes, rosy cheeks, warm smiles, cozy romantic atmosphere, charming doodle elements floating around them (hearts, flowers, stars, swirls, sunshine icons). Lush green park or beach scenery in the background, bright sunny day, whimsical children's-book aesthetic, clean line art, soft painterly shading, adorable proportions, cozy cottagecore vibes, dreamy and cheerful mood, highly detailed digital illustration, storybook quality, kawaii aesthetic, gentle textures, vibrant yet soft colors, Instagram-worthy artwork, wholesome couple portrait, cute lifestyle illustration, masterpiece, ultra detailed.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case294",
+    "title": "不存在的1870年代老照片",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Arminn_Ai/status/2065104900590109130",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case294/output.jpg",
+    "imageAlt": "不存在的1870年代老照片示例图",
+    "prompt": "Non Existence Vintage Photographs with GPT Image 2 📸\n\n- Prompt 👇\na photographic image in the style of 1870, [SCENE DESCRIPTION], with [CHARACTERS described in period accurate clothing], [Describe the interaction].\n\nThe photo has an aged and worn appearance, as it was taken in 1870. It features prominent time-induced chemical stains, heavy grain, sepia toning, and deep scratches.\n\nSignificantly reduce the sharpness so that the details of the [SUBJECT] are not crisp, making the [SUBJECT] blurry and low-fidelity.\n\nGreatly increase the wear of the photo, including small tears, missing corners, water damage, and small wormholes caused by insect damage. Add a prominent, jagged diagonal cut across the photo, mended clumsily with old, discolored tape.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case295",
+    "title": "人偶化概念肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065104023011868884",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case295/output.jpg",
+    "imageAlt": "人偶化概念肖像示例图",
+    "prompt": "prompt:\n\nUltra-realistic full-body portrait of a woman posed exactly as in the reference photo, stylized as a sleek female action figure. She stands with arms folded across her chest on top of a massive Microsoft Surface Tablet, dressed in urban streetwear — black hoodie, jeans, sneakers — with sharp red tech glasses.\n\nFloating around her in a dynamic layout are designer tools: a next-gen camera with a blue holographic glow, a geometric mouse with electric sparks, a digital stylus leaving wireframe trails, a Pantone color guide in bold blue and black, and a minimal black coffee cup with binary code steam rising from it.\n\nBold blue-and-orange color palette with dramatic lighting throughout. Cyberpunk vibe, neon details, particle effects scattered across the scene. Visual style blends 3D animation with tech photography. Crisp focus, cinematic lighting, 8k resolution.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case296",
+    "title": "霓虹涂鸦画廊快照模板",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/im_shahid7/status/2065099049938878503",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case296/output.jpg",
+    "imageAlt": "霓虹涂鸦画廊快照模板示例图",
+    "prompt": "Create a 9:16 image in the \"Neon Doodle Gallery Snapshot\" style.\n\nSubject: [SUBJECT].\nSubject action: [SUBJECT_ACTION].\nProp or product: [PRODUCT_OR_PROP].\nLocation: [kashmir].\nBackground elements: [wooden interior ].\nMain handwritten text: \"[Focus mode on]\".\nSecondary handwritten text: \"[keep going]\".\nAccent symbol: [ACCENT_SYMBOL].\nWardrobe style: [WARDROBE_STYLE].\n\nUse a realistic candid phone-photo as the base layer. The setting should feel specific and ordinary: visible walls, art, shelves, labels, tables, lamps, posters, people, bags, shadows, grain, and imperfect handheld framing.\n\nDraw a loud digital marker layer directly on top of the photo. Wrap the main subject with a thick hot-pink contour and a cyan offset glow. Add yellow-orange monster spikes, horns, rays, fins, or sunburst shapes around the silhouette. Scatter rough hand-drawn symbols around the frame: stars, paw prints, spiderweb corners, halos, abstract eyes, plants, flowers, scribble underlines, tally marks, arrows, hearts, and sticker-like blobs.\n\nPlace rough uppercase handwritten marker text in open areas, using white, yellow, or lime green. The text should feel funny, personal, distracted, and student-made. Preserve the contrast between a real candid photo and chaotic handmade doodles.\n\nAvoid watermarks, usernames, platform logos, creator IDs, app marks, QR codes, clean vector-only illustration, fully illustrated backgrounds, polished ad layout, luxury editorial styling, perfect typography, empty sterile locations, identifiable celebrities, and tiny unreadable text.\n\n--- VARIABLES ---\n\n[ACCENT_SYMBOL] — star, paw print, spiderweb, halo, abstract eye, plant, flower, underline, arrow, tally mark, or scribble\n[BACKGROUND_ELEMENTS] — real photo details such as wall art, labels, shelves, posters, tables, lamps, signage, crowds, fabric, shadows, and phone-camera grain\n[LOCATION] — art gallery, campus hallway, library, studio critique room, classroom, night market, cafe, bookstore, museum, or city wall\n[MAIN_TEXT] — large hand-drawn caption or emotional headline\n[PRODUCT_OR_PROP] — notebook, tote bag, coffee, phone, headphones, sketchbook, jacket, snack, poster, camera, book, or exhibition card\n[SECONDARY_TEXT] — small handwritten notes, repeated words, short joke, date-like label, or study annotation\n[SUBJECT] — main person, group, student, artist, friend, commuter, shopper, or quiet candid figure\n[SUBJECT_ACTION] — looking at art, studying, walking, waiting, browsing, reacting, hiding, laughing, or holding a prop\n[WARDROBE_STYLE] — casual student streetwear, oversized shirt, hoodie, tote bag, loose trousers, jacket, headphones, sneakers, or art-school layers\n\n--- NEGATIVE PROMPT ---\n\nwatermark, username, creator ID, platform logo, app mark, QR code, clean vector poster, fully illustrated scene, polished advertising layout, luxury editorial shoot, sterile studio, perfect typography, perfect sticker sheet, subtle doodles, empty background, corporate mascot, identifiable celebrity, real public figure, tiny unreadable text",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case297",
+    "title": "保持五官一致的人像生成",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/john_my07/status/2065092295092051994",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case297/output.jpg",
+    "imageAlt": "保持五官一致的人像生成示例图",
+    "prompt": "Use the attached reference image as the exclusive guide for facial identity, bone structure, body proportions, skin tone, facial features, and overall physical likeness. Create an ultra-realistic luxury fashion editorial portrait of a stunning young woman captured in a premium lifestyle photoshoot.\nShe wears an oversized designer crimson-red T-shirt crafted from heavyweight cotton, featuring the striking white slogan \"WHATEVER\" across the chest in contemporary minimalist typography. A crisp white curved-brim cap adds a sporty upscale touch, while sleek dark aviator-inspired sunglasses rest slightly lower on the bridge of her nose, revealing her eyes and enhancing the fashion-forward aesthetic.\nThe subject is seated comfortably in an elegant sunlit setting, positioned at a subtle three-quarter angle. One hand lightly touches the brim of her cap while the other rests naturally near her knee, displaying a refined gold luxury timepiece. Her posture conveys confidence, sophistication, and effortless style, with a gentle head tilt and captivating direct gaze toward the camera.\nHer exceptionally long chestnut-brown hair cascades over one shoulder in soft, voluminous waves, enriched with warm caramel and hazelnut highlights. Individual strands catch the sunlight, creating natural dimension, movement, and silky texture.\nProfessional beauty styling includes radiant luminous skin, softly sculpted cheekbones, precise winged eyeliner, naturally full brows, dramatic lashes, subtle champagne highlighter, delicate peach blush, and glossy coral-nude lips. Makeup appears polished yet realistic, suitable for a high-end fashion campaign.\nAccessories are tastefully curated: layered fine gold chains, elegant hoop earrings, a slim gold bracelet, and a premium luxury wristwatch. The jewelry enhances the look without overpowering it.\nPhotographed in the style of an international fashion magazine cover, with warm late-afternoon sunlight, creamy background separation, cinematic depth of field, realistic skin detail, ultra-sharp eye focus, premium fabric texture, luxury lifestyle ambiance, sophisticated color grading, and impeccable commercial fashion photography. Hyper-realistic, editorial quality, Vogue-inspired, high-fashion advertising campaign, 8K resolution, award-winning portrait imagery.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case390",
+    "title": "双重曝光艺术总监海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065088795494773094",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case390/output.jpg",
+    "imageAlt": "双重曝光艺术总监海报示例图",
+    "prompt": "prompt:\n\n[PERSONE]. Act as a Senior Art Director.\n\nPHASE 1: PHOTOGRAPHIC COMPOSITION.\n\n- Layered Effect: Double exposure photo collage. Sharp action shot in the foreground; massive monumental silhouette in the background.\n\n- Overlap: The subject blends seamlessly with the background graphic elements.\n\nPHASE 2: CONTEXTUAL VIBE.\n\n- Identity Analysis: Automatically detect the core industry of [PERSONE] (Sport, Music, Cinema, or Business).\n\n- Pose and Props tailored to match their identity.\n\nPHASE 3: DYNAMIC BRAND COLORS.\n\n- Primary Color: Identify the most iconic color tied to [PERSONE] or their team or brand. Apply to the background, halftone textures, and smoke effects.\n\n- Accent Color: Choose a high-contrast vibrant secondary hue (neon, gold, or electric white) for the radial burst rays.\n\n- Visual Texture: Heavy film grain and halftone dots in the shadow areas of the photos.\n\nPHASE 4: GRAPHIC ACCENTS.\n\n- Geometry: Bold radial rays bursting from the center. Fluid wave-like organic shapes at the base.\n\n- Birds: Minimal black bird silhouettes for scale and depth.\n\nPHASE 5: BRANDING AND TEXT.\n\n- Tagline: A powerful one- or two-word slogan that captures [PERSONE]'s legacy.\n\n- Logo: Minimalist industry-appropriate logo in the bottom corner.\n\n- Typography: Bold, high-impact sans-serif.\n\nTECHNICAL FINISH:\n\n- Quality: 8K resolution, authentic commercial photography style (not an illustration).\n\n- Lighting: Extreme studio rim lighting to separate the photographic subjects from the graphic layers.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case298",
+    "title": "便利店店员昼夜对比写真",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/johnAGI168/status/2065080792548618431",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case298/output.jpg",
+    "imageAlt": "便利店店员昼夜对比写真示例图",
+    "prompt": "上班山田😊\n\n下班田山🕶\n\nGPT- image 2 prompt👇\nDaytime Yamada cashier version, 3:4 vertical image. Create a realistic live-action portrait of an adult young Japanese woman, around 24 years old. She has fair skin, soft delicate facial features, a gentle oval face, calm dark eyes, natural light makeup, reddish hair, straight blunt bangs, and long side locks framing both sides of her face. Her expression is gentle, polite, slightly shy, and quietly mature, like a reliable supermarket cashier with a warm customer-service smile.\n\nScene: daytime inside a Japanese supermarket checkout area. She is standing behind or beside the checkout counter, facing the camera, with a polite gentle smile. The background has blurred product shelves, checkout counter details, and clean supermarket lighting.\n\nOutfit: Japanese supermarket employee uniform. Deep red headscarf covering the back of her hair while still showing her straight bangs and red side locks, pale green or beige striped short-sleeve work shirt, deep red apron, black flared work pants. Add a small rectangular employee name badge pinned on the upper chest or apron with readable Japanese text “山田”. The badge should be realistic, small, and clear. The only readable text in the image should be “山田”.\n\nStyle: realistic live-action Japanese drama still, 3:4 vertical portrait, waist-up or three-quarter body, natural indoor fluorescent supermarket lighting, shallow depth of field, muted realistic colors, natural skin texture, 35mm lens look, high detail.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case186",
+    "title": "奢表光束质感产品图",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/meng_dagg695/status/2065078841765458040",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case186/output.jpg",
+    "imageAlt": "奢表光束质感产品图示例图",
+    "prompt": "A luxury watch emerges from darkness. Extreme macro shot of ticking gears and moving hands. Golden sparks and floating particles surround the watch. The camera circles the timepiece while dramatic light streaks reflect across the sapphire crystal. Slow-motion water splash freezes in midair around the watch. Mechanical components assemble themselves automatically. Cinematic black-and-gold environment, premium commercial lighting, ultra-realistic reflections, luxury lifestyle advertisement, powerful orchestral atmosphere, smooth camera motion, product hero shot, brand reveal, Hollywood-level commercial, 8K photorealism.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case299",
+    "title": "云端梦幻面孔肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065073375463325883",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case299/output.jpg",
+    "imageAlt": "云端梦幻面孔肖像示例图",
+    "prompt": "prompt:\n\nReimagine [NAME] as a dreamlike cloud portrait, keeping their face, expression, and defining features clearly recognizable while transforming the form into soft billowing clouds against a bright blue sky.\nThe portrait should look like the face is materializing from or melting into the clouds, with gentle diffused natural light casting soft highlights and airy shadows for depth and realism.\nAvoid sharp edges, visible skin texture, or hard details, keeping the transition symbolic and organic.\nPreserve facial proportions, eyes, smile, and distinctive features through the cloud structure.\nStyle: dreamy, ethereal, cinematic, surreal\nLighting: volumetric sunlight, soft glow, natural\nColor palette: sky blue, white, soft gradient tones\nMood: serene, uplifting, peaceful\nLayer clouds naturally around and within the face for a smooth, seamless transition. Keep the background a clean blue sky with soft gradient clouds.\nUltra-realistic cloud texture, high resolution, seamless blending, no watermarks, no text.\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case172",
+    "title": "浪漫手机情侣场景产品图",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/hmontilla_/status/2065072437398589669",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case172/output.jpg",
+    "imageAlt": "浪漫手机情侣场景产品图示例图",
+    "prompt": "Create a cozy cinematic romantic scene featuring two black smartphones standing vertically on a rustic wooden table, positioned side by side and slightly angled inward. Each phone displays a video call.\n\nOn the left phone screen, show a smiling young woman with long brown hair, light skin, wearing a cream knitted sweater and a beige winter beanie with a pom-pom. She is looking warmly toward the other phone while raising her hand to form one half of a heart shape.\n\nOn the right phone screen, show a smiling young man with light skin, subtle facial hair, wearing a gray winter beanie and a denim jacket with a soft shearling collar. He is looking toward the woman while raising his hand to form the other half of the heart shape.\n\nThe hands from both screens should visually meet in the center between the two phones, creating a perfect heart shape, symbolizing long-distance love and connection.\n\nSet the scene in a warm indoor room during golden hour, with a large softly blurred window in the background, subtle potted plants, a cozy coffee mug, soft knitted fabric, floating dust particles, and warm cinematic bokeh lights. Use shallow depth of field, realistic glass reflections, soft rim lighting, warm amber highlights, and natural wooden table textures.\n\nInclude minimal video-call UI elements on each phone screen: small video camera icon, green call button, microphone icon, and a subtle white home indicator bar. Keep the UI clean, modern, and realistic.\n\nStyle and quality:\n\nUltra-realistic cinematic digital art, premium lifestyle photography aesthetic, cozy winter romance mood, warm golden-hour sunlight, soft atmospheric haze, realistic skin texture, realistic knit fabric, detailed phone reflections, elegant composition, sharp focus on phones and faces, dreamy romantic bokeh, high-end editorial visual quality.\n\nAspect ratio: 1:1 square composition.\n\nNegative prompt:\n\nDistorted hands, extra fingers, broken anatomy, duplicated limbs, unrealistic reflections, blurry faces, messy composition, unreadable UI, fake lighting, harsh shadows, low resolution, overexposed highlights, warped phones, text errors, AI artifacts, plastic skin, unnatural facial expressions.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case300",
+    "title": "保脸超写实人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Rainlanded/status/2065071103316484451",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case300/output.jpg",
+    "imageAlt": "保脸超写实人像示例图",
+    "prompt": "low quality, blurry, distorted face, bad anatomy, extra limbs, stiff pose, unnatural selfie angle, overexposed skin, harsh flash, plastic skin, overly bright colors, cheap fabric, messy background, cartoon style, exaggerated beauty filter, unrealistic eyes, artificial hair, bad hands, awkward arm, noisy image.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case391",
+    "title": "皮克斯3D烤肉师傅分镜海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/TechieBySA/status/2065069836045033908",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case391/output.jpg",
+    "imageAlt": "皮克斯3D烤肉师傅分镜海报示例图",
+    "prompt": "“Create a crisp, clean infographic storyboard poster for THE KEBAB MAKER. Wide 16:9 layout, white background, black borders, bold black typography, premium Pixar 3D stylized rendering, bright vivid colors — deep caramelized meat browns, vivid red tomatoes, fresh green lettuce, white garlic sauce, golden warm flatbread, warm Istanbul street light.\n\nTop header\n\n•THE KEBAB MAKER\n•TOTAL VIDEO TIME: 12 SECONDS\n•8 SHOTS · BOLD · SIZZLING · STRAIGHT FROM ISTANBUL\n•Legend icons: ACTION, HEAT, TIME HINT, INGREDIENT\n\nSame Pixar-style middle-aged Turkish male kebab maker throughout — thick dark mustache, white t-shirt, red and white striped apron, small outdoor Istanbul kebab street stand, vertical doner spit glowing and rotating behind him, warm golden light, busy Turkish street with Galata Tower softly visible in background. Skilled, fast, proud.\n\n8 panels:\n\nPanel 1 — THE OPENER: Wide shot. Kebab maker stands behind his outdoor street stand, busy Istanbul street behind him, Galata Tower softly visible in warm afternoon light. Vertical doner spit rotating and glistening behind him. He slaps both hands on the counter and grins at the camera. The spit is already turning. You know exactly what’s coming.\n\nPanel 2 — THE BREAD: Close-up. Kebab maker opens a warm flatbread with both hands — the bread splitting open softly, steam rising from inside, soft and pillowy interior revealed. Warm golden bread catching the afternoon light. The base of everything. Anticipation building.\n\nPanel 3 — THE SPIT: Dramatic close-up. The vertical doner spit filling the entire frame — towering stack of layered marinated meat rotating slowly, outside layer deeply caramelized and glistening, heat element glowing orange behind it, steam rising. The most iconic kebab visual in the world.\n\nPanel 4 — THE SHAVE INTO BREAD: Hero craft frame. Wide medium with character visible. Kebab maker holds the open flatbread in one hand positioned directly below the spit, long knife in the other shaving meat in one confident downward stroke — thin caramelized strips falling directly into the open bread below. Meat, knife, bread and spit all in one frame. The most dynamic panel in the series.\n\nPanel 5 — THE SUMAC: Extreme close-up. Kebab maker’s hand sprinkling deep red sumac powder generously over the shaved meat — the vivid crimson powder catching the warm afternoon light as it falls, dusting every piece of meat. Deep red against deep brown. The most authentically Turkish panel in the series. The insider detail that makes Turkish viewers feel seen and everyone else curious.\n\nPanel 6 — THE SAUCE: Close-up hero shot. Thick white garlic sauce poured in a generous arc over the filling — cascading over the meat and vegetables. Then a zigzag of vivid red chili sauce over the top. White and red against deep brown meat. The most appetizing panel.\n\nPanel 7 — THE WRAP: Close-up dramatic. Both hands wrapping the flatbread tight and fast — filling bulging slightly at the ends, foil paper wrapped around the bottom. One confident twist. Done. The payoff of all the craft.\n\nPanel 8 — THE BITE: Wide warm shot. Customer standing on the Istanbul street takes the wrapped kebab, takes a massive first bite — filling visible at the end, sauce on their lip, eyes closing in pure street food satisfaction. Kebab maker watching from behind the stand, arms crossed, deeply proud. Istanbul street and Galata Tower glowing warmly behind them both.\n\nFooter:\n\n•VIDEO FLOW: 8 shots × ~1.5s = 12 seconds. Spit to first bite.\n•CAMERA TIPS: wide on the Istanbul opener, close-up on the bread opening with steam, dramatic close-up on the spit, wide medium hero on the shave into bread, extreme close-up on the sumac dusting, close-up hero for the sauce, close-up dramatic for the wrap, wide warm for the Istanbul street bite\n•LIGHT & STYLE: warm Istanbul afternoon light, deep caramelized meat browns, vivid red sumac, white garlic sauce, red chili sauce, golden flatbread, red”",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case392",
+    "title": "BMX骑手街头混搭拼贴",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/omnitrix204/status/2065069786753872120",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case392/output.jpg",
+    "imageAlt": "BMX骑手街头混搭拼贴示例图",
+    "prompt": "Ultra-creative streetwear collage poster featuring a tattooed BMX rider and urban lifestyle athlete. Multiple cutout photographs arranged in a layered mixed-media composition. One large back-facing portrait wearing an oversized black graphic t-shirt and cap dominates the center. A second portrait faces the camera while lifting his shirt over part of his face, revealing intense eyes and tattooed arms.\nA dynamic BMX action shot performing a trick is positioned in the foreground. Torn paper edges, ripped poster textures, magazine cutouts, handwritten signatures, stickers, stamps, urban symbols, architectural photography, and layered graphic elements create a premium street culture aesthetic.\nPredominantly black-and-white photography with selective electric blue accents. Crumpled paper background texture, photocopy effects, editorial typography, distressed print details, urban skate and BMX culture influences. Contemporary streetwear advertising campaign, zine-inspired layout, high-fashion graphic design, raw underground energy.\nHighly detailed collage artwork, premium poster composition, monochrome photography, torn paper effects, streetwear branding aesthetic, fashion editorial design, modern youth culture visuals, 8K resolution.\nStyle Keywords: BMX culture, streetwear collage, monochrome poster, ripped paper design, urban editorial, grunge graphic design, fashion zine, underground culture, mixed media artwork.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case301",
+    "title": "锐利数字肖像插画",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/JamilAI55/status/2065060797861023948",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case301/output.jpg",
+    "imageAlt": "锐利数字肖像插画示例图",
+    "prompt": "Open Gemini / Grok / GPT Image 2.0\n2. Upload your photo\n3. Copy the prompt\n4. Generate\n5. Prompt ⤵️\nPrompt 👇\nUltra-detailed digital portrait illustration of a confident young man with sharp facial features and intense dark eyes, looking directly into the camera. His hand covers the lower half of his face, creating a mysterious and powerful expression. Stylish voluminous black hair, wearing a deep red shirt over a black t-shirt, black wrist wrap, and a subtle gold chain. Dramatic red rim lighting outlining the hair, face, shoulders, and clothing against a pure black background. High-contrast cinematic lighting, dark moody atmosphere, bold shadows, comic-book and graphic novel style, semi-realistic digital painting, ultra-sharp details, textured brushwork, modern masculine aesthetic, centered composition, portrait crop, 4K quality, trending on ArtStation, masterpiece, highly detailed, red and black color palette, powerful gaze, edgy and stylish character design",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case21",
+    "title": "3D杂技跳跃讽刺漫画",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065058228585844954",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case21/output.jpg",
+    "imageAlt": "3D杂技跳跃讽刺漫画示例图",
+    "prompt": "prompt:\n\nOne complete 3D illustration, editorial exaggerated cartoon style, single standalone image, not a storyboard or multi-panel layout.\n\nCentral character: a cartoon figure with a tiny head, chubby round torso, super-long limbs, huge hands and bulky shoes, slightly off-balance, caught mid-jump in a dramatic pose radiating tension and playful energy.\n\nThe silhouette reads like a soft toy sculpture — plump, springy, and exaggerated, not anatomically realistic.\n\nSurface quality: matte rubber, fuzzy textile, knitted detail, clay-like feel, subtle fiber grain, handmade texture. Avoid shiny plastic, transparent glass, or high-spec reflections.\n\nColor: vibrant dopamine palette, high saturation, strong color contrasts, large bold flat fills — vivid but not neon-overexposed.\n\nBackground: pure white, minimal staging, just a gentle oval drop shadow beneath the character, no elaborate setting.\n\nDecorative floating elements orbiting the character: stars, wavy lines, spheres, cubes, icons, abstract shapes — all sculpted as soft rubber or paper-like 3D props, amplifying motion and graphic energy.\n\nLighting: soft studio setup, global illumination, diffused shadows, low contrast, polished commercial feel.\n\nRendered in C4D or Blender: stylized soft-sculpture aesthetic, matte clay finish, knitted fabric surface, playful editorial tone, high resolution.\n\n— Scene: a pastel-toned acrobat throwing both arms up in a victorious airborne leap, wearing chunky multicolor sneakers\n\n#AIart #GPTImage2",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case393",
+    "title": "奢感历史文明策略卡",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Gdgtify/status/2065057210426900515",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case393/output.jpg",
+    "imageAlt": "奢感历史文明策略卡示例图",
+    "prompt": "SYSTEM: Render the input as a luxury historical civilization stratigraphy poster. Do not hardcode dates unless inevitable. Infer the territorial expansion phases, economic foundation pillars, military innovation cycles, cultural assimilation patterns, and the geological layers of decline.  SEMANTIC SOLVE: EMPIRE_AUTOPSY =    (INFER(territorial_architecture FROM founding_core + expansion_vectors + frontier_fortifications + trade_route_control + vassal_networks) ::5) +    (INFER(economic_pillars FROM agricultural_base + mineral_resources + taxation_system + currency_standard + labor_organization) ::4) +    (INFER(military_innovation FROM weapon_technology + tactical_doctrine + logistics_chain + fortification_engineering + naval_capacity) ::4) +    (INFER(decline_mechanics FROM succession_crises + economic_inflation + frontier_pressure + internal_rebellion + environmental_stress) ::3) -    (generic timeline infographics + cartoon maps + cluttered textbook layouts + stock-photo ruins + cheap educational posters) ::-4  COMPOSITION: One central empire visualized as a multi-layered archaeological cross-section. The bottom layer shows the founding settlement, middle layers reveal territorial expansion through colored strata, and the top layer displays the fragmentation pattern. Surrounding the core are floating callouts showing key battles, economic indicators, and dynastic transitions mapped as physical artifacts. Use callout lines like an archaeological dig site report crossed with a military campaign map.  STYLE DNA: Ancient Roman Tabula Peutingeriana ::0.30 archaeological stratigraphy diagram ::0.25 vintage military campaign map ::0.20 museum exhibit infographic ::0.15 aged parchment with stain texture ::0.10  OUTPUT: Warm sepia or deep terracotta background luxury history poster, elegant classical serif + handwritten annotation typography, restrained callouts, hyper-realistic map textures, refined aging effects, premium negative space.  NEGATIVE: no holograms, no glowing elements, no VR/AR overlays, no modern digital maps, no cartoon illustrations, no cluttered timelines, no stock-photo emperors, no watermark, no anachronistic elements.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case302",
+    "title": "巴黎路灯倚靠感全身照",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/CHAseUnre/status/2065240920283398353",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case302/output.jpg",
+    "imageAlt": "巴黎路灯倚靠感全身照示例图",
+    "prompt": "[인물] 이미지1, 이미지2 참조. 파리의 길거리 표지판 기둥에 몸을 비스듬히 기대어 서 있는 전신 포즈입니다. 고개를 살짝 왼쪽으로 기울이고 눈을 감은 채 입술을 아주 약간 내밀며 나른하고 감성적인 표정을 짓고 있습니다. 왼손에는 테이크아웃 커피 컵을 가볍게 쥐고 있습니다. 배경: 파리 거리 분위기, 흐린 자연광.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case104",
+    "title": "四种建筑风格2×2网格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Gdgtify/status/2065191846800740636",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case104/output.jpg",
+    "imageAlt": "四种建筑风格2×2网格示例图",
+    "prompt": "2x2 grid, do this for 4 famous architectural styles. Anchor: [Architectural Style] :: [Geometric Essence & Period]. Each panel shows a representative building in that exact style with consistent camera angle and neutral sky background.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case22",
+    "title": "雨中灵姬东方幻想 3D CG 角色",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/liyue_ai/status/2065107695557075460",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case22/output.jpg",
+    "imageAlt": "雨中灵姬东方幻想 3D CG 角色示例图",
+    "prompt": "9:16 竖版，高精度 3D CG 东方幻想女性角色写真，3D CG oriental fantasy beauty portrait，anime-style 3D CG character art，semi-realistic 3D character render，镜头为大腿及上半身构图，画面主体是一位明确成年的年轻东方幻想系女性，视觉年龄约 20–26 岁，整体气质清冷、空灵、精致、安静，带有雨中水系精灵般的神秘感与高级感。整体不是平面插画，而是高完成度 3D CG 角色渲染，具有精致角色建模、真实材质表现、电影级冷调柔光与高级虚拟角色海报质感。\n\n人物拥有精致的东方美型脸，小巧流畅的鹅蛋脸，皮肤冷白细腻，带轻微通透感与柔和皮肤着色，肌肤表面有细腻水珠与湿润反光。眼睛细长清澈，瞳色为冰蓝绿调，瞳孔有通透玻璃感与细致高光，眼神微垂，安静、疏离、略带脆弱感。睫毛纤长，眼妆干净克制，鼻梁秀气挺直，嘴唇柔软，唇色为低饱和裸粉色，嘴唇微启，神情冷静而迷人。\n\n发型为短款蓝黑色渐变发，主色为浓黑与深海军蓝，发尾带冷调蓝色高光，发型为短层次波浪感短发，一侧额发自然垂落遮住部分脸颊，顶部带编发结构，发丝湿润、轻盈、细腻，具有高精度发丝建模与柔顺光泽。耳部佩戴精致蓝色水晶几何耳饰与金属耳骨夹，增强东方幻想与水元素气质。颈部佩戴白色高领装饰项圈与青蓝色宝石流苏细节，精致而高级。\n\n服装为精致的东方幻想水系礼装，上半身穿着白色轻薄、湿润感的缎面的贴身长裙，布料柔软垂坠，带细腻高光和微透感，胸口与躯干线条以克制优雅的方式表现。外层披着一件宽松白色衬衫式轻纱外搭，自然滑落至手臂与腰侧，形成层叠褶皱与飘逸感，增强随性与梦幻氛围。腰臀处可见黑色蕾丝边短裤细节，作为整体造型中的轻哥特点缀，使画面更具层次与精致感，但整体保持高级、克制、不低俗。\n\n人物姿势为优雅侧身站立，身体呈现流畅的 S 型曲线，肩颈舒展，背部与腰线自然延展，头部微微低垂侧转，视线向下，整体姿态安静、轻盈、克制。手臂自然下垂，手指修长，姿态如同在雨中静立的一瞬间，突出侧脸、肩颈、背部、腰臀线条与服装湿润材质的精致表现。\n\n背景调整为精致的东方幻想水境场景，整体以冷白、冰蓝、淡灰为主色调。背景为朦胧的雨幕、轻雾与若隐若现的东方幻想建筑轮廓，可融入远处模糊的亭台、石阶、水池边缘或空灵宫殿轮廓，营造高级幻想空间感。人物周围有动态水花、水流弧线与透明水晶般飞溅效果，像由水元素凝结出的装饰性波纹，背景适度虚化，既通透空灵，又不喧宾夺主。\n\n光线采用冷白主光与柔和逆光结合，整体为雨天高调低饱和电影感打光。面部、锁骨、肩背、手臂与腿部有细腻湿润高光，发丝边缘与水花边缘有轻微轮廓光。白色布料、蕾丝、金属、宝石、水珠与水花都具有真实清晰的材质反馈。整体画面干净、通透、冷艳、梦幻、精修感强，具有高端收藏级 3D CG 东方幻想角色海报质感。\n\nhigh detail 3D CG render, Unreal Engine quality, Octane render look, cinematic lighting, PBR materials, subsurface scattering skin, realistic wet hair strands, translucent wet fabric, crystal water splash effects, delicate lace details, elegant oriental fantasy styling, aquatic spirit atmosphere, volumetric light, cinematic depth of field, soft bloom, ultra detailed, polished anime realism, premium virtual character portrait",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case187",
+    "title": "可口可乐百事雪碧品牌 KV 对比",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/liyue_ai/status/2065039304175538382",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case187/output.jpg",
+    "imageAlt": "可口可乐百事雪碧品牌 KV 对比示例图",
+    "prompt": "品牌 KV 海报系列。使用统一提示词框架，针对不同饮料品牌调整视觉情绪色彩：可口可乐 → 热烈红色聚会感；百事可乐 → 年轻蓝色潮流感；雪碧 → 清爽绿色柠檬感。同一结构展现不同品牌 DNA。3 张对比输出。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case303",
+    "title": "深夜调酒师暗红酒吧封面写真",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/liyue_ai/status/2064965712406556931",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case303/output.jpg",
+    "imageAlt": "深夜调酒师暗红酒吧封面写真示例图",
+    "prompt": "深夜调酒师人物摄影：高级酒吧场景、暗红灯光、玻璃酒杯反光 + 黑衬衫、深酒红马甲、袖箍建立人物身份感 + 调酒动作、抬眼看镜头、金色边缘光建立封面气场。危险但克制的气质，深夜暗红酒吧封面风。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case394",
+    "title": "Sony A7 分解结构图",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066085004116193571",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case394/output.jpg",
+    "imageAlt": "Sony A7 分解结构图示例图",
+    "prompt": "Detailed exploded-view diagram of a Sony A7 mirrorless camera, with all internal components separated and clearly visible, each part labeled with its name. Technical product illustration style, clean white background, precise and informative layout.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case395",
+    "title": "仿生机械器官产品渲染",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066069842407416126",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case395/output.jpg",
+    "imageAlt": "仿生机械器官产品渲染示例图",
+    "prompt": "Ultra-realistic 3D anatomical human [organ] crafted from semi-translucent frosted polycarbonate with a milky matte finish that softly diffuses light. Features industrial injection-molded details, subtle micro-texture, and rounded edges with precise manufacturing seams. Interior reveals mechanical components in place of organic tissue — micro gears, pistons, circuitry, and engineered chambers seen through the translucent shell with a soft blur. A minimal white Apple logo is subtly embedded on the surface, understated and not overpowering. Diffused studio lighting, realistic plastic light refraction, gentle shadow underneath, centered framing, pure white background, ultra-detailed futuristic biomechanical render, 1:1 aspect ratio.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case396",
+    "title": "太阳风暴 WPA 海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/92digitalartArt/status/2066062156441735187",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case396/output.jpg",
+    "imageAlt": "太阳风暴 WPA 海报示例图",
+    "prompt": "A 1930s WPA travel poster style infographic poster in 16:9 horizontal format about solar weather and space storms, designed to look exactly like a vintage Works Progress Administration national parks poster from the New Deal era, with flat gouache-style color fills, bold black outlines, dramatic perspective and zero photorealism; the background transitions from deep black space at the top to a glowing teal-green aurora sky at the bottom, divided into bold graphic bands of color in the WPA tradition; the central illustration shows the Sun in the upper left as a massive dramatic circle with stylized flat orange and yellow flame corona eruptions radiating outward, and a large coronal mass ejection arc sweeping diagonally toward Earth in the upper right, depicted as a simplified blue sphere with a thin atmosphere ring; mid-composition, the solar wind stream is shown as bold parallel lines of warm gold flowing between Sun and Earth, and where those lines hit the atmosphere they bloom into a spectacular aurora borealis rendered in flat curtains of teal, green and violet in the WPA graphic tradition; below the main illustration, a clean horizontal strip divides the composition into three labeled science panels in a sans-serif bold font: SOLAR FLARE, CORONAL MASS EJECTION, and AURORA BOREALIS, each with a minimal one-color icon and two lines of punchy educational text; the title at the top reads SOLAR STORMS in massive slab-serif WPA lettering, with the subtitle THE VIOLENT WEATHER OF SPACE in a smaller weight beneath; the full palette is restricted to five flat colors — black, deep cream, burnt orange, teal and violet — giving the whole piece the unmistakable graphic punch and populist optimism of a 1930s government art print, high quality, aspect ratio 16:9",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case397",
+    "title": "高级汽车规格海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066055530012111310",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case397/output.jpg",
+    "imageAlt": "高级汽车规格海报示例图",
+    "prompt": "Generate a stunning premium car poster for\n[CAR MODEL].\n\nPosition the vehicle as the dominant centerpiece in a bold three-quarter side angle, visually striking and commanding full attention.\n\nCapture the full essence of the car with an aggressive stance, flawless proportions, luxury wheels, distinctive headlights, aerodynamic bodywork, spoilers, performance accents, and high-end design cues.\n\nLayer in crisp premium typography featuring the brand name, model designation, performance figures, horsepower rating, 0-60 time, top speed, engine details, and iconic milestones, seamlessly woven into the layout.\n\nWeave in subtle background motifs drawn from the car's history: ghost blueprint lines, motorsport heritage, silhouette overlays, legendary circuits, mechanical diagrams, velocity graphics, and collector-print vibes.\n\nApply bold visual contrast, vivid premium hues (no dark or black-heavy backgrounds), cinematic illumination, razor-sharp reflections, glossy paint sheen, luxury magazine quality, slick graphic design, and a scroll-stopping poster energy.\n\nPolished composition, top-tier automotive ad aesthetic, collectible poster feel, ultra-detailed, visually commanding, premium masterpiece.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case23",
+    "title": "超现实卡通肖像模板",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Goodmanprotocol/status/2066048157805629937",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case23/output.jpg",
+    "imageAlt": "超现实卡通肖像模板示例图",
+    "prompt": "Vertical bizarre flat cartoon portrait of [SUBJECT from the attached photo] with a high geometric head shape, a long narrow neck, huge round eyes, a tiny mouth and an unflappable laugh, dressed in [CLOTHES from the photo], with a [OBJECT/CREATURE] sitting on their head like a living hat. Pure black outline, smooth color fills, simple face shapes, rare drawings on animal fur or skin, playful surreal character design, bold graphic palette [COLOR]. Background decorations: [ENVIRONMENT DECORATIONS from LOCATION/SCENE], made using simplified shapes, clear depth, a small amount of scenery from the environment and a clear cartoon perspective. Clear digital illustration, vertical framing in the form of a poster, no realism, no 3D rendering, no picturesque shading, aspect ratio 4:5.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case398",
+    "title": "多巴胺 3D 城市海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066039955177234472",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case398/output.jpg",
+    "imageAlt": "多巴胺 3D 城市海报示例图",
+    "prompt": "Top-tier internet marketing visual design, Behance / Dribbble inspired 3D illustration poster aesthetic, C4D rendering style, soft-light treatment, vivid high-saturation colors, dopamine-driven color palette, abstract artwork, clean minimalist background, fresh and lively feel, youthful and energetic vibe, polished and intricate. Theme: Urban Nomad Project.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case400",
+    "title": "大片级动作电影镜头",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066009564018082289",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case400/output.jpg",
+    "imageAlt": "大片级动作电影镜头示例图",
+    "prompt": "Cinematic photorealistic action scene on a rain-soaked downtown street canyon. A dark-haired man in his 30s sprints toward the camera, soaked dark jacket and dark pants, mid-stride with a tense survival expression. Behind him, a massive urban explosion tears through a high-rise building -- fire, smoke, shattered concrete, glass, and metal debris blast outward. Exactly 3 damaged vehicles visible: a dark sedan left foreground with crumpled hood splashing through rainwater, a wrecked dark car right midground, and an overturned black SUV tilted up on the right. Wet asphalt reflects headlights and firelight. Dense debris frozen mid-air. Overcast stormy daylight, desaturated blue-gray palette with orange fire accents, motion blur on flying debris but sharp focus on the runner, low-angle wide-lens composition, ultra-detailed blockbuster disaster-movie realism, volumetric smoke, rain spray, cinematic lighting, high contrast.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case105",
+    "title": "硬币金额编辑测试",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065994787094983151",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case105/output.jpg",
+    "imageAlt": "硬币金额编辑测试示例图",
+    "prompt": "Modify this photo so the total adds up to 244.5 baht. Adjust the number of coins in each stack until the combined value hits the target.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case183",
+    "title": "早期互联网作品集页面",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Kashberg_0/status/2065992579502747850",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case183/output.jpg",
+    "imageAlt": "早期互联网作品集页面示例图",
+    "prompt": "Design a minimal early-internet personal profile webpage / digital portfolio landing page on a large white canvas with generous negative space and a thin pastel pink browser-style frame. In the center, place a black-and-white editorial portrait of [SUBJECT], featuring soft film grain, subtle scanner texture, and low-contrast photographic tones.\n\nSurround the portrait with scattered profile metadata labels and small star-bullet elements arranged asymmetrically, resembling a playful personal résumé. Include descriptors such as:\n\n✦ creator\n✦ model\n✦ stylist\n✦ DJ\n✦ girl\n✦ photographer\n✦ collector\n✦ dreamer\n\nIn the top-left corner, create a colorful hand-drawn logo or personal brand mark. Beneath it, add a tiny timestamp and date in a small system font, mimicking an old personal homepage.\n\nIn the top-right corner, place irregular sticker-like navigation tabs in bright accent colors (pink, cyan, purple, yellow, and green). Use simple labels such as:\n\nHOME\nABOUT\nWORK\nDIARY\nLINKS\n\nScatter handwritten marker-style notes, introductions, personal thoughts, and lifestyle captions throughout the empty space. Examples:\n\n\"currently making things online\"\n\"welcome to my homepage\"\n\"music, fashion, internet\"\n\"updated today\"\n\"living between projects\"\n\nMaintain an anti-grid editorial layout with intentionally imperfect spacing and playful placement. Mix tiny system fonts, handwritten script, and casual notebook-style annotations. Keep the portrait entirely monochrome while reserving color only for the logo, navigation stickers, and a few small graphic accents.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case401",
+    "title": "编辑风墨线插画模板",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Naiknelofar788/status/2065973105823281314",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case401/output.jpg",
+    "imageAlt": "编辑风墨线插画模板示例图",
+    "prompt": "Cinematic editorial ink illustration of [HUMAN] in [SCENERY], looking back over the shoulder with realistic proportions, windblown hair and sharp confident gaze. Wearing [CLOTHING]. Loose expressive black ink linework, visible sketch construction lines, high-contrast shadows, sunlit rim glow, weathered paper texture, ink splatters, distressed print marks, realistic road-movie environment, limited three-color palette: [PALETTE], contemporary fashion poster illustration, aspect ratio 4:5.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case188",
+    "title": "奢华运动鞋编辑网格",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065964253505585436",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case188/output.jpg",
+    "imageAlt": "奢华运动鞋编辑网格示例图",
+    "prompt": "Louis Vuitton luxury leather sneaker campaign. High-fashion editorial, avant-garde aesthetic. Aspect ratio 3:4.\n\nMaterials: Full-grain calf leather, Monogram Embossed Canvas, Polished Gold Hardware.\nColor palette: Cognac Brown, Deep Obsidian, Champagne Gold.\nLighting: High-contrast Chiaroscuro with soft-box key lighting.\n\n9-cell editorial grid:\n\nRow 1, Heritage:\n- Hero side-profile: sneaker resting on a vintage LV trunk, side-lit to reveal the leather grain texture.\n- Extreme macro close-up: gold-tone \"LV\" lace aglets and precision stitching detail.\n- Dynamic shot: gold dust particles swirling around the sole as the shoe steps into frame.\n\nRow 2, Innovation:\n- Minimalist: sneaker balanced on top of an abstract, floating glass \"V\" sculpture.\n- Floating deconstructed view: sole and upper suspended in a void.\n- Sensory: a gloved hand adjusting the tongue, highlighting the softness of the leather.\n\nRow 3, Surrealism:\n- Monochromatic scene in LV Havane brown with liquid silk drapes.\n- Abstract: rubber sole pattern reimagined as a geometric desert landscape.\n- Fusion: sneaker walking on a mirror-still lake reflecting a Parisian sunset skyline.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case189",
+    "title": "无线耳机生活方式广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065753093283991651",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case189/output.jpg",
+    "imageAlt": "无线耳机生活方式广告示例图",
+    "prompt": "Design a 9:16 vertical product infographic for Bolt True Wireless Earbuds with a high-end lifestyle ad feel.\nComposition & Framing\nFull-body shot of a young woman whose face, skin tone, and hairstyle match the reference photo exactly\nSlightly low camera angle close to the subject, fashion campaign style, for depth and visual presence\nShe's seated casually on the floor, one knee up, one leg stretched toward the camera\nForeground (Product)\nShe holds an open Bolt earbud charging case out toward the viewer\nOne earbud is visible inside the case, the other is in her ear\nThe case is glossy white with \"BOLT\" branding\nSlight macro bokeh blur on the hand and case for cinematic depth\nOutfit & Style\nModern athleisure streetwear: off-white or neutral lightweight jacket, crop top or sports bra, soft pink joggers, textured white sneakers\nExpression: confident and relaxed, subtle smile\nPose feels natural and lifestyle-driven, not posed\nBackground\nSoft gray gradient studio background\nRainbow prism lens flares and subtle light leaks\nFloating blurred earbuds and case in background\nStudio floor texture visible underfoot\nLighting\nDiffused commercial studio lighting emphasizing skin texture, the glossy case, and fabric detail\nSoft rim light to separate the subject from the background\nText Overlays (modern sans-serif, white)\nTop Center: \"BOLT\" in large bold text, partially behind the subject\nTop Right: Bolt Earbuds / True Wireless\nMid Left: Powerful sound. / Effortless vibes. / Engineered for every beat of your day.\nMid Right: 30 hours of playtime / IPX5 water resistant\nBottom Right: 1 year warranty\nQuality\n8K ultra-realistic commercial photography\nSharp on face and earbuds, gentle depth blur on foreground and background\nClean Apple/Nike premium ad aesthetic, strong negative space",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case402",
+    "title": "等距地标微缩场景",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065737739589615987",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case402/output.jpg",
+    "imageAlt": "等距地标微缩场景示例图",
+    "prompt": "Generate an isometric miniature 3D diorama of [COUNTRY NAME]'s iconic [FAMOUS STRUCTURE] landmark from a 45-degree top-down perspective.\n\nUse clean soft textures and realistic PBR materials with balanced, natural lighting. The elevated base features surrounding streets, landscape elements, and cultural details unique to the structure. Include tiny stylized figures of locals and tourists with detailed facial features.\n\nSet the background to solid [BACKGROUND COLOR]. Display [COUNTRY NAME] in bold text at the top center with [STRUCTURE NAME] on the next line, followed by a minimal architecture icon below. Adjust text color to ensure contrast.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case190",
+    "title": "Kinder Joy 吊椅场景",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066312771978092587",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case190/output.jpg",
+    "imageAlt": "Kinder Joy 吊椅场景示例图",
+    "prompt": "Hyper-realistic 8k medium shot photograph with shallow depth of field, surreal indoor scene with cinematic lighting. A normal-sized woman sits cross-legged inside a massive, highly detailed Kinder Joy egg that's been converted into a swing chair. The egg is split open, its white interior forming the seat and orange textured exterior visible, suspended by dark metal chains from a curved metal stand.\n\nShe wears a black t-shirt and blue-and-white plaid pajama pants, holding a small white teacup with both hands, gazing directly at the viewer with a calm, relaxed expression. Use uploaded face as reference.\n\nOn a polished wooden table to the left foreground: another gigantic fully wrapped Kinder Joy egg with intricate foil texture and branding details. To the right of the swing base: a vintage-style wooden radio with white dials, and a tiny bonsai tree in a small pot.\n\nSoft warm directional lighting from the left casts subtle shadows, highlighting the detailed egg wrapper textures, clothing, and wooden surface. Background is a softly blurred warm-toned interior wall with pleasing bokeh. Standard lens, shot from mid-height.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case304",
+    "title": "针毡羊毛微缩人偶",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066206049464660301",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case304/output.jpg",
+    "imageAlt": "针毡羊毛微缩人偶示例图",
+    "prompt": "Transform the subject into a handcrafted needle-felted wool miniature. Material: organic roving wool with visible needle-punch textures, soft fuzzy surface, and handcrafted seams. Eyes are tiny black bead eyes or simple felted circles.\n\nStyle rules: slightly oversized head with simplified limbs and a cute, charming aesthetic. Retain the original colors from the source image but soften them with wool texture. Clothing becomes simplified felt versions of the original outfits with tiny fabric buttons and stitched details. Accessories are recreated as miniature felted props.\n\nCamera: macro photography, close-up shot. Soft studio lighting with warm highlights and gentle shadows. Clean, out-of-focus bokeh background in a neutral craft studio setting. Shallow depth of field (f/2.8). High fidelity, 8k resolution, photorealistic wool texture, Pixar-like character charm.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case191",
+    "title": "隐形护盾防晒广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamrealsnow/status/2066200217347854445",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case191/output.jpg",
+    "imageAlt": "隐形护盾防晒广告示例图",
+    "prompt": "SUNSCREEN AD, “THE INVISIBLE SHIELD”\n\nLuxury skincare advertising masterpiece, a colossal premium sunscreen bottle standing on a pristine tropical shoreline at golden hour, powerful beams of sunlight crashing down from the sky and splitting apart upon contact with a transparent protective energy dome radiating from the sunscreen, millions of sparkling UV particles dissolving into golden dust before reaching flawless skin, crystal clear ocean reflections, flowing water suspended in mid air around the product, microscopic droplets catching cinematic sunlight, ultra realistic textures revealing every detail of the bottle surface, luxury beauty campaign aesthetics, dramatic volumetric lighting, glowing atmospheric haze, premium white and gold color palette, futuristic protection technology visualized as elegant light waves, hyper detailed environment, commercial photography perfection, award winning advertising design, photorealistic rendering, 16K ultra resolution, global skincare brand campaign, masterpiece quality.\n\nText Overlay:\nSUNSCREEN\n\nTagline:\n“Protect Every Ray. Reveal Every Glow.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case403",
+    "title": "发条微缩世界",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Gdgtify/status/2066192943887630372",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case403/output.jpg",
+    "imageAlt": "发条微缩世界示例图",
+    "prompt": "create a charming but ultra-refined scene centered on [wind-up toy / mechanical miniature world] where a tiny self-contained world is powered by a visible wind-up key and internal spring system. the toy should contain miniature architecture, characters, moving scenery, rotating signage, tiny lifts, oscillating parts, and small narrative moments that all activate from one central mechanism. mini world features: include visual zones for [main scene], [secondary scene], [moving prop], [character action], and [secret detail / easter egg]. surrounding close-ups can reveal the key, spring chamber, cams, and hidden moving linkages. visual style: japanese capsule toy magic meets luxury miniature cinematography meets premium collectible product photography. whimsical, intricate, emotionally irresistible. composition guidelines: the toy remains the hero, but the viewer should feel invited to peer into its tiny world. balance cuteness with high craftsmanship. make the mechanisms visible enough to create fascination. lighting & background: soft studio lighting with theatrical micro-shadows, premium pastel, lacquer, or dark velvet backdrop depending on [mood], hyper-detailed miniature realism, no watermark. variables: [wind-up toy / mechanical miniature world], [main scene], [secondary scene], [moving prop], [character action], [secret detail / easter egg], [mood]",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case192",
+    "title": "隐藏 Logo 地景幻象",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066191259354689714",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case192/output.jpg",
+    "imageAlt": "隐藏 Logo 地景幻象示例图",
+    "prompt": "Create a subliminal advertising landscape photograph where a recognizable brand logo (like the Apple logo, Nike swoosh, or Batman symbol) is secretly embedded into a breathtaking natural environment (like snowy mountains, dense jungle, sand dunes, or ocean coastline).\n\nThe logo must be formed entirely by the physical geography of the terrain — NOT overlaid digitally. The main body of the logo appears as a carved void (a deep valley, cliff edge, or sharp color contrast in the terrain), while any disconnected elements (like Apple's leaf) float as a suspended island of rock and earth in the misty sky above.\n\nCamera: wide aerial drone shot, landscape stretching vast and majestic across the frame.\n\nAtmosphere: dramatic and moody — heavy swirling clouds, rolling mist through valleys, crepuscular god rays bursting through gaps in the clouds, defining the hidden silhouette.\n\nVisual rule: at first glance it must look like a 100% authentic nature photo. The brand logo only emerges as an optical illusion (pareidolia) on second look. Edges must be slightly jagged and organic, shaped by real geological features like cliff faces and treelines — never perfect vector shapes.\n\nLighting: high contrast between dark shadowed valleys (dense forests) and bright snow or sunlit highlights. Sun partially hidden behind clouds or the floating landmass, backlighting the entire scene.\n\nMood: cinematic, majestic, subtly surreal.\n\nOutput: 1:1 square, photorealistic, National Geographic aerial photography aesthetic.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case404",
+    "title": "沙丘上空的水母之城",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/92digitalartArt/status/2066176419038683562",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case404/output.jpg",
+    "imageAlt": "沙丘上空的水母之城示例图",
+    "prompt": "The Jellyfish City Above the Dunes\n\nOn a desert world too hot to live on, entire cities float just above the dunes—built from colossal jellyfish that weave their own architecture in the sky.\n\nSoft solarpunk alien vibes, no horror.\n\nPrompt below for anyone exploring gentle alien worlds.\n\nPROMPT:\n\nA serene daylight scene on an alien desert planet, wide cinematic shot of a floating city made from enormous translucent jellyfish creatures drifting just above endless dunes; each jellyfish (Aeromedusae) is house‑sized, with a bulbous semi‑transparent dome filled with pale turquoise gas, long trailing tendrils weaving together into suspended walkways, platforms and hammock‑like membranes that form an aerial village; nacreous plates and chitin ribs have grown along their undersides to create skeletal arches and open “rooms,” shimmering with opalescent highlights; several Aeromedusae cluster together in a loose line, casting soft, organic shadows on the sand below; tiny silhouettes of ground caravans with insect‑like vehicles and fabric canopies move through the dunes, clearly dwarfed by the floating city overhead; distant rusted anchor towers and cables rise from the sand, hinting at a human or alien attempt to tether these living buildings; palette of warm sand beige, pale turquoise, dusty coral and soft white, with high noon sunlight, subtle heat haze and gentle lens bloom; the camera sits at a medium distance, slightly low angle, capturing both the jellyfish city and the ground caravans in one frame, 35mm lens, peaceful solarpunk‑like atmosphere, painterly yet detailed, no horror, one frame from a larger alien desert universe.\n\nNEGATIVE PROMPT:\nhuman-like alien, blue-skinned humanoid, generic sci-fi city, skyscrapers, cyberpunk neon, dark horror tone, gore, tentacle monster cliché, cheap sci-fi armor, guns, war scene, cartoon, anime chibi, bad anatomy, cluttered composition, oversaturated colors, heavy bloom, low detail, blurry image, noisy grain, HUD, UI, readable text, watermark, logo, plastic toy look, realistic Earth desert animals, Earth buildings, spaceships dogfighting",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case184",
+    "title": "彩铅照片转绘",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/AIwithSynthia/status/2066154697828782245",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case184/output.jpg",
+    "imageAlt": "彩铅照片转绘示例图",
+    "prompt": "Transform the uploaded photo into a charming hand-drawn colored-pencil and crayon illustration while preserving the person's exact pose, facial features, outfit, expression, and background composition. Create a warm, whimsical sketchbook aesthetic with visible pencil strokes, crayon textures, and soft pastel colors.\n\nPlace the illustrated version as the main full-frame artwork. Add playful doodles around the scene such as hearts, stars, flowers, clouds, sparkles, and cute hand-drawn elements that complement the environment. Use textured paper as the canvas background and maintain a cozy, nostalgic, storybook feel.\n\nIn the bottom-right corner, include a rounded-rectangle inset containing the original unedited photo as a realistic reference image. The inset should resemble a social media post preview with subtle UI elements like a heart icon and engagement count. Ensure the illustrated version perfectly matches the original photo in composition, creating a striking before-and-after transformation effect.\n\nHighly detailed, colored pencil illustration, crayon art style, hand-sketched textures, vibrant yet soft pastel palette, Instagram-style layout, whimsical doodles, premium artwork, realistic reference inset, masterpiece, ultra-detailed, 4K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case405",
+    "title": "移轴城市地图旅行海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066145999266128367",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case405/output.jpg",
+    "imageAlt": "移轴城市地图旅行海报示例图",
+    "prompt": "Render a photorealistic tilt-shift miniature scene of [CITY NAME] with a [VEHICLE NAME] winding along an elevated road that rises organically from a vintage illustrated city map. The road sweeps toward the city's iconic skyline in the background, with the vehicle as the main subject up front. Seamlessly merge the real cityscape with the hand-drawn map so the road feels naturally embedded. Feature the city name in large bold lettering on the map foreground. Apply warm golden-hour light, shallow depth of field, cinematic shadows, aerial perspective, and hyper-realistic detail. Final look: a luxury travel poster crossed with a miniature diorama. Aspect ratio 1:1.\n\nFull prompt: \n\nCreate a highly detailed cinematic miniature tilt-shift travel scene of [CITY NAME] featuring a realistic [VEHICLE NAME] driving along a winding elevated road that emerges naturally from a printed vintage-style city map. The road should curve dramatically toward the background skyline and landmarks of [CITY NAME], while the vehicle remains the clear focal point in the foreground.\n\nBlend the real city seamlessly with the illustrated map surface so the road appears integrated into the map itself. Include recognizable local landmarks, waterways, architecture, vegetation, and atmosphere associated with [CITY NAME], but keep the composition clean and uncluttered.\n\nShow large bold typography of \"[CITY NAME]\" printed directly on the map in the foreground. Use warm golden-hour lighting, shallow depth of field, realistic textures, cinematic shadows, aerial perspective, and photorealistic detail. The overall aesthetic should feel like a premium Instagram travel poster mixed with a miniature diorama.\n\nAspect ratio 1:1.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case193",
+    "title": "SPLASH 液态 Logo 时尚海报",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2065979523229975021",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case193/output.jpg",
+    "imageAlt": "SPLASH 液态 Logo 时尚海报示例图",
+    "prompt": "Hyper-realistic fashion campaign poster for brand \"SPLASH\". A girl (matching the reference photo exactly, same face) seated confidently atop a gleaming, water-like 3D SPLASH logo surrounded by dynamic water splash effects. Editorial pose: one leg loose, one bent.\n\nEnormous bold \"SPLASH\" typography fills the background, partially behind her. Small tagline reads: \"Own Your Style.\"\n\nClothing: contemporary black streetwear (blazer, fitted top, trousers, sneakers).\n\nLighting: cinematic studio setup with soft key light and rim light, glossy reflections on the liquid logo.\n\nStyle: luxury fashion campaign aesthetic (Zara / H&M), polished clean environment.\n\nShot with an 85mm lens, shallow depth of field, 8K resolution, ultra-detailed, photorealistic.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case305",
+    "title": "空气感日系窗边人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066643592366727581",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case305/output.jpg",
+    "imageAlt": "空气感日系窗边人像示例图",
+    "prompt": "35mm film photo, airy Japanese aesthetic, soft natural window light from the side, slightly overexposed, muted pastel colors, low contrast, bright gentle highlights, quiet indoor room beside sheer white curtains, pale wall, natural eye-level frame from mid-thigh upward, young East Asian woman, barely-there makeup, smooth natural skin, long loose dark hair, oversized white button-down shirt, casual shorts, bare feet, effortless everyday style, relaxed stance with arms lightly at sides or gently back, looking softly at the camera, calm quiet smile, stillness and lightness, fine film grain, gentle dreamy mood --ar 9:16",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case25",
+    "title": "辉光档案官角色海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/92digitalartArt/status/2066558474650095890",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case25/output.jpg",
+    "imageAlt": "辉光档案官角色海报示例图",
+    "prompt": "Vertical 9:16 full-body cinematic portrait of a single alien character, the Luminant Archivist, standing on a rocky ridge on the twilight band of an alien planet; the creature has a tall elongated body with three root-like legs forming a stable tripod, lower torso textured like smooth bark and sinew fused together; two long arms with four segmented joints each end in multifingered, tendril-like manipulators gently holding a glowing hexagonal plate; instead of a human head, the upper torso flares into a tall crown of layered translucent plates arranged like a vertical fan, each plate lit from within by faint cyan neural patterns, no face, no eyes, no mouth; along its back and shoulders grow rigid bioluminescent data plates, flat hexagonal organisms clinging like barnacles, softly pulsing in cyan, teal and occasional warm amber; the body is draped in a partial organic mantle made of fibrous membrane and chitin filaments, not clothing but grown; background shows a perpetual dusk sky with a low orange band on one horizon and deep indigo on the opposite, distant silhouettes of hollow spires and tiny other Archivists crossing the landscape; ground covered in reflective glassy lichen and small crystals catching the character's glow; palette of deep indigo, dusty violet, cyan glows and subtle warm amber accents; strong horizon rim light outlining the Archivist's silhouette, subtle backlighting from the bioluminescent plates, gentle atmospheric haze; realistic but slightly painterly rendering, extremely detailed textures on skin, plates and lichen; composed like a high-end sci-fi character poster, vertical 9:16 aspect ratio, full body in frame, centered but with enough headroom and ground visible to feel part of a larger universe.\n\nNegative prompt:\nhuman-like alien, humanoid face, eyes, nose, mouth, jaw, blue-skinned human, elf, armor suit, guns, generic sci-fi soldier, anime style, cartoon, chibi, cyberpunk city, neon signs, medieval fantasy, wings, halos, angel, bad anatomy, random extra limbs, cluttered background, oversaturated colors, strong lens distortion, fisheye, low resolution, blurry details, noisy grain, HUD, UI, readable text, watermark, logo, modern Earth clothing, sneakers, jeans, T-shirt",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case406",
+    "title": "AI 音乐训练营活动海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066538267835867647",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case406/output.jpg",
+    "imageAlt": "AI 音乐训练营活动海报示例图",
+    "prompt": "Generate a dramatic Japanese anime-style event promotional poster in vertical 4:5 format, ultra-detailed, cinematic, neon-lit, high contrast, styled like a polished social media announcement. Center-right subject: a beautiful anime girl from the waist up, long flowing deep blue hair blowing in the wind with small star hairpins, wearing a dark hoodie with large studio headphones around her neck. Her face is softly obscured by a rectangular blur. Background: glowing sunset-to-night city skyline with sparkling lights, music-energy particles, lens flares, and glowing petals. Color palette: electric blue, violet, magenta, gold, and sunset orange.\n\nLayer crisp Japanese typography integrated like a professional event ad with exactly 8 text groups: (1) top-left heading 「始まるのは、キミと創る 音楽の物語。」 with subcopy 「AIを使って、みんなで音楽をつくる特別な3日間。」; (2) top-right glowing marquee 「GW連休!」 and neon box 「みんなで最高の音楽をつくろう!」; (3) center title with English 「AI MUSIC BOOTCAMP 2」 above large 「AI音楽 ブートキャンプ 2」; (4) massive gold metallic text across the middle 「開催決定!」; (5) date bar 「開催期間」 with 「5.2 SAT 土」 and 「5.4 MON 月」; (6) hashtag callout 「参加はカンタン!!  をつけて投稿するだけ!」; (7) encouragement line 「初心者も大歓迎! みんなで最高の音楽体験を!」; (8) three bottom feature captions with icons: 「一緒に学ぶ 仲間とつながる」, 「AIで創る 新しい音楽体験」, 「想いをカタチに 自分だけの1曲を」.\n\nLeft edge: vertical filmstrip with 4 panels showing the girl (1) performing on stage before a crowd, (2) at a music production desk with screens, (3) singing into a mic, (4) playing acoustic guitar. Lower area: 2 neon music icons — tilted smartphone with music note (lower left), glowing microphone with musical notes (lower right). Text effects: glossy, luminous, gold and white emboss, energetic streaks and spark explosions around headline. Mood: inspiring, celebratory, futuristic, emotionally uplifting — like a high-impact Japanese Golden Week music event ad.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case185",
+    "title": "吉祥物品牌识别设计表",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066568983453880412",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case185/output.jpg",
+    "imageAlt": "吉祥物品牌识别设计表示例图",
+    "prompt": "{\n  \"type\": \"18-section complete brand identity and mascot design sheet\",\n  \"brand\": {\n    \"name\": \"{argument name=\\\"brand name\\\" default=\\\"MUYANG TEA\\\"}\",\n    \"industry\": \"{argument name=\\\"industry\\\" default=\\\"tea shop\\\"}\",\n    \"colors\": [\"{argument name=\\\"primary color\\\" default=\\\"yellow\\\"}\", \"{argument name=\\\"secondary color\\\" default=\\\"green\\\"}\", \"white\", \"brown\", \"dark green\"]\n  },\n  \"subject\": \"{argument name=\\\"character description\\\" default=\\\"3D rendered cute Shiba Inu mascot wearing a green apron\\\"}\",\n  \"layout\": {\n    \"grid\": \"3-column by 6-row grid layout\",\n    \"sections\": [\n      {\n        \"title\": \"01 BRAND DNA ANALYSIS\",\n        \"elements\": [\"brand logo\", \"5 color swatches\", \"6 brand icons\", \"target audience charts\"]\n      },\n      {\n        \"title\": \"02 CONCEPT MOODBOARD\",\n        \"elements\": [\"5 reference photos\", \"4 mood icons\", \"design concept equation\"]\n      },\n      {\n        \"title\": \"03 FORM STUDY\",\n        \"elements\": [\"4 logo anatomy icons\", \"4 design evolution steps\", \"4 character silhouettes\"]\n      },\n      {\n        \"title\": \"04 CONCEPT EXPLORATION\",\n        \"elements\": [\"12 line-art character concept sketches\"]\n      },\n      {\n        \"title\": \"05 REFINED LINE ART\",\n        \"elements\": [\"3 rows of front and side view line art with proportion guides\"]\n      },\n      {\n        \"title\": \"06 DETAIL REFINEMENT\",\n        \"elements\": [\"2 full-body renders with annotation labels\", \"4 circular close-up views\"]\n      },\n      {\n        \"title\": \"07 EXPRESSION SHEET\",\n        \"elements\": [\"11 3D rendered facial expressions\"]\n      },\n      {\n        \"title\": \"08 POSE LIBRARY\",\n        \"elements\": [\"9 full-body 3D rendered character poses\"]\n      },\n      {\n        \"title\": \"09 TURNAROUND VIEW\",\n        \"elements\": [\"5 full-body 3D renders from multiple angles\", \"5 matching line-art views\"]\n      },\n      {\n        \"title\": \"10 COLOR DEVELOPMENT\",\n        \"elements\": [\"5 rows of 5-color palette options\", \"color psychology explanations\"]\n      },\n      {\n        \"title\": \"11 MATERIAL SPECIFICATION\",\n        \"elements\": [\"5 surface texture swatches\", \"material property sliders\", \"4 manufacturing process icons\"]\n      },\n      {\n        \"title\": \"12 COLOR APPLICATION\",\n        \"elements\": [\"4 color scheme variant renders\", \"2 light and dark mode renders\", \"4 contrast rating indicators\"]\n      },\n      {\n        \"title\": \"13 CONSTRUCTION GUIDE\",\n        \"elements\": [\"2 line-art technical diagrams for geometry and grid system\"]\n      },\n      {\n        \"title\": \"14 DESIGN SYSTEM RULES\",\n        \"elements\": [\"minimum size icons\", \"clear space diagram\", \"4 correct and incorrect usage examples\"]\n      },\n      {\n        \"title\": \"15 ASSET VARIANTS\",\n        \"elements\": [\"3 scaled size variants\", \"3 line-art style variants\", \"3 simplified flat icon heads\"]\n      },\n      {\n        \"title\": \"16 DIGITAL APPLICATIONS\",\n        \"elements\": [\"1 app icon design\", \"2 social media avatar versions\", \"UI component elements\", \"3-frame animation cycle\"]\n      },\n      {\n        \"title\": \"17 PHYSICAL APPLICATIONS\",\n        \"elements\": [\"plush toy product mockup\", \"product packaging mockup\", \"branded merchandise mockup\", \"retail storefront mockup\"]\n      },\n      {\n        \"title\": \"18 FINAL RENDERING\",\n        \"elements\": [\"large high-resolution 3D mascot render holding tea cup\", \"finalized logo\", \"deliverable file format list\"]\n      }\n    ]\n  }\n}",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case186",
+    "title": "建筑风产品目录页",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066447564132745574",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case186/output.jpg",
+    "imageAlt": "建筑风产品目录页示例图",
+    "prompt": "Create a vertical 3:4 product design catalog page with a warm neutral paper-like background.\n\nTop section — lifestyle hero shot: place the product (use the uploaded image as the exact reference, preserving its form, proportions, materials, and identity without redesign) center-dominant with generous whitespace. Setting is a minimal architectural interior with a textured plaster wall and subtle concrete/stone floor. Lighting is natural sunlight angled from the side, soft but casting high-contrast shadows. Render in editorial lifestyle photography style, high realism, warm and muted color grading.\n\nBottom section — technical specification panel laid out in a clean modular grid:\n- Bottom left and center: orthographic architectural line drawings showing front view, side view, and three-quarter cutaway/profile view. Lines in muted red or sepia, fine technical weight, with minimal editorial measurement and construction callouts.\n- Bottom right: 3-4 material swatch samples derived from the product's actual materials (fabric, leather, metal, wood, or plastic as applicable), in square or rectangular format with small editorial captions.\n\nTypography: minimal editorial style, subtle captions only, no large headlines, soft black or dark brown.\n\nOverall mood: design catalog / product design journal — architectural, premium, calm. No clutter, no bold colors, no heavy branding, no decorative graphics, no perspective distortion in the technical drawings.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case194",
+    "title": "OBSIDIAN 咖啡品牌企划",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2066523210808484228",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case194/output.jpg",
+    "imageAlt": "OBSIDIAN 咖啡品牌企划示例图",
+    "prompt": "Generate four cohesive high-end realistic editorial visuals for OBSIDIAN coffee brand. Cinematic, dark, mature aesthetic inspired by luxury sportswear and premium coffee advertising. Studio lighting that's dramatic yet controlled, photorealistic textures, clean compositional layout. Shot 1: Hero brand poster featuring 'OBSIDIAN' lettering with an artful coffee display — steam rising, beans scattered. Shot 2: Full product range — coffee bags, cans, and capsules arranged together. Shot 3: Tight packaging detail with tagline 'Coffee for grown-ups who chase flavor.' Shot 4: Lifestyle close-up of a steaming cup. Ultra-polished finish, crisp realistic materials, unified brand identity, no fantastical or surreal elements",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case106",
+    "title": "蓝图与渲染分屏物体",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067202108303311255",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case106/output.jpg",
+    "imageAlt": "蓝图与渲染分屏物体示例图",
+    "prompt": "Pick any object and slice it in half vertically, the left side rendered as a detailed technical schematic blueprint with grid lines and annotations, the right side as a polished 3D model render, the center seam flickering and glitching where the two visual realities collide.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case107",
+    "title": "凉棚蓝图与实景搭建分屏",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067142493389603170",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case107/output.jpg",
+    "imageAlt": "凉棚蓝图与实景搭建分屏示例图",
+    "prompt": "Architectural split-scene: left side shows a hand-sketched pencil blueprint of a wooden garden pergola on white paper, front and slight side elevation with construction lines, dimension labels, and handwritten notes, posts and crossbeams precisely drafted in a professional hand-sketched technical style. Right side shows the finished pergola fully built in a real garden, photographed from a low front-corner angle at eye level showing the full timber beam depth. Natural wood texture with realistic joints, installed on grass with surrounding plants, soft daylight and grounded shadows. Photorealistic architectural visualization.\n\nPergola Blueprint Prompt: Hand-drawn architectural pencil sketch of a wooden garden pergola on white paper. Front and slight side elevation view with clear proportions.\n\nConstruction lines, dimensions and handwritten notes visible. Wooden posts and cross beams precisely drafted. Professional but hand-sketched technical style. Clean white background.\n\nFinished Pergola: Fully built wooden pergola in a real garden, matching the exact structure and proportions from the sketch. Viewed from a low front corner perspective at eye level, showing depth and the full beam structure instead of a flat elevation. Natural wood texture with realistic joints and connections. Installed on grass with surrounding plants. Soft daylight with grounded shadows. Photorealistic architectural visualization.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case306",
+    "title": "公园长椅冰咖啡人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/saniaspeaks_/status/2067451160991084677",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case306/output.jpg",
+    "imageAlt": "公园长椅冰咖啡人像示例图",
+    "prompt": "Beautiful young Japanese girl with long straight dark brown hair and soft full bangs, fair skin, bright natural smile, sitting casually on a wooden park bench while holding an iced coffee cup. Wearing a light beige windbreaker jacket and a white pleated mini skirt, relaxed posture, one hand resting on the bench. Surrounded by a lush green park with tall trees, fresh grass, and a bright blue sky with soft clouds. Captured with a smartphone camera in portrait mode, casual everyday snapshot, natural daylight, handheld iPhone photo, slightly imperfect framing, realistic skin texture, natural colors, soft HDR phone processing, candid social-media aesthetic, no professional modeling, no studio lighting, no cinematic color grading, authentic mobile photography, ordinary park outing vibe, spontaneous moment, realistic shadows, subtle lens softness, photorealistic, high-quality phone camera image.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case307",
+    "title": "窗帘刘海近景人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamsofiaijaz/status/2067450336378544407",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case307/output.jpg",
+    "imageAlt": "窗帘刘海近景人像示例图",
+    "prompt": "A photorealistic close-up portrait of a young girl filling almost the entire frame. Her head is slightly tilted to the side, with her cheek resting against her shoulder and partially hidden inside the long cream-colored sleeve of a hoodie. Long, straight hair with curtain bangs falls freely along the left side of her face, covering one eye.￼ On the visible side of her face, she wears soft makeup: laminated brows, a sharp elongated black winged eyeliner that extends the shape of the eye, matte dusty-pink lips, and a calm, slightly pouting expression. She looks directly into the camera, with visible eyelashes.\n\nA long zip-up hoodie over the one shoulder The composition is intimate and casual, resembling a webcam selfie. The frame has a slight tilt, and the face is positioned very close to the lens. Focus is sharp on the visible eye, lips, hair texture, and the thick cream-colored fabric of the sleeve, while the background fades into a soft blur. Behind her is a simple warm gray-beige wall with no visible details. Warm indoor and screen lighting from the front-left creates soft highlights on the skin and hair. The contrast is moderate, and the color palette is muted, featuring black, beige-gray, and dusty pink tones. The overall image should preserve the authentic feeling of a selfie photograph.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case407",
+    "title": "保持专注编辑海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067444516605620410",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case407/output.jpg",
+    "imageAlt": "保持专注编辑海报示例图",
+    "prompt": "Award-worthy graphic design poster in neo-editorial / contemporary editorial style, D&AD / Awwwards / Behance quality.\n\nTheme: Stay Focused.\n\nCreate a powerful central visual metaphor for this theme — transform the concept into a sculptural, iconic, installation-like object that is cut, layered, stretched, stacked, reconstructed, wrapped, or deconstructed, with clear conceptual weight rather than decoration.\n\nClean, minimal light-gray background with generous whitespace.\n\nHigh-contrast modern editorial typography: oversized bold black English headline at top, secondary subtitle, annotation text, exhibition-style hierarchy.\n\nSwiss editorial grid system with intentional breaks, asymmetric balance, precise alignment, strong rhythm, refined spacing.\n\nCentered or near-centered composition with strong vertical tension.\n\nMaterials and rendering: premium product-quality render, matte surfaces, subtle reflections, hard-edge cuts, slight inter-layer translucency, suspended sliced structures, refined details, crisp silhouettes.\n\nColor: black, white, and gray dominant with a single striking accent color and minimal secondary accents — restrained, high-end, contemporary.\n\nLighting: soft studio lighting, subtle shadows, ultra-clean render, highly polished but non-glossy, razor-sharp details.\n\nMood: conceptual, intellectual, exhibition-grade, contemporary, premium, restrained, iconic.\n\nAspect ratio 9:16, 4K, ultra sharp, ultra detailed, ultra clean, high resolution.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case408",
+    "title": "炒面食谱信息图",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067429181726904350",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case408/output.jpg",
+    "imageAlt": "炒面食谱信息图示例图",
+    "prompt": "Ultra-clean modern recipe infographic for chowmin. Feature the finished dish as hero visual, plated and slightly elevated in a perspective or angled view. Arrange ingredients, preparation steps, and tips dynamically around the dish in an editorial layout. Ingredients: icons or mini illustrations with quantities, arranged in clusters or circular flows connected visually to the dish. Steps: numbered panels with arrows or connecting lines forming a logical flow, including small cooking icons (knife, pan, oven, timer). Optional info: calories, prep/cook time, servings, spice level displayed as clean bubbles or badges. Visual style: editorial infographic meets lifestyle food photography. Vibrant natural food colors, subtle drop shadows, clean vector icons, modern typography, soft gradients or glassmorphism for step panels, accent colors on key stats. Composition: finished meal as hero, ingredients and steps flowing dynamically around it, clear visual hierarchy with ample negative space. Lighting: soft natural studio light on a minimal textured or gradient background. Output: 1080x1080, ultra-crisp, social-feed optimized, no watermark.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case173",
+    "title": "花卉精华产品大片",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067413876564795743",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case173/output.jpg",
+    "imageAlt": "花卉精华产品大片示例图",
+    "prompt": "Minimalist studio product photography, a small transparent glass facial oil dropper bottle with a black rubber pipette cap, containing pale pink serum with suspended dried pink floral elements, centered on a natural raw wooden block with visible grain and split texture. Tall matte white skincare box on the left labeled \"HUILE ÉCLAT VISAGE\" with clean black typography and subtle logo near the bottom. Clear cylindrical glass vase on the right filled with water and thin stems of dried pink gypsophila extending upward. Composition rests on a smooth matte pastel pink surface against a matching seamless pink studio background. Strong directional soft light from the left casts long natural-style shadows of the flowers onto the background, with gentle highlights on the glass, subtle reflections on the serum bottle, and soft texture on the wooden block. Straight-on tabletop camera angle, all objects in sharp focus. Color palette: blush pink, soft rose, warm light wood, clean white, transparent glass. Premium Scandinavian minimalist skincare aesthetic, ultra-realistic, studio-grade.\n\nfull prompt:",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case195",
+    "title": "椰香天堂护肤广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Strength04_X/status/2067445760325734734",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case195/output.jpg",
+    "imageAlt": "椰香天堂护肤广告示例图",
+    "prompt": "Minimal white bottle with golden pump surrounded by cracked coconuts, coconut milk splash and foam clouds, tropical luxury spa atmosphere, creamy textures, realistic bubbles floating in background, premium skincare commercial, soft warm lighting, ultra detailed 8K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case196",
+    "title": "逆向重组产品特效广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067399156596175345",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case196/output.jpg",
+    "imageAlt": "逆向重组产品特效广告示例图",
+    "prompt": "[PRODUCT] reassembling in midair from scattered pieces, reverse-disintegration effect, mechanical precision, each component suspended at a different depth, dark void background, high-concept product advertising, cinematic VFX.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case187",
+    "title": "王者仍在呼吸题头版式",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/NeuralAIInsight/status/2067291988953567706",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case187/output.jpg",
+    "imageAlt": "王者仍在呼吸题头版式示例图",
+    "prompt": "Create a 16:9 image.\n\n[PROJECT CARD]\nCreate a compact designed masthead, not a table.\nTITLE: THE KING STILL BREATHES\nMETA LINE: empty night stadium / a buried crown remembers / three triumphs and one hope\nPRIORITY: the four-jewel crown — three jewels lit certain and complete (blue, white, blue) and a fourth softly awakening with hope; crown stays buried until it rises; pitch resolves into a giant number 10; one realistic field, restraint throughout\nMICRO BRIEF: After a legendary hat-trick, a buried crown awakens beneath an empty Argentina-blue stadium — three jewels light for three World Cups, a fourth begins to glow with hope, and the pitch briefly forms a giant number 10.[CONTINUITY HEADER]\nSEQUENCE ID: king_still_breathes_4jewel_12p\nREFERENCE PRIORITY: No image references provided (Brief-Only). No character — environment-led and symbolic. This storyboard controls stadium geography, the waking pitch lines, the buried crown, the four-jewel sequence, the crown rise, the number-10 reveal, and panel order.\nBEAT NAME LOCK (generate once, use identically in panel headers, action path, state track, and the director-strip beat labels): P01 Empty Stadium / P02 Lines Wake / P03 Crown Stirs / P04 First Jewel (blue) / P05 Second Jewel (white) / P06 Third Jewel (blue) / P07 Crown Rises / P08 Three Jewels Lit / P09 Fourth Jewel Awakens / P10 Lines Connect / P11 Number 10 / P12 Hopeful Stillness. Do not relabel or reorder these anywhere on the board\n[SCENE PACKET]\nPREMISE: An empty but still-charged football stadium at night remembers a legendary hat-trick; the pitch wakes, a buried crown stirs and lights three historic jewels one by one, rises in ceremony, and a fourth jewel softly begins to glow with hope as the field geometry briefly forms a giant number 10.\nLOCATION: A single realistic modern football stadium at night after a major match, empty stands, floodlights over an Argentina sky-blue atmosphere, dark emerald grass, white pitch markings, silver floodlight haze, one goal net. Normal football geography only. The pitch surface and the crown buried beneath it are the active stage.\nSTART -> END: empty charged stadium, one net swaying, lines beginning to wake -> a quiet hold on the still field, the crown settled, three jewels fading but the fourth jewel remaining faintly alive — the future has begun to breathe.\nACTION CHAIN: empty stadium, one net sways -> the white pitch lines begin glowing softly, the field waking -> beneath the grass the crown stirs, sensed through buried light and pressure (no visible crown) -> the first jewel lights blue (first World Cup) -> the second jewel lights white (second World Cup) -> the third jewel lights blue (third World Cup) -> the crown rises with ceremonial weight from beneath the pitch -> we see the crown clearly, three jewels glowing blue-white-blue -> a fourth dark jewel stirs, flickers, breathes, and softly begins to glow (hope, not yet a triumph) -> the white lines connect and spread with living light -> from an elevated view the field geometry resolves into a giant number 10 -> the glow fades toward stillness, the crown settles, the fourth jewel remaining faintly alive.\nPROP / EFFECT STATE: a buried crown made by the pitch — gold edges partly formed from the white pitch lines, soil and grass clinging, elegant and football-mythic, never medieval-prop or fantasy-clean. It has four jewel settings. The first three jewels ignite one by one, certain and complete, in Albiceleste rhythm: blue, white, blue. The crown is NOT clearly visible before P07. The fourth jewel is visually distinct: dormant, then flickering and breathing, a soft fragile glow that never fully ignites like the others. The number 10 forms organically and half-found from real field geometry (penalty box, center circle, touchlines, glowing trails), never a graphic overlay. The fourth jewel remains faintly lit at the end. Subtle gold and jewel light only; otherwise blues, whites, silver.\nMUST READ: the hat-trick lights history (three certain jewels) and awakens belief in what comes next (the fragile fourth). Reverent, epic, restrained; pride turning to hope.\n[CHARACTER SANITIZATION]\nNo characters. No player, face, body, silhouette, portrait, or likeness of any real person. No Messi depiction of any kind. The subject is the stadium, the pitch, and the crown. The crown is a symbol, not worn; no king, throne, or robes.\n[IDENTITY CONSISTENCY]\nKeep stadium geometry, floodlight positions, the single net position, and pitch-line layout consistent across all panels. Keep the crown design consistent once revealed, and keep the four jewel positions consistent (three that light historic, one that awakens). Argentina connection through color and atmosphere only — sky blue, white, deep night blue — never text, crests, or a depicted person.\n[STORYBOARD PURITY]\nFull-color panel artwork (polished pitch board). Panel numbers, beat names, and lens tags in the header strip outside each panel. The beat names in the headers must match the BEAT NAME LOCK and the director-strip beat labels exactly. No captions, subtitles, signage, logos, crests, brand marks, trophy replicas, readable text, arrows, or overlays inside the artwork. The number 10 appears ONLY as illuminated field geometry within the image, never a graphic label. One clear visual idea per panel.\n[MASTER SHOT RULE]\nP01 establishes the geography: the empty night stadium, floodlights over Argentina-blue haze, dark emerald pitch with white markings, one goal net, empty stands. One realistic field, normal geography. The sacred charged emptiness is set here.\n[EMOTIONAL ARC]\npost-match silence -> recognition -> awakening -> pride (three historic jewels and the coronation) -> hope (the fragile fourth jewel and the lingering glow); carried by the environment — the swaying net, waking lines, buried stir, the one-by-one jewels, the ceremonial rise, the breathing fourth jewel, the connecting geometry, the number 10, and a quiet hopeful hold.\n[STYLE LOCKS]\nSTYLE LOCK: mythic cinematic football short, premium symbolic sports poetry, elegant and emotionally charged; full-color; deep stadium night blues, sky-blue and white Argentina light, dark emerald grass, silver floodlight haze, selective gold only on the crown and jewel moments. Reverent, epic, restrained, poetic rather than literal. Not a match recap, not a fan edit, not abstract art-film.\nEFFECT LOCK: the white pitch lines wake with a soft living glow like a nervous system; the crown stirs as buried light and pressure under the turf before any reveal; the first three jewels ignite one by one with clear punctuation, certain and complete, blue then white then blue; the crown, once revealed, rises slow and ceremonial and heavy, pitch-made with soil and grass clinging, never a clean prop; the fourth jewel is softer, fragile, flickering and breathing into a gentle glow, never a full bright ignition; the lines connect and spread with living light; the number 10 resolves organically and half-found from real field geometry, discovered by the camera; the fourth jewel remains faintly alive at the end.\nENVIRONMENT LOCK: one realistic night stadium throughout — floodlights, blue atmosphere, emerald pitch, white lines, a single net, empty stands; normal football geography only; no three-net or impossible layouts; no crowd, no players, no symbolic clutter.\nCROWN REVEAL LOCK: the crown is NOT clearly visible in P01-P06. In P03-P06 show only buried glow, pressure under the turf, and the jewels lighting beneath/through the grass — never a readable crown. The first clear crown reveal is P07 when it rises. The crown is pitch-made: gold edges partly formed from white pitch lines, soil and grass clinging, elegant and football-mythic, not medieval-prop, not fantasy-clean.\nJEWEL LOCK: four jewel settings, consistent positions. Three light one-by-one as historic and complete in Albiceleste rhythm — P04 blue, P05 white, P06 blue. The fourth (P09) is visually distinct: dormant then awakening, a soft fragile breathing glow that never matches the full certainty of the first three. It must read as hope, not a won trophy.\n[SPATIAL CONTINUITY LOCK]\nAll panels share one stadium geography: pitch, white-line layout, floodlight positions, the single net, the crown's central buried location and its four jewel positions. The jewels light in fixed positions; the crown rises from one fixed central point (only from P07); the number 10 forms from the established white-line geometry seen from a widening elevated angle (not a new location or overlay). The camera starts close and textural and gradually widens and elevates toward the reveal. Allowed changes: camera height/angle/distance, which jewel is lit, buried-glow state, crown emergence state (none before P07), the fourth jewel's awakening state, glow spread, line illumination, net sway.\n[DIRECTOR STRIP]\nAnimatic track board aligned to panel columns. Shot chips, rhythm blocks, intensity bars, short labels. No seconds or timestamps. BEAT LABEL row must read exactly: P01 Empty Stadium / P02 Lines Wake / P03 Crown Stirs / P04 First Jewel / P05 Second Jewel / P06 Third Jewel / P07 Crown Rises / P08 Three Jewels Lit / P09 Fourth Jewel / P10 Lines Connect / P11 Number 10 / P12 Hopeful Stillness. These must match the panel header beat names.\nPANEL HEADERS:\nP01 / 24mm wide / Empty stadium\nP02 / macro low / Lines wake\nP03 / macro low / Crown stirs (buried)\nP04 / 50mm low / First jewel: blue\nP05 / 50mm low / Second jewel: white\nP06 / 50mm low / Third jewel: blue\nP07 / 35mm low / Crown rises\nP08 / 50mm / Three jewels lit\nP09 / macro / Fourth jewel awakens\nP10 / 35mm rising / Lines connect\nP11 / 24mm crane high / Number 10\nP12 / 24mm wide / Hopeful stillness\nCAMERA + LENS PLAN:\nP01: high wide establishing hold on the empty stadium and single net, patient\nP02: macro low as the white pitch lines begin to glow softly, the field waking\nP03: macro low on the turf as the buried crown stirs — light and pressure under the grass, no visible crown\nP04: low push as the first jewel lights blue beneath the surface, certain and clear\nP05: low push as the second jewel lights white, matching punctuation\nP06: low push as the third jewel lights blue, the historic three now complete\nP07: low angle as the pitch-made crown rises with ceremonial weight from beneath the pitch, soil and grass clinging — first clear reveal\nP08: held medium on the risen crown, three jewels glowing blue-white-blue in Albiceleste rhythm\nP09: macro on the fourth, previously dark jewel as it stirs, flickers, breathes, and softly begins to glow — fragile, hopeful, distinct from the other three\nP10: rising angle as the white lines connect and spread with living light across the field\nP11: high crane / elevated wide as the field geometry resolves half-found into a giant number 10\nP12: wide hold as the glow fades toward stillness and the crown settles, the fourth jewel remaining faintly alive\nACTION PATH:\nP01: the empty stadium sits charged under floodlights, one net swaying slightly\nP02: the white pitch lines begin glowing softly, the field waking and remembering\nP03: beneath the grass the crown stirs, sensed only through buried light and pressure; no crown visible\nP04: the first jewel lights blue — Argentina's first World Cup\nP05: the second jewel lights white — the second World Cup\nP06: the third jewel lights blue — the third World Cup, the historic three complete\nP07: the crown rises with ceremonial weight from beneath the pitch, soil and grass clinging\nP08: the crown is seen clearly, three jewels glowing blue-white-blue\nP09: a fourth dark jewel stirs, flickers, breathes, and softly begins to glow — hope for a fourth, not yet a triumph\nP10: the white lines connect and spread with living light through the pitch geometry\nP11: from the elevated view, the field geometry resolves into a giant number 10\nP12: the glow fades toward stillness, the crown settles, the fourth jewel remains faintly alive\nRHYTHM TRACK:\nRHY P01: hold / long block / held beat\nRHY P02: slow reveal / medium block / clean beat\nRHY P03: slow reveal / medium block / held beat\nRHY P04: build / short block / clean beat\nRHY P05: build / short block / match beat\nRHY P06: impact / short block / smash beat\nRHY P07: build / long block / held beat\nRHY P08: pause / medium block / held beat\nRHY P09: slow reveal / long block / held beat\nRHY P10: build / medium block / match beat\nRHY P11: final hit / long block / smash beat\nRHY P12: pause / long block / held beat\nESCALATION MAP:\nESC P01: L1 calm / flat\nESC P02: L2 tension / rise\nESC P03: L2 tension / rise\nESC P04: L3 rise / rise\nESC P05: L3 rise / rise\nESC P06: L4 surge / spike\nESC P07: L5 peak / surge\nESC P08: L4 surge / held\nESC P09: L3 rise / rise\nESC P10: L4 surge / rise\nESC P11: L5 peak / spike\nESC P12: L2 tension / release\nSTATE TRACK:\nP01: empty stadium, one net sways, no glow\nP02: white lines waking, soft glow\nP03: buried crown stirs, pressure under turf, no crown\nP04: first jewel blue, beneath surface\nP05: second jewel white\nP06: third jewel blue, historic three complete\nP07: crown rises, soil clinging (first reveal)\nP08: crown clear, three jewels blue-white-blue\nP09: fourth jewel flickering, breathing, soft glow\nP10: lines connected, living light spreading\nP11: geometry resolves into number 10\nP12: glow fades, crown settled, fourth jewel faintly alive STYLE TRACK:\nP01: blue floodlit haze\nP02: waking line glow\nP03: buried stir, turf pressure\nP04: blue jewel light\nP05: white jewel light\nP06: blue jewel light\nP07: rising pitch-made gold\nP08: Albiceleste three-jewel glow\nP09: fragile fourth-jewel breath\nP10: connecting line veins\nP11: half-found number 10\nP12: fading glow, one jewel alive [NEGATIVE / AVOID]\nPanel header beat names must match the\n\nSeedance 2.0 Prompt:\n\nBased on the storyboard , create this short film — do not include any movement arrows, camera notes, panel numbers, captions, labels, borders, or storyboard markings.\n\nTHE KING STILL BREATHES — beneath an empty Argentina-blue stadium, a buried crown lights three jewels for three triumphs and a fourth begins to glow with hope.\n\nIMAGE REFERENCE INSTRUCTION\n= the locked 12-panel storyboard, the authoritative director-approved blueprint for composition, staging, motion, timing, and pacing across the full 15 seconds. Follow the panel order exactly. Do not render the storyboard sheet itself. Do not invent alternative coverage. This is an environment-led symbolic piece with no character — no player, face, body, or likeness anywhere.\nColor bible (definitive): deep stadium night blues, sky-blue and white Argentina light, dark emerald grass, silver floodlight haze; selective gold only on the crown and jewel moments. The crown is pitch-made — gold edges partly formed from the white pitch lines, soil and grass clinging to it, elegant and football-mythic, never a clean prop or medieval cosplay. The number 10 forms only from real field geometry, half-found, never a graphic overlay. One realistic football field, one net, normal geography only.\n\nTASK\nCreate a 15-second mythic cinematic football short built from deliberate, elegant cuts. An empty night stadium, still charged after a legendary hat-trick, slowly awakens: the white pitch lines begin to glow, a buried crown stirs beneath the turf, and three jewels light one by one — blue, white, blue — for Argentina's three World Cup triumphs. The crown rises in ceremony, revealing those three certain jewels, and then a fourth dark jewel softly stirs, flickers, and begins to glow with fragile hope for what comes next. The field lines connect and spread with living light until the pitch geometry resolves, for one brief unforgettable moment, into a giant number 10 — then the glow fades toward stillness, the crown settles, and the fourth jewel remains faintly alive. Football history turning to myth, and pride turning to hope.\n\nSTYLE\nMythic cinematic football short, premium symbolic sports poetry, elegant and emotionally charged — not a match recap, not a fan edit, not abstract art-film. Reverent, epic, restrained, poetic rather than literal, as if the stadium itself remembers. Deep night blues with sky-blue and white Argentina light, dark emerald grass, silver floodlight haze, selective gold only on the crown and jewels. Everything moves with weight and intention; restraint over spectacle.\n\nSHOT STRUCTURE: 12 shots / 15s / 16:9 — deliberate cinematic cuts (not one continuous take)\n\nSEQUENCE\nShot 01 — EMPTY STADIUM [0–1.5s] WIDE / STATIC / PATIENT HOLD: the empty night stadium under floodlights, Argentina-blue haze, dark emerald pitch, a single goal net swaying faintly. Still, but charged with the memory of what just happened. Post-match silence.\nShot 02 — LINES WAKE [1.5–3s] MACRO / LOW / SLOW TRACK ALONG A LINE: the white pitch lines begin to glow softly, light running along the painted markings like the field's nervous system waking and remembering. Recognition.\nShot 03 — CROWN STIRS [3–4s] MACRO / LOW / SLOW PUSH: in the turf, a buried glow and faint pressure stir beneath the grass — something royal sensed but not yet seen. No visible crown.\nShot 04 — FIRST JEWEL [4–5s] CLOSE / LOW / CUT IN: beneath the surface the first jewel lights a deep blue — Argentina's first World Cup. Certain, clear, historic.\nShot 05 — SECOND JEWEL [5–6s] CLOSE / LOW / MATCHING CUT: the second jewel lights white — the second triumph. The same confident punctuation.\nShot 06 — THIRD JEWEL [6–7.5s] CLOSE / LOW / MATCHING CUT: the third jewel lights blue — the third triumph. The historic three now complete, glowing in Albiceleste rhythm.\nShot 07 — CROWN RISES [7.5–9.5s] MEDIUM / LOW / SLOW CEREMONIAL RISE: the pitch-made crown rises with heavy ceremonial weight from beneath the turf, soil and grass clinging to its gold edges. Earned, mythic, powerful. The first clear reveal.\nShot 08 — THREE JEWELS LIT [9.5–11s] MEDIUM / SLOW PUSH: the crown seen clearly, its three jewels glowing blue-white-blue. A held moment of pride. The king's history made visible.\nShot 09 — FOURTH JEWEL AWAKENS [11–12.5s] MACRO / SLOW PUSH: a fourth, previously dark jewel stirs — it flickers, breathes, and softly begins to glow. It does not blaze like the other three; it is fragile, tentative, hopeful. Belief in a fourth triumph, not yet won.\nShot 10 — LINES CONNECT [12.5–13.5s] HIGH / RISING: the white pitch lines connect and spread with living light across the field, the geometry beginning to mean something.\nShot 11 — NUMBER 10 [13.5–14.5s] CRANE HIGH / ELEVATED WIDE: from above, the glowing field geometry resolves, half-found and broken-edged, into a giant number 10 — discovered by the camera, pitch memory rather than a drawn symbol. The unforgettable image.\nShot 12 — HOPEFUL STILLNESS [14.5–15s] WIDE / STATIC / HOLD: the glow fades toward stillness, the crown settles back into the grass, the stadium quiets — but the fourth jewel remains faintly alive, breathing. The future has begun to breathe. Hold.\n\nCAMERA RULES\nDeliberate, elegant cinematic cuts between shots — not one continuous take. The camera is patient and confident, uncovering something sacred: it begins close and textural (macro grass, low jewel angles) and gradually widens and elevates toward the reveal, ending on a held wide. One primary move per shot; no shaky handheld, no snap zooms, no hyper-editing. The number 10 is discovered by the elevated camera, never presented as a flat graphic. Let the piece breathe.\n\nHARD RULES\n- No character of any kind: no player, face, body, silhouette, or Messi likeness. The subject is the stadium, the pitch, and the crown.\n- The crown is NOT visible before Shot 07; Shots 03–06 show only buried glow, turf pressure, and the jewels lighting beneath the grass.\n- The crown is pitch-made, soil and grass clinging, elegant and football-mythic — never a clean prop, medieval cosplay, or ornate fantasy.\n- The first three jewels light one by one, certain and complete, in Albiceleste rhythm: blue, white, blue.\n- The fourth jewel must look different from the first three — dormant then awakening, fragile, flickering, a soft glow that never fully blazes. It reads as hope, not a won trophy.\n- One realistic football field, one net, normal geography only — never three nets or impossible layouts.\n- The number 10 appears only as illuminated field geometry, half-found with broken edges, never a graphic overlay or label.\n- No readable logos, crests, sponsor marks, brand marks, or trophy replicas. Argentina connection through color and atmosphere only.\n- Not a match-highlight recap. Reverent aftermath, memory, myth, and hope. Power through restraint — no symbolic clutter.\n\nAUDIO\nNo dialogue, no commentary. Reverent, charged, slightly supernatural sound design. Begin with the deep ambience of an empty stadium — distant floodlight hum, a faint wind, the soft creak of the swaying net. The lines waking add a delicate glassy shimmer running across the field. The crown stirring is a low buried throb under the turf. Each of the three jewels lights with a clear, resonant chime — three certain, complete tones, the same confident punctuation each time. The crown rising lands with a heavy, sacred low impact and a slow rising shimmer of gold. The three-jewel moment holds on a proud sustained chord. The fourth jewel is different — a soft, fragile, flickering tone that breathes rather than rings, tentative and tender. The lines connecting add a spreading living hum; the number 10 resolves on a held, awe-struck swell. Then it falls back toward near-silence — the empty stadium hum, and one last faint breathing shimmer from the fourth jewel. Music: sparse, mythic, restrained — deep cinematic drones, a slow sacred build through the coronation, a single restrained peak at the number-10 reveal, then a quiet hopeful fade that does not fully resolve, leaving the fourth jewel's note hanging. Never bombastic, never a sports anthem; aura and hope, not hype.\n\nNegatives: no player, face, likeness, body, or silhouette; no Messi depiction; no crown before Shot 07; no clean-prop or medieval crown; the fourth jewel must not blaze like the first three; one field and one net only, never three nets; the number 10 only as organic half-found field geometry, never an overlay; no logos, crests, brand marks, trophy replicas, or readable text; no match-recap energy; no identity drift, no jitter or temporal flicker, no warped geometry, no floating objects, no watermarks; no movement arrows, camera notes, panel numbers, captions, labels, borders, or storyboard markings in the video.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case188",
+    "title": "抖音直播截图",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068123767994523857",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case188/output.jpg",
+    "imageAlt": "抖音直播截图示例图",
+    "prompt": "Vertical 9:16 aspect ratio. Create a realistic Douyin (TikTok China) live broadcast screenshot. The scene shows Liu Yifei hosting a live stream, holding up a sign that reads: \"Streaming live tonight, join the chat with Yifei!\" Capture the authentic look of a Chinese mobile livestreaming interface.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case410",
+    "title": "狮驼岭妖魔王庭",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068096704973549620",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case410/output.jpg",
+    "imageAlt": "狮驼岭妖魔王庭示例图",
+    "prompt": "Dark, eerie Chinese mythological atmosphere blending traditional aesthetics with cinematic realism, meticulous detail, multi-pass rendering, flawless modeling. Journey to the West — the treacherous Lion-Camel Ridge, teeming with countless demons. Three massive thrones: the heavily armored Demon Elephant King seated on the left, the heavily armored Demon Lion King enthroned at center, the heavily armored Great Roc Demon King on the right. A diminutive Sun Wukong — back turned to the viewer — marches forward with his Ruyi Jingu Bang resting on his shoulder, clad in full battle armor. Low-angle upward shot, telephoto compression, dramatic hard shadows. Maximum detail, multiple refinement passes, precise perspective and structural lines, exquisite craftsmanship.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case175",
+    "title": "香辣番茄辣酱产品特写",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068032837610356989",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case175/output.jpg",
+    "imageAlt": "香辣番茄辣酱产品特写示例图",
+    "prompt": "Overhead shot of a glass jar of spicy tomato chili chutney on a dark stone surface, surrounded by whole red tomatoes, tomato halves, fresh red chili peppers, black peppercorns, and a small wooden bowl with chutney and a spoon. Warm earthy backdrop, soft directional light, deep rich shadows, high contrast, clean minimal styling, commercial product photography, ultra-detailed, 4K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case198",
+    "title": "Ray-Ban 巨型飞行员墨镜广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/MrDasOnX/status/2068024611074367579",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case198/output.jpg",
+    "imageAlt": "Ray-Ban 巨型飞行员墨镜广告示例图",
+    "prompt": "Minimalist commercial ad featuring oversized Ray-Ban Aviator sunglasses, ultra-clean design. A young woman in all-white outfit leans casually against the giant sunglasses, relaxed confident pose, eyes closed, also holding a regular-sized pair in her hand. Soft gradient golden background with large bold white “RAY-BAN” text behind. Glossy reflective floor, soft studio lighting, modern high-end product photography. Small top-right text “Designed by Mr Das”. Bottom center tagline in small white font: “Iconic vision, every look.”",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case28",
+    "title": "Pixar 香蕉英雄角色",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068003049600380972",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case28/output.jpg",
+    "imageAlt": "Pixar 香蕉英雄角色示例图",
+    "prompt": "Pixar-style 3D animated banana character, single fruit brought to life. A charismatic male figure with bold confident eyes, thick expressive brows, and a wide grin full of gleaming white teeth with sparkle accents. Smooth, slightly glossy yellow peel with soft highlights. Stubby cartoon arms and legs, posed upright with arms crossed in a heroic stance. Background features a blurred bunch of bananas. Standing on a wooden dining table beside a sun-filled window in a cozy modern home interior. Rich vibrant colors, cinematic lighting, soft natural shadows, ultra-detailed high-fidelity textures.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case411",
+    "title": "莫斯科瑞士风格社论海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Naiknelofar788/status/2067991181376868462",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case411/output.jpg",
+    "imageAlt": "莫斯科瑞士风格社论海报示例图",
+    "prompt": "Design a contemporary Swiss Style editorial poster for Moscow, Russia. Use a large bold sans-serif capital letter “M” as the main typographic structure. The “M” must be very clear, clean, geometric, solid, and dominant, with no stroke outline, no border, no shadow outline, and no decorative treatment. The silhouette of the letter “M” must remain easy to read at first glance. Do not let the illustration obscure or distort the shape of the letter. The poster should follow a precise left-aligned Swiss grid system with generous negative space.\n\nInside the “M”, create a simple, logical, and restrained flat illustration of Moscow’s city landscape character. Use only a few essential visual elements: simplified modern skyscrapers inspired by Moscow City business district, the calm curve of the Moscow River, a subtle silhouette of the Kremlin walls and towers, onion domes of Saint Basil’s Cathedral in a simplified geometric form, a soft green park landscape inspired by Gorky Park or Zaryadye Park, and two pedestrians on a clean riverside walkway. Keep the composition minimal, spacious, and easy to understand. Do not add too many landmarks, people, signs, vehicles, monuments, statues, fountains, trains, buses, or small decorative objects.\n\nThe illustration should suggest Moscow’s identity as a capital city where imperial history, Soviet monumental scale, modern glass skyscrapers, riverfront public spaces, and vast urban rhythm coexist in a clean contemporary way. Use flat vector shapes, clean silhouettes, minimal linework, simplified architecture, and believable scale relationships. Keep the scene lightly lively but not busy. The illustration should support the letter “M”, not compete with it.\n\nAllow only extremely subtle overlap outside the “M” frame using simple organic or atmospheric elements only: a few leaves from riverside trees or soft atmospheric mist over the river may slightly extend beyond the letter edge. Keep 97% of the illustration inside the “M”. Do not let people, buildings, domes, towers, vehicles, faces, paths, signage, or complex objects overlap outside the letter. The “M” must remain clearly readable and visually dominant.\n\nPlace the headline “Moscow” below the letter in bold sans-serif type, title case, not all caps, left aligned to the same grid. Under the headline, add this short body paragraph in small regular sans-serif text, also left aligned, with clean spacing and refined editorial hierarchy:\n\n“Moscow moves through grand historic layers, monumental architecture, river bends, and a dense modern skyline. Between imperial heritage, Soviet scale, and contemporary urban energy, the city holds a character that is powerful, structured, and constantly evolving.”\n\nNo icons, no badges, no decorative symbols. The overall design should feel Swiss minimalist: strong grid, precise alignment, asymmetrical balance, clean typography, generous negative space, restrained composition, and modern cultural city poster aesthetics.\n\nColor palette: warm ivory background, deep navy or charcoal typography, concrete gray, glass blue, pine green, Kremlin red accents, river blue-gray, pale beige, and soft black accents. Matte paper finish, subtle paper grain, crisp edges, flat contemporary illustration, modern Moscow metropolitan mood, calm but strong, sophisticated, balanced, and print-ready.\n\nNegative prompt: photorealistic, 3D render, glossy, maximalist, overcrowded city, complex illustration, too many details, too many landmarks",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case189",
+    "title": "AR 超市购物 POV 界面",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067987931651068364",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case189/output.jpg",
+    "imageAlt": "AR 超市购物 POV 界面示例图",
+    "prompt": "POV shot from inside a grocery store aisle, your hands holding a vibrant mixed-fruit jam jar -- strawberry, blueberry, and orange blend. Holographic AR overlays float around it: a \"Flavor Mix\" panel with fruit icons, a \"Nutrition Info\" display, and a glowing \"Freshness Meter\" at 9/10. A translucent digital shopping list with checkmarks for bread and butter hovers nearby, plus recipe suggestions for toast, pancakes, and desserts. Bokeh background of store shelves and shoppers. Clean retail lighting, photorealistic, cinematic, AR glasses POV, vertical composition.\n\nFull prompt: \nA first-person point-of-view (POV) shot inside a modern supermarket aisle. The viewer's hands are holding a mixed fruit jam jar with colorful branding, showing a blend of strawberry, blueberry, and orange flavors. Floating around the jar are sleek, semi-transparent Augmented Reality (AR) digital interfaces and holographic HUDs. The overlays display \"Flavor Mix\" with fruit icons, \"Nutrition Info,\" and a glowing \"Freshness Meter\" reading 9/10. A digital shopping list with checkmarks for bread and butter appears beside the jar, along with small recipe suggestions like breakfast toast, pancakes, and desserts. The background shelves are slightly blurred with other products and shoppers, creating realistic depth of field. Bright, clean lighting with a futuristic retail atmosphere, ultra-realistic, cinematic look, high-tech AR glasses perspective, vertical composition.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case176",
+    "title": "悬浮美食摄影组图",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067851560168931394",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case176/output.jpg",
+    "imageAlt": "悬浮美食摄影组图示例图",
+    "prompt": "A professional studio food photography series showcasing deconstructed dishes captured mid-air in dramatic high-speed levitation. Set against a seamless dusty pink backdrop with soft, even studio lighting, the ingredients burst and float in dynamic formations. Featured dishes include a suspended tiramisu with its components (scoops of gelato, ladyfingers, mascarpone cream, and coffee beans) hovering in the air, borscht elements (beets, rye bread slices, fresh herbs) floating above a ceramic bowl of soup resting on a wooden board, and a sourdough toast topped with mashed avocado and a runny poached egg caught mid-split. Fine details like flying crumbs, spice particles, scattered herbs, and liquid droplets should be razor-sharp with a shallow depth of field. Soft shadows fall beneath the main suspended elements.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case412",
+    "title": "人群中的低语海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2067837876822581352",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case412/output.jpg",
+    "imageAlt": "人群中的低语海报示例图",
+    "prompt": "A sorrowful Korean psychological drama movie poster depicting a beautiful young woman photographed from a dramatic overhead angle, camera pointing straight down at her face as she gazes upward. Her long dark hair is loosely gathered in an undone bun with loose strands framing her face. Pale complexion, an expression of quiet emotional exhaustion. She is dressed in an oversized burgundy wool sweater, dark grey leggings, and scuffed white sneakers, holding a worn paperback book tightly against her chest. Surrounding her, a busy subway station where commuters stream past in long-exposure motion blur, their figures becoming ghostly streaks of movement against cold grey platform tiles. The contrast between her stillness and their motion creates a powerful sense of solitude. Korean title text at the top reads: \"군중 속의 속삭임 (Gunjung Sogui Soksagim - Whispers in the Crowd)\". Bold white serif typography fills the center of the composition. Visual style: warm-beige film grade, fine analog grain, shallow depth of field, soft tungsten underground lighting, subtle atmospheric haze, cinematic K-drama mood. Shot on Sony A7R IV, 50mm, slow shutter speed.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case310",
+    "title": "玩具相机阳台随拍",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068501129059783072",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case310/output.jpg",
+    "imageAlt": "玩具相机阳台随拍示例图",
+    "prompt": "A quiet summer morning in a European apartment. A woman sits on the floor next to open balcony doors, absorbed in a book, one leg stretched toward the railing, a cream knitted blanket draped loosely over her lap. She wears a simple orange bralette and delicate jewelry, completely unaware of the camera. A cup of tea and an open book rest on the wooden floor beside her. The balcony overlooks classic European architecture: cream stone facades, wrought-iron railings, flowering balconies, leafy trees.\n\nPhotographed from an awkward handheld angle, as if someone walked past the room and snapped a photo without slowing down. The framing is tilted and accidental. The subject is not centered. Parts of the balcony doors, blanket, floor, and foreground objects are cut off by the frame edges.\n\nCaptured on a cheap 2000s low-resolution toy digital camera. 0.3-megapixel quality. Heavy motion blur. Intentionally crooked and tilted framing. Harsh pop-up flash despite bright daylight. Overexposed white highlights. Intense digital noise and heavy sensor grain. Low-fidelity faded colors. Chromatic aberration at the edges. Lens flare. Looks like an extremely blurry candid photo uploaded from an old toy camera. Raw and amateurish. Authentic nostalgic texture.\n\nSlight focus miss, motion smear, low-resolution facial details, sensor noise, JPEG artifacts, and compression damage visible across the face — exactly as a cheap toy camera would produce.\n\nDo not preserve modern clarity. Do not protect facial sharpness. The subject remains recognizable despite image degradation. Subject occupies 65% of the frame.\n\nLarge foreground obstructions from a partially clipped teacup, book, blanket folds, and balcony door frame. Extreme off-balance composition. Camera not leveled. Subject positioned awkwardly near one edge. Parts of the room, railing, and foreground elements are clipped.\n\nThe image should feel like a forgotten candid uploaded to an old social media site in the mid-2000s. Raw, amateurish, imperfect, accidental, nostalgic, unpolished. Captured-memory realism, not aesthetic photography.\n\nSuper thick plastic toy-lens softness, motion smear, focus miss, smeared highlights, low-resolution detail loss, heavy JPEG compression, sensor noise, and degraded detail across the face, hair, hands, blanket, books, teacup, balcony, buildings, and sky.\n\n--ar 4:5\n\nNegative prompt: beauty filter, modern smartphone quality, DSLR quality, cinematic grading, HDR photography, professional composition, studio lighting, ultra sharp face, perfect skin, flawless focus, fashion editorial, influencer photo, polished digital rendering, AI perfection, hyper-detailed eyes, premium camera quality, luxury portrait photography",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case311",
+    "title": "祖母绿头巾时尚社论人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/bmx_ai13/status/2068462145319444778",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case311/output.jpg",
+    "imageAlt": "祖母绿头巾时尚社论人像示例图",
+    "prompt": "A cinematic close up side profile portrait of a beautiful Black woman with deep glowing skin, eyes closed peacefully, wearing a bold emerald green and black patterned headwrap and matching scarf. Minimal elegant white face paint strokes above the eyebrow and across the cheek, glossy natural lips, small silver earring. Dark muted green studio background with soft atmospheric bokeh, premium fashion editorial lighting, smooth skin texture, dramatic yet calm mood, African inspired beauty portrait, high end magazine cover aesthetic, ultra-realistic photography, shallow depth of field, soft rim light, rich contrast, 85mm lens, f/1.8, 8k detail.\n\nNegative Prompt: text, logo, watermark, extra face paint, messy fabric, distorted face, bad anatomy, harsh shadows, overexposed skin, blurry eyes, plastic skin, low resolution, cartoon, CGI, unrealistic jewelry, extra earrings, deformed nose, asymmetrical lips.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case108",
+    "title": "失重清晨分镜板",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/DrSadek_/status/2068438789236699582",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case108/output.jpg",
+    "imageAlt": "失重清晨分镜板示例图",
+    "prompt": "A cinematic 6-panel storyboard sheet on a clean dark charcoal background, arranged in a 3-column by 2-row grid of widescreen 16:9 panels with thin neutral gray borders and a small white number label in the top-left corner of each panel. Photorealistic film stills, naturalistic dawn lighting, shallow depth of field, natural skin texture with subtle imperfections, candid composition, muted naturalistic color grade. Unifying concept: an ordinary morning where gravity has quietly stopped working — everyday objects and people drifting weightlessly. Panel 1: a bedroom at dawn, soft blue light, a sleeping person and their duvet drifting an inch above the mattress, dust motes hanging perfectly still in the air. Panel 2: a kitchen close-up, dark coffee pouring upward out of a white mug in a slow liquid ribbon, steam curling downward toward the counter. Panel 3: a bathroom, a toothbrush hovering mid-air with a pearl-like blob of toothpaste suspended beside it, scattered water droplets frozen around a reaching hand. Panel 4: a breakfast table, cereal pieces and milk orbiting a bowl in a lazy floating halo, a single spoon chasing one drifting cereal O. Panel 5: an entryway, keys, coins and a wallet frozen in a constellation above a doormat, a hand sweeping slowly through them. Panel 6: a front door swinging open onto an ordinary busy street below, a person floating out unbothered while sipping from an upside-down coffee cup. Each panel a distinct camera framing, photoreal textures. Small white label text — EXACT TEXT: '1','2','3','4','5','6' — one number per panel, no extra text, no duplicate text.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case312",
+    "title": "深夜办公室闪光灯人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068395305624871253",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case312/output.jpg",
+    "imageAlt": "深夜办公室闪光灯人像示例图",
+    "prompt": "CCD flash photography style, late-night office setting, whiteboard covered in mathematical formulas in the background, black-rimmed glasses, white high-neck top, black high-waisted mini skirt, semi-matte cool-white porcelain skin with realistic skin texture, subject seated at desk, whiteboard marker held close to the lips, slight dutch angle composition, nuyoah aesthetic",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case413",
+    "title": "红裙时尚社论人像",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/meng_dagg695/status/2068369080504222141",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case413/output.jpg",
+    "imageAlt": "红裙时尚社论人像示例图",
+    "prompt": "Editorial fashion portrait, woman wearing flowing red bell-sleeve wrap dress, dramatic hard rim lighting from camera-left casting golden edge glow on fabric, direct intense eye contact with camera, parted lips, confident expression, wind-blown sleeve fabric captured mid-motion with natural fabric ripple, hair strands lifted by wind, deep saturated red shadows contrasted against warm blown-out gold highlights, asymmetric tight crop with one sleeve extending off-frame, cinematic color grading, high dynamic range, shot on Hasselblad medium format, 85mm lens, f/1.8 shallow depth of field, warm amber gradient backdrop with subtle atmospheric haze and soft lens flare bottom-left corner, skin texture realistic with subtle highlight sheen, professional studio fashion photography, ultra detailed",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case414",
+    "title": "金色光环时尚海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Xaroon_x/status/2068359539691532543",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case414/output.jpg",
+    "imageAlt": "金色光环时尚海报示例图",
+    "prompt": "Create a luxury cinematic fashion poster featuring a stylish young male standing in a powerful confident pose, captured from a low-angle perspective. The subject wears a high-end black designer outfit with sharp tailoring, subtle metallic accents, and clean modern silhouette. His expression is calm, confident, and slightly intimidating, with direct eye contact. Hair is perfectly styled with soft volume and natural shine. Behind him is a large glowing circular spotlight in deep gold, creating a halo effect that enhances dominance and focus. The background is minimalist matte black with subtle texture, dust particles, and faint vignette edges to enhance depth. Lighting is dramatic studio-style with strong contrast, highlighting facial structure and clothing details. The composition is symmetrical and centered like a luxury brand advertisement or album cover. Ultra-realistic, 8K detail, 4:5 vertical ratio, high-end editorial aesthetic designed for viral engagement. --ar 4:5 ratio",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case29",
+    "title": "粉彩卡哇伊动物伙伴",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Taaruk_/status/2068351521016955098",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case29/output.jpg",
+    "imageAlt": "粉彩卡哇伊动物伙伴示例图",
+    "prompt": "Cute minimalist pastel doodle illustration, kawaii character standing side-by-side with their adorable animal companion, inspired by modern Japanese stationery art and children's picture books, clean vector linework, soft cream background, muted pastel color palette (pink, blue, mint, lavender, yellow), simple geometric shapes, tiny confetti dots and floating decorative elements, rounded character design with oversized sweater, wide pants, sneakers, glasses, calm expression, animal companion variations including llama, bear, axolotl, rabbit, cat, fox, turtle or fantasy creature, cozy scenic background with seaside boardwalk, lakeside village, mountain town or whimsical nature landscape, flat design, thick outlines, charming and playful aesthetic, symmetrical composition, full body pose, cute friendship theme, highly detailed vector illustration, sticker-like appearance, children's book art style, soft shadows, clean negative space, vibrant yet gentle colors, trending on Pinterest, adorable wholesome atmosphere, 4k, masterpiece.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case415",
+    "title": "罗纳尔多三区运动海报",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/vireonixx/status/2068870555349246242",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case415/output.jpg",
+    "imageAlt": "罗纳尔多三区运动海报示例图",
+    "prompt": "Cristiano Ronaldo sports poster. Background divided intothree horizontal zones. Top zone warm cream Pantone 9183Coccupying top 40% of poster. Middle zone signal redPantone 485C as a pure flat color band occupying exactly\n8% of poster height at golden ratio point. Bottom zone\ndeep charcoal Pantone 432C occupying remaining 52%.\nThree zones. Two colors and one neutral. The geometry\nof the Portuguese flag deconstructed and reconstructedas graphic architecture.\n\nHis figure spans all three zones. Shot full body from\nslight low angle. Al Nassr gold kit. Mid stride. Leftleg forward. Right arm back. The specific body positionof someone at absolute peak running velocity. Not a posedaction. A captured action. The body in the cream zonerendered in full color warm skin tones and gold kit. The\nbody in the red zone bleached to near white silhouette\nwhere it intersects the red band. The body in the charcoal\nzone rendered in black and white high contrast. Three color treatments on one continuous figure. The zones are notbackgrounds they are filters. Each one revealing a\ndifferent version of the same man.\n\nMotion blur. His figure in slight motion blur at 1/250second shutter. The sharp elements his face his number 7his boot touching ground. The blurred elements his armsin motion his hair his loose kit fabric. The blurcommunicates what no still image can. The speed. The\nrelentlessness. The fact that he is never fully stopped.\n\nLayered over the three zones across the full poster width.\nA system of fine parallel horizontal lines. 0.3pt. Warm\nwhite. At 25% opacity. Running edge to edge. Spaced 4mm\napart. The texture of a television scan line. Or a\nprinting registration grid. Or the lines on a ruledpage waiting to be written on. The lines are the sameacross all three zones changing color against each\nbackground. White on cream barely visible. White on red\nglowing. White on charcoal clear and strong. The same\nline behaving differently in different worlds.\n\nPaint intervention. In the cream zone only. Upper left\nquadrant. Raw gestural brushstroke in cobalt blue\nPantone 2728C. A single mark. Applied with a wide brush\nat 45 degrees. The blue unexpected against the cream.\nNot part of the flag system. A disruption. An intervention\nfrom outside the established color logic. The color of\na sky he is always looking toward.\n\nJapanese typography. Large scale. Behind photograph layer.\nIn cream zone behind his upper body. 挑戦 pronounced\nchōsen meaning challenge. Rendered at 200pt Noto Serif\nCJK deep charcoal at 15% opacity. The kanji visible\nthrough the photographic layer like a thought behind\na face. In charcoal zone behind his lower body.\n勝利 pronounced shōri meaning victory. Same scale\nsame treatment. Beginning and end. Challenge and victory.\nAbove and below.\n\nInformation system. Right side of poster. Thin vertical\nrule signal red 1px running full height. To its right\na column of data in Helvetica Neue Light 6pt tracking\n200 bone white on charcoal and cream on red adjusting\nfor legibility. Club career timeline. Years at each\nclub. Goals per season. The data as a river running\nparallel to the figure. The career in numbers beside\nthe career in motion.\n\nTypography primary. Across the red zone. Full poster\nwidth. The red band is a stage for one typographic event.\nFutura PT Heavy. All caps. White. 36pt. Tracking 300.\nPerfectly centered vertically in the red band. THE\nSTANDARD HAS ALWAYS BEEN HIM. The red band exists to\nhold this sentence. Everything else in the poster exists\nto justify it.\n\nBelow the red band entering the charcoal zone. Full width.\nHelvetica Neue Black Extended. White. 96pt. Tracking minus\n10. RONALDO. The letters occupying the full width exactly\ntracked to fit. The name as the foundation of the\ncharcoal zone. Below the name in same charcoal zone.\nHelvetica Neue Light. 8pt. Tracking 600. Bone white.\nCR7 PORTUGAL 900 GOALS FORWARD LEGEND. One line. All\nthe context needed. None of the decoration.\n\nArt direction M/M Paris conceptual intelligence. Bureau\nBorsche typographic sophistication. Wieden Kennedy\nAmsterdam emotional directness. Nike Brand Design\nproduction quality. All four present simultaneously\nat their absolute peak.\n\nShot aesthetic Misan Harriman color and dignity. Ernst\nHaas motion blur mastery. Gregory Heisler technical\nperfection. Three photographers whose combined vision\nmakes something none of them would make alone.\n\nPrint format 70x100cm. 10K resolution. HDR. The three\nzones printed in three separate ink passes on a\nHeidelberg offset press. The red band overprinted twice\nfor maximum saturation. The charcoal zone with 7 color\nprocess for maximum depth. The cream zone with minimum\nink for maximum paper feel.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case190",
+    "title": "中文野生动物信息图",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068852226844664044",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case190/output.jpg",
+    "imageAlt": "中文野生动物信息图示例图",
+    "prompt": "Design a visually rich infographic about an endangered animal using Chinese text. Feature a photorealistic animal as the main focal point, surrounded by annotated diagrams, structured callouts, and concise labels covering its habitat, diet, and distinctive traits. Blend photorealism with bold graphic design elements including color blocking, icons, and layered shapes on a clean background. Make it dense with information, tactile in feel, and professionally crafted.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case416",
+    "title": "梦核品牌视觉套件插画",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/92digitalartArt/status/2068766168979063085",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case416/output.jpg",
+    "imageAlt": "梦核品牌视觉套件插画示例图",
+    "prompt": "surreal dreamcore architectural illustration, bright Memphis design influence, pastel pop color palette, crisp black ink outlines, isometric fantasy garden space, tiled geometric walls, floating spheres, checkerboard floor, stylized clouds, ornamental plants and topiary, clean comic-book linework, playful postmodern shapes, flat colors with subtle grain texture, whimsical liminal atmosphere, decorative botanical details, airy blue sky, high-detail editorial illustration, vibrant retro-futuristic mood.\n\nCreated entirely with ChatGPT Image 2 🚀",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case30",
+    "title": "乐高足球收藏人偶",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/ChillaiKalan__/status/2068717001145778630",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case30/output.jpg",
+    "imageAlt": "乐高足球收藏人偶示例图",
+    "prompt": "A highly detailed collectible toy figure inspired by a LEGO-style minifigure, standing in a professional studio. The figure has a realistic young woman’s face with porcelain skin, straight jet-black hair, blunt bangs, and a single striking white streak running through the hair. She wears small silver earrings and maintains a calm, confident expression. The body is a glossy plastic brick-toy minifigure wearing a soccer jersey with the number 10, matching shorts, and national-team-inspired colors. Full-body composition, centered framing, shallow depth of field, premium product photography, ultra-clean lighting, reflective plastic surfaces, realistic shadows, sharp focus, luxury collectible aesthetic, high-end commercial advertising style, photorealistic face blended seamlessly with toy body, 8K resolution, vibrant color grading, studio backdrop matching the jersey color theme.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case417",
+    "title": "奇趣凸面镜旅行手账",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Taaruk_/status/2068716967968788743",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case417/output.jpg",
+    "imageAlt": "奇趣凸面镜旅行手账示例图",
+    "prompt": "Transform the uploaded photo into a whimsical hand-painted storybook illustration. Keep the exact pose, perspective, convex traffic mirror reflection, road, utility pole, and surrounding tropical greenery. Reimagine the mirror reflection as a vibrant illustrated world with lush jungle plants, palm trees, flowers, butterflies, doodle hearts, stars, swirls, smiling sun, fluffy clouds, and colorful hand-drawn decorations. The person is transformed into a cute cartoon character wearing a white t-shirt, navy shorts, white socks, and a blue cap, posing playfully with one leg raised and a peace sign. Integrate fitness-tracker statistics inside the mirror in a charming infographic style: “Day 53”, “4.06 km”, “88 m”, “24 min 9 sec”. Bright pastel colors, textured gouache paint, children's book aesthetic, whimsical doodles, clean outlines, cozy and cheerful mood, highly detailed foliage, playful travel journal style, Strava-inspired adventure artwork, vibrant greens, oranges, blues, and pinks, ultra-detailed illustration, masterpiece, kawaii aesthetic, editorial quality, vertical composition, 4k.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case418",
+    "title": "民俗纸艺场景重构",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Ciri_ai/status/2068716810346860804",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case418/output.jpg",
+    "imageAlt": "民俗纸艺场景重构示例图",
+    "prompt": "Reimagine the entire image as one cohesive Decorative Folk Flat Illustration blended with a soft handcrafted paper-cut layered style, inspired by charming papercraft diorama aesthetics. Preserve the original subject, composition, and overall mood, but simplify every element into clean flat forms, bold rounded shapes, and cute childlike proportions. Add playful doodle accents, decorative folk patterns, slightly uneven handmade outlines, and minimal facial details such as dot eyes and soft blush cheeks.\n\nUse a vivid, cheerful color palette that feels fresh and different from the original image, while keeping the final artwork warm, sweet, innocent, whimsical, and storybook-like. Create the feeling of layered cardstock with stacked paper depth, clean cut edges, subtle shadows between layers, and gentle paper-crafted imperfections, as if the scene were carefully cut, colored, and assembled on clean white paper. The result should look cute, handcrafted, playful, and visually unified, with a polished yet charming handmade folk-art papercraft finish.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case419",
+    "title": "阿根廷10号运动海报",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068534010574459131",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case419/output.jpg",
+    "imageAlt": "阿根廷10号运动海报示例图",
+    "prompt": "prompt:\n\nA mixed-media sports poster with a realistic chest-up portrait of a young Argentine soccer player, confident pose with a subtle smile, dark brown slightly messy hair. Wearing the Argentina national team jersey with iconic sky-blue and white stripes, Adidas logo on right chest, Argentina Football Association crest on left.\n\nSoft studio lighting from upper left with gentle shadows and highlights on the hair. A bold white number \"10\" fills the background, partially overlapped by the player.\n\nBackground features vertical smoke bands in Argentine flag colors: sky blue, white, and sky blue.\n\nModern, clean, and dynamic style combining sharp portrait details with soft smoky effects for a powerful professional sports-poster aesthetic.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case313",
+    "title": "深夜地铁CCD人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2068516066679283984",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case313/output.jpg",
+    "imageAlt": "深夜地铁CCD人像示例图",
+    "prompt": "prompt:\n\nCCD flash photo with low-saturation black-pearl dark-gold tones, deep charcoal shadows, subtle dark-gold light reflections, soft frontal flash illuminating the subject, slight overexposure, fine grain, cool and moody late-night city atmosphere.\n\nSubject: young East Asian woman, elegant small oval face, narrow almond-shaped eyes, aloof expression, black low ponytail.\nOutfit: black turtleneck bodycon dress + dark gray thin jacket + sheer stockings + pointed stilettos.\nSetting: deserted midnight subway platform, metal benches, blurred backlit ad panels, reflective floor.\nPose: sitting on platform bench, legs crossed naturally, one hand on her bag.\nExpression: pensive, glancing up at camera after looking down.\nHighlight: long legs, slim waist, cold elegant vibe.\nAspect ratio: 9:16",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case315",
+    "title": "俯拍航拍棚拍人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069568331821318277",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case315/output.jpg",
+    "imageAlt": "俯拍航拍棚拍人像示例图",
+    "prompt": "Full prompt: \n\nUltra-wide angle, 90-degree top-down aerial studio portrait of a woman looking straight up at the camera. Strict identity preservation from reference image, do not alter face, proportions, skin texture, or expression.\n\nComposition: full-body framing, large negative space surrounding the subject, dramatic isolation and graphic impact.\n\nSubject: woman with round thick-framed stylish glasses. Wearing a deep dark brown short-sleeve button-up shirt in corduroy or textured fabric, with a light beige off-white textured sweater underneath. Natural hairstyle with visible texture and volume, do not alter hair color or structure. Natural realistic skin tone, visible texture, not over-smoothed. Expression: engaging, slightly curious or inquisitive.\n\nBackground: minimalist studio backdrop, soft gray gradient, darker at edges, lighter at center directly beneath the subject.\n\nLighting: soft uniform overhead lighting from above, subtle shadows defining facial features and clothing folds, even illumination, no harsh contrast.\n\nCamera: ISO 150-200, aperture f/1.28, shutter speed 1/200s, high-resolution ultra-detailed.\n\nColor grading: neutral modern tones, soft balanced contrast, clean contemporary look.\n\nMood: minimalist, modern, contemplative. Strong subject isolation and visual clarity.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case110",
+    "title": "铅笔屑微缩景观网格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Gdgtify/status/2069543521045143580",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case110/output.jpg",
+    "imageAlt": "铅笔屑微缩景观网格示例图",
+    "prompt": "2x2 grid, do this for 4 days $ scenes that made humans proud: Input = Pencil Shaving Category. Identify 4 distinct shavings (e.g., Graphite Shavings, Red Pencil Shavings, Yellow Pencil Shavings, Green Pencil Shavings). > Function Draw($ Pencil_Shaving, $ scene) > Anchor: [scene]:: [Pencil_Shaving]::4 > Morphology: A stunning 3D [scene] composed of [Pencil_Shaving] — full detailed > Material Physics: The thin curled wood, painted color edge, and fine grain of [$Pencil_Shaving] under warm window light",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case316",
+    "title": "强制透视运动鞋人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069538312357114324",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case316/output.jpg",
+    "imageAlt": "强制透视运动鞋人像示例图",
+    "prompt": "A cinematic forced-perspective street photography scene where a giant worn-out sneaker appears enormous in the foreground, towering over a casually dressed young man leaning against it. The man wears a brown leather jacket, loose blue jeans, sneakers, and a beige cap, standing confidently with hands in pockets. Autumn atmosphere with yellow and orange leaves scattered on the road, talltrees with fall foliage in the background, parked car slightly blurred. Ultra-realistic textures on the shoe sole, visible dirt and fabric wear. Shot from a very low angle to exaggerate scale, shallow depth of field, natural daylight, soft cinematic color grading, realistic shadows, high detail, 8K resolution, professional photography, surreal yet believable forced perspective illusion.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case317",
+    "title": "云绽时尚编辑人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/ChillaiKalan__/status/2069471846890959183",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case317/output.jpg",
+    "imageAlt": "云绽时尚编辑人像示例图",
+    "prompt": "Photorealistic high-fashion editorial image, vertical 4:5. A young adult fashion model sitting calmly on the center of one enormous pink flower growing above the clouds, the flower stem rising from below and disappearing into soft white clouds. Low-angle perspective from slightly below, the flower framing the image, making the flower feel monumental and surreal. The model wears a short sleeve crisp oversized white shirt, loose light trousers, silver jewelry, and black minimal sandals. Natural open brown hair moving softly in the wind, composed expression, slight soft smile. Clean vivid blue sky, a few soft white clouds, huge detailed flower petals, bright natural daylight, crisp vivid color, playful surreal fashion campaign mood, realistic anatomy, natural hands, sharp editorial photography, no text, no logos --ar 4:5 --raw --profile glu65pn --stylize 60 --weird 4 --hd",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case421",
+    "title": "温馨日式生活方式插画",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/oggii_0/status/2069469184787198164",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case421/output.jpg",
+    "imageAlt": "温馨日式生活方式插画示例图",
+    "prompt": "Create a delicate contemporary Japanese lifestyle illustration with a cozy slice-of-life atmosphere.\n\nART STYLE\nHand-drawn pen-and-ink sketch illustration, thin expressive linework, loose imperfect contours, minimalist editorial artwork, soft watercolor washes, subtle paper texture, elegant negative space, sketchbook aesthetic, modern Japanese indie illustration, light and airy composition, contemporary café-art style, emotionally warm and intimate.\n\nCHARACTERS\nTwo young adults with soft, simplified facial features and natural expressions. Casual oversized clothing, relaxed body language, authentic interaction, candid everyday moment. Faces are minimally rendered with delicate linework rather than detailed realism.\n\nENVIRONMENT\nA cozy indoor setting such as a café, coffee shop, apartment, studio, bookstore, kitchen corner, or creative workspace. Include wooden furniture, coffee mugs, indoor plants, shelves, books, windows, soft decorative details, and small everyday objects. The environment should feel lived-in yet uncluttered.\n\nCOMPOSITION\nFull-body or three-quarter-body view. Characters seated naturally and facing one another. Balanced asymmetrical layout. Large areas of clean negative space. Storytelling through posture and atmosphere rather than action. Editorial illustration framing. Eye-level perspective.\n\nCOLOR PALETTE\nMuted and desaturated colors only:\n• Dusty blue\n• Warm cream\n• Soft beige\n• Light gray\n• Sage green\n• Warm brown\n• Off-white\n\nAdd only one small accent color element such as red socks, red shoes, a red mug, or a small red object.\n\nLIGHTING\nSoft natural daylight entering through windows. Gentle ambient illumination. No dramatic shadows. Warm, peaceful, calming mood.\n\nRENDERING\nMinimal shading. Sparse details. Watercolor-style color fills inside delicate ink outlines. Slightly unfinished sketch quality. High-quality illustration with visible hand-drawn imperfections. Soft edges and subtle texture.\n\nMOOD\nComfortable, quiet, nostalgic, peaceful, intimate, cozy, everyday happiness, slow living, café culture, thoughtful conversation, gentle human connection.\n\nAVOID\nAnime screenshots, manga panels, cel shading, digital painting, hyperrealism, photorealism, 3D rendering, glossy surfaces, vibrant saturated colors, cinematic effects, dramatic lighting, excessive details, sharp outlines, heavy shadows, complex backgrounds.\n\nSCENE:\n[INSERT YOUR SCENE DESCRIPTION HERE]\n\nThe final image should feel like a premium Japanese lifestyle illustration found in an art book, café magazine, design journal, or independent sketchbook collection.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case202",
+    "title": "STARKIDZ 宇宙望远镜广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Strength04_X/status/2069448983651787177",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case202/output.jpg",
+    "imageAlt": "STARKIDZ 宇宙望远镜广告示例图",
+    "prompt": "A magical science advertisement poster. A curious young boy age 10 in a NASA tshirt gazes up in total wonder beside a giant shiny silver telescope 3x his height pointed toward a breathtaking galaxy view above, \"STARKIDZ\" written in glowing white font on the telescope body. Deep dark space background with milky way galaxy colorful nebula clouds and shooting stars. Glowing cosmic typography \"STARKIDZ\" in white and blue filling the background. Tagline bottom: \"Explore the universe.\" Small text top-right corner reads \"Designed with GPT Image 2\" in grey. Photorealistic, magical kids science product commercial, dramatic deep space galaxy lighting.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case203",
+    "title": "纪念碑感时计时尚广告",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069387162425205211",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case203/output.jpg",
+    "imageAlt": "纪念碑感时计时尚广告示例图",
+    "prompt": "Oversized luxury wristwatch as a modern sculpture centerpiece, fashion model leaning against the dial face, monumental \"TIME\" typography looming in the background, deep emerald studio environment, reflective polished floor, Swiss high-end advertising aesthetic, cinematic editorial photography, ultra-clean minimalist composition, 1:1",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case318",
+    "title": "富士胶片风日系情侣写真",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069961089719353505",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case318/output.jpg",
+    "imageAlt": "富士胶片风日系情侣写真示例图",
+    "prompt": "9:16 vertical portrait of a young Japanese couple captured in Fujifilm analog film style\n\nFilm aesthetic: Fujifilm Pro 400H / Superia emulation, muted pastel palette, faint green-magenta color cast, low contrast, soft highlight falloff, fine film grain, gentle halation around light sources\n\nLighting: natural window light, diffused and airy, soft shadow transitions, bright but gentle indoor daylight\n\nSubjects: two young Japanese people, minimal natural makeup, realistic skin with subtle texture and natural imperfections\n\nFemale: oversized button-up shirt, loose shorts, casual relaxed styling\nMale: simple light t-shirt or shirt, clean understated look\nBoth: natural, slightly tousled hair\n\nPose: intimate closeness, sitting or standing side by side; she leans gently toward him, one hand on his shoulder or chest; he tilts in, faces nearly touching, the moment just before a kiss\n\nExpression: soft natural smiles or tender gaze toward each other, genuine emotional warmth\n\nCamera: waist-up close framing, eye-level angle, slight handheld quality, intimate feel\n\nSetting: minimal indoor space near a window, soft curtains, clean neutral background\n\nMood: warm, romantic, quiet everyday intimacy\n\nQuality: ultra-realistic, analog film character, gentle grain, slight softness, natural imperfections",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case195",
+    "title": "Flash Chat 应用图标",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069900481770737707",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case195/output.jpg",
+    "imageAlt": "Flash Chat 应用图标示例图",
+    "prompt": "Design a macOS App Store icon for an app called 'Flash Chat'. Single squircle icon with smooth, continuously rounded corners, centered on a white canvas with padding, filling roughly 80% of the canvas. Modern light skeuomorphic style, macOS App Store quality. One icon only.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case422",
+    "title": "广州丝带海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069840084673945968",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case422/output.jpg",
+    "imageAlt": "广州丝带海报示例图",
+    "prompt": "Spring Festival 2026 Guangzhou city promo poster, vertical 9:16, festive yet elegant. Double exposure with S-curve flowing composition on a pure white textured background. Bottom-right corner: a miniature figure in traditional Chinese attire swings a long red silk ribbon that morphs into mountain ridges and river currents, revealing a layered Guangzhou panorama inside, including Canton Tower, Zhujiang New Town skyline, Pearl River with cruise ships, ancient architecture, and Baiyun Mountain. Bottom-left typography: \"SPRING 2026\" horizontal with a vertical line of Chinese characters reading \"Millennial Trade City, Charming Guangzhou.\"",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case319",
+    "title": "提灯徒步者棚拍人像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069812774277087740",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case319/output.jpg",
+    "imageAlt": "提灯徒步者棚拍人像示例图",
+    "prompt": "3D render, stylized full-body side-view portrait of an elderly male hiker with a long white beard, walking right. Solid seamless deep-teal studio background with soft floor reflections. He wears a brown wide-brim felt hat, a gray-blue plaid shirt, cuffed brown corduroy trousers, and scuffed dark work boots. Large canvas-and-wicker backpack with leather straps on his back. Right hand holds a lit vintage hurricane lantern (brass frame, glass globe) casting a warm amber glow. Left hand grips a plain wooden walking stick. Textured matte finish, soft diffused studio lighting, vertical composition with generous negative space above.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case111",
+    "title": "椒盐卷饼工匠分镜板",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/TechieBySA/status/2069811464324460679",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case111/output.jpg",
+    "imageAlt": "椒盐卷饼工匠分镜板示例图",
+    "prompt": "“Create a crisp, clean infographic storyboard poster for THE PRETZEL MAKER. Wide 16:9 layout, white background, black borders, bold black typography, premium Pixar 3D stylized rendering, bright vivid colors — deep golden brown pretzel crust, warm caramel tones, coarse white salt crystals, rich wood textures, warm Bavarian daylight.\nTop header:\nTHE PRETZEL MAKER\nTOTAL VIDEO TIME: 12 SECONDS\n8 SHOTS · GOLDEN · TWISTED · STRAIGHT FROM BAVARIA\nLegend icons: ACTION, HEAT, TIME HINT, INGREDIENT\nSame Pixar-style middle-aged Bavarian male baker throughout — warm round face, thick blonde mustache, traditional lederhosen with suspenders, white shirt, small charming wooden pretzel stand, string lights overhead, wooden beer barrels nearby, warm daylight, charming German town square or beer garden visible behind him.\n8 panels:\nPanel 1 — THE OPENER: Wide shot. Baker stands behind his wooden pretzel stand, warm daylight flooding the scene, string lights hanging above, traditional German buildings softly visible behind him. He spreads his arms wide and says \"Fresh Pretzel!\" with a massive proud smile. His world established. You know exactly what's coming.\nPanel 2 — THE ROPE: Close-up. Both hands rolling a length of soft pale dough into a long even rope on the wooden counter — rolling back and forth with practiced rhythm, the rope stretching longer and thinner with each pass.\nPanel 3 — THE TWIST: Hero craft frame. Close-up dramatic. Both hands lifting the dough rope and crossing it into the iconic pretzel shape — looping the ends, twisting them together, folding them down onto the body to form the classic pretzel knot. The most unique hand motion in the entire series. Nobody has shown this in Pixar style.\nPanel 4 — THE BATH: Close-up. The shaped pretzel dipped into a pot of bubbling baking soda water — briefly submerged, lifted back out glistening and slightly darkened, ready for the oven. The step that gives pretzels their signature deep color and chew.\nPanel 5 — THE SALT: Close-up dramatic. Coarse white salt crystals scattered generously over the wet pretzel surface — sticking instantly, catching the daylight, vivid white against the pale dough.\nPanel 6 — THE OVEN: Wide medium with him visible. Baker slides the tray of pretzels into the glowing oven, closes the door. Steps back with a satisfied nod. The wait begins.\nPanel 7 — THE REVEAL: The hero frame. Oven door opens — pretzels emerging deep golden brown, glossy, perfectly twisted, steam rising. He lifts the tray with both hands, eyes lighting up with pride. The most beautiful pretzels you have ever seen.\nPanel 8 — THE TEAR: Wide warm shot. Baker tears a warm pretzel apart with both hands — soft warm interior revealed, steam escaping, salt crystals visible on the golden crust. Eyes closing in pure satisfaction. String lights and the warm Bavarian square glowing behind him.\nFooter:\nVIDEO FLOW: 8 shots × ~1.5s = 12 seconds. Dough rope to the tear.\nCAMERA TIPS: wide on the stand opener, close-up for the rope roll, close-up dramatic for the twist, close-up for the baking soda bath, close-up dramatic for the salt, wide medium for the oven, hero wide for the reveal, wide warm for the tear\nLIGHT & STYLE: warm Bavarian daylight throughout, deep golden pretzel crust, coarse white salt, rich wood textures, traditional lederhosen, string lights, Pixar vivid warm colors throughout\nBAKER NOTES: one baker, one stand, one perfect pretzel. Golden, twisted, and straight from Bavaria.”",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case423",
+    "title": "罗纳尔多地形海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/vireonixx/status/2069793294641778794",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case423/output.jpg",
+    "imageAlt": "罗纳尔多地形海报示例图",
+    "prompt": "Create an extraordinary collector-edition Cristiano Ronaldo poster inspired by contemporary data visualization, cartographic design, and editorial publishing. The composition should capture Manchester United-era Ronaldo during a dynamic turning movement, as if caught between acceleration and decision. His expression should communicate youthful confidence and relentless ambition.\n\nThe portrait should be integrated into a visual world constructed from flowing topographic contours, movement trajectories, directional systems, and abstract maps representing a lifetime of progress. The lines should feel elegant and intelligent rather than technical. Large-scale information structures should guide the viewer's eye through the composition while reinforcing the narrative of movement and evolution.\n\nThe palette combines arctic blue, coral red, soft ivory, and charcoal accents. Sophisticated typography, layered publishing systems, and contemporary information design should create visual depth throughout the artwork. The final image should resemble an award-winning editorial feature documenting one of the most remarkable journeys in modern sport.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-comparison_case112",
+    "title": "鸟巢椅概念板",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069779689074561192",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case112/output.jpg",
+    "imageAlt": "鸟巢椅概念板示例图",
+    "prompt": "Design concept board: bird nest weaving methods as the inspiration for a sculptural lounge chair. Four-stage sequence from nest-building reference photos to construction diagrams, then organic form abstraction, then the finished product. Interlocking woven frame forms the seat and backrest. Natural fiber upholstery with soft cushioning. Earthy warm tones with a polished, refined surface. Sustainable luxury aesthetic. Presentation layout with process sketches in the top half, final rendered chair in the bottom half. Warm natural lighting.\n\nAR 4:3",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case424",
+    "title": "乌法旅行贴纸海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Sairah_0/status/2069779118535930286",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case424/output.jpg",
+    "imageAlt": "乌法旅行贴纸海报示例图",
+    "prompt": "Create an airy city scene with large typography-safe negative space in the upper-left. Add [УФА] and one short elegant English caption matching the city mood. Automatically adapt the background to the city: one iconic primary landmark, local architecture, café culture, transport sign, street lamp, flowers, trees, small decorative details, and calm daily-life moments. Use 3–6 people only, naturally interacting with the city: talking at a café, walking, jogging, sketching, or taking photos. Avoid crowds and avoid a single hero character. Style: Japanese stationery aesthetic, luxury sticker illustration, premium commercial flat-vector poster, clean thin outlines, consistent line weight, flat colors only, no shading, no gradients, no texture. Palette: blush pink, dusty rose, sage green, warm cream, soft beige, muted gray-green. Mood: minimal, elegant, calm, refined, high-end travel postcard and lifestyle branding. No realism, no watercolor, no painterly effects, no photorealism, no dense background. Установить соотношение сторон 3:4",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case425",
+    "title": "无限之爱演唱会海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069749509392052645",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case425/output.jpg",
+    "imageAlt": "无限之爱演唱会海报示例图",
+    "prompt": "Swiss International design style, minimalist flat vector poster, vertical 9:16 format, diagonal-split layout. Top-left: Traditional Chinese headline in a serif typeface paired with flowing connected-script serif English. Bottom-right: key symbolic illustration — flat vector artwork with vivid fluorescent gradients, subtle grain texture, scattered pixel-art icons, cultural festival poster aesthetic, museum-quality graphic design. Theme: Infinite Love Marathon Concerts (floral motif). 4K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case196",
+    "title": "九宫格产品企划",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2069628865044254934",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case196/output.jpg",
+    "imageAlt": "九宫格产品企划示例图",
+    "prompt": "Generate a 3×3 image grid (3:4 aspect ratio) for a luxury commercial campaign centered on the uploaded product.\n\nEach of the nine frames should deliver a unique visual concept while keeping the product visually identical throughout.\n\nThe nine concepts:\n1. Hero still life with a bold, iconic arrangement\n2. Extreme macro revealing surface texture and material detail\n3. Liquid or particle dynamics wrapping around the product\n4. Minimalist sculptural staging with abstract geometry\n5. Floating elements that convey lightness and forward-thinking design\n6. Close-up sensory shot focused on tactile realism\n7. Color-concept scene drawn from the product's own palette\n8. Symbolic ingredient or component abstraction\n9. Surreal but refined blend of realism and imagination\n\nProduct rules: maintain 100% fidelity to the product's shape, proportions, label, type, color, and branding. No distortion or redesign. Clean product-to-background separation.\n\nLighting and finish: soft controlled studio lighting, subtle highlights, realistic shadows, ultra-sharp focus, high dynamic range, editorial luxury aesthetic.\n\nMood: polished, modern, hyperreal, aspirational. Built for brand sites, social grids, and digital billboards.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case197",
+    "title": "3D 音乐播放器图标套组",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071108428563697756",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case197/output.jpg",
+    "imageAlt": "3D 音乐播放器图标套组示例图",
+    "prompt": "Design a complete set of 12 music-player homepage category icons in the style of a professional app UI designer. Icons should cover: music note, vinyl record, equalizer, headphones, liked music, music folder, video, microphone, playlist, speaker, CD, and radio. Render each in 3D skeuomorphic style with vibrant colorful accents, on white background rounded-corner cards.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case31",
+    "title": "温馨生活方式贴纸九宫格",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/RuzainaMeer/status/2071097968846057649",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case31/output.jpg",
+    "imageAlt": "温馨生活方式贴纸九宫格示例图",
+    "prompt": "A 3x3 grid collage of 9 illustrated sticker-style panels, all featuring the same young woman with curly brown hair styled in a messy bun, soft anime-inspired illustration style with warm pastel color palette (blush pink, cream, warm brown, soft teal). White background for each panel with subtle sparkle/heart decorations. Each panel shows her in a different cozy lifestyle activity:\nPanel 1 (top-left): Cooking in a cozy kitchen, wearing a cream knit sweater and apron, stirring a pink pot on the stove, tomatoes and herbs nearby, warm kitchen background.\nPanel 2 (top-center): Reading a book curled in a cozy chair, wearing a black oversized hoodie, wrapped in a pink blanket, coffee cup with heart on the side, bookshelf behind her.\nPanel 3 (top-right): Painting on a canvas easel, wearing white overalls, holding a paintbrush over a colorful palette, soft musical notes floating around.\nPanel 4 (middle-left): Gardening with floral gloves and denim overalls, planting flowers in terracotta pots, watering can beside her, pink flowers blooming.\nPanel 5 (middle-center): Doing yoga/stretching on a pink mat, wearing a pink crop top and black leggings, arm raised gracefully overhead, green plant in background, water bottle and dumbbells nearby.\nPanel 6 (middle-right): Hugging a golden retriever puppy, wearing a cream hoodie, surrounded by floating pink hearts, big happy smile.\nPanel 7 (bottom-left): Journaling at a desk, wearing a pink off-shoulder knit sweater, writing in a notebook, tulips in a vase, a lit candle, sparkle accents around her.\nPanel 8 (bottom-center): Playing acoustic guitar, wearing a black casual outfit, smiling joyfully, musical notes and golden sparkles floating around her.\nPanel 9 (bottom-right): Traveling with a backpack, wearing a straw hat, sunglasses, white tee, holding an open map, camera hanging around her neck, airplane trail in background.\nConsistent character design across all panels. Soft lineart, warm skin tone, expressive large eyes, cozy and aesthetic illustration style similar to Korean webtoon sticker art. Clean white background per panel, arranged in a 3x3 grid layout.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case426",
+    "title": "Moon Whisper 石墨肖像",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/AiwithLariab/status/2071096245611872431",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case426/output.jpg",
+    "imageAlt": "Moon Whisper 石墨肖像示例图",
+    "prompt": "Create an ultra-detailed monochrome graphite pencil masterpiece featuring a graceful HALF-FACE portrait emerging from a pure white background. Position the face on the far right side of the composition, with eyes gently closed in peaceful reflection. The visible half of the face should be large, elegant, and highly detailed with realistic graphite shading and delicate pencil textures.\n\nBehind the subject, place a MASSIVE luminous full moon dominating the background, occupying nearly half of the artwork. Surround it with tiny graphite stars, subtle stardust, and soft celestial particles. Long flowing black hair dissolves into dreamy smoke-like wisps, delicate butterflies, and elegant swirling pencil strokes that blend into the moonlit atmosphere.\n\nMaintain a minimalist fine-art composition with generous negative space, museum-quality graphite rendering, ultra-realistic pencil textures, soft shadows, emotional elegance, ethereal beauty, luxury gallery artwork, vertical phone wallpaper, masterpiece, 8K, hyper-detailed, Moon Whisper theme.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case427",
+    "title": "涂鸦破墙海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Sheldon056/status/2071082708512465062",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case427/output.jpg",
+    "imageAlt": "涂鸦破墙海报示例图",
+    "prompt": "A portrait-oriented cinematic poster in the Graffiti Come to Life (Optical Illusion) style, where the cartoon character is not portrayed as a separate 3D figure standing beside the real person. Instead, the character exists as a highly detailed graffiti mural painted on a textured brick wall, while one or both of its hands appear to break through the wall as if coming to life, naturally wrapping around or interacting with the real subject standing in front of it. The illusion should feel seamless, convincing, and visually striking, blending realistic perspective, shadows, lighting, and depth to create the impression that the graffiti has become partially alive.\n\nThe overall composition should feature a modern cinematic atmosphere with dynamic lighting, rich color contrast, and carefully balanced depth. Enhance the poster with stylish graffiti-inspired decorative elements such as spray paint splashes, urban textures, paint drips, stencil patterns, geometric accents, subtle wall cracks, layered graphic shapes, and contemporary street-art details that strengthen the visual identity without making the design feel overcrowded.\n\nThe subject's pose must be completely different from the reference photo, appearing expressive, confident, and naturally dynamic rather than stiff or flat. The body language should resemble that of an international fashion model, conveying elegance, confidence, and effortless movement with a refined editorial aesthetic. The facial expression should feel lively, engaging, and full of personality, creating a stronger emotional connection with the viewer.\n\nThe outfit should reflect modern casual fashion with a stylish, contemporary look. Combine clothing pieces with varied colors, textures, materials, and subtle patterns to avoid a repetitive or monotonous appearance. The styling should feel fashionable, youthful, and visually balanced while remaining realistic and naturally wearable.\n\nEvery typography element within the poster should feature bold, premium, and eye-catching font styles that complement the graffiti concept. Use creative font treatments, layered text compositions, dynamic sizing, and modern graphic placement to ensure the typography becomes an integral part of the artwork rather than looking plain or generic.\n\nThe overall poster should deliver a premium, high-end visual experience with a fresh contemporary aesthetic. Avoid ordinary layouts, repetitive compositions, mediocre design choices, or generic visual treatments. Every element should contribute to a vibrant, visually rich, and modern street-art inspired masterpiece rendered in ultra-high-definition 8K quality with exceptional sharpness, realistic textures, and professional cinematic finishing.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case428",
+    "title": "霓虹暗影缪斯",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamrealsnow/status/2071080066751312345",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case428/output.jpg",
+    "imageAlt": "霓虹暗影缪斯示例图",
+    "prompt": "Use the uploaded photo as the exact identity reference. Preserve the facial structure, hairstyle, beard, skin tone, facial proportions, eyebrows, lips, jawline, and overall likeness with photorealistic accuracy. Do not alter the identity.\n\nConvert the portrait into a premium high-contrast monochrome vector illustration with clean comic-book linework and sharp cel shading.\n\nThe subject faces directly toward the camera with a confident expression and slight chin lift.\n\nAdd vivid red neon rim lighting around the hair, ears, shoulders, and jawline.\n\nWear an oversized black open shirt layered over a plain white crew-neck t-shirt, a thin silver square pendant necklace, luxury watch, and black sunglasses resting on top of the head.\n\nPure black background with subtle floating particles and dramatic shadows.\n\nUltra-clean vector lines, premium poster composition, luxury editorial style, crisp facial details, cinematic contrast, minimal color palette using only black, white, and glowing red.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case429",
+    "title": "茶园绘本拼贴",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Sairah_0/status/2071076528532971692",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case429/output.jpg",
+    "imageAlt": "茶园绘本拼贴示例图",
+    "prompt": "Create a whimsical, hand-painted storybook-style illustration inspired by three candid travel photos arranged vertically in a collage. Preserve the exact composition, poses, and framing from the reference: a young woman with long straight dark brown hair wearing an oversized off-white button-up shirt, black smartwatch, and round sunglasses, standing waist-deep in lush green tea plantations. The first panel shows her facing slightly left while gently brushing the tea leaves with both hands. The second panel captures her from behind with both arms stretched outward, walking peacefully through the tea bushes. The third panel shows her turned slightly to the right, smiling softly while touching the leaves.\n\nTransform the realistic tea estate into a dreamy, colorful illustrated landscape with rolling hills, playful stylized trees, blooming wildflowers, and vibrant foliage. Use soft pastel tones, rich greens, warm yellows, blush pinks, and teal accents. Add whimsical doodle elements around the composition such as hearts, stars, clouds, sunshine, sparkles, tiny flowers, and hand-drawn decorative marks on a warm cream paper background. Maintain the same vertical three-panel layout with generous spacing, rounded organic shapes, textured brush strokes, and a cozy children’s book aesthetic. The illustration should feel joyful, peaceful, and magical, with clean outlines, subtle paper texture, high detail, and a charming gouache/watercolor-inspired finish. No text, no watermark, high-resolution, portrait orientation.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case320",
+    "title": "单色摄影棚肖像网格",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/harboriis/status/2071068008341262538",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case320/output.jpg",
+    "imageAlt": "单色摄影棚肖像网格示例图",
+    "prompt": "A premium fashion editorial portrait series featuring a stylish young man photographed inside a minimalist studio with warm beige walls and soft natural window light. The collection consists of nine unique portraits arranged in a clean 3×3 grid, each showing a different relaxed pose and expression while maintaining a cohesive luxury editorial aesthetic.\nThe model has thick messy wavy dark hair, defined facial features, and wears an elegant monochrome wardrobe consisting entirely of black clothing, including fitted black shirts, tailored black trousers, lightweight knitwear, plain black t shirts, and a structured black blazer. A silver wristwatch subtly completes several looks.\nEach portrait captures a different emotion and pose. Resting his chin on his hand while sitting sideways on a wooden chair. Sleeping across the chair back in a quiet introspective moment. Looking away with a sharp jawline highlighted by side lighting. Reclining casually with one hand through his hair. Leaning forward with elbows on knees and an intense gaze. Resting his face against his hand in a thoughtful pose. Looking back over his shoulder while seated. Sitting with one fist against his lips in black and white. Relaxing with an open collar and confident posture.\nSoft diffused daylight enters from a large window, creating smooth shadows and subtle highlights that emphasize facial structure and fabric textures. The backgrounds remain clean and uncluttered with warm neutral tones throughout.\nShot on an 85mm full frame lens at f/2.2, shallow depth of field, soft editorial lighting, muted color palette, subtle film grain, luxury magazine photography, photorealistic, ultra detailed skin texture, premium fashion campaign, minimalist composition, 8K HDR.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case321",
+    "title": "海岸白日梦胶片肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/mehvishs25/status/2071043508346183695",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case321/output.jpg",
+    "imageAlt": "海岸白日梦胶片肖像示例图",
+    "prompt": "Coastal Daydream\nComposition: Three-quarter close-up captured from slightly behind the shoulder, with wind-swept hair creating organic movement across the frame while the coastline softly recedes into mist.\nPrompt:\nUsing the uploaded photo as the exact face reference. Preserve the face identity perfectly without modifying facial structure, proportions, expression anatomy, skin texture, or unique features. No beautification, no face reshaping, no artificial symmetry, no AI-generated appearance. Photorealistic candid photograph captured on a worn disposable film camera, monochrome cinematic photography, authentic 35mm grain, subtle exposure inconsistencies, natural imperfections, vintage analog character, documentary realism.\nThe woman sits quietly on rugged coastal rocks damp from ocean spray, wearing a flowing white dress with soft fabric folds gathered naturally around her. Strong sea breeze moves through her voluminous hair, lifting sections into the air while delicate strands drift across her cheeks and lips. Her head is turned slightly toward the shoreline, eyes closed, wearing a calm reflective expression and a faint genuine smile as she enjoys the cool ocean wind.\nBehind her, towering sea cliffs disappear gradually into dense coastal fog beneath a dramatic cloud-filled sky. Waves break softly against distant rocks, adding subtle atmosphere without distracting from the subject. Diffused overcast daylight creates gentle tonal transitions across the face and dress, emphasizing realistic skin texture and natural film contrast.\nShot with an 85mm lens, shallow depth of field, cinematic documentary framing, emotional editorial photography, realistic analog exposure, soft focus falloff. The composition captures her from just behind the shoulder, allowing wind-blown hair to partially veil the frame while the mist-covered coastline stretches into the background, creating a quiet sense of solitude and freedom.\nno ultra-clean digital sharpness, no CGI appearance, no beauty-retouching, no fashion-poster composition, no studio lighting, no centered framing, no black bars, no artificial skin smoothing, aspect ratio vertical.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case33",
+    "title": "世界杯摇头公仔",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/SaasJunctionHQ/status/2070943717238919211",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case33/output.jpg",
+    "imageAlt": "世界杯摇头公仔示例图",
+    "prompt": "Turn any player into a collectible.\n\nGenerate a photorealistic studio image of a custom bobble-head collectible figure modeled after [PLAYER NAME], based entirely on the attached reference photo. The reference image is the absolute and sole source of truth for all physical characteristics — do not rely on any prior knowledge, training data, or assumptions about how [PLAYER NAME] looks. Every visual decision must be driven exclusively by what is visible in the attached photo.\nFollow all of the rules below without exception:\nLikeness & Identity\n•Engrave the name ”[PLAYER NAME]” in clean white lettering on the front face of the two-tiered base beneath the figure.\n•Reproduce every distinctive facial feature — bone structure, eye shape, nose, lips, skin tone, and complexion — exactly as seen in the reference. Do not smooth, soften, generalize, or idealize any feature.\n•The hairstyle must match the reference with exact fidelity — preserve natural curl, wave, coil, frizz, volume, length, and direction. Never straighten, flatten, or restyle the hair.\n•Replicate facial hair (beard, mustache, stubble) at the precise density and pattern shown in the reference. If the subject appears clean-shaven, add absolutely no facial hair.\n•Include accessories such as glasses, earrings, or a hat only if they are visibly present in the reference photo. If no accessories appear, add none whatsoever.\nFigure Design & Style\n•The figure must follow a classic sporty bobble-head aesthetic — proportionally large head, compact body, and an overall collectible toy feel. This is not a Funko Pop, not a caricature, and not a hyper-stylized vinyl figure.\n•The neck must be short and thick in proportion, with absolutely no spring, coil, or hinge mechanism visible.\n•Dress the figure in the official national football kit that corresponds to [PLAYER NAME]’s country — use the correct jersey color, shorts, and socks as worn by their national team. Do not default to any generic or incorrect kit.\nPose & Base\n•Pose the figure standing upright with one foot casually resting on top of a standard soccer ball, which sits directly on the base.\n•The base must be two-tiered, with a top surface that mimics the texture of matte natural grass — no gloss, no shine, no reflection of any kind.\nBackground & Lighting\n•The background must show a football stadium that is softly blurred using a shallow depth-of-field bokeh effect, so the figure remains the clear focal point.\n•The stadium lighting must evoke a warm golden hour — rich amber and soft orange tones, low sun angle, cinematic warmth.\nFormat\n•Final output must be in 4:5 portrait orientation.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case204",
+    "title": "涂鸦逃脱工作室冲刺",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/john_my07/status/2071605998729740705",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case204/output.jpg",
+    "imageAlt": "涂鸦逃脱工作室冲刺示例图",
+    "prompt": "Create an ultra-realistic editorial studio photograph set against a smooth off-white seamless backdrop with a bright, airy minimalist aesthetic.\n\nA fun-loving young woman with a pastel blue pixie cut is captured in a spontaneous moment of playful escape. She bursts into laughter while jogging forward, her smile wide and genuine, eyes nearly closed from amusement. Her posture shows energetic movement as she tries to continue running despite being gently held back, creating a humorous tug-of-war effect.\n\nPose & Movement\n\nNatural mid-stride running motion.\n\nOne leg lifted slightly off the floor.\n\nArms moving freely with realistic running dynamics.\n\nOne hand confidently holding a vibrant rainbow spiral lollipop.\n\nSubtle motion in the hair and clothing.\n\nStrong sense of forward momentum with believable body mechanics.\n\nWardrobe\n\nLoose oversized powder-blue sweatshirt.\n\nRelaxed-fit beige trousers with wide legs.\n\nRed checkerboard slip-on skate shoes.\n\nRound eyeglasses casually resting atop her head rather than covering her eyes.\n\nDoodle Character Interaction\nA simple hand-drawn black doodle figure appears beside her, sketched in thick marker lines directly onto the photograph. The character features a round head, tiny dot eyes, and a straight neutral mouth.\n\nThe doodle extends an exaggerated arm that grips the back of the woman's sweatshirt, stretching the fabric noticeably as it attempts to stop her from getting away. The tension creates realistic folds and pull lines in the sweatshirt while subtly drawing her shoulders backward even as her body continues moving forward.\n\nSmall sketch-style motion marks around the doodle's arm suggest effort and resistance. Additional playful doodle accents around the woman's head emphasize her laughter, excitement, and movement.\n\nDetails\n\nAnatomically accurate hands and fingers.\n\nClear visibility of both hands despite oversized sleeves.\n\nRealistic grip and proportions on the lollipop.\n\nConvincing fabric tension and clothing physics.\n\nBright high-key lighting with soft natural shadows.\n\nClean editorial lifestyle photography aesthetic.\n\nHumorous visual storytelling.\n\nModern premium magazine-quality look.\n\nWholesome and playful mood.\n\nUltra-realistic textures, sharp focus, crisp detail, 8K resolution.\n\nVertical composition.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ad-creative_case205",
+    "title": "地铁 CCTV 惊悚画面",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/frametheory058/status/2071605430858756121",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case205/output.jpg",
+    "imageAlt": "地铁 CCTV 惊悚画面示例图",
+    "prompt": "Create a cinematic surveillance-thriller image set inside a massive multi-level underground metro station. The camera should feel like a ceiling-mounted CCTV positioned high above at roughly a 40-degree angle, looking down over a long industrial escalator and the complex architecture of the station.\nThe composition should use a 4:5 vertical frame, with the escalator cutting diagonally through the image to create strong depth and scale. The station is crowded with hundreds of commuters moving in both directions, forming a chaotic flow of people with subtle motion blur.\nAt the center of the frame, a single person matching the uploaded reference image is descending the escalator. The subject appears to be moving quickly, slightly leaning forward. One hand holds the escalator handrail for balance, while the other carries a small glossy black mini bag with realistic reflections.\nAt a dramatic moment, the subject suddenly turns their head over their shoulder and looks directly into the camera, creating an intense fourth-wall-breaking moment, as if they know they are being watched.\nAdd a realistic CCTV interface overlay, including:\nLive recording indicators\nTimestamp and camera ID\nA facial-tracking square locked onto the subject\nA secondary zoomed-in facial recognition panel in one corner\nMinimal technical HUD elements and surveillance graphics\nLighting should be cold and fluorescent, typical of a modern subway station, with realistic reflections on the metallic escalator surfaces and polished handrails. Keep the surrounding crowd slightly blurred while the subject remains sharp and in focus.\nOverall mood: high-end documentary surveillance thriller, ultra-photorealistic, cinematic composition, realistic skin textures, natural crowd behavior, detailed environmental reflections, and professional movie-grade realism.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-character_case34",
+    "title": "钻石牙饰夸张公仔",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071470936973533271",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case34/output.jpg",
+    "imageAlt": "钻石牙饰夸张公仔示例图",
+    "prompt": "Create a hyper-detailed full-body 3D stylized caricature of the person in [REFERENCE IMAGE], preserving their exact face, skin tone, and ethnic features.\n\nStyle: Massive oversized head on a tiny compact body, classic caricature exaggeration. Expression: mischievous wink and wide smirk showing sparkling diamond grillz rendered with ray-traced reflections and prismatic glints.\n\nPose: Standing upright, one arm extended toward the camera to showcase a thick iced-out diamond watch. Every gem catches and refracts light brilliantly.\n\nOutfit: Match exactly what they wear in [REFERENCE IMAGE]. Fabrics rendered with micro-detail stitching, realistic folds. Skin with subsurface scattering, studio-clean and smooth.\n\nSetting: Clean solid vibrant blue backdrop, soft front-facing softbox lighting. No backlighting, no rim light. Diamonds are the brightest focal points in the frame.\n\nRender: Octane Render quality, cinematic 8K, sharp edges, masterpiece level, no text or watermarks, 4:5 aspect ratio.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ecommerce_case177",
+    "title": "VOLT Rush 柑橘爆发",
+    "category": "商品与电商",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071742565339320451",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case177/output.jpg",
+    "imageAlt": "VOLT Rush 柑橘爆发示例图",
+    "prompt": "Ultra-cinematic product photography of a neon-green energy drink can labeled \"VOLT RUSH\", tilted at a sharp diagonal, bursting through glowing citrus slices and electric sparks. Frozen lime juice splashes and ice shards suspended mid-air, micro droplets clearly visible. High-contrast studio lighting with green neon rim lights, deep dark background, glossy aluminum surface, shallow depth of field, photorealistic, 8K, premium advertising style.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case322",
+    "title": "阴郁 GQ 海滩封面",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071772854908326260",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case322/output.jpg",
+    "imageAlt": "阴郁 GQ 海滩封面示例图",
+    "prompt": "Cinematic GQ Style magazine cover — male model with a dark beard and messy curly dark hair, leaning against a vintage 1960s silver convertible on a misty, overcast beach. He stares directly into the camera with a cool, intense expression. Outfit: oversized black leather bomber jacket with utility pockets worn open over a white ribbed tank top, high-waisted black trousers with double-buckle belt, two thin gold necklaces with small pendants hanging mid-chest. Background: shallow depth of field, desaturated sandy shore, pale hazy sky, polished metallic silver car reflecting flat diffused light. Lighting: moody cinematic grade, muted earth tones, blacks, and silvers, high-end film grain throughout. Typography overlay: bold white \"GQ Style\" serif logo at the top, smaller white sans-serif \"HEISENBERG\" on the mid-left.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-portrait_case323",
+    "title": "镀铬面罩侧面肖像",
+    "category": "摄影与文档",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071712457262080034",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case323/output.jpg",
+    "imageAlt": "镀铬面罩侧面肖像示例图",
+    "prompt": "Photorealistic sci-fi portrait, young woman in left-facing side profile, dressed in a mirror-finish chrome-blue jacket and a futuristic helmet with a wide glossy visor obscuring her eyes. Helmet features smooth curves, white trim, clear side panels with subtle tech detailing. Visor has a cool blue reflective sheen, cyberpunk meets space-age fashion. Clean, minimal framing against a gradient blue backdrop. Cinematic studio lighting, high contrast, mirror-like reflections across jacket and helmet surfaces. Razor-sharp detail on facial features and material textures, slight bokeh, 8K resolution, hyper-realistic editorial aesthetic.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case430",
+    "title": "水彩夏日城市恋曲",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/Goodmanprotocol/status/2071643725030457469",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case430/output.jpg",
+    "imageAlt": "水彩夏日城市恋曲示例图",
+    "prompt": "Create a 3:4 vertical watercolor urban sketch travel poster on textured handmade watercolor paper.\n\nCity input:\n[CITY NAME]\n\nCreate a romantic everyday scene reflecting the real architecture, landmarks, street life, climate, and cultural mood of [CITY NAME]. Use recognizable city-specific elements such as local buildings, cafes, balconies, canals, bridges, trams, towers, rooftops, tiles, waterfronts, street furniture, plants, or signs. Avoid generic European scenery or incorrect landmarks.\n\nMain scene:\nShow two lovers as the main subjects, placed slightly below center. They may be walking, sitting at an outdoor cafe, sharing iced coffee, standing near the water, looking at a view, or gently holding hands. Their pose should feel natural, affectionate, quiet, and unposed. Do not show a single person.\n\nCharacters:\nDress the couple in stylish casual summer clothing suited to [CITY NAME]: linen shirts, light cardigans, relaxed trousers, summer dresses, sneakers, sandals, sunglasses, crossbody bags, tote bags, cameras, pastries, or iced drinks. Use mostly white, pale blue, aqua, and soft gray-blue clothing with one or two small lemon-yellow accents. Add gentle wind movement to hair and loose fabric.\n\nComposition:\nUse a clean vertical poster layout with large negative space and an airy editorial feel. Keep the couple small to medium in scale, framed by city-specific architecture or scenery. Place buildings and landmarks in the background or along the sides, softly blended into the paper texture. Keep the upper half bright and open, with the upper right reserved for typography.\n\nTypography:\nIn the upper right corner, add the city name in elegant italic English lettering:\n\"[CITY NAME]\"\n\nDirectly below, add one short poetic English sentence matching the city's fresh summer mood. Use delicate soft cobalt, gray-blue, or muted navy lettering. Keep it minimal, readable, and naturally integrated into the paper.\n\nColor direction:\nUse a refreshing blue-and-yellow summer palette:\n\n75% cool blues and blue-grays: sky blue, cyan, pale aqua, powder blue, faded turquoise, soft blue-gray, selective cobalt.\n\n15% clean white and warm off-white paper highlights.\n\n10% pale lemon yellow, soft butter yellow, sunlit cream, or light golden accents.\n\nBlue should dominate while yellow adds warmth and visual rhythm. Use yellow only as accents in awnings, window light, flowers, umbrellas, pastries, signs, clothing details, drink labels, or sunlit building edges. Avoid an all-blue flat background.\n\nWatercolor technique:\nUse translucent washes, soft blue bleeding, subtle pigment granulation, wet-on-dry textures, gentle brush blooms, pale shadows, visible handmade paper texture, minimal splashes, and delicate reflections where appropriate. Yellow washes should feel like light touching paper.\n\nDrawing detail:\nUse delicate thin ink line art with slightly imperfect hand-drawn lines. Add refined urban sketch details: windows, shutters, balconies, streetlamps, cafe chairs, paving stones, railings, plants, clothing folds, hair strands, hands, shoes, bags, cups, signs, and soft ground marks. Keep faces softly suggested, not realistic.\n\nMood and quality:\nMinimalist watercolor urban sketch, romantic summer travel poster, quiet love story, city-specific atmosphere, breezy blue palette with lemon-yellow highlights, elegant fashion illustration, cozy slice-of-life, Japanese-inspired softness, premium editorial look, calm pastel mood, soft natural lighting, clean background, poster-ready, 8K.\n\nNegative prompt:\nsingle person, generic city, incorrect landmarks, all-blue background, monochrome blue, lifeless colors, yellow-dominant, orange-heavy, brown-dominant, dark vintage, muddy beige, neon colors, oversaturated colors, photorealistic, 3D render, heavy outlines, harsh shadows, crowded street, cluttered background, realistic faces, stiff pose, awkward anatomy, glossy texture, bold typography.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-poster_case431",
+    "title": "CMYK 罗纳尔多收藏海报",
+    "category": "海报与排版",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/vireonixx/status/2071629983324488160",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case431/output.jpg",
+    "imageAlt": "CMYK 罗纳尔多收藏海报示例图",
+    "prompt": "Create a world-class collector's edition Cristiano Ronaldo poster inspired by premium offset printing, editorial publishing, and award-winning graphic design. The composition is dominated by a monumental close-up portrait of peak Real Madrid Cristiano Ronaldo occupying nearly seventy-five percent of the composition. His iconic hairstyle, sharp jawline, and confident expression should be rendered with extraordinary realism.\n\nThe core visual concept explores the beauty of CMYK printing itself. Instead of ordinary colour grading, the portrait should subtly separate into overlapping cyan, magenta, yellow, and black print layers only around selected edges, creating sophisticated registration effects found in premium printing houses. The effect should feel handcrafted and luxurious rather than digital glitch art.\n\nMassive editorial typography should integrate naturally with the portrait while printer crop marks, colour calibration bars, registration targets, production notes, paper codes, and printing specifications become part of the graphic language.\n\nThe palette is dominated by warm paper white with controlled CMYK colour accents. Rich paper grain, tactile ink textures, subtle overprint effects, premium offset realism, museum-quality print production, elegant editorial hierarchy, Behance Featured Project quality, contemporary sports branding, collector-edition masterpiece.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case198",
+    "title": "Y2K 原宿品牌徽章",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071683274725028140",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case198/output.jpg",
+    "imageAlt": "Y2K 原宿品牌徽章示例图",
+    "prompt": "[BRAND NAME]\n\nYou are a senior vector designer specializing in Y2K Harajuku badge art. Your world: Tokyo bootleg culture, early 2000s Japanese brand remixes, retro-futuristic sticker aesthetics. Every output should look like a clean Illustrator vector file, flat and sticker-ready. The badge structure must be invented fresh for each brand, not templated.\n\nBRAND ANALYSIS\n\nBefore designing, resolve all of the following: (1) PRIMARY COLOR — brand's main color softened into a pastel Y2K version, still recognizable but lighter and more kawaii; (2) ACCENT COLOR — brand's secondary color pushed to warm saturation for energetic pop; (3) DARK COLOR — deep brand palette (navy, dark brown, near-black) used for outlines and extrusions; (4) LETTER CONTENT — brand name in bold lowercase or most iconic abbreviation; (5) KATAKANA — correct Japanese transliteration as a secondary text element; (6) ORIGIN FLAG — brand's country of origin flag as a small flat element; (7) SHAPE LANGUAGE — iconic geometric forms from the brand's visual identity used as orbital and background elements, never generic ovals; (8) CULTURAL SYMBOLS — 1-2 small iconic objects from the brand's universe rendered as tiny flat illustrations; (9) COMPOSITION LOGIC — design the badge layout using everything above so it feels invented specifically for this brand.\n\nCANVAS\n\n1:1 square. Flat off-white or warm light grey background. Completely empty, no texture, no gradient.\n\nBADGE STRUCTURE\n\nUsing the resolved shape language and composition logic, build the full badge. Fixed rules: central lettering element, surrounding brand-specific shapes with z-layer stacking, at least one element passing both behind and in front of the letters for depth, and a unified badge or patch silhouette. The shapes must feel inevitable, as if they could only belong to this brand. Everything else is determined by the brand's own visual DNA.\n\nLETTERING\n\nBrand name in large bold lowercase with a wide rounded display typeface. Flat PRIMARY COLOR fill. Thick DARK COLOR extrusion offset down-right at 8-12% of letter height. Bold DARK COLOR outline. No gradients, no rendering.\n\nY2K SIGNATURE ELEMENTS\n\nEvery badge must include: SPEED LINES or motion texture in ACCENT COLOR inside background shapes. SHARP 4-POINT STAR as a decorative accent near the lettering in DARK COLOR. KATAKANA transliteration tucked naturally into the composition. ORIGIN FLAG as a small accurate flat element. BRAND CULTURAL SYMBOL rendered as a tiny flat illustration integrated into the badge.\n\nTECH SPECS\n\nFlat vector only. Zero gradients, effects, blur, or rendering. Clean crisp edges throughout. Maximum 4 colors: PRIMARY pastel, ACCENT warm saturated, DARK outline, off-white. Must feel like a collectible sticker or embroidered patch. Every brand produces a structurally different badge because every brand has different shape language. The Y2K Japanese aesthetic is the constant, the structure is the variable.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-evo-ui_case199",
+    "title": "怀旧记忆网格布局",
+    "category": "UI 与界面",
+    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "界面",
+      "截图",
+      "可复用"
+    ],
+    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071561442013118600",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case199/output.jpg",
+    "imageAlt": "怀旧记忆网格布局示例图",
+    "prompt": "Generate a {argument name=\"grid layout\" default=\"4x3\"} seamless grid layout where every panel shows a separate scene featuring the {argument name=\"subject\" default=\"a young woman\"}. Keep subject appearance, colors, and lighting perfectly consistent across all panels. Theme: {argument name=\"theme\" default=\"childhood memories\"}, mood: {argument name=\"mood\" default=\"warm, nostalgic\"}, style: {argument name=\"style\" default=\"nostalgic cinematic realism\"}. No text, no gaps.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case544",
+    "title": "幼儿词汇拆解学习卡",
+    "category": "图表与信息图",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "信息图",
+      "图表",
+      "讲解"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Naiknelofar788/status/2092993830220120231",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case544.jpg",
+    "imageAlt": "幼儿词汇拆解学习卡示例图",
+    "prompt": "Create a clean, child-friendly educational vocabulary poster for preschool/kindergarten children, inspired by a simple visual learning card.\n\nFeature [FRUIT] as the main large realistic object on the left, and show a [PART / SLICE / SEGMENT] of the same fruit on the right. Connect the two with a playful dotted curved arrow and a tiny simple stick-figure child pointing toward the smaller part.\n\nAdd the word “[FRUIT NAME]” in large bold uppercase letters at the top and “[PART NAME]” in large bold uppercase letters underneath the smaller image. Use a soft white and very light pastel-blue background, rounded image panels, clean spacing, realistic fruit photography, simple blue typography, and minimal playful illustrations.\n\nThe overall design should feel bright, educational, modern, uncluttered, and easy for young children to understand, like a premium preschool vocabulary learning card. Vertical 4:5 composition, high resolution, soft lighting, clear labels, no unnecessary decorations.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case543",
+    "title": "旅行纪念珐琅徽章",
+    "category": "商品与电商",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Emmma__0/status/2093194689222705645",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case543.jpg",
+    "imageAlt": "旅行纪念珐琅徽章示例图",
+    "prompt": "Turn the reference photo into a travel souvenir enamel pin badge. Compose it as a SCENE, not a single isolated object.\n\nSubject hierarchy: the defining landscape, terrain or landmark of the photo forms the main body of the badge and occupies most of its area. If a person appears prominently in the photo, keep them in the badge as a small, simplified figure at true relative scale within that landscape — the person is an accent, the landscape is the subject. Preserve the original spatial relationship and scale between the figure and the surroundings.\n\nHow to render the person: flat enamel color blocks matching their real clothing and hair color from the photo. The face is a smooth plain area of light skin-tone enamel with no drawn facial features — do NOT render the person as a dark or black silhouette, and do NOT black out the face or head. Skin reads as a warm light enamel color, clearly lighter than the clothing.\n\nStyling: thin polished gold outline around the silhouette and along every internal divider, glossy enamel color fill, gentle even lighting with only a soft sheen on the gold lines, very subtle drop shadow. Outer contour follows the scene's own shape, not a plain rectangle.\n\nBackground: flat dark navy coarse linen texture. Badge centered, filling about 60% of the frame.\n\nAvoid: black silhouette figure, blacked-out face, dark featureless head, portrait close-up, detailed facial features, person dominating the badge, cropping out the landscape, three-quarter angle, macro product photography, heavy specular glare, cartoon, realistic scene, text, watermark.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case542",
+    "title": "黑白排版侧脸肖像海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/HustleXR/status/2093206386012230000",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case542.jpg",
+    "imageAlt": "黑白排版侧脸肖像海报示例图",
+    "prompt": "High-contrast black and white typographic portrait poster of [HUMAN], shown in side profile with [FEATURE]. Build the portrait with bold black silhouette blocks, sharp negative space, rough ink edges, fragmented stencil shapes, tiny editorial microtext, vertical typographic accents and expressive hand-drawn calligraphic marks. Integrate one large readable text block saying “[TEXT]” in 2 to 4 stacked lines, placed only inside the neck and body area, using oversized scribbled lettering that feels fused into the silhouette. Include a graphic design logo reading “[LOGO]” near the footer. Minimal off-white paper background, asymmetrical layout, cropped vertical composition, experimental editorial poster design, raw ink print texture, aspect ratio 4:5.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case541",
+    "title": "50/50 混合媒介回忆卡",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Sairah_0/status/2093212900160868430",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case541.jpg",
+    "imageAlt": "50/50 混合媒介回忆卡示例图",
+    "prompt": "Transform the uploaded photo into a vertical mixed-media memory card with a strict 50/50 split.\n\nKeep the original photo unchanged in the top half. In the bottom half, use textured off-white handmade paper and add a muted, irregular color patch matching the photo’s tones.\n\nRedraw the main subjects as a simple dark wax-crayon sketch with loose, imperfect lines and minimal details. Add a short handwritten English phrase and subtle Risograph grain.\n\nCreate a quiet, nostalgic Morandi-style aesthetic with generous negative space. Do not add extra elements or copy the reference composition exactly.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case540",
+    "title": "梦幻未来城市编辑艺术海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Naiknelofar788/status/2093230701986672924",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case540.jpg",
+    "imageAlt": "梦幻未来城市编辑艺术海报示例图",
+    "prompt": "Create a visually unforgettable editorial art poster of a dreamlike futuristic world where familiar everyday life meets surreal architecture. Grand sculptural buildings, winding roads, oversized plants, tiny people, unexpected floating elements, dramatic perspective, cinematic atmosphere, and one iconic focal point. Blend vintage travel-poster design with modern luxury editorial aesthetics, sophisticated muted colors, soft natural light, subtle film grain, tactile paper texture, clean geometric shapes, minimal composition, nostalgic yet futuristic, whimsical but premium, highly detailed, instantly recognizable silhouette, Pinterest-worthy, Instagram-viral aesthetic, collectible art print, no clutter, no photorealism, vertical 4:5.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case539",
+    "title": "粗粝手绘搭档肖像海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/kingofdairyque/status/2093279729717780736",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case539.jpg",
+    "imageAlt": "粗粝手绘搭档肖像海报示例图",
+    "prompt": "Raw sketchy graphic portrait poster of [HUMAN] wearing [CLOTHING], half-body and large in frame, accompanied closely by [ANIMAL], with a minimal [SCENERY] background. Render in a rough expressive illustrated style with broken black ink contours, loose sketch lines, scratchy hatching, irregular stroke weight, imperfect line edges, fast gestural mark-making, simplified anatomy, flat cel-like shadow blocks, and reduced detail. Use a restrained [COLORS] palette with one dominant warm field, one cool counter-field, dark inked shadows, and a few pale highlight accents. Keep the face oversized and central, crop around mid-torso, and place the animal in the lower foreground or tucked beside the subject, drawn with the same simplified raw linework. Reduce the scenery into only 2 or 3 bold silhouette shapes behind the subject, with no detailed environment rendering. Add a narrow warm off-white poster border and very light print texture. Strong attitude, graphic poster energy, intentionally imperfect strokes, raw and sketchy finish, ar 4:5",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case538",
+    "title": "橡皮章旅行田野笔记海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/MahnoorAi12/status/2092221482139349307",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case538.jpg",
+    "imageAlt": "橡皮章旅行田野笔记海报示例图",
+    "prompt": "Rubber Stamp Travel Field Notes Poster — Natural Realism Version\n\nCreate a separate “Rubber Stamp Travel Field Notes Poster” for each photo I upload. Output each photo individually. Never create a collage or combine multiple photos.\n\nUse a 4:3 landscape composition with a natural visual transition between the original photograph on the left and the aged-paper field-note area on the right. Do not add an obvious dividing line.\n\nLEFT — ORIGINAL PHOTOGRAPH\n\nThe left side should occupy roughly 58% of the frame.\n\nKeep the uploaded photograph visually authentic and recognizable. Preserve the original subject, perspective, terrain, architecture, plants, people, spatial relationships, natural light, shadows, textures, and overall atmosphere.\n\nDo not redesign or reinterpret the photograph.\n\nOnly apply a very subtle editorial photo treatment: gentle tonal balancing, restrained color grading, slightly softened highlights, and extremely fine natural film grain. It should still look like a real photograph taken on location rather than an AI-generated image.\n\nNatural cropping is allowed if needed to fit the 4:3 layout, but do not stretch, distort, move, replace, or redraw the main subject.\n\nAvoid excessive sharpness, HDR effects, artificial clarity, cinematic color grading, or overly perfect details.\n\nRIGHT — AGED PAPER FIELD NOTES\n\nThe right side should occupy roughly 42% of the frame.\n\nUse warm off-white, slightly aged paper with a believable physical texture. Include very subtle paper fibers, fine grain, faint handling marks, and a matte surface.\n\nKeep large areas completely unprinted.\n\nThe paper should feel like a real sheet from an architect's travel notebook or field journal, not a designed poster background.\n\nAvoid overly strong stains, decorative textures, vintage filters, or artificial grunge.\n\nSMALL RUBBER STAMP\n\nStudy the uploaded photograph and identify only the few visual features that make the location immediately recognizable.\n\nReduce them into a compact, imperfect multi-color rubber stamp impression.\n\nDo not reproduce the photograph element by element.\n\nSimplify aggressively and retain only the most meaningful visual relationships:\n\n- distinctive architecture and silhouette\n- important roof, tower, dome, arch, or structural shape\n- mountain or terrain contours\n- shoreline or road direction\n- a few recognizable trees or vegetation forms\n- simplified settlement layers\n- one or two important foreground shapes when visually relevant\n\nRemove crowds, cars, dense windows, repetitive buildings, tiny vegetation, decorative objects, and insignificant background details.\n\nThe result should look like something a traveler could have actually carved into a small rubber stamp, not a miniature illustration of the entire photograph.\n\nPlace the stamp in the lower-middle portion of the right paper area, occupying approximately 30–38% of the right section's height.\n\nKeep generous blank paper around it.\n\nDo not enlarge it into a large illustration.\n\nSTAMP COLOR & PRINT CHARACTER\n\nExtract approximately 2–4 muted spot colors naturally from the original photograph.\n\nPossible colors include:\n\n- carbon black\n- deep green\n- brick or muted red\n- ochre\n- slate blue\n- taupe or earthy brown\n\nDo not force these colors if the photograph suggests a different restrained palette.\n\nEach color should appear as a separate physical ink layer.\n\nMake the print feel genuinely handmade:\n\n- slightly uneven pressure\n- tiny gaps in the ink\n- dry areas\n- paper showing through\n- rough carved edges\n- irregular line thickness\n- small contour breaks\n- granular ink texture\n- faint ghosting\n- slight natural color-layer misregistration\n- subtle edge variation\n\nThe imperfections should be small and believable, as if the stamp was pressed onto paper by hand.\n\nAvoid perfectly aligned digital layers, smooth vector edges, clean gradients, or artificially exaggerated distress.\n\nThe stamp should look physically printed, not digitally illustrated.\n\nFIELD-NOTE TYPOGRAPHY\n\nGenerate a small amount of text based only on the actual location and imagery in the photograph:\n\nLocation — English name\nNo. — Number\nThree short English keywords\nGregorian calendar year\n\nPlace the text below or beside the stamp within the available whitespace.\n\nUse a small, understated typewriter or archival field-note style.\n\nThe typography should have very slight mechanical irregularity, as though typed or printed on an old field notebook.\n\nKeep it quiet and secondary to the photograph.\n\nSpell the location and all words correctly.\n\nDo not add slogans, brands, tourist phrases, decorative quotes, or unnecessary text.\n\nOVERALL REALISM\n\nThe finished image should feel like a real travel photograph mounted beside a small handmade field stamp on an architect's personal notebook page.\n\nPrioritize subtle physical realism over visual perfection.\n\nThe photograph should remain the strongest visual element.\n\nThe stamp should feel like a small fragment of memory extracted from the photograph rather than a second illustration.\n\nUse restrained contrast, natural imperfections, believable paper texture, and slightly imperfect printing.\n\nThe final result should feel quiet, tactile, documentary, collectible, and genuinely handmade.\n\nAvoid\n\nObvious dividing lines, circular seals, postage-stamp borders, perforations, wax seals, sticker layouts, souvenir-card designs, generic travel templates, smooth vector logos, polished digital illustrations, cartoon styling, 3D rendering, plastic textures, glossy gradients, excessive saturation, HDR effects, excessive text, decorative clutter, overly clean geometry, perfectly aligned ink layers, dense miniature architecture, or any alteration/redrawing of the original photograph.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case537",
+    "title": "地下档案馆暗黑概念海报",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/PromptSin/status/2092390329890849163",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case537.jpg",
+    "imageAlt": "地下档案馆暗黑概念海报示例图",
+    "prompt": "Use case: stylized-concept\nAsset type: vertical social-media artwork for the “Your Dark Side” theme\n\nCreate an original psychological dark-surrealist scene in a colossal underground archive. Endless shelves of sealed black books rise like skyscrapers and vanish into fog. In the central aisle, a solitary human figure in bone-white clothing kneels before one open book on the floor. No words are visible. From the blank pages rises a delicate life-size figure made entirely of dense black smoke, standing face-to-face with the kneeling person. The smoke figure has no eyes or mouth; instead, its chest contains a small locked crimson door. Thin threads connect that door to the kneeling person’s hands, suggesting a secret self finally acknowledged.\n\nVertical 9:16 framing, towering shelves create a narrow symmetrical canyon, high-angle shaft of cold silver light, the two figures positioned small in the lower center, immense oppressive scale above them. Black paper, aged stone, floating ash, volumetric fog, subtle polished-floor reflections, premium photorealistic dark concept art, refined editorial composition, quiet dread and introspection rather than horror spectacle.\n\nColor palette: obsidian black, graphite, bone white, cold silver, a single muted crimson accent at the tiny door.\n\nConstraints: entirely original metaphor; blank book pages with absolutely no writing; no recognizable person; no text, symbols, logos, signatures, borders, or watermark.\n\nAvoid: visible letters or runes, portrait close-up, split face, black substance on skin, glowing eyes, gore, skulls, conventional ghosts, fantasy wizard styling, imitation of any named artist.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case536",
+    "title": "春日樱花回眸电影人像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/SheBuildsAI_/status/2092431090095149533",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case536.jpg",
+    "imageAlt": "春日樱花回眸电影人像示例图",
+    "prompt": "{\n  \"title\": \"WHISPERS OF SPRING\",\n\n  \"scene\": \"A peaceful pathway beneath blooming cherry blossom trees during a warm spring afternoon. Pink blossoms fill the canopy overhead while delicate petals drift gracefully through the air. Soft sunlight filters through the branches, creating a dreamy and enchanting atmosphere.\",\n\n  \"subject\": \"A young woman walks away from the camera before gently turning her head over her shoulder with a soft, mysterious smile. She wears a flowing natural linen dress that moves gracefully with the breeze, highlighting her delicate facial features and effortless elegance.\",\n\n  \"detail\": \"Wind carries countless pink cherry blossom petals across the frame while warm sunlight creates glowing highlights throughout the scene. Every strand of hair moves naturally in the breeze, with ultra realistic skin texture, lifelike fabric folds, soft floral surroundings, and subtle atmospheric haze enhancing the cinematic realism.\",\n\n  \"atmosphere\": \"Elegant, peaceful, romantic, dreamy, timeless, cinematic, graceful, and enchanting.\",\n\n  \"lighting\": \"Warm spring sunlight filtering through cherry blossom branches, soft natural illumination, glowing highlights, volumetric light rays, gentle ambient shadows, and subtle atmospheric haze.\",\n\n  \"composition\": \"Cinematic editorial portrait captured with an 85mm lens, featuring the subject in a three-quarter over-the-shoulder pose. Shallow depth of field, creamy bokeh, balanced framing with flowering trees, soft leading lines, and immersive visual storytelling.\",\n\n  \"style\": \"Photorealistic, masterpiece, editorial fashion photography, analog film aesthetic, dreamy pastel color palette, ultra realistic skin texture, highly detailed, shallow depth of field, creamy bokeh, atmospheric haze, HDR, cinematic realism, 8K.\"\n}",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case535",
+    "title": "同一人脸十二款发型 Lookbook",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Ciri_ai/status/2092452220768002400",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case535.jpg",
+    "imageAlt": "同一人脸十二款发型 Lookbook示例图",
+    "prompt": "Create a 12-panel grid (3 columns × 4 rows, numbered 1 to 12) showing the SAME person from the reference photo with 12 different hairstyles. This is a hairstyle lookbook. Final image aspect ratio: 4:5 (vertical/portrait).\nTHE ONLY THING THAT CHANGES BETWEEN PANELS IS THE HAIR ON THE HEAD (shape, style and length only). Everything else stays exactly as in the reference photo.\nIdentity Anchor (Critical)\nThe face must be IDENTICAL to the reference photo in every single panel. Preserve exactly: facial bone structure, jawline, cheekbones, nose shape, lips, eye shape and spacing, eyebrows, skin tone, skin texture (pores, natural imperfections), and overall facial proportions. This is the same real person in all 12 frames. Do NOT beautify, slim, or alter the face. Same age, same expression as in the reference.\nMandatory Rules (Do Not Violate)\n- NO SUNGLASSES. Eyes must be fully visible in all 12 panels.\n- NO ENVIRONMENTAL BACKGROUNDS. Every panel must have a plain, uniform, solid light grey studio backdrop with zero objects, zero textures, zero gradients. Just flat neutral grey.\n- Hair COLOR stays exactly as it appears in the reference photo in all 12 panels. Only the shape, length and style changes, never the color.\nKeep Identical in Every Panel (Do Not Change)\n- MAKEUP AND SKIN: If the person in the reference photo wears makeup, replicate it identically in every panel. Same lip color, same eye makeup, same brow grooming. If they wear no makeup, keep all panels makeup-free. Do NOT add, remove, or alter makeup between panels.\n- Clothing: the same clothing visible in the reference photo, replicated exactly.\n- Accessories: preserve ALL visible accessories from the reference photo (earrings, necklaces, rings, bracelets, piercings, watch, glasses, etc.). Do not omit, resize, recolor, or restyle any accessory. If the person wears prescription glasses (not sunglasses), keep them in every panel.\n- Background: plain solid light grey studio backdrop in every panel. No room, no furniture, no environment.\nThe 12 Hairstyles\n1. Pixie cut: very short, textured, slightly tousled on top with tapered sides and nape\n2. Classic bob: chin-length, straight, blunt ends, clean middle part\n3. Long layered waves: past the shoulders, soft voluminous waves with face-framing layers\n4. Sleek low bun: hair pulled back smoothly into a tight low bun at the nape, no flyaways\n5. Curtain bangs with medium-length hair: soft parted fringe framing the face, hair falling just past the shoulders\n6. High ponytail: hair pulled up into a sleek high ponytail, smooth crown, length falling behind\n7. French bob: short bob ending at the jawline with a soft blunt micro-fringe across the forehead\n8. Long straight hair with middle part: very long, sleek, pin-straight, falling well past the shoulders\n9. Shaggy wolf cut: medium length, heavy layers, choppy fringe, textured and voluminous with a slightly wild look\n10. Elegant updo: hair swept up into a polished chignon with soft face-framing tendrils\n11. Short curly crop: short voluminous curls all over, natural texture, tapered at the sides\n12. Side-swept Hollywood waves: long glamorous deep side part, sculpted vintage waves cascading over one shoulder\nPhotographic Specs\nShot on a Canon EOS R5 with an 85mm f/1.4 lens, studio portrait lighting (soft key light, subtle fill), shallow depth of field with sharp focus on the face. PLAIN SOLID LIGHT GREY STUDIO BACKGROUND in every panel. Natural skin rendering with visible pores and realistic hair strands (no plastic or CGI look). Consistent lighting, color grading and exposure across all 12 panels. Photorealistic, high detail, hyperrealistic, 8K. No illustration, no painterly effect, no over-smoothing. NO SUNGLASSES.\nEach panel clearly numbered 1 to 12 in the top-left corner. Overall output aspect ratio 4:5.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case534",
+    "title": "红光干扰实验编辑人像海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Goodmanprotocol/status/2092471662126211143",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case534.jpg",
+    "imageAlt": "红光干扰实验编辑人像海报示例图",
+    "prompt": "Create a medium-sized 9:16 experimental editorial portrait poster using the following customizable inputs:\n\nSubject: [Adult Male or Female Portrait]\nInterference: [Color Split / Narrow Light Beam / Horizontal Cut / Motion Veil]\nTitle: [Title]\nPalette: [Main Neutral Tones + One Accent Color]\nMood: [Sharp / Cinematic / Restrained / Experimental]\n\nCreate a striking close-up or waist-up portrait with the subject occupying a strong portion of the frame. Preserve realistic facial features, natural skin texture, authentic hair, realistic proportions, clear emotion, and a strong silhouette. The portrait must work visually as a fashion photograph before the graphic intervention is applied.\n\nUse only one primary interference method:\n\nColor Split: Uneven translucent bands selectively shift, reveal, separate, or distort portions of the portrait.\n\nNarrow Light Beam: A single controlled beam cuts across the face or body and continues naturally into the surrounding space.\n\nHorizontal Cut: Bold horizontal bands interrupt selected areas of the portrait and interact with oversized typography.\n\nMotion Veil: Keep the main portrait sharp while selected areas create subtle horizontal photographic motion trails.\n\nMake typography an integral part of the composition. Use one dominant headline, allowing letters to crop beyond the frame, overlap the subject, disappear behind the body, or interact with the interference.\n\nKeep supporting text minimal: one small series label and one short phrase.\n\nUse mostly black, white, grey, charcoal, or deep neutral tones, plus one accent color. Keep skin tones natural and avoid excessive warmth or yellow grading.\n\nAdd only a few subtle graphic details such as fine lines, circles, or open corner marks when necessary.\n\nThe final composition should feel like a premium fashion editorial, contemporary photography poster, or experimental art-direction piece—clean, intentional, sophisticated, and visually balanced.\n\nAvoid multiple competing effects, dense text, UI elements, heavy glitches, random collage, excessive decoration, numbering, “Vol.” or “Issue” labels, sparkle symbols, logos, watermarks, distorted anatomy, plastic skin, oversaturation, and generic template aesthetics.\n\nKeep the overall treatment medium in scale, refined, adaptable, and universally applicable to different people, titles, themes, palettes, and editorial concepts.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case533",
+    "title": "手绘涂鸦时尚人物插画",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Sairah_0/status/2092473965927334071",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case533.jpg",
+    "imageAlt": "手绘涂鸦时尚人物插画示例图",
+    "prompt": "Transform the subject from the reference image into a cute, quirky hand-drawn doodle illustration.\n\nUse a minimalist children’s storybook / fashion sketch aesthetic with loose, imperfect black ink lines, visible scribbly pencil strokes, subtle cross-hatching, and a charming handmade feel. Keep the character’s recognizable facial features, hairstyle, face shape, clothing, accessories, and overall identity from the reference while simplifying them into a cute illustrated character.\n\nCharacter design:\n- Oversized head and small simplified body\n- Simple dot-like eyes and tiny minimal mouth\n- Soft rounded facial features\n- Slight rosy pink blush on the cheeks\n- Messy, expressive hand-drawn hair with many loose sketch lines\n- Slightly exaggerated, playful proportions\n- Natural, relaxed pose with a whimsical fashion-illustration feel\n\nArt style:\n- Black-and-white pencil/ink doodle drawing\n- Rough, imperfect sketch lines rather than clean digital outlines\n- Dense scribbled hair and clothing details\n- Light hand-colored accents\n- Subtle watercolor/crayon-like coloring\n- Minimal shading\n- White or off-white clean background\n- Lots of negative space\n- Cute, innocent, playful, cozy aesthetic\n- Looks like an original handmade notebook/fashion doodle illustration\n\nPreserve the important details of the reference image while converting everything into this consistent doodle-art style. The final image should feel hand-sketched, slightly imperfect, adorable, expressive, and effortlessly stylish, not like polished vector art or 3D cartoon art.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case532",
+    "title": "六宫格柠檬饮料微缩广告",
+    "category": "商品与电商",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/ou_zhen599/status/2091160215928574397",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case532.jpg",
+    "imageAlt": "六宫格柠檬饮料微缩广告示例图",
+    "prompt": "Create a Cannes-level premium summer beverage campaign poster for a fictional lemon drink brand called \"LIMORA\", using a strict 2-column by 3-row grid layout with six perfectly aligned panels. Preserve the exact structural logic of the composition: each panel shows the same tiny ultra-realistic young woman on a bright sandy beach interacting with oversized lemons, lemon slices, lemon juice, or the final branded drink, while selected panels include a giant realistic human hand entering from above. The full poster must feel like one unified high-end advertising storyboard in motion, where the eye flows continuously from fresh citrus fruit to crafted beverage desire. The lemon product world must remain the absolute visual hero across all six panels.\n\nOverall composition:\nUse a clean six-panel grid with thin white dividers, equal panel proportions, consistent horizon line, consistent beach-ocean background, and unified lighting. Every panel should feel self-contained yet rhythmically connected, as if six consecutive scenes from the same luxury summer commercial were frozen at their most iconic moments. Keep the miniature woman and the oversized lemon-related object centered in each frame, with the sea softly blurred in the background and the sand sharply rendered in the foreground. The full page must read instantly from a distance, with strong commercial clarity and polished editorial control.\n\nOrbit visual flow:\nDesign the entire set around one strong circulation of motion from panel 1 to panel 6. The action should escalate visually: touch, recline, squeeze, travel, embrace, taste. Use repeating directional rhythms in hair movement, arm gestures, leg angles, juice droplets, spoon angle, lemon slice placement, straw tilt, and the position of the entering hand so the eye naturally sweeps across the poster in a flowing wave. Build subtle diagonal energy inside every panel, making the citrus world feel alive, breezy, sparkling, and in motion. The whole set should feel like summer energy orbiting around the brand’s lemon drink.\n\nNarrative panel sequence:\nPanel 1: the tiny woman hugs a giant whole lemon on the sand while a giant adult hand descends from above, delicately positioning the lemon. Her pose is lively and slightly off-balance, as if the scene has just begun.\nPanel 2: she reclines elegantly inside a halved lemon as though it were a luxury beach chaise, wearing dark sunglasses and holding a tiny parasol drink pick, while a floating lemon slice is lowered from above like a radiant citrus sun.\nPanel 3: a giant hand squeezes a vertically cut lemon from above, sending translucent juice streams and droplets downward in a sparkling arc. The woman reacts dynamically beneath it, arms raised, body tilted, caught in the middle of the citrus action.\nPanel 4: she rides in a small refined wooden cart piled with lemons, being pulled by a whimsical premium lemon-shaped creature or rolling lemon harness. The cart must feel physically grounded, artisanal, and stylish rather than cartoonish.\nPanel 5: the hero climax panel. A tall branded LIMORA lemonade glass dominates the frame, packed with ice cubes, lemon slices, pale sparkling liquid, condensation, a fresh green straw, and a refined cocktail umbrella. The tiny woman hugs the cold glass joyfully, and this panel must be the strongest product-selling moment in the entire composition.\nPanel 6: she sits inside a halved lemon while a large polished spoon descends from above carrying glossy lemon sorbet or crushed lemon ice, creating a final delicious serving beat with playful anticipation.\n\nHero product focus:\nThe real hero is the lemon beverage system: whole citrus fruit, sliced fruit, squeezed juice, ice, sparkling drink, sorbet, and premium serving details. Every lemon must feel hyper-real, fragrant, sunlit, juicy, and tactile, with detailed skin pores, subtle waxy oil sheen, translucent membranes, wet cut surfaces, and bright natural citrus pulp. The branded glass in panel 5 must be the most visually dominant product object in the set, with crystal-clear glass, refined original English branding reading \"LIMORA\", elegant condensation, premium ice refraction, and luminous pale-yellow drink clarity.\n\nCharacter design:\nDepict one recurring ultra-realistic miniature young woman across all six panels, wearing the same fitted green floral mini dress and white sandals, with long dark wavy hair and naturally expressive features. She must look like a real scaled-down human placed into a surreal oversized citrus world. Keep anatomy coherent and believable in every frame: correct head-to-body proportion, realistic shoulders, collarbones, arms, waist, hips, thighs, knees, calves, ankles, and feet, with perfectly formed hands and five fingers clearly visible. Her expressions should shift panel by panel: surprised delight, relaxed confidence, playful alarm, exhilaration, joyful refreshment, amused anticipation. Skin must remain photorealistic with pores, natural tonal shifts, faint knee and elbow texture, realistic skin elasticity, and no plastic AI beauty finish.\n\nLighting:\nUse bright premium seaside daylight with a soft upper-left sun direction and gentle atmospheric diffusion. Maintain luminous fresh summer lighting across all six scenes, with short, soft-edged shadows and crisp dimensional highlights. Juice droplets, lemon pulp, ice cubes, spoon edges, sunglasses, glass rim, and condensation should all catch clean sparkling highlights. Lighting must feel luxurious, refreshing, and physically consistent from panel to panel.\n\nMaterials:\nLemons: ultra-detailed peel pores, subtle dimpling, natural rind thickness, glistening wet pulp, believable cut translucency, realistic juice behavior.\nDrink glass: high-clarity premium glass, accurate refraction, heavy base, condensation beads, crisp logo print, ice transparency, sparkling carbonated liquid feel.\nSorbet and juice: glossy, semi-translucent, cold, wet, appetizing, physically accurate.\nDress: lightweight summer cotton with tiny green floral print, natural wrinkles, fabric tension, and wind-responsive edges.\nHair and skin: realistic strands, fine flyaways, natural shine, believable skin texture.\nLarge hand: realistic adult fingers, soft skin compression, natural nails, coherent scale perspective.\nCart and props: refined warm wood grain, polished wheels, believable joints and harness elements.\nBeach environment: fine sunlit sand with miniature footprints and pressure marks, soft shoreline blur, clean turquoise sea with pale foam.\n\nColor system:\nBuild the palette around lemon yellow, fresh citrus green, turquoise sea, pale sky blue, warm beach beige, crisp white highlights, and restrained natural skin tones. Yellow must remain the dominant hero color, supported by green and turquoise. Keep the image bright, appetizing, summery, clean, and internationally commercial. Avoid random accent colors.\n\nTypography and branding:\nDo not copy any text from the sample. Keep typography minimal and original. Place refined English branding only on the hero glass and optionally a tiny campaign line below the full grid, such as: \"LIMORA — Bright in Motion\". Typography must feel premium, modern, minimal, and secondary to the visual storytelling.\n\nArt direction:\nHyper-real premium surreal advertising photography, luxury FMCG campaign, storyboard energy, elegant humor, cinematic micro-world illusion, high-end beverage styling, global summer launch poster, polished magazine-grade finish, sharp product realism, strong narrative rhythm, premium brand coherence.\n\nNegative prompt:\ncopied text, Chinese text, existing brand names, cartoon style, toy-like figure, grotesque oversized head, deformed anatomy, extra fingers, missing fingers, fused fingers, twisted wrists, broken limbs, distorted feet, AI plastic skin, over-smoothed skin, fake citrus texture, unrealistic juice physics, muddy lemon pulp, cloudy glass, weak product focus, inconsistent lighting, inconsistent horizon, messy grid, cluttered props, meme aesthetic, cheap humor, childish illustration, low-resolution detail, oversaturated colors, dead black patches, distorted giant hand perspective",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case531",
+    "title": "水晶框国家旅行广告海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Taaruk_/status/2091391283063361558",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case531.jpg",
+    "imageAlt": "水晶框国家旅行广告海报示例图",
+    "prompt": "Create a luxurious, dreamy country travel-art collection in the exact visual language of an elegant premium tourism campaign: a large transparent crystal/glass architectural frame or arched glass display standing on a glossy reflective surface, containing a highly detailed cinematic illustration of the destination. For [COUNTRY], feature its most iconic landmarks, historic architecture, distinctive landscapes, local transportation, cultural elements, national flag, flowers and recognizable scenery arranged as one seamless poetic panorama. Use warm golden-hour sunlight, soft atmospheric haze, pastel cream, champagne, muted blue and sage tones, delicate clouds, subtle birds, realistic glass refraction and rainbow prism highlights along the edges. Create a perfect mirror reflection beneath the glass structure, extending the entire composition downward with beautifully softened reflections. Add elegant editorial typography at the top reading “[COUNTRY]”, with smaller refined text “THE SOUL OF [COUNTRY]” and “A JOURNEY THROUGH TIME • 2026” beneath it. Sophisticated luxury travel magazine aesthetic, photorealistic yet painterly, cinematic depth, fine-art composition, extremely detailed architecture, serene atmosphere, premium advertising photography, symmetrical balanced framing, soft film grain, 8K, vertical 4:5, no clutter, no modern UI elements, no extra text.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case530",
+    "title": "实拍背景涂鸦人物替换",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Emmma__0/status/2091391958128251286",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case530.jpg",
+    "imageAlt": "实拍背景涂鸦人物替换示例图",
+    "prompt": "Transform ONLY the people in the uploaded photo into adorable hand-drawn doodle characters while keeping the original photographic background unchanged.\n\nCORE RULE:\nBackground = original realistic photo.\nPeople = cute hand-drawn doodle characters.\n\nPRESERVE THE BACKGROUND:\nKeep the original sky, landscape, buildings, water, furniture, ground, plants, railings, objects, lighting, colors, perspective, camera angle, framing, and textures as close to the original photo as possible.\n\nDo NOT redraw, simplify, illustrate, or apply doodle/crayon/pencil effects to the background or environmental objects.\n\nTRANSFORM ONLY PEOPLE:\nReplace each person with a charming, naive doodle version while preserving:\n- exact number of people\n- original position and relative scale\n- front/back/side/three-quarter orientation\n- head and body direction\n- pose and gesture\n- arm and leg positions\n- interactions with people or objects\n- hairstyle, clothing colors, and major accessories\n\nIMPORTANT:\nIf someone faces away, keep them back-facing.\nIf sideways, keep them sideways.\nIf facing forward, keep them forward.\nNever rotate a person toward the viewer or invent a face that is not visible.\n\nCUTE DOODLE STYLE:\nFreely reinterpret realistic anatomy into an adorable, imperfect character:\n- oversized round head\n- tiny compact body\n- short simplified arms and legs\n- tiny hands and feet\n- cute awkward proportions\n- loose scribbled hair\n- tiny dot eyes and simple facial features when visible\n- rosy scribbled cheeks when appropriate\n\nKeep the original pose recognizable, but simplify and slightly exaggerate it for cuteness.\n\nDRAWING STYLE:\nLoose naive hand-drawn doodle, like a quick children's sketch.\nUse thin shaky black outlines, imperfect shapes, overlapping sketch lines, scribbled colored-pencil or crayon fills, uneven coloring, white gaps, and slightly messy edges.\n\nThe character should look intentionally roughly drawn but extremely cute.\n\nOBJECTS:\nObjects, furniture, scenery, and items around the people should remain photographic whenever possible. A doodle character may naturally touch or hold a real photographic object.\n\nINTEGRATION:\nKeep correct scale, ground contact, depth, and occlusion so the doodle characters naturally occupy the same locations as the original people.\n\nFINAL LOOK:\nIt should feel like the real people were removed from the original photograph and replaced with adorable little hand-drawn doodle versions of themselves, while the real-world background remained untouched.\n\nPrioritize:\n1. Original photographic background\n2. Person position and scale\n3. Exact body orientation\n4. Pose and gesture\n5. Cute exaggerated doodle character design\n\nAvoid full-image illustration, background doodling, realistic anatomy, anime, manga, 3D cartoon, polished digital art, vector lines, changed poses, changed orientation, added people, or invented faces.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case529",
+    "title": "云朵气球山脊旅行人像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/AiwithLariab/status/2091394735416160715",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case529.jpg",
+    "imageAlt": "云朵气球山脊旅行人像示例图",
+    "prompt": "Create a dreamy ultra-photorealistic outdoor fashion photograph based on the person in @image1.\n\nIDENTITY & FACE:\nPreserve the exact facial identity of the person in @image1. Keep the same face shape, facial proportions, eyes, eyebrows, nose, lips, skin tone, hairstyle, hairline, and all recognizable facial features. The person must remain clearly recognizable and consistent with the reference image. Do not redesign or replace the face.\n\nPOSE & COMPOSITION:\nCreate a full-body vertical portrait of the person standing naturally on a grassy mountain ridge. The body is slightly turned toward the camera while the face looks naturally toward the viewer. One hand gently holds several long white strings attached to an enormous fluffy white cloud floating directly above the person like a whimsical balloon bouquet. The other hand rests naturally beside the body.\n\nSCENE:\nA breathtaking high-altitude mountain landscape with layers of distant blue-green mountains stretching across the horizon. The subject stands on a natural grassy ridge with delicate wild grass around her feet. Vast open sky dominates the upper portion of the composition.\n\nCLOUD BALLOON:\nCreate one enormous soft white cumulus cloud directly above the subject, visually resembling a giant floating cloud balloon. Multiple thin white strings descend from the cloud and gather elegantly into the person's hand. The strings should look physically believable and naturally connected to the cloud. The cloud is fluffy, voluminous, bright white, and beautifully illuminated by sunlight.\n\nCLOTHING:\nDress the person in a completely modest, elegant, fully covered outfit:\n\nlong flowing light-blue maxi dress reaching the ankles\n\nloose long sleeves covering the arms completely\n\nhigh and modest neckline\n\nopaque non-transparent fabric\n\nfull-length flowing skirt\n\nsimple white closed-toe sneakers\n\nsmall woven crossbody bag\nNo exposed midriff, no deep neckline, no sheer fabric, no short skirt, no revealing clothing. The outfit should look graceful, comfortable, elegant, and wholesome.\n\nACCESSORIES:\nAdd tasteful round dark sunglasses and a simple woven shoulder/crossbody bag. Keep accessories minimal and natural.\n\nHAIR:\nKeep the person's original hairstyle and hair color from @image1 as much as possible. Allow a few natural strands of hair to move gently in the mountain breeze.\n\nLIGHTING:\nBright natural midday sunlight, soft atmospheric illumination, realistic highlights on the white cloud and dress, subtle natural shadows, crisp but gentle exposure, beautiful blue-sky contrast.\n\nPHOTOGRAPHY STYLE:\nUltra-photorealistic professional travel-fashion photography, realistic skin texture, natural fabric details, physically accurate lighting, realistic depth of field, cinematic atmospheric perspective, high dynamic range, sharp subject with a softly detailed background.\n\nCOLOR PALETTE:\nSky blue, soft white, pale powder blue, natural green grass, and distant blue mountains. Clean, airy, dreamy color grading with a peaceful summer atmosphere.\n\nCOMPOSITION:\n9:16 vertical portrait, full body visible from head to shoes, subject positioned slightly below center, enormous blue sky and cloud occupying the upper half, distant mountains forming a soft horizontal horizon, balanced negative space, visually striking editorial travel photograph.\n\nIMPORTANT:\nPreserve the exact identity from @image1. Do not change the person's recognizable face or facial structure. Keep the outfit completely modest, opaque, and fully covering. Maintain realistic anatomy, natural hands, realistic proportions, and believable interaction between the person, strings, cloud, grass, and mountain environment.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case528",
+    "title": "圣诞街景 Chibi 真实背景人像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Sairah_0/status/2091401764360896762",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case528.jpg",
+    "imageAlt": "圣诞街景 Chibi 真实背景人像示例图",
+    "prompt": "Use the uploaded image as the primary reference. Transform the person into a cute, hand-drawn anime/chibi character while preserving the original person’s recognizable facial features, hairstyle, outfit, pose, and accessories.\n\nA cute young woman standing on a modern city street at blue hour, surrounded by tall illuminated skyscrapers and festive Christmas decorations. A huge glowing Christmas tree covered in warm golden lights stands directly behind her, creating a magical holiday atmosphere. The street is filled with elegant decorative lights, pedestrians, modern architecture, and soft evening city illumination.\n\nRender the character in a charming Japanese hand-drawn anime/chibi illustration style with expressive large eyes, soft blush on the cheeks, delicate facial details, textured pencil-and-ink outlines, subtle watercolor-like coloring, and slightly imperfect handmade sketch details. Keep the background photorealistic and highly detailed, creating a beautiful contrast between the illustrated character and the real-world environment.\n\nCinematic composition, natural perspective, soft evening lighting, warm Christmas glow, realistic background depth, detailed clothing texture, cozy winter atmosphere, high detail, aesthetically pleasing, vertical portrait composition.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case527",
+    "title": "Rio 旅行票据纸雕立体海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/john_my07/status/2091408386466214031",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case527.jpg",
+    "imageAlt": "Rio 旅行票据纸雕立体海报示例图",
+    "prompt": "Create a highly detailed, photorealistic miniature travel-poster diorama inspired by Rio de Janeiro, arranged as a handcrafted 3D paper scene on a warm ivory, slightly textured background.\n\nIn the foreground, a realistic human hand holds a vintage Brazilian travel ticket or Rio-themed transit card vertically on the left side. Give the card aged paper texture, subtle printing imperfections, elegant typography, and authentic-looking travel details. From behind the card, a miniature Rio de Janeiro landscape physically rises outward like an intricate pop-up diorama.\n\nMake Christ the Redeemer the dominant central landmark, positioned high above a miniature cityscape with lush green mountains surrounding it. Below, build a tiny realistic Rio street featuring a classic yellow taxi, colorful buildings, palm trees, pedestrians, cyclists, street lamps, tiled sidewalks, and small Brazilian urban details. Add Copacabana beach elements in the distance with tiny umbrellas, beachgoers, and a glimpse of the Atlantic Ocean. Layer the architecture and terrain so everything appears physically constructed from paper, wood, plaster, and miniature materials, with convincing depth, cast shadows, overlapping surfaces, and a slight three-quarter perspective.\n\nAround the main 3D scene, incorporate delicate black, charcoal, and muted sepia hand-drawn travel illustrations on the cream paper. Include a small Sugarloaf Mountain sketch in the upper left, an artistic Copacabana promenade illustration in the upper right, a detailed Selarón Steps sketch along the right side, and a small Ipanema beachfront skyline drawing near the bottom. Add subtle handwritten travel notes, tiny map markings, architectural outlines, compass symbols, postage-stamp details, and understated Brazilian travel annotations.\n\nKeep the composition refined rather than crowded. Blend realistic miniature photography with vintage travel-journal design, tactile paper fibers, faint ink bleed, imperfect hand-drawn lines, warm natural studio lighting, gentle shadows, subtle film grain, and a sophisticated cream, charcoal, muted green, ocean blue, and Brazilian yellow palette.\n\nThe final image should feel like a premium collectible Rio de Janeiro travel postcard transformed into a physical miniature world, with the central diorama sharply detailed and the surrounding illustrations slightly softer. Highly realistic human hand and fingers, believable miniature materials, cinematic product photography, editorial travel-magazine aesthetic, shallow depth of field, ultra-fine textures, photorealistic 3D details, vertical 4:5 composition, 8K quality.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case526",
+    "title": "体积激光黑场海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/zhidawang219555/status/2090246237094310178",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case526.jpg",
+    "imageAlt": "体积激光黑场海报示例图",
+    "prompt": "从全黑剧场开始，像切标本一样用六片真实体积激光把空间分层。光面必须有明确起点、透视和薄雾中的厚度，人物站在交汇点，透明道具折射出一小束异色光扇。构图沿左下至右上的对角线推进，脸只用一道克制边光揭示；标题与其中一片光面共享透视，小字留在纯黑负空间。每次替换主题与角色时，不得退化成夜店模板、HUD、霓虹城市或无物理来源的光线。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case525",
+    "title": "酒红棚拍男士时尚肖像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/iamsofiaijaz/status/2090294894187413883",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case525.jpg",
+    "imageAlt": "酒红棚拍男士时尚肖像示例图",
+    "prompt": "A cinematic, ultra-realistic close-up portrait of a stylish man, using the provided image as an accurate face reference. Preserve his natural facial identity, thick naturally curly dark brown hair, neatly trimmed salt-and-pepper beard, strong masculine facial structure, and realistic facial proportions. He wears sophisticated round vintage amber-brown sunglasses and a premium deep burgundy suede jacket over a fitted black silk-knit shirt, creating a refined luxury fashion aesthetic.\n\nWarm cinematic studio lighting with a soft amber-golden key light illuminating the face from the front-left, complemented by a subtle crimson-red rim light outlining the hair and shoulders. The background is a rich burgundy, wine-red, and dark plum gradient, with soft atmospheric haze and subtle diffused light creating depth without distracting from the subject. Elegant warm highlights contrast beautifully against the dark clothing.\n\nExtremely detailed natural skin texture, individual beard hairs, realistic pores, subtle facial imperfections, sharp eyes visible behind slightly tinted lenses, natural reflections on the sunglasses, rich dimensional shadows, realistic fabric and suede texture, shallow depth of field. Sophisticated luxury fashion campaign, mysterious and confident mood, premium men's editorial photography, cinematic color grading, photorealistic, HDR, professional studio photography, 85mm portrait lens, f/1.8, crisp facial details, soft background bokeh, centered composition, head-and-shoulders framing, powerful masculine presence, understated elegance, 3:4 aspect ratio.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case524",
+    "title": "纸雕拼贴乡野人像",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/AiwithLariab/status/2090297565732585554",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case524.jpg",
+    "imageAlt": "纸雕拼贴乡野人像示例图",
+    "prompt": "Create a premium whimsical handcrafted paper-collage diorama inspired exactly by the uploaded reference image.\n\nUse the uploaded girl reference as the ONLY human subject. Preserve her facial identity with maximum accuracy: exact face shape, eyes, eyebrows, nose, lips, skin tone, hairstyle, hairline, and recognizable facial features. Strict face identity lock — do not redesign, beautify, stylize, age, de-age, or replace her face.\n\nThe girl stands alone in the center of the composition in a graceful, natural editorial pose. She is facing the camera with a relaxed confident expression and a subtle natural smile. Her body is slightly angled, creating a candid fashion-editorial feeling. She holds a beautiful small mixed bouquet of flowers naturally with both hands in front of her. One leg is slightly crossed in front of the other for an elegant relaxed pose.\n\nOutfit\n\nChange the outfit completely from the original reference while keeping it fully modest and elegant:\n\n- elegant ivory/cream long-sleeve button-up blouse\n- high-waisted wide-leg beige trousers\n- full-length trousers with complete coverage\n- simple cream closed-toe shoes\n- small brown leather shoulder bag\n- no revealing clothing\n- no exposed midriff\n- sophisticated countryside editorial fashion\n- natural realistic fabric folds and texture\n\nEnvironment\n\nCreate a beautiful handcrafted 3D paper-diorama countryside scene:\n\n- layered blue mountains in the distance\n- green forest and rolling hills\n- peaceful blue lake\n- grassy lakeside landscape\n- textured beige paper pathway in the foreground\n- rustic white wooden fence behind the girl\n- dreamy pastel sky\n\nSurround the composition with oversized handmade paper flowers in pink, peach, cream, white, and light blue, with layered green paper leaves.\n\nAdd decorative paper elements floating in the sky:\n\n- pink paper hearts\n- yellow paper stars\n- blue stars\n- soft white and pale-blue clouds\n- tiny colorful paper dots\n\nPlace two tiny vintage vehicles near the lake in the background: a cream vintage camper van on one side and a small vintage blue-green car on the other.\n\nArt Direction\n\nThe entire environment should look handcrafted from premium textured paper while the girl remains photorealistic and seamlessly integrated into the paper world.\n\nUse:\nhand-torn paper edges, visible paper fibers, layered cardstock, subtle imperfections, realistic paper shadows, dimensional cut-paper elements, tactile textures, soft natural daylight, cinematic depth, gentle atmospheric perspective, premium editorial photography.\n\nThe final image should feel like a luxury handmade paper storybook brought to life with a real photographic subject.\n\nComposition\n\nCentered full-body girl\nFace clearly visible and sharply detailed\nNatural elegant pose\nBouquet held naturally\nRustic fence framing the subject\nLake and mountains creating depth\nLarge flowers framing both lower corners\nClouds and decorative elements filling the upper background\nBalanced symmetrical composition with organic handmade imperfections\nGirl remains the strongest focal point\n\nFinal Look\n\nPhotorealistic girl + handcrafted paper-art environment\nDreamy pastel colors\nLuxury editorial aesthetic\nWhimsical miniature diorama\nSoft cinematic daylight\nHighly detailed paper textures\nNatural realistic skin\nSharp facial identity\nProfessional fashion photography\nPinterest/Instagram viral visual aesthetic\nMagazine-quality composition\n\nVertical 4:5 portrait composition, full-body framing, ultra-detailed, high resolution, clean polished finish, visually striking, aesthetically balanced, premium handcrafted paper-collage photography.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case523",
+    "title": "曼哈顿公园水彩旅行插画",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Taaruk_/status/2090307485374578755",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case523.jpg",
+    "imageAlt": "曼哈顿公园水彩旅行插画示例图",
+    "prompt": "Create a vertical editorial travel illustration inspired by vintage European travel posters, featuring a peaceful summer afternoon in a grand city park with a recognizable Manhattan-style skyline in the background. Use delicate hand-drawn ink outlines combined with soft, slightly imperfect watercolor washes on warm textured cream paper. Show a wide green lawn filled with people relaxing, reading, walking, jogging, cycling, and having picnics. In the foreground, a casually dressed young couple sits together on a picnic blanket beside a woven basket. Include elegant black vintage park lamps, winding pathways, dense leafy trees framing the composition, and detailed historic and modern skyscrapers rising behind the park. Add a small picturesque stone arch bridge over a calm pond near the bottom of the artwork. Use muted sage green, olive, warm beige, soft blue, pale gray, and subtle golden sunlight, with natural watercolor bleeding, paper grain, fine pen hatching, and an airy sophisticated travel-journal aesthetic. No text, no letters, no logos, no typography, no captions, no signs. Vertical 4:5 composition, highly detailed, elegant, nostalgic, handcrafted watercolor-and-ink illustration.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case521",
+    "title": "青花敦煌刺绣四拼风格海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/zhidawang219555/status/2090310144190218272",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case521.jpg",
+    "imageAlt": "青花敦煌刺绣四拼风格海报示例图",
+    "prompt": "请将我上传的照片制作成一张竖版拼图海报，整体采用 3:4 竖版构图。画面从上到下严格四等分为四个横向区域，每个区域的高度必须精确控制为整体画面高度的25%（四层比例严格为1:1:1:1，不允许出现比例偏差），区域之间无缝衔接，不设分隔线、不留间隙，顺序为：原图→风格1→风格2→风格3。由于每层为约3:1的极扁宽幅比例，各层主体建议横向居中排布，强调左右开阔留白与呼吸感，避免元素纵向拉伸变形或贴边拥挤。四层在人物站位、场景结构、视线方向上保持连贯呼应，呈现同一画面、四种转译的整体感。风格层（第二至四层）须遵循极简原则：每层视觉元素数量压缩至最低限度，只保留1个最核心的主体符号，其余次要装饰、背景细节与陪衬元素一律省略，画面留白占比不低于60%。\n\n第一层保留原始照片的主体结构、人物真实互动关系与姿态、真实质感、自然光影与原有色彩氛围，仅进行轻微高级摄影调色，呈现杂志摄影质感，不改变人物关系与构图逻辑，并可在不改变人物关系与构图逻辑的前提下自然扩展天空、地面或环境背景，使整体更具空间感与叙事感。\n\n第二层为青花瓷绘风格：借鉴青花瓷绘画技法，以钴蓝色线条与晕染在米白底上表现人物与场景，呈现瓷器纹样的疏朗雅致感。色彩以钴蓝与米白为主的单色系。避免蓝色浓淡层次过多显杂，避免图案化装饰堆砌。\n\n第三层为敦煌壁画风格：借鉴敦煌壁画矿物重彩质感，表现古朴斑驳的美感，需简化线条与色块。背景为土黄或赭石底色，带斑驳壁画肌理感。色彩以赭石、石青、朱砂、土黄为主。避免裂纹肌理过多堆砌，避免复杂纹样装饰。\n\n第四层为刺绣锦缎风格：以刺绣针脚肌理表现人物与场景轮廓，呈现丝缎光泽与针线纹理感，图案需极简概括。背景为米白或浅灰缎面底色。色彩以2至3种柔和色搭配金线点缀。避免针脚过密显繁琐，避免金线过多显浮夸。\n\n每一层需将主体与场景统一转换为对应风格，整体表达极度克制与简化，只保留最核心的一个主体符号及其基本轮廓关系，删除一切非必要的背景元素、装饰细节与陪衬物；人物之间的关键位置关系、互动方向与姿态特征需保留，但应抽象为可识别的轮廓关系，做到“元素越少、关系越清晰”。色彩均从原图中提取归纳，每层严格控制在2-4种主色以内。四个区域的高度比例须严格保持1:1:1:1（各占25%），不可出现拼接错位或比例偏差。整体避免朋克/赛博朋克风格、写实照片质感强行叠加、卡通风格、3D渲染感、商业海报感、复杂背景堆砌、元素过多或画面拥挤、相邻两层风格雷同，以及任何文字、Logo、水印或标题。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case520",
+    "title": "月面宇航员 T 恤图形",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/lovimg_com/status/2077035644254363972",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case520.jpg",
+    "imageAlt": "月面宇航员 T 恤图形示例图",
+    "prompt": "A graphic illustration centered on a dark navy blue t-shirt, depicting an astronaut sitting on the surface of the moon, viewed from a side profile. The astronaut is wearing a detailed, bulky space suit and helmet, leaning back against a small lunar rock formation, and is holding a small steaming mug, suggesting they are enjoying a peaceful drink. Positioned directly in front of the astronaut in the background is a large, majestic view of the Earth, rendered in shades of white, light blue, and navy, featuring prominent swirling cloud formations. The entire artwork is monochromatic, utilizing a cool blue-and-white color palette that creates a serene, solitary, and contemplative atmosphere. The lunar ground is textured with craters and dust, providing a grounded contrast to the vast, dark sky and the bright, swirling planet above. The style is clean, artistic, and iconic, reminiscent of screen-printed apparel designs.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case519",
+    "title": "薄荷玫瑰香水电商图",
+    "category": "商品与电商",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/lovimg_com/status/2077036313832996893",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case519.jpg",
+    "imageAlt": "薄荷玫瑰香水电商图示例图",
+    "prompt": "100%完整保留上传的原图香水瓶的全部原始外观细节，瓶身造型、薄荷绿玻璃质感、木纹球形瓶盖、原有标签文字完全不做任何修改；瓶身环绕米色织带，周围簇拥薄荷绿玫瑰和浅绿色植物，冷调渐变浅留白背景，冷调逆光柔焦光影，低饱和度冷清高级色调，景深虚化突出香水主体，超写实C4D质感，轻奢高级ins风，适配竖版电商详情页，2K高清",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case518",
+    "title": "花田风动夏日人像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/lovimg_com/status/2077036746198618336",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case518.jpg",
+    "imageAlt": "花田风动夏日人像示例图",
+    "prompt": "主題：\n花風のまどろみ\n\n主体：\n縦長4:5の写真風ポートレート。白と黄色のマーガレット、オレンジ色の小花が密に咲く夏の草花畑に、成熟した大人の女性が仰向けで静かに横たわっている。人物は画面下部から中央にかけて大きく入り、顔は中央やや右、胸元から肩までは画面下側に収まる。周囲の花が画面全体を埋め、対角線方向に流れる花のモーションブラーが前景を横切る。\n\n人物・表情：\n自然で現実感のある日系ポートレート。暗めのブラウンロングヘアに、薄い前髪と顔まわりのやわらかな毛束。目を閉じ、眉は力が抜け、唇は軽く閉じた穏やかな表情。頬と鼻先に自然な血色、肌には過度な補正をせず細かな質感を残す。首筋、鎖骨、頬に夏の日差しが当たり、静かに眠っているような落ち着いた雰囲気。\n\n服装・ポーズ：\n白い夏用キャミソールワンピース。細い肩紐、胸元の控えめなレース、中央の小さなリボン、薄手のコットン素材。人物の両肩は草花に自然に沈み、片腕は画面下側で花に隠れて見切れる。体は画面左下から右上へ少し斜めに置かれ、髪は草の上に広がり、風で数本だけ額にかかる。\n\n背景・光：\n郊外にある小さな花畑のような、生活感のある自然な草花の密度。背景はすべて緑の葉と白・黄色・オレンジの花で構成し、人工物や読める文字は入れない。高めの位置から差す夏の太陽光。光はやや硬めで暖かく、顔の左側と首筋、肩に明るいハイライトが入り、花と髪の影が肌に細く落ちる。草の反射で下側に淡い緑の返り光。\n\n構図・カメラ：\nやや俯瞰の近距離撮影。85mm相当の自然な圧縮感、人物の顔にピントを合わせ、周辺の花は浅い被写界深度で少しぼける。前景の花だけが風に流され、白・黄色・オレンジの細長い光跡として左上から右下へ走る。顔まわりはブラーを弱め、表情と肌の質感をはっきり見せる。\n\n質感・スタイル：\nリアルな写真表現。夏の日差し、透明感のある肌、柔らかな髪の束感、薄手コットンのしわ、草花の細密な質感。ナチュラルな色調で、緑を深く、白い花を明るく、オレンジの花をアクセントにする。フィルム写真のようなわずかな粒子感と、雑誌ポートレートの落ち着いた仕上がり。\n\nネガティブ：\n不自然な顔、不自然な視線、余分な指、欠けた指、手足の融合、関節の破綻、服と体の接触不良、浮遊、不自然な重力、誤った遠近法、光源と矛盾する影、過度な美肌補正、プラスチックのような肌、文字化け、ロゴ、透かし。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case517",
+    "title": "杯内鱼眼夏日冰饮广告",
+    "category": "商品与电商",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "电商",
+      "产品",
+      "转化"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/lovimg_com/status/2077036659028484375",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case517.jpg",
+    "imageAlt": "杯内鱼眼夏日冰饮广告示例图",
+    "prompt": "主題：\n氷越しの夏\n\n主体：\n縦長2:3のリアル写真。透明な大型プラスチックカップの内側から見上げるような超広角フィッシュアイ構図。画面下半分いっぱいに赤いいちご果肉とクラッシュアイスが迫り、中央から太いグリーンのストローが奥へ一直線に伸びる。丸く歪んだカップの開口部の向こうに、女性の顔が中央に大きく収まる。\n\n人物・表情：\n自然で現実感のある若い女性。黒髪に近いダークブラウンの髪を高めのお団子にまとめ、薄い前髪と顔まわりの後れ毛が日差しで細く光っている。透明感のあるナチュラルメイク、淡いピンクの頬、つやのあるリップ。目を大きく開いてカメラをまっすぐ見つめ、唇を小さく丸めてストローをくわえている。少し驚いたような、可愛らしく無邪気な表情。\n\n服装・ポーズ：\n白いレース素材のブラウス。首元と肩まわりに細かなフリルがあり、夏らしく軽い質感。人物はカップの向こう側に顔を近づけ、両肩は下部に少しだけ見える。ストローは人物の口元に自然に接触し、奥から手前の赤い氷へ向かって強い奥行きを作る。\n\n背景・光：\n背景は晴れた夏の日の古い商店街。木造風の店先、かき氷屋の暖簾、苺柄の看板、白い小さな旗、街路樹が見える。文字はすべてぼかされた読めない装飾として扱う。左上から強い太陽光が入り、透明カップの水滴、カップ縁、氷、赤い果肉に細かな反射とハイライトが出る。影は右下へ落ち、白いクリームの残りがカップ内側にリング状についている。\n\n構図・カメラ：\nカメラはカップの底付近、赤い氷のすぐ上に置いたような極端なローアングル。フィッシュアイレンズでカップの円形リムが大きく湾曲し、周囲の商店街も軽く歪む。画面下45％は赤い氷と果肉の前ボケ、中央はストローと女性の顔、上部は青空とカップの透明な縁。ピントは女性の目と口元、手前の氷はきらめく浅いボケ。\n\n質感・スタイル：\nプロ用カメラで撮影した夏の広告写真風。透明プラスチックの屈折、水滴の粒、氷の冷たさ、いちご果肉の瑞々しさを高精細に表現。青空、赤い氷、グリーンのストロー、白いブラウスの色の対比を鮮やかにする。肌は自然な質感を残し、過度な美肌補正はしない。明るくポップで、少しユーモラスな日本の夏スイーツ写真。\n\nネガティブ：\n実在ブランドロゴ、読める文字、商標の再現、不自然な顔、不自然な視線、歯や唇の崩れ、ストローとの接触不良、余分な指、欠けた指、手足の融合、氷の浮遊、不自然な重力、誤った遠近法、光源と矛盾する影、文字化け、透かし、過度な美肌補正、プラスチックのような肌。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case516",
+    "title": "工业橡胶管品牌造型渲染",
+    "category": "品牌与空间",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "品牌",
+      "空间",
+      "质感"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Just_sharon7/status/2077034244988150062",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case516.jpg",
+    "imageAlt": "工业橡胶管品牌造型渲染示例图",
+    "prompt": "Create an ultra-detailed hyper-realistic 3D render of {Object} , formed from thick industrial rubber tubing bent into the exact shape of the design, flexible yet dense structure, smooth rounded contours, subtle matte finish, realistic elastomer texture, faint molded seam lines, soft tension at each curve, authentic material compression and stretch behavior, slightly grippy surface quality, engineered object realism, colored using the authentic official brand color palette of [brand], faithful brand-matching hues applied across the tubing, accurate color blocking that follows the original logo design, premium studio product photography aesthetic, isolated on a pure white seamless background, soft diffused studio lighting, realistic contact shadow, macro detail, razor-sharp focus, photorealistic, 8k, 16:9, no watermark, no extra text.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case515",
+    "title": "Guadalajara 复古电影旅行海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/MiMundoConIA/status/2077046470335938826",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case515.jpg",
+    "imageAlt": "Guadalajara 复古电影旅行海报示例图",
+    "prompt": "@Crea una imagen {\n  \"style\": \"Cinematic Vintage Movie Poster — Guadalajara, Mexico\",\n  \"target_tool\": \"DALL-E 3 (ChatGPT)\",\n  \"prompt\": \"Generate a vertical portrait-format movie poster image, taller than wide in a 2:3 aspect ratio. The image is a cinematic vintage travel movie poster for Guadalajara, Mexico, rendered with the visual texture of an aged large-format film poster: heavy 35mm film grain throughout especially in the shadow areas, slightly faded and warm-shifted color tones as if printed on aged matte paper stock, a subtle halftone dot pattern visible in the midtones, and a very slight ink bleed at high-contrast edges giving it an authentic vintage printed poster feel. Foreground: a single dark silhouette of a lone mariachi musician standing still at the center-bottom of the frame, rendered as a pure clean dark silhouette with no facial features visible — traditional wide-brim charro sombrero, fitted traje de charro suit outline, holding a guitarrón — casting a long warm shadow across the honey-colored cantera stone paving of Plaza de la Liberación below, with colorful papel picado banners in red, orange, green and yellow cut tissue paper strung in loose diagonal lines overhead from building to building, swaying slightly, framing the upper composition, no people other than the single silhouetted figure, no vehicles, no modern objects. Midground: the grand honey-amber cantera stone neoclassical facade of the Teatro Degollado rising directly behind the silhouette, its ornate columned portico and triangular pediment warmly lit by the low golden-hour sun hitting from the left, long dramatic shadows stretching across the stone paving, the warm amber volcanic stone glowing intensely in the golden light. Background: the twin neo-Gothic spires of the Catedral Metropolitana de Guadalajara rising tall into the upper frame against a vast deep cerulean blue sky transitioning to burnt amber and deep orange near the horizon, a single scattered cloud catching violet and gold light from below, the cathedral facade in warm honey stone matching the Teatro Degollado's palette. Color grade: saturated warm amber and golden honey tones dominating the stone architecture, deep cobalt blue in the upper sky, rich burnt orange near the horizon, faded warm sepia in the shadow areas consistent with a vintage printed poster. At the very top of the image, centered above the spires, render the single word GUADALAJARA in bold condensed uppercase display serif letters in warm cream-gold with a faint dark drop shadow, leaving clear sky negative space for the title. No modern buildings, no cars, no utility wires, no people other than the single dark silhouette visible anywhere in the scene.\",\n  \"target\": \"🎯 Target: DALL-E 3 (ChatGPT) — 💡 Foreground/midground/background separation places Teatro Degollado and the Cathedral in distinct spatial layers, the mariachi silhouette is specified as a featureless outline to eliminate aberration risk, and vintage print texture is described visually rather than as a style label.\"\n}",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case514",
+    "title": "硬边现代艺术人像",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/SimplyAnnisa/status/2071783914595897555",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case514.jpg",
+    "imageAlt": "硬边现代艺术人像示例图",
+    "prompt": "A striking piece of hard-edge modern art on matte archival paper, with visible screen-printing layers and slight ink misalignment. A young East Asian woman is captured in a sharp, three-quarter profile. Her facial features are rendered with precise, crisp contours, contrasting with abstract, luminous geometric shapes that seem to emanate from within her skin. She wears a sleek, high-collared jacket in deep midnight blue, adorned with a single, bold neon coral brooch in the shape of a sharp triangle. Her dark hair is styled in a severe, architectural bob with blunt edges. Her expression is calm and detached, eyes gazing off-frame. The background is a clean, architectural space with sharp diagonal planes in crisp white and deep slate. High-contrast chiaroscuro lighting highlights the edges of her silhouette. Sophisticated palette: deep midnight blue, crisp white, electric neon coral. A stray cat tail is rendered as a sharp, geometric vector in the bottom left corner. Ultra-modern artistic style. No digital CGI feel.\ndutch angle, stray cat tail --ar 9:16",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case513",
+    "title": "单色点缀旅行手账插画",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Sairah_0/status/2071779087396606433",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case513.jpg",
+    "imageAlt": "单色点缀旅行手账插画示例图",
+    "prompt": "Create a charming editorial travel illustration of {DESTINATION} in a simple hand-drawn doodled style, as if sketched by hand with a black felt-tip marker in a travel notebook. The illustration should feel personal, spontaneous, and imperfect rather than digitally designed. Think of the kind of drawing someone might casually create while sitting at a café after exploring the destination.** ## COLOR PALETTE Keep the illustration almost entirely black and white. Use **only one accent color: {ONE POINT COLOR}** ## STYLE Draw entirely with black felt-tip pen lines. Use slightly wobbly hand-drawn contours, natural line variation, loose marker strokes, sketch-like confidence, subtle imperfections, slightly open line endings, uneven hand pressure, and occasional overlapping strokes. Every line should clearly look handmade. Avoid perfectly smooth curves, mechanically precise outlines, polished vector graphics, or overly crisp digital rendering. ## SUBJECT Illustrate the unique atmosphere and instantly recognizable identity of **{DESTINATION}** rather than producing a realistic cityscape. Select the destination's most iconic landmarks, characteristic architecture, local transportation, famous scenery, native plants, local animals, regional food, and cultural objects. Focus on the spirit of the destination instead of literal accuracy. ## COMPOSITION Arrange the selected elements into a balanced editorial composition with generous white space. The layout should feel open, light, and effortless, similar to a designer's travel sketchbook. Allow objects to overlap naturally without becoming crowded. Every element should have room to breathe. Keep the composition visually relaxed and uncluttered. Apply the blue sparingly to selected details such as water, sky, windows, signs, clothing accents, decorative highlights, or small architectural features. Never introduce any additional colors. ## DRAWING STYLE Keep every object simple and intentionally simplified. Use flat shapes with minimal interior detail. Avoid realistic textures, gradients, shadows, painterly brushwork, glossy surfaces, or complex rendering. The illustration should remain clean, airy, understated, and highly graphic. ## LINE QUALITY The black marker lines are the main visual feature. Lines should feel confident, casual, lively, expressive, and naturally imperfect. Slightly uneven contours, open edges, variable line thickness, and small drawing inaccuracies are encouraged because they enhance the authentic hand-drawn feeling. ## MOOD Warm. Friendly. Relaxed. Playful. Minimal. Editorial. Contemporary. Elegant through simplicity. The finished artwork should resemble a beautifully designed travel notebook, boutique travel guide, editorial magazine illustration, or lifestyle sketchbook rather than a polished digital illustration. ## IMPORTANT No photorealism. No 3D rendering. No painterly effects. No gradients. No heavy shadows. No glossy lighting. No vector-clean artwork. No excessive detail. No busy composition. Preserve generous white space. Maintain a flat editorial doodle aesthetic with a distinctly handmade character. The final image should instantly evoke **{DESTINATION}** through simple, expressive black felt-tip sketches with subtle sky-blue accents.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case511",
+    "title": "城市名地标排版旅行海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Goodmanprotocol/status/2071819124708438092",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case511.jpg",
+    "imageAlt": "城市名地标排版旅行海报示例图",
+    "prompt": "Create a clean, modern typographic travel poster where the city name itself becomes the composition. Render the city name in large, bold, uppercase sans-serif letters spanning the width of the artwork. Seamlessly integrate the city's most iconic landmarks, architecture, monuments, streets, transportation, cultural symbols, cafés, bridges, parks, skylines, sculptures, waterfronts, historic buildings, and local details into, around, and inside the letters. Let landmarks naturally interact with the typography while preserving legibility.\nUse an elegant flat vector illustration style with crisp geometric shapes, minimal detail, clean outlines, subtle shadows, and a premium editorial aesthetic. Maintain a limited color palette of deep navy, warm cream, muted red, and soft gray-blue for a timeless travel-poster look.\nAdd small decorative elements such as street lamps, trees, clouds, birds, benches, bicycles, fountains, trams, ferries, or other city-specific objects where appropriate. Keep generous negative space with a clean background and perfectly balanced composition.\nEnsure every landmark, architectural style, vehicle, sign, and cultural element is accurate to the chosen city—avoid generic or incorrect landmarks. If desired, include a small elegant tagline beneath the city name (such as a famous nickname or slogan) in minimal typography.\nStyle: premium flat vector, minimalist travel poster, geometric illustration, editorial design, tourism branding, clean typography, high contrast, ultra-sharp lines, museum-quality print, modern graphic design, centered composition, scalable SVG aesthetic, 8K resolution.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case510",
+    "title": "Bichon Shop 拟物 App 图标",
+    "category": "品牌与空间",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "品牌",
+      "空间",
+      "质感"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2071923809788285125",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case510.jpg",
+    "imageAlt": "Bichon Shop 拟物 App 图标示例图",
+    "prompt": "A macOS app icon for an app named 'Bichon Shop'. A single squircle icon with smooth continuous rounded corners, centered on a white canvas with padding, occupying about 80% of the canvas. Modern light skeuomorphic macOS App Store style. Only one icon.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case509",
+    "title": "涂鸦拉衣奔跑棚拍",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Sairah_0/status/2071929275897491491",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case509.jpg",
+    "imageAlt": "涂鸦拉衣奔跑棚拍示例图",
+    "prompt": "A playful, high-key studio portrait of [subject] running joyfully across a seamless light gray background, captured mid-stride with one leg lifted and a wide genuine smile. The subject wears a casual oversized outfit with soft neutral tones (or vibrant colors), creating a dynamic sense of motion. Behind them, a simple black hand-drawn cartoon stick figure grabs and stretches the back of their shirt, making the fabric appear elastically pulled as if trying to stop them. The doodle character is integrated naturally into the scene with expressive motion lines and a humorous facial expression. The subject holds a fun prop (such as a dinosaur toy, oversized lollipop, teddy bear, or balloon), enhancing the playful storytelling. Minimalist composition, clean studio lighting, soft shadows, ultra-sharp focus, realistic skin texture, vibrant yet natural colors, whimsical editorial photography, premium children’s fashion campaign aesthetic, highly detailed, photorealistic, 8K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case508",
+    "title": "木漏日庭院俯拍猫咪人像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/ohmuyi/status/2067930690977779942",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case508.jpg",
+    "imageAlt": "木漏日庭院俯拍猫咪人像示例图",
+    "prompt": "俯拍镜头，高角度顶机位，自上而下俯瞰一位年轻的东亚裔女性，她有着精致的东亚五官和柔顺的黑发。她蹲在花园小径上，轻轻逗弄一只毛茸茸的橘猫。头顶密密的枝叶滤过阳光，形成灵动的“木漏日”效果——跃动、圆形的光斑在她的肌肤和猫毛上流转舞动。空气中悬浮着淡淡的潮湿薄雾，捕捉住光束，营造出柔和可见的立体光柱（丁达尔效应）。当她仰头朝向镜头时，一层轻雾柔化了画面边缘，增添梦幻氛围。她的表情从略带俏皮的轻噘嘴，渐渐转为眼角堆起细纹的真挚笑容，斑驳的光线恰好勾勒出她肌肤的细腻纹理和眼中盈盈的水光。",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case507",
+    "title": "暖调钩织角色玩偶",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/azed_ai/status/2067925399947067728",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case507.jpg",
+    "imageAlt": "暖调钩织角色玩偶示例图",
+    "prompt": "A handcrafted crochet doll of a [subject], made with soft yarn textures and intricate knitted details. Dressed in a vivid [color1] accent and a delicate [color2] garment, holding a small [prop]. Set in a cozy [setting], warm muted atmosphere, charming handmade aesthetic, nostalgic amigurumi style.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case506",
+    "title": "可爱发卡图文人像海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/xiaoxiaodong01/status/2062924832917029248",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case506.jpg",
+    "imageAlt": "可爱发卡图文人像海报示例图",
+    "prompt": "围绕具体主题内容生成一张明亮清爽的图文合成视觉：画面以大面积高明度纯净色场承托主体，背景平整、通风、没有复杂景深，视觉重心由下方被大胆裁切的人像或真实主体建立，只露出最有记忆点的局部，使主体像从画面边缘进入。主体上方叠放一个极简图形符号或拟物角色，它要像轻轻坐在主体头顶或贴合轮廓生长出来，形体圆润、边缘干净、表情或结构由少量粗线完成，兼具标识感和亲近感。文字是画面的主动角色：顶部使用大号手写感标题，字距松、笔画柔软，像一句轻声招呼；中心用更强的竖向或轴向标题建立层级；边缘安放少量小字号信息，保持安静但精确，让空白继续占主导。色彩从主题自身的材质、情绪、地域或品牌语义中提取，映射为明亮底色、洁净主体亮面、清晰深色结构线与少量强调信息色，保留大面积轻快底场、小面积高对比文字线条、自然主体暗部的关系；整体保持高明度、清透、干净、饱和度清晰而不过度刺激，暗色只用于结构和阅读，不制造脏灰、烟雾或陈旧质感。摄影局部与扁平图形之间要形成真实与童趣的反差，边缘叠压准确，阴影极少，完成感像城市公共宣传与角色插画结合的轻松视觉系统。\n\n主题：柳岩\n\n比例9:16",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case505",
+    "title": "夜间手机光沙发肖像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063231612478017579",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case505.jpg",
+    "imageAlt": "夜间手机光沙发肖像示例图",
+    "prompt": "A young adult woman with soft refined features, thin metal glasses, and shoulder-length dark tousled hair, leaning forward across a dark upholstered couch at night. She wears a pale cream lace-trim camisole with thin straps and matching soft shorts. One hand holds a smartphone close to the foreground, the screen glow casting cool reflections on her fingers and glasses lenses. Her expression is dreamy and softly tired, eyes lifted toward the camera as if she just looked up from scrolling, lips gently closed in a relaxed pout.\n\nShot in a vertical 3:4 frame at slightly above eye level, medium close-up to three-quarter portrait. Warm dim tungsten room light mixed with cool phone-screen reflections, no flash, soft falloff across the couch and wall. Shallow depth of field, soft low-light grain, slight motion blur, natural imperfect sharpness. Background: plain beige-gray wall, minimal decor, late-night atmosphere. Soft glam makeup: subtle eyeliner, long lashes, smooth skin, glossy pink-nude lips. Realistic social-media night portrait aesthetic.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case503",
+    "title": "霓虹设计师 3D 海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/AiwithLariab/status/2063240283786187251",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case503.jpg",
+    "imageAlt": "霓虹设计师 3D 海报示例图",
+    "prompt": "Create an ultra-detailed 3D stylized creative designer poster featuring a cool young digital artist standing confidently in the center of a futuristic blue neon studio. The character wears oversized black streetwear with electric-blue graphic accents, black cargo pants, layered silver chains, black sunglasses, and clean white sneakers. A cute fluffy puppy sits on the artist's shoulder. The camera angle is dramatic low-angle perspective, making the sneakers appear larger for a premium poster effect.\n\nSurround the character with floating creative elements including a glowing laptop, professional camera, design books, notebooks, 3D icons, social media symbols, holographic UI panels, graphic design tools, and futuristic blue geometric shapes. Add motivational typography such as \"DESIGN MODE\", \"CREATE • BUILD • INSPIRE\", and \"CREATIVE NEVER SLEEPS\" integrated into the scene.\n\nInclude a collectible chibi mini-figure version of the character standing beside the main subject on a display base. Use cinematic blue lighting, glossy reflections, volumetric glow, depth of field, floating particles, luxury toy-photography aesthetics, high-end 3D rendering, Octane Render quality, ultra-sharp details, vibrant neon blue color palette, futuristic creator workspace atmosphere, premium commercial poster design, trending ArtStation style, masterpiece quality, 8K resolution, vertical 9:16 composition.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case501",
+    "title": "夏日牵手回眸电影肖像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/iamaiistudio/status/2063247373388992790",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case501.jpg",
+    "imageAlt": "夏日牵手回眸电影肖像示例图",
+    "prompt": "Cinematic portrait photography, ultra-photorealistic, 2160x3840 vertical composition, 50mm or 85mm portrait lens rendering, shallow depth of field, clean translucent summer natural-light color grading — not overly yellow, not over-filtered.\n\nSubject: a young beautiful adult East Asian woman, [describe face shape and features, e.g. soft heart-shaped face, refined classical features, bright almond/fox eyes, petite nose bridge, naturally full lips], overall vibe sweet, sunny, energetic, cute with a touch of allure. Gaze highly engaging — bright, clear, natural catchlights, as if it speaks; corners of mouth slightly lifted, expression gentle, vivid, natural.\n\nShe walks along a [scene, e.g. garden stone path / tree-lined lane / European street / courtyard], right hand reaching back to hold the hand of someone behind her; only their hand appears in the lower-left corner — like a first-person couple's POV snapshot. She glances back at the camera while her body stays in a forward walking motion, posture elegant and natural, clearly a candid captured moment with a faint in-love feeling.\n\nLong [hair color] hair, [style, e.g. naturally wavy / relaxed big waves / airy bangs / half-up], many strands tousled and flying in the wind, richly layered and dynamic. Strong natural side-backlight rims the hair edges — clean, crisp rim light and semi-translucent glow, hair edges lit as if by sunlight, light and luminous. This is the core highlight of the image.\n\nShe wears [outfit, e.g. white lace slip dress / beige slip dress / light-blue short-sleeve top with white skirt / light-pink fitted dress], fabric texture natural, material light and soft. Bright natural summer sunlight realistically warms her skin, shoulders, collarbone, and clothing with soft, clean highlight transitions.\n\nSkin texture: extremely realistic — visible fine pores, natural skin texture, faint imperfections, subtle tone variation, soft sheen. Cheeks, nose tip, shoulders show natural delicate gradations in sunlight. Translucent, healthy, real and refined — no plastic look, no waxwork, no over-smoothing.\n\nBackground: soft atmospheric blur, never distracting.\n\nAvoid: over-smoothing, plastic skin, CG look, anime look, wig look, stiff expression, dead eyes, stiff poses, overall yellow cast, overexposed face, distorted features, wrong fingers, deformed hands, cluttered background, heavy influencer retouching.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case500",
+    "title": "梦幻花冠仙境肖像",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/HaniaAi12/status/2062696495741391006",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case500.jpg",
+    "imageAlt": "梦幻花冠仙境肖像示例图",
+    "prompt": "Ultra-realistic ethereal fantasy portrait of a breathtaking young woman with delicate porcelain skin, soft grey-blue eyes, and natural rosy lips. She gazes gently toward the viewer with a serene, dreamy expression, her fingertips lightly touching her chin. Wispy ash-brown hair flows softly in the breeze, styled in a loose romantic updo adorned with pastel blush roses, shimmering crystal ornaments, delicate feathers, and intricate floral accessories. She wears elegant dangling crystal earrings and a translucent, flowing gown made of sheer iridescent fabric embroidered with tiny sparkling flowers.\n\nThe scene is bathed in soft diffused morning light, creating a luminous glow around her face and shoulders. Surrounded by floating butterflies, sparkling dust particles, translucent petals, and dreamy floral textures, the background blends pastel lavender, pearl white, blush pink, and silver tones. Cinematic fine-art photography, fairycore aesthetic, enchanted garden atmosphere, magical realism, ultra-detailed skin texture, soft focus highlights, volumetric lighting, bokeh, masterpiece quality, highly detailed, 8K resolution, delicate feminine beauty, romantic fantasy artwork, elegant composition, dreamy color grading, soft glow, celestial ambiance.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case499",
+    "title": "极简精品店全身时尚写真",
+    "category": "摄影与文档",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "摄影",
+      "真实感",
+      "复用"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/john_my07/status/2062579742759649486",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case499.jpg",
+    "imageAlt": "极简精品店全身时尚写真示例图",
+    "prompt": "A full-body editorial fashion photograph of a beautiful young woman with the same appearance as the reference, long glossy dark hair, soft bangs, fair skin, and refined feminine features. She stands casually in an upscale minimalist fashion boutique, wearing an oversized pastel-blue knit sweater paired with a black pleated tennis-style skirt, white crew socks, and chunky designer sneakers. Relaxed confident pose, gentle smile, luxury retail interior with modern clothing racks, neutral-toned garments, warm ambient lighting, wood and stone textures, clean architectural lines, cinematic depth of field, realistic lighting, premium fashion advertising, Vogue-style editorial, ultra-detailed, sharp focus, photorealistic, 4K.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case498",
+    "title": "铅笔画背景 3D 分身",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/AIwithkhan/status/2062567518389391540",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case498.jpg",
+    "imageAlt": "铅笔画背景 3D 分身示例图",
+    "prompt": "Create a handrawn pencil illustration of [image] yawning on paper, as background.\n\nAdd a 3D Pixar style render of [foto] standing casually infront of the giant handrawn pencil illustration. Soft cinematic lighting. 8K resolution. 3:4 ratio",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case497",
+    "title": "单色水彩城市旅行海报",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/Goodmanprotocol/status/2062564327140503787",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case497.jpg",
+    "imageAlt": "单色水彩城市旅行海报示例图",
+    "prompt": "Minimalist vintage watercolor travel poster illustration of [CITY NAME], [COUNTRY], rendered entirely in elegant monochromatic [COLOR] watercolor and fine ink linework.\n\nAspect ratio: 4:5 vertical composition optimized for poster and social media presentation.\n\nA peaceful early-morning streetscape featuring the iconic [PRIMARY LANDMARK] and [SECONDARY LANDMARK/LOCATION] in the foreground, viewed from a slightly low pedestrian-level perspective. Historic local architecture, elegant facades, ornate details, arched windows, decorative cornices, and traditional street elements line the spacious surroundings, creating a timeless urban atmosphere. A classic [LOCAL STREET ELEMENT OR LAMP STYLE] stands prominently on the left side, while mature leafy trees frame portions of the scene, their foliage painted with soft watercolor washes and delicate splatter textures. In the distance, [DISTANT LANDMARK OR SKYLINE FEATURE] rises gracefully against the skyline, serving as a recognizable cultural landmark. A vintage [LOCAL VEHICLE] or a few small pedestrians add subtle life and scale without disturbing the tranquil mood.\n\nThe composition includes large areas of clean white negative space, soft cloudy watercolor textures in the sky, delicate paper grain, and subtle watercolor blooms. The paving, street, or plaza stretches dramatically across the foreground, leading the viewer’s eye toward the landmark ensemble. Typography in the upper-left corner reads “[CITY NAME], [COUNTRY]” in a refined serif font, styled like a sophisticated travel journal or collectible city poster.\n\nHandcrafted watercolor illustration, architectural sketch aesthetic, serene urban atmosphere, soft natural morning lighting, muted monochromatic palette, highly detailed line art, elegant travel-poster design, minimalist luxury wall-art style, timeless local charm, premium stationery illustration, ultra-detailed, high-resolution, clean composition, Pinterest-worthy, Instagram-worthy, gallery-quality artwork.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case496",
+    "title": "水雕品牌 Logo 六宫格",
+    "category": "品牌与空间",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "品牌",
+      "空间",
+      "质感"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/AIwithSynthia/status/2062521441141088599",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case496.jpg",
+    "imageAlt": "水雕品牌 Logo 六宫格示例图",
+    "prompt": "Create a premium 3x2 grid collage of iconic global brand logos recreated entirely from dynamic water formations, floating above a crystal-clear ocean under a vibrant blue sky. Each panel features a different logo sculpted from realistic transparent water, with detailed splashes, droplets, reflections, refractions, and flowing liquid textures. The water forms should look physically accurate, elegant, and instantly recognizable while remaining made completely of water.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case495",
+    "title": "巴黎街头故事书插画",
+    "category": "海报与排版",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "海报",
+      "排版",
+      "视觉"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/MissDelulu9/status/2062376738500526347",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case495.jpg",
+    "imageAlt": "巴黎街头故事书插画示例图",
+    "prompt": "Portrait illustration in a storybook style featuring a young adult woman exploring the streets of Paris. She is laughing happily with her eyes closed, holding a coffee cup in her hand. She has long, wavy hair and wears a beret hat. The scene is set near a Parisian café in a peaceful morning atmosphere. The woman has a sweet, charming smile. Soft, dreamy mood, romantic Paris street vibe, gentle lighting, and highly detailed artwork.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+  {
+    "id": "gallery-fs-case494",
+    "title": "电动巴士工程信息图",
+    "category": "图表与信息图",
+    "description": "来自freestylefly/awesome-gpt-image-2 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
+    "tags": [
+      "信息图",
+      "图表",
+      "讲解"
+    ],
+    "source": "freestylefly/awesome-gpt-image-2 社区案例",
+    "sourceUrl": "https://x.com/j_smeaton99/status/2062365258984177766",
+    "recommendedSize": "1:1",
+    "imageUrl": "https://cdn.jsdmirror.com/gh/freestylefly/awesome-gpt-image-2@main/data/images/case494.jpg",
+    "imageAlt": "电动巴士工程信息图示例图",
+    "prompt": "Create a premium square “reference-style sustainable transportation infographic” centered around a futuristic electric city bus called the {E_BUS_NAME}, designed as a beautifully curated urban-mobility handbook page rather than a commercial vehicle advertisement.\n\nThe composition should feel like a modern visual encyclopedia mixed with an elite public-transit engineering guide and high-end editorial infographic system.\n\nVisual Direction\n\n• 1:1 square composition\n• Premium smart-city background with subtle transportation blueprints, circuit-inspired overlays, and urban infrastructure schematics\n• Elegant palette using deep navy, graphite black, electric green, steel gray, and soft cyan accents\n• Refined editorial typography hierarchy\n• Rounded modular information cards with clean spacing\n• Gentle realistic reflections and premium transit-system dividers\n• Minimal transportation engineering iconography\n• Extremely detailed central electric bus render viewed in dramatic three-quarter perspective driving through a futuristic smart-city boulevard\n• Thin precision annotation lines pointing toward key systems and technologies\n• Clean, organized “knowledge-first” layout with high information density but breathable spacing\n\nMain Subject Presentation\n\nA stunning ultra-detailed realistic render of the {E_BUS_NAME} placed at the center, featuring:\n\n• sleek aerodynamic body design\n• panoramic windshield\n• illuminated destination display\n• low-floor accessibility layout\n• futuristic LED lighting systems\n• premium electric drivetrain details\n• realistic urban reflections\n• smart-city transportation realism\n\nSurround the bus with engineering callouts explaining:\n\n• battery pack technology\n• electric motor system\n• regenerative braking system\n• charging infrastructure compatibility\n• smart fleet management systems\n• passenger accessibility features\n• thermal battery management\n• energy-efficiency technologies\n• safety monitoring systems\n• intelligent driver assistance features\n\nInclude Modular Sections\n\n• E-Bus Overview\n• Technical Specifications\n• Vehicle Dimensions & Capacity\n• Powertrain & Energy System\n• Battery Technology Breakdown\n• Charging Solutions\n• Passenger Comfort Features\n• Safety & Reliability Systems\n• Fleet Management Technology\n• Environmental Impact Analysis\n• Operating Cost Comparison\n• Construction & Material Engineering\n• Sustainability Lifecycle Assessment\n• Smart-City Integration\n• Global Adoption Trends\n• “Did You Know?” Facts Section\n• Future of Electric Public Transport\n\nAdd Premium Visualization Modules\n\n• battery architecture diagrams\n• charging workflow graphics\n• energy-consumption charts\n• passenger-capacity visualizations\n• smart-city integration maps\n• drivetrain cutaway illustrations\n• environmental impact comparisons\n• fleet-management dashboards\n• vehicle blueprint dimensions\n• lifecycle sustainability graphics\n\nStyle Keywords\n\n“premium transportation encyclopedia”\n“editorial electric mobility handbook”\n“high-end public transit infographic”\n“scientific transportation poster”\n“museum-quality electric bus reference page”\n“modular smart-city knowledge system”\n“clean engineering editorial design”\n“ultra-detailed mobility visualization”\n“future transportation showcase”\n“sustainable urban mobility design”\n\nAvoid\n\n• generic vehicle advertisements\n• cluttered commercial brochure layouts\n• cartoon transportation styling\n• unrealistic flying-bus concepts\n• excessive cyberpunk neon overload\n• low-detail stock-vehicle renders\n\nFinal Goal\n\nThe final result should resemble a professionally published transportation-engineering reference-book page created for urban planners, transportation engineers, sustainability researchers, architects, public-transit authorities, and smart-city enthusiasts, combining technical accuracy, sustainability insights, and premium editorial design.",
+    "tips": [
+      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
+      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
+    ]
+  },
+
 ]
 
 const DEFAULT_CURATED_TEMPLATE_TIPS = [
