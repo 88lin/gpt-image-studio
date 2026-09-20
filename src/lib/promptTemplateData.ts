@@ -593,7 +593,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046272578705068476",
-    "title": "an ingame screenshot of rust",
+    "title": "射击竞技实机截图",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -606,7 +606,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case34/output.jpg",
     "imageAlt": "an ingame screenshot of rust示例图",
-    "prompt": "以「an ingame screenshot of rust」为目标生成图像。\n\n核心提示词：an ingame screenshot of rust\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "生成一张射击竞技内截图风格的画面。\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -614,7 +614,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046514205529088501",
-    "title": "Create a Science fiction movie pos...",
+    "title": "科幻电影海报",
     "category": "海报与排版",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -627,7 +627,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case45/output.jpg",
     "imageAlt": "Create a Science fiction movie pos...示例图",
-    "prompt": "以「Create a Science fiction movie pos...」为目标生成图像。\n\n核心提示词：Create a Science fiction movie poster\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "创作一张科幻电影海报。\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1097,7 +1097,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046410519595348397",
-    "title": "counter strike in game screenshot,...",
+    "title": "像素沙盒风混合截图",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -1110,7 +1110,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case30/output.jpg",
     "imageAlt": "counter strike in game screenshot,...示例图",
-    "prompt": "以「counter strike in game screenshot,...」为目标生成图像。\n\n核心提示词：counter strike in game screenshot, mixed with Terraria\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "生成一张射击竞技内截图风格的画面，融合像素沙盒建造风格。\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1278,7 +1278,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776828293363-8y5jjpp7-1776828295131-1.jpeg",
     "imageAlt": "精美美妆邮件序列排版示例图",
-    "prompt": "以「精美美妆邮件序列排版」为目标生成图像。\n\n核心提示词：中文提示词\n为fenty beauty创建一个精美的电子邮件序列模板\n\n英文提示词\nCreate a polished email sequence template for fenty beauty\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「精美美妆邮件序列排版」为目标生成图像。\n\n核心提示词：\n为fenty beauty创建一个精美的电子邮件序列模板\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1320,7 +1320,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776841492121-a4i7vcgj-1776841495289-1.jpeg",
     "imageAlt": "乔丹传奇生涯史诗海报示例图",
-    "prompt": "中文提示词\n创作一张史诗级海报，展示迈克尔·乔丹职业生涯中最具标志性的时刻。史诗级，电影感，镜头光晕\n\n英文提示词\nCreate an epic poster showcasing the most iconic moments of Michael Jordan career. epic, cinematic, lens flare",
+    "prompt": "创作一张史诗级海报，展示迈克尔·乔丹职业生涯中最具标志性的时刻。史诗级，电影感，镜头光晕",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1341,7 +1341,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786405094-joms0gk0-1776786428039-1.jpeg",
     "imageAlt": "诗仙李白月下直播起舞示例图",
-    "prompt": "以「诗仙李白月下直播起舞」为目标生成图像。\n\n核心提示词：中文提示词\n李白在抖音直播月下起舞\n\n英文提示词\nLi Bai dancing under the moon during a Douyin livestream\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「诗仙李白月下直播起舞」为目标生成图像。\n\n核心提示词：\n李白在抖音直播月下起舞\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1383,7 +1383,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776785155954-ar23f4li-1776785158136-1.jpeg",
     "imageAlt": "品牌视觉设计全案展示示例图",
-    "prompt": "以「品牌视觉设计全案展示」为目标生成图像。\n\n核心提示词：中文提示词\n帮我生成一张品牌视觉\n\n英文提示词\nHelp me generate a brand visual\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「品牌视觉设计全案展示」为目标生成图像。\n\n核心提示词：\n帮我生成一张品牌视觉\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1404,7 +1404,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776788368181-psb2qpep-1776788374142-1.jpeg",
     "imageAlt": "百件A字头物品矩阵图示例图",
-    "prompt": "中文提示词\n创建一个包含 10x10 网格的图像，每个对象名称都以字母 a 开头。\n\n英文提示词\ncreate an image with 10x10 grid of objects that have the names starting with letter a.",
+    "prompt": "创建一个包含 10x10 网格的图像，每个对象名称都以字母 a 开头。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1509,7 +1509,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786409545-aaccxsl6-1776786437089-1.jpeg",
     "imageAlt": "苏轼被贬首日朋友圈曝光示例图",
-    "prompt": "以「苏轼被贬首日朋友圈曝光」为目标生成图像。\n\n核心提示词：中文提示词\n苏轼被贬第一天小红书截图\n\n英文提示词\nSu Shi's first day of exile Xiaohongshu screenshot\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「苏轼被贬首日朋友圈曝光」为目标生成图像。\n\n核心提示词：\n苏轼被贬第一天小红书截图\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1530,7 +1530,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776785168586-zxoua7pe-1776785174825-1.jpeg",
     "imageAlt": "吉利银河暗黑中控界面示例图",
-    "prompt": "中文提示词\n帮我生成一个吉利银河m9的中控界面，尺寸为21:9，暗色系\n\n英文提示词\nHelp me generate a central control interface of Geely Galaxy M9, size 21:9, dark color scheme.",
+    "prompt": "帮我生成一个吉利银河m9的中控界面，尺寸为21:9，暗色系",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1551,7 +1551,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776785160503-te2u57in-1776785167809-1.jpeg",
     "imageAlt": "亚马逊详情图设计示例图",
-    "prompt": "以「亚马逊详情图设计」为目标生成图像。\n\n核心提示词：中文提示词\n生成一套亚马逊 A+=详情图\n\n英文提示词\nGenerate a set of Amazon A+= detail images\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「亚马逊详情图设计」为目标生成图像。\n\n核心提示词：\n生成一套亚马逊 A+=详情图\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1614,7 +1614,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786166493-lfx79w9u-1776786169166-1.jpeg",
     "imageAlt": "千禧年日系校园喜剧场景示例图",
-    "prompt": "以「千禧年日系校园喜剧场景」为目标生成图像。\n\n核心提示词：中文提示词\n2000 年代面向中学生的日剧喜剧场景\n\n英文提示词\n2000s Japanese TV drama comedy scene aimed at middle school students\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「千禧年日系校园喜剧场景」为目标生成图像。\n\n核心提示词：\n2000 年代面向中学生的日剧喜剧场景\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1635,7 +1635,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786026785-wy7iele5-1776786032073-1.jpeg",
     "imageAlt": "一张中文健身信息图示例图",
-    "prompt": "中文提示词\n请生成一张中文健身信息图，主题为：【xxx】。 \n\n要求这张图既专业又实用，适合普通成年人作为训练参考。默认对象为无严重伤病的健康成年人；如果没有额外说明，默认训练目标为“增肌 + 基础力量提升”，默认训练水平为“新手到中级之间”，默认训练场景为“普通健身房”，默认单次训练时长控制在 40–60 分钟内。\n\n请根据【训练主题】自动判断输出类型：\n\n1）如果【训练主题】是某个肌群或身体部位（例如：胸肌、背阔肌、肱二头肌、腹肌、肩部、腿部等），请输出一张“该部位训练计划信息图”。\n2）如果【训练主题】是某个动作或技能目标（例如：引体向上、俯卧撑、双杠臂屈伸、深蹲等），请输出一张“动作解锁 / 进阶训练计划信息图”。\n\n整张图请采用清晰、现代、专业、易读的中文信息图风格，竖版排版，视觉简洁，重点突出，适合社交媒体分享或训练参考卡片。不要写成长篇大论，每个模块用简洁短句呈现，数字信息要醒目。\n\n这张信息图必须包含以下内容：\n\n【A. 标题区】\n- 主标题：直接写【训练主题】训练计划 / 解锁计划\n- 副标题：自动补充适用人群、目标、训练场景、建议时长\n例如：适合新手 / 增肌导向 / 健身房版 / 45分钟\n\n【B. 训练目标区】\n用简洁语言说明：\n- 这次训练主要针对什么\n- 主要目标是什么（增肌 / 力量 / 技能解锁 / 核心控制等）\n- 本次训练的重点刺激或能力提升方向\n\n【C. 热身区】\n给出 2–4 个热身建议，简洁列出即可，例如：\n- 动态活动\n- 目标肌群激活\n- 轻重量预热组\n每项可附一句说明\n\n【D. 主训练区】\n这是核心部分，请列出 4–6 个主要训练动作。\n每个动作都要包含以下信息：\n- 动作名称\n- 训练作用 / 针对部位\n- 组数 × 次数（或时间）\n- RIR 建议\n- 每组间休息时间\n- 动作关键要点（1–2 条）\n- 常见错误（1 条即可）\n\n请确保动作安排合理：\n- 先复合动作，后孤立动作\n- 整体训练量适中\n- 新手不要安排过度极限训练\n- 主动作通常建议 RIR 1–3\n- 孤立动作可建议 RIR 0–2\n- 如果是腹肌或核心类动作，可用“秒数 / 次数”形式\n- 如果是技能类动作，请优先安排“前置能力动作 + 过渡动作 + 目标动作尝试”\n\n【E. 进阶 / 解锁逻辑区】\n根据主题自动生成：\n- 如果是肌群训练：写“如何渐进超负荷”，例如达到次数上限后再加重量、优先保证动作标准等\n- 如果是动作解锁：写“分阶段进阶路径”，例如从悬垂、肩胛引体、离心训练、弹力带辅助，到标准动作完成\n\n【F. 替代动作区】\n请给出 2–3 个替代动作，适用于以下情况：\n- 没有器械\n- 家庭训练\n- 当前能力不足\n- 某些动作做不了\n\n【G. 执行提醒区】\n请给出 4–6 条简洁提醒，例如：\n- 动作标准优先于重量\n- 不要每组都练到力竭\n- 同肌群建议间隔 48–72 小时\n- 疼痛不等于正常发力\n- 睡眠不足时可适当减少训练量\n\n【H. 恢复建议区】\n简洁说明：\n- 训练后恢复重点\n- 蛋白质 / 睡眠 / 恢复间隔建议\n- 1 句风险提醒（如有明显疼痛应停止并评估）\n\n【I. 视觉设计要求】\n- 整体为单页中文信息图\n- 竖版排版\n- 风格现代、清爽、专业、健身感强\n- 使用模块化卡片布局\n- 重点数字（组数、次数、RIR、休息）要醒目\n- 可加入简洁的人体肌群图标、哑铃、杠铃、引体向上等小图标\n- 颜色保持高级、干净、有运动感\n- 中文文字必须清晰、准确、易读\n- 避免过多装饰，强调实用性与执行性\n\n请最终输出为“一张完整的信息图内容”，而不是只给普通段落文字。",
+    "prompt": "请生成一张中文健身信息图，主题为：【xxx】。 \n\n要求这张图既专业又实用，适合普通成年人作为训练参考。默认对象为无严重伤病的健康成年人；如果没有额外说明，默认训练目标为“增肌 + 基础力量提升”，默认训练水平为“新手到中级之间”，默认训练场景为“普通健身房”，默认单次训练时长控制在 40–60 分钟内。\n\n请根据【训练主题】自动判断输出类型：\n\n1）如果【训练主题】是某个肌群或身体部位（例如：胸肌、背阔肌、肱二头肌、腹肌、肩部、腿部等），请输出一张“该部位训练计划信息图”。\n2）如果【训练主题】是某个动作或技能目标（例如：引体向上、俯卧撑、双杠臂屈伸、深蹲等），请输出一张“动作解锁 / 进阶训练计划信息图”。\n\n整张图请采用清晰、现代、专业、易读的中文信息图风格，竖版排版，视觉简洁，重点突出，适合社交媒体分享或训练参考卡片。不要写成长篇大论，每个模块用简洁短句呈现，数字信息要醒目。\n\n这张信息图必须包含以下内容：\n\n【A. 标题区】\n- 主标题：直接写【训练主题】训练计划 / 解锁计划\n- 副标题：自动补充适用人群、目标、训练场景、建议时长\n例如：适合新手 / 增肌导向 / 健身房版 / 45分钟\n\n【B. 训练目标区】\n用简洁语言说明：\n- 这次训练主要针对什么\n- 主要目标是什么（增肌 / 力量 / 技能解锁 / 核心控制等）\n- 本次训练的重点刺激或能力提升方向\n\n【C. 热身区】\n给出 2–4 个热身建议，简洁列出即可，例如：\n- 动态活动\n- 目标肌群激活\n- 轻重量预热组\n每项可附一句说明\n\n【D. 主训练区】\n这是核心部分，请列出 4–6 个主要训练动作。\n每个动作都要包含以下信息：\n- 动作名称\n- 训练作用 / 针对部位\n- 组数 × 次数（或时间）\n- RIR 建议\n- 每组间休息时间\n- 动作关键要点（1–2 条）\n- 常见错误（1 条即可）\n\n请确保动作安排合理：\n- 先复合动作，后孤立动作\n- 整体训练量适中\n- 新手不要安排过度极限训练\n- 主动作通常建议 RIR 1–3\n- 孤立动作可建议 RIR 0–2\n- 如果是腹肌或核心类动作，可用“秒数 / 次数”形式\n- 如果是技能类动作，请优先安排“前置能力动作 + 过渡动作 + 目标动作尝试”\n\n【E. 进阶 / 解锁逻辑区】\n根据主题自动生成：\n- 如果是肌群训练：写“如何渐进超负荷”，例如达到次数上限后再加重量、优先保证动作标准等\n- 如果是动作解锁：写“分阶段进阶路径”，例如从悬垂、肩胛引体、离心训练、弹力带辅助，到标准动作完成\n\n【F. 替代动作区】\n请给出 2–3 个替代动作，适用于以下情况：\n- 没有器械\n- 家庭训练\n- 当前能力不足\n- 某些动作做不了\n\n【G. 执行提醒区】\n请给出 4–6 条简洁提醒，例如：\n- 动作标准优先于重量\n- 不要每组都练到力竭\n- 同肌群建议间隔 48–72 小时\n- 疼痛不等于正常发力\n- 睡眠不足时可适当减少训练量\n\n【H. 恢复建议区】\n简洁说明：\n- 训练后恢复重点\n- 蛋白质 / 睡眠 / 恢复间隔建议\n- 1 句风险提醒（如有明显疼痛应停止并评估）\n\n【I. 视觉设计要求】\n- 整体为单页中文信息图\n- 竖版排版\n- 风格现代、清爽、专业、健身感强\n- 使用模块化卡片布局\n- 重点数字（组数、次数、RIR、休息）要醒目\n- 可加入简洁的人体肌群图标、哑铃、杠铃、引体向上等小图标\n- 颜色保持高级、干净、有运动感\n- 中文文字必须清晰、准确、易读\n- 避免过多装饰，强调实用性与执行性\n\n请最终输出为“一张完整的信息图内容”，而不是只给普通段落文字。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1656,7 +1656,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786418205-6j6qle8q-1776786444619-1.jpeg",
     "imageAlt": "杜甫朋友圈吐槽茅屋被掀翻示例图",
-    "prompt": "以「杜甫朋友圈吐槽茅屋被掀翻」为目标生成图像。\n\n核心提示词：中文提示词\n杜甫发朋友圈吐槽房顶被风刮没了\n\n英文提示词\nDu Fu posting on WeChat Moments complaining about his roof being blown away by the wind\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「杜甫朋友圈吐槽茅屋被掀翻」为目标生成图像。\n\n核心提示词：\n杜甫发朋友圈吐槽房顶被风刮没了\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1677,7 +1677,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786414068-mzh7pqdr-1776786444836-1.jpeg",
     "imageAlt": "武则天发微博自拍太魔性了示例图",
-    "prompt": "以「武则天发微博自拍太魔性了」为目标生成图像。\n\n核心提示词：中文提示词\n武则天自拍登记发微博\n\n英文提示词\nWu Zetian taking a selfie, registering and posting on Weibo.\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「武则天发微博自拍太魔性了」为目标生成图像。\n\n核心提示词：\n武则天自拍登记发微博\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1719,7 +1719,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776787243471-rqnw5jz4-1776787246313-1.jpeg",
     "imageAlt": "清新夏日女装连衣裙电商展示示例图",
-    "prompt": "以「清新夏日女装连衣裙电商展示」为目标生成图像。\n\n核心提示词：中文提示词\n夏季女裙电商详情图\n\n英文提示词\nSummer women's dress e-commerce detail image\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「清新夏日女装连衣裙电商展示」为目标生成图像。\n\n核心提示词：\n夏季女裙电商详情图\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1740,7 +1740,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776787247636-f7emaylv-1776787249099-1.jpeg",
     "imageAlt": "全自动咖啡机产品展示示例图",
-    "prompt": "以「全自动咖啡机产品展示」为目标生成图像。\n\n核心提示词：中文提示词\n全自动咖啡机电商详情图\n\n英文提示词\nFully automatic coffee machine e-commerce detail image\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「全自动咖啡机产品展示」为目标生成图像。\n\n核心提示词：\n全自动咖啡机电商详情图\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1761,7 +1761,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776787222335-d3r7ciyk-1776787251238-1.jpeg",
     "imageAlt": "未来科技感AI智能眼镜详情页示例图",
-    "prompt": "以「未来科技感AI智能眼镜详情页」为目标生成图像。\n\n核心提示词：中文提示词\nAI智能眼镜电商详情图\n\n英文提示词\nAI smart glasses e-commerce detail image\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「未来科技感AI智能眼镜详情页」为目标生成图像。\n\n核心提示词：\nAI智能眼镜电商详情图\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1782,7 +1782,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776788160435-r9hkzzqc-1776788164587-1.jpeg",
     "imageAlt": "千手观音化身打工人示例图",
-    "prompt": "中文提示词\n一幅高度详细的千手观音菩萨工笔画。\n\n然而，千手并没有拿着神圣的宗教法器，而是拿着现代办公和家用物品：**笔记本电脑、智能手机、成堆的文件、咖啡杯、印章、计算器、拖把和奶瓶**。它代表了终极的多任务处理现代工作者。\n\n脑后的金色光环由旋转的时钟齿轮组成。\n\n**在右下角，一个单一的红色竖排艺术家印章写着“吴先生”（Mr. Wu），风格化得像水印一样。** --ar 3:4\n\n英文提示词\nA highly detailed Gongbi painting of the Bodhisattva \"Guanyin of a Thousand Hands\".\n\nHowever, instead of sacred religious artifacts, the thousand hands are holding modern office and household items: **laptops, smartphones, stacks of paperwork, coffee cups, stamps, calculators, mops, and baby bottles**. It represents the ultimate multi-tasking modern worker.\n\nThe golden aura behind the head is made of spinning clock gears.\n\n**In the bottom right corner, a single red vertical artist chop seal reads \"吴先生\" (Mr. Wu), stylized like a watermark.** --ar 3:4",
+    "prompt": "一幅高度详细的千手观音菩萨工笔画。\n\n然而，千手并没有拿着神圣的宗教法器，而是拿着现代办公和家用物品：**笔记本电脑、智能手机、成堆的文件、咖啡杯、印章、计算器、拖把和奶瓶**。它代表了终极的多任务处理现代工作者。\n\n脑后的金色光环由旋转的时钟齿轮组成。\n\n**在右下角，一个单一的红色竖排艺术家印章写着“吴先生”（Mr. Wu），风格化得像水印一样。** --ar 3:4",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1803,7 +1803,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776787036433-joama245-1776787064875-1.jpeg",
     "imageAlt": "健身蛋白粉电商详情页示例图",
-    "prompt": "以「健身蛋白粉电商详情页」为目标生成图像。\n\n核心提示词：中文提示词\n健身蛋白粉电商详情图\n\n英文提示词\nFitness protein powder e-commerce detail image\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「健身蛋白粉电商详情页」为目标生成图像。\n\n核心提示词：\n健身蛋白粉电商详情图\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1824,7 +1824,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776786702887-7u2psqb2-1776786734879-1.jpeg",
     "imageAlt": "试卷上的涂鸦巨龙示例图",
-    "prompt": "中文提示词\n一个巨大的巨龙，庞大的规模，高耸的存在感，\n一个远超人类尺寸的巨大实体，压倒性和压迫性的，\n用极其密集的混乱涂鸦线条绘制，\n超密集的重叠笔触，纠缠和混乱的线条画，\n在真实的印刷英文/中文教科书或试卷页面上，\n可见的文本、布局和纸张纹理清晰透出，\n圆珠笔绘画风格，精细的墨水线条，杂乱的分层笔触，\n没有干净的轮廓，一切由混乱的涂鸦构成，\n黑暗和柔和的底色（黑色，深靛蓝，暗紫罗兰色），\n带有微妙的低饱和度霓虹点缀（蓝色，青色，紫色），\n仅在关键区域（眼睛，核心，裂缝，静脉）有选择性的生物发光，\n不是整体的亮度，\n取决于主体的有机或机械纹理，\n错综复杂的细节，复杂的表面图案，\n形态从混乱中浮现，\n高密度中心，边缘消融为松散的涂鸦，\n主体附近微小的人类剪影强调了尺度感，\n半透明层，由线条密度产生的深度，\n原始的，不完美的，嘈杂的，充满活力的手绘感，\n略带诡异，超现实，神秘的氛围，\n混合媒体插画，涂鸦艺术，\n极其详细，黑暗团块和发光点缀之间的高对比度，\n杰作，极其详细\n\n英文提示词\nA colossal [SUBJECT], massive scale, towering presence,\na gigantic entity far beyond human size, overwhelming and oppressive,\n\ndrawn with extremely dense chaotic scribble lines,\nultra-dense overlapping pen strokes, tangled and chaotic linework,\n\non top of a real printed English/Chinese textbook or exam paper page,\nvisible text, layout, and paper texture clearly showing through,\n\nballpoint pen drawing style, fine ink lines, messy layered strokes,\nno clean outlines, everything constructed from chaotic scribbles,\n\ndark and muted base tones (black, deep indigo, dark violet),\nwith subtle low-saturation neon accents (blue, cyan, purple),\n\nselective bioluminescent glow only in key areas (eyes, core, cracks, veins),\nnot overall brightness,\n\norganic or mechanical textures depending on subject,\nintricate details, complex surface patterns,\n\nform emerging from chaos,\nhigh-density center, edges dissolving into loose scribbles,\n\nsense of scale emphasized by tiny human silhouette near the subject,\n\nsemi-transparent layers, depth created by line density,\nraw, imperfect, noisy, energetic hand-drawn feeling,\n\nslightly eerie, surreal, mysterious atmosphere,\nmixed media illustration, scribble art,\n\nextremely detailed, high contrast between dark mass and glowing accents,\nmasterpiece, ultra detailed\n\n主体：巨龙",
+    "prompt": "一个巨大的巨龙，庞大的规模，高耸的存在感，\n一个远超人类尺寸的巨大实体，压倒性和压迫性的，\n用极其密集的混乱涂鸦线条绘制，\n超密集的重叠笔触，纠缠和混乱的线条画，\n在真实的印刷英文/中文教科书或试卷页面上，\n可见的文本、布局和纸张纹理清晰透出，\n圆珠笔绘画风格，精细的墨水线条，杂乱的分层笔触，\n没有干净的轮廓，一切由混乱的涂鸦构成，\n黑暗和柔和的底色（黑色，深靛蓝，暗紫罗兰色），\n带有微妙的低饱和度霓虹点缀（蓝色，青色，紫色），\n仅在关键区域（眼睛，核心，裂缝，静脉）有选择性的生物发光，\n不是整体的亮度，\n取决于主体的有机或机械纹理，\n错综复杂的细节，复杂的表面图案，\n形态从混乱中浮现，\n高密度中心，边缘消融为松散的涂鸦，\n主体附近微小的人类剪影强调了尺度感，\n半透明层，由线条密度产生的深度，\n原始的，不完美的，嘈杂的，充满活力的手绘感，\n略带诡异，超现实，神秘的氛围，\n混合媒体插画，涂鸦艺术，\n极其详细，黑暗团块和发光点缀之间的高对比度，\n杰作，极其详细\n\n主体：巨龙",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1866,7 +1866,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776783875218-qz2tjfc6-1776783881176-1.jpeg",
     "imageAlt": "杠精视角的独特文案创意示例图",
-    "prompt": "以「杠精视角的独特文案创意」为目标生成图像。\n\n核心提示词：中文提示词\n杠精视角文案 + GPT Image 2\n\n英文提示词\nTroll perspective copywriting + GPT Image 2\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「杠精视角的独特文案创意」为目标生成图像。\n\n核心提示词：\n杠精视角文案 + GPT Image 2\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1887,7 +1887,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776783869052-cuva8qaz-1776783877933-1.jpeg",
     "imageAlt": "智能动画分镜生成器示例图",
-    "prompt": "以「智能动画分镜生成器」为目标生成图像。\n\n核心提示词：中文提示词\n生成一张动画分镜生成器\n\n英文提示词\nGenerate an animation storyboard generator\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「智能动画分镜生成器」为目标生成图像。\n\n核心提示词：\n生成一张动画分镜生成器\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1908,7 +1908,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776783863662-ghn5u66w-1776783872036-1.jpeg",
     "imageAlt": "皇宫深处的御用快递驿站示例图",
-    "prompt": "以「皇宫深处的御用快递驿站」为目标生成图像。\n\n核心提示词：中文提示词\n生成一张古代皇宫 × 快递驿站\n\n英文提示词\nGenerate an ancient imperial palace × express delivery station\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「皇宫深处的御用快递驿站」为目标生成图像。\n\n核心提示词：\n生成一张古代皇宫 × 快递驿站\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1950,7 +1950,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776783050495-hf6ae7jk-1776783053669-1.jpeg",
     "imageAlt": "萌系大模型训练图解示例图",
-    "prompt": "以「萌系大模型训练图解」为目标生成图像。\n\n核心提示词：中文提示词\n可爱地解释一下大语言模型训练过程\n\n英文提示词\nCute explanation of the large language model training process\n\n输出比例：4:5 / 16:9。\n\n扩展要求：请把信息拆成清晰标题、分区、编号、标注、图例和短说明，保证中文或英文关键文字可读。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「萌系大模型训练图解」为目标生成图像。\n\n核心提示词：\n可爱地解释一下大语言模型训练过程\n\n输出比例：4:5 / 16:9。\n\n扩展要求：请把信息拆成清晰标题、分区、编号、标注、图例和短说明，保证中文或英文关键文字可读。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1971,7 +1971,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776782989344-465uezpx-1776782994541-1.jpeg",
     "imageAlt": "天坛古建拆解全图示例图",
-    "prompt": "中文提示词\n生成一个天坛的建筑拆解图，有详细的说明，中式美学风格\n\n英文提示词\nGenerate an architectural exploded view of the Temple of Heaven, with detailed annotations, Chinese aesthetic style",
+    "prompt": "生成一个天坛的建筑拆解图，有详细的说明，中式美学风格",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2055,7 +2055,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776674850455-h2v9uqxa-1776674856973-1.jpeg",
     "imageAlt": "绘制科学百科知识图谱示例图",
-    "prompt": "中文提示词\n角色：世界级科学百科插画师兼知识图谱架构师\n任务：以经典、无品牌标识（无任何 Logo）的科学百科风格，创作一幅细节极致丰富、结构极其精巧、视觉效果惊艳的「环球图解百科科学信息图」。\n题材选择：从【人物、植物、动物】中任选其一。\n具体对象：【例如：大王乌贼 / 列奥纳多·达·芬奇 / 红杉树】\n风格：采用复古泛黄米色纸张背景，绘制精细工整的科学插画；线条细腻精致，整体繁复专业、严谨考究。\n核心视觉要求\n主体逼真 3D 效果\n位于画面视觉中心（C 位）的主体形象，需具备极致的写实感与动态张力。营造强烈的空间纵深感，让人物、植物或动物仿佛突破画框，从平面纸张中跃出、冲向观者（效果类似变形 3D 或动态弹出效果，高精度写实呈现）。\n版式布局与留白设计\n主体位置：占据画面中心，周围刻意设置规划式留白，强化立体弹出效果，使其成为绝对视觉焦点。\n周边模块：根据所选题材，在画面四周（上下左右及四角）排布 6–8 个独立且规整有序的知识模块。整体呈现规整的信息密度感，而非杂乱堆砌。每个模块需带有清晰边框、标题栏与详尽丰富的内容。\n关联结构\n运用纤细的指示线、箭头、括号、虚线与小型连接点，构建复杂且逻辑清晰的网络，将中心主体与所有周边模块相连，并使各模块之间相互关联，形成完整统一的知识体系。\n文字与标注（硬性要求：必须为清晰中文）\n主标题：以醒目大气、笔法优美的中文书法字体呈现具体对象名称【例如：大王乌贼】。\n书法点缀：在主体画面与模块标题中，对关键术语使用工整美观的中文书法字体标注。\n标准中文文本：其余所有说明文字、大量清晰中文手写注释、模块内容及注解均使用清晰可辨的简体汉字，不得出现乱码或无法识别符号，优先保证文字可读性。\n指示线标注：模块内所有细小结构、细节、子模块、图表与插画，均需搭配详尽的指示线标注（仿解剖图形式），直接指向对应部位，最大化体现专业性与科普价值，做到每一处结构均有标注。\n分题材模块结构（参考示例）\nA. 人物类\n模块 1：解剖结构与骨骼系统（含放大剖面图示）\n模块 2：生理运作机制（如循环系统、神经系统）\n模块 3：生平背景与时间线（核心成就）\n模块 4：主要贡献图解（详细拆解）\n模块 5：认知模式与心理特征\n模块 6：基因特征与演化溯源\n模块 7：全球影响力与文化冲击\n模块 8：艺术形象与后世传承\nB. 动物类\n模块 1：整体外形草图与解剖结构（含显微镜级圆形放大细节）\n模块 2：行为模式与生命周期（如交配、迁徙，流程图形式）\n模块 3：消化系统与骨骼系统\n模块 4：栖息环境与分布地图（含环境细节）\n模块 5：独特适应性特征（如伪装、捕食器官）\n模块 6：演化历史与亲缘物种\n模块 7：共生关系与生态位作用\n模块 8：保护现状与人类互动\nC. 植物类\n模块 1：植株整体草图与解剖结构（含叶片、根部放大细节）\n模块 2：光合作用与生命周期流程（搭配环境示意图标）\n模块 3：细胞结构（圆形放大视图）\n模块 4：药用价值与实际应用\n模块 5：环境适应性与独有特征\n模块 6：分布地图与生长环境\n模块 7：基因变异与培育方式\n模块 8：历史用途与民间传说\n整体构图要求\n信息密度极高，规整划分为 6–8 个结构化模块，同时通过中心区域的规划留白突出超写实主体的立体弹出效果。风格硬核、专业、学术化，凭借动态 3D 主体实现极强视觉吸引力。\n无任何百科品牌标识（如 DK 等 Logo）。\n所有标注清晰可辨，所有手写注释工整可读。\n主标题采用中文书法字体。\n画面比例：3:4。\n【主题内容】\n\n英文提示词\nRole: World-class Scientific Encyclopedia Illustrator & Knowledge Graph Architect.\n\nTask: Generate a highly detailed, extremely intricate, and visually stunning \"Universal Illustrated Encyclopedia Science Infographic\" in a classic, unbranded (NO logos) scientific encyclopedia style.\n\nSubject Matter: Choose one from [People, Plants, or Animals]. \n\nSpecific Subject: [e.g., The Giant Squid / Leonardo da Vinci / The Sequoia Tree].\n\nStyle: Fine, detailed scientific illustration on a retro, aged beige paper background. Delicate linework. Intricately complex and professional.\n\nKey Visual Requirements:\n\n1.  Lifelike 3D Effect (The Central Subject): The central subject in the \"C position\" must be rendered with extraordinary realism and dynamism. Create a dramatic sense of depth where the character, plant, or animal appears to break the frame, leaping or bursting out of the flat paper towards the viewer (an effect similar to anamorphic 3D or dynamic pop-out, with high-precision realism).\n\n2.  Layout & Strategic White Space:\n    * Central Subject: Dominates the center, with intentional \"strategic white space\" around it to enhance the popping-out effect and make the figure the clear focal point.\n    * Surrounding Modules: The surrounding area (left, right, top, bottom, and corners) must be filled with 6-8 distinct, highly organized knowledge modules, depending on the subject. There should be a sense of organized density, not random clutter. The modules themselves must have clear borders, headers, and extensive, detailed content.\n\n3.  Connections: Use a complex, logical network of fine leader lines, arrows, brackets, dotted lines, and small connection points to link the central figure to all surrounding modules, and interconnect the modules themselves into a cohesive knowledge web.\n\n4.  Text & Annotation (Hard Requirement - Must be CLEAR Chinese):\n    * Main Title: A large, prominent, beautifully executed **Chinese calligraphy** (书法体) of the specific subject's name [e.g., \"大王乌贼\"].\n    * Calligraphic Accents: Scattered throughout the main content and module titles, use beautiful, clear Chinese calligraphy for important terms.\n    * Standard Chinese Text: All other descriptive text, handwritten notes (大量清晰中文手写注释), module content, and annotations must be clear, legible Chinese characters (简体中文), not gibberish or unreadable symbols. Ensure text clarity is prioritized.\n    * Leader Line Annotations: Every single small component, detail, submodule, diagram, or illustration within the modules must have detailed leader line annotations (拟解剖图) pointing directly to it for maximum professionalism and educational value. Every part should be labeled.\n\nSubject-Specific Module Structure (Example for general reference):\n\nA. For Humans [People]:\n   - Module 1: Anatomy & Skeletal Structure (w/ magnified cross-sections)\n   - Module 2: Physiological Processes (e.g., Circulatory/Nervous System)\n   - Module 3: Historical Context & Timeline (Key Achievements)\n   - Module 4: Major Contribution Diagram (Detailed breakdown)\n   - Module 5: Cognitive Process / Psychological Insight\n   - Module 6: Genetic Profile / Evolution\n   - Module 7: Global Influence & Cultural Impact\n   - Module 8: Cultural Representations / Legacy\n\nB. For Animals:\n   - Module 1: Full External Sketch & Anatomy (w/ microscope magnified detail circular windows)\n   - Module 2: Behavioral Patterns & Lifecycle (e.g., Mating/Migration, Flowchart style)\n   - Module 3: Digestive & Skeletal System\n   - Module 4: Habitats & Distribution Map (with environmental details)\n   - Module 5: Unique Adaptations (e.g., camouflage, hunting tools)\n   - Module 6: Evolutionary History & Relatives\n   - Module 7: Symbiotic Relationships / Ecosystem Role\n   - Module 8: Conservation Status & Human Interaction\n\nC. For Plants:\n   - Module 1: Full Plant Sketch & Anatomy (w/ magnified leaf/root details)\n   - Module 2: Photosynthesis & Lifecycle Flow (w/ icons for environment)\n   - Module 3: Cellular Structure (Magnified circular views)\n   - Module 4: Medicinal Properties / Practical Applications (as in original original prompt)\n   - Module 5: Environmental Adaptations / Unique Features\n   - Module 6: Distribution Map & Environmental Context\n   - Module 7: Genetic Variations & Cultivation\n   - Module 8: Historical Usage & Folklore\n\nOverall Composition: Extremely dense with information, organized into 6-8 structured modules, but balanced with strategic empty space around the center to allow the main, hyper-realistic figure to pop. Hard-core, professional, academic, but visually engaging due to the dynamic 3D central figure. No branding from any specific encyclopedia (e.g., no \"DK\" logos). All annotations must be legible. All handwritten notes must be clear. Main titles in Chinese calligraphy. Aspect Ratio: 3:4.\n\n[主题内容]",
+    "prompt": "角色：世界级科学百科插画师兼知识图谱架构师\n任务：以经典、无品牌标识（无任何 Logo）的科学百科风格，创作一幅细节极致丰富、结构极其精巧、视觉效果惊艳的「环球图解百科科学信息图」。\n题材选择：从【人物、植物、动物】中任选其一。\n具体对象：【例如：大王乌贼 / 列奥纳多·达·芬奇 / 红杉树】\n风格：采用复古泛黄米色纸张背景，绘制精细工整的科学插画；线条细腻精致，整体繁复专业、严谨考究。\n核心视觉要求\n主体逼真 3D 效果\n位于画面视觉中心（C 位）的主体形象，需具备极致的写实感与动态张力。营造强烈的空间纵深感，让人物、植物或动物仿佛突破画框，从平面纸张中跃出、冲向观者（效果类似变形 3D 或动态弹出效果，高精度写实呈现）。\n版式布局与留白设计\n主体位置：占据画面中心，周围刻意设置规划式留白，强化立体弹出效果，使其成为绝对视觉焦点。\n周边模块：根据所选题材，在画面四周（上下左右及四角）排布 6–8 个独立且规整有序的知识模块。整体呈现规整的信息密度感，而非杂乱堆砌。每个模块需带有清晰边框、标题栏与详尽丰富的内容。\n关联结构\n运用纤细的指示线、箭头、括号、虚线与小型连接点，构建复杂且逻辑清晰的网络，将中心主体与所有周边模块相连，并使各模块之间相互关联，形成完整统一的知识体系。\n文字与标注（硬性要求：必须为清晰中文）\n主标题：以醒目大气、笔法优美的中文书法字体呈现具体对象名称【例如：大王乌贼】。\n书法点缀：在主体画面与模块标题中，对关键术语使用工整美观的中文书法字体标注。\n标准中文文本：其余所有说明文字、大量清晰中文手写注释、模块内容及注解均使用清晰可辨的简体汉字，不得出现乱码或无法识别符号，优先保证文字可读性。\n指示线标注：模块内所有细小结构、细节、子模块、图表与插画，均需搭配详尽的指示线标注（仿解剖图形式），直接指向对应部位，最大化体现专业性与科普价值，做到每一处结构均有标注。\n分题材模块结构（参考示例）\nA. 人物类\n模块 1：解剖结构与骨骼系统（含放大剖面图示）\n模块 2：生理运作机制（如循环系统、神经系统）\n模块 3：生平背景与时间线（核心成就）\n模块 4：主要贡献图解（详细拆解）\n模块 5：认知模式与心理特征\n模块 6：基因特征与演化溯源\n模块 7：全球影响力与文化冲击\n模块 8：艺术形象与后世传承\nB. 动物类\n模块 1：整体外形草图与解剖结构（含显微镜级圆形放大细节）\n模块 2：行为模式与生命周期（如交配、迁徙，流程图形式）\n模块 3：消化系统与骨骼系统\n模块 4：栖息环境与分布地图（含环境细节）\n模块 5：独特适应性特征（如伪装、捕食器官）\n模块 6：演化历史与亲缘物种\n模块 7：共生关系与生态位作用\n模块 8：保护现状与人类互动\nC. 植物类\n模块 1：植株整体草图与解剖结构（含叶片、根部放大细节）\n模块 2：光合作用与生命周期流程（搭配环境示意图标）\n模块 3：细胞结构（圆形放大视图）\n模块 4：药用价值与实际应用\n模块 5：环境适应性与独有特征\n模块 6：分布地图与生长环境\n模块 7：基因变异与培育方式\n模块 8：历史用途与民间传说\n整体构图要求\n信息密度极高，规整划分为 6–8 个结构化模块，同时通过中心区域的规划留白突出超写实主体的立体弹出效果。风格硬核、专业、学术化，凭借动态 3D 主体实现极强视觉吸引力。\n无任何百科品牌标识（如 DK 等 Logo）。\n所有标注清晰可辨，所有手写注释工整可读。\n主标题采用中文书法字体。\n画面比例：3:4。\n【主题内容】",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2118,7 +2118,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776658693374-r9e2p438-1776658698077-1.jpeg",
     "imageAlt": "完美匹配的海报广告图示例图",
-    "prompt": "中文提示词\n生成一张与这张图片完美匹配的广告图片。信息量要多一些。\n\n英文提示词\nGenerate an advertising image that perfectly matches this image. There should be a lot of information.",
+    "prompt": "生成一张与这张图片完美匹配的广告图片。信息量要多一些。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2223,7 +2223,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657529804-tr4civws-1776657532444-1.jpeg",
     "imageAlt": "蒙娜丽莎畅饮可乐的趣味油画示例图",
-    "prompt": "以「蒙娜丽莎畅饮可乐的趣味油画」为目标生成图像。\n\n核心提示词：中文提示词\n生成一张蒙娜丽莎喝可乐的油画。\n\n英文提示词\nGenerate an oil painting of Mona Lisa drinking cola.\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「蒙娜丽莎畅饮可乐的趣味油画」为目标生成图像。\n\n核心提示词：\n生成一张蒙娜丽莎喝可乐的油画。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2244,7 +2244,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657486195-qpu3k3qe-1776657487621-1.jpeg",
     "imageAlt": "朱元璋登基后的推特主页示例图",
-    "prompt": "中文提示词\n创建一个明朝朱元璋登基之后的X帖子页面\n\n英文提示词\nCreate an X post page of Zhu Yuanzhang after his ascension to the throne in the Ming Dynasty",
+    "prompt": "创建一个明朝朱元璋登基之后的X帖子页面",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2349,7 +2349,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776524925775-50l71kyc-1776524929755-1.jpeg",
     "imageAlt": "关键人物关系图谱示例图",
-    "prompt": "以「关键人物关系图谱」为目标生成图像。\n\n核心提示词：中文提示词\n请你生成 《XXX》 的关键人物关系图。\n\n英文提示词\nPlease generate a key character relationship diagram for \"XXX\".\n\n输出比例：4:5 / 16:9。\n\n扩展要求：请把信息拆成清晰标题、分区、编号、标注、图例和短说明，保证中文或英文关键文字可读。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「关键人物关系图谱」为目标生成图像。\n\n核心提示词：\n请你生成 《XXX》 的关键人物关系图。\n\n输出比例：4:5 / 16:9。\n\n扩展要求：请把信息拆成清晰标题、分区、编号、标注、图例和短说明，保证中文或英文关键文字可读。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2433,7 +2433,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776650719212-3u93a518-1776650719811-1.jpeg",
     "imageAlt": "抖音直播间的绝美女主播示例图",
-    "prompt": "中文提示词\n生成一个抖音直播的截图 里面是一个美女在直播\n\n英文提示词\nGenerate a screenshot of a Douyin livestream, inside there is a beautiful woman livestreaming",
+    "prompt": "生成一个抖音直播的截图 里面是一个美女在直播",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2580,7 +2580,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525372786-z3yu2f3w-1776525381382-1.jpeg",
     "imageAlt": "抖音美女直播间界面设计示例图",
-    "prompt": "中文提示词\n生成抖音直播间界面，内容是一个美女在直播\n\n英文提示词\nGenerate a TikTok live stream interface, the content is a beautiful woman live streaming",
+    "prompt": "生成抖音直播间界面，内容是一个美女在直播",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2622,7 +2622,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525517075-n2mzyfzh-1776525526017-1.jpeg",
     "imageAlt": "聚焦人工智能的校园日报示例图",
-    "prompt": "以「聚焦人工智能的校园日报」为目标生成图像。\n\n核心提示词：中文提示词\n生成一张校园日报，主题AI教育\n\n英文提示词\nGenerate a campus daily newspaper, theme AI education\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「聚焦人工智能的校园日报」为目标生成图像。\n\n核心提示词：\n生成一张校园日报，主题AI教育\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2643,7 +2643,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525522661-g3vics4w-1776525543539-1.jpeg",
     "imageAlt": "精美潮汕菜馆菜单图示例图",
-    "prompt": "以「精美潮汕菜馆菜单图」为目标生成图像。\n\n核心提示词：中文提示词\n生成一张潮菜馆菜单图\n\n英文提示词\nGenerate a Teochew restaurant menu image.\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「精美潮汕菜馆菜单图」为目标生成图像。\n\n核心提示词：\n生成一张潮菜馆菜单图\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2664,7 +2664,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525531952-le3fnwzg-1776525557920-1.jpeg",
     "imageAlt": "复古传统老黄历二零二六年四月十八示例图",
-    "prompt": "以「复古传统老黄历二零二六年四月十八」为目标生成图像。\n\n核心提示词：中文提示词\n生成一张2026年4月18日的老黄历\n\n英文提示词\nGenerate an old almanac for April 18, 2026\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "以「复古传统老黄历二零二六年四月十八」为目标生成图像。\n\n核心提示词：\n生成一张2026年4月18日的老黄历\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2748,7 +2748,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525527475-fn5igqe2-1776525549682-1.jpeg",
     "imageAlt": "人教版三年级语文课本内页示例图",
-    "prompt": "中文提示词\n生成人教版小学三年级语文课本的一页\n\n英文提示词\nGenerate a page from the PEP (People's Education Press) primary school third-grade Chinese textbook",
+    "prompt": "生成人教版小学三年级语文课本的一页",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2811,7 +2811,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1773331399608-8r3h8k10-1.jpeg",
     "imageAlt": "创意树叶拼贴构成的角色画像示例图",
-    "prompt": "中文提示词\n{ 角色名称 } 完全由天然树叶制成，创意树叶拼贴艺术，分层绿叶和干叶构成身体、面部和衣服，可见叶脉和纹理，手工植物艺术风格，干净的白色背景，俯视平铺构图，高度细节，柔和自然光，逼真树叶纹理，8k\n\n英文提示词\n{\n  CHARACTER NAME\n} made entirely from natural leaves,\ncreative leaf collage art,\nlayered green and dry leaves forming body,\nface and clothes,\nvisible leaf veins and textures,\nhandcrafted botanical art style,\nclean white background,\ntop-down flat lay composition,\nhighly detailed,\nsoft natural lighting,\nrealistic leaf textures,\n8k",
+    "prompt": "{ 角色名称 } 完全由天然树叶制成，创意树叶拼贴艺术，分层绿叶和干叶构成身体、面部和衣服，可见叶脉和纹理，手工植物艺术风格，干净的白色背景，俯视平铺构图，高度细节，柔和自然光，逼真树叶纹理，8k",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2853,7 +2853,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1772465342699-yfqywm1b-1.jpeg",
     "imageAlt": "晨曦薰衣草田梦幻少女三联画示例图",
-    "prompt": "中文提示词\n日出时分薰衣草田中女子的水平三联画。\n上部：半身像，闭着眼睛，淡紫色连衣裙，一只手放在头发里，模糊的薰衣草前景。\n中部：特写镜头，看着镜头，蓬乱的头发，薄纱围巾，脸上的阳光。\n下部：四分之三镜头，手持薰衣草花束，飘逸的裙子，柔和的粉彩天空，温暖的梦幻色调。\n\n英文提示词\nHorizontal triptych of a woman in a lavender field at sunrise.\nTop: Waist-up, eyes closed, pale lilac dress, one hand in hair, blurred lavender foreground.\nMiddle: Close-up, looking at camera, tousled hair, sheer scarf, sunlight on face.\nBottom: Three-quarter shot, holding lavender bouquet, flowing skirt, soft pastel sky, warm dreamy tones.",
+    "prompt": "日出时分薰衣草田中女子的水平三联画。\n上部：半身像，闭着眼睛，淡紫色连衣裙，一只手放在头发里，模糊的薰衣草前景。\n中部：特写镜头，看着镜头，蓬乱的头发，薄纱围巾，脸上的阳光。\n下部：四分之三镜头，手持薰衣草花束，飘逸的裙子，柔和的粉彩天空，温暖的梦幻色调。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
