@@ -782,7 +782,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046413660147314714",
-    "title": "Generate a high-quality vertical \"...",
+    "title": "科普百科风信息图",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -795,7 +795,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case32/output.jpg",
     "imageAlt": "Generate a high-quality vertical \"...示例图",
-    "prompt": "Generate a high-quality vertical \"science popularization encyclopedia image\" based on [Theme].  \n\n This image is not an ordinary poster, nor is it purely an illustration; it's a modular science information graphic that combines \"atlas-like feel, encyclopedic feel, information structure, and collectible appeal.\" The overall style references a blend of advanced natural history atlases, modern encyclopedia pages, lifestyle knowledge cards, and highly shareable social media infographics.  Please include in the image: - A clear and beautiful main visual of the theme - Several magnified close-up details of partial features - Multiple rounded modular information sections - Clear title hierarchy and key labels - Concise yet rich encyclopedic content - Visualized ratings, key point summaries, or Top 5 modules  Content sections should automatically adapt based on the theme, prioritizing selection and reasonable combination from these directions: Basic profile, classification info, appearance features, habits/ecology, formation mechanism/structure composition, growth or usage conditions, care or maintenance tips, risks and precautions, suitable people or application scenarios, pros and cons comparison, quick rating card.  Visual requirements: Light, clean background; soft color palette; subtle shadows; refined small icons; rounded info boxes; neat typography; high information density without clutter; excellent reading experience. The overall design must feel like a genuine science encyclopedia card that can be published, read, collected, and produced in series—not like an ad graphic.  Please don't make it into an ordinary commercial promotional poster. Emphasize the features of \"knowledge organization + modular info + atlas-style presentation.",
+    "prompt": "生成一张高质量的竖版「科普百科风信息图」，主题为【自定义主题】。这张图不是普通海报，也不是单纯的插画，而是一张融合了图鉴感、百科感、信息结构感与收藏价值的模块化科普信息图。整体风格参考高端博物志图鉴、现代百科书页、生活方式知识卡片，以及适合社交媒体分享的高传播力信息图。画面需包含：清晰精美的主题主视觉；若干局部特征的放大细节特写；多个圆角模块化信息区块；清晰的标题层级与关键标签；简洁而丰富的百科内容；可视化评分、要点总结或 Top5 模块。内容区块应根据主题自动适配，优先从以下方向筛选并合理组合：基础档案、分类信息、外观特征、习性生态、形成机制或结构组成、生长或使用条件、养护或保养技巧、风险与注意事项、适用人群或应用场景、优缺点对比、快速评分卡。视觉要求：明亮干净的背景、柔和的配色、细腻的阴影、精致的小图标、圆角信息框、工整的排版、信息密度高而不显杂乱、阅读体验出色。整体要像一张可出版、可阅读、可收藏、可成系列生产的真正科普百科卡片，而非广告图。请勿做成普通商业促销海报，重点突出「知识整理＋模块化信息＋图鉴式呈现」的特征。画面比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -824,7 +824,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046530764871696750",
-    "title": "GPT-image-2でこの手相を診断して詳細な鑑定書を作って",
+    "title": "手相占卜鉴定书",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -837,7 +837,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case32/output.jpg",
     "imageAlt": "GPT-image-2でこの手相を診断して詳細な鑑定書を作って示例图",
-    "prompt": "以「GPT-image-2でこの手相を診断して詳細な鑑定書を作って」为目标生成图像。\n\n核心提示词：GPT-image-2でこの手相を診断して詳細な鑑定書を作って\n生命線・知能線・感情線・運命線・太陽線・財運線・結婚線を、線の形状・濃淡・枝分かれ・起点終点まで分析すること。\n助言を重点的に高品質な占い鑑定書にまとめること。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "请对这只手相进行诊断，制作一份详尽的鉴定书。需分析生命线、智慧线、感情线、命运线、太阳线、财运线与婚姻线，从线条的形状、深浅、分叉、起点与终点逐一解读。以给出建议为重点，整理成一份高品质的占卜鉴定书，排版工整、结论清晰、富有仪式感，条理分明地呈现每条掌纹的含义与对应的人生指引。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -887,7 +887,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046437230127034774",
-    "title": "GPT Image 2を使って、OpenClawの情報を調べてドンキ...",
+    "title": "唐吉诃德风促销POP",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -900,7 +900,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case34/output.jpg",
     "imageAlt": "GPT Image 2を使って、OpenClawの情報を調べてドンキ...示例图",
-    "prompt": "以「GPT Image 2を使って、OpenClawの情報を調べてドンキ...」为目标生成图像。\n\n核心提示词：GPT Image 2を使って、OpenClawの情報を調べてドンキの広告ポップ風に実際のドンキに貼っているような感じで画像生成してください\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "请查阅 OpenClaw 的相关信息，生成一张唐吉诃德折扣店广告 POP 风格的图像，效果要像实际张贴在店内货架上的手写促销海报：黄底红字、夸张大字号、手写体价格与爆炸贴，密集堆叠的卖点文案，热闹拥挤、极具冲击力的日式量贩店促销氛围，整体色彩鲜艳、信息满溢。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -908,7 +908,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046514558064586782",
-    "title": "『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には...",
+    "title": "超市特卖折页海报",
     "category": "商品与电商",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -921,7 +921,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case49/output.jpg",
     "imageAlt": "『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には...示例图",
-    "prompt": "以「『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には...」为目标生成图像。\n\n核心提示词：『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には「特売」の大きな文字と今週の日付。カラフルな商品写真（野菜・果物・牛肉・鮮魚）、赤枠の価格タグ、「超目玉商品」「家計応援」のキャッチ…』\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "一张热闹而吸引人的超市折页传单图像。顶部是「特卖」的醒目大字与本周日期；画面布满色彩缤纷的商品照片（蔬菜、水果、牛肉、鲜鱼），配以红框价格标签，以及「超值特惠」「家计应援」等号召性标语。整体排版密集饱满、配色鲜艳，营造出量贩超市促销单页的真实质感与抢购氛围。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -950,7 +950,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046448773162033240",
-    "title": "# 混沌としたメモ書き・記号の集合体からキャラクターの顔を浮かび上が...",
+    "title": "混沌手稿浮现人脸",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -963,7 +963,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case9/output.jpg",
     "imageAlt": "# 混沌としたメモ書き・記号の集合体からキャラクターの顔を浮かび上が...示例图",
-    "prompt": "# 混沌としたメモ書き・記号の集合体からキャラクターの顔を浮かび上がらせるアート\n\n--- スタイル\n- 白い紙の上に黒インクで描かれた大量の手書きメモ、数式、記号、ランダムな線。\n- 紙いっぱいに散らばる書き殴り風のカオス。\n- 所々に赤インクの強調（ライン、塗り潰し、マーカー風の塊）。\n- アナログのノート落書きのような質感。\n\n--- 構図\n- ランダムなメモや記号が全体を覆い尽くす。\n- 黒インクの線や文字の密度が「キャラクターの顔」の位置に集中する。\n- 結果として、混沌の中から「与えられたキャラクターの顔のシルエット・表情」がうっすら浮かび上がる。\n- 顔は写実的ではなく、カオスの断片が集まって形を成す。\n\n--- 色彩\n- モノクロ（黒・白）を主体に構成。\n- 赤インクをアクセントとして散発的に配置。\n- 彩度は抑えめ、アナログの紙とインク感を重視。\n\n--- 表現要素\n- 読めるようで読めない文字列、日本語や英数字が混在。\n- 数式記号、矢印、点、斜線、クロス、ドリップ（インクの飛び散り）。\n- キャラクターの顔の目や髪の輪郭は、メモや記号の配置の「余白」や「濃淡」で浮かび上がる。\n\n--- 禁止事項\n- 顔を直接的に描き込む写実ポートレート。\n- デジタル処理的で整然とした幾何学模様。\n- カラフルな彩色や過飽和表現。\n- ロゴ、透かし、人工的なCG感。\n\n--- Definition of Done (DoD)\n- 全体は「混沌としたメモ・記号の集合体」として成立している。  \n- 与えられたキャラクターの顔が、混沌の濃淡・配置から自然に浮かび上がる。  \n- 色はモノクロ＋赤アクセントのみ。  \n- 紙とインクの手描き的質感を保持している。",
+    "prompt": "一种从混沌的手写笔记与符号集合中浮现出人物面孔的艺术。风格：白纸上以黑色墨水写满大量手写笔记、公式、符号与随意线条；整张纸铺满涂写般的混沌感；局部以红色墨水强调（线条、涂块、马克笔式块面）；呈现模拟笔记本涂鸦的质感。构图：随机的笔记与符号铺满整个画面；黑色墨水的线条与文字密度在人物面孔所在位置聚集；最终从混沌之中隐隐浮现出给定人物的面部轮廓与神情；面孔并非写实描绘，而是由混沌碎片聚合成形。色彩：以黑白单色为主体，红色墨水作为零星点缀，饱和度克制，重视纸张与墨水的模拟质感。表现要素：似可辨认又难以读清的字符串，中文与英数字混杂；数学符号、箭头、点、斜线、交叉、墨迹飞溅；人物面孔的眼睛与发丝轮廓，由笔记符号排布的留白与浓淡自然浮现。禁止：直接描画面孔的写实肖像、过于规整的数字化几何图案、缤纷上色或过饱和表现、标志、水印与人工感画面。完成标准：整体成立为混沌的笔记符号集合体，给定人物的面孔从浓淡与排布中自然浮现，配色仅为黑白加红色点缀，保留纸张与墨水的手绘质感。画面比例 3:4。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -971,7 +971,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046414546378584558",
-    "title": "Generate for me a UI design system...",
+    "title": "前卫玻璃拟态设计系统",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -984,7 +984,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046414546378584558.jpg",
     "imageAlt": "Generate for me a UI design system...示例图",
-    "prompt": "Generate for me a UI design system with a very cutting-edge, bold, and unique theme that includes glassy visuals and transparencies",
+    "prompt": "为我生成一套界面设计系统，主题极其前卫、大胆而独特，包含玻璃拟态的通透视觉与透明质感。整套系统需组件齐全、风格统一：按钮、卡片、开关、输入框、导航栏、弹窗等成套呈现；大量运用磨砂玻璃、半透明叠层、柔和高光与细腻投影，营造真实的毛玻璃折射质感；配色前卫大胆、层次分明，兼具科技感与高级感，可直接用作产品界面的设计规范。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1034,7 +1034,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046528889124728993",
-    "title": "ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録を...",
+    "title": "普拉提课程招生广告",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -1047,7 +1047,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case51/output.jpg",
     "imageAlt": "ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録を...示例图",
-    "prompt": "以「ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録を...」为目标生成图像。\n\n核心提示词：ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録をするのに惹かれるような文言にし、画像内には女性がピラティスを実際に行っている様子を映して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "制作一张普拉提教室的招生广告图像。文案要更能吸引用户报名、具号召力与打动力；画面中呈现女性正在实际练习普拉提的场景，姿态舒展专业。整体明亮、健康、专业，突出体态之美与课程氛围，配色清新、排版清晰，适合投放社媒与门店招生。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1992,7 +1992,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776782883300-p64dzlag-1776782886534-1.jpeg",
     "imageAlt": "专业设计师打造角色写真集示例图",
-    "prompt": "中文提示词\n请用这个角色制作一本专业设计师打造的照片集。语言为日语。  \n\n根据喜好加入提示词会让它更丰富多彩…  \n・丰富的场景  \n・信息量较多\n\n英文提示词\nPlease use this character to create a photo book crafted by a professional designer. The language should be Japanese.\n\nAdding prompts according to your preferences will make it more colorful and rich\n・Rich scenes\n・Large amount of information",
+    "prompt": "请用这个角色制作一本由专业设计师打造的写真集，语言设定为日语。可根据个人喜好补充更多提示词，让成品更加丰富多彩：场景丰富多样、信息量充足饱满，整体呈现专业摄影集般的高级质感与叙事感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3084,7 +3084,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202601/1769442575444-xj11mror-1.jpeg",
     "imageAlt": "超真实3D INS广告大片示例图",
-    "prompt": "中文提示词\nCreate a hyper-realistic, cinematic Instagram post layout where the Instagram UI exists as a physical, tangible 3D object, photographed like a premium commercial product shot. The result should feel indistinguishable from a real studio photograph.\nInstagram Frame (UI Accuracy – Critical)\nAuthentic Instagram interface rendered as a solid white physical 3D card\nSmooth matte plastic surface with subtle micro-texture\nSlight thickness visible on edges, realistic bevels\nPerfectly rounded corners (exact Instagram radius)\nSoft studio reflections and realistic edge highlights\nTop Bar (Pixel-accurate UI):\nCircular profile avatar on the left\nUsername text: “June” in Instagram’s default bold UI font\nLight blue FOLLOW button with correct proportions\nThree-dot menu icon aligned to the far right\nExact spacing, typography, and icon sizing matching the real Instagram app\nAspect ratio 1:1, centered, balanced, premium composition.\nMain Subject (Pose – Match Reference Image Exactly)\nA photorealistic athletic woman partially emerging out of the Instagram frame into real 3D space\nSeated pose identical to the reference image:\nBoth legs bent and angled to the side\nOne knee slightly raised and closer to the chest\nArms gently wrapped around the raised knee\nHands relaxed, fingers naturally resting\nTorso leaning slightly back against the frame edge\nExpression: calm, thoughtful, self-assured\nGaze: looking slightly to the side and upward, not engaging the camera\nNatural body proportions, relaxed posture, editorial realism\nNo exaggerated curves, no artificial posing\nClothing (Nike Only – Realistic Fit)\nMuted ivory / off-white Nike fitted short-sleeve blouse\nSoft neutral tone that contrasts beautifully with the background\nVisible white Nike swoosh\nNatural fabric stretch and tension\nDeep blue Nike athletic pants, length up to the knee\nTailored, performance-fit silhouette\nRealistic fabric weight with subtle folds at the knee bend\nClean stitching and breathable sports material\nClean white Nike sneakers\nSlight wear realism\nCorrect sole texture and stitching\nPremium sportswear look, real commercial styling\nNo distortion, no fantasy fashion\nBackground (Inside the Instagram Post Only)\nDark indoor gym or studio environment\nCool blue and muted purple cinematic lighting\nSoft haze in the background\nSubtle volumetric light beams barely visible\nShallow depth of field, background softly blurred\nSubject and Instagram frame remain sharp and dominant\nLighting & Photorealism\nStudio-grade cinematic lighting\nSoft key light illuminating the subject naturally\nGentle rim light outlining the body and Instagram frame\nRealistic skin texture with visible pores and natural highlights\nAccurate contact shadows where the subject touches the frame\nPhysically correct light falloff and reflections\nFooter UI (Engagement Section)\nInstagram action icons: like, comment, share, save (accurate icons)\nText visible: “785 likes”\nCaption begins with June\nCaption text:\nFreedom isn’t found in comfort.\nIt’s built in the quiet moments where discipline meets belief.\nHashtags partially visible and naturally cropped\nOverall Style & Quality\nUltra-high resolution\nAdvertising-grade realism\nClean, modern, editorial Instagram aesthetic\nHyper-realistic blend of 3D object + real photography\nNo extra elements\nNo text errors\nNo distortion\nLooks like a real product photoshoot, not AI art\n\n英文提示词\nCreate a hyper-realistic, cinematic Instagram post layout where the Instagram UI exists as a physical, tangible 3D object, photographed like a premium commercial product shot. The result should feel indistinguishable from a real studio photograph.\nInstagram Frame (UI Accuracy – Critical)\nAuthentic Instagram interface rendered as a solid white physical 3D card\nSmooth matte plastic surface with subtle micro-texture\nSlight thickness visible on edges, realistic bevels\nPerfectly rounded corners (exact Instagram radius)\nSoft studio reflections and realistic edge highlights\nTop Bar (Pixel-accurate UI):\nCircular profile avatar on the left\nUsername text: “June” in Instagram’s default bold UI font\nLight blue FOLLOW button with correct proportions\nThree-dot menu icon aligned to the far right\nExact spacing, typography, and icon sizing matching the real Instagram app\nAspect ratio 1:1, centered, balanced, premium composition.\nMain Subject (Pose – Match Reference Image Exactly)\nA photorealistic athletic woman partially emerging out of the Instagram frame into real 3D space\nSeated pose identical to the reference image:\nBoth legs bent and angled to the side\nOne knee slightly raised and closer to the chest\nArms gently wrapped around the raised knee\nHands relaxed, fingers naturally resting\nTorso leaning slightly back against the frame edge\nExpression: calm, thoughtful, self-assured\nGaze: looking slightly to the side and upward, not engaging the camera\nNatural body proportions, relaxed posture, editorial realism\nNo exaggerated curves, no artificial posing\nClothing (Nike Only – Realistic Fit)\nMuted ivory / off-white Nike fitted short-sleeve blouse\nSoft neutral tone that contrasts beautifully with the background\nVisible white Nike swoosh\nNatural fabric stretch and tension\nDeep blue Nike athletic pants, length up to the knee\nTailored, performance-fit silhouette\nRealistic fabric weight with subtle folds at the knee bend\nClean stitching and breathable sports material\nClean white Nike sneakers\nSlight wear realism\nCorrect sole texture and stitching\nPremium sportswear look, real commercial styling\nNo distortion, no fantasy fashion\nBackground (Inside the Instagram Post Only)\nDark indoor gym or studio environment\nCool blue and muted purple cinematic lighting\nSoft haze in the background\nSubtle volumetric light beams barely visible\nShallow depth of field, background softly blurred\nSubject and Instagram frame remain sharp and dominant\nLighting & Photorealism\nStudio-grade cinematic lighting\nSoft key light illuminating the subject naturally\nGentle rim light outlining the body and Instagram frame\nRealistic skin texture with visible pores and natural highlights\nAccurate contact shadows where the subject touches the frame\nPhysically correct light falloff and reflections\nFooter UI (Engagement Section)\nInstagram action icons: like, comment, share, save (accurate icons)\nText visible: “785 likes”\nCaption begins with June\nCaption text:\nFreedom isn’t found in comfort.\nIt’s built in the quiet moments where discipline meets belief.\nHashtags partially visible and naturally cropped\nOverall Style & Quality\nUltra-high resolution\nAdvertising-grade realism\nClean, modern, editorial Instagram aesthetic\nHyper-realistic blend of 3D object + real photography\nNo extra elements\nNo text errors\nNo distortion\nLooks like a real product photoshoot, not AI art",
+    "prompt": "创作一张超写实、电影感的社交帖子版式图，让界面化作一个可触摸的实体三维物件，像高端商业产品摄影那样拍摄，成品需与真实影棚照片难以区分。外框：真实界面呈现为一张纯白实体三维卡片，表面为光滑哑光塑料并带细微纹理，边缘可见轻微厚度与真实倒角，完美的圆角，柔和的影棚反射与真实的边缘高光。顶栏：左侧圆形头像，用户名文字为默认粗体界面字体，浅蓝色关注按钮比例正确，右上角三点菜单图标，间距、字体与图标尺寸精确匹配真实应用。画面比例 1:1，居中、均衡、高级构图。主体：一位写实的健美女性从外框中半探身进入真实三维空间，坐姿与参考图完全一致——双腿弯曲侧向一边，一侧膝盖略微抬高靠近胸口，双臂轻轻环抱抬起的膝盖，双手放松、手指自然搭放，上身微微后倚在外框边缘；神情平静、若有所思、自信从容，目光望向侧上方而不与镜头交流；身体比例自然，姿态放松，具编辑级写实感，不夸张身形、不做作摆姿。服装：柔和象牙米白色修身短袖上衣，中性色调与背景形成柔和对比，布料自然拉伸；深蓝色运动裤长及膝盖，剪裁贴身，膝弯处有细微褶皱，缝线干净、面料透气；干净的白色运动鞋带轻微磨损感，鞋底纹理与缝线正确；高级运动服质感，真实商业造型，不变形、不做奇幻服饰。背景：昏暗的室内健身房或影棚环境，冷蓝与低饱和紫色的电影感布光，背景带柔雾，隐约可见体积光束，浅景深，背景柔和虚化，主体与外框保持锐利且占主导。光照与写实：影棚级电影布光，柔和主光自然照亮主体，柔和轮廓光勾勒身体与外框边缘，真实肤质可见毛孔与自然高光，主体触碰外框处有准确的接触阴影，物理正确的光线衰减与反射。底栏互动区：点赞、评论、分享、收藏图标准确，可见点赞数文字，标题以人名开头，文案大意为自由并非在舒适中寻得，而是在自律与信念相遇的静默时刻里建立，话题标签部分可见、自然裁切。整体：超高分辨率、广告级写实，干净现代的编辑感美学，三维物件与真实摄影超写实融合，无多余元素、无文字错误、无变形，看起来像真实产品拍摄而非人工图像。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3189,7 +3189,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/images/1145.jpeg",
     "imageAlt": "烬甲猎鹰者与燃翼神禽示例图",
-    "prompt": "zh\n一幅充满奇幻色彩的电影场景：一位英姿飒爽的女战士兼猎鹰师，身着饱经战火洗礼、饰以闪耀余烬纹理的皮甲，漫步于幽暗迷雾笼罩的森林之中。她高举手臂，指挥着一头巨大的凤凰与雄鹰的混合体，这头猛禽双翼燃烧，羽毛燃焰，尖端喷吐着火焰。它周身散发着橙红色的熔岩光芒，火星和余烬飞溅。女战士梳着辫子，皮肤上沾满了灰烬，神情坚定，手中拿着绳索和工具袋。画面细节丰富，羽毛纹理逼真，火焰物理效果自然，光照效果极具戏剧性，运用了体积雾、浅景深等技术，营造出史诗般的奇幻氛围，色彩调校极具电影质感，背景阴郁深沉，分辨率高达8K，呈现出概念艺术的精髓，并采用了虚幻引擎的渲染效果。\n\nen\nA cinematic fantasy scene of a fierce female use image for face reference warrior falconer walking through a dark misty forest, wearing battle-worn leather armor infused with glowing ember textures. Her arm is raised, commanding a massive phoenix-eagle hybrid with blazing wings and flaming feathers, fire trailing from its tips. The bird radiates molten orange and red light, casting sparks and embers into the air.The warrior has braided hair, ash-streaked skin, and a determined expression, carrying a rope and utility pouch. Ultra-detailed feathers, realistic fire physics, dramatic lighting, volumetric fog, shallow depth of field, epic fantasy atmosphere, hyper-realistic, cinematic color grading, dark moody background, 8k, concept art, unreal engine quality.",
+    "prompt": "一幅充满奇幻色彩的电影场景：一位英姿飒爽的女战士兼猎鹰师，身着饱经战火洗礼、饰以闪耀余烬纹理的皮甲，漫步于幽暗迷雾笼罩的森林之中。她高举手臂，指挥着一头巨大的凤凰与雄鹰的混合体，这头猛禽双翼燃烧，羽毛燃焰，尖端喷吐着火焰。它周身散发着橙红色的熔岩光芒，火星和余烬飞溅。女战士梳着辫子，皮肤上沾满灰烬，神情坚定，手中拿着绳索和工具袋（面部可参考给定图片）。画面细节丰富，羽毛纹理逼真，火焰物理效果自然，光照极具戏剧性，运用体积雾、浅景深等技术，营造出史诗般的奇幻氛围；色彩调校极具电影质感，背景阴郁深沉，分辨率高达 8K，呈现概念艺术的精髓，并采用虚幻引擎级别的渲染效果。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3882,7 +3882,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case341/output.jpg",
     "imageAlt": "涂鸦涂乱真人照片肖像示例图",
-    "prompt": "Turn this photo into a chaotic funny doodle illustration, intentionally messy and low-skill, as if drawn quickly with a cheap marker, crayon, or worn-out felt pen on paper.\n\nCreate exaggerated facial features with awkward proportions, uneven eyes, oversized head, tiny body, crooked smile, and clumsy anatomy while still keeping the person recognizable. Use rough childish sketch lines, shaky hand-drawn strokes, visible scribbles, overlapping outlines, accidental marks, and random doodles around the scene. Add a simple cartoon-style background with badly drawn buildings, trees, clouds, street elements, and uneven perspective. Coloring should look careless and imperfect, with visible stroke texture, inconsistent fill areas, wax crayon texture, marker bleed, and irregular shading. Include playful imperfections like crossed-out lines, unfinished details, random arrows, tiny notes, stars, swirls, and abstract scribbles. Overall aesthetic should feel humorous, spontaneous, handmade, energetic, goofy, and intentionally unpolished, resembling a child's sketchbook mixed with absurd internet meme art. High texture detail, paper grain visible, asymmetrical composition, awkward framing, expressive doodle chaos, raw sketch energy.",
+    "prompt": "把这张照片变成一幅混乱搞笑的涂鸦插画，刻意画得潦草、稚拙，仿佛用廉价马克笔、蜡笔或用旧的毡头笔在纸上飞快涂画而成。夸张地处理五官、比例别扭：眼睛歪斜大小不一、脑袋过大、身体缩小、嘴角歪扭、解剖笨拙，但仍能认出是本人。使用粗糙稚气的速写线条、抖动的手绘笔触、明显的乱涂、重叠的轮廓、无意的杂痕与四处随手的涂鸦。背景是简单的卡通场景，画着拙劣的建筑、树木、云朵、街道元素，透视歪歪扭扭。上色刻意显得随意不均，带可见的笔触纹理、填色不匀、蜡笔质感、马克笔渗色与不规则明暗。加入俏皮的瑕疵：划掉的线条、未完成的细节、随手的箭头、小字批注、星星、漩涡与抽象乱涂。整体气质幽默、即兴、手作、活力、憨傻而刻意不精致，像儿童速写本混合荒诞网络迷因艺术。高纹理细节，可见纸张颗粒，构图不对称，取景笨拙，充满表现力的涂鸦混沌与生猛的速写能量。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3903,7 +3903,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case342/output.jpg",
     "imageAlt": "半3D时尚大片头像示例图",
-    "prompt": "Create a premium high-resolution vector-cartoon / semi-3D illustration of the person from the reference image. Reimagine them in a stylish modern fashion-editorial look, sitting confidently on a sleek designer chair. Outfit: trendy T-shirt, fashionable skirt/pants, stylish sneakers, and bold sunglasses as the hero accessory. Exaggerate key facial features while maintaining recognizable likeness. Clean flat-colored background (single vibrant color), smooth lines, sharp details, soft studio lighting, luxury advertising aesthetic, centered composition with ample negative space for branding and headlines. Ultra-detailed, print-ready, billboard-quality, modern eyewear campaign style.",
+    "prompt": "为参考图中的人物创作一张高级、高分辨率的矢量卡通与半三维插画。将其重新演绎为时尚现代的时装大片造型，自信地坐在一把线条利落的设计师座椅上。造型：潮流上衣、时髦的半裙或长裤、时尚运动鞋，并以一副抢眼的墨镜作为主角配饰。夸张刻画关键五官，同时保持可辨认的相似度。背景为干净的纯色平涂，单一鲜艳色，线条流畅、细节锐利、柔和的影棚光照，奢华广告美学，居中构图并预留充足留白以放置品牌与标题。超精细、可印刷、广告牌级画质，现代眼镜广告风格。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3924,7 +3924,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case94/output.jpg",
     "imageAlt": "90年代情景喜剧时装角色阵容示例图",
-    "prompt": "Full-body character lineup showcasing the same person transformed through six iconic 1990s fashion aesthetics, standing side-by-side in a clean studio composition. Each version features a unique outfit inspired by classic 90s sitcom culture: varsity college student, sophisticated business casual professional, colorful patterned sweater enthusiast, streetwear trendsetter, nerdy intellectual with suspenders and glasses, and vibrant hip-hop fashion icon. Consistent facial features across all versions, expressive poses, detailed clothing textures, oversized silhouettes, retro sneakers, loafers, accessories, layered outfits, bold color palettes, fashion illustration style, character design sheet, clean white background, highly detailed linework, modern cartoon realism, concept art, fashion reference board, full-body view, professional character turnaround, ultra-sharp details, vibrant colors, 4K, masterpiece.",
+    "prompt": "全身人物阵容图，将同一个人演绎为六种标志性的一九九〇年代时尚风格，并排站立于干净的影棚构图中。每个版本都有一套灵感源自经典九十年代情景喜剧文化的独特穿搭：校队学院风学生、干练的商务休闲职场人、彩色图案毛衣爱好者、街头潮流引领者、戴吊带裤与眼镜的书呆子学霸，以及活力四射的嘻哈时尚偶像。所有版本面部特征保持一致，姿态富有表现力，服装纹理细腻，廓形宽大，复古运动鞋、乐福鞋与各式配饰，叠穿造型，大胆的配色。时装插画风格，人物造型设计表，干净的白色背景，线稿高度精细，现代卡通写实，概念艺术，时尚参考板，全身视角，专业转身展示，超锐利细节，色彩鲜艳，4K，杰作。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3945,7 +3945,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case267/output.jpg",
     "imageAlt": "黑白身份拼贴网格示例图",
-    "prompt": "Edit the photo while preserving the subject’s exact facial features and identity. Create a high-resolution vertical portrait composition (9:16), ultra-detailed, sharp focus throughout, no background blur, rendered with a premium 8K editorial finish.\n\nDesign the image as a sophisticated black-and-white fashion portrait collage arranged in a 2×3 grid, featuring six unique frames of the same young woman in a clean, minimalist indoor studio environment. The overall aesthetic should feel elegant, cinematic, intimate, and effortlessly stylish, inspired by timeless monochrome fashion editorials and luxury magazine photography.\n\nHair is long, reaching the waist, colored a cool ash-brown with subtle gray undertones. Styled in a Korean-inspired hush cut with soft face-framing layers, airy see-through bangs, and sleek straight lengths that gently curve outward at the ends. The texture appears silky, healthy, and glossy, with a few natural flyaway strands for realism.\n\nBeauty styling remains refined and understated: luminous hydrated skin, naturally feathered brows, subtle brown eyeliner, soft mascara, muted nude lips with a velvety finish, and barely-there blush for a fresh editorial appearance.\n\nWardrobe consists of a fitted white rib-knit tank top paired with relaxed high-waisted vintage-wash denim jeans, visible in selected frames. Accessories include matte black nail art, delicate silver hoop earrings, multiple silver rings, and a slim silver wristwatch, contributing to a contemporary fashion-editorial mood.\n\nCollage Frame Concepts:\n\n• Frame 1 — Tight portrait crop, fingertips resting softly against the cheek, direct eye contact, confident yet gentle expression.\n\n• Frame 2 — Casual seated pose on a sofa, body turned slightly to one side, gaze directed away from the camera in a contemplative moment.\n\n• Frame 3 — Relaxed reclining position with one knee bent, leaning comfortably into an arm, creating a graceful editorial silhouette.\n\n• Frame 4 — Arms lifted behind the head, posture open and self-assured, subtle lean backward conveying effortless confidence.\n\n• Frame 5 — Emotional close portrait with a slight head tilt and closed eyes, emphasizing calmness and quiet introspection.\n\n• Frame 6 — Front-facing seated composition with composed expression and subtle movement through the hair for a natural, candid feel.\n\nEnvironment remains intentionally simple: a light-toned studio wall with a neutral sofa appearing selectively across certain frames. The background should support the subject without drawing attention away from her.\n\nLighting is soft and diffused, resembling natural window light in a professional studio. Gentle directional shadows create depth and dimensionality, while a faint rim light subtly separates the hair from the background. Avoid harsh flash or strong contrast.\n\nCaptured with the quality and detail associated with professional mirrorless cameras such as a Canon EOS R5 or Sony A7R IV. Use a combination of intimate close-ups and medium-length portraits, primarily at eye level with occasional slightly elevated angles. Emphasize balanced magazine-style compositions and natural visual flow across the collage.\n\nFinal processing should feature a rich monochrome conversion with smooth tonal transitions, lifted shadows, restrained contrast, delicate 35mm film grain, a soft matte finish, and exceptional detail retention in both skin texture and hair, echoing the look of classic high-fashion editorial photography.",
+    "prompt": "在保留主体确切面部特征与身份的前提下编辑照片。创作一张高分辨率竖版人像构图（9:16），超精细，全幅锐利对焦，背景不虚化，以高级 8K 编辑级质感呈现。将画面设计为一组精致的黑白时尚人像拼贴，按二乘三网格排列，呈现同一位年轻女性在干净极简的室内影棚中的六个独特画面。整体美学优雅、电影感、亲密而不费力地时髦，灵感源自永恒的黑白时装大片与奢华杂志摄影。头发长及腰际，染成带微妙灰调的冷调灰棕色，梳理成韩式空气感层次剪裁，配柔和的修饰脸型碎发、通透的空气刘海，以及发尾轻微外翻的顺直发丝；质感柔滑、健康、有光泽，并带几缕自然飞发以求真实。妆容精致内敛：水润透亮的肌肤、自然的羽状眉、淡淡的棕色眼线、柔和睫毛、雾面裸色唇与若有若无的腮红，呈现清新的编辑感。服装为修身白色罗纹背心搭配宽松高腰复古水洗牛仔裤，在部分画面中可见；配饰包括哑光黑色美甲、精致的银色圈形耳环、多枚银戒与一只纤细银色腕表，营造当代时装大片氛围。拼贴画面构想：画面一，紧凑的人像特写，指尖轻搭脸颊，直视镜头，自信而温柔；画面二，沙发上随性的坐姿，身体略侧向一边，目光望向镜头之外若有所思；画面三，放松的斜倚姿态，一膝弯曲，舒适地倚靠扶手，形成优雅的编辑级剪影；画面四，双臂抬起置于脑后，姿态开放自信，身体略微后倾透出从容；画面五，情绪化的近景，头部微倾、双眼闭合，强调平静与内省；画面六，正面坐姿，神情从容，发丝间有细微动态，呈现自然抓拍感。环境刻意保持简约：浅色调影棚墙面，部分画面出现中性色沙发，背景应烘托主体而不分散注意力。光照柔和漫射，仿佛专业影棚中的自然窗光，柔和的定向阴影营造纵深与立体感，一抹微弱轮廓光将头发与背景轻轻分离，避免刺眼闪光或强烈对比。以专业无反相机的画质与细节拍摄，结合亲密特写与中景人像，主要采用平视角度、偶尔略微俯拍，强调均衡的杂志式构图与拼贴间自然的视觉流动。最终处理采用丰富的黑白转换，色调过渡平滑，暗部提亮，对比克制，细腻的 35mm 胶片颗粒，柔和的哑光质感，肤质与发丝细节保留出色，呼应经典高级时装大片的质感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3966,7 +3966,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case343/output.jpg",
     "imageAlt": "复古汽车旅行海报模板示例图",
-    "prompt": "prompt:\n\nCreate a vertical retro automotive travel poster featuring [CAR MODEL] either parked or driving through [SCENERY]. Use a bold 1970s printmaking style with a strict 4-color palette only: [COLORS]. Build the image with flat silkscreen-style color blocking, strong contrast shadows, simplified geometric reflections, slight ink misregistration, subtle paper grain, distressed print texture, and graphic halftone shading.\n\nAvoid gradients, photorealism, glossy 3D rendering, and modern digital polish. The car should feel iconic and graphic, with thick simplified contour shapes and a warm nostalgic travel-ad atmosphere.\n\nInclude vintage advertisement typography that reads \"[TITLE]\" and integrate an authentic [BRAND LOGO] naturally into the layout. Add stylized trees, buildings, road signs, landscape shapes, or location details in the background so the setting clearly supports the travel-poster story.\n\nThe composition should feel like a strong mid-century tourism poster: balanced, editorial, poster-ready, and visually bold. Keep the design clean and intentional, with no stamp border.",
+    "prompt": "创作一张竖版复古汽车旅行海报，画面中【汽车型号】停驻于或行驶穿越【风景场景】。采用大胆的一九七〇年代丝网印刷风格，严格限定仅用四色调色板。以平涂的丝网印刷式色块、强对比阴影、简化的几何反光、轻微的油墨套印错位、细微的纸张颗粒、做旧的印刷质感与图形化的半调网点明暗来构建画面。避免渐变、写实照片、光泽三维渲染与现代数码修饰。汽车应显得标志而图形化，带有粗壮简化的轮廓造型与温暖怀旧的旅行广告氛围。加入复古广告字体，写着【标题】，并将一枚真实的品牌标志自然融入版面。背景添加风格化的树木、建筑、路牌、地貌造型或地点细节，使场景清晰地服务于旅行海报叙事。整体构图应如一张出色的中世纪旅游海报：均衡、具编辑感、适合成海报、视觉大胆。设计保持干净而有章法，不加邮票式边框。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3987,7 +3987,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case344/output.jpg",
     "imageAlt": "全家福水彩时装速写示例图",
-    "prompt": "A stylish family standing together, digital watercolor and ink sketch illustration, fashion illustration style, white clean background with abstract beige brush strokes, soft lighting, expressive line art, casual modern clothing, denim jeans, black hijabs, relaxed happy pose, elegant minimal aesthetic, high detail, editorial sketch look.",
+    "prompt": "一家人时尚地站在一起，数码水彩与钢笔速写插画，时装插画风格，干净的白色背景配抽象的米色笔触，柔和光照，富有表现力的线条艺术，休闲现代的服装，牛仔裤，黑色头巾，轻松愉快的姿态，优雅极简的美学，高细节，编辑级速写质感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -4008,7 +4008,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ecommerce_case164/output.jpg",
     "imageAlt": "土耳其烤肉商业美食摄影组图示例图",
-    "prompt": "prompt:\n\n8K UHD hyper-realistic commercial food photography, 3:4 aspect ratio. 6 scenes, each on its own solid or gradient background:\n\nScene 1, Döner slice explosion: Traditional Turkish döner (beef and lamb mix), paper-thin ribbons spiraling outward mid-air, white garlic sauce and red chili sauce splashing, fresh parsley leaves floating. Deep crimson red background.\n\nScene 2, Dürüm wrap floating: Premium dürüm cut in half and floating vertically, cross-section revealing döner meat, lettuce, tomatoes, onions layered inside, white garlic yogurt sauce drizzling elegantly, subtle spice particles drifting. Warm terracotta orange background.\n\nScene 3, Sauce pour drama: Mound of freshly sliced döner with crispy charred edges, thick creamy garlic yogurt sauce pouring from above frozen mid-flow, spicy red chili sauce drizzling alongside in thin crimson streams, sliced tomatoes and parsley below, heat vapor rising. Dark charcoal black background.\n\nScene 4, Deconstructed composition: Toasted lavash bread pieces, döner slices, tomato slices, lettuce leaves, and onion rings all suspended separately at varying heights, glossy sauce ribbons connecting elements artistically, ultra-fine spice dust in the air. Muted sage green background.\n\nScene 5, Rotating spit close-up: Extreme close-up of vertical döner tower on spit, large döner knife frozen mid-slice, fresh slice falling away, charred bits and seasoning particles in air, heat vapor rising from the fresh cut. Rich golden amber background.\n\nScene 6, Overhead plate explosion: Top-down view, all ingredients bursting upward in circular pattern, döner slices, french fries, grilled peppers and tomatoes, fresh parsley, sumac, lemon wedges, sauce droplets spraying, elements at varying heights with some rotating. Deep burgundy red background with vignette.\n\nGlobal: controlled studio lighting emphasizing meat texture and char marks, shallow to medium depth of field, rich contrast, warm savory tones, natural shine, appetizing color grading. No text, logos, people, hands, cartoon style, or plastic-looking food.",
+    "prompt": "8K 超高清超写实商业美食摄影，比例 3:4。六个场景，每个都置于各自的纯色或渐变背景之上。场景一，旋转烤肉爆裂：传统土耳其烤肉，牛羊肉混合，薄如纸片的肉丝在半空螺旋飞散，白色蒜酱与红色辣酱飞溅，新鲜欧芹叶漂浮，深绯红色背景。场景二，卷饼悬浮：高级土耳其卷饼对半切开并竖直漂浮，截面露出内层的烤肉、生菜、番茄、洋葱，白色蒜香酸奶酱优雅垂淋，细微香料颗粒飘散，暖赤陶橙色背景。场景三，淋酱戏剧瞬间：一堆刚切下、边缘焦脆的烤肉，浓稠奶香蒜味酸奶酱自上方倾泻并定格于流动中，辣味红椒酱以纤细的绯红细流在旁淋下，下方是番茄片与欧芹，热气蒸腾，深炭黑色背景。场景四，解构式构图：烤过的薄饼块、烤肉片、番茄片、生菜叶与洋葱圈各自悬浮于不同高度，光泽酱汁丝带在元素间艺术地相连，超细香料尘埃浮于空中，柔和的鼠尾草绿背景。场景五，旋转肉柱特写：竖直烤肉柱的极致特写，巨大的烤肉刀定格于切片瞬间，一片新鲜肉片正落下，焦屑与调味颗粒浮于空中，热气自新切面升腾，浓郁金琥珀色背景。场景六，俯拍摆盘爆裂：俯视视角，所有食材以环形向上迸发，烤肉片、薯条、烤椒与番茄、新鲜欧芹、盐肤木粉、柠檬角、酱汁飞溅，元素处于不同高度且部分旋转，深勃艮第红背景带暗角。全局：受控影棚布光，强调肉质纹理与炭烤痕迹，浅至中等景深，丰富对比，温暖可口的色调，自然光泽，诱人的调色。无文字、无标志、无人物、无手部、无卡通风格、无塑料感假食物。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -4029,7 +4029,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case268/output.jpg",
     "imageAlt": "毛绒吉祥物伙伴肖像示例图",
-    "prompt": "Use the uploaded portrait as the identity reference and preserve the person's recognizable facial features, hairstyle, skin tone, expression, fashion sense, and overall presence. Create a premium full-body portrait of the same person alongside a large custom-designed plush companion that feels like their mascot alter ego. The plush should be inspired by the subject's mood, facial impression, styling, posture, and overall energy rather than being a generic animal or mascot. Automatically choose a creature concept that best matches the person's unique vibe, avoiding predictable or stereotype-based selections. The mascot must clearly be an oversized plush toy with soft fuzzy fabrics, rounded shapes, detailed stitching, premium textures, and a collectible designer-toy aesthetic. Its design, expression, silhouette, and proportions should subtly reflect the person's character and visual identity. Build a harmonious color palette using cues from the subject's hair, skin tone, clothing, and atmosphere so the person, mascot, and scene feel naturally connected. Show both the person and plush fully visible from head to toe, including shoes and all parts of the mascot, with balanced framing and comfortable spacing. Choose a natural interaction that suits the subject, such as standing beside, sitting with, leaning on, lightly hugging, or casually engaging with the plush companion. Keep the person's expression relaxed, warm, and authentic with a subtle smile or calm gaze, avoiding stiff poses or mannequin-like appearances. If the original image only shows part of the outfit, intelligently complete the full look in a believable and stylish way. Place the scene in a clean, aesthetically pleasing environment such as a minimalist studio, cozy lifestyle setting, or refined editorial backdrop that complements both the person and mascot without distractions. The final image should feel charming, cozy, stylish, emotionally engaging, visually cohesive, and suitable for a high-end character campaign or social-media editorial. Avoid cropped bodies, hidden shoes, incomplete mascot visibility, generic animal choices, real animals, horror elements, cheap toy aesthetics, awkward poses, cluttered backgrounds, distorted anatomy, extra limbs, text, logos, or watermarks.",
+    "prompt": "以上传的人像作为身份参照，保留人物可辨认的面部特征、发型、肤色、神情、时尚品味与整体气场。创作一张高级的同一人物全身像，身旁伴有一只大型定制毛绒伙伴，宛如其吉祥物化身。毛绒形象应从主体的情绪、面部印象、造型、姿态与整体气质中汲取灵感，而非泛泛的动物或吉祥物。自动选择一个最契合此人独特气质的生物概念，避免可预测或刻板的选择。吉祥物须明确是一只超大毛绒玩具，带柔软蓬松的织物、圆润的造型、细致的缝线、高级质感与收藏级设计师玩具美学；其设计、神情、剪影与比例应含蓄地映照人物的性格与视觉身份。运用取自主体发色、肤色、服装与氛围的线索构建和谐的配色，使人物、吉祥物与场景自然相连。人物与毛绒玩具均需从头到脚完整可见，包括鞋子与吉祥物的所有部位，取景均衡、间距舒适。选择一种适合主体的自然互动，如站在旁边、并坐、倚靠、轻轻拥抱或随意地与毛绒伙伴互动。人物神情保持放松、温暖、真实，带微笑或平静的目光，避免僵硬姿势或人偶般的呆板。若原图仅显示部分穿搭，则以可信而时髦的方式智能补全整体造型。将场景置于干净悦目的环境中，如极简影棚、温馨的生活方式场景或精致的编辑级背景，衬托人物与吉祥物而不喧宾夺主。成品应显得迷人、温馨、时髦、情感动人、视觉协调，适合高端形象营销或社媒编辑大片。避免身体被裁切、鞋子被遮挡、吉祥物显示不全、泛泛的动物选择、真实动物、恐怖元素、廉价玩具感、别扭姿势、杂乱背景、扭曲解剖、多余肢体、文字、标志或水印。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -4050,7 +4050,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case95/output.jpg",
     "imageAlt": "SQL收藏玩具包装网格示例图",
-    "prompt": "SELECT * FROM Collectible_Toy_Packaging  WHERE layout_format = '2x2_Quadrant_Grid' AND targets = ARRAY['[IP_1]', '[IP_2]', '[IP_3]', '[IP_4]'] AND quadrant_structure = ARRAY[     (Zone: 'Left_Column', Material: 'Printed_Cardboard', Content: 'Massive_Typography_Title_And_Inferred_Creator_Metadata'),     (Zone: 'Center_Stage', Material: 'confection candy', Content: 'infer_main_character_and_diorama(target)'),      (Zone: 'Right_Column', Material: 'Transparent_Glossy_Vacuum_Plastic_Blister_Pack', Content: 'infer_three_iconic_props(target)_As_3D_Miniatures_With_Text_Labels') ] AND color_grading = 'Vintage_Retro_Palette_Matching_Inferred_IP_Era' AND camera = 'Product_Photography_Front_Orthographic_View';",
+    "prompt": "以数据库查询的视觉隐喻来构建一张收藏级玩具包装图：布局为二乘二的四象限网格，目标为四个自定义形象。四象限结构如下——左栏：印刷卡纸材质，内容为巨大的排版标题与推断出的创作者信息；中央舞台：糖果糖霜材质，内容为根据目标推断出的主角形象与微缩立体场景；右栏：透明高光真空塑料吸塑泡壳材质，内容为根据目标推断出的三件标志性道具，制作成带文字标签的三维微缩模型。色彩调性匹配所推断年代的复古怀旧色板；相机为产品摄影的正投影正视角。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -4071,7 +4071,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case175/output.jpg",
     "imageAlt": "杂志风解剖信息图海报示例图",
-    "prompt": "prompt:\n\nUltra-clean editorial infographic poster (1080x1080 square), blending premium magazine design with lifestyle illustration and photography.\n\n**HEADLINE:**\nBold, large sans-serif type centered at top: \"HUMAN LIVER\"\n\n**MAIN IMAGE:**\nHigh-detail 3D illustration of the human liver, showing the Right Lobe, Left Lobe, and Gallbladder. Color palette: terracotta, deep brownish-red, and soft coral tones. Background: clean, soft beige or off-white. Lighting: soft studio style.\n\n**POSTER SECTIONS:**\n\n* **Floating Fact Bubbles (top corners):**\n    * \"Weight: ~1.5 kg (Heaviest internal organ)\"\n    * \"Regeneration: Can regrow from just 25%\"\n    * \"Location: Upper Right Abdomen\"\n    * \"Blood Flow: Filters 1.4 L/min\"\n\n* **Organ Labels (arrows pointing to anatomy):**\n    * Right Lobe\n    * Left Lobe\n    * Gallbladder (greenish sac below)\n    * Common Bile Duct\n    * Hepatic Portal Vein\n\n* **Key Functions (left column, small icons):**\n    * **Detox:** Filters toxins from blood\n    * **Bile:** Aids fat digestion\n    * **Metabolism:** Processes carbs and protein\n    * **Storage:** Holds glycogen, iron, vitamins\n\n* **Highlights (right column, small icons):**\n    * **Chemical Factory:** 500+ vital functions\n    * **Immunity:** Fights blood-borne infections\n    * **Clotting:** Makes blood-clotting proteins\n\n* **Health Tips (bottom cards):**\n    1. **Limit Alcohol** - Prevents cirrhosis\n    2. **Stay Hydrated** - Flushes toxins\n    3. **Balanced Diet** - Low sugar, high fiber\n    4. **Vaccinate** - Hepatitis A & B protection\n    5. **Exercise** - Burns fat and triglycerides\n\n**STYLE:** Glassmorphism frosted-glass text boxes, soft drop shadows, medical accuracy meets high-end graphic design.",
+    "prompt": "超干净的编辑级信息图海报（1080×1080 正方形），融合高端杂志设计、生活方式插画与摄影。标题：顶部居中的粗体大号无衬线字「人体肝脏」。主图：高细节的人体肝脏三维插画，展示右叶、左叶与胆囊；配色为赤陶色、深棕红与柔和珊瑚色调；背景为干净柔和的米色或米白；光照为柔和影棚风格。海报区块：顶部两角的悬浮知识气泡——重量约 1.5 公斤（最重的内脏器官）、仅凭 25% 即可再生、位置在右上腹部、每分钟过滤 1.4 升血液；器官标注，箭头指向解剖部位——右叶、左叶、胆囊（下方的绿色囊袋）、胆总管、肝门静脉；关键功能（左栏小图标）——解毒即过滤血液毒素、胆汁助脂肪消化、代谢处理碳水与蛋白质、储存糖原铁与维生素；亮点（右栏小图标）——化学工厂承担五百多项重要功能、免疫抵御血源性感染、凝血制造凝血蛋白；健康贴士（底部卡片）——限制饮酒预防肝硬化、保持水分冲刷毒素、均衡饮食低糖高纤、接种疫苗预防甲肝乙肝、运动燃烧脂肪与甘油三酯。风格：玻璃拟态磨砂玻璃文本框，柔和投影，医学准确性与高端平面设计并重。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -4092,7 +4092,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case345/output.jpg",
     "imageAlt": "日系时尚封面插画示例图",
-    "prompt": "prompt:\n\nCreate a high-end Japanese fashion magazine cover illustration. The subject is [XXX]. Use a minimalist, modern fashion-digital-illustration style with refined cel shading, crisp clean large color-block modeling, almost no visible linework, and elegant sharp edges.\n\nKeep a blue-and-white structural palette as the foundation, with restrained accents of coral red, misty purple, pale yellow, ash pink, sage green, silver gray, or similar soft secondary tones. The final image should stay minimal, premium, cohesive, and not flashy.\n\nUse a clean background, such as cobalt blue, royal blue, misty blue, or another pure large color field, with generous negative space. Strong sunlight enters from the upper left. White areas should be bright and close to overexposed, while shadows are built from hard-edged planes of cool blue, gray-blue, and blue-purple.\n\nGive the subject a slender silhouette and a quiet, aloof posture. Simplify details while keeping the form accurate. The overall mood should feel translucent, cool, elegant, fashionable, and suitable for a premium magazine cover poster.\n\nAvoid text, watermarks, complex backgrounds, photorealistic photography, 3D, heavy impasto, childish cartoon styling, and cluttered decoration.",
+    "prompt": "创作一张高级日系时尚杂志封面插画，主体为【自定义主体】。采用极简现代的时装数码插画风格，精致的赛璐璐上色，干净利落的大色块塑形，几乎不见线稿，边缘优雅锐利。以蓝白结构色为基底，克制地点缀珊瑚红、雾紫、浅黄、灰粉、鼠尾草绿、银灰等柔和辅色，成品保持极简、高级、协调、不张扬。背景干净，如钴蓝、宝蓝、雾蓝或其他纯净大色块，留白充足。强烈阳光自左上方射入，白色区域明亮近乎过曝，阴影则由冷蓝、灰蓝、蓝紫的硬边块面构成。赋予主体修长的剪影与安静疏离的姿态，简化细节同时保持形体准确。整体氛围通透、清冷、优雅、时尚，适合高级杂志封面海报。避免文字、水印、复杂背景、写实摄影、三维、厚涂、幼稚卡通风格与杂乱装饰。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
