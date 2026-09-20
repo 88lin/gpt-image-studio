@@ -5541,7 +5541,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case394/output.jpg",
     "imageAlt": "Sony A7 分解结构图示例图",
-    "prompt": "Detailed exploded-view diagram of a Sony A7 mirrorless camera, with all internal components separated and clearly visible, each part labeled with its name. Technical product illustration style, clean white background, precise and informative layout.",
+    "prompt": "索尼 A7 无反相机的精细分解视图图，所有内部组件分离并清晰可见，每个部件标注名称。技术产品插画风格，干净白色背景，精确而信息丰富的版式。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5562,7 +5562,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case395/output.jpg",
     "imageAlt": "仿生机械器官产品渲染示例图",
-    "prompt": "Ultra-realistic 3D anatomical human [organ] crafted from semi-translucent frosted polycarbonate with a milky matte finish that softly diffuses light. Features industrial injection-molded details, subtle micro-texture, and rounded edges with precise manufacturing seams. Interior reveals mechanical components in place of organic tissue — micro gears, pistons, circuitry, and engineered chambers seen through the translucent shell with a soft blur. A minimal white Apple logo is subtly embedded on the surface, understated and not overpowering. Diffused studio lighting, realistic plastic light refraction, gentle shadow underneath, centered framing, pure white background, ultra-detailed futuristic biomechanical render, 1:1 aspect ratio.",
+    "prompt": "超写实三维人体【器官】，由半透明白色磨砂聚碳酸酯制成，带奶白色哑光表面以柔和漫射光线。具有工业注塑细节、微妙微观纹理与带精密制造接缝的圆角边缘。内部以机械组件替代有机组织——透过半透明外壳可见微型齿轮、活塞、电路与工程腔室，呈现柔和模糊。表面微妙嵌入一枚极简白色品牌标志，低调而不夺主。漫射影棚光照、真实塑料光折射、下方柔和阴影、居中构图、纯白背景、超精细未来生物机械渲染、1:1 比例。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5583,7 +5583,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case396/output.jpg",
     "imageAlt": "太阳风暴 WPA 海报示例图",
-    "prompt": "A 1930s WPA travel poster style infographic poster in 16:9 horizontal format about solar weather and space storms, designed to look exactly like a vintage Works Progress Administration national parks poster from the New Deal era, with flat gouache-style color fills, bold black outlines, dramatic perspective and zero photorealism; the background transitions from deep black space at the top to a glowing teal-green aurora sky at the bottom, divided into bold graphic bands of color in the WPA tradition; the central illustration shows the Sun in the upper left as a massive dramatic circle with stylized flat orange and yellow flame corona eruptions radiating outward, and a large coronal mass ejection arc sweeping diagonally toward Earth in the upper right, depicted as a simplified blue sphere with a thin atmosphere ring; mid-composition, the solar wind stream is shown as bold parallel lines of warm gold flowing between Sun and Earth, and where those lines hit the atmosphere they bloom into a spectacular aurora borealis rendered in flat curtains of teal, green and violet in the WPA graphic tradition; below the main illustration, a clean horizontal strip divides the composition into three labeled science panels in a sans-serif bold font: SOLAR FLARE, CORONAL MASS EJECTION, and AURORA BOREALIS, each with a minimal one-color icon and two lines of punchy educational text; the title at the top reads SOLAR STORMS in massive slab-serif WPA lettering, with the subtitle THE VIOLENT WEATHER OF SPACE in a smaller weight beneath; the full palette is restricted to five flat colors — black, deep cream, burnt orange, teal and violet — giving the whole piece the unmistakable graphic punch and populist optimism of a 1930s government art print, high quality, aspect ratio 16:9",
+    "prompt": "一张一九三〇年代 WPA 旅行海报风格的信息图海报，16:9 横版，主题为太阳天气与太空风暴。设计须完全呈现为新政时期的复古国家公园海报，平涂水粉风格填色、粗黑轮廓、戏剧性透视、零写实。背景自顶部深黑太空过渡至底部发光的青绿色极光天空，以 WPA 传统的大胆色带分割。中心插画左上为太阳，呈现为巨型戏剧性圆盘，带风格化的平涂橙黄火焰日冕向外辐射，一道大型日冕物质抛射弧对角扫向右上方的地球——地球以简化蓝色球体带薄大气环呈现。画面中部，太阳风以温暖金色的粗平行线流过太阳与地球之间，当这些线击中大气时绽放为壮观的北极光，以青、绿、紫的平涂帘幕 WPA 图形传统呈现。主插画下方一条干净水平条带将构图分为三个标注科学面板——太阳耀斑、日冕物质抛射与北极光，各含极简单色图标与两行有力科普文字。顶部标题以巨型 WPA 板状衬线字体呈现，副标题意为「太空的暴烈天气」。全套配色严格限定五种平涂色——黑、深奶油、焦橙、青与紫，赋予整件作品一九三〇年代政府艺术印刷品标志性的图形冲击力与大众乐观主义，高质量，比例 16:9。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5604,7 +5604,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case397/output.jpg",
     "imageAlt": "高级汽车规格海报示例图",
-    "prompt": "Generate a stunning premium car poster for\n[CAR MODEL].\n\nPosition the vehicle as the dominant centerpiece in a bold three-quarter side angle, visually striking and commanding full attention.\n\nCapture the full essence of the car with an aggressive stance, flawless proportions, luxury wheels, distinctive headlights, aerodynamic bodywork, spoilers, performance accents, and high-end design cues.\n\nLayer in crisp premium typography featuring the brand name, model designation, performance figures, horsepower rating, 0-60 time, top speed, engine details, and iconic milestones, seamlessly woven into the layout.\n\nWeave in subtle background motifs drawn from the car's history: ghost blueprint lines, motorsport heritage, silhouette overlays, legendary circuits, mechanical diagrams, velocity graphics, and collector-print vibes.\n\nApply bold visual contrast, vivid premium hues (no dark or black-heavy backgrounds), cinematic illumination, razor-sharp reflections, glossy paint sheen, luxury magazine quality, slick graphic design, and a scroll-stopping poster energy.\n\nPolished composition, top-tier automotive ad aesthetic, collectible poster feel, ultra-detailed, visually commanding, premium masterpiece.",
+    "prompt": "为【汽车型号】生成一张惊艳的高端汽车海报。将车辆置于大胆的四分之三侧角作为主导中心，视觉抢眼并完全占据注意力。以激进姿态、完美比例、奢华轮毂、独特头灯、空气动力学车身、尾翼、性能细节与高端设计线索捕捉汽车的完整精髓。叠加清晰高端字体，含品牌名、型号、性能参数、马力、零到百加速时间、极速、发动机详情与标志性里程碑，无缝融入版式。融入取自汽车历史的微妙背景纹样——幽灵蓝图线、赛车传承、剪影叠层、传奇赛道、机械图解、速度图形与收藏印刷品氛围。运用大胆视觉对比、鲜艳高端色调（避免深色或黑色为主的背景）、电影光照、锐利反射、光泽车漆、奢华杂志品质、利落平面设计与令人驻足的海报能量。精致构图、顶级汽车广告美学、收藏海报感、超精细、视觉震撼、高端杰作。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5625,7 +5625,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case23/output.jpg",
     "imageAlt": "超现实卡通肖像模板示例图",
-    "prompt": "Vertical bizarre flat cartoon portrait of [SUBJECT from the attached photo] with a high geometric head shape, a long narrow neck, huge round eyes, a tiny mouth and an unflappable laugh, dressed in [CLOTHES from the photo], with a [OBJECT/CREATURE] sitting on their head like a living hat. Pure black outline, smooth color fills, simple face shapes, rare drawings on animal fur or skin, playful surreal character design, bold graphic palette [COLOR]. Background decorations: [ENVIRONMENT DECORATIONS from LOCATION/SCENE], made using simplified shapes, clear depth, a small amount of scenery from the environment and a clear cartoon perspective. Clear digital illustration, vertical framing in the form of a poster, no realism, no 3D rendering, no picturesque shading, aspect ratio 4:5.",
+    "prompt": "竖版怪诞扁平卡通肖像，以附图中的【主体】为基础。高几何感头型、修长窄颈、硕大圆眼、小嘴与从容不迫的笑容，身着照片中的【衣物】，头顶坐着一只【物件或生物】如活帽子。纯黑轮廓、平滑填色、简练面部造型、动物皮毛或皮肤上稀有纹路、俏皮超现实角色设计、大胆图形化配色。背景装饰取自场景的【环境装饰】，以简化造型、清晰层次、少量环境景物与清晰卡通透视呈现。清晰数码插画、海报式竖构图、无写实、无三维渲染、无风景画式阴影，比例 4:5。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5646,7 +5646,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case398/output.jpg",
     "imageAlt": "多巴胺 3D 城市海报示例图",
-    "prompt": "Top-tier internet marketing visual design, Behance / Dribbble inspired 3D illustration poster aesthetic, C4D rendering style, soft-light treatment, vivid high-saturation colors, dopamine-driven color palette, abstract artwork, clean minimalist background, fresh and lively feel, youthful and energetic vibe, polished and intricate. Theme: Urban Nomad Project.",
+    "prompt": "顶级互联网营销视觉设计，设计平台灵感的三维插画海报美学，三维渲染风格、柔光处理、鲜艳高饱和色彩、多巴胺驱动配色、抽象艺术、干净极简背景、清新活泼感、青春能量、精致而繁复。主题：都市游牧计划。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5667,7 +5667,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case400/output.jpg",
     "imageAlt": "大片级动作电影镜头示例图",
-    "prompt": "Cinematic photorealistic action scene on a rain-soaked downtown street canyon. A dark-haired man in his 30s sprints toward the camera, soaked dark jacket and dark pants, mid-stride with a tense survival expression. Behind him, a massive urban explosion tears through a high-rise building -- fire, smoke, shattered concrete, glass, and metal debris blast outward. Exactly 3 damaged vehicles visible: a dark sedan left foreground with crumpled hood splashing through rainwater, a wrecked dark car right midground, and an overturned black SUV tilted up on the right. Wet asphalt reflects headlights and firelight. Dense debris frozen mid-air. Overcast stormy daylight, desaturated blue-gray palette with orange fire accents, motion blur on flying debris but sharp focus on the runner, low-angle wide-lens composition, ultra-detailed blockbuster disaster-movie realism, volumetric smoke, rain spray, cinematic lighting, high contrast.",
+    "prompt": "电影感超写实动作场景，发生在雨中的 downtown 街道峡谷。一位三十多岁的黑发男子朝镜头冲刺，湿透的深色夹克与长裤，跨步中途，表情紧张求生。他身后一场巨型城市爆炸撕裂一栋高楼——火焰、浓烟、碎混凝土、玻璃与金属碎片向外爆射。画面中恰好可见三辆受损车辆：左前景一辆深色轿车引擎盖褶皱、溅起雨水，右中景一辆损毁的深色车，右侧一辆翻倒的黑色越野车倾斜翘起。湿沥青反射车灯与火光。密集碎片凝固于半空。阴沉暴风日光、去饱和的蓝灰配色配橙色火焰点缀，飞溅碎片带运动模糊但跑步者锐利对焦。低角度广角镜头构图、超精细灾难大片写实、体积烟雾、雨雾飞溅、电影光照、高对比。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5688,7 +5688,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case105/output.jpg",
     "imageAlt": "硬币金额编辑测试示例图",
-    "prompt": "Modify this photo so the total adds up to 244.5 baht. Adjust the number of coins in each stack until the combined value hits the target.",
+    "prompt": "修改这张照片使总额为 244.5 泰铢。调整每叠硬币的数量直至合计值达到目标。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5709,7 +5709,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case183/output.jpg",
     "imageAlt": "早期互联网作品集页面示例图",
-    "prompt": "Design a minimal early-internet personal profile webpage / digital portfolio landing page on a large white canvas with generous negative space and a thin pastel pink browser-style frame. In the center, place a black-and-white editorial portrait of [SUBJECT], featuring soft film grain, subtle scanner texture, and low-contrast photographic tones.\n\nSurround the portrait with scattered profile metadata labels and small star-bullet elements arranged asymmetrically, resembling a playful personal résumé. Include descriptors such as:\n\n✦ creator\n✦ model\n✦ stylist\n✦ DJ\n✦ girl\n✦ photographer\n✦ collector\n✦ dreamer\n\nIn the top-left corner, create a colorful hand-drawn logo or personal brand mark. Beneath it, add a tiny timestamp and date in a small system font, mimicking an old personal homepage.\n\nIn the top-right corner, place irregular sticker-like navigation tabs in bright accent colors (pink, cyan, purple, yellow, and green). Use simple labels such as:\n\nHOME\nABOUT\nWORK\nDIARY\nLINKS\n\nScatter handwritten marker-style notes, introductions, personal thoughts, and lifestyle captions throughout the empty space. Examples:\n\n\"currently making things online\"\n\"welcome to my homepage\"\n\"music, fashion, internet\"\n\"updated today\"\n\"living between projects\"\n\nMaintain an anti-grid editorial layout with intentionally imperfect spacing and playful placement. Mix tiny system fonts, handwritten script, and casual notebook-style annotations. Keep the portrait entirely monochrome while reserving color only for the logo, navigation stickers, and a few small graphic accents.",
+    "prompt": "设计一张极简的早期互联网个人主页与作品集落地页，大尺寸白色画布配充足留白与细粉彩色浏览器式边框。中央放置【主体】的黑白编辑肖像，带柔和胶片颗粒、微妙扫描仪纹理与低对比摄影色调。围绕肖像散布个人档案标签与小星号元素，不对称排列，如俏皮的个人简历。含标签如：创作者、模特、造型师、打碟人、女孩、摄影师、收藏家、梦想家。左上角创作一个彩色手绘标志或个人品牌标记，其下添加极小时间戳与日期的小系统字体，模仿旧式个人主页。右上角放置不规则贴纸式导航标签，使用明亮点缀色（粉、青、紫、黄、绿），简单标签如首页、关于、作品、日记、链接。在空白处散布手写马克笔式笔记、自我介绍、个人想法与生活方式文案，如「目前在网上做东西」「欢迎来到我的主页」「音乐、时尚、互联网」「今日更新」「生活在项目之间」。保持反网格编辑版式，间距刻意不完美、放置俏皮。混合微型系统字体、手写体与随性笔记本式批注。肖像保持完全单色，色彩仅用于标志、导航贴纸与少数小图形点缀。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5730,7 +5730,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case401/output.jpg",
     "imageAlt": "编辑风墨线插画模板示例图",
-    "prompt": "Cinematic editorial ink illustration of [HUMAN] in [SCENERY], looking back over the shoulder with realistic proportions, windblown hair and sharp confident gaze. Wearing [CLOTHING]. Loose expressive black ink linework, visible sketch construction lines, high-contrast shadows, sunlit rim glow, weathered paper texture, ink splatters, distressed print marks, realistic road-movie environment, limited three-color palette: [PALETTE], contemporary fashion poster illustration, aspect ratio 4:5.",
+    "prompt": "电影感编辑级墨线插画，【人物】位于【场景】中，回头望肩，比例写实，风吹发丝与锐利自信凝视，身着【服装】。松散富有表现力的黑色墨线、可见的草图结构线、高对比阴影、阳光轮廓光、做旧纸张纹理、墨点飞溅、破损印刷痕迹、写实公路片环境，限定三色配色，当代时装海报插画，比例 4:5。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5751,7 +5751,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case188/output.jpg",
     "imageAlt": "奢华运动鞋编辑网格示例图",
-    "prompt": "Louis Vuitton luxury leather sneaker campaign. High-fashion editorial, avant-garde aesthetic. Aspect ratio 3:4.\n\nMaterials: Full-grain calf leather, Monogram Embossed Canvas, Polished Gold Hardware.\nColor palette: Cognac Brown, Deep Obsidian, Champagne Gold.\nLighting: High-contrast Chiaroscuro with soft-box key lighting.\n\n9-cell editorial grid:\n\nRow 1, Heritage:\n- Hero side-profile: sneaker resting on a vintage LV trunk, side-lit to reveal the leather grain texture.\n- Extreme macro close-up: gold-tone \"LV\" lace aglets and precision stitching detail.\n- Dynamic shot: gold dust particles swirling around the sole as the shoe steps into frame.\n\nRow 2, Innovation:\n- Minimalist: sneaker balanced on top of an abstract, floating glass \"V\" sculpture.\n- Floating deconstructed view: sole and upper suspended in a void.\n- Sensory: a gloved hand adjusting the tongue, highlighting the softness of the leather.\n\nRow 3, Surrealism:\n- Monochromatic scene in LV Havane brown with liquid silk drapes.\n- Abstract: rubber sole pattern reimagined as a geometric desert landscape.\n- Fusion: sneaker walking on a mirror-still lake reflecting a Parisian sunset skyline.",
+    "prompt": "奢华皮革运动鞋活动，高级时装编辑、前卫美学，比例 3:4。材质：全粒面小牛皮、压花帆布、抛光金色五金。配色：干棕、深黑、香槟金。光照：高对比明暗法配柔光箱主光。九宫格编辑网格：第一行传承——英雄侧面轮廓：运动鞋置于复古旅行箱上，侧光展现皮革纹理；极致微距特写：金色鞋带孔与精密缝线细节；动态镜头：金粉粒子环绕鞋底旋转入场。第二行创新——极简：运动鞋平衡于抽象悬浮玻璃雕塑之上；悬浮解构视图：鞋底与鞋面悬浮于虚空；感官：戴手套的手调整鞋舌，突显皮革柔软。第三行超现实——单色场景配液态丝绸帷幔；抽象：橡胶鞋底纹样重塑为几何沙漠景观；融合：运动鞋行走在镜面般平静的湖面上倒映巴黎日落天际。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5772,7 +5772,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case189/output.jpg",
     "imageAlt": "无线耳机生活方式广告示例图",
-    "prompt": "Design a 9:16 vertical product infographic for Bolt True Wireless Earbuds with a high-end lifestyle ad feel.\nComposition & Framing\nFull-body shot of a young woman whose face, skin tone, and hairstyle match the reference photo exactly\nSlightly low camera angle close to the subject, fashion campaign style, for depth and visual presence\nShe's seated casually on the floor, one knee up, one leg stretched toward the camera\nForeground (Product)\nShe holds an open Bolt earbud charging case out toward the viewer\nOne earbud is visible inside the case, the other is in her ear\nThe case is glossy white with \"BOLT\" branding\nSlight macro bokeh blur on the hand and case for cinematic depth\nOutfit & Style\nModern athleisure streetwear: off-white or neutral lightweight jacket, crop top or sports bra, soft pink joggers, textured white sneakers\nExpression: confident and relaxed, subtle smile\nPose feels natural and lifestyle-driven, not posed\nBackground\nSoft gray gradient studio background\nRainbow prism lens flares and subtle light leaks\nFloating blurred earbuds and case in background\nStudio floor texture visible underfoot\nLighting\nDiffused commercial studio lighting emphasizing skin texture, the glossy case, and fabric detail\nSoft rim light to separate the subject from the background\nText Overlays (modern sans-serif, white)\nTop Center: \"BOLT\" in large bold text, partially behind the subject\nTop Right: Bolt Earbuds / True Wireless\nMid Left: Powerful sound. / Effortless vibes. / Engineered for every beat of your day.\nMid Right: 30 hours of playtime / IPX5 water resistant\nBottom Right: 1 year warranty\nQuality\n8K ultra-realistic commercial photography\nSharp on face and earbuds, gentle depth blur on foreground and background\nClean Apple/Nike premium ad aesthetic, strong negative space",
+    "prompt": "为一款真无线耳机设计一张 9:16 竖版产品信息图，具高端生活方式广告感。构图与取景：年轻女性全身照，面部、肤色与发型严格匹配参考图；略低相机角度靠近主体，时装广告风格，营造纵深与视觉存在感；她随性地坐在地上，一膝抬起、一腿伸向镜头。前景产品：她向观众手持打开的耳机充电盒，盒中可见一只耳机，另一只在她耳中，充电盒为光泽白色带品牌标识，手与充电盒带轻微微距散景模糊以营造电影感纵深。穿搭风格：现代运动休闲街头风，米白或中性轻薄夹克、短上衣或运动背心、柔粉色慢跑裤、纹理白色运动鞋；表情自信放松、微笑；姿态自然生活方式驱动而非摆拍。背景：柔和灰色渐变影棚背景、彩虹棱镜镜头光斑与微妙漏光、背景中漂浮模糊的耳机与充电盒、脚下可见影棚地板纹理。光照：漫射商业影棚光照强调肤质、光泽充电盒与面料细节，柔和轮廓光将主体与背景分离。文字叠层（现代无衬线、白色）：顶部中央大号粗体品牌名部分位于主体之后；右上产品名与真无线标签；左中文案意为「澎湃音质／从容氛围／为你的每一拍而造」；右中参数意为「30 小时续航、IPX5 防水」；右下保修信息。质量：8K 超写实商业摄影，面部与耳机锐利、前景与背景柔和景深，干净的高端品牌广告美学，强留白。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5793,7 +5793,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case402/output.jpg",
     "imageAlt": "等距地标微缩场景示例图",
-    "prompt": "Generate an isometric miniature 3D diorama of [COUNTRY NAME]'s iconic [FAMOUS STRUCTURE] landmark from a 45-degree top-down perspective.\n\nUse clean soft textures and realistic PBR materials with balanced, natural lighting. The elevated base features surrounding streets, landscape elements, and cultural details unique to the structure. Include tiny stylized figures of locals and tourists with detailed facial features.\n\nSet the background to solid [BACKGROUND COLOR]. Display [COUNTRY NAME] in bold text at the top center with [STRUCTURE NAME] on the next line, followed by a minimal architecture icon below. Adjust text color to ensure contrast.",
+    "prompt": "以 45 度俯视等距视角生成【国家名】标志性【著名建筑】地标的等距微缩三维立体模型。使用干净柔和纹理与真实基于物理的材质，均衡自然光照。抬升基座含周边街道、景观元素与该建筑独特的文化细节，包括带面部细节的微型风格化本地人与游客人偶。背景设为纯【背景色】。顶部中央以粗体显示【国家名】，下一行为【建筑名】，下方放一个极简建筑图标，文字颜色调整以确保对比。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5814,7 +5814,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case190/output.jpg",
     "imageAlt": "Kinder Joy 吊椅场景示例图",
-    "prompt": "Hyper-realistic 8k medium shot photograph with shallow depth of field, surreal indoor scene with cinematic lighting. A normal-sized woman sits cross-legged inside a massive, highly detailed Kinder Joy egg that's been converted into a swing chair. The egg is split open, its white interior forming the seat and orange textured exterior visible, suspended by dark metal chains from a curved metal stand.\n\nShe wears a black t-shirt and blue-and-white plaid pajama pants, holding a small white teacup with both hands, gazing directly at the viewer with a calm, relaxed expression. Use uploaded face as reference.\n\nOn a polished wooden table to the left foreground: another gigantic fully wrapped Kinder Joy egg with intricate foil texture and branding details. To the right of the swing base: a vintage-style wooden radio with white dials, and a tiny bonsai tree in a small pot.\n\nSoft warm directional lighting from the left casts subtle shadows, highlighting the detailed egg wrapper textures, clothing, and wooden surface. Background is a softly blurred warm-toned interior wall with pleasing bokeh. Standard lens, shot from mid-height.",
+    "prompt": "超写实 8K 中景照片配浅景深，超现实室内场景配电影光照。一位正常身材的女性盘腿坐在一个巨大的、细节丰富的巧克力蛋中——蛋被改造成吊椅，蛋壳裂开，白色内层构成座椅，橙色纹理外壳可见，以深色金属链悬挂于弯曲金属支架。她穿黑色T恤与蓝白格子睡裤，双手捧一只小白茶杯，平静放松地直视观众，面部使用上传照片作为参考。左前景抛光木桌上放着另一颗巨大的完整包装巧克力蛋，带精细锡箔纹理与品牌细节。吊椅右侧有一台复古风木质收音机配白色旋钮，以及一盆小型盆景。左侧柔和温暖定向光投下微妙阴影，突显蛋包装纹理、衣物与木面。背景为柔和虚化的暖调室内墙面配悦人散景。标准镜头、中等高度拍摄。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5835,7 +5835,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case304/output.jpg",
     "imageAlt": "针毡羊毛微缩人偶示例图",
-    "prompt": "Transform the subject into a handcrafted needle-felted wool miniature. Material: organic roving wool with visible needle-punch textures, soft fuzzy surface, and handcrafted seams. Eyes are tiny black bead eyes or simple felted circles.\n\nStyle rules: slightly oversized head with simplified limbs and a cute, charming aesthetic. Retain the original colors from the source image but soften them with wool texture. Clothing becomes simplified felt versions of the original outfits with tiny fabric buttons and stitched details. Accessories are recreated as miniature felted props.\n\nCamera: macro photography, close-up shot. Soft studio lighting with warm highlights and gentle shadows. Clean, out-of-focus bokeh background in a neutral craft studio setting. Shallow depth of field (f/2.8). High fidelity, 8k resolution, photorealistic wool texture, Pixar-like character charm.",
+    "prompt": "将主体转化为一只手工针毡羊毛微缩人偶。材质：有机原色羊毛带可见针刺纹理、柔软绒毛表面与手工缝线痕迹，眼睛为微型黑色珠眼或简单毡制圆点。风格规则：头部略大、四肢简化、可爱迷人美学。保留原图色彩但以羊毛纹理柔化，服装变为原图的简化毡版配微型布扣与缝线细节，配饰重现为微型毡制道具。相机：微距摄影、近景特写。柔和影棚光照配温暖高光与轻柔阴影。干净失焦散景背景、中性手作工坊场景。浅景深 f/2.8，高保真、8K 分辨率、超写实羊毛纹理、皮克斯式角色魅力。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5856,7 +5856,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case191/output.jpg",
     "imageAlt": "隐形护盾防晒广告示例图",
-    "prompt": "SUNSCREEN AD, “THE INVISIBLE SHIELD”\n\nLuxury skincare advertising masterpiece, a colossal premium sunscreen bottle standing on a pristine tropical shoreline at golden hour, powerful beams of sunlight crashing down from the sky and splitting apart upon contact with a transparent protective energy dome radiating from the sunscreen, millions of sparkling UV particles dissolving into golden dust before reaching flawless skin, crystal clear ocean reflections, flowing water suspended in mid air around the product, microscopic droplets catching cinematic sunlight, ultra realistic textures revealing every detail of the bottle surface, luxury beauty campaign aesthetics, dramatic volumetric lighting, glowing atmospheric haze, premium white and gold color palette, futuristic protection technology visualized as elegant light waves, hyper detailed environment, commercial photography perfection, award winning advertising design, photorealistic rendering, 16K ultra resolution, global skincare brand campaign, masterpiece quality.\n\nText Overlay:\nSUNSCREEN\n\nTagline:\n“Protect Every Ray. Reveal Every Glow.",
+    "prompt": "防晒广告——「隐形护盾」。奢华护肤广告杰作，一只巨型高端防晒霜瓶立于黄金时刻的原始热带海岸线上，强大阳光光束自天空倾泻而下，在接触防晒霜散发的透明保护能量穹顶时分裂开来，数百万闪耀的紫外线粒子在触及无瑕肌肤前溶解为金粉，清澈海洋倒影、悬浮于产品周围空中的流水、微观水滴捕捉电影感阳光，超写实纹理展现瓶身每一处细节，奢华美妆广告美学，戏剧性体积光照、发光大气雾、高端白金配色、未来感防护技术可视化为优雅光波，超精细环境、商业摄影完美、获奖广告设计、超写实渲染、16K 超分辨率、全球护肤品牌活动、杰作品质。文字叠层：防晒霜。标语：「守护每一缕光，绽放每一分彩。」",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5877,7 +5877,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case403/output.jpg",
     "imageAlt": "发条微缩世界示例图",
-    "prompt": "create a charming but ultra-refined scene centered on [wind-up toy / mechanical miniature world] where a tiny self-contained world is powered by a visible wind-up key and internal spring system. the toy should contain miniature architecture, characters, moving scenery, rotating signage, tiny lifts, oscillating parts, and small narrative moments that all activate from one central mechanism. mini world features: include visual zones for [main scene], [secondary scene], [moving prop], [character action], and [secret detail / easter egg]. surrounding close-ups can reveal the key, spring chamber, cams, and hidden moving linkages. visual style: japanese capsule toy magic meets luxury miniature cinematography meets premium collectible product photography. whimsical, intricate, emotionally irresistible. composition guidelines: the toy remains the hero, but the viewer should feel invited to peer into its tiny world. balance cuteness with high craftsmanship. make the mechanisms visible enough to create fascination. lighting & background: soft studio lighting with theatrical micro-shadows, premium pastel, lacquer, or dark velvet backdrop depending on [mood], hyper-detailed miniature realism, no watermark. variables: [wind-up toy / mechanical miniature world], [main scene], [secondary scene], [moving prop], [character action], [secret detail / easter egg], [mood]",
+    "prompt": "创作一个迷人而极致精炼的场景，以【发条玩具或机械微缩世界】为中心，一个微型的自足世界由可见的发条钥匙与内部弹簧系统驱动。玩具须包含微型建筑、人物、移动布景、旋转招牌、微型升降梯、摆动部件与小型叙事瞬间，全部由一个中央机制激活。微世界分区：【主场景】、【次场景】、【移动道具】、【角色动作】与【隐藏细节或彩蛋】。周围特写可揭示钥匙、弹簧腔、凸轮与隐藏联动装置。视觉风格：日式扭蛋魔力邂逅奢华微缩电影感邂逅高端收藏品产品摄影。奇思妙想、精巧、情感上不可抗拒。构图指引：玩具保持为英雄，但观者应被邀请窥探其微型世界，在可爱与高工艺之间取得平衡，使机制足够可见以引发好奇。光照与背景：柔和影棚光照配戏剧性微阴影，根据【氛围】选择高端粉彩、漆面或深色天鹅绒背景，超精细微缩写实、无水印。变量：【发条玩具或机械微缩世界】、【主场景】、【次场景】、【移动道具】、【角色动作】、【隐藏细节或彩蛋】、【氛围】。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5898,7 +5898,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case192/output.jpg",
     "imageAlt": "隐藏 Logo 地景幻象示例图",
-    "prompt": "Create a subliminal advertising landscape photograph where a recognizable brand logo (like the Apple logo, Nike swoosh, or Batman symbol) is secretly embedded into a breathtaking natural environment (like snowy mountains, dense jungle, sand dunes, or ocean coastline).\n\nThe logo must be formed entirely by the physical geography of the terrain — NOT overlaid digitally. The main body of the logo appears as a carved void (a deep valley, cliff edge, or sharp color contrast in the terrain), while any disconnected elements (like Apple's leaf) float as a suspended island of rock and earth in the misty sky above.\n\nCamera: wide aerial drone shot, landscape stretching vast and majestic across the frame.\n\nAtmosphere: dramatic and moody — heavy swirling clouds, rolling mist through valleys, crepuscular god rays bursting through gaps in the clouds, defining the hidden silhouette.\n\nVisual rule: at first glance it must look like a 100% authentic nature photo. The brand logo only emerges as an optical illusion (pareidolia) on second look. Edges must be slightly jagged and organic, shaped by real geological features like cliff faces and treelines — never perfect vector shapes.\n\nLighting: high contrast between dark shadowed valleys (dense forests) and bright snow or sunlit highlights. Sun partially hidden behind clouds or the floating landmass, backlighting the entire scene.\n\nMood: cinematic, majestic, subtly surreal.\n\nOutput: 1:1 square, photorealistic, National Geographic aerial photography aesthetic.",
+    "prompt": "创作一张潜意识广告风景摄影，一个可辨认的品牌标志（如苹果标志、耐克勾或蝙蝠标志）被秘密嵌入令人屏息的自然环境（如雪山、密林、沙丘或海岸线）。标志须完全由地形的物理地理构成，而非数字叠层。标志主体呈现为雕刻虚空（深谷、崖边或地形中的锐利色差对比），任何断开的元素（如苹果叶）则以悬浮的岩石与泥土岛屿漂浮于上方雾蒙蒙的天空中。相机：宽广航拍无人机镜头，景观广阔雄伟。氛围：戏剧性而情绪化——厚重翻涌的云层、山谷间翻滚的薄雾、云隙间迸射的晨昏光束，勾勒出隐藏的剪影。视觉规则：乍看之下须百分之百像真实自然照片，品牌标志仅在第二眼时作为视错觉浮现。边缘须略带锯齿与有机感，由真实的悬崖面与林线塑造——绝非完美矢量造型。光照：深影山谷（密林）与明亮积雪或阳光高光之间高对比，太阳部分隐藏于云层或悬浮地块之后，为整场逆光。氛围：电影感、雄伟、微妙超现实。输出：1:1 正方形、超写实、国家地理航拍摄影美学。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5919,7 +5919,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case404/output.jpg",
     "imageAlt": "沙丘上空的水母之城示例图",
-    "prompt": "The Jellyfish City Above the Dunes\n\nOn a desert world too hot to live on, entire cities float just above the dunes—built from colossal jellyfish that weave their own architecture in the sky.\n\nSoft solarpunk alien vibes, no horror.\n\nPrompt below for anyone exploring gentle alien worlds.\n\nPROMPT:\n\nA serene daylight scene on an alien desert planet, wide cinematic shot of a floating city made from enormous translucent jellyfish creatures drifting just above endless dunes; each jellyfish (Aeromedusae) is house‑sized, with a bulbous semi‑transparent dome filled with pale turquoise gas, long trailing tendrils weaving together into suspended walkways, platforms and hammock‑like membranes that form an aerial village; nacreous plates and chitin ribs have grown along their undersides to create skeletal arches and open “rooms,” shimmering with opalescent highlights; several Aeromedusae cluster together in a loose line, casting soft, organic shadows on the sand below; tiny silhouettes of ground caravans with insect‑like vehicles and fabric canopies move through the dunes, clearly dwarfed by the floating city overhead; distant rusted anchor towers and cables rise from the sand, hinting at a human or alien attempt to tether these living buildings; palette of warm sand beige, pale turquoise, dusty coral and soft white, with high noon sunlight, subtle heat haze and gentle lens bloom; the camera sits at a medium distance, slightly low angle, capturing both the jellyfish city and the ground caravans in one frame, 35mm lens, peaceful solarpunk‑like atmosphere, painterly yet detailed, no horror, one frame from a larger alien desert universe.\n\nNEGATIVE PROMPT:\nhuman-like alien, blue-skinned humanoid, generic sci-fi city, skyscrapers, cyberpunk neon, dark horror tone, gore, tentacle monster cliché, cheap sci-fi armor, guns, war scene, cartoon, anime chibi, bad anatomy, cluttered composition, oversaturated colors, heavy bloom, low detail, blurry image, noisy grain, HUD, UI, readable text, watermark, logo, plastic toy look, realistic Earth desert animals, Earth buildings, spaceships dogfighting",
+    "prompt": "沙丘上空的水母之城。在一颗热到无法居住的沙漠星球上，整座城市漂浮在沙丘之上方——由巨大的水母构成，它们在天空中编织出自己的建筑。柔和的太阳朋克异星氛围，无恐怖。提示词：异星沙漠行星上的宁静日景，宽广电影镜头，一座由巨大半透明水母生物构成的漂浮城市在无尽沙丘上方缓缓漂移。每只水母约房屋大小，球茎状半透明圆顶内充满淡绿松石色气体，长长垂落的触须编织成悬浮走道、平台与吊床般的膜结构，形成空中村落。珍珠母板片与甲壳肋骨沿其下方生长，构成骨架拱与开放式「房间」，闪烁着蛋白石光泽。数只水母松散地聚集成线，在沙地上投射柔和有机的阴影。地面商队的微小剪影——昆虫般载具与织物顶篷——穿行于沙丘中，明显被头顶的漂浮城市所矮化。远处生锈的锚塔与缆绳从沙中升起，暗示人类或异星尝试拴系这些活体建筑。配色为温暖沙米、淡绿松石、蒙尘珊瑚与柔白，正午阳光、微妙热雾与柔和镜头光晕。相机位于中等距离、略低角度，在一帧中同时捕捉水母城市与地面商队，35mm 镜头，宁静的太阳朋克氛围，绘画感而精细，无恐怖，异星沙漠宇宙的一帧。避免类人外星人、蓝皮肤人形、通用科幻城市、摩天楼、赛博朋克霓虹、黑暗恐怖、血腥、触手怪俗套、廉价科幻盔甲、枪械、战争场景、卡通、Q版、解剖错误、杂乱构图、过饱和色彩、厚重光晕、低细节、模糊、噪点、界面元素、可读文字、水印、标志、塑料玩具感、真实地球沙漠动物、地球建筑、太空船狗斗。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5940,7 +5940,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case184/output.jpg",
     "imageAlt": "彩铅照片转绘示例图",
-    "prompt": "Transform the uploaded photo into a charming hand-drawn colored-pencil and crayon illustration while preserving the person's exact pose, facial features, outfit, expression, and background composition. Create a warm, whimsical sketchbook aesthetic with visible pencil strokes, crayon textures, and soft pastel colors.\n\nPlace the illustrated version as the main full-frame artwork. Add playful doodles around the scene such as hearts, stars, flowers, clouds, sparkles, and cute hand-drawn elements that complement the environment. Use textured paper as the canvas background and maintain a cozy, nostalgic, storybook feel.\n\nIn the bottom-right corner, include a rounded-rectangle inset containing the original unedited photo as a realistic reference image. The inset should resemble a social media post preview with subtle UI elements like a heart icon and engagement count. Ensure the illustrated version perfectly matches the original photo in composition, creating a striking before-and-after transformation effect.\n\nHighly detailed, colored pencil illustration, crayon art style, hand-sketched textures, vibrant yet soft pastel palette, Instagram-style layout, whimsical doodles, premium artwork, realistic reference inset, masterpiece, ultra-detailed, 4K.",
+    "prompt": "将上传照片转化为一幅迷人的手绘彩色铅笔与蜡笔插画，同时保留人物的精确姿势、面部特征、服装、表情与背景构图。营造温暖、异想天开的速写本美学，带可见铅笔笔触、蜡笔纹理与柔和粉彩色彩。将插画版本作为全画幅主艺术品。在场景周围添加俏皮涂鸦，如心形、星星、花朵、云朵、闪光与可爱的手绘元素以呼应环境。使用纹理纸张作为画布背景，保持温馨、怀旧、绘本般的质感。右下角放置一个圆角矩形嵌入框，内含原始未编辑照片作为写实参考图，嵌入框应类似社交媒体帖子预览，带心形图标与互动数等微妙界面元素。确保插画版本在构图上与原图完美匹配，形成醒目的前后对比转化效果。高细节彩铅插画、蜡笔艺术风格、手绘纹理、鲜艳而柔和的粉彩调色板、社交媒体风格版式、异想天开涂鸦、高端艺术品、写实参考嵌入、杰作、超精细、4K。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5961,7 +5961,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case405/output.jpg",
     "imageAlt": "移轴城市地图旅行海报示例图",
-    "prompt": "Render a photorealistic tilt-shift miniature scene of [CITY NAME] with a [VEHICLE NAME] winding along an elevated road that rises organically from a vintage illustrated city map. The road sweeps toward the city's iconic skyline in the background, with the vehicle as the main subject up front. Seamlessly merge the real cityscape with the hand-drawn map so the road feels naturally embedded. Feature the city name in large bold lettering on the map foreground. Apply warm golden-hour light, shallow depth of field, cinematic shadows, aerial perspective, and hyper-realistic detail. Final look: a luxury travel poster crossed with a miniature diorama. Aspect ratio 1:1.\n\nFull prompt: \n\nCreate a highly detailed cinematic miniature tilt-shift travel scene of [CITY NAME] featuring a realistic [VEHICLE NAME] driving along a winding elevated road that emerges naturally from a printed vintage-style city map. The road should curve dramatically toward the background skyline and landmarks of [CITY NAME], while the vehicle remains the clear focal point in the foreground.\n\nBlend the real city seamlessly with the illustrated map surface so the road appears integrated into the map itself. Include recognizable local landmarks, waterways, architecture, vegetation, and atmosphere associated with [CITY NAME], but keep the composition clean and uncluttered.\n\nShow large bold typography of \"[CITY NAME]\" printed directly on the map in the foreground. Use warm golden-hour lighting, shallow depth of field, realistic textures, cinematic shadows, aerial perspective, and photorealistic detail. The overall aesthetic should feel like a premium Instagram travel poster mixed with a miniature diorama.\n\nAspect ratio 1:1.",
+    "prompt": "渲染一张超写实的移轴微缩场景，【城市名】中一辆【交通工具名】沿着一条高架道路蜿蜒前行，道路从一张复古插画城市地图上自然升起。道路扫向背景中的城市标志性天际线，交通工具作为前景主体。将真实城市景观与手绘地图无缝融合，使道路感觉自然嵌入地图。在地图前景以大号粗体字呈现城市名。运用温暖黄金时刻光照、浅景深、电影感阴影、 aerial 透视与超写实细节。最终观感：奢华旅行海报与微缩立体模型交融，比例 1:1。完整提示：创作一张高细节电影感微缩移轴旅行场景，【城市名】中一辆写实的【交通工具名】沿蜿蜒高架道路行驶，道路从印刷的复古风格城市地图上自然浮现。道路应戏剧性地弯向背景天际线与地标，交通工具保持前景清晰焦点。将真实城市与插画地图表面无缝融合，使道路看起来融入地图本身。包含与该城市相关的可辨认地标、水道、建筑、植被与氛围，但保持构图干净不杂乱。在地图前景直接印刷大号粗体城市名。使用温暖黄金时刻光照、浅景深、真实纹理、电影阴影、 aerial 透视与超写实细节，整体美学为高端社媒旅行海报与微缩立体模型交融，1:1。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -5982,7 +5982,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ad-creative_case193/output.jpg",
     "imageAlt": "SPLASH 液态 Logo 时尚海报示例图",
-    "prompt": "Hyper-realistic fashion campaign poster for brand \"SPLASH\". A girl (matching the reference photo exactly, same face) seated confidently atop a gleaming, water-like 3D SPLASH logo surrounded by dynamic water splash effects. Editorial pose: one leg loose, one bent.\n\nEnormous bold \"SPLASH\" typography fills the background, partially behind her. Small tagline reads: \"Own Your Style.\"\n\nClothing: contemporary black streetwear (blazer, fitted top, trousers, sneakers).\n\nLighting: cinematic studio setup with soft key light and rim light, glossy reflections on the liquid logo.\n\nStyle: luxury fashion campaign aesthetic (Zara / H&M), polished clean environment.\n\nShot with an 85mm lens, shallow depth of field, 8K resolution, ultra-detailed, photorealistic.",
+    "prompt": "为品牌制作的超写实时装活动海报。一位女孩（严格匹配参考照片、同一张脸）自信地坐在一个光泽如水的三维品牌标志之上，标志周围环绕动态水花效果。编辑姿势：一腿放松、一腿弯曲。背景充满巨型粗体品牌名，部分位于她身后。小标语意为「定义你的风格」。服装：当代黑色街头风（西装外套、修身上衣、长裤、运动鞋）。光照：电影影棚布光配柔主光与轮廓光，液态标志上的光泽反射。风格：奢华时装广告美学，精致干净环境。85mm 镜头拍摄，浅景深，8K 分辨率，超精细，超写实。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
