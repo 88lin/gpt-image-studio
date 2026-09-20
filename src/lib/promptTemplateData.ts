@@ -18,7 +18,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case2/output.jpg",
     "imageAlt": "电影感极简人像示例图",
-    "prompt": "Generate a cinematic minimal portrait of a solitary man standing in an intense orange to red gradient environment, strong silhouette lighting, deep shadow contrast, reflective glossy floor, symmetrical composition, minimal",
+    "prompt": "生成一张电影感极简人像：一位孤身男子站在浓烈的橙红渐变环境中，强烈的剪影式布光，深邃的阴影对比，地面为反光的光泽地板，构图对称，极简主义。整体氛围沉静而富有戏剧性，光影干净利落，主体轮廓清晰，留白充足。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -39,7 +39,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case5/output.jpg",
     "imageAlt": "卧室镜自拍人像示例图",
-    "prompt": "A stunning 18-year-old Chinese girl with a youthful, pure face and realistic skin texture, sitting on a cozy, slightly messy bed in her bedroom. She is taking a mirror selfie with a smartphone, capturing a natural and intimate moment. Wearing casual gray loungewear and neat white crew socks. Soft natural light (golden hour) streams in from a side window, creating a warm, moody, and cinematic atmosphere. 35mm lens, sharp focus on the subject in the mirror, depth of field with a beautifully blurred background (bokeh). Photorealistic, 8K, high resolution, studio quality, masterpiece.\nNegative Prompts: no extra limbs, no deformed hands, no blur, no noise, no watermark, no text, no cartoon/anime style. Aspect Ratio: 3:4.",
+    "prompt": "一张年轻女性在卧室里的镜中自拍人像：她坐在温馨、略显凌乱的床上，用手机对着镜子自拍，捕捉自然放松的居家一刻。穿着灰色休闲家居服和干净的白色中筒袜，清新自然的面容与写实肤质。柔和的自然光（黄金时刻）从侧窗洒入，营造温暖、慵懒而富有电影感的氛围。35mm 镜头，对焦在镜中主体上，背景柔美虚化（焦外光斑）。写实风格，8K 高分辨率，影棚级画质。画面干净，无多余肢体、无畸形手部、无水印、无文字。画幅比例 3:4。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -60,7 +60,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case7/output.jpg",
     "imageAlt": "奢华魅力美妆人像示例图",
-    "prompt": "Luxury Glam Beauty Portrait:, Beautiful Black woman, youthful spirit, creamy vanilla, silk press, mahogany red, subtle confidence, textured fabric, sapphire blue, minimal jewelry, beachside breeze, lens flare effect, nostalgic, cinematic lens, symmetrical composition, soft focus, high fashion photography, monochromatic, dewy finish, mysterious tension, layered elements\n\n*Found on Midjourney's Explore page.",
+    "prompt": "奢华魅力美妆人像：一位美丽的黑人女性，洋溢青春气息，奶油香草般的肤质光泽，丝滑顺直的发型，桃花心木红色调，含蓄而自信的神态，富有质感的织物，宝蓝色点缀，极简珠宝，海边微风拂面，镜头光晕效果，怀旧氛围，电影感镜头，对称构图，柔焦，高级时尚摄影，单色调，水润光泽的妆面，神秘的张力，层次丰富的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -81,7 +81,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case1/output.jpg",
     "imageAlt": "2026 波士顿春季城市海报示例图",
-    "prompt": "A striking Spring 2026 city poster for Boston with an elegant celebratory mood and a bold contemporary design. On a clean off-white textured background with large areas of negative space, a miniature single sculler rows across the lower right corner of the image on a narrow ribbon of reflective water. The wake from the oar sweeps upward in a dynamic calligraphic curve, gradually transforming into the Charles River and then into a dreamlike hand-painted panorama of Boston. Inside this flowing river-shaped composition are iconic Boston elements: the Back Bay skyline, Beacon Hill brownstones, Acorn Street, Boston Public Garden, Swan Boats, Zakim Bridge, Fenway-inspired details, historic brick architecture, harbor ferries, and the city's waterfront atmosphere. Soft morning fog, golden spring light, subtle festive accents in crimson and gold, rich detail, layered depth, sophisticated city-poster aesthetics, fresh and refined, visually powerful but not overcrowded. Elegant typography in the lower left reads \"SPRING 2026\" with a vertical slogan \"BOSTON, A CITY OF RIVER, MEMORY, AND INVENTION\", text clear and beautifully composed, premium graphic design, 9:16",
+    "prompt": "一张极具冲击力的 2026 春季波士顿城市海报，格调优雅、气氛欢庆，采用大胆的当代设计。在干净的米白色纹理背景上，大面积留白，画面右下角一名微缩的单人赛艇选手划过一条狭窄的反光水带。船桨划出的尾迹向上扫成一道富有动感的书法曲线，逐渐化为查尔斯河，再化为一幅梦幻般手绘的波士顿全景。这条流动的河形构图中融入波士顿标志元素：后湾天际线、灯塔山的褐石排屋、橡子街、波士顿公共花园、天鹅船、扎金大桥、芬威风格的细节、历史悠久的红砖建筑、港口渡轮，以及城市滨水氛围。柔和的晨雾、金色的春日光线、深红与金色的节庆点缀，细节丰富，层次纵深，格调考究的城市海报美学，清新精致，视觉有力却不拥挤。左下方以优雅字体写着「SPRING 2026」，配一句竖排标语「BOSTON, A CITY OF RIVER, MEMORY, AND INVENTION」，文字清晰、排版精美，高级平面设计，比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -165,7 +165,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case8/output.jpg",
     "imageAlt": "未来感曼荼罗插画示例图",
-    "prompt": "でChatGPTで画像を作成してもらって、今日また作成してもらったらGPT image 2かもしれず、出来が変わったように見えるのでメモ\n\n左の水色と黄色のが先週\n右の紫のが今日\n\n右のは透明感とか解像度、緻密さが違うような気がする…\n\nプロンプト\n曼荼羅の近未来SF版を描いて",
+    "prompt": "绘制一幅曼陀罗的近未来科幻版本：在传统曼陀罗对称严谨的几何结构基础上，融入未来科技元素——精密的机械纹路、发光的能量线条、半透明的全息层次与金属质感的环形结构。整体保持曼陀罗特有的向心放射式对称，色彩通透、分辨率极高、层次细密，兼具东方冥想美学与赛博科幻的冷冽光感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -186,7 +186,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case2/output.jpg",
     "imageAlt": "业余感 iPhone 发布会快照示例图",
-    "prompt": "Amateur iPhone photo at Apple Park during the iPhone 20 keynote, Tim Cook presenting on stage. Shot from the crowd at a distance",
+    "prompt": "一张业余感的 iPhone 随手拍照片：在 Apple Park 举办的 iPhone 20 发布会现场，蒂姆·库克正在舞台上演讲。从观众席远距离拍摄，画面带有普通手机随手抓拍的真实质感——轻微的距离感、现场灯光氛围与人群前景，看起来像观众用手机随手记录的一瞬，而非官方精修图。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -207,7 +207,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case3/output.jpg",
     "imageAlt": "手写笔记本照片示例图",
-    "prompt": "Amateur photo of an open notebook lying flat, filled with handwritten notes in black ballpoint pen. The handwriting is casual and slightly messy, like personnal notes, natural imperfections, crossed out words, underlined headings. Shot from slightly above, natural daylight from a window, no flash. Casual desk setting, shot on iPhone",
+    "prompt": "一张摊平笔记本的业余随手拍照片：本子上写满黑色圆珠笔的手写笔记，字迹随意、略显潦草，像私人笔记一样带有自然的瑕疵——划掉的字词、加下划线的标题。从略微俯视的角度拍摄，来自窗户的自然日光，无闪光灯。随意的书桌场景，用 iPhone 拍摄。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -270,7 +270,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case8/output.jpg",
     "imageAlt": "太祖李成桂的 X 页面示例图",
-    "prompt": "以「太祖李成桂的 X 页面」为目标生成图像。\n\n核心提示词：👍프롬프트 :\n태조 이성계의 X  페이지(위화도 회군을 벌이기 직전- 최영 장군과 서로 디스하는 내용이 담긴 게시글들)을 만들어 주세요.\ngpt-image-2\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "请制作朝鲜太祖李成桂的 X（社交媒体）页面：内容是他在发动威化岛回军前夕、与崔莹将军互相隔空喊话、彼此攻讦的一系列帖子。界面要有完整的头像、用户名、发帖时间、点赞与转发数据等真实社交产品细节，帖子正文以贴合当时历史语境的口吻呈现，画面像真实的产品截图而非概念稿，关键文字清晰可读。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -362,7 +362,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046115431144902732",
-    "title": "Analog 35mm film photography, soft...",
+    "title": "日系胶片风人像",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -375,7 +375,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case6/output.jpg",
     "imageAlt": "Analog 35mm film photography, soft...示例图",
-    "prompt": "Analog 35mm film photography, soft airy Japanese-style aesthetic, gentle diffused natural window light, slight overexposure, pastel tones, low contrast, soft highlights,  minimal indoor setting near a window with white curtains, clean light-colored wall, natural composition, eye-level, slightly closer full-body framing (mid-thigh to head),  young East Asian woman, natural minimal makeup, soft realistic skin texture, long slightly messy dark hair,  oversized white button-up shirt, light casual shorts, barefoot, simple and relaxed styling,  standing naturally with relaxed posture, arms loosely at sides or slightly behind, facing camera, gentle soft smile, subtle stillness,  focus on light, air, and quiet everyday mood, soft film grain, dreamy and understated atmosphere --ar 9:16",
+    "prompt": "模拟 35mm 胶片摄影，柔和通透的日系美学，来自窗边的柔和漫射自然光，轻微过曝，粉彩色调，低对比度，柔和的高光。靠窗的极简室内场景，白色窗帘，干净的浅色墙面，自然构图，平视机位，略微贴近的全身取景（大腿中部到头部）。一位年轻东亚女性，自然淡妆，柔和写实的肤质，微乱的深色长发，穿着宽松白色衬衫、浅色休闲短裤，赤脚，简约放松的造型。自然站立，姿态松弛，双臂随意垂于身侧或微微背在身后，面向镜头，温柔浅笑，带着一丝静止感。整体聚焦于光线、空气与安静的日常氛围，柔和的胶片颗粒，梦幻而含蓄，画幅比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -383,7 +383,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046434670724907395",
-    "title": "9:16 vertical — editorial portrait...",
+    "title": "黑雾滤镜编辑风人像",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -396,7 +396,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case14/output.jpg",
     "imageAlt": "9:16 vertical — editorial portrait...示例图",
-    "prompt": "9:16 vertical — editorial portrait, single subject  soft black mist filter, subtle haze, gentle highlight bloom, muted tones  minimal indoor space, clean background, slight texture  young Korean woman, minimal makeup, natural skin texture  outfit: fitted ribbed knit top or soft camisole layered under a loose shirt, paired with high-waisted shorts or skirt; fabric slightly clings to body shape, soft and natural, no revealing elements  hair: slightly messy, natural volume  pose: sitting on floor with one leg bent and the other relaxed, body slightly leaning, shoulders not aligned, head tilted  composition: subject slightly off-center, negative space present  expression: calm, slightly distant, natural lips  lighting: soft side light, gentle shadow falloff  mood: understated, quiet, subtly sensual through natural body lines, relaxed and unposed  quality: fine grain, slight softness, realistic look",
+    "prompt": "竖版 9:16 编辑风人像，单一主体。柔和的黑雾滤镜，淡淡的薄雾，轻微的高光晕染，低饱和色调。极简室内空间，干净背景，略带纹理。一位年轻女性，淡妆，自然肤质。穿搭：修身罗纹针织上衣或柔软吊带，外搭一件宽松衬衫，配高腰短裤或短裙；面料柔和自然、贴合身形，无暴露元素。发型：微乱、自然蓬松。姿态：坐在地板上，一腿弯曲一腿放松，身体略微前倾，双肩不对齐，头部微侧。构图：主体略微偏离中心，保留负空间。神情：平静、略显疏离，唇形自然。布光：柔和的侧光，阴影过渡轻柔。氛围：含蓄、安静，通过自然的身体线条透出含蓄气质，放松而不摆拍。画质：细腻颗粒，略带柔和，写实观感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -404,7 +404,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046498264774791514",
-    "title": "この商品広告をプロのデザイナー目線でリデザインして。",
+    "title": "商品广告专业重设计",
     "category": "商品与电商",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -417,7 +417,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case41/output.jpg",
     "imageAlt": "この商品広告をプロのデザイナー目線でリデザインして。示例图",
-    "prompt": "以「この商品広告をプロのデザイナー目線でリデザインして。」为目标生成图像。\n\n核心提示词：この商品広告をプロのデザイナー目線でリデザインして。\n今のトレンド、ターゲットに合わせた洗練されたデザインで。\n\n输出比例：4:5 / 1:1。\n\n扩展要求：请突出产品主体、材质、卖点标注、使用场景、价格或活动信息，避免遮挡品牌和包装。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "请以专业设计师的视角，为这则商品广告重新设计：契合当下潮流与目标受众，做出精致洗练的版面。突出产品主体与卖点，信息层级清晰，配色与排版考究，标题和关键文案清晰醒目，整体像可直接投放的成品广告，而非草稿。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -446,7 +446,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046144801071079612",
-    "title": "A mecha girl mid-teens, pale skin ...",
+    "title": "机甲女战士海废废土视觉",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -459,7 +459,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case7/output.jpg",
     "imageAlt": "A mecha girl mid-teens, pale skin ...示例图",
-    "prompt": "A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar , standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind , a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes , moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor , 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes , cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic . Format 16:9.",
+    "prompt": "一位年轻的机甲女战士，苍白皮肤沾满煤灰与海盐飞沫，锐利的琥珀色双眼上叠加着发光的 HUD 瞄准线，及腰的灰白色长发扎成高马尾在海风中飞扬，哑光枪铁色的外骨骼装甲覆盖她的肩部、前臂与小腿，关节处露出液压活塞，胸前挂载着发出青色光的冷却管线，一件沾满油污的宽大机库夹克从一侧肩头滑落，一门巨大的轨道炮搁在她右肩，衣领处挂着军牌和磨损的红丝带。她站在一处倾斜锈蚀钢制平台的边缘、略微偏左，平台探出于黑暗水面之上，重心压在一条腿上，左手抓着炮带，头略微转向镜头，目光安静而不屈，背部推进器喷出蒸汽，马尾和夹克在海风中向侧面飘扬。背景是黄昏中一座荒废的巨大海上城市，用途不明的庞大建筑群以错落的剪影从海面升起，骨白色的巨石高塔与附着藤壶的钢铁交融，环形巨构以断裂的角度倾斜，锈蚀的骨架吊架缠绕着废弃缆线，暗涌在支柱间翻滚，沉船半掩于塔基之下，浓重的海雾缠绕底部而上层结构刺入淤青色的天空，塔顶零星微光闪烁如远方的眼睛。低沉压抑的布光，来自阴天的冷青色环境光，右侧远处建筑透出温暖的琥珀色钠灯余晖，高塔背后低垂的太阳投来强烈逆光勾勒她的剪影，体积光穿透海雾，装甲上带着湿润的高光。35mm 变形宽银幕镜头，略微仰角越过她的肩头望向建筑群，中远景，浅景深，前景锈迹处于柔焦，水平方向的镜头光晕，细腻的空气雾气把远处巨构压缩成层叠的剪影。电影感主视觉，笔触细腻的数字插画，清晰的线稿，由青色、骨白与锈色构成的低饱和海洋色调，点缀少量温暖的强调光，胶片颗粒，高对比的编辑海报美学，画幅比例 16:9。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -467,7 +467,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046371076402503709",
-    "title": "「神層37区 特級執行官 神巫サバト」この名称のキャラクターと世界観...",
+    "title": "奇幻执行官竖版角色海报",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -480,7 +480,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case38/output.jpg",
     "imageAlt": "「神層37区 特級執行官 神巫サバト」この名称のキャラクターと世界観...示例图",
-    "prompt": "以「「神層37区 特級執行官 神巫サバト」この名称のキャラクターと世界観...」为目标生成图像。\n\n核心提示词：「神層37区　特級執行官　神巫サバト」この名称のキャラクターと世界観に合ったビジュアルイメージを、プロのデザイナーとして縦長のポスターイメージとして制作して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "请以专业设计师的身份，为名为「神层37区 特级执行官 神巫萨巴特」的角色及其世界观，创作一张贴合设定的竖版视觉海报。画面需塑造出鲜明的角色形象与独特的世界观氛围，构图为纵向长海报，主体突出、气场强烈，光影富有戏剧性，风格神秘而富有科幻奇幻质感，标题文字排版清晰美观。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -509,7 +509,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046502288102170757",
-    "title": "9:16 vertical — Japanese Fuji film...",
+    "title": "富士胶片风情侣写真",
     "category": "商品与电商",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -522,7 +522,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case17/output.jpg",
     "imageAlt": "9:16 vertical — Japanese Fuji film...示例图",
-    "prompt": "9:16 vertical — Japanese Fuji film style couple portrait, two subjects  Fujifilm analog aesthetic (Pro 400H / Superia feel), soft pastel tones, slight green-magenta shift, low contrast, gentle highlight roll-off, fine film grain, subtle halation  bright natural daylight, diffused sunlight through window, soft shadows, airy atmosphere  young Japanese couple, natural minimal makeup, realistic skin texture, slight imperfections  female outfit: oversized button-up shirt with loose shorts, relaxed fit, soft casual styling   male outfit: simple t-shirt or light shirt, clean and understated  hair: natural, slightly tousled for both  pose: close intimate distance — sitting or standing close together; the girl gently leaning toward him, one hand lightly resting on his shoulder or chest; the boy slightly leaning in, faces close, almost touching, capturing the moment just before a kiss  expression: soft smiles or gentle gaze toward each other, relaxed and natural, emotional connection visible  camera: close framing (waist-up), eye-level, intimate distance, slight handheld feel  setting: minimal indoor near window, light curtains, clean soft background  lighting: diffused daylight, gentle highlight bloom, soft shadow transitions  mood: warm, romantic, intimate everyday moment, natural affection  quality: ultra-realistic, analog film look, fine grain, slight softness, natural imperfections",
+    "prompt": "竖版 9:16，日系富士胶片风格的情侣人像，两位主体。富士胶片模拟质感（Pro 400H / Superia 的观感），柔和的粉彩色调，轻微的绿-品红偏移，低对比度，柔和的高光过渡，细腻的胶片颗粒，淡淡的光晕。明亮的自然日光，透过窗户漫射的阳光，柔和的阴影，通透的氛围。一对年轻的日本情侣，自然淡妆，写实肤质，带有细微瑕疵。女方穿搭：宽大衬衫配宽松短裤，版型松弛，柔和的休闲造型；男方穿搭：简单 T 恤或浅色衬衫，干净而低调。发型：两人都自然、略微凌乱。姿态：亲密贴近——依偎着坐或站；女孩轻轻靠向他，一只手轻搭在他的肩或胸前；男孩略微前倾，两人面庞贴近、几乎相触，捕捉即将亲吻前的那一刻。神情：彼此温柔浅笑或对视，放松自然，情感联系清晰可见。机位：近距离取景（半身），平视，亲密的距离，略带手持感。场景：靠窗的极简室内，浅色窗帘，干净柔和的背景。布光：漫射日光，轻柔的高光晕染，柔和的阴影过渡。氛围：温暖、浪漫、亲密的日常瞬间，自然流露的情意。画质：超写实，胶片观感，细腻颗粒，略带柔和，自然的瑕疵。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -530,7 +530,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046494262158930154",
-    "title": "バックプロパゲーションについて詳しく図解して",
+    "title": "反向传播详细图解",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -543,7 +543,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case43/output.jpg",
     "imageAlt": "バックプロパゲーションについて詳しく図解して示例图",
-    "prompt": "以「バックプロパゲーションについて詳しく図解して」为目标生成图像。\n\n核心提示词：バックプロパゲーションについて詳しく図解して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "请对神经网络中的反向传播（Backpropagation）进行详细图解：用清晰的示意图逐步拆解前向传播、损失计算、梯度回传与权重更新的过程，配以箭头、公式与分层结构标注，直观展示误差如何沿网络反向传播并驱动参数调整。整体为信息图风格，标题层级分明，关键术语与公式清晰可读，适合教学讲解。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -551,7 +551,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046500429786402973",
-    "title": "デメニギスの体の構造を解説するカラー図鑑のページ",
+    "title": "桶眼鱼身体结构图鉴页",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -564,7 +564,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case44/output.jpg",
     "imageAlt": "デメニギスの体の構造を解説するカラー図鑑のページ示例图",
-    "prompt": "以「デメニギスの体の構造を解説するカラー図鑑のページ」为目标生成图像。\n\n核心提示词：デメニギスの体の構造を解説するカラー図鑑のページ\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "创作一页解说桶眼鱼（管眼鱼，Barreleye）身体结构的彩色图鉴页面：以自然博物图鉴的风格，精细描绘这种深海鱼透明头部、可旋转的桶状眼睛及内部器官等独特构造。画面配有详尽的指示线标注，直接指向各个身体部位，说明其功能；整体版式工整、信息密度高，标题与注释文字清晰可读，兼具科学严谨性与观赏性，画幅比例 3:4。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -635,7 +635,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046501692246470871",
-    "title": "少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ...",
+    "title": "夏日清凉冷面美食图",
     "category": "摄影与文档",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -648,7 +648,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case46/output.jpg",
     "imageAlt": "少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ...示例图",
-    "prompt": "以「少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ...」为目标生成图像。\n\n核心提示词：少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ、みたいなところをもっと強く感じたい。冷たいうどんやナス、つゆを口に含んだ時の爽快感、みたいなものをもっと感じるように\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
+    "prompt": "在这个天气逐渐转热的时节，营造出清爽、沁凉、水润的强烈感受：想让人更强烈地体会到冷乌冬、茄子、蘸汁入口时那种透心凉的爽快感。画面聚焦清凉的日式冷食，冰凉的冷乌冬面、晶莹的茄子与清透的蘸汁，水珠凝结、雾气微冒，色调清新，质感水灵，充分传递出盛夏里一口下肚的畅快与清爽。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -740,7 +740,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   },
   {
     "id": "gallery-github-raw-2046523198116889064",
-    "title": "A refined 2026 Silicon Valley city...",
+    "title": "2026 硅谷城市宣传海报",
     "category": "UI 与界面",
     "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
     "tags": [
@@ -753,7 +753,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case48/output.jpg",
     "imageAlt": "A refined 2026 Silicon Valley city...示例图",
-    "prompt": "A refined 2026 Silicon Valley city promotional poster with a futuristic yet elegant atmosphere.\n\nDouble exposure composition, preserving an S-shaped sense of flowing movement. On a pure white textured background, in the lower-right corner, a miniature figure dressed in sleek modern techwear is releasing a long ribbon of luminous silver-blue light. The ribbon flows gracefully through the air, showing a soft silk-like texture, and as it drifts toward the upper-left, it magically transforms into a grand landscape of rolling hills, coastline, data streams, and illuminated urban terrain.\n\nWithin this flowing “river of light,” overlay a hand-drawn panoramic map of Silicon Valley, blending technology, nature, innovation, and California sunlight. The scene feels visionary, expansive, sophisticated, and inspiring.\n\nInclude iconic Silicon Valley and Bay Area elements: Stanford University arches, Apple Park, Google campus-inspired buildings, Meta-like glass offices, Tesla-style innovation imagery, venture capital offices on Sand Hill Road, Palo Alto tree-lined streets, San Jose skyline, the Santa Cruz Mountains, San Francisco Bay, highways, autonomous vehicles, startup labs, semiconductor patterns, AI data centers, and subtle circuit-board textures.\n\nSurrounded by soft mist, golden California light, floating clouds, and delicate digital particles. Rich colors, complex structure, highly detailed, grand and breathtaking, yet still fresh and minimal because of the large areas of white space.\n\nIn the lower-left corner, elegant typography reads “SILICON VALLEY 2026” with a vertical promotional slogan: “Where Ideas Shape Tomorrow.” Beautiful editorial layout, graceful spacing, clear and complete lettering, premium city branding poster, cinematic lighting, sophisticated details, 9:16 aspect ratio.",
+    "prompt": "一张格调考究的 2026 硅谷城市宣传海报，氛围兼具未来感与优雅。双重曝光构图，保留一种 S 形的流动韵律。在纯白纹理背景上，画面右下角一个身着利落现代机能服的微缩人物，正释放出一条长长的银蓝色发光丝带。丝带在空中优雅流动，呈现柔软的丝绸质感，向左上方飘去时，奇迹般地化为一片壮阔的地景——起伏的丘陵、海岸线、数据流与灯火通明的城市地貌。在这条流动的「光之河」中，叠加一幅手绘的硅谷全景地图，融合科技、自然、创新与加州阳光。场景充满远见、开阔、精致而鼓舞人心。融入硅谷与湾区的标志元素：斯坦福大学拱门、Apple Park、谷歌风格园区建筑、Meta 式玻璃办公楼、特斯拉式创新意象、沙丘路上的风投办公室、帕洛阿尔托林荫街道、圣何塞天际线、圣克鲁兹山脉、旧金山湾、高速公路、自动驾驶汽车、初创实验室、半导体纹样、AI 数据中心，以及若隐若现的电路板纹理。四周环绕柔和薄雾、金色加州阳光、漂浮云朵与细腻的数字粒子。色彩丰富，结构繁复，细节极致，宏大而震撼，却因大面积留白而依旧清新极简。左下角以优雅字体写着「SILICON VALLEY 2026」，配一句竖排标语「Where Ideas Shape Tomorrow」。版式精美、间距优雅、字迹清晰完整，高级城市品牌海报，电影级布光，细节考究，画幅比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
