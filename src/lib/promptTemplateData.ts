@@ -374,7 +374,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/BubbleBrain/status/2046115431144902732",
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case6/output.jpg",
-    "imageAlt": "Analog 35mm film photography, soft...示例图",
+    "imageAlt": "日系胶片风人像示例图",
     "prompt": "模拟 35mm 胶片摄影，柔和通透的日系美学，来自窗边的柔和漫射自然光，轻微过曝，粉彩色调，低对比度，柔和的高光。靠窗的极简室内场景，白色窗帘，干净的浅色墙面，自然构图，平视机位，略微贴近的全身取景（大腿中部到头部）。一位年轻东亚女性，自然淡妆，柔和写实的肤质，微乱的深色长发，穿着宽松白色衬衫、浅色休闲短裤，赤脚，简约放松的造型。自然站立，姿态松弛，双臂随意垂于身侧或微微背在身后，面向镜头，温柔浅笑，带着一丝静止感。整体聚焦于光线、空气与安静的日常氛围，柔和的胶片颗粒，梦幻而含蓄，画幅比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -395,7 +395,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/BubbleBrain/status/2046434670724907395",
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case14/output.jpg",
-    "imageAlt": "9:16 vertical — editorial portrait...示例图",
+    "imageAlt": "黑雾滤镜编辑风人像示例图",
     "prompt": "竖版 9:16 编辑风人像，单一主体。柔和的黑雾滤镜，淡淡的薄雾，轻微的高光晕染，低饱和色调。极简室内空间，干净背景，略带纹理。一位年轻女性，淡妆，自然肤质。穿搭：修身罗纹针织上衣或柔软吊带，外搭一件宽松衬衫，配高腰短裤或短裙；面料柔和自然、贴合身形，无暴露元素。发型：微乱、自然蓬松。姿态：坐在地板上，一腿弯曲一腿放松，身体略微前倾，双肩不对齐，头部微侧。构图：主体略微偏离中心，保留负空间。神情：平静、略显疏离，唇形自然。布光：柔和的侧光，阴影过渡轻柔。氛围：含蓄、安静，通过自然的身体线条透出含蓄气质，放松而不摆拍。画质：细腻颗粒，略带柔和，写实观感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -416,7 +416,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/genel_ai/status/2046498264774791514",
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case41/output.jpg",
-    "imageAlt": "この商品広告をプロのデザイナー目線でリデザインして。示例图",
+    "imageAlt": "商品广告专业重设计示例图",
     "prompt": "请以专业设计师的视角，为这则商品广告重新设计：契合当下潮流与目标受众，做出精致洗练的版面。突出产品主体与卖点，信息层级清晰，配色与排版考究，标题和关键文案清晰醒目，整体像可直接投放的成品广告，而非草稿。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -458,7 +458,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/old_pgmrs_will/status/2046144801071079612",
     "recommendedSize": "16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case7/output.jpg",
-    "imageAlt": "A mecha girl mid-teens, pale skin ...示例图",
+    "imageAlt": "机甲女战士海废废土视觉示例图",
     "prompt": "一位年轻的机甲女战士，苍白皮肤沾满煤灰与海盐飞沫，锐利的琥珀色双眼上叠加着发光的 HUD 瞄准线，及腰的灰白色长发扎成高马尾在海风中飞扬，哑光枪铁色的外骨骼装甲覆盖她的肩部、前臂与小腿，关节处露出液压活塞，胸前挂载着发出青色光的冷却管线，一件沾满油污的宽大机库夹克从一侧肩头滑落，一门巨大的轨道炮搁在她右肩，衣领处挂着军牌和磨损的红丝带。她站在一处倾斜锈蚀钢制平台的边缘、略微偏左，平台探出于黑暗水面之上，重心压在一条腿上，左手抓着炮带，头略微转向镜头，目光安静而不屈，背部推进器喷出蒸汽，马尾和夹克在海风中向侧面飘扬。背景是黄昏中一座荒废的巨大海上城市，用途不明的庞大建筑群以错落的剪影从海面升起，骨白色的巨石高塔与附着藤壶的钢铁交融，环形巨构以断裂的角度倾斜，锈蚀的骨架吊架缠绕着废弃缆线，暗涌在支柱间翻滚，沉船半掩于塔基之下，浓重的海雾缠绕底部而上层结构刺入淤青色的天空，塔顶零星微光闪烁如远方的眼睛。低沉压抑的布光，来自阴天的冷青色环境光，右侧远处建筑透出温暖的琥珀色钠灯余晖，高塔背后低垂的太阳投来强烈逆光勾勒她的剪影，体积光穿透海雾，装甲上带着湿润的高光。35mm 变形宽银幕镜头，略微仰角越过她的肩头望向建筑群，中远景，浅景深，前景锈迹处于柔焦，水平方向的镜头光晕，细腻的空气雾气把远处巨构压缩成层叠的剪影。电影感主视觉，笔触细腻的数字插画，清晰的线稿，由青色、骨白与锈色构成的低饱和海洋色调，点缀少量温暖的强调光，胶片颗粒，高对比的编辑海报美学，画幅比例 16:9。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -479,7 +479,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/tebasaki3D/status/2046371076402503709",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case38/output.jpg",
-    "imageAlt": "「神層37区 特級執行官 神巫サバト」この名称のキャラクターと世界観...示例图",
+    "imageAlt": "奇幻执行官竖版角色海报示例图",
     "prompt": "请以专业设计师的身份，为名为「神层37区 特级执行官 神巫萨巴特」的角色及其世界观，创作一张贴合设定的竖版视觉海报。画面需塑造出鲜明的角色形象与独特的世界观氛围，构图为纵向长海报，主体突出、气场强烈，光影富有戏剧性，风格神秘而富有科幻奇幻质感，标题文字排版清晰美观。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -521,7 +521,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/BubbleBrain/status/2046502288102170757",
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case17/output.jpg",
-    "imageAlt": "9:16 vertical — Japanese Fuji film...示例图",
+    "imageAlt": "富士胶片风情侣写真示例图",
     "prompt": "竖版 9:16，日系富士胶片风格的情侣人像，两位主体。富士胶片模拟质感（Pro 400H / Superia 的观感），柔和的粉彩色调，轻微的绿-品红偏移，低对比度，柔和的高光过渡，细腻的胶片颗粒，淡淡的光晕。明亮的自然日光，透过窗户漫射的阳光，柔和的阴影，通透的氛围。一对年轻的日本情侣，自然淡妆，写实肤质，带有细微瑕疵。女方穿搭：宽大衬衫配宽松短裤，版型松弛，柔和的休闲造型；男方穿搭：简单 T 恤或浅色衬衫，干净而低调。发型：两人都自然、略微凌乱。姿态：亲密贴近——依偎着坐或站；女孩轻轻靠向他，一只手轻搭在他的肩或胸前；男孩略微前倾，两人面庞贴近、几乎相触，捕捉即将亲吻前的那一刻。神情：彼此温柔浅笑或对视，放松自然，情感联系清晰可见。机位：近距离取景（半身），平视，亲密的距离，略带手持感。场景：靠窗的极简室内，浅色窗帘，干净柔和的背景。布光：漫射日光，轻柔的高光晕染，柔和的阴影过渡。氛围：温暖、浪漫、亲密的日常瞬间，自然流露的情意。画质：超写实，胶片观感，细腻颗粒，略带柔和，自然的瑕疵。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -542,7 +542,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/itnavi2022/status/2046494262158930154",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case43/output.jpg",
-    "imageAlt": "バックプロパゲーションについて詳しく図解して示例图",
+    "imageAlt": "反向传播详细图解示例图",
     "prompt": "请对神经网络中的反向传播（Backpropagation）进行详细图解：用清晰的示意图逐步拆解前向传播、损失计算、梯度回传与权重更新的过程，配以箭头、公式与分层结构标注，直观展示误差如何沿网络反向传播并驱动参数调整。整体为信息图风格，标题层级分明，关键术语与公式清晰可读，适合教学讲解。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -563,7 +563,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/itnavi2022/status/2046500429786402973",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case44/output.jpg",
-    "imageAlt": "デメニギスの体の構造を解説するカラー図鑑のページ示例图",
+    "imageAlt": "桶眼鱼身体结构图鉴页示例图",
     "prompt": "创作一页解说桶眼鱼（管眼鱼，Barreleye）身体结构的彩色图鉴页面：以自然博物图鉴的风格，精细描绘这种深海鱼透明头部、可旋转的桶状眼睛及内部器官等独特构造。画面配有详尽的指示线标注，直接指向各个身体部位，说明其功能；整体版式工整、信息密度高，标题与注释文字清晰可读，兼具科学严谨性与观赏性，画幅比例 3:4。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -605,7 +605,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/FixlationAI/status/2046272578705068476",
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case34/output.jpg",
-    "imageAlt": "an ingame screenshot of rust示例图",
+    "imageAlt": "射击竞技实机截图示例图",
     "prompt": "生成一张射击竞技内截图风格的画面。\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -626,7 +626,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/underwoodxie96/status/2046514205529088501",
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case45/output.jpg",
-    "imageAlt": "Create a Science fiction movie pos...示例图",
+    "imageAlt": "科幻电影海报示例图",
     "prompt": "创作一张科幻电影海报。\n\n输出比例：4:5 / 9:16。\n\n扩展要求：请强化标题、副标题、视觉主体、留白、字体层级和版面节奏，做成完成度高的海报或封面。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -647,7 +647,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/genel_ai/status/2046501692246470871",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case46/output.jpg",
-    "imageAlt": "少し暑くなってきた今の時期に、さわやかにさっぱりしたい、みずみずしさ...示例图",
+    "imageAlt": "夏日清凉冷面美食图示例图",
     "prompt": "在这个天气逐渐转热的时节，营造出清爽、沁凉、水润的强烈感受：想让人更强烈地体会到冷乌冬、茄子、蘸汁入口时那种透心凉的爽快感。画面聚焦清凉的日式冷食，冰凉的冷乌冬面、晶莹的茄子与清透的蘸汁，水珠凝结、雾气微冒，色调清新，质感水灵，充分传递出盛夏里一口下肚的畅快与清爽。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -752,7 +752,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/carsonyungos/status/2046523198116889064",
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case48/output.jpg",
-    "imageAlt": "A refined 2026 Silicon Valley city...示例图",
+    "imageAlt": "2026 硅谷城市宣传海报示例图",
     "prompt": "一张格调考究的 2026 硅谷城市宣传海报，氛围兼具未来感与优雅。双重曝光构图，保留一种 S 形的流动韵律。在纯白纹理背景上，画面右下角一个身着利落现代机能服的微缩人物，正释放出一条长长的银蓝色发光丝带。丝带在空中优雅流动，呈现柔软的丝绸质感，向左上方飘去时，奇迹般地化为一片壮阔的地景——起伏的丘陵、海岸线、数据流与灯火通明的城市地貌。在这条流动的「光之河」中，叠加一幅手绘的硅谷全景地图，融合科技、自然、创新与加州阳光。场景充满远见、开阔、精致而鼓舞人心。融入硅谷与湾区的标志元素：斯坦福大学拱门、Apple Park、谷歌风格园区建筑、Meta 式玻璃办公楼、特斯拉式创新意象、沙丘路上的风投办公室、帕洛阿尔托林荫街道、圣何塞天际线、圣克鲁兹山脉、旧金山湾、高速公路、自动驾驶汽车、初创实验室、半导体纹样、AI 数据中心，以及若隐若现的电路板纹理。四周环绕柔和薄雾、金色加州阳光、漂浮云朵与细腻的数字粒子。色彩丰富，结构繁复，细节极致，宏大而震撼，却因大面积留白而依旧清新极简。左下角以优雅字体写着「SILICON VALLEY 2026」，配一句竖排标语「Where Ideas Shape Tomorrow」。版式精美、间距优雅、字迹清晰完整，高级城市品牌海报，电影级布光，细节考究，画幅比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -794,7 +794,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/pfanis/status/2046413660147314714",
     "recommendedSize": "9:16",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case32/output.jpg",
-    "imageAlt": "Generate a high-quality vertical \"...示例图",
+    "imageAlt": "科普百科风信息图示例图",
     "prompt": "生成一张高质量的竖版「科普百科风信息图」，主题为【自定义主题】。这张图不是普通海报，也不是单纯的插画，而是一张融合了图鉴感、百科感、信息结构感与收藏价值的模块化科普信息图。整体风格参考高端博物志图鉴、现代百科书页、生活方式知识卡片，以及适合社交媒体分享的高传播力信息图。画面需包含：清晰精美的主题主视觉；若干局部特征的放大细节特写；多个圆角模块化信息区块；清晰的标题层级与关键标签；简洁而丰富的百科内容；可视化评分、要点总结或 Top5 模块。内容区块应根据主题自动适配，优先从以下方向筛选并合理组合：基础档案、分类信息、外观特征、习性生态、形成机制或结构组成、生长或使用条件、养护或保养技巧、风险与注意事项、适用人群或应用场景、优缺点对比、快速评分卡。视觉要求：明亮干净的背景、柔和的配色、细腻的阴影、精致的小图标、圆角信息框、工整的排版、信息密度高而不显杂乱、阅读体验出色。整体要像一张可出版、可阅读、可收藏、可成系列生产的真正科普百科卡片，而非广告图。请勿做成普通商业促销海报，重点突出「知识整理＋模块化信息＋图鉴式呈现」的特征。画面比例 9:16。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -836,7 +836,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/agi_aibusi/status/2046530764871696750",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case32/output.jpg",
-    "imageAlt": "GPT-image-2でこの手相を診断して詳細な鑑定書を作って示例图",
+    "imageAlt": "手相占卜鉴定书示例图",
     "prompt": "请对这只手相进行诊断，制作一份详尽的鉴定书。需分析生命线、智慧线、感情线、命运线、太阳线、财运线与婚姻线，从线条的形状、深浅、分叉、起点与终点逐一解读。以给出建议为重点，整理成一份高品质的占卜鉴定书，排版工整、结论清晰、富有仪式感，条理分明地呈现每条掌纹的含义与对应的人生指引。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -899,7 +899,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/loglogrog/status/2046437230127034774",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case34/output.jpg",
-    "imageAlt": "GPT Image 2を使って、OpenClawの情報を調べてドンキ...示例图",
+    "imageAlt": "唐吉诃德风促销POP示例图",
     "prompt": "请查阅 OpenClaw 的相关信息，生成一张唐吉诃德折扣店广告 POP 风格的图像，效果要像实际张贴在店内货架上的手写促销海报：黄底红字、夸张大字号、手写体价格与爆炸贴，密集堆叠的卖点文案，热闹拥挤、极具冲击力的日式量贩店促销氛围，整体色彩鲜艳、信息满溢。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -920,7 +920,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/weel_corp/status/2046514558064586782",
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case49/output.jpg",
-    "imageAlt": "『賑やかで魅力的なスーパーマーケットの折り込みチラシの画像。上部には...示例图",
+    "imageAlt": "超市特卖折页海报示例图",
     "prompt": "一张热闹而吸引人的超市折页传单图像。顶部是「特卖」的醒目大字与本周日期；画面布满色彩缤纷的商品照片（蔬菜、水果、牛肉、鲜鱼），配以红框价格标签，以及「超值特惠」「家计应援」等号召性标语。整体排版密集饱满、配色鲜艳，营造出量贩超市促销单页的真实质感与抢购氛围。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -962,7 +962,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/loglogrog/status/2046448773162033240",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case9/output.jpg",
-    "imageAlt": "# 混沌としたメモ書き・記号の集合体からキャラクターの顔を浮かび上が...示例图",
+    "imageAlt": "混沌手稿浮现人脸示例图",
     "prompt": "一种从混沌的手写笔记与符号集合中浮现出人物面孔的艺术。风格：白纸上以黑色墨水写满大量手写笔记、公式、符号与随意线条；整张纸铺满涂写般的混沌感；局部以红色墨水强调（线条、涂块、马克笔式块面）；呈现模拟笔记本涂鸦的质感。构图：随机的笔记与符号铺满整个画面；黑色墨水的线条与文字密度在人物面孔所在位置聚集；最终从混沌之中隐隐浮现出给定人物的面部轮廓与神情；面孔并非写实描绘，而是由混沌碎片聚合成形。色彩：以黑白单色为主体，红色墨水作为零星点缀，饱和度克制，重视纸张与墨水的模拟质感。表现要素：似可辨认又难以读清的字符串，中文与英数字混杂；数学符号、箭头、点、斜线、交叉、墨迹飞溅；人物面孔的眼睛与发丝轮廓，由笔记符号排布的留白与浓淡自然浮现。禁止：直接描画面孔的写实肖像、过于规整的数字化几何图案、缤纷上色或过饱和表现、标志、水印与人工感画面。完成标准：整体成立为混沌的笔记符号集合体，给定人物的面孔从浓淡与排布中自然浮现，配色仅为黑白加红色点缀，保留纸张与墨水的手绘质感。画面比例 3:4。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -983,7 +983,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/pfanis/status/2046414546378584558",
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046414546378584558.jpg",
-    "imageAlt": "Generate for me a UI design system...示例图",
+    "imageAlt": "前卫玻璃拟态设计系统示例图",
     "prompt": "为我生成一套界面设计系统，主题极其前卫、大胆而独特，包含玻璃拟态的通透视觉与透明质感。整套系统需组件齐全、风格统一：按钮、卡片、开关、输入框、导航栏、弹窗等成套呈现；大量运用磨砂玻璃、半透明叠层、柔和高光与细腻投影，营造真实的毛玻璃折射质感；配色前卫大胆、层次分明，兼具科技感与高级感，可直接用作产品界面的设计规范。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -1046,7 +1046,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/ck_igarashi/status/2046528889124728993",
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case51/output.jpg",
-    "imageAlt": "ピラティス教室の広告画像を作成したい テキストはよりユーザーが登録を...示例图",
+    "imageAlt": "普拉提课程招生广告示例图",
     "prompt": "制作一张普拉提教室的招生广告图像。文案要更能吸引用户报名、具号召力与打动力；画面中呈现女性正在实际练习普拉提的场景，姿态舒展专业。整体明亮、健康、专业，突出体态之美与课程氛围，配色清新、排版清晰，适合投放社媒与门店招生。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
@@ -1109,7 +1109,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "sourceUrl": "https://x.com/yssrski/status/2046410519595348397",
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case30/output.jpg",
-    "imageAlt": "counter strike in game screenshot,...示例图",
+    "imageAlt": "像素沙盒风混合截图示例图",
     "prompt": "生成一张射击竞技内截图风格的画面，融合像素沙盒建造风格。\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
