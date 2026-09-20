@@ -37,12 +37,14 @@ export function getPromptTextareaLayout(input: {
   imagesHeight: number
   manualHeight: number | null
   expandedHeight?: number | null
+  placeholderHeight?: number
 }) {
   const minHeight = input.isMobile ? MOBILE_MIN_PROMPT_HEIGHT : DESKTOP_MIN_PROMPT_HEIGHT
   const minMaxHeight = input.isMobile ? MOBILE_MIN_PROMPT_MAX_HEIGHT : DESKTOP_MIN_PROMPT_MAX_HEIGHT
   const maxHeight = Math.max(input.windowHeight * 0.56 - (input.imagesHeight + 140), minMaxHeight)
   const desiredHeight = Math.max(
     input.scrollHeight,
+    input.placeholderHeight ?? 0,
     minHeight,
     input.isMobile ? 0 : input.manualHeight ?? 0,
   )
@@ -958,12 +960,14 @@ export default function InputBar() {
 
     const nextHeight = Math.round(el.getBoundingClientRect().height)
     const imagesHeight = imagesRef.current?.offsetHeight ?? 0
+    const placeholderEl = el.parentElement?.querySelector<HTMLElement>('.prompt-placeholder')
     const { targetHeight } = getPromptTextareaLayout({
       isMobile,
       scrollHeight: el.scrollHeight,
       windowHeight: window.innerHeight,
       imagesHeight,
       manualHeight: null,
+      placeholderHeight: placeholderEl ? placeholderEl.scrollHeight : 0,
     })
 
     manualPromptHeightRef.current = !isMobile && nextHeight > targetHeight + 4
@@ -1069,6 +1073,8 @@ export default function InputBar() {
     if (!el) return
 
     const imagesHeight = imagesRef.current?.offsetHeight ?? 0
+    const placeholderEl = el.parentElement?.querySelector<HTMLElement>('.prompt-placeholder')
+    const placeholderHeight = placeholderEl ? placeholderEl.scrollHeight : 0
 
     el.style.transition = 'none'
     el.style.height = '0'
@@ -1082,6 +1088,7 @@ export default function InputBar() {
       expandedHeight: promptExpanded
         ? Math.max(el.parentElement?.clientHeight ?? 0, 80)
         : null,
+      placeholderHeight,
     })
     setIsSingleLine(isSingleLine)
     setPromptCanExpand(canExpand)
