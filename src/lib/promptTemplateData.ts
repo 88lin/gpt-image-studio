@@ -319,90 +319,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     ]
   },
   {
-    "id": "gallery-16",
-    "title": "A/B 测试签名输出",
-    "category": "摄影与文档",
-    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
-    "sourceUrl": "https://x.com/saskr_13/status/2044744396932079934",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case16/output.jpg",
-    "imageAlt": "A/B 测试签名输出示例图",
-    "prompt": "をシェアします💗🤣\nGPT Image 2 はまだ正式リリースされてないと言っておりましたが、添付した 2 枚は「 A / B どちらが良いか」選ばせるタイプでした。\nよく見ると右下にサインまで…！\nこれが噂の 2 なのでしょうか？\n懐かしの「私がどんなふうに扱ったか」シリーズです(笑)\n--------------------\n✅#prompt : \n私があなたをどんなふうに扱ってきたか、4 コマ漫画風に描いてください。まずは 800 字くらいのプロットをテキストで出して、私が「描いて」と言ったらプロットに沿った 4 コマ漫画を描いてください。\n--------------------\nまずテキストを生成しますので、そのあと「描いて」と送ってください。その前に画風など指定するのも良いかと思います。\n\n画風は「アクリル水彩の油絵＋現代風の大人の成熟したカップルで、実写じゃなくて少女漫画風に描いて欲しい」とお願いしました☺\n間違えて「アクリル水彩の油絵」と書いちゃいましたが…(笑)\nおなじタッチが出て来るか分かりませんが、いろいろなシチュエーションで試してみようと思います(^^♪\n大事なところに線をひいておきました🤣",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-17",
-    "title": "duct-tape-1 文字渲染展示",
-    "category": "摄影与文档",
-    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
-    "sourceUrl": "https://x.com/kawai_design/status/2044739028420079840",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case17/output.jpg",
-    "imageAlt": "duct-tape-1 文字渲染展示示例图",
-    "prompt": "以「duct-tape-1 文字渲染展示」为目标生成图像。\n\n核心提示词：を試し続けたらGPT Image 2だと噂される「duct-tape-1」が登場しました。文字の描画とレイアウトのユニークさが特徴だと感じます。\n\nこれをデフォルトで使えるとなると...\nたくさん実験したくてウズウズします。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-19",
-    "title": "MAI-Image-2 vs GPT vs Nano Banana ...",
-    "category": "摄影与文档",
-    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
-    "sourceUrl": "https://x.com/old_pgmrs_will/status/2044356515751231527",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case19/output.jpg",
-    "imageAlt": "MAI-Image-2 vs GPT vs Nano Banana ...示例图",
-    "prompt": "以「MAI-Image-2 vs GPT vs Nano Banana ...」为目标生成图像。\n\n核心提示词：で\n☝️MAI-Image-2-Efficient\n👉GPT-Image-2️\n👇Nano Banana Pro\n個人的好みは GPT-Image-2\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-20",
-    "title": "白板绘图展示",
-    "category": "摄影与文档",
-    "description": "来自GPT-Image-2 案例观摩馆 EvoLinkAI的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "GPT-Image-2 案例观摩馆 / EvoLinkAI",
-    "sourceUrl": "https://x.com/jrpj2010/status/2044817134761767306",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case20/output.jpg",
-    "imageAlt": "白板绘图展示示例图",
-    "prompt": "以「白板绘图展示」为目标生成图像。\n\n核心提示词：もこのレベル📷\nやべ〜\nいよいよ当人のYoutube板書レベルに・・・いや超えてね！？\n\n1.5年前はこのレベルで発狂してたかと思うと感慨深い・・・\n→\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
     "id": "gallery-github-raw-2046201836525302032",
     "title": "帮我生成xxxx真迹图片",
     "category": "摄影与文档",
@@ -418,27 +334,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case32/output.jpg",
     "imageAlt": "帮我生成xxxx真迹图片示例图",
     "prompt": "以「帮我生成xxxx真迹图片」为目标生成图像。\n\n核心提示词：帮我生成xxxx真迹图片\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-github-raw-2046154976159035613",
-    "title": "この画像からゲームのステータス画面を作ってください。情報量多め。言語...",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/Kashiko_AIart/status/2046154976159035613",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case27/output.jpg",
-    "imageAlt": "この画像からゲームのステータス画面を作ってください。情報量多め。言語...示例图",
-    "prompt": "以「この画像からゲームのステータス画面を作ってください。情報量多め。言語...」为目标生成图像。\n\n核心提示词：この画像からゲームのステータス画面を作ってください。情報量多め。言語は日本語。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -508,27 +403,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     ]
   },
   {
-    "id": "gallery-github-raw-2046509734954741780",
-    "title": "架空のアニメ映画のポスターをGPT image2で作成。",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/seiiiiiiiiiiru/status/2046509734954741780",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case40/output.jpg",
-    "imageAlt": "架空のアニメ映画のポスターをGPT image2で作成。示例图",
-    "prompt": "以「架空のアニメ映画のポスターをGPT image2で作成。」为目标生成图像。\n\n核心提示词：架空のアニメ映画のポスターをGPT image2で作成。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
     "id": "gallery-github-raw-2046498264774791514",
     "title": "この商品広告をプロのデザイナー目線でリデザインして。",
     "category": "商品与电商",
@@ -586,27 +460,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/character_case7/output.jpg",
     "imageAlt": "A mecha girl mid-teens, pale skin ...示例图",
     "prompt": "A mecha girl mid-teens, pale skin smudged with soot and salt spray, sharp amber eyes with glowing HUD reticles, waist-length ash-white hair tied in a high ponytail whipping in the sea wind, matte gunmetal exoskeleton armor plating her shoulders, forearms and shins, exposed hydraulic pistons at the joints, chest rig with glowing cyan coolant lines, oversized oil-stained hangar jacket half slipping off one shoulder, a massive rail cannon resting on her right shoulder, dog tags and frayed red ribbon at her collar , standing off-center to the left on the rusted edge of a tilted steel platform jutting out over dark water, weight shifted onto one leg, left hand gripping the cannon strap, head turned slightly toward camera with a quiet defiant stare, steam venting from her back thrusters, her ponytail and jacket streaming sideways in the salt wind , a vast derelict sea-city at dusk, colossal megastructures of unknown purpose rising from the ocean in staggered silhouettes, bone-white monolithic towers fused with barnacled steel, cyclopean ring-shaped constructs canted at broken angles, rusted skeletal gantries threaded with dead cables, dark swells rolling between the pylons, shipwrecks half-swallowed at their feet, thick sea fog clinging to the bases while the upper structures pierce into a bruised sky, scattered faint lights blinking high in the towers like distant eyes , moody low-key lighting, cold teal ambient from the overcast sky, warm amber sodium glow leaking from a distant structure camera-right, hard backlight from a low sun behind the towers carving her silhouette, volumetric god rays cutting through sea mist, wet specular highlights on her armor , 35mm anamorphic lens, slight low angle looking up past her shoulder toward the structures, medium-wide shot, shallow depth of field with foreground rust in soft focus, horizontal lens flares, fine atmospheric haze compressing the distant megastructures into layered silhouettes , cinematic anime key visual, painterly digital illustration with crisp line art, desaturated oceanic palette of teal, bone-white and rust punched by small warm accent lights, film grain, high-contrast editorial poster aesthetic . Format 16:9.",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-github-raw-2046530758190440928",
-    "title": "やり方とプロンプトはツリー↓",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/agi_aibusi/status/2046530758190440928",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046530758190440928.jpg",
-    "imageAlt": "やり方とプロンプトはツリー↓示例图",
-    "prompt": "以「やり方とプロンプトはツリー↓」为目标生成图像。\n\n核心提示词：やり方とプロンプトはツリー↓\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -754,27 +607,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case34/output.jpg",
     "imageAlt": "an ingame screenshot of rust示例图",
     "prompt": "以「an ingame screenshot of rust」为目标生成图像。\n\n核心提示词：an ingame screenshot of rust\n\n输出比例：9:16 / 16:9。\n\n扩展要求：请补充完整状态栏、导航、核心内容区、操作区和真实应用细节，像真实产品截图而不是概念稿。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-github-raw-2046188377524076915",
-    "title": "画像のプロンプトはALTに載せてます。",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/yudotanaka/status/2046188377524076915",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046188377524076915.jpg",
-    "imageAlt": "画像のプロンプトはALTに載せてます。示例图",
-    "prompt": "以「画像のプロンプトはALTに載せてます。」为目标生成图像。\n\n核心提示词：画像のプロンプトはALTに載せてます。\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -970,27 +802,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     ]
   },
   {
-    "id": "gallery-github-raw-2046215187678790140",
-    "title": "プロンプトはリプに最終ページとまとめて掲載します↓",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/minesan_ai/status/2046215187678790140",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046215187678790140.jpg",
-    "imageAlt": "プロンプトはリプに最終ページとまとめて掲載します↓示例图",
-    "prompt": "以「プロンプトはリプに最終ページとまとめて掲載します↓」为目标生成图像。\n\n核心提示词：プロンプトはリプに最終ページとまとめて掲載します↓\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
     "id": "gallery-github-raw-2046165776055546341",
     "title": "生成一张慈禧的X主页",
     "category": "摄影与文档",
@@ -1180,27 +991,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     ]
   },
   {
-    "id": "gallery-github-raw-2046406024303976904",
-    "title": "戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画...",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/RitaStar1128/status/2046406024303976904",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case31/output.jpg",
-    "imageAlt": "戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画...示例图",
-    "prompt": "以「戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画...」为目标生成图像。\n\n核心提示词：戦前日本の怪しげな研究所を探検しているマイクラのスクリーンショット画像を作成して\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
     "id": "gallery-github-raw-2046218165961753047",
     "title": "根据你对我的认知 给我生成一个“你认识的我”的 图片",
     "category": "摄影与文档",
@@ -1216,27 +1006,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/portrait_case18/output.jpg",
     "imageAlt": "根据你对我的认知 给我生成一个“你认识的我”的 图片示例图",
     "prompt": "以「根据你对我的认知 给我生成一个“你认识的我”的 图片」为目标生成图像。\n\n核心提示词：根据你对我的认知 给我生成一个“你认识的我”的 图片\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-github-raw-2046542225358917945",
-    "title": "この画像のプロンプト↓",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/hiro_ai_auto/status/2046542225358917945",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/88lin/gpt-image-studio@main/docs/images/prompt-examples/2046542225358917945.jpg",
-    "imageAlt": "この画像のプロンプト↓示例图",
-    "prompt": "以「この画像のプロンプト↓」为目标生成图像。\n\n核心提示词：この画像のプロンプト↓\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1285,27 +1054,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     ]
   },
   {
-    "id": "gallery-github-raw-2046519658166317160",
-    "title": "日本のソシャゲのガチャ画面を生成して、",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/the_wheel_2024/status/2046519658166317160",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case35/output.jpg",
-    "imageAlt": "日本のソシャゲのガチャ画面を生成して、示例图",
-    "prompt": "以「日本のソシャゲのガチャ画面を生成して、」为目标生成图像。\n\n核心提示词：日本のソシャゲのガチャ画面を生成して、\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
     "id": "gallery-github-raw-2046507931907080330",
     "title": "用可爱的风格讲述中国远征军的历史故事",
     "category": "摄影与文档",
@@ -1321,48 +1069,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/poster_case53/output.jpg",
     "imageAlt": "用可爱的风格讲述中国远征军的历史故事示例图",
     "prompt": "以「用可爱的风格讲述中国远征军的历史故事」为目标生成图像。\n\n核心提示词：用可爱的风格讲述中国远征军的历史故事\n用波普风格讲述金刚经\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-github-raw-2046507362266259832",
-    "title": "サムアルトマンがメジャーリーガーでバットを構えている。よくあるような...",
-    "category": "摄影与文档",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "摄影",
-      "文档",
-      "真实感"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/16kthir0GRXgNqn/status/2046507362266259832",
-    "recommendedSize": "3:4 / 4:5",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/comparison_case39/output.jpg",
-    "imageAlt": "サムアルトマンがメジャーリーガーでバットを構えている。よくあるような...示例图",
-    "prompt": "以「サムアルトマンがメジャーリーガーでバットを構えている。よくあるような...」为目标生成图像。\n\n核心提示词：サムアルトマンがメジャーリーガーでバットを構えている。よくあるようなテレビ画面の構図\n\n输出比例：3:4 / 4:5。\n\n扩展要求：请保留真实摄影或文档质感，补充光线、机位、环境细节、纸张或镜头特征。\n画面要有明确主体、可复用构图和一致的视觉语言；如果出现文字，标题和关键标签必须清晰可读。不要生成乱码、水印、无意义占位字、低清截图或与主题无关的元素。",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
-    "id": "gallery-github-raw-2046501587762188535",
-    "title": "A 9:16 vertical version, high-deta...",
-    "category": "UI 与界面",
-    "description": "来自ZeroLu/awesome-gpt-image 社区案例的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "界面",
-      "截图",
-      "可复用"
-    ],
-    "source": "ZeroLu/awesome-gpt-image 社区案例",
-    "sourceUrl": "https://x.com/Shinning1010/status/2046501587762188535",
-    "recommendedSize": "9:16",
-    "imageUrl": "https://cdn.jsdmirror.com/gh/EvoLinkAI/awesome-gpt-image-2-prompts@main/images/ui_case36/output.jpg",
-    "imageAlt": "A 9:16 vertical version, high-deta...示例图",
-    "prompt": "A 9:16 vertical version, high-detail realistic style Chinese TikTok live screenshot, Elon Musk is talking to the mobile phone camera in the live broadcast room, excited, smiling, and the live atmosphere is warm and real. He held a white handwritten sign in one hand, which clearly said: \"Thank you Shinning\". There are obvious Chinese TikTok interface elements in the live broadcast screen, including likes, comments and share icons arranged vertically on the right, scrolling Chinese bullet screens and interactive comments below, and the \"live broadcast\" logo at the top, which looks like a real mobile phone screenshot. There is an eye-catching gift prompt special effect in the screen: \"Shinning sent TikTok No. 1\", with gift animation light effect and platform-style prompt box. Musk is in a professional live broadcast environment, with a mobile phone holder, a ring fill light and a desktop microphone in front of him. The background is a modern technology live broadcast room with bright lights and a slight neon atmosphere. The composition is real and natural, like the ongoing live screenshot of the Chinese short video platform. The interface information is rich but not messy, the characters are clear, the expression is vivid, the details are rich, the sense of real photography, the depth of field, high definition, cinematic, photorealistic, realistic livestream screenshot, social media UI, Chinese Douyin live room, detailed lighting, natural skin texture.\n\nNegative prompts:\n\nLow definition, blur, cartoon, illustration, too strong CG sense, two-dimensional, deformed fingers, wrong text, scrambled code, multiple mobile phones, multiple brands, character repetition, face collapse, facial features distortion, excessive skin polishing, overexposure, too dark, messy background, wrong UI, non-Chinese short video interface, too many English bullet screens, gift special effects are not obvious, cropping error, proportional error\n\nSupplementary reinforcement words:\n\nReal mobile phone screen recording screenshot feeling, the live broadcast UI is complete, the gift prompt box conforms to the style of the Chinese short video platform, the Chinese comment area is active, the number of people online in the live broadcast room is clearly displayed, and the time, power and signal bar are visible.",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1530,7 +1236,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776828443358-gkns0aah-1776828445531-1.jpeg",
     "imageAlt": "老干妈星巴克高端联名运营图示例图",
-    "prompt": "中文提示词\n生成完整高端的品牌运营图 ，产品是老干妈和星巴克的联名款：老干妈美式，中间是主图，下面放一些联名的设计，包装袋、杯套以及吉祥物。\n\n英文提示词\nGenerate a complete high-end brand operation image, the product is a co-branded item of Lao Gan Ma and Starbucks: Lao Gan Ma Americano, the main image is in the center, below are some co-branded designs, packaging bags, cup sleeves, and mascots.",
+    "prompt": "生成完整高端的品牌运营图 ，产品是老干妈和星巴克的联名款：老干妈美式，中间是主图，下面放一些联名的设计，包装袋、杯套以及吉祥物。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1551,7 +1257,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776827118950-adeh7gj5-1776827119846-1.jpeg",
     "imageAlt": "极简学术风马格努斯效应科普图解示例图",
-    "prompt": "中文提示词\n创建一个视觉上令人惊叹的教育信息图表，以简洁、现代的学术风格解释马格努斯效应。使用柔和的中性背景（奶油色或浅米色），标题采用优雅的衬线字体，正文使用极简的无衬线字体。\n\n将布局结构化为清晰分隔的编号部分（例如，1、2、3、4），每个部分包含简洁的标题和简短解释。包含细微的分隔线和平衡的间距。\n\n融入数学符号、符号以及逐步视觉图表（如网格、箭头、高亮或方框元素），以清晰阐释概念。使用有限的色彩调色板（蓝绿色、金色点缀、深灰色文本），并以柔和的高亮进行强调。\n\n添加视觉提示，如箭头、虚线或高亮框，以引导观者的视线跟随逻辑。保持对称、对齐，以及一种精致的“教科书遇见现代设计”的美学。\n\n最终设计应给人一种高端教育海报的感觉——极简、优雅、高度可读，并具有智力满足感。\n\n英文提示词\nCreate a visually stunning educational infographic explaining Magnus Effect  in a clean, modern academic style. Use a soft neutral background (cream or light beige), elegant serif typography for titles, and minimalist sans-serif for body text.\n\nStructure the layout into clearly separated numbered sections (e.g., 1, 2, 3, 4), each with a concise heading and short explanation. Include subtle dividing lines and balanced spacing.\n\nIncorporate mathematical notation, symbols, and step-by-step visual diagrams (like grids, arrows, highlights, or boxed elements) to illustrate the concept clearly. Use a limited color palette (teal, gold accents, dark gray text) with soft highlights for emphasis.\n\nAdd visual cues like arrows, dotted lines, or highlighted boxes to guide the viewer’s eye through the logic. Maintain symmetry, alignment, and a polished “textbook meets modern design” aesthetic.\n\nThe final design should feel like a premium educational poster - minimal, elegant, highly readable, and intellectually satisfying.",
+    "prompt": "创建一个视觉上令人惊叹的教育信息图表，以简洁、现代的学术风格解释马格努斯效应。使用柔和的中性背景（奶油色或浅米色），标题采用优雅的衬线字体，正文使用极简的无衬线字体。\n\n将布局结构化为清晰分隔的编号部分（例如，1、2、3、4），每个部分包含简洁的标题和简短解释。包含细微的分隔线和平衡的间距。\n\n融入数学符号、符号以及逐步视觉图表（如网格、箭头、高亮或方框元素），以清晰阐释概念。使用有限的色彩调色板（蓝绿色、金色点缀、深灰色文本），并以柔和的高亮进行强调。\n\n添加视觉提示，如箭头、虚线或高亮框，以引导观者的视线跟随逻辑。保持对称、对齐，以及一种精致的“教科书遇见现代设计”的美学。\n\n最终设计应给人一种高端教育海报的感觉——极简、优雅、高度可读，并具有智力满足感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1593,7 +1299,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776828330452-duv3go93-1776828332021-1.jpeg",
     "imageAlt": "千禧甜美风少女杂志内页示例图",
-    "prompt": "中文提示词\n参考例图五官发型，生成一页古早少女系时尚杂志内页，类似 2000s-2010s 早期日系甜美穿搭月刊风格，真实的杂志内容页。\n整体是高完成度杂志排版设计，画面中要有：\n•主模特大图（占页面主体）\n•多个穿搭单品拆解模块\n•妆容教学小框（眼妆、唇妆、腮红技巧）\n•发型技巧小框 / hair arrange\n•搭配建议 / 3days coordinate / item checklist\n•若干产品图（衣服、包包、鞋子、化妆品）\n•杂志标题、小标题、注释、价格标签、说明文字\n•版面丰富，信息量大，但排版清晰，像真实杂志，不要海报感，不要只有一个人物大图\n\n英文提示词\nReference the facial features and hairstyle of the example image, generate a page of retro girly fashion magazine inner page, similar to 2000s-2010s early Japanese sweet outfit monthly magazine style, a real magazine content page.\nThe overall is a high-completion magazine layout design, the image must include:\n• Main model large image (occupying the main body of the page)\n• Multiple outfit item breakdown modules\n• Makeup tutorial small frames (eye makeup, lip makeup, blush tips)\n• Hairstyle tips small frames / hair arrange\n• Coordination suggestions / 3days coordinate / item checklist\n• Several product images (clothes, bags, shoes, cosmetics)\n• Magazine titles, subtitles, annotations, price tags, explanatory text\n• Rich layout, large amount of information, but clear typography, like a real magazine, no poster feel, do not just have a single large character image",
+    "prompt": "参考例图五官发型，生成一页古早少女系时尚杂志内页，类似 2000s-2010s 早期日系甜美穿搭月刊风格，真实的杂志内容页。\n整体是高完成度杂志排版设计，画面中要有：\n•主模特大图（占页面主体）\n•多个穿搭单品拆解模块\n•妆容教学小框（眼妆、唇妆、腮红技巧）\n•发型技巧小框 / hair arrange\n•搭配建议 / 3days coordinate / item checklist\n•若干产品图（衣服、包包、鞋子、化妆品）\n•杂志标题、小标题、注释、价格标签、说明文字\n•版面丰富，信息量大，但排版清晰，像真实杂志，不要海报感，不要只有一个人物大图",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1656,7 +1362,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776784640649-12qv6x04-1776784648887-1.jpeg",
     "imageAlt": "清冷佳人夜市烧烤三刀流示例图",
-    "prompt": "中文提示词\n一个有着清冷孤傲气质的绝美佳人，精致的面部特征，一张冷酷且精致的高级时装面容，长发，以及优雅苗条的身材；烧烤“三刀流”姿势：嘴里叼着一根烧烤串，每只手各拿一根烧烤串交叉以模仿索隆的三刀流；街头夜景氛围，温暖黄色的夜市灯光，模糊的背景，胶片般的质感，柔焦光晕，电影般的叙事感，时髦高端网红风格的时尚拍摄，清晰发光的肌肤，清晰细致的发丝，生动的动态表情，低角度广角镜头，情绪化的暗调氛围，浅景深，超高清8K，极致细节，电影级光照\n\n英文提示词\na stunning beauty with a cool, aloof atmosphere, delicate facial features, a cold and sophisticated high-fashion face, long hair, and a graceful slender figure; barbecue “three-sword style” pose: one barbecue skewer held in her mouth, one skewer in each hand crossed to mimic Zoro’s three-sword style; street night scene ambiance, warm yellow night market lighting, blurred background, film-like texture, soft-focus glow, cinematic storytelling feel, trendy high-end influencer-style fashion shoot, clear luminous skin, sharply detailed strands of hair, lively dynamic expression, low-angle wide-angle shot, moody dark-toned atmosphere, shallow depth of field, ultra HD 8K, extreme detail, cinematic lighting",
+    "prompt": "一个有着清冷孤傲气质的绝美佳人，精致的面部特征，一张冷酷且精致的高级时装面容，长发，以及优雅苗条的身材；烧烤“三刀流”姿势：嘴里叼着一根烧烤串，每只手各拿一根烧烤串交叉以模仿索隆的三刀流；街头夜景氛围，温暖黄色的夜市灯光，模糊的背景，胶片般的质感，柔焦光晕，电影般的叙事感，时髦高端网红风格的时尚拍摄，清晰发光的肌肤，清晰细致的发丝，生动的动态表情，低角度广角镜头，情绪化的暗调氛围，浅景深，超高清8K，极致细节，电影级光照",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1719,7 +1425,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776788275989-65yil5cp-1776788279128-1.jpeg",
     "imageAlt": "赛博科幻桃太郎主视觉图示例图",
-    "prompt": "中文提示词\n设计虚构动画的钥匙视觉图。主题是「科幻桃太郎」。设计有魅力的角色、背景、标志和宣传语，以一幅美丽插画的形式完成，让世界观在一张图中传达出来。\n\n英文提示词\nDesign a key visual for a fictional animation. The theme is \"Sci-Fi Momotaro\". Design charming characters, backgrounds, logos, and promotional slogans, completed in the form of a beautiful illustration, allowing the worldview to be conveyed in a single image.",
+    "prompt": "设计虚构动画的钥匙视觉图。主题是「科幻桃太郎」。设计有魅力的角色、背景、标志和宣传语，以一幅美丽插画的形式完成，让世界观在一张图中传达出来。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1740,7 +1446,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776788227102-kr9hpsd2-1776788230985-1.jpeg",
     "imageAlt": "银河繁星点缀的冰蓝襦裙示例图",
-    "prompt": "中文提示词\n服裝細節： 模特兒身穿一套精緻的淡冰藍色齊胸襦裙，採用多層輕盈的薄紗和絲綢歐根紗材質制成。其寬大的、半透明的廣袖上點綴著如繁星般微小的銀色和淺藍色亮片刺繡，在光線下閃爍（具有銀河般的夢幻感）。抹胸位置有複雜的銀色蕾絲和編織紋理細節，腰帶自然垂落。\n\n材質與光影： 畫面呈現 8k 超高分辨率和對織物微距紋理的極致渲染。光線採用柔和的自然側光（丁達爾效應 Typndall Effect），精準地透射過輕薄的紗布，營造出面料的半透明感（Translucency）和流動感。\n\n構圖與鏡頭： 採用 85mm 黄金人像鏡頭效果，f/1.8 大光圈，全身構圖，模特居中站立\n\n英文提示词\nClothing details: The model wears an exquisite pale ice blue chest-high ruqun, made of multiple layers of lightweight tulle and silk organza materials. Its wide, translucent broad sleeves are adorned with tiny silver and light blue sequin embroideries like stars, shimmering under the light (with a galaxy-like dreamy feel). The tube top position has complex silver lace and woven texture details, and the belt falls naturally.\nMaterial and light and shadow: The image presents 8k ultra-high resolution and extreme rendering of macro textures of the fabric. The lighting uses soft natural side light (Tyndall Effect Typndall Effect), accurately transmitting through the light gauze, creating a sense of translucency (Translucency) and fluidity of the fabric.\nComposition and lens: Uses 85mm golden portrait lens effect, f/1.8 large aperture, full-body composition, model standing in the center",
+    "prompt": "服裝細節： 模特兒身穿一套精緻的淡冰藍色齊胸襦裙，採用多層輕盈的薄紗和絲綢歐根紗材質制成。其寬大的、半透明的廣袖上點綴著如繁星般微小的銀色和淺藍色亮片刺繡，在光線下閃爍（具有銀河般的夢幻感）。抹胸位置有複雜的銀色蕾絲和編織紋理細節，腰帶自然垂落。\n\n材質與光影： 畫面呈現 8k 超高分辨率和對織物微距紋理的極致渲染。光線採用柔和的自然側光（丁達爾效應 Typndall Effect），精準地透射過輕薄的紗布，營造出面料的半透明感（Translucency）和流動感。\n\n構圖與鏡頭： 採用 85mm 黄金人像鏡頭效果，f/1.8 大光圈，全身構圖，模特居中站立",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1761,7 +1467,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776788156668-dzauld0z-1776788159632-1.jpeg",
     "imageAlt": "唐朝贵妇遛粉色马甲异形工笔画示例图",
-    "prompt": "中文提示词\n一幅细节丰富的工笔画，描绘了一位唐朝贵族女子在御花园中漫步。她看起来优雅而平静。\n\n她手里拿着一根金色的牵引绳。牵引绳的尽头是一只可怕的**异形怪物（出自电影《异形》）**。然而，这只异形穿着一件**可爱的粉色丝绸马甲**，并且表现得像一只训练有素的狗。\n\n背景有牡丹和蝴蝶。\n\n**在右下角，有一个红色的竖排艺术家印章，写着“吴先生”（Mr. Wu），风格像水印一样。** --ar 3:4\n\n英文提示词\nA finely detailed Gongbi painting of a noble Tang Dynasty lady taking a stroll in the imperial garden. She looks elegant and calm.\n\nShe is holding a gold leash. At the end of the leash is a terrifying **Xenomorph monster (from the movie Alien)**. However, the Xenomorph is wearing a **cute pink silk vest** and is behaving like a well-trained dog.\n\nBackground features peonies and butterflies.\n\n**In the bottom right corner, a single red vertical artist chop seal reads \"吴先生\" (Mr. Wu), stylized like a watermark.** --ar 3:4",
+    "prompt": "一幅细节丰富的工笔画，描绘了一位唐朝贵族女子在御花园中漫步。她看起来优雅而平静。\n\n她手里拿着一根金色的牵引绳。牵引绳的尽头是一只可怕的**异形怪物（出自电影《异形》）**。然而，这只异形穿着一件**可爱的粉色丝绸马甲**，并且表现得像一只训练有素的狗。\n\n背景有牡丹和蝴蝶。\n\n**在右下角，有一个红色的竖排艺术家印章，写着“吴先生”（Mr. Wu），风格像水印一样。** --ar 3:4",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1782,7 +1488,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776788069815-r8feni4l-1776788071547-1.jpeg",
     "imageAlt": "高端AI演示平台封面设计示例图",
-    "prompt": "中文提示词\n创建一个高级的 4:3 演示文稿封面幻灯片，介绍来自 http://chroniclehq.com 的 AI 原生演示平台 Chronicle。  \n\nStyle: \n优雅，极简，现代，高级初创企业美学。类似于高端品牌指南封面（如 Apple / Linear / Notion 风格）。带有微妙深度感的柔和渐变背景，干净的留白，精致的排版，经过打磨的编辑式布局。  \n\nMain title: \nCHRONICLE  \n\nSubtitle: \nAI PRESENTATION PLATFORM  \n\nBody copy (small elegant text): \n将原始想法转化为经过打磨的、高影响力的演示文稿。 \n从笔记、文档、链接或现有幻灯片开始。 \n使用 AI 生成美观的、符合品牌调性的幻灯片。 \n在灵活的画布上自由编辑。 \n导出为 PPT、PDF，或发布为网站。  \n\nFeature highlights (small premium labels): \nSTORY-FIRST \nON-BRAND DESIGN \nAI EDITING \nFREEFORM CANVAS \nPPT EXPORT \nTEAM COLLABORATION  \n\nBottom-right elegant logo text: \nchronicle  \n\nVisual feeling: \n商务级高级感，战略级幻灯片质量，咨询级演示文稿，略带未来感但高度专业。  \n\nComposition: \n干净的编辑式平衡，不对称布局，强烈的留白，演示软件主视觉感。  \n\nAspect ratio: \n4:3  \n\nLanguage: \n仅限英文\n\n英文提示词\nCreate a premium 4:3 presentation cover slide introducing Chronicle, the AI-native presentation platform from http://chroniclehq.com.  \n\nStyle: \nelegant, minimal, modern, premium startup aesthetic. Similar to high-end brand guideline covers (like Apple / Linear / Notion style). Soft gradient background with subtle depth, clean whitespace, refined typography, polished editorial layout.  \n\nMain title: \nCHRONICLE  \n\nSubtitle: \nAI PRESENTATION PLATFORM  \n\nBody copy (small elegant text): \nTurn raw ideas into polished, high-impact presentations. \nStart from notes, docs, links, or existing decks. \nGenerate beautiful, on-brand slides with AI. \nEdit freely on a flexible canvas. \nExport to PPT, PDF, or publish as a website.  \n\nFeature highlights (small premium labels): \nSTORY-FIRST \nON-BRAND DESIGN \nAI EDITING \nFREEFORM CANVAS \nPPT EXPORT \nTEAM COLLABORATION  \n\nBottom-right elegant logo text: \nchronicle  \n\nVisual feeling: \nbusiness-class premium, strategy deck quality, consulting-grade presentation, slightly futuristic but highly professional.  \n\nComposition: \nclean editorial balance, asymmetrical layout, strong whitespace, presentation software hero shot feeling.  \n\nAspect ratio: \n4:3  \n\nLanguage: \nEnglish only",
+    "prompt": "创建一个高级的 4:3 演示文稿封面幻灯片，介绍来自 http://chroniclehq.com 的 AI 原生演示平台 Chronicle。  \n\nStyle: \n优雅，极简，现代，高级初创企业美学。类似于高端品牌指南封面（如 Apple / Linear / Notion 风格）。带有微妙深度感的柔和渐变背景，干净的留白，精致的排版，经过打磨的编辑式布局。  \n\nMain title: \nCHRONICLE  \n\nSubtitle: \nAI PRESENTATION PLATFORM  \n\nBody copy (small elegant text): \n将原始想法转化为经过打磨的、高影响力的演示文稿。 \n从笔记、文档、链接或现有幻灯片开始。 \n使用 AI 生成美观的、符合品牌调性的幻灯片。 \n在灵活的画布上自由编辑。 \n导出为 PPT、PDF，或发布为网站。  \n\nFeature highlights (small premium labels): \nSTORY-FIRST \nON-BRAND DESIGN \nAI EDITING \nFREEFORM CANVAS \nPPT EXPORT \nTEAM COLLABORATION  \n\nBottom-right elegant logo text: \nchronicle  \n\nVisual feeling: \n商务级高级感，战略级幻灯片质量，咨询级演示文稿，略带未来感但高度专业。  \n\nComposition: \n干净的编辑式平衡，不对称布局，强烈的留白，演示软件主视觉感。  \n\nAspect ratio: \n4:3  \n\nLanguage: \n仅限英文",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1866,7 +1572,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776785000833-gvh4ksh1-1776785125448-1.jpeg",
     "imageAlt": "蒸汽朋克射手座解剖图谱示例图",
-    "prompt": "中文提示词\n（Steampunk Scientific Illustrator）你是一位专业复古蒸汽朋克解剖图谱设计师，擅长星座机械结构科普海报。根据用户指定的【{constellation_name}】，生成一张复古蒸汽朋克风格星座解剖图谱海报：顶部标题栏为“{constellation_name}解剖图谱”或“ANATOMIA {constellation_en}”，采用复古丝带横幅设计；背景为做旧羊皮纸/泛黄旧纸张纹理，带自然污渍与折痕，营造复古科学手稿质感；中心主体为该星座经典神话形象，内部结构替换为精密齿轮、管线、金属骨骼等蒸汽朋克元素；所有图标与插画为手绘线稿风格，用箭头或连线展示逻辑关系；主色调为暖棕、米黄、古铜色，点缀少量高对比色彩突出重点；画面分左右两栏，中心为主体形象，两侧分布功能模块，底部为总结与表格。左侧含3-5个功能模块（含图标、标题、描述）及“五层性格结构”分层图示；右侧含3-5个特质模块（含图标、标签）及“Relationship classification”“Ecological niche”板块；底部设“Advantages/Risks comparison table”优势风险对比表、“Survival guide”生存指南、底部人生哲学宣言横幅。整体严谨精致、复古机械美学，文字清晰可读 4K高清，直接出图，星座为【射手座 / Sagittarius】。\n\n英文提示词\n(Steampunk Scientific Illustrator) You are a professional vintage steampunk anatomy atlas designer, specializing in constellation mechanical structure popular science posters. Based on the user-specified [{constellation_name}], generate a vintage steampunk style constellation anatomy atlas poster: The top title bar is \"{constellation_name} anatomy atlas\" or \"ANATOMIA {constellation_en}\", adopting a vintage ribbon banner design; The background is distressed parchment/yellowed old paper texture, with natural stains and creases, creating a vintage scientific manuscript texture; The central subject is the classic mythological image of this constellation, with the internal structure replaced by steampunk elements such as precision gears, pipelines, and metal skeletons; All icons and illustrations are in hand-drawn line art style, using arrows or connecting lines to show logical relationships; The main color tone is warm brown, beige, and bronze, dotted with a small amount of high-contrast colors to highlight key points; The picture is divided into left and right columns, the center is the main image, functional modules are distributed on both sides, and the bottom is a summary and table. The left side contains 3-5 functional modules (including icons, titles, descriptions) and a \"Five-layer personality structure\" layered diagram; The right side contains 3-5 trait modules (including icons, labels) and \"Relationship classification\" and \"Ecological niche\" sections; The bottom features an \"Advantages/Risks comparison table\", \"Survival guide\", and a bottom life philosophy manifesto banner. Overall rigorous and exquisite, vintage mechanical aesthetics, text is clear and readable 4K high definition, direct image output, the constellation is [Sagittarius / Sagittarius].",
+    "prompt": "（Steampunk Scientific Illustrator）你是一位专业复古蒸汽朋克解剖图谱设计师，擅长星座机械结构科普海报。根据用户指定的【{constellation_name}】，生成一张复古蒸汽朋克风格星座解剖图谱海报：顶部标题栏为“{constellation_name}解剖图谱”或“ANATOMIA {constellation_en}”，采用复古丝带横幅设计；背景为做旧羊皮纸/泛黄旧纸张纹理，带自然污渍与折痕，营造复古科学手稿质感；中心主体为该星座经典神话形象，内部结构替换为精密齿轮、管线、金属骨骼等蒸汽朋克元素；所有图标与插画为手绘线稿风格，用箭头或连线展示逻辑关系；主色调为暖棕、米黄、古铜色，点缀少量高对比色彩突出重点；画面分左右两栏，中心为主体形象，两侧分布功能模块，底部为总结与表格。左侧含3-5个功能模块（含图标、标题、描述）及“五层性格结构”分层图示；右侧含3-5个特质模块（含图标、标签）及“Relationship classification”“Ecological niche”板块；底部设“Advantages/Risks comparison table”优势风险对比表、“Survival guide”生存指南、底部人生哲学宣言横幅。整体严谨精致、复古机械美学，文字清晰可读 4K高清，直接出图，星座为【射手座 / Sagittarius】。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1887,7 +1593,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776784715622-867bhbjf-1776784740576-1.jpeg",
     "imageAlt": "荒诞超现实女装大叔海报示例图",
-    "prompt": "中文提示词\n一个看似真实却微妙地古怪的女装大叔出现的电影海报，4 种。达到专业设计师制作的水平。 企划和设定本身就是那种“这种东西真要拍成电影吗？”的、认真却忍不住想笑的超现实动画。 标题和播出信息也要用日文显示的状态。\n\n英文提示词\nA movie poster featuring a seemingly realistic yet subtly bizarre cross-dressing older man, 4 variations. Reaching the level of a professional designer's production. The project and setting itself is a surreal animation of the \"Are they really making a movie out of this?\" kind, serious yet irresistibly funny. The title and broadcast information should also be displayed in Japanese.",
+    "prompt": "一个看似真实却微妙地古怪的女装大叔出现的电影海报，4 种。达到专业设计师制作的水平。 企划和设定本身就是那种“这种东西真要拍成电影吗？”的、认真却忍不住想笑的超现实动画。 标题和播出信息也要用日文显示的状态。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -1992,7 +1698,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776787619030-svh7qint-1776787621892-1.jpeg",
     "imageAlt": "暗黑极简头像网站视觉设计示例图",
-    "prompt": "中文提示词\n用 ABCD（a black cover design) 的风格，为 图你太美 设计一个 vi 系统。图你太美是一个头像美图分享 网站。\n\n英文提示词\nIn the style of ABCD (a black cover design), design a VI system for Tu Ni Tai Mei. Tu Ni Tai Mei is an avatar and beauty photo sharing website.",
+    "prompt": "用 ABCD（a black cover design) 的风格，为 图你太美 设计一个 vi 系统。图你太美是一个头像美图分享 网站。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2139,7 +1845,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776784036342-aty6sen1-1776784051347-1.jpeg",
     "imageAlt": "苍白陶瓷娃娃沙滩仰视示例图",
-    "prompt": "中文提示词\n{\n  \"相机参数\": {\n    \"设备类型\": \"iPhone 15 Pro 前置自拍\",\n    \"镜头\": \"24mm\",\n    \"构图\": \"高角度 POV（第一人称视角）\",\n    \"后期处理\": \"计算摄影风格，清晰的数字读出，深景深\"\n  },\n  \"主体描述\": {\n    \"特征\": \"陶瓷娃娃审美，无瑕的苍白皮肤，巨大的冰蓝色眼睛，小巧的鼻子，翘起的自然色嘴唇\",\n    \"表情\": \"面无表情，空洞，瞪大眼睛注视\",\n    \"造型\": \"白金色的双紧辫发型，鲜艳的蓝色美甲\",\n    \"服装\": \"浅蓝色紧身弹力棉上衣，极深超宽 V 领，深邃锁骨与领口线\",\n    \"动作\": \"抬头仰视镜头，用一只手遮挡刺眼的阳光\"\n  },\n  \"环境与灯光\": {\n    \"场景\": \"广阔的沙滩，背景中模糊的海平线\",\n    \"灯光\": \"高调明亮的沿海日光，5500K 色温，强烈的白沙反光填充，均匀照明\",\n    \"质感\": \"微带露水的无孔皮肤，细腻的反光白沙颗粒\"\n  },\n  \"技术约束\": {\n    \"色彩科学\": \"柔和的粉彩色调，线性中性色，高曝光\",\n    \"负面提示词\": [\n      \"重阴影\",\n      \"雪\",\n      \"冬装\",\n      \"红指甲\",\n      \"黑色上衣\",\n      \"保守的领口\",\n      \"胶片颗粒感\"\n    ]\n  }\n}\n\n英文提示词\n{\n  \"cameraParameters\": {\n    \"deviceType\": \"iPhone 15 Pro front selfie\",\n    \"lens\": \"24mm\",\n    \"composition\": \"High angle POV (first-person perspective)\",\n    \"postProcessing\": \"Computational photography style, clear digital readout, deep depth of field\"\n  },\n  \"subjectDescription\": {\n    \"features\": \"Porcelain doll aesthetic, flawless pale skin, huge ice-blue eyes, small nose, slightly upturned natural-colored lips\",\n    \"expression\": \"Expressionless, hollow, wide-eyed staring\",\n    \"styling\": \"Platinum blonde tight double braids hairstyle, vibrant blue nail polish\",\n    \"clothing\": \"Light blue tight stretch cotton top, extremely deep ultra-wide V-neck, deep collarbone and neckline\",\n    \"action\": \"Looking up at the camera, blocking the glaring sunlight with one hand\"\n  },\n  \"environmentAndLighting\": {\n    \"scene\": \"Vast sandy beach, blurry horizon in the background\",\n    \"lighting\": \"High-key bright coastal daylight, 5500K color temperature, strong white sand reflection fill, even lighting\",\n    \"texture\": \"Slightly dewy poreless skin, fine reflective white sand particles\"\n  },\n  \"technicalConstraints\": {\n    \"colorScience\": \"Soft pastel tones, linear neutral colors, high exposure\",\n    \"negativePrompts\": [\n      \"Heavy shadows\",\n      \"Snow\",\n      \"Winter clothing\",\n      \"Red nails\",\n      \"Black top\",\n      \"Conservative neckline\",\n      \"Film grain\"\n    ]\n  }\n}",
+    "prompt": "{\n  \"相机参数\": {\n    \"设备类型\": \"iPhone 15 Pro 前置自拍\",\n    \"镜头\": \"24mm\",\n    \"构图\": \"高角度 POV（第一人称视角）\",\n    \"后期处理\": \"计算摄影风格，清晰的数字读出，深景深\"\n  },\n  \"主体描述\": {\n    \"特征\": \"陶瓷娃娃审美，无瑕的苍白皮肤，巨大的冰蓝色眼睛，小巧的鼻子，翘起的自然色嘴唇\",\n    \"表情\": \"面无表情，空洞，瞪大眼睛注视\",\n    \"造型\": \"白金色的双紧辫发型，鲜艳的蓝色美甲\",\n    \"服装\": \"浅蓝色紧身弹力棉上衣，极深超宽 V 领，深邃锁骨与领口线\",\n    \"动作\": \"抬头仰视镜头，用一只手遮挡刺眼的阳光\"\n  },\n  \"环境与灯光\": {\n    \"场景\": \"广阔的沙滩，背景中模糊的海平线\",\n    \"灯光\": \"高调明亮的沿海日光，5500K 色温，强烈的白沙反光填充，均匀照明\",\n    \"质感\": \"微带露水的无孔皮肤，细腻的反光白沙颗粒\"\n  },\n  \"技术约束\": {\n    \"色彩科学\": \"柔和的粉彩色调，线性中性色，高曝光\",\n    \"负面提示词\": [\n      \"重阴影\",\n      \"雪\",\n      \"冬装\",\n      \"红指甲\",\n      \"黑色上衣\",\n      \"保守的领口\",\n      \"胶片颗粒感\"\n    ]\n  }\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2223,7 +1929,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776783722610-qq5m7e0q-1776783734485-1.jpeg",
     "imageAlt": "国风工笔八仙长卷插画示例图",
-    "prompt": "中文提示词\n（国风卷轴插画师）你是一位顶尖的中国传统工笔人物画师，擅长将经典人物群像绘制成长卷式百科海报。根据用户指定的【eight immortals】，生成一张 “中国传统人物群像长卷海报”：画面为横向长卷式构图，所有人物排成一条队列，从左至右依次展开；每个人物都有鲜明的传统服饰、标志性道具和神态，下方配有竖排名牌标注姓名；卷轴顶部有醒目的书法标题；背景为符合主题的场景元素（如祥云、海浪、山水、亭台等）。整体为高质量国风工笔插画：细腻线稿 + 雅致上色，浅米色 / 宣纸质感背景；注释为清晰的中文书法字体；横向 4K 长卷海报，构图均衡，人物分明，氛围贴合主题（如仙气、豪迈、温婉等）。直接出图，人物群像为【eight immortals】。\n\n英文提示词\n(Guofeng scroll illustrator) You are a top Chinese traditional Gongbi figure painter, skilled in painting classic character group portraits into long-scroll-style encyclopedia posters. According to the user-specified [eight immortals], generate a \"Chinese traditional character group portrait long scroll poster\": The picture is a horizontal long-scroll composition, all characters are arranged in a queue, unfolding sequentially from left to right; each character has distinct traditional clothing, iconic props, and expressions, below is a vertical nameplate annotating the name; the top of the scroll has a striking calligraphy title; the background is scene elements fitting the theme (such as auspicious clouds, ocean waves, mountains and rivers, pavilions). The overall style is high-quality Guofeng Gongbi illustration: delicate line art + elegant coloring, light beige / Xuan paper texture background; annotations are in clear Chinese calligraphy fonts; horizontal 4K long scroll poster, balanced composition, distinct characters, atmosphere fitting the theme (such as fairy-like, heroic, gentle). Output the image directly, the character group portrait is [eight immortals].",
+    "prompt": "（国风卷轴插画师）你是一位顶尖的中国传统工笔人物画师，擅长将经典人物群像绘制成长卷式百科海报。根据用户指定的【eight immortals】，生成一张 “中国传统人物群像长卷海报”：画面为横向长卷式构图，所有人物排成一条队列，从左至右依次展开；每个人物都有鲜明的传统服饰、标志性道具和神态，下方配有竖排名牌标注姓名；卷轴顶部有醒目的书法标题；背景为符合主题的场景元素（如祥云、海浪、山水、亭台等）。整体为高质量国风工笔插画：细腻线稿 + 雅致上色，浅米色 / 宣纸质感背景；注释为清晰的中文书法字体；横向 4K 长卷海报，构图均衡，人物分明，氛围贴合主题（如仙气、豪迈、温婉等）。直接出图，人物群像为【eight immortals】。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2293,27 +1999,6 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     ]
   },
   {
-    "id": "gallery-opennana-jin-ping-mei-tupu",
-    "title": "绘制金瓶梅知识图谱",
-    "category": "UI 与界面",
-    "description": "来自GPT-Image-2 案例观摩馆 OpenNana的实用案例，可直接替换主题、文案、产品或场景后复用。",
-    "tags": [
-      "界面",
-      "截图",
-      "可复用"
-    ],
-    "source": "GPT-Image-2 案例观摩馆 / OpenNana",
-    "sourceUrl": "https://x.com/xiaoxiaodong01/status/2046252164717416641",
-    "recommendedSize": "3:4",
-    "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776766580229-3ohndgsn-1776766582702-1.jpeg",
-    "imageAlt": "绘制金瓶梅知识图谱示例图",
-    "prompt": "英文提示词\nRole: World-class Scientific Encyclopedia Illustrator & Knowledge Graph Architect.\n\nTask: Generate a highly detailed, extremely intricate, and visually stunning \"Universal Illustrated Encyclopedia Science Infographic\" in a classic, unbranded (NO logos) scientific encyclopedia style.\n\nSubject Matter: Choose one from [People, Plants, or Animals]. \n\nSpecific Subject: [e.g., The Giant Squid / Leonardo da Vinci / The Sequoia Tree].\n\nStyle: Fine, detailed scientific illustration on a retro, aged beige paper background. Delicate linework. Intricately complex and professional.\n\nKey Visual Requirements:\n\n1.  Lifelike 3D Effect (The Central Subject): The central subject in the \"C position\" must be rendered with extraordinary realism and dynamism. Create a dramatic sense of depth where the character, plant, or animal appears to break the frame, leaping or bursting out of the flat paper towards the viewer (an effect similar to anamorphic 3D or dynamic pop-out, with high-precision realism).\n\n2.  Layout & Strategic White Space:\n    * Central Subject: Dominates the center, with intentional \"strategic white space\" around it to enhance the popping-out effect and make the figure the clear focal point.\n    * Surrounding Modules: The surrounding area (left, right, top, bottom, and corners) must be filled with 6-8 distinct, highly organized knowledge modules, depending on the subject. There should be a sense of organized density, not random clutter. The modules themselves must have clear borders, headers, and extensive, detailed content.\n\n3.  Connections: Use a complex, logical network of fine leader lines, arrows, brackets, dotted lines, and small connection points to link the central figure to all surrounding modules, and interconnect the modules themselves into a cohesive knowledge web.\n\n4.  Text & Annotation (Hard Requirement - Must be CLEAR Chinese):\n    * Main Title: A large, prominent, beautifully executed **Chinese calligraphy** (书法体) of the specific subject's name [e.g., \"大王乌贼\"].\n    * Calligraphic Accents: Scattered throughout the main content and module titles, use beautiful, clear Chinese calligraphy for important terms.\n    * Standard Chinese Text: All other descriptive text, handwritten notes (大量清晰中文手写注释), module content, and annotations must be clear, legible Chinese characters (简体中文), not gibberish or unreadable symbols. Ensure text clarity is prioritized.\n    * Leader Line Annotations: Every single small component, detail, submodule, diagram, or illustration within the modules must have detailed leader line annotations (拟解剖图) pointing directly to it for maximum professionalism and educational value. Every part should be labeled.\n\nSubject-Specific Module Structure (Example for general reference):\n\nA. For Humans [People]:\n   - Module 1: Anatomy & Skeletal Structure (w/ magnified cross-sections)\n   - Module 2: Physiological Processes (e.g., Circulatory/Nervous System)\n   - Module 3: Historical Context & Timeline (Key Achievements)\n   - Module 4: Major Contribution Diagram (Detailed breakdown)\n   - Module 5: Cognitive Process / Psychological Insight\n   - Module 6: Genetic Profile / Evolution\n   - Module 7: Global Influence & Cultural Impact\n   - Module 8: Cultural Representations / Legacy\n\nB. For Animals:\n   - Module 1: Full External Sketch & Anatomy (w/ microscope magnified detail circular windows)\n   - Module 2: Behavioral Patterns & Lifecycle (e.g., Mating/Migration, Flowchart style)\n   - Module 3: Digestive & Skeletal System\n   - Module 4: Habitats & Distribution Map (with environmental details)\n   - Module 5: Unique Adaptations (e.g., camouflage, hunting tools)\n   - Module 6: Evolutionary History & Relatives\n   - Module 7: Symbiotic Relationships / Ecosystem Role\n   - Module 8: Conservation Status & Human Interaction\n\nC. For Plants:\n   - Module 1: Full Plant Sketch & Anatomy (w/ magnified leaf/root details)\n   - Module 2: Photosynthesis & Lifecycle Flow (w/ icons for environment)\n   - Module 3: Cellular Structure (Magnified circular views)\n   - Module 4: Medicinal Properties / Practical Applications (as in original original prompt)\n   - Module 5: Environmental Adaptations / Unique Features\n   - Module 6: Distribution Map & Environmental Context\n   - Module 7: Genetic Variations & Cultivation\n   - Module 8: Historical Usage & Folklore\n\nOverall Composition: Extremely dense with information, organized into 6-8 structured modules, but balanced with strategic empty space around the center to allow the main, hyper-realistic figure to pop. Hard-core, professional, academic, but visually engaging due to the dynamic 3D central figure. No branding from any specific encyclopedia (e.g., no \"DK\" logos). All annotations must be legible. All handwritten notes must be clear. Main titles in Chinese calligraphy. Aspect Ratio: 3:4.\n\n主题内容：潘金莲",
-    "tips": [
-      "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
-      "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
-    ]
-  },
-  {
     "id": "gallery-opennana-western-art-pixel-museum",
     "title": "西方艺术演进像素博物馆",
     "category": "UI 与界面",
@@ -2328,7 +2013,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776741242142-tlqwsihn-1776741245961-1.jpeg",
     "imageAlt": "西方艺术演进像素博物馆示例图",
-    "prompt": "中文提示词\n创作一张超高细节等距像素艺术时间线插画（3:4，4K），融合细节密度、象征性与隐喻。用户指定的主题为【Western Art Development】。\n\n首先，围绕Western Art Development进行推理，确定：主题的中英文标题、涵盖的最早与最近历史时期、起始阶段标签与结束阶段标签，以及3-5个关键演进阶段及其各自的象征性元素与色彩方案。\n\n然后构建一个以\"Western Art Development\"为主题的等距\"演进博物馆\"，每个展馆区域代表一个演进阶段，空间推进即代表时间演变。采用标准等距视角（2:1），丰富的层次深度与流畅过渡。每个阶段分配3-5个与主题强烈关联的象征元素，并用差异化色彩暗示时间流动。在场景中融入双语像素字体标题：中文\"[主题中文]演进史\"与英文\"EVOLUTION OF Western Art Development\"，加上起止阶段的双语副标题及关键时间节点标记。整体风格专业且具视觉张力，适合学术分析与对比可视化，直接出图。\n\n英文提示词\nCreate an ultra-high-detail isometric pixel art timeline illustration (3:4, 4K), integrating detail density, symbolism, and metaphor. The user-specified theme is [Western Art Development]. First, reason around Western Art Development to determine: the Chinese and English titles of the theme, the earliest and most recent historical periods covered, the starting stage label and the ending stage label, as well as 3-5 key evolution stages and their respective symbolic elements and color schemes. Then build an isometric \"Evolution Museum\" themed \"Western Art Development\", where each exhibition hall area represents an evolution stage, and spatial progression represents time evolution. Adopt a standard isometric perspective (2:1), rich layer depth, and smooth transitions. Allocate 3-5 symbolic elements strongly associated with the theme to each stage, and use differentiated colors to imply the flow of time. Integrate bilingual pixel font titles in the scene: Chinese \"[Theme Chinese] Evolution History\" and English \"EVOLUTION OF Western Art Development\", plus bilingual subtitles for the starting and ending stages and key time node markers. The overall style is professional and visually tense, suitable for academic analysis and comparative visualization, direct image output.",
+    "prompt": "创作一张超高细节等距像素艺术时间线插画（3:4，4K），融合细节密度、象征性与隐喻。用户指定的主题为【Western Art Development】。\n\n首先，围绕Western Art Development进行推理，确定：主题的中英文标题、涵盖的最早与最近历史时期、起始阶段标签与结束阶段标签，以及3-5个关键演进阶段及其各自的象征性元素与色彩方案。\n\n然后构建一个以\"Western Art Development\"为主题的等距\"演进博物馆\"，每个展馆区域代表一个演进阶段，空间推进即代表时间演变。采用标准等距视角（2:1），丰富的层次深度与流畅过渡。每个阶段分配3-5个与主题强烈关联的象征元素，并用差异化色彩暗示时间流动。在场景中融入双语像素字体标题：中文\"[主题中文]演进史\"与英文\"EVOLUTION OF Western Art Development\"，加上起止阶段的双语副标题及关键时间节点标记。整体风格专业且具视觉张力，适合学术分析与对比可视化，直接出图。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2349,7 +2034,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776737886849-rg2qpocb-1776737887640-1.png",
     "imageAlt": "雅致图案四款时尚单品设计示例图",
-    "prompt": "中文提示词\n使用附图中的图案，由专业设计师打造 4 款时尚单品，采用不同的色彩搭配与排版设计，附带穿搭效果图。以雅致的构图凸显图案的美感。格式为 2:3，希望将图像生成模型从 duct-tape-1 指定为 duct-tape-2、3。\n\n英文提示词\nUse the patterns in the attached image, crafted by professional designers to create 4 fashion items, using different color schemes and layout designs, accompanied by outfit effect pictures. Highlight the beauty of the patterns with an elegant composition. The format is 2:3, hoping to specify the image generation model from duct-tape-1 to duct-tape-2, 3.",
+    "prompt": "使用附图中的图案，由专业设计师打造 4 款时尚单品，采用不同的色彩搭配与排版设计，附带穿搭效果图。以雅致的构图凸显图案的美感。格式为 2:3，希望将图像生成模型从 duct-tape-1 指定为 duct-tape-2、3。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2391,7 +2076,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657588153-1ggv7ra0-1776657590726-1.jpeg",
     "imageAlt": "古风明朝帝王群像长卷示例图",
-    "prompt": "中文提示词\n根据上传图片的风格，生成明朝各个皇帝的头像，头像下面有他们的谥号和名字\n\n英文提示词\nBased on the style of the uploaded image, generate portraits of the emperors of the Ming Dynasty, with their posthumous titles and names below the portraits",
+    "prompt": "根据上传图片的风格，生成明朝各个皇帝的头像，头像下面有他们的谥号和名字",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2412,7 +2097,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657252001-ecj9s0aw-1776657253070-1.jpeg",
     "imageAlt": "哔哩哔哩户晨风直播截图示例图",
-    "prompt": "中文提示词\n9:16 的图片，生成一张哔哩哔哩直播的截图，里面是 户晨风在直播，户晨风表情开心，手里拿着牌子，牌子里写着 “Austin总太性情了，大家给Austin总点点关注。”\n\n英文提示词\nA 9:16 image, generate a screenshot of a Bilibili live stream, inside is Hu Chenfeng broadcasting live, Hu Chenfeng has a happy expression, holding a sign in his hand, the sign says \"Boss Austin is so emotional, everyone please give Boss Austin some follows.\"",
+    "prompt": "9:16 的图片，生成一张哔哩哔哩直播的截图，里面是 户晨风在直播，户晨风表情开心，手里拿着牌子，牌子里写着 “Austin总太性情了，大家给Austin总点点关注。”",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2454,7 +2139,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657864578-gcgion2q-1776657867037-1.jpeg",
     "imageAlt": "琉璃透明画眉鸟飞舞羊城墨卷示例图",
-    "prompt": "中文提示词\n【背景与骨架线条】\n纯黑深邃底色，一条粗壮有力的墨色书法S型曲线自画面一端蜿蜒贯穿至另一端，笔触苍劲，墨迹浓淡有致，如大写意行笔，构成整幅画面的视觉骨架与叙事动线。\n【主体：透明燕子】\n曲线上方，一只展翅飞翔的画眉鸟占据视觉核心；身体呈玻璃透明质感，内部映射传统建筑群叠影，蓝绿色光流在透明羽翼间流转折射，仿佛时间长河与文明记忆凝缩其中；轮廓以极细金线勾边，增强立体感与神圣感。\n【中景：古典建筑序列】\n燕子下方，沿墨线曲线错落分布广州的各种风景名胜：白云山、陈家祠、双子塔、广州塔、猎德大桥、海珠塔依次浮现；主色调青绿与淡金，建筑细节清晰，琉璃瓦、飞檐翘角、石阶回廊；木棉花簇拥点缀于建筑周围，花瓣随风轻散，静谧而悠远；几朵水墨云朵轻盈飘浮其间，增添空灵层次。\n【前景：白鹤与水面】\n前景湖畔：数只白鹤或静立水边、或振翅腾飞，姿态各异，优雅从容；浅蓝湖面如镜，倒影荡漾，波光细碎，营造宁静氛围。\n【远景：山峦】\n远处山峦层叠起伏，青黛色晕染，墨色由浓至淡，朦胧氤氲，富有水墨层次；与前景形成近实远虚的空间纵深。\n【构图与光影】\n非线性透视构图，墨线曲线为叙事主轴，古今元素沿线嵌入；光源自画面中心向外辐射扩散，形成强烈明暗对比，中心亮、四周渐暗；冷色调主导（深蓝、青绿、银白），暖色点缀（樱花粉、淡金），和谐而神秘；东方美学与现代意象交融，超现实诗意意境。\n【技术规格】\n8K超高清渲染，极致细节精度，最佳画质，比例 9:16\n\n英文提示词\n[\n  Background and Skeleton Lines\n] Pure black deep background,\na thick and powerful ink calligraphy S-shaped curve meanders from one end of the picture to the other,\nwith vigorous brushstrokes and well-proportioned ink shades,\nlike freehand brushwork,\nforming the visual skeleton and narrative dynamic line of the entire picture. [\n  Subject: Transparent Swallow\n] Above the curve,\na flying thrush with spread wings occupies the visual core; the body has a glass transparent texture,\nwith overlapping shadows of traditional architectural complexes mapped inside,\nblue-green light flows circulate and refract between the transparent wings,\nas if the long river of time and civilized memories are condensed within it; the outline is bordered with extremely thin gold lines to enhance three-dimensionality and sacredness. [\n  Midground: Classical Architecture Sequence\n] Below the swallow,\nvarious scenic spots in Guangzhou are scattered along the ink curve: Baiyun Mountain,\nChen Clan Ancestral Hall,\nTwin Towers,\nCanton Tower,\nLiede Bridge,\nHaizhu Tower appear in sequence; the main tone is cyan-green and pale gold,\narchitectural details are clear,\nglazed tiles,\nflying eaves,\nstone steps and corridors; kapok flowers cluster and decorate around the buildings,\npetals scatter lightly with the wind,\nquiet and distant; a few ink clouds float lightly among them,\nadding ethereal layers. [\n  Foreground: White Cranes and Water Surface\n] Lakeside in the foreground: several white cranes either stand quietly by the water or flap their wings to soar,\nwith different postures,\nelegant and calm; the light blue lake surface is like a mirror,\nreflections rippling,\nshimmering light,\ncreating a tranquil atmosphere. [\n  Distance: Mountains\n] Distant mountains rise and fall in layers,\nsmudged in cyan-black,\nink shades from thick to light,\nhazy and misty,\nrich in ink wash layers; forming a spatial depth with solid foreground and empty distance with the foreground. [\n  Composition and Light and Shadow\n] Non-linear perspective composition,\nthe ink curve is the main narrative axis,\nancient and modern elements are embedded along the line; the light source radiates and diffuses outward from the center of the picture,\nforming a strong contrast between light and dark,\nbright in the center and gradually darkening around; cool tones dominate (dark blue,\ncyan-green,\nsilver white),\nwarm tones embellish (cherry blossom pink,\npale gold),\nharmonious and mysterious; Eastern aesthetics blend with modern imagery,\nsurreal poetic mood. [\n  Technical Specifications\n] 8K ultra-high definition rendering,\nextreme detail precision,\nbest image quality,\nratio 9:16",
+    "prompt": "【背景与骨架线条】\n纯黑深邃底色，一条粗壮有力的墨色书法S型曲线自画面一端蜿蜒贯穿至另一端，笔触苍劲，墨迹浓淡有致，如大写意行笔，构成整幅画面的视觉骨架与叙事动线。\n【主体：透明燕子】\n曲线上方，一只展翅飞翔的画眉鸟占据视觉核心；身体呈玻璃透明质感，内部映射传统建筑群叠影，蓝绿色光流在透明羽翼间流转折射，仿佛时间长河与文明记忆凝缩其中；轮廓以极细金线勾边，增强立体感与神圣感。\n【中景：古典建筑序列】\n燕子下方，沿墨线曲线错落分布广州的各种风景名胜：白云山、陈家祠、双子塔、广州塔、猎德大桥、海珠塔依次浮现；主色调青绿与淡金，建筑细节清晰，琉璃瓦、飞檐翘角、石阶回廊；木棉花簇拥点缀于建筑周围，花瓣随风轻散，静谧而悠远；几朵水墨云朵轻盈飘浮其间，增添空灵层次。\n【前景：白鹤与水面】\n前景湖畔：数只白鹤或静立水边、或振翅腾飞，姿态各异，优雅从容；浅蓝湖面如镜，倒影荡漾，波光细碎，营造宁静氛围。\n【远景：山峦】\n远处山峦层叠起伏，青黛色晕染，墨色由浓至淡，朦胧氤氲，富有水墨层次；与前景形成近实远虚的空间纵深。\n【构图与光影】\n非线性透视构图，墨线曲线为叙事主轴，古今元素沿线嵌入；光源自画面中心向外辐射扩散，形成强烈明暗对比，中心亮、四周渐暗；冷色调主导（深蓝、青绿、银白），暖色点缀（樱花粉、淡金），和谐而神秘；东方美学与现代意象交融，超现实诗意意境。\n【技术规格】\n8K超高清渲染，极致细节精度，最佳画质，比例 9:16",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2475,7 +2160,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657798150-p8nxedw3-1776657800111-1.jpeg",
     "imageAlt": "极简国潮鎏金广州塔海报示例图",
-    "prompt": "中文提示词\n新中式极简风格高端城市海报，9:16竖版构图，以广州为核心主题，画面中心为抽象几何化的广州塔，造型简洁但具有辨识度，\n\n整体采用S型流动构图，从下方向上延展，珠江水系被设计为流动的水波纹与传统祥云纹样融合，环绕整个画面形成视觉动线，\n\n广州地标建筑以“留白+线描+局部色块”的方式点缀其中：珠江新城双塔、猎德大桥、白云山轮廓、岭南骑楼，\n传统与现代建筑自然融合，层次递进，远近虚实分明，\n\n风格控制：极简 + 高级 + 东方意境，不杂乱不过度写实，\n\n色彩方案（重点）：\n高饱和但克制 ，中国红、青蓝、鎏金为主色，\n辅以少量暖金高光点缀，形成强烈视觉冲击但不俗艳，\n\n背景：大面积纯净留白或淡宣纸肌理，增强呼吸感与高级感，\n\n细节：祥云与水纹具有轻微浮雕/烫金质感，\n局部加入微光粒子或流动光线，增强现代感，\n\n光影：柔和渐变光+局部高光，突出恢弘大气氛围，\n\n整体风格：国潮高级插画 / 品牌海报级质感 / 8K / 超清细节\n\n英文提示词\nNeo-Chinese minimalist style high-end city poster, 9:16 vertical composition, with Guangzhou as the core theme, the center of the image is an abstract geometric Canton Tower, simple in shape but highly recognizable,\n\nThe overall adopts an S-shaped flowing composition, extending from bottom to top, the Pearl River water system is designed as flowing water ripples fused with traditional auspicious cloud patterns, surrounding the entire image to form a visual dynamic line,\n\nGuangzhou landmark buildings are embellished in it in the way of \"blank space + line drawing + local color blocks\": Zhujiang New Town Twin Towers, Liede Bridge, Baiyun Mountain outline, Lingnan arcade houses,\nTraditional and modern architecture naturally blend, progressive layers, clear distinction between far and near, virtual and real,\n\nStyle control: minimalist + high-end + Eastern artistic conception, not cluttered and not overly realistic,\n\nColor scheme (key point):\nHigh saturation but restrained, Chinese red, cyan blue, and gilded gold as the main colors,\nSupplemented by a small amount of warm gold highlight embellishments, forming a strong visual impact but not tacky,\n\nBackground: large area of pure blank space or light Xuan paper texture, enhancing a sense of breathing and high-end feel,\n\nDetails: auspicious clouds and water ripples have a slight relief/gold stamping texture,\nLocally add faint light particles or flowing light lines to enhance modernity,\n\nLight and shadow: soft gradient light + local highlights, highlighting a magnificent and grand atmosphere,\n\nOverall style: Guochao high-end illustration / brand poster-level texture / 8K / ultra-clear details",
+    "prompt": "新中式极简风格高端城市海报，9:16竖版构图，以广州为核心主题，画面中心为抽象几何化的广州塔，造型简洁但具有辨识度，\n\n整体采用S型流动构图，从下方向上延展，珠江水系被设计为流动的水波纹与传统祥云纹样融合，环绕整个画面形成视觉动线，\n\n广州地标建筑以“留白+线描+局部色块”的方式点缀其中：珠江新城双塔、猎德大桥、白云山轮廓、岭南骑楼，\n传统与现代建筑自然融合，层次递进，远近虚实分明，\n\n风格控制：极简 + 高级 + 东方意境，不杂乱不过度写实，\n\n色彩方案（重点）：\n高饱和但克制 ，中国红、青蓝、鎏金为主色，\n辅以少量暖金高光点缀，形成强烈视觉冲击但不俗艳，\n\n背景：大面积纯净留白或淡宣纸肌理，增强呼吸感与高级感，\n\n细节：祥云与水纹具有轻微浮雕/烫金质感，\n局部加入微光粒子或流动光线，增强现代感，\n\n光影：柔和渐变光+局部高光，突出恢弘大气氛围，\n\n整体风格：国潮高级插画 / 品牌海报级质感 / 8K / 超清细节",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2496,7 +2181,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657705664-3i5r5l7j-1776657706656-1.jpeg",
     "imageAlt": "疾风起狂草艺术字体设计示例图",
-    "prompt": "中文提示词\n创意艺术字体“纵有疾风起”，秀丽笔手写风格，整体文字横版排列，具有强烈视觉冲击力；\n深度融合手写书法笔意，笔触带毛笔书写的粗犷洒脱，如挥毫泼墨的肆意劲道；\n起收笔的飞白，顿挫，尽显促销的火爆张力，文字的形态打破规整，笔画的粗细变化；\ndutch angle，营造出动感冲刺的气势，字形呈奔放之势；\n重心上扬如蓄势待发，笔画的伸展，穿插毫无拘束，似全力冲刺的劲道；\n整体架构疏密交织，紧密处如促销热潮的汹涌，留白处似优惠间隙的呼吸感；\n纯净黑色背景打底，完美契合热烈氛围，艺术字的形态与色彩酣畅传递。\n\n英文提示词\nCreative artistic typography \"Zong You Ji Feng Qi\", hand-written style with a fine brush, overall text arranged horizontally, with strong visual impact;\nDeeply integrated with the essence of handwritten calligraphy, the brushstrokes carry the rugged and free-spirited nature of brush writing, like the unrestrained vigor of splashing ink;\nThe flying white and pauses at the start and end of the strokes fully display the explosive tension of a promotion, the form of the text breaks away from neatness, with variations in the thickness of the strokes;\ndutch angle, creating a dynamic sprinting momentum, the font shape shows a bold and unrestrained trend;\nThe center of gravity rises like being ready to launch, the stretching and interlacing of the strokes are completely unconstrained, like the vigor of a full-force sprint;\nThe overall structure is intertwined with density and sparseness, the tight parts are like the surging of a promotional craze, and the blank spaces are like the breathing sense during promotional gaps;\nPure black background as the base, perfectly fitting the passionate atmosphere, the form and color of the artistic typography are conveyed with full expressiveness.",
+    "prompt": "创意艺术字体“纵有疾风起”，秀丽笔手写风格，整体文字横版排列，具有强烈视觉冲击力；\n深度融合手写书法笔意，笔触带毛笔书写的粗犷洒脱，如挥毫泼墨的肆意劲道；\n起收笔的飞白，顿挫，尽显促销的火爆张力，文字的形态打破规整，笔画的粗细变化；\ndutch angle，营造出动感冲刺的气势，字形呈奔放之势；\n重心上扬如蓄势待发，笔画的伸展，穿插毫无拘束，似全力冲刺的劲道；\n整体架构疏密交织，紧密处如促销热潮的汹涌，留白处似优惠间隙的呼吸感；\n纯净黑色背景打底，完美契合热烈氛围，艺术字的形态与色彩酣畅传递。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2517,7 +2202,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657682935-vnueoh7w-1776657684667-1.jpeg",
     "imageAlt": "兰亭集序书法帖意境图示例图",
-    "prompt": "中文提示词\n结合王羲之的《兰亭集序》里的内容，生成一副书法帖图片，要求图片背景符合《兰亭集序》的意境，背景图可以使用蒙版，前景是《兰亭集序》\n\n英文提示词\nCombining the content from Wang Xizhi's \"Lantingji Xu\", generate a calligraphy copy image, requiring the image background to match the artistic conception of \"Lantingji Xu\", the background image can use a mask, the foreground is \"Lantingji Xu\"",
+    "prompt": "结合王羲之的《兰亭集序》里的内容，生成一副书法帖图片，要求图片背景符合《兰亭集序》的意境，背景图可以使用蒙版，前景是《兰亭集序》",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2580,7 +2265,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776657005744-ewii7m35-1776657007167-1.jpeg",
     "imageAlt": "治愈系助眠指南九宫格示例图",
-    "prompt": "中文提示词\n生成一张适合小红书发布的 3:4 竖版九宫格海报，整体为 3列 × 3行 排版，九个宫格边界清晰，方便后期直接切割成 9 张单图发布。整体风格干净、高级、统一，适合女性向健康生活方式内容，具有小红书爆款封面气质。画面要求 信息排版清晰、文字大、可读性强、留白舒服、配色温柔治愈。\n\n整体视觉风格：\n奶油白、浅米色、淡燕麦色、浅焦糖色为主色调，搭配少量深棕色文字，ins风、治愈感、睡眠疗愈主题，简约排版，轻拟物插画点缀，可加入枕头、月亮、星星、热牛奶、香薰、书本、眼罩、窗帘、床铺等元素。整体像专业新媒体设计图，字体工整，适合做知识科普类小红书九宫格。\n排版要求：\n\n整张图必须是标准九宫格构图，切分后每一格都能独立成图\n\n每个宫格内容完整居中，不要把标题或正文压在分割线附近\n每个格子之间保留明显间隔或细边框，保证裁切后不影响阅读\n所有文字使用中文，清晰易读，不要乱码，不要英文\n每个宫格都像独立的小红书图文卡片，但视觉风格保持统一\n画面精致、真实、自然，不要廉价营销感，不要过度花哨\n九宫格具体内容：\n\n第1格（封面）\n大标题：让你倒头就睡的8个 tips\n副标题：失眠党、熬夜党一定要收藏\n封面视觉最吸睛，适合做首图，加入柔软床铺、月亮、枕头、眼罩等治愈睡眠元素，标题突出，排版高级。\n\n第2格\n标题：1. 睡前1小时别玩手机\n正文：蓝光会让大脑更清醒，越刷越睡不着。\n配图元素：手机、月亮、困倦表情的小插画\n第3格\n标题：2. 睡前把灯光调暗\n正文：暖光环境能帮助身体进入“准备睡觉”的状态。\n配图元素：床头灯、暖黄色灯光、窗帘\n第4格\n标题：3. 房间温度别太高\n正文：稍微凉一点，更容易快速入睡。\n配图元素：空调、温度计、被子\n第5格\n标题：4. 晚上别喝浓茶咖啡\n正文：咖啡因会延迟困意，让你躺很久还睡不着。\n配图元素：咖啡杯、茶杯、禁止符号\n\n第6格\n标题：5. 睡前洗个热水澡\n正文：能让身体放松下来，入睡速度更快。\n配图元素：浴室蒸汽、毛巾、热水\n第7格\n标题：6. 脑子停不下来就写下来\n正文：把烦心事和待办清单写下，大脑会更容易放松。\n配图元素：笔记本、钢笔、小台灯\n第8格\n标题：7. 固定上床时间\n正文：每天差不多时间睡，生物钟会越来越稳定。\n配图元素：时钟、月亮、床\n第9格\n标题：8. 试试深呼吸放松法\n正文：吸气4秒，停4秒，呼气6秒，慢慢就有困意了。\n底部小字：收藏这组，今晚试试看\n配图元素：呼吸线条、闭眼人物、星星\n\n画质要求：\n高清，高级排版，杂志感，真实可发布，新媒体运营审美，小红书爆款图文风格，文字布局规整，适合直接切图。\n\n英文提示词\nGenerate a 3:4 vertical 9-grid poster suitable for publishing on Xiaohongshu, with an overall layout of 3 columns × 3 rows. The boundaries of the nine grids are clear, making it easy to directly cut into 9 single images for later publishing. The overall style is clean, premium, and unified, suitable for female-oriented healthy lifestyle content, possessing the vibe of a viral Xiaohongshu cover. Image requirements: clear information layout, large text, strong readability, comfortable white space, gentle and healing color palette.\n\nOverall visual style:\nCream white, light beige, light oat color, and light caramel color as the main color tones, paired with a small amount of dark brown text. Ins style, healing sense, sleep therapy theme, minimalist layout, light skeuomorphic illustration embellishments. Elements such as pillows, moons, stars, hot milk, aromatherapy, books, eye masks, curtains, and beds can be added. The overall look should be like a professional new media design graphic, with neat fonts, suitable for a knowledge-based popular science Xiaohongshu 9-grid.\n\nLayout requirements:\nThe entire image must be a standard 9-grid composition, and each grid can stand alone as an independent image after being cut.\nThe content of each grid should be completely centered; do not place titles or body text near the dividing lines.\nKeep obvious gaps or thin borders between each grid to ensure that reading is not affected after cropping.\nAll text must use Chinese, be clear and readable, no garbled characters, no English.\nEach grid should look like an independent Xiaohongshu image-and-text card, but the visual style must remain unified.\nThe image should be exquisite, realistic, and natural, without a cheap marketing feel, and not overly flashy.\n\nSpecific content of the 9-grid:\n\nGrid 1 (Cover)\nMain title: 8 tips to make you fall asleep instantly\nSubtitle: Insomniacs and night owls must save this\nThe cover visuals should be the most eye-catching, suitable for the first image. Add healing sleep elements such as soft beds, moons, pillows, and eye masks. The title should be prominent with a premium layout.\n\nGrid 2\nTitle: 1. Don't play with your phone 1 hour before bed\nBody text: Blue light makes the brain more awake; the more you scroll, the harder it is to fall asleep.\nImage elements: Mobile phone, moon, small illustration of a sleepy expression\n\nGrid 3\nTitle: 2. Dim the lights before bed\nBody text: A warm light environment can help the body enter a \"ready to sleep\" state.\nImage elements: Bedside lamp, warm yellow light, curtains\n\nGrid 4\nTitle: 3. Don't keep the room temperature too high\nBody text: Keeping it a bit cooler makes it easier to fall asleep quickly.\nImage elements: Air conditioner, thermometer, quilt\n\nGrid 5\nTitle: 4. Don't drink strong tea or coffee at night\nBody text: Caffeine delays sleepiness, making you lie in bed for a long time unable to sleep.\nImage elements: Coffee cup, teacup, prohibition sign\n\nGrid 6\nTitle: 5. Take a hot shower before bed\nBody text: It can relax the body and help you fall asleep faster.\nImage elements: Bathroom steam, towel, hot water\n\nGrid 7\nTitle: 6. Write it down if your brain won't stop\nBody text: Writing down your worries and to-do lists makes it easier for your brain to relax.\nImage elements: Notebook, fountain pen, small desk lamp\n\nGrid 8\nTitle: 7. Fix your bedtime\nBody text: Going to bed at about the same time every day will make your biological clock increasingly stable.\nImage elements: Clock, moon, bed\n\nGrid 9\nTitle: 8. Try deep breathing relaxation\nBody text: Inhale for 4 seconds, hold for 4 seconds, exhale for 6 seconds, and sleepiness will gradually come.\nBottom small text: Save this set and try it tonight\nImage elements: Breathing lines, person with closed eyes, stars\n\nImage quality requirements:\nHigh definition, premium layout, magazine feel, realistically publishable, new media operation aesthetics, Xiaohongshu viral image-and-text style, neat text layout, suitable for direct image cutting.",
+    "prompt": "生成一张适合小红书发布的 3:4 竖版九宫格海报，整体为 3列 × 3行 排版，九个宫格边界清晰，方便后期直接切割成 9 张单图发布。整体风格干净、高级、统一，适合女性向健康生活方式内容，具有小红书爆款封面气质。画面要求 信息排版清晰、文字大、可读性强、留白舒服、配色温柔治愈。\n\n整体视觉风格：\n奶油白、浅米色、淡燕麦色、浅焦糖色为主色调，搭配少量深棕色文字，ins风、治愈感、睡眠疗愈主题，简约排版，轻拟物插画点缀，可加入枕头、月亮、星星、热牛奶、香薰、书本、眼罩、窗帘、床铺等元素。整体像专业新媒体设计图，字体工整，适合做知识科普类小红书九宫格。\n排版要求：\n\n整张图必须是标准九宫格构图，切分后每一格都能独立成图\n\n每个宫格内容完整居中，不要把标题或正文压在分割线附近\n每个格子之间保留明显间隔或细边框，保证裁切后不影响阅读\n所有文字使用中文，清晰易读，不要乱码，不要英文\n每个宫格都像独立的小红书图文卡片，但视觉风格保持统一\n画面精致、真实、自然，不要廉价营销感，不要过度花哨\n九宫格具体内容：\n\n第1格（封面）\n大标题：让你倒头就睡的8个 tips\n副标题：失眠党、熬夜党一定要收藏\n封面视觉最吸睛，适合做首图，加入柔软床铺、月亮、枕头、眼罩等治愈睡眠元素，标题突出，排版高级。\n\n第2格\n标题：1. 睡前1小时别玩手机\n正文：蓝光会让大脑更清醒，越刷越睡不着。\n配图元素：手机、月亮、困倦表情的小插画\n第3格\n标题：2. 睡前把灯光调暗\n正文：暖光环境能帮助身体进入“准备睡觉”的状态。\n配图元素：床头灯、暖黄色灯光、窗帘\n第4格\n标题：3. 房间温度别太高\n正文：稍微凉一点，更容易快速入睡。\n配图元素：空调、温度计、被子\n第5格\n标题：4. 晚上别喝浓茶咖啡\n正文：咖啡因会延迟困意，让你躺很久还睡不着。\n配图元素：咖啡杯、茶杯、禁止符号\n\n第6格\n标题：5. 睡前洗个热水澡\n正文：能让身体放松下来，入睡速度更快。\n配图元素：浴室蒸汽、毛巾、热水\n第7格\n标题：6. 脑子停不下来就写下来\n正文：把烦心事和待办清单写下，大脑会更容易放松。\n配图元素：笔记本、钢笔、小台灯\n第8格\n标题：7. 固定上床时间\n正文：每天差不多时间睡，生物钟会越来越稳定。\n配图元素：时钟、月亮、床\n第9格\n标题：8. 试试深呼吸放松法\n正文：吸气4秒，停4秒，呼气6秒，慢慢就有困意了。\n底部小字：收藏这组，今晚试试看\n配图元素：呼吸线条、闭眼人物、星星\n\n画质要求：\n高清，高级排版，杂志感，真实可发布，新媒体运营审美，小红书爆款图文风格，文字布局规整，适合直接切图。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2601,7 +2286,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776656903352-rmd3llwp-1776656905414-1.jpeg",
     "imageAlt": "粤超联赛国潮风邀请函海报示例图",
-    "prompt": "中文提示词\n广东省城市足球超级联赛（粤超）邀请函海报设计，比例9:16； \n\nS型流动构图，画面从下方向上延展，一条由足球运动轨迹形成的动态能量流贯穿画面， 中心为一颗发光的足球，带有动感轨迹与能量光效；\n\n沿S型动线融合广东城市地标与文化元素： 广州塔、深圳平安金融中心、珠海渔女雕像、岭南建筑与佛山武术剪影、中山孙中山文化象征、潮汕英歌舞动态人物轮廓、清远山水自然景观， 所有元素采用“线描 + 局部色块 + 留白”融合表现，层次递进、远近虚实结合；\n\n加入抽象足球运动员剪影，弱化人物细节，强化动势与竞技氛围，视觉重点仍为足球；\n\n风格：现代国潮高级海报，极简风格但富有设计感，高级、干净、统一， 融合东方美学与现代体育视觉；\n\n色彩方案：高饱和但克制，中国红为主视觉，青蓝色辅助，金色点缀高光， 高对比但不杂乱，具有品牌级视觉冲击力； \n\n顶部中央横版视觉主标题 「广东省城市足球超级联赛」：中字，宋体， 中央竖排文字排版： 「粤超」，大字，手写书法艺术字体， 「邀请函」：中字，宋体，纵向排列，间距较大， 底部中央第一排横排： 「2026年4月25日」，小字，宋体，第二排：「广州越秀山体育场」，小字，宋体， 预留文字排版空间；\n\n整体版式平衡、具有高级品牌海报质感，极致精细，构图简洁干净，无杂乱元素，电影级光影，8K 分辨率，高端设计感。融入源自中国传统祥云纹的雅致云纹与水波纹元素，浮动光效粒子，富有动感与生机。\n\n英文提示词\nGuangdong Provincial City Football Super League (Yuechao) invitation poster design, aspect ratio 9:16; \n\nS-shaped flowing composition, the picture extends from bottom to top, a dynamic energy flow formed by the trajectory of football movement runs through the picture, the center is a glowing football, with dynamic trajectory and energy light effects;\n\nAlong the S-shaped motion line, integrate Guangdong city landmarks and cultural elements: Canton Tower, Shenzhen Ping An Finance Centre, Zhuhai Fisher Girl statue, Lingnan architecture and Foshan martial arts silhouettes, Zhongshan Sun Yat-sen cultural symbols, Chaoshan Yingge dance dynamic character outlines, Qingyuan landscape natural scenery, all elements adopt the integrated expression of \"line drawing + partial color blocks + blank space\", progressive layers, combination of distance and virtual-real;\n\nAdd abstract football player silhouettes, weaken character details, strengthen momentum and competitive atmosphere, the visual focus remains on the football;\n\nStyle: modern Guochao high-end poster, minimalist style but rich in design sense, high-end, clean, unified, integrating oriental aesthetics and modern sports vision;\n\nColor scheme: high saturation but restrained, Chinese red as the main visual, cyan-blue as auxiliary, gold embellished highlights, high contrast but not cluttered, with brand-level visual impact; \n\nTop center horizontal visual main title \"Guangdong Provincial City Football Super League\": medium font, Song typeface, center vertical text layout: \"Yuechao\", large font, handwritten calligraphy art font, \"Invitation\": medium font, Song typeface, vertical arrangement, large spacing, bottom center first row horizontal: \"April 25, 2026\", small font, Song typeface, second row: \"Guangzhou Yuexiushan Stadium\", small font, Song typeface, reserve text layout space;\n\nThe overall layout is balanced, has a high-end brand poster texture, extremely detailed, the composition is simple and clean, no cluttered elements, cinematic light and shadow, 8K resolution, high-end design sense. Integrate elegant cloud patterns and water wave patterns derived from traditional Chinese auspicious clouds, floating light effect particles, full of dynamics and vitality.",
+    "prompt": "广东省城市足球超级联赛（粤超）邀请函海报设计，比例9:16； \n\nS型流动构图，画面从下方向上延展，一条由足球运动轨迹形成的动态能量流贯穿画面， 中心为一颗发光的足球，带有动感轨迹与能量光效；\n\n沿S型动线融合广东城市地标与文化元素： 广州塔、深圳平安金融中心、珠海渔女雕像、岭南建筑与佛山武术剪影、中山孙中山文化象征、潮汕英歌舞动态人物轮廓、清远山水自然景观， 所有元素采用“线描 + 局部色块 + 留白”融合表现，层次递进、远近虚实结合；\n\n加入抽象足球运动员剪影，弱化人物细节，强化动势与竞技氛围，视觉重点仍为足球；\n\n风格：现代国潮高级海报，极简风格但富有设计感，高级、干净、统一， 融合东方美学与现代体育视觉；\n\n色彩方案：高饱和但克制，中国红为主视觉，青蓝色辅助，金色点缀高光， 高对比但不杂乱，具有品牌级视觉冲击力； \n\n顶部中央横版视觉主标题 「广东省城市足球超级联赛」：中字，宋体， 中央竖排文字排版： 「粤超」，大字，手写书法艺术字体， 「邀请函」：中字，宋体，纵向排列，间距较大， 底部中央第一排横排： 「2026年4月25日」，小字，宋体，第二排：「广州越秀山体育场」，小字，宋体， 预留文字排版空间；\n\n整体版式平衡、具有高级品牌海报质感，极致精细，构图简洁干净，无杂乱元素，电影级光影，8K 分辨率，高端设计感。融入源自中国传统祥云纹的雅致云纹与水波纹元素，浮动光效粒子，富有动感与生机。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2622,7 +2307,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776656861987-5gb9o03c-1776656864574-1.jpeg",
     "imageAlt": "夏日柑橘苏打高转化广告图示例图",
-    "prompt": "中文提示词\n图像生成: 商品广告照片, 适合夏天的季节商品, 碳酸饮料, 名称=\"夏柑SODA\", 形状=PET瓶500ml, 研究2025年作为饮料广告的高CTA设计后设计并生成图像规格, 宽高比3:4\n\n英文提示词\nImage generation: Product advertising photo, Seasonal product suitable for summer, Carbonated beverage, Name=\"Summer Citrus SODA\", Shape=500ml PET bottle, Design and generate image specifications after researching high CTA design as a beverage advertisement in 2025, Aspect ratio 3:4",
+    "prompt": "图像生成: 商品广告照片, 适合夏天的季节商品, 碳酸饮料, 名称=\"夏柑SODA\", 形状=PET瓶500ml, 研究2025年作为饮料广告的高CTA设计后设计并生成图像规格, 宽高比3:4",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2643,7 +2328,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776656794495-v4bzy0gp-1776656796788-1.jpeg",
     "imageAlt": "星云巨鲤与小人的奇幻对话示例图",
-    "prompt": "中文提示词\n一幅超现实主义数字插画风格，采用低角度仰拍视角。画面描绘了一条巨型彩色锦鲤遨游在梦幻般的星云中，四周环绕着色彩鲜艳的星云与气泡。 \n画面中央还站着一个小人，背对观众，神情平静地仰望空中这条巨大的锦鲤，锦鲤头向下看着小人。 \n整体画面呈现出强烈的大小对比，氛围空灵又梦幻。比例9:16\n\n英文提示词\nA surrealist digital illustration style, adopting a low-angle upward perspective. The picture depicts a giant colorful koi swimming in a dreamy nebula, surrounded by colorful nebulae and bubbles. In the center of the picture stands a small figure, with their back to the audience, calmly looking up at this huge koi in the air, and the koi is looking down at the small figure. The overall picture presents a strong size contrast, and the atmosphere is ethereal and dreamy. Aspect ratio 9:16",
+    "prompt": "一幅超现实主义数字插画风格，采用低角度仰拍视角。画面描绘了一条巨型彩色锦鲤遨游在梦幻般的星云中，四周环绕着色彩鲜艳的星云与气泡。 \n画面中央还站着一个小人，背对观众，神情平静地仰望空中这条巨大的锦鲤，锦鲤头向下看着小人。 \n整体画面呈现出强烈的大小对比，氛围空灵又梦幻。比例9:16",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2685,7 +2370,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776650445623-1hkmq7cf-1776650446602-1.jpeg",
     "imageAlt": "景德镇青花瓷全景解说图谱示例图",
-    "prompt": "中文提示词\n为我生成景德镇青花瓷的详细解说图，配上详细的中文知识解析\n\n英文提示词\nGenerate a detailed explanatory diagram of Jingdezhen blue and white porcelain, accompanied by detailed Chinese knowledge analysis.",
+    "prompt": "为我生成景德镇青花瓷的详细解说图，配上详细的中文知识解析",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2706,7 +2391,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776650737490-r1l0q5yv-1776650738041-1.jpeg",
     "imageAlt": "美女举牌感谢大哥打赏大火箭示例图",
-    "prompt": "中文提示词\n生成一个抖音直播的截图 ，一个美女在直播，美女手里拿着牌子，上面写着：谢谢行者大哥的大火箭！\n\n英文提示词\nGenerate a screenshot of a TikTok live stream, a beautiful woman is live streaming, the beautiful woman is holding a sign in her hand, on which it says: Thank you Brother Xingzhe for the big rocket!",
+    "prompt": "生成一个抖音直播的截图 ，一个美女在直播，美女手里拿着牌子，上面写着：谢谢行者大哥的大火箭！",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2727,7 +2412,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776650729722-rd4rhkwl-1776650730307-1.jpeg",
     "imageAlt": "瑜伽裤女主播展示身材曲线示例图",
-    "prompt": "中文提示词\n手机竖屏界面，短视频直播平台风格，一位年轻亚洲女主播在家中直播带货，主播穿着贴身瑜伽裤与简约上衣，身材曲线自然，正在侧身展示裤子的线条与弹性，动作自然不夸张；\n\n英文提示词\nMobile vertical screen interface, short video live streaming platform style, a young Asian female streamer selling goods through live streaming at home, the streamer is wearing tight yoga pants and a simple top, natural body curves, turning sideways to show the lines and elasticity of the pants, natural movements without exaggeration;",
+    "prompt": "手机竖屏界面，短视频直播平台风格，一位年轻亚洲女主播在家中直播带货，主播穿着贴身瑜伽裤与简约上衣，身材曲线自然，正在侧身展示裤子的线条与弹性，动作自然不夸张；",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2769,7 +2454,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776650724977-7cfjghe1-1776650726134-1.jpeg",
     "imageAlt": "抖音汉服美女直播带货截图示例图",
-    "prompt": "中文提示词\n生成一个抖音直播的截图里面是一个穿着中国传统服饰的美女在直播卖货\n\n英文提示词\nGenerate a screenshot of a Douyin live stream, featuring a beautiful woman wearing traditional Chinese clothing selling goods during the live broadcast.",
+    "prompt": "生成一个抖音直播的截图里面是一个穿着中国传统服饰的美女在直播卖货",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2790,7 +2475,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776527271516-4go9vf4d-1776527284495-1.jpeg",
     "imageAlt": "Z世代Y2K平价美妆广告图示例图",
-    "prompt": "中文提示词\n为Z世代设计的可爱Y2K风格的平价化妆品广告图像。使用鲜艳的配色，包括荧光色。纵横比为3:4。\n\n英文提示词\nCute Y2K style affordable cosmetics advertising image designed for Gen Z. Using vibrant color schemes, including neon colors. Aspect ratio is 3:4.",
+    "prompt": "为Z世代设计的可爱Y2K风格的平价化妆品广告图像。使用鲜艳的配色，包括荧光色。纵横比为3:4。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2811,7 +2496,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776527138994-7uc10dwo-1776527145970-1.jpeg",
     "imageAlt": "日式潮流广告四联画示例图",
-    "prompt": "中文提示词\n生成四张虚构的日式广告图片，涵盖不同类型并排排列。采用专业设计师创作的潮流设计。宽高比为1:1\n\n英文提示词\nGenerate four fictional Japanese advertisement images, covering different types arranged side by side. Trendy design created by professional designers. Aspect ratio 1:1",
+    "prompt": "生成四张虚构的日式广告图片，涵盖不同类型并排排列。采用专业设计师创作的潮流设计。宽高比为1:1",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2832,7 +2517,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776526972578-td0hm5vb-1776526980244-1.jpeg",
     "imageAlt": "一张采用分层蒙太奇构图的电影海报示例图",
-    "prompt": "中文提示词\n“一张采用分层蒙太奇构图的电影海报。背景为日落时分的海滨小镇，平静的海面倒映着耀眼的日光眩光，薄雾笼罩的天空中有远处飞鸟，沿海公路旁立着电线杆剪影。左侧中景处，一位身着深灰色外套、留着深色卷发的中年男子站在混凝土海堤边，神情忧郁地低头凝视，被傍晚的阳光逆光勾勒轮廓。右侧前景主体为一张大幅特写年轻女子侧脸肖像，她望向右侧，身穿带白色条纹的深色水手校服，湿润的黑发贴在脸颊，柔和漫射光线下，一滴泪珠从她脸颊滑落。画面下方中央前景处，一只柴犬抬头朝右侧望去，红棕色毛发被温暖的轮廓光点亮。画面最底端为一条横向电影胶片，内含五幅独立矩形场景缩略图：女孩与柴犬在海滩、女孩骑车望向海面、女孩与男子坐在室内桌前、男子与女孩在海滩面对面站立、女孩拥抱柴犬的特写。画面叠加指定文字：左上角为深青绿色大号衬线字体标题《风间静语》，下方副标题为「—— 致那日的你 ——」；标题下方为小号深色衬线正文：“逝去之物，不复归来。然而，只要心灵稍稍相连，我们便能再度直面明日。” 画面右侧中部为深色衬线字体文字：“曾有一段时光，是你教会我如何生活。我永不会忘。” 左下角为大号白色文字：“10 月 31 日 周五 影院上映”。右下角为小号白色无衬线字体演职人员表：“主演：福波真子 / 桐嶋秀作 原作与剧本：柴野麻吕 导演：今仓七海 主题曲：SyVa《看得见海的地方》（Dogstar★唱片） 制作：《夕凪之尾》影视伙伴 制作公司：DABUSHIBANU-NU 发行：GOODSHIBALERS ©2026《夕凪之尾》影视伙伴”。\n分段提示词：\n图层索引：0\n片段：“背景为日落时分的海滨小镇，平静海面倒映耀眼日光眩光，薄雾天空中有远处飞鸟，沿海公路旁有电线杆剪影。”\n图层索引：1\n片段：“左侧中景处，身着深灰色外套、留深色卷发的中年男子站在混凝土海堤边，神情忧郁低头，被傍晚阳光逆光照射。”\n图层索引：2\n片段：“右侧前景主体为大幅特写年轻女子侧脸肖像，她望向右侧，身穿带白条纹的深色水手校服，湿润黑发贴脸，柔和漫射光下一滴泪珠滑落脸颊。”\n图层索引：3\n片段：“画面下方中央前景处，一只柴犬抬头望向右侧，红棕色毛发被温暖轮廓光点亮。”\n图层索引：4\n片段：“画面最底端为横向电影胶片，内含五幅独立矩形场景缩略图：女孩与柴犬在海滩、女孩骑车望向水面、女孩与男子坐在室内桌前、男子与女孩在海滩面对面、女孩拥抱柴犬特写。”\n图层索引：[5,6,7,8]\n片段：“画面叠加指定文字：左上角为深青绿色大号衬线字体《风间静语》，下方副标题「—— 致那日的你 ——」；其下小号深色衬线正文：“逝去之物，不复归来。然而，只要心灵稍稍相连，我们便能再度直面明日。” 右侧中部深色衬线文字：“曾有一段时光，是你教会我如何生活。我永不会忘。” 左下角大号白色文字：“10 月 31 日 周五 影院上映”。右下角小号白色无衬线字体演职信息：“主演：福波真子 / 桐嶋秀作 原作与剧本：柴野麻吕 导演：今仓七海 主题曲：SyVa《看得见海的地方》（Dogstar★唱片） 制作：《夕凪之尾》影视伙伴 制作公司：DABUSHIBANU-NU 发行：GOODSHIBALERS ©2026《夕凪之尾》影视伙伴”。\n负面提示词：\n“平光照明，无质感表面，对称构图，底部留白空荡，文字缺失，翻译文字，改写文字，3D 渲染，卡通风格，高对比生硬阴影，干涩头发，明亮欢快表情”\n\n英文提示词\nA cinematic movie poster utilizing a layered montage composition. In the background, a coastal town at sunset with calm ocean water reflecting a glowing sun glare, distant birds in a hazy sky, and the silhouette of utility poles along a coastal road. In the left midground, a middle-aged man with dark wavy hair in a dark grey jacket stands near a concrete sea wall, looking downward with a melancholic expression, backlit by the late afternoon sun. Dominating the right foreground is a large, closely cropped profile portrait of a young woman looking right; she wears a dark school sailor uniform with white stripes, has wet dark hair clinging to her face, and a single tear rolls down her cheek under soft, diffuse lighting. In the lower center foreground, a Shiba Inu dog looks upwards toward the right, its reddish-brown fur catching warm rim lighting. Along the very bottom edge is a horizontal film strip of five distinct rectangular scene thumbnails: a dog and girl on a beach, a girl on a bicycle looking at the water, a girl and man sitting at an indoor table, a man and girl standing facing each other on a beach, and a close-up of a girl hugging a Shiba Inu. Overlaid on the image is specific text. In the top left, large dark teal serif text reads 'The Quiet Between Winds' with a subtitle below reading '— To You, That Day —'. Below that, smaller dark serif body text reads 'What is lost will not return. And yet, when hearts connect, even just a little, we can face tomorrow again.'. On the mid-right side, dark serif text reads 'There was a time when you taught me how to live. I won't forget it.'. In the bottom left, large white text reads 'OCTOBER 31 FRI. IN THEATERS'. In the lower right corner, small white sans-serif credit text reads 'Starring: Mako Fukunami / Shusaku Kirimine Original Story & Screenplay: Shibano Maruo Director: Nanami Imakura Theme Song: SyVa \\\"Umi no Mieru de\\\" (Dogstar★RECORDS) Production: \\\"Yūnagi no Shippo\\\" Film Partners Production Company: DABUSHIBANU-NU Distribution: GOODSHIBALERS ©2026 \\\"Yūnagi no Shippo\\\" Film Partners'.\"\n  segmented:\n    - layer_index: 0\n      segment: \"In the background, a coastal town at sunset with calm ocean water reflecting a glowing sun glare, distant birds in a hazy sky, and the silhouette of utility poles along a coastal road.\"\n    - layer_index: 1\n      segment: \"In the left midground, a middle-aged man with dark wavy hair in a dark grey jacket stands near a concrete sea wall, looking downward with a melancholic expression, backlit by the late afternoon sun.\"\n    - layer_index: 2\n      segment: \"Dominating the right foreground is a large, closely cropped profile portrait of a young woman looking right; she wears a dark school sailor uniform with white stripes, has wet dark hair clinging to her face, and a single tear rolls down her cheek under soft, diffuse lighting.\"\n    - layer_index: 3\n      segment: \"In the lower center foreground, a Shiba Inu dog looks upwards toward the right, its reddish-brown fur catching warm rim lighting.\"\n    - layer_index: 4\n      segment: \"Along the very bottom edge is a horizontal film strip of five distinct rectangular scene thumbnails: a dog and girl on a beach, a girl on a bicycle looking at the water, a girl and man sitting at an indoor table, a man and girl standing facing each other on a beach, and a close-up of a girl hugging a Shiba Inu.\"\n    - layer_indices: [5, 6, 7, 8]\n      segment: \"Overlaid on the image is specific text. In the top left, large dark teal serif text reads 'The Quiet Between Winds' with a subtitle below reading '— To You, That Day —'. Below that, smaller dark serif body text reads 'What is lost will not return. And yet, when hearts connect, even just a little, we can face tomorrow again.'. On the mid-right side, dark serif text reads 'There was a time when you taught me how to live. I won't forget it.'. In the bottom left, large white text reads 'OCTOBER 31 FRI. IN THEATERS'. In the lower right corner, small white sans-serif credit text reads 'Starring: Mako Fukunami / Shusaku Kirimine Original Story & Screenplay: Shibano Maruo Director: Nanami Imakura Theme Song: SyVa \\\"Umi no Mieru de\\\" (Dogstar★RECORDS) Production: \\\"Yūnagi no Shippo\\\" Film Partners Production Company: DABUSHIBANU-NU Distribution: GOODSHIBALERS ©2026 \\\"Yūnagi no Shippo\\\" Film Partners'.\"\n\nnegative: \"flat lighting, untextured surfaces, symmetrical composition, empty bottom margin, missing text, translated text, paraphrased text, 3D render, cartoon, high-contrast harsh shadows, dry hair, bright cheerful expressions",
+    "prompt": "“一张采用分层蒙太奇构图的电影海报。背景为日落时分的海滨小镇，平静的海面倒映着耀眼的日光眩光，薄雾笼罩的天空中有远处飞鸟，沿海公路旁立着电线杆剪影。左侧中景处，一位身着深灰色外套、留着深色卷发的中年男子站在混凝土海堤边，神情忧郁地低头凝视，被傍晚的阳光逆光勾勒轮廓。右侧前景主体为一张大幅特写年轻女子侧脸肖像，她望向右侧，身穿带白色条纹的深色水手校服，湿润的黑发贴在脸颊，柔和漫射光线下，一滴泪珠从她脸颊滑落。画面下方中央前景处，一只柴犬抬头朝右侧望去，红棕色毛发被温暖的轮廓光点亮。画面最底端为一条横向电影胶片，内含五幅独立矩形场景缩略图：女孩与柴犬在海滩、女孩骑车望向海面、女孩与男子坐在室内桌前、男子与女孩在海滩面对面站立、女孩拥抱柴犬的特写。画面叠加指定文字：左上角为深青绿色大号衬线字体标题《风间静语》，下方副标题为「—— 致那日的你 ——」；标题下方为小号深色衬线正文：“逝去之物，不复归来。然而，只要心灵稍稍相连，我们便能再度直面明日。” 画面右侧中部为深色衬线字体文字：“曾有一段时光，是你教会我如何生活。我永不会忘。” 左下角为大号白色文字：“10 月 31 日 周五 影院上映”。右下角为小号白色无衬线字体演职人员表：“主演：福波真子 / 桐嶋秀作 原作与剧本：柴野麻吕 导演：今仓七海 主题曲：SyVa《看得见海的地方》（Dogstar★唱片） 制作：《夕凪之尾》影视伙伴 制作公司：DABUSHIBANU-NU 发行：GOODSHIBALERS ©2026《夕凪之尾》影视伙伴”。\n分段提示词：\n图层索引：0\n片段：“背景为日落时分的海滨小镇，平静海面倒映耀眼日光眩光，薄雾天空中有远处飞鸟，沿海公路旁有电线杆剪影。”\n图层索引：1\n片段：“左侧中景处，身着深灰色外套、留深色卷发的中年男子站在混凝土海堤边，神情忧郁低头，被傍晚阳光逆光照射。”\n图层索引：2\n片段：“右侧前景主体为大幅特写年轻女子侧脸肖像，她望向右侧，身穿带白条纹的深色水手校服，湿润黑发贴脸，柔和漫射光下一滴泪珠滑落脸颊。”\n图层索引：3\n片段：“画面下方中央前景处，一只柴犬抬头望向右侧，红棕色毛发被温暖轮廓光点亮。”\n图层索引：4\n片段：“画面最底端为横向电影胶片，内含五幅独立矩形场景缩略图：女孩与柴犬在海滩、女孩骑车望向水面、女孩与男子坐在室内桌前、男子与女孩在海滩面对面、女孩拥抱柴犬特写。”\n图层索引：[5,6,7,8]\n片段：“画面叠加指定文字：左上角为深青绿色大号衬线字体《风间静语》，下方副标题「—— 致那日的你 ——」；其下小号深色衬线正文：“逝去之物，不复归来。然而，只要心灵稍稍相连，我们便能再度直面明日。” 右侧中部深色衬线文字：“曾有一段时光，是你教会我如何生活。我永不会忘。” 左下角大号白色文字：“10 月 31 日 周五 影院上映”。右下角小号白色无衬线字体演职信息：“主演：福波真子 / 桐嶋秀作 原作与剧本：柴野麻吕 导演：今仓七海 主题曲：SyVa《看得见海的地方》（Dogstar★唱片） 制作：《夕凪之尾》影视伙伴 制作公司：DABUSHIBANU-NU 发行：GOODSHIBALERS ©2026《夕凪之尾》影视伙伴”。\n负面提示词：\n“平光照明，无质感表面，对称构图，底部留白空荡，文字缺失，翻译文字，改写文字，3D 渲染，卡通风格，高对比生硬阴影，干涩头发，明亮欢快表情”",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2853,7 +2538,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776647559544-xrha4n2w-1776647560359-1.jpg",
     "imageAlt": "涂鸦速写风AI建造者大师示例图",
-    "prompt": "中文提示词\n以涂鸦速写风表现【一个厉害的AI builder】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性，而不是严谨写实或精细刻画。  颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹、刷痕、飞白与覆盖感，色彩根据【主题/主体】自动适配，但整体保持涂鸦式、速写式、概括式的表达。不要透明水彩晕染效果，不要细腻水彩过渡，不要纸纹理，不要柔和雾化，不要梦幻质感。  背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号、圈画、重复线、随手写的文字或其他涂鸦元素，以增强速写本或随笔式视觉语言，但不可过于拥挤，不可破坏主体和留白气质。  画面内容不需要预先写清楚，由【一个厉害的AI builder】自动推演并生成最适合的主体形象、动作、相关元素、符号或简化场景，整体保持统一的涂鸦速写风和夸张概括的表现方式，避免复杂写实背景和过度铺陈。 画面中需自然加入专属签名\"BlanPlan\"，作为画面的一部分，位置低调但清晰，可放在左下角、右下角或标题附近，风格需与整体版式统一，像作品署名或设计落款；签名字体精致、克制、高级，不可过大，不可破坏主体构图，不可显得突兀或廉价。\n\n英文提示词\nExpress [an awesome AI builder] in a graffiti sketch style, overall presenting a visual effect of quick sketching, free deformation, impromptu hand-drawing and draft-like. The lines are casual, exaggerated, and can vary in thickness, slightly messy but with rhythm and expressiveness, emphasizing summarization, exaggeration, fun and casualness, rather than rigorous realism or fine depiction. The colors use rough blocks with obvious dry brush feel, retaining uneven smearing traces, brush strokes, flying white and covering feel, the colors automatically adapt according to [theme/subject], but overall maintain a graffiti-style, sketch-style, and summarized expression. Do not use transparent watercolor smudging effects, do not use delicate watercolor transitions, do not use paper texture, do not use soft atomization, do not use dreamy texture. The background is mainly blank, keeping it simple, relaxed, unfinished and designed, can add a small amount of auxiliary symbols, arrows, marks, circled drawings, repeated lines, casually written text or other graffiti elements, to enhance the sketchbook or essay-style visual language, but it must not be too crowded, and must not destroy the subject and blank temperament. The picture content does not need to be written clearly in advance; [an awesome AI builder] automatically deduces and generates the most suitable subject image, movements, related elements, symbols or simplified scenes, overall maintaining a unified graffiti sketch style and exaggerated summarized expression method, avoiding complex realistic backgrounds and excessive padding. The exclusive signature \"BlanPlan\" needs to be naturally added into the picture as a part of the picture, the position is low-key but clear, can be placed in the bottom left corner, bottom right corner or near the title, the style needs to be unified with the overall layout, like an artwork signature or design sign-off; the signature font is exquisite, restrained, and high-end, must not be too large, must not destroy the subject composition, must not appear abrupt or cheap.",
+    "prompt": "以涂鸦速写风表现【一个厉害的AI builder】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性，而不是严谨写实或精细刻画。  颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹、刷痕、飞白与覆盖感，色彩根据【主题/主体】自动适配，但整体保持涂鸦式、速写式、概括式的表达。不要透明水彩晕染效果，不要细腻水彩过渡，不要纸纹理，不要柔和雾化，不要梦幻质感。  背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号、圈画、重复线、随手写的文字或其他涂鸦元素，以增强速写本或随笔式视觉语言，但不可过于拥挤，不可破坏主体和留白气质。  画面内容不需要预先写清楚，由【一个厉害的AI builder】自动推演并生成最适合的主体形象、动作、相关元素、符号或简化场景，整体保持统一的涂鸦速写风和夸张概括的表现方式，避免复杂写实背景和过度铺陈。 画面中需自然加入专属签名\"BlanPlan\"，作为画面的一部分，位置低调但清晰，可放在左下角、右下角或标题附近，风格需与整体版式统一，像作品署名或设计落款；签名字体精致、克制、高级，不可过大，不可破坏主体构图，不可显得突兀或廉价。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2874,7 +2559,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776648055004-203e9jn1-1776648055894-1.jpg",
     "imageAlt": "珠江新城剪纸璀璨夜景示例图",
-    "prompt": "中文提示词\n以珠江新城现代都市景观为灵感的剪纸艺术，通过精巧的镂空手法在一整幅纸上，立体刻画广州塔、东西双塔等地标建筑与繁华城景。\n所有建筑与元素均以流畅的线条与结构相连，无孤立部分，构成一幅完整的都市画卷。\n画面采用金属箔或光泽纸材质，表面带有细腻的明暗光泽，在光照下呈现柔和的高光与阴影，仿佛被城市灯光轻轻照亮。\n背景以虚化的珠江新城天际线为衬，点缀隐约可见的花城广场与树木轮廓，整体透出现代浪漫的氛围。\n作品中巧妙融入轻盈的蒲公英绒毛或星光般的动态光点，象征梦想与活力在这座新城中飘散飞扬。整体呈现8K超高清视觉，细节丰富，真实而富有艺术感染力。\n\n英文提示词\nPaper-cut art inspired by the modern urban landscape of Zhujiang New Town, through exquisite hollow-carving techniques on a single sheet of paper, three-dimensionally depicting landmark buildings such as Canton Tower, East and West Twin Towers, and the bustling cityscape. All buildings and elements are connected by smooth lines and structures, with no isolated parts, forming a complete urban scroll. The picture uses metallic foil or glossy paper material, with delicate light and dark gloss on the surface, presenting soft highlights and shadows under illumination, as if gently illuminated by city lights. The background is set against a blurred Zhujiang New Town skyline, dotted with faintly visible outlines of Huacheng Square and trees, overall revealing a modern romantic atmosphere. The work cleverly integrates light dandelion fluff or starlight-like dynamic light points, symbolizing dreams and vitality fluttering and flying in this new city. The overall presents 8K ultra-high-definition vision, rich in details, realistic and full of artistic appeal.",
+    "prompt": "以珠江新城现代都市景观为灵感的剪纸艺术，通过精巧的镂空手法在一整幅纸上，立体刻画广州塔、东西双塔等地标建筑与繁华城景。\n所有建筑与元素均以流畅的线条与结构相连，无孤立部分，构成一幅完整的都市画卷。\n画面采用金属箔或光泽纸材质，表面带有细腻的明暗光泽，在光照下呈现柔和的高光与阴影，仿佛被城市灯光轻轻照亮。\n背景以虚化的珠江新城天际线为衬，点缀隐约可见的花城广场与树木轮廓，整体透出现代浪漫的氛围。\n作品中巧妙融入轻盈的蒲公英绒毛或星光般的动态光点，象征梦想与活力在这座新城中飘散飞扬。整体呈现8K超高清视觉，细节丰富，真实而富有艺术感染力。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -2916,7 +2601,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4 / 4:5",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525706488-cqvbcfn0-1776525713548-1.jpeg",
     "imageAlt": "明朝登基宝玉的推文页面示例图",
-    "prompt": "中文提示词\n创建一个宝玉（查阅 https://x.com/dotey 这个推主的主页及部分推文）穿越到明朝，登基之后依据其业务/个性，绘制的其新的X帖子页面。\n\n英文提示词\nCreate a new X post page illustrated for Baoyu (refer to the homepage and some posts of this Twitter user at https://x.com/dotey) after time-traveling to the Ming Dynasty and ascending the throne, based on his business/personality.",
+    "prompt": "创建一个宝玉（查阅 https://x.com/dotey 这个推主的主页及部分推文）穿越到明朝，登基之后依据其业务/个性，绘制的其新的X帖子页面。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3000,7 +2685,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525912966-b9ho61su-1776525929746-1.jpeg",
     "imageAlt": "手写食谱变身杂志级跨页示例图",
-    "prompt": "中文提示词\n手写食谱 → 专业食谱页面 上传一份凌乱的手写家庭食谱；模型会搜索准确的现代计量/营养信息，然后生成一份精致的杂志风格双页跨页，包含分步平铺图、完美的食材标签和卡路里分解。\n\n[INSERT_RECIPE_LINK]\n\n英文提示词\nHandwritten Recipe → Professional Cookbook Page Upload a messy handwritten family recipe; the model searches for accurate modern measurements/nutrition, then generates a polished, magazine-style double-page spread with step-by-step flat lays, perfect ingredient labels, and calorie breakdowns.\n\n[INSERT_RECIPE_LINK]",
+    "prompt": "手写食谱 → 专业食谱页面 上传一份凌乱的手写家庭食谱；模型会搜索准确的现代计量/营养信息，然后生成一份精致的杂志风格双页跨页，包含分步平铺图、完美的食材标签和卡路里分解。\n\n[INSERT_RECIPE_LINK]",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3021,7 +2706,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525007722-xxynjreb-1776525014773-1.jpeg",
     "imageAlt": "极简留白涂鸦手绘草图示例图",
-    "prompt": "中文提示词\n以涂鸦速写风表现【主题/主体】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性，而不是严谨写实或精细刻画。\n\n颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹、刷痕、飞白与覆盖感，色彩根据【主题/主体】自动适配，但整体保持涂鸦式、速写式、概括式的表达。不要透明水彩晕染效果，不要细腻水彩过渡，不要纸纹理，不要柔和雾化，不要梦幻质感。\n\n背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号、圈画、重复线、随手写的文字或其他涂鸦元素，以增强速写本或随笔式视觉语言，但不可过于拥挤，不可破坏主体和留白气质。\n\n画面内容不需要预先写清楚，由【主题/主体】自动推演并生成最适合的主体形象、动作、相关元素、符号或简化场景，整体保持统一的涂鸦速写风和夸张概括的表现方式，避免复杂写实背景和过度铺陈。\n画面中需自然加入专属签名“voxcat”，作为画面的一部分，位置低调但清晰，可放在左下角、右下角或标题附近，风格需与整体版式统一，像作品署名或设计落款；签名字体精致、克制、高级，不可过大，不可破坏主体构图，不可显得突兀或廉价。\n\n英文提示词\nExpress [Subject/Theme] in a graffiti sketch style, presenting an overall visual effect of quick outlining, free deformation, impromptu hand-drawing, and draft-like appearance. The lines are casual, exaggerated, and can vary in thickness, slightly messy but rhythmic and expressive, emphasizing generalization, exaggeration, playfulness, and spontaneity, rather than rigorous realism or detailed rendering. Colors are expressed in rough blocks with a distinct dry-brush feel, retaining uneven smearing traces, brush strokes, dry-brush effects, and a sense of coverage. Colors automatically adapt to [Subject/Theme], but the overall expression remains graffiti-style, sketch-style, and generalized. Do not use transparent watercolor blooming effects, do not use delicate watercolor transitions, do not use paper textures, do not use soft atomization, and do not use dreamy textures. The background is mainly left blank, maintaining a sense of simplicity, relaxation, incompleteness, and design. A small number of auxiliary symbols, arrows, marks, circled areas, repeated lines, casually written text, or other graffiti elements can be added to enhance the visual language of a sketchbook or jotting style, but it must not be too crowded, and must not destroy the subject and the blank space temperament. The image content does not need to be written out in advance; the most suitable subject image, actions, related elements, symbols, or simplified scenes are automatically deduced and generated by [Subject/Theme], keeping the overall unified graffiti sketch style and exaggerated generalized expression, avoiding complex realistic backgrounds and over-elaboration. The exclusive signature \"voxcat\" needs to be naturally added to the image as a part of the picture. The position should be low-key but clear, and can be placed in the bottom left corner, bottom right corner, or near the title. The style must be consistent with the overall layout, like an artwork signature or a design sign-off; the signature font should be exquisite, restrained, and high-end, must not be too large, must not destroy the subject composition, and must not appear abrupt or cheap.",
+    "prompt": "以涂鸦速写风表现【主题/主体】，整体呈现快速勾勒、自由变形、即兴手绘与草稿式的视觉效果。线条随手、夸张、可粗细不一，略显凌乱但具有节奏和表现力，强调概括、夸张、趣味和随性，而不是严谨写实或精细刻画。\n\n颜色采用粗糙、干刷感明显的块面表现，可保留不均匀的涂抹痕迹、刷痕、飞白与覆盖感，色彩根据【主题/主体】自动适配，但整体保持涂鸦式、速写式、概括式的表达。不要透明水彩晕染效果，不要细腻水彩过渡，不要纸纹理，不要柔和雾化，不要梦幻质感。\n\n背景以留白为主，保持简洁、轻松、未完成感和设计感，可加入少量辅助性符号、箭头、记号、圈画、重复线、随手写的文字或其他涂鸦元素，以增强速写本或随笔式视觉语言，但不可过于拥挤，不可破坏主体和留白气质。\n\n画面内容不需要预先写清楚，由【主题/主体】自动推演并生成最适合的主体形象、动作、相关元素、符号或简化场景，整体保持统一的涂鸦速写风和夸张概括的表现方式，避免复杂写实背景和过度铺陈。\n画面中需自然加入专属签名“voxcat”，作为画面的一部分，位置低调但清晰，可放在左下角、右下角或标题附近，风格需与整体版式统一，像作品署名或设计落款；签名字体精致、克制、高级，不可过大，不可破坏主体构图，不可显得突兀或廉价。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3042,7 +2727,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525330845-cnps5dwe-1776525345767-1.jpeg",
     "imageAlt": "九位大师的机械键盘设计图鉴示例图",
-    "prompt": "中文提示词\n一个九宫格图片，展现九位当代知名设计师设计的同一组物体：机械键盘，包括设计师头像，设计师对于设计的中文文字解读和作品呈现。排版统一规则\n\n英文提示词\nA nine-grid image showing the same group of objects designed by nine contemporary famous designers: mechanical keyboards, including designer avatars, designers' Chinese text interpretations of the designs, and artwork presentations. Unified layout rules",
+    "prompt": "一个九宫格图片，展现九位当代知名设计师设计的同一组物体：机械键盘，包括设计师头像，设计师对于设计的中文文字解读和作品呈现。排版统一规则",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3084,7 +2769,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776525754418-004mf9wu-1776525769834-1.jpeg",
     "imageAlt": "荧光蓝穷奇新中式山水画示例图",
-    "prompt": "中文提示词\n极简主义，新中式风格立体图形设计，图像下端有楷体中国文字：“东方美学”，“2026/04/18”，署名 “CHINA”，和“\n@LIYUE\n\"；\n平整纯白色的亚光质感厚艺术纸上绘充满东方诗意氛围的山水创意画，不规则的撕纸效果；\n中国的神兽：穷奇，身形图案完整，美轮美奂，，线条柔美灵动,眼睛炯炯有神，威严的神态，优雅的姿势，奢华装饰艺术，中国传统纹饰；\n荧光蓝色线条，0.5mm极细金色金属质感勾边，泼白墨大笔触，色彩渲染，红底，蓝色的浪漫诗意视觉；\n冷暖光交织的梦幻唯美场景，强烈的光影对比氛围，花轻舞的时光叙事，东风禅意，画面有大面积留白，框架构图，底部留白，细节清晰。\n\n英文提示词\nMinimalism, Neo-Chinese style three-dimensional graphic design, at the bottom of the image there are Chinese characters in regular script: \"东方美学\", \"2026/04/18\", signature \"CHINA\", and \"\n@LIYUE\n\";\nDrawn on flat, pure white matte textured thick art paper, a creative landscape painting full of oriental poetic atmosphere, irregular torn paper effect;\nChinese mythical beast: Qiongqi, complete body pattern, magnificent,, soft and agile lines, bright piercing eyes, majestic demeanor, elegant posture, luxury decorative art, Chinese traditional patterns;\nFluorescent blue lines, 0.5mm ultra-fine gold metallic texture outlining, large strokes of splashed white ink, color rendering, red background, romantic and poetic blue vision;\nDreamy and aesthetic scene where cold and warm lights intertwine, strong light and shadow contrast atmosphere, time narrative of flowers dancing lightly, Oriental Zen, the picture has a large area of blank space, framework composition, blank space at the bottom, clear details.",
+    "prompt": "极简主义，新中式风格立体图形设计，图像下端有楷体中国文字：“东方美学”，“2026/04/18”，署名 “CHINA”，和“\n@LIYUE\n\"；\n平整纯白色的亚光质感厚艺术纸上绘充满东方诗意氛围的山水创意画，不规则的撕纸效果；\n中国的神兽：穷奇，身形图案完整，美轮美奂，，线条柔美灵动,眼睛炯炯有神，威严的神态，优雅的姿势，奢华装饰艺术，中国传统纹饰；\n荧光蓝色线条，0.5mm极细金色金属质感勾边，泼白墨大笔触，色彩渲染，红底，蓝色的浪漫诗意视觉；\n冷暖光交织的梦幻唯美场景，强烈的光影对比氛围，花轻舞的时光叙事，东风禅意，画面有大面积留白，框架构图，底部留白，细节清晰。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3105,7 +2790,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202604/1776408209788-c38fkved-1776408211178-1.jpeg",
     "imageAlt": "抖音直播截图画面示例图",
-    "prompt": "中文提示词\n9:16 的图片比例，生成一张抖音直播的截图，里面是 xxx 在直播，xxx 手里拿着牌子，牌子里写着 xxxx。\n\n英文提示词\n9:16 aspect ratio, generate a screenshot of a Douyin live stream, inside is xxx live streaming, xxx is holding a sign in their hand, the sign says xxxx.",
+    "prompt": "9:16 的图片比例，生成一张抖音直播的截图，里面是 xxx 在直播，xxx 手里拿着牌子，牌子里写着 xxxx。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3147,7 +2832,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1773332307174-dnudjvn7-1.jpeg",
     "imageAlt": "零食品牌技术分解图示例图",
-    "prompt": "中文提示词\n创建一个 [SNACK] 的品牌技术信息图，结合产品的真实照片或照片级真实渲染，并将技术注释覆盖层直接置于其上。在纯白摄影棚背景上使用带有策略性 [BRAND COLOR] 点缀的黑色墨水风格线条画（建筑草图外观），包括：\n• 关键组件标签\n• 显示结构、分层或内部设计的内部截面图\n• 测量数据、尺寸和规格\n• 带有成分和数量的材料标注\n• 指示主要功能和结构完整性的箭头\n• 显示关键机械或设计元素的简单示意图或剖面图\n• 可持续性标注\n标题位置：位于手绘技术注释框内，带有强调色边框，粗体字显示产品名称，置于上角。\n风格与布局规则：\n• 真实产品保持清晰可见\n• 注释具有素描感、技术感和建筑感\n• 强调色用于高光（占线条工作的 20-30%），黑色用于主要技术线条（70-80%）\n• 构图整洁，负空间平衡\n• 具有教育意义、食品工程氛围和高端品牌感\n• 在角落包含微妙的品牌标志\n视觉风格：极简技术插画美学，黑色线条在真实图像上带有点缀，精确但略带手绘感。\n调色板：白色背景，黑色注释线/文本，[BRAND COLOR] 仅用于点缀和关键标注。\n输出：1080×1080，超清晰，社交媒体动态优化，无水印。\n\n英文提示词\nCreate a branded technical infographic of a [SNACK], combining a realistic photograph or photoreal render of the product with technical annotation overlays placed directly on top. Use black ink–style line drawings with strategic [BRAND COLOR] accents (architectural sketch look) on a pure white studio background, including:\n• Key component labels\n• Internal cross-section showing structure, layering, or internal design\n• Measurements, dimensions, and specifications\n• Material callouts with composition and quantities\n• Arrows indicating function for primary features and structural integrity\n• Simple schematic or sectional diagram showing key mechanical or design elements\n• Sustainability callouts\nTitle placement: Inside a hand-drawn technical annotation box with accent border reading the product name in bold font, positioned in upper corner.\nStyle & layout rules:\n• The realistic product remains clearly visible\n• Annotations feel sketched, technical, and architectural\n• Accents used for highlight (20-30% of linework), black for primary technical lines (70-80%)\n• Clean composition with balanced negative space\n• Educational, food-engineering vibe with premium branding\n• Include subtle brand logo mark in corner\nVisual style: Minimal technical illustration aesthetic, black linework with accents over realistic imagery, precise but slightly hand-drawn feel.\nColor palette: White background, black annotation lines/text, [BRAND COLOR] for accents and key callouts only.\nOutput: 1080×1080, ultra-crisp, social-feed optimized, no watermark.​​​​​​​​​​​​​​​​",
+    "prompt": "创建一个 [SNACK] 的品牌技术信息图，结合产品的真实照片或照片级真实渲染，并将技术注释覆盖层直接置于其上。在纯白摄影棚背景上使用带有策略性 [BRAND COLOR] 点缀的黑色墨水风格线条画（建筑草图外观），包括：\n• 关键组件标签\n• 显示结构、分层或内部设计的内部截面图\n• 测量数据、尺寸和规格\n• 带有成分和数量的材料标注\n• 指示主要功能和结构完整性的箭头\n• 显示关键机械或设计元素的简单示意图或剖面图\n• 可持续性标注\n标题位置：位于手绘技术注释框内，带有强调色边框，粗体字显示产品名称，置于上角。\n风格与布局规则：\n• 真实产品保持清晰可见\n• 注释具有素描感、技术感和建筑感\n• 强调色用于高光（占线条工作的 20-30%），黑色用于主要技术线条（70-80%）\n• 构图整洁，负空间平衡\n• 具有教育意义、食品工程氛围和高端品牌感\n• 在角落包含微妙的品牌标志\n视觉风格：极简技术插画美学，黑色线条在真实图像上带有点缀，精确但略带手绘感。\n调色板：白色背景，黑色注释线/文本，[BRAND COLOR] 仅用于点缀和关键标注。\n输出：1080×1080，超清晰，社交媒体动态优化，无水印。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3189,7 +2874,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1772464721838-fpheu1wo-1.jpeg",
     "imageAlt": "鲜艳霓虹光影下的动感苏打水飞溅商业海报示例图",
-    "prompt": "中文提示词\n{\n  \"prompt\": \"一个充满活力的高端广告构图中的三个超动态苏打水罐 —— 一罐热带冲刺苏打水伴随着戏剧性的水和热带水果飞溅而爆炸，鲜艳的橙色和粉色背景光；一罐柠檬冰爽苏打水在发光的绿色动态光背景下被冷水泼溅；两罐都覆盖着逼真的冷凝水和运动模糊的水滴，充满果味和清爽的能量。深橙色、粉色和霓虹绿灯光在大胆的演播室布置中融合。由使用佳能 50mm 镜头的专业摄影师拍摄，超写实纹理，清晰的细节，超高分辨率，明亮的商业海报美学，丰富的色彩鲜艳度，电影级飞溅效果 --ar 3:4\"\n}\n\n英文提示词\n{\n  \"prompt\": \"Three ultra-dynamic soda cans in one vibrant high-end advertising composition — a can of TROPICAL RUSH exploding with dramatic water and tropical fruit splash, vibrant orange and pink background lighting; a can of LEMON ICED splashed with cold water against a glowing green dynamic light background; both cans covered in realistic condensation and motion-blurred droplets, bursting with fruity, refreshing energy. Deep orange, pink, and neon green lighting blend together in a bold studio setup. Captured by a professional photographer using a Canon 50mm lens, hyper-realistic textures, crisp details, ultra high resolution, bright commercial poster aesthetic, rich color vibrancy, cinematic splash effects --ar 3:4\"\n}",
+    "prompt": "{\n  \"prompt\": \"一个充满活力的高端广告构图中的三个超动态苏打水罐 —— 一罐热带冲刺苏打水伴随着戏剧性的水和热带水果飞溅而爆炸，鲜艳的橙色和粉色背景光；一罐柠檬冰爽苏打水在发光的绿色动态光背景下被冷水泼溅；两罐都覆盖着逼真的冷凝水和运动模糊的水滴，充满果味和清爽的能量。深橙色、粉色和霓虹绿灯光在大胆的演播室布置中融合。由使用佳能 50mm 镜头的专业摄影师拍摄，超写实纹理，清晰的细节，超高分辨率，明亮的商业海报美学，丰富的色彩鲜艳度，电影级飞溅效果 --ar 3:4\"\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3210,7 +2895,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1772382710956-097tb10d-1.jpeg",
     "imageAlt": "梦幻蓝紫烟雾环绕的NUBELLA奢华护肤软管示例图",
-    "prompt": "中文提示词\n{\n  \"style\": \"超写实奢华化妆品产品摄影\",\n  \"composition\": {\n    \"color_scheme\": \"戏剧性的单色蓝紫色\",\n    \"resolution\": \"8K超高分辨率\",\n    \"depth\": \"电影级景深\",\n    \"aesthetic\": \"高端香氛护肤品广告风格\"\n  },\n  \"product\": {\n    \"type\": \"软管包装\",\n    \"finish\": \"缎面质感\",\n    \"color\": \"长春花蓝\",\n    \"label\": \"NUBELLA\",\n    \"typography\": \"优雅的银色字体\",\n    \"cap\": \"反光金属铬盖\",\n    \"position\": \"垂直居中\"\n  },\n  \"surroundings\": {\n    \"smoke\": {\n      \"type\": \"墨水般的旋涡云雾\",\n      \"colors\": [\n        \"薰衣草色\",\n        \"靛蓝色\",\n        \"冰蓝色\"\n      ],\n      \"texture\": \"柔软、翻腾\",\n      \"interaction\": \"环绕在产品周围\"\n    },\n    \"flowers\": {\n      \"primary\": [\n        {\n          \"color\": \"紫色\",\n          \"details\": \"错综复杂的花瓣细节\",\n          \"center\": \"鲜艳的黄色\"\n        },\n        {\n          \"color\": \"紫丁香色\",\n          \"details\": \"错综复杂的花瓣细节\",\n          \"center\": \"鲜艳的黄色\"\n        }\n      ],\n      \"secondary\": {\n        \"type\": \"细小的紫罗兰色花朵\",\n        \"purpose\": \"增加立体感\"\n      }\n    }\n  },\n  \"lighting\": {\n    \"direction\": \"来自左上方的柔和定向照明\",\n    \"effects\": [\n      \"突显软管的光滑曲度\",\n      \"为金属盖增添微妙的光泽\",\n      \"在烟雾中营造深度\"\n    ]\n  },\n  \"background\": {\n    \"blend\": \"无缝的冷色调蓝色和紫色调\",\n    \"enhancement\": \"空灵的花香美学\"\n  },\n  \"details\": \"花瓣和蒸汽的超精细纹理\"\n}\n\n英文提示词\n{\n  \"style\": \"Ultra-realistic luxury cosmetic product photography\",\n  \"composition\": {\n    \"color_scheme\": \"Dramatic monochromatic blue-violet\",\n    \"resolution\": \"8K ultra-high resolution\",\n    \"depth\": \"Cinematic depth\",\n    \"aesthetic\": \"High-end perfumed skincare advertising style\"\n  },\n  \"product\": {\n    \"type\": \"Squeeze tube\",\n    \"finish\": \"Satin-finish\",\n    \"color\": \"Periwinkle-blue\",\n    \"label\": \"NUBELLA\",\n    \"typography\": \"Elegant silver\",\n    \"cap\": \"Reflective metallic chrome\",\n    \"position\": \"Vertically centered\"\n  },\n  \"surroundings\": {\n    \"smoke\": {\n      \"type\": \"Ink-like swirling clouds\",\n      \"colors\": [\n        \"Lavender\",\n        \"Indigo\",\n        \"Icy blue\"\n      ],\n      \"texture\": \"Soft, billowing\",\n      \"interaction\": \"Wrapping around the product\"\n    },\n    \"flowers\": {\n      \"primary\": [\n        {\n          \"color\": \"Purple\",\n          \"details\": \"Intricate petal details\",\n          \"center\": \"Vibrant yellow\"\n        },\n        {\n          \"color\": \"Lilac\",\n          \"details\": \"Intricate petal details\",\n          \"center\": \"Vibrant yellow\"\n        }\n      ],\n      \"secondary\": {\n        \"type\": \"Tiny violet blossoms\",\n        \"purpose\": \"Added dimension\"\n      }\n    }\n  },\n  \"lighting\": {\n    \"direction\": \"Soft directional lighting from upper left\",\n    \"effects\": [\n      \"Highlights smooth curvature of the tube\",\n      \"Adds subtle sheen to metallic cap\",\n      \"Creates depth within smoke plumes\"\n    ]\n  },\n  \"background\": {\n    \"blend\": \"Seamless cool blue and purple tones\",\n    \"enhancement\": \"Ethereal floral fragrance aesthetic\"\n  },\n  \"details\": \"Hyper-detailed textures of petals and vapor\"\n}",
+    "prompt": "{\n  \"style\": \"超写实奢华化妆品产品摄影\",\n  \"composition\": {\n    \"color_scheme\": \"戏剧性的单色蓝紫色\",\n    \"resolution\": \"8K超高分辨率\",\n    \"depth\": \"电影级景深\",\n    \"aesthetic\": \"高端香氛护肤品广告风格\"\n  },\n  \"product\": {\n    \"type\": \"软管包装\",\n    \"finish\": \"缎面质感\",\n    \"color\": \"长春花蓝\",\n    \"label\": \"NUBELLA\",\n    \"typography\": \"优雅的银色字体\",\n    \"cap\": \"反光金属铬盖\",\n    \"position\": \"垂直居中\"\n  },\n  \"surroundings\": {\n    \"smoke\": {\n      \"type\": \"墨水般的旋涡云雾\",\n      \"colors\": [\n        \"薰衣草色\",\n        \"靛蓝色\",\n        \"冰蓝色\"\n      ],\n      \"texture\": \"柔软、翻腾\",\n      \"interaction\": \"环绕在产品周围\"\n    },\n    \"flowers\": {\n      \"primary\": [\n        {\n          \"color\": \"紫色\",\n          \"details\": \"错综复杂的花瓣细节\",\n          \"center\": \"鲜艳的黄色\"\n        },\n        {\n          \"color\": \"紫丁香色\",\n          \"details\": \"错综复杂的花瓣细节\",\n          \"center\": \"鲜艳的黄色\"\n        }\n      ],\n      \"secondary\": {\n        \"type\": \"细小的紫罗兰色花朵\",\n        \"purpose\": \"增加立体感\"\n      }\n    }\n  },\n  \"lighting\": {\n    \"direction\": \"来自左上方的柔和定向照明\",\n    \"effects\": [\n      \"突显软管的光滑曲度\",\n      \"为金属盖增添微妙的光泽\",\n      \"在烟雾中营造深度\"\n    ]\n  },\n  \"background\": {\n    \"blend\": \"无缝的冷色调蓝色和紫色调\",\n    \"enhancement\": \"空灵的花香美学\"\n  },\n  \"details\": \"花瓣和蒸汽的超精细纹理\"\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3231,7 +2916,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1772374518725-5xe5pxb9-1.jpeg",
     "imageAlt": "红蓝光影下的未来都市双重曝光青年示例图",
-    "prompt": "中文提示词\n{\n  \"prompt\": \"一位年轻男子的超写实电影级双重曝光侧脸肖像，表情专注强烈，皮肤纹理细节丰富，眼神锐利。他的面部与从剪影中浮现的未来主义城市天际线无缝融合，摩天大楼和城市建筑构成了他的颈部和下颌线。深蓝色和鲜艳红色的强烈对比，象征着冲突与力量。抽象的数字划痕、碎裂的玻璃纹理和漏光效果覆盖在面部，营造出戏剧性的效果。干净的白色背景，超精细的灯光，专业电影海报风格，高对比度，清晰聚焦，8K分辨率，逼真的发丝，社论海报构图，现代平面设计美学，戏剧性的氛围，超高清，照片级真实。\",\n  \"negative_prompt\": \"模糊，低分辨率，扭曲的面部，多余的肢体，过饱和的颜色，嘈杂的背景，平淡的灯光，卡通化，低细节\",\n  \"resolution\": \"8K\",\n  \"style\": \"电影感，双重曝光，照片级真实感，社论海报\",\n  \"background\": \"干净的白色\",\n  \"lighting\": \"高对比度，戏剧性的蓝红分割布光\"\n}\n\n英文提示词\n{\n  \"prompt\": \"A hyper-realistic cinematic double exposure portrait of a young man in side profile, intense focused expression, detailed skin texture and sharp eyes. His face seamlessly blended with a futuristic city skyline emerging from his silhouette, skyscrapers and urban buildings forming his neck and jawline. Strong contrast of deep blue and vibrant red tones symbolizing conflict and power. Abstract digital scratches, fractured glass textures, and light leaks overlaying the face for a dramatic effect. Clean white background, ultra-detailed lighting, professional movie poster style, high contrast, sharp focus, 8K resolution, realistic hair strands, editorial poster composition, modern graphic design aesthetics, dramatic mood, ultra-HD, photorealistic.\",\n  \"negative_prompt\": \"blurry, low resolution, distorted face, extra limbs, oversaturated colors, noisy background, flat lighting, cartoonish, low detail\",\n  \"resolution\": \"8K\",\n  \"style\": \"cinematic, double exposure, photorealistic, editorial poster\",\n  \"background\": \"clean white\",\n  \"lighting\": \"high contrast, dramatic blue and red split lighting\"\n}",
+    "prompt": "{\n  \"prompt\": \"一位年轻男子的超写实电影级双重曝光侧脸肖像，表情专注强烈，皮肤纹理细节丰富，眼神锐利。他的面部与从剪影中浮现的未来主义城市天际线无缝融合，摩天大楼和城市建筑构成了他的颈部和下颌线。深蓝色和鲜艳红色的强烈对比，象征着冲突与力量。抽象的数字划痕、碎裂的玻璃纹理和漏光效果覆盖在面部，营造出戏剧性的效果。干净的白色背景，超精细的灯光，专业电影海报风格，高对比度，清晰聚焦，8K分辨率，逼真的发丝，社论海报构图，现代平面设计美学，戏剧性的氛围，超高清，照片级真实。\",\n  \"negative_prompt\": \"模糊，低分辨率，扭曲的面部，多余的肢体，过饱和的颜色，嘈杂的背景，平淡的灯光，卡通化，低细节\",\n  \"resolution\": \"8K\",\n  \"style\": \"电影感，双重曝光，照片级真实感，社论海报\",\n  \"background\": \"干净的白色\",\n  \"lighting\": \"高对比度，戏剧性的蓝红分割布光\"\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3252,7 +2937,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1772373599949-45krpuqa-1.jpeg",
     "imageAlt": "棘龙巨口中的酷飒少女与史前奇观示例图",
-    "prompt": "中文提示词\n超写实电影级奇幻场景，设定在郁郁葱葱的史前丛林山谷中。一只巨大的棘龙站在浅河边，它那长而类似鳄鱼的巨颚张得很大。一位年轻女子平静地坐在恐龙张开的嘴里，完美居中，双腿微微向前悬挂。她有一头深色直发，表情镇定无畏，皮肤纹理逼真。她身穿合身的黑色长袖短款上衣，蓝色牛仔短裤和黑色及膝战术靴。衣服和腿上可见微小的血迹和轻微划痕，增加了戏剧性的紧张感但并不血腥。她怀里温柔地抱着一只小恐龙幼崽，充满保护欲地抱着它。\n\n在他们身后，一道高耸而充满戏剧性的瀑布顺着覆盖着茂密绿色植被和薄雾的陡峭丛林悬崖倾泻而下。场景中栖息着多只恐龙：几只迅猛龙在河岸边潜行，小型食草动物在背景中奔跑，飞翔的翼龙在头顶盘旋。环境丰富，有长满苔藓的岩石、流动的河水、热带植物和柔和的大气雾。\n\n灯光具有电影感和自然感，漫射的日光照亮场景，阴影细节丰富，焦点清晰地聚在女子和棘龙身上，背景元素采用浅景深。恐龙鳞片、牙齿、水珠、树叶和织物上的超写实纹理。史诗奇幻写实主义，戏剧性构图，垂直构图，超精细，照片级真实感，4K，电影级调色，无文字，无水印。\n\n英文提示词\nUltra-realistic cinematic fantasy scene set in a lush prehistoric jungle valley. A colossal Spinosaurus stands beside a shallow river, its long crocodile-like jaws stretched wide open. Seated calmly inside the dinosaur’s open mouth is a young woman, perfectly centered, legs hanging slightly forward. She has straight dark hair, a composed fearless expression, and realistic skin texture. She is wearing a fitted black long-sleeve crop top, blue denim shorts, and black knee-high combat boots. Small blood smears and light scratches are visible on her clothes and legs, adding dramatic tension without gore. She gently cradles a small baby dinosaur in her arms, holding it protectively.\n\nBehind them, a tall dramatic waterfall cascades down steep jungle cliffs covered in dense green foliage and mist. Multiple dinosaurs populate the scene: several Velociraptors stalking the riverbank, small herbivores running through the background, and flying pterosaurs circling overhead. The environment is rich with mossy rocks, flowing water, tropical plants, and soft atmospheric fog.\n\nLighting is cinematic and natural, with diffused daylight illuminating the scene, detailed shadows, sharp focus on the woman and the Spinosaurus, and shallow depth of field for background elements. Hyper-real textures on dinosaur scales, teeth, water droplets, foliage, and fabric. Epic fantasy realism, dramatic composition, vertical framing, ultra-detailed, photorealistic, 4K, cinematic color grading, no text, no watermark.",
+    "prompt": "超写实电影级奇幻场景，设定在郁郁葱葱的史前丛林山谷中。一只巨大的棘龙站在浅河边，它那长而类似鳄鱼的巨颚张得很大。一位年轻女子平静地坐在恐龙张开的嘴里，完美居中，双腿微微向前悬挂。她有一头深色直发，表情镇定无畏，皮肤纹理逼真。她身穿合身的黑色长袖短款上衣，蓝色牛仔短裤和黑色及膝战术靴。衣服和腿上可见微小的血迹和轻微划痕，增加了戏剧性的紧张感但并不血腥。她怀里温柔地抱着一只小恐龙幼崽，充满保护欲地抱着它。\n\n在他们身后，一道高耸而充满戏剧性的瀑布顺着覆盖着茂密绿色植被和薄雾的陡峭丛林悬崖倾泻而下。场景中栖息着多只恐龙：几只迅猛龙在河岸边潜行，小型食草动物在背景中奔跑，飞翔的翼龙在头顶盘旋。环境丰富，有长满苔藓的岩石、流动的河水、热带植物和柔和的大气雾。\n\n灯光具有电影感和自然感，漫射的日光照亮场景，阴影细节丰富，焦点清晰地聚在女子和棘龙身上，背景元素采用浅景深。恐龙鳞片、牙齿、水珠、树叶和织物上的超写实纹理。史诗奇幻写实主义，戏剧性构图，垂直构图，超精细，照片级真实感，4K，电影级调色，无文字，无水印。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3273,7 +2958,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202603/1772370879093-klk7hbpq-1.jpeg",
     "imageAlt": "冲破次元壁的写实漫画跑者示例图",
-    "prompt": "中文提示词\n{\n  \"prompt\": \"超写实，一位留着深色短卷发、修剪整齐的胡须和黑色方形眼镜的年轻男子的鲜艳逼真渲染，身穿深色纹理高领毛衣和牛仔裤。他奔跑到一半被捕捉下来，姿态充满动感，向前突破，充满戏剧性地从一个破碎的漫画分镜框中显现——一条腿和一只手臂冲入现实世界，而身体的其余部分仍留在漫画框内。他的表情充满活力和喜悦，拥有锐利的面部细节，自然的皮肤纹理，以及具有高对比度和深度的戏剧性电影灯光。\\n\\n背景：一个非常详细的黑白漫画布局，充满了幽默、夸张的且与他直接互动的反应场景。周围的漫画人物表现出震惊和喜剧的表情，配有粗体的对话气泡和速度线。漫画分镜采用经典的高对比度水墨风格绘制，线条清晰，网点阴影。撕裂的纸张边缘和碎片增强了他冲破漫画世界的幻觉。全彩色的写实人物与单色的漫画环境形成强烈对比，创造出写实与漫画艺术之间的动态混合体。超精细，8k分辨率，清晰聚焦，戏剧性的阴影，电影级景深。\"\n}\n\n英文提示词\n{\n  \"prompt\": \"Ultra-realistic, vibrant photorealistic rendering of a young man with short curly dark hair, neatly trimmed beard, and black rectangular glasses, wearing a dark textured turtleneck sweater and jeans. He is captured mid-run in a dynamic, forward-breaking pose, dramatically emerging from a torn manga panel — one leg and one arm bursting into the real world while the rest of his body remains inside the comic frame. His expression is energetic and joyful, with sharp facial details, natural skin texture, and dramatic cinematic lighting with high contrast and depth. \\n\\nBackground: a highly detailed black-and-white manga layout filled with humorous, exaggerated reaction scenes that directly interact with him. The surrounding manga characters display shocked and comedic expressions, with bold speech bubbles and motion lines. The manga panels are illustrated in a classic high-contrast ink style with crisp linework and halftone shading. Torn paper edges and debris enhance the illusion of him breaking through the comic world. The fully colored, photorealistic figure contrasts strongly against the monochrome manga environment, creating a dynamic hybrid between reality and comic art. Ultra-detailed, 8k resolution, sharp focus, dramatic shadows, cinematic depth of field.\"\n}",
+    "prompt": "{\n  \"prompt\": \"超写实，一位留着深色短卷发、修剪整齐的胡须和黑色方形眼镜的年轻男子的鲜艳逼真渲染，身穿深色纹理高领毛衣和牛仔裤。他奔跑到一半被捕捉下来，姿态充满动感，向前突破，充满戏剧性地从一个破碎的漫画分镜框中显现——一条腿和一只手臂冲入现实世界，而身体的其余部分仍留在漫画框内。他的表情充满活力和喜悦，拥有锐利的面部细节，自然的皮肤纹理，以及具有高对比度和深度的戏剧性电影灯光。\\n\\n背景：一个非常详细的黑白漫画布局，充满了幽默、夸张的且与他直接互动的反应场景。周围的漫画人物表现出震惊和喜剧的表情，配有粗体的对话气泡和速度线。漫画分镜采用经典的高对比度水墨风格绘制，线条清晰，网点阴影。撕裂的纸张边缘和碎片增强了他冲破漫画世界的幻觉。全彩色的写实人物与单色的漫画环境形成强烈对比，创造出写实与漫画艺术之间的动态混合体。超精细，8k分辨率，清晰聚焦，戏剧性的阴影，电影级景深。\"\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3294,7 +2979,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202602/1772111294034-xpxiipdw-1.jpeg",
     "imageAlt": "震撼视觉的深红影棚广角美妆大片示例图",
-    "prompt": "中文提示词\n照片级真实感的大胆美妆宣传活动，使用上传的模特作为精确的身份参考。不做面部改变，不做平滑处理。\n场景：深红色饱和的摄影棚环境，具有高对比度的地板图案或光滑表面。\n产品：产品被握持或放置在极其靠近镜头的位置，由于透视关系显得巨大。\n模特姿势：俏皮或自信的微笑，手臂完全伸向相机，手指因广角镜头而略微变形。透过太阳镜的强烈眼神交流或自然凝视。\n相机：超广角 20–28mm 美学，动态前景夸张，浅至中等景深。\n灯光：强有力的商业照明，具有清晰的高光和反射，锐利的包装边缘，充满活力的调色。超精细的皮肤纹理和织物真实感。\n\n英文提示词\nPhotorealistic bold beauty campaign using uploaded model as exact identity reference. No facial changes, no smoothing.  \nScene: deep red saturated studio environment with high-contrast floor pattern or glossy surface.  \nProduct: the product held or positioned extremely close to the lens, appearing large due to perspective.   \nModel pose: playful or confident smile, arm fully extended toward camera, fingers slightly distorted by wide lens. Strong eye contact through sunglasses or natural gaze.  \nCamera: ultra-wide 20–28mm aesthetic, dynamic foreground exaggeration, shallow-to-medium depth of field.  \nLighting: punchy commercial lighting with defined highlights and reflections, crisp packaging edges, vibrant color grading. Hyper-detailed skin texture and fabric realism.",
+    "prompt": "照片级真实感的大胆美妆宣传活动，使用上传的模特作为精确的身份参考。不做面部改变，不做平滑处理。\n场景：深红色饱和的摄影棚环境，具有高对比度的地板图案或光滑表面。\n产品：产品被握持或放置在极其靠近镜头的位置，由于透视关系显得巨大。\n模特姿势：俏皮或自信的微笑，手臂完全伸向相机，手指因广角镜头而略微变形。透过太阳镜的强烈眼神交流或自然凝视。\n相机：超广角 20–28mm 美学，动态前景夸张，浅至中等景深。\n灯光：强有力的商业照明，具有清晰的高光和反射，锐利的包装边缘，充满活力的调色。超精细的皮肤纹理和织物真实感。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3315,7 +3000,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "4:5 / 1:1",
     "imageUrl": "https://img.opennana.com/prompts/assets/202602/1772111289141-hzd4rr9r-1.jpeg",
     "imageAlt": "珊瑚色极简影棚时尚商业大片示例图",
-    "prompt": "中文提示词\n超写实高端时尚商业广告大片，使用上传的模特照片作为严格的身份参考。保留精确的面部特征、比例和自然皮肤纹理——无修图，无变形。场景：珊瑚色单色工作室盒，配有光泽反光棋盘格或极简抛光地板。拥有柔和光线渐变的干净几何墙壁。产品：产品放置在前景中心超大位置，因广角透视而占据画面主导地位。包装超清晰，文字完全可读，具有逼真的反射和材质纹理。较小的产品单元可对称放置在背景中。模特姿势：站在产品后方，微蹲或前倾，一只手伸向镜头以创造深度感。强烈自信的表情，时尚态度。相机：低角度 24-35mm 镜头感，戏剧性透视畸变，对产品和模特都进行深焦处理。灯光：明亮的商业影棚灯光，柔和阴影，包装上有光泽高光，高端广告成片质感。4K–8K 写实主义，无水印，无嵌入式文本。纵横比 9:13\n\n英文提示词\nUltra-realistic high-fashion commercial campaign using the uploaded model photo as strict identity reference. Preserve exact facial features, proportions and natural skin texture — no retouching, no reshaping.  \nScene: coral monochrome studio box with glossy reflective checker or minimal polished floor. Clean geometric walls with soft light gradients.  \nProduct: the product placed oversized in the center foreground, dominating the frame due to wide-angle perspective. The packaging is ultra-sharp, fully readable, realistic reflections and material texture. Smaller product units can be placed symmetrically in the background.  \nModel pose: standing behind the product, slightly crouched or leaning forward, one hand reaching toward the camera to create depth. Strong confident expression, fashion attitude.  \nCamera: low-angle 24–35mm lens look, dramatic perspective distortion, deep focus on both product and model.  \nLighting: bright commercial studio lighting, soft shadows, glossy highlights on packaging, high-end campaign finish. 4K–8K realism, no watermark, no embedded text.i ar 9:13",
+    "prompt": "超写实高端时尚商业广告大片，使用上传的模特照片作为严格的身份参考。保留精确的面部特征、比例和自然皮肤纹理——无修图，无变形。场景：珊瑚色单色工作室盒，配有光泽反光棋盘格或极简抛光地板。拥有柔和光线渐变的干净几何墙壁。产品：产品放置在前景中心超大位置，因广角透视而占据画面主导地位。包装超清晰，文字完全可读，具有逼真的反射和材质纹理。较小的产品单元可对称放置在背景中。模特姿势：站在产品后方，微蹲或前倾，一只手伸向镜头以创造深度感。强烈自信的表情，时尚态度。相机：低角度 24-35mm 镜头感，戏剧性透视畸变，对产品和模特都进行深焦处理。灯光：明亮的商业影棚灯光，柔和阴影，包装上有光泽高光，高端广告成片质感。4K–8K 写实主义，无水印，无嵌入式文本。纵横比 9:13",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3336,7 +3021,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202602/1771992723517-11xkvi5s-1.jpeg",
     "imageAlt": "鸟群织就的梦幻高定时装秀示例图",
-    "prompt": "中文提示词\n一个充满趣味的高级时装T台场景，主角是一位自信的女性，正走在奢华时装秀的T台上，身穿一件完全由鸟类制成的非凡高级定制礼服。数百只优雅、色彩鲜艳的鸟类构成了飘逸的雕塑感礼服形状，像活着的羽毛一样层叠，翅膀微微张开，营造出布料和运动的错觉。一些鸟儿在她周围轻轻升入空中，捕捉于飞行瞬间，增添了神奇、超现实的运动感。鸟儿们展现出丰富多样的色彩——彩虹般的蓝色、光芒四射的红色、金黄色和柔和的白色——拥有错综复杂的羽毛细节和自然纹理。她在迈步间摆出姿势，带着快乐、自信的表情，富有表现力的眼睛，以及精致的T台妆容。戏剧性的舞台灯光配以发光的高光，黑暗模糊的观众背景，电影级的景深，奇幻现实主义，超精细纹理，高对比度，清晰聚焦，奇思妙想的奢华时装秀，超现实主义高级定制，4K分辨率，专业调色。\n\n英文提示词\nA playful high-fashion runway scene featuring a confident woman walking a luxury fashion show catwalk, wearing an extraordinary couture dress made entirely of birds. Hundreds of elegant, vividly colored birds form the shape of a flowing, sculptural gown, layered like living feathers, with wings partially spread to create the illusion of fabric and motion. Some birds lift gently into the air around her, captured mid-flight, adding a magical, surreal sense of movement. The birds display a rich variety of colors — iridescent blues, radiant reds, golden yellows, and soft whites — with intricate feather details and natural textures. She poses mid-stride with a joyful, confident expression, expressive eyes, and refined runway makeup. Dramatic stage lighting with glowing highlights, dark blurred audience background, cinematic depth of field, fantasy realism, ultra-detailed textures, high contrast, sharp focus, whimsical luxury fashion show, surreal couture, 4K resolution, professional color grading.",
+    "prompt": "一个充满趣味的高级时装T台场景，主角是一位自信的女性，正走在奢华时装秀的T台上，身穿一件完全由鸟类制成的非凡高级定制礼服。数百只优雅、色彩鲜艳的鸟类构成了飘逸的雕塑感礼服形状，像活着的羽毛一样层叠，翅膀微微张开，营造出布料和运动的错觉。一些鸟儿在她周围轻轻升入空中，捕捉于飞行瞬间，增添了神奇、超现实的运动感。鸟儿们展现出丰富多样的色彩——彩虹般的蓝色、光芒四射的红色、金黄色和柔和的白色——拥有错综复杂的羽毛细节和自然纹理。她在迈步间摆出姿势，带着快乐、自信的表情，富有表现力的眼睛，以及精致的T台妆容。戏剧性的舞台灯光配以发光的高光，黑暗模糊的观众背景，电影级的景深，奇幻现实主义，超精细纹理，高对比度，清晰聚焦，奇思妙想的奢华时装秀，超现实主义高级定制，4K分辨率，专业调色。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3357,7 +3042,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202602/1771924760833-8i25qoj7-1.jpeg",
     "imageAlt": "冰火双雄背靠背史诗电影海报示例图",
-    "prompt": "中文提示词\n一幅戏剧性的电影海报风格肖像，描绘了两位史诗奇幻战士在冰冻风暴中背靠背站立。左侧是一位身经百战的男性战士，留着湿漉漉的深色卷发，低头以此表达坚定的决心，紧握着一把插在冰里的中世纪长剑。霜雪附着在他毛皮镶边的斗篷和肩膀上。右侧是一位强有力的女性战士侧影，苍白的皮肤在炽热的橙色光芒下闪耀，她的身体部分被火焰吞没，与冰冷的蓝色氛围形成对比。雪花粒子在空中盘旋，在象征性的冲突中融合了火与冰。超精细的面部细节，情感强度，体积雾，电影级布光，冷蓝色调混合温暖的火焰高光，浅景深，史诗奇幻电影海报，超写实，8K分辨率，戏剧性构图，清晰聚焦，高对比度，逼真纹理。\n\n英文提示词\nA dramatic cinematic poster-style portrait of two epic fantasy warriors standing back-to-back in a frozen storm. On the left, a battle-worn male warrior with wet, curly dark hair, head bowed in quiet resolve, gripping a medieval sword planted into the ice. Frost and snow cling to his fur-lined cloak and shoulders. On the right, a powerful female warrior in profile, pale skin glowing with fiery orange light, her body partially engulfed in flames thatcontrast against the icy blue atmosphere. Snow particles swirl through the air, blending fire and ice in a symbolic clash. Ultra-detailed faces, emotional intensity, volumetric fog, cinematic lighting, cold blue tones mixed with warm fire highlights, shallow depth of field, epic fantasy movie poster, hyper-realistic, 8K resolution, dramatic composition, sharp focus, high contrast, photorealistic textures.",
+    "prompt": "一幅戏剧性的电影海报风格肖像，描绘了两位史诗奇幻战士在冰冻风暴中背靠背站立。左侧是一位身经百战的男性战士，留着湿漉漉的深色卷发，低头以此表达坚定的决心，紧握着一把插在冰里的中世纪长剑。霜雪附着在他毛皮镶边的斗篷和肩膀上。右侧是一位强有力的女性战士侧影，苍白的皮肤在炽热的橙色光芒下闪耀，她的身体部分被火焰吞没，与冰冷的蓝色氛围形成对比。雪花粒子在空中盘旋，在象征性的冲突中融合了火与冰。超精细的面部细节，情感强度，体积雾，电影级布光，冷蓝色调混合温暖的火焰高光，浅景深，史诗奇幻电影海报，超写实，8K分辨率，戏剧性构图，清晰聚焦，高对比度，逼真纹理。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3378,7 +3063,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "3:4",
     "imageUrl": "https://img.opennana.com/prompts/assets/202601/1769873890606-csyjkxj3-1.jpeg",
     "imageAlt": "街头炫瓶男模示例图",
-    "prompt": "中文提示词\n专业照片，一位男士，30岁的俄罗斯模特（参考图像），正对着镜头，向相机倾斜，从下往上拍摄，使用广角镜头。男士倾斜着身体，近距离将一瓶饮料展示给镜头，一只手拿着瓶子，紧贴在镜头前。瓶子的标签和方向保持笔直，以便标签清晰可读。他穿着白色运动鞋，一只脚在镜头前方。男士站在街道上，湿漉漉的沥青和飞溅的水花从下方拍出。鲜艳的色彩，电影级灯光，光线从后方打在模特的脸上。--v7 --ar 3:4 --style raw\n\n英文提示词\nProfessional photo, a guy, a 30-year-old Russian model (reference image), is facing the lens, tilted towards the camera, angle from below, shot with a wide-angle lens. The guy is tilted and shows a bottle close-up to the camera, a hand with a bottle close-up right in front of the lens. The label and direction of the bottle are straight so the label is readable. He's wearing white sneakers, one foot in front of the camera. The guy is standing on the street, wet asphalt and splashes from below. Bright colors, cinematic lighting, the light is behind and on the model’s face. --v7 --ar 3:4 --style raw",
+    "prompt": "专业照片，一位男士，30岁的俄罗斯模特（参考图像），正对着镜头，向相机倾斜，从下往上拍摄，使用广角镜头。男士倾斜着身体，近距离将一瓶饮料展示给镜头，一只手拿着瓶子，紧贴在镜头前。瓶子的标签和方向保持笔直，以便标签清晰可读。他穿着白色运动鞋，一只脚在镜头前方。男士站在街道上，湿漉漉的沥青和飞溅的水花从下方拍出。鲜艳的色彩，电影级灯光，光线从后方打在模特的脸上。--v7 --ar 3:4 --style raw",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3420,7 +3105,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202601/1769340463229-ret3fajs-1.jpeg",
     "imageAlt": "复古巴士上的红风衣女郎示例图",
-    "prompt": "中文提示词\n一位时尚年轻女子坐在老式复古巴士的前缘，身穿红色长风衣、羊毛无檐小便帽、圆形蓝色反光太阳镜、叠层项链和粗犷的棕色皮靴。她有着波浪状金发，带着自信而梦幻的表情，仰望天空。巴士漆面剥落，呈青绿色与铁锈红色调。明亮清澈的蓝天，城市背景建筑极少，柔和日光，电影级色彩分级，浅景深，高端时尚旅行氛围，编辑摄影，超写实，4K分辨率，锐利对焦，自然肌肤质感，戏剧性构图，电影静帧美学。\n\n英文提示词\nA stylish young woman sitting on the front edge of an old vintage bus, wearing a long red trench coat, woolen beanie cap, round blue reflective sunglasses, layered necklaces, and rugged brown leather boots. She has wavy blonde hair and a confident, dreamy expression, looking upward toward the sky. The bus is weathered with peeling paint in turquoise and rust red tones.Bright clear blue sky, urban background with minimal buildings, soft daylight, cinematic color grading, shallow depth of field, high fashion travel vibe, editorial photography, ultra-realistic, 4K resolution, sharp focus, natural skin texture, dramatic composition, film still aesthetic.",
+    "prompt": "一位时尚年轻女子坐在老式复古巴士的前缘，身穿红色长风衣、羊毛无檐小便帽、圆形蓝色反光太阳镜、叠层项链和粗犷的棕色皮靴。她有着波浪状金发，带着自信而梦幻的表情，仰望天空。巴士漆面剥落，呈青绿色与铁锈红色调。明亮清澈的蓝天，城市背景建筑极少，柔和日光，电影级色彩分级，浅景深，高端时尚旅行氛围，编辑摄影，超写实，4K分辨率，锐利对焦，自然肌肤质感，戏剧性构图，电影静帧美学。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3441,7 +3126,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16 / 16:9",
     "imageUrl": "https://img.opennana.com/prompts/assets/202601/1768919593335-uya7wlam-1.jpeg",
     "imageAlt": "皮克斯风阳光少年示例图",
-    "prompt": "中文提示词\n一个风格化的3D卡通肖像，一位年轻男子，拥有短棕发和富有表现力的绿色眼睛，温暖地微笑。他穿着黑色西装外套内搭白色T恤，现代休闲时尚。类似皮克斯/迪士尼风格角色设计，皮肤光滑，柔和光照，略微夸张的面部特征。高细节、精美的3D渲染，友好且平易近人的表情。渐变背景为柔和的蓝绿色和粉色，工作室灯光，浅景深，高分辨率。\n\n英文提示词\nA stylized 3D cartoon portrait of a young man with short brown hair and expressive green eyes, smiling warmly. He is wearing a black blazer over a white t-shirt, modern casual fashion. Pixar-like / Disney-style character design with smooth skin, soft lighting, and slightly exaggerated facial features. High detail, polished 3D render, friendly and approachable expression. Gradient background with soft teal and pink colors, studio lighting, shallow depth of field, high resolution.",
+    "prompt": "一个风格化的3D卡通肖像，一位年轻男子，拥有短棕发和富有表现力的绿色眼睛，温暖地微笑。他穿着黑色西装外套内搭白色T恤，现代休闲时尚。类似皮克斯/迪士尼风格角色设计，皮肤光滑，柔和光照，略微夸张的面部特征。高细节、精美的3D渲染，友好且平易近人的表情。渐变背景为柔和的蓝绿色和粉色，工作室灯光，浅景深，高分辨率。",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3462,7 +3147,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202601/1768402800354-cyso7pp1-1.jpeg",
     "imageAlt": "沉香玫瑰悬浮幻景示例图",
-    "prompt": "中文提示词\n{\n  \"master_prompt_type\": \"超精细8K AI图像生成\",\n  \"global_settings\": {\n    \"resolution\": \"8K UHD\",\n    \"aspect_ratio\": \"2:3 竖版\",\n    \"render_quality\": \"极致锐度、超微细节、电影级光效\",\n    \"style\": \"超现实商业产品摄影\",\n    \"color_profile\": \"温暖金调搭配柔和琥珀高光\",\n    \"environment\": {\n      \"location\": \"古老中东市场走廊\",\n      \"architecture\": {\n        \"walls\": \"岁月痕迹的粗糙石墙与可见纹理\",\n        \"arches\": \"背景巨型石拱\",\n        \"floor\": \"暖棕色石材地面\"\n      },\n      \"background_elements\": [\n        \"装满香料的木架\",\n        \"袋装与碗装干货\",\n        \"悬挂草药束\",\n        \"散发暖黄光的传统金属灯笼\"\n      ],\n      \"lighting\": {\n        \"primary\": \"柔和金色环境光\",\n        \"secondary\": \"两侧暖灯笼辉光\",\n        \"atmosphere\": \"薄雾增强光线漫射\"\n      }\n    },\n    \"main_subject\": {\n      \"type\": \"香水瓶\",\n      \"position\": \"中心前景\",\n      \"placement\": \"置于华丽木桌之上\",\n      \"material\": {\n        \"bottle\": \"透明清玻璃\",\n        \"cap\": \"黄金金属矩形瓶盖\",\n        \"liquid\": \"淡金香水液体\"\n      },\n      \"design\": {\n        \"shape\": \"圆角矩形瓶身\",\n        \"finish\": \"高光反射表面\",\n        \"label\": \"无可见标签\"\n      },\n      \"table\": {\n        \"material\": \"深色雕花木材\",\n        \"shape\": \"方形台面\",\n        \"details\": [\n          \"繁复花卉与几何雕刻\",\n          \"金色镶嵌装饰\",\n          \"抛光表面映光\"\n        ]\n      },\n      \"floating_elements\": {\n        \"composition_style\": \"竖向成分堆叠\",\n        \"motion\": \"成分悬浮并伴随旋转金光\",\n        \"effects\": [\n          \"发光粒子\",\n          \"闪耀尘埃\",\n          \"柔光尾迹连接元素\"\n        ],\n        \"elements_order_top_to_bottom\": [\n          {\n            \"ingredient\": \"琥珀树脂\",\n            \"appearance\": \"半透明金棕树脂块\",\n            \"glow\": \"温暖内发光\"\n          },\n          {\n            \"ingredient\": \"大马士革玫瑰\",\n            \"appearance\": \"盛放粉色玫瑰\",\n            \"details\": [\n              \"柔软层叠花瓣\",\n              \"自然绿叶\",\n              \"轻飘附近花瓣\"\n            ]\n          },\n          {\n            \"ingredient\": \"白麝香\",\n            \"appearance\": \"光滑白水晶状石块\",\n            \"additional\": \"石下细白粉末\"\n          },\n          {\n            \"ingredient\": \"陈年沉香\",\n            \"appearance\": \"深棕木片\",\n            \"texture\": \"粗糙纤维木纹\",\n            \"effect\": \"缕缕白烟上升\"\n          }\n        ]\n      },\n      \"text_elements\": {\n        \"title\": {\n          \"text\": \"精致叙利亚香水\",\n          \"font_style\": \"优雅衬线体\",\n          \"color\": \"金色\",\n          \"position\": \"顶部中央\"\n        },\n        \"subtitle\": {\n          \"text\": \"奢华叙利亚香水\",\n          \"font_style\": \"较小衬线体\",\n          \"color\": \"金色\",\n          \"position\": \"主标题下方\"\n        },\n        \"ingredient_labels\": [\n          {\n            \"title\": \"纯琥珀\",\n            \"description\": \"来自自然深处的珍贵树脂\"\n          },\n          {\n            \"title\": \"大马士革玫瑰\",\n            \"description\": \"美丽与叙利亚传承的象征\"\n          },\n          {\n            \"title\": \"白麝香\",\n            \"description\": \"干净、粉感、永恒优雅的香氛\"\n          },\n          {\n            \"title\": \"陈年沉香\",\n            \"description\": \"深邃温暖、浓郁烟熏木香\"\n          }\n        ],\n        \"typography_details\": {\n          \"connector_lines\": \"细弯金线连接文字与成分\",\n          \"icons\": \"线末端小圆点标记\"\n        },\n        \"opacity\": \"轻微半透明\"\n      }\n    },\n    \"overall_mood\": {\n      \"tone\": \"奢华、温暖、优雅\",\n      \"theme\": \"传承香水工艺\",\n      \"visual_feel\": \"浓郁、高端、电影级广告\"\n    }\n  }\n}\n\n英文提示词\n{\n  \"master_prompt_type\": \"Ultra-detailed 8K AI image generation\",\n  \"global_settings\": {\n    \"resolution\": \"8K UHD\",\n    \"aspect_ratio\": \"2:3 vertical\",\n    \"render_quality\": \"extreme sharpness, ultra-fine detail, cinematic lighting\",\n    \"style\": \"hyper-realistic commercial product photography\",\n    \"color_profile\": \"warm golden tones with soft amber highlights\",\n    \"environment\": {\n      \"location\": \"ancient Middle Eastern market corridor\",\n      \"architecture\": {\n        \"walls\": \"aged stone walls with visible texture and wear\",\n        \"arches\": \"large stone archway in background\",\n        \"floor\": \"stone flooring, warm brown tone\"\n      },\n      \"background_elements\": [\n        \"wooden shelves filled with spices\",\n        \"sacks and bowls of dried goods\",\n        \"hanging bundles of herbs\",\n        \"traditional metal lanterns emitting warm yellow light\"\n      ],\n      \"lighting\": {\n        \"primary\": \"soft golden ambient light\",\n        \"secondary\": \"warm lantern glow from both sides\",\n        \"atmosphere\": \"slight haze enhancing light diffusion\" \"main_subject\": {\n          \"type\": \"perfume bottle\",\n          \"position\": \"center foreground\",\n          \"placement\": \"on top of an ornate wooden table\",\n          \"material\": {\n            \"bottle\": \"transparent clear glass\",\n            \"cap\": \"gold metallic rectangular cap\",\n            \"liquid\": \"light golden perfume liquid\"\n          },\n          \"design\": {\n            \"shape\": \"rectangular bottle with rounded edges\",\n            \"finish\": \"glossy reflective surface\",\n            \"label\": \"no visible label\" \"table\": {\n              \"material\": \"dark carved wood\",\n              \"shape\": \"square top\",\n              \"details\": [\n                \"intricate floral and geometric carvings\",\n                \"golden inlay accents\",\n                \"polished surface reflecting light\" \"floating_elements\": {\n                  \"composition_style\": \"vertical ingredient stack\",\n                  \"motion\": \"ingredients appear suspended with swirling golden light\",\n                  \"effects\": [\n                    \"glowing particles\",\n                    \"sparkling dust\",\n                    \"soft light trails connecting elements\"\n                  ],\n                  \"elements_order_top_to_bottom\": [\n                    {\n                      \"ingredient\": \"amber resin\",\n                      \"appearance\": \"translucent golden-brown resin chunks\",\n                      \"glow\": \"warm internal glow\" \"ingredient\": \"damask rose\",\n                      \"appearance\": \"fully bloomed pink rose\",\n                      \"details\": [\n                        \"soft layered petals\",\n                        \"natural green leaves\",\n                        \"petals gently floating nearby\"\n                      ] \"ingredient\": \"white musk\",\n                      \"appearance\": \"smooth white crystal-like stone\",\n                      \"additional\": \"fine white powder beneath the stone\" \"ingredient\": \"aged agarwood\",\n                      \"appearance\": \"dark brown wooden pieces\",\n                      \"texture\": \"rough, fibrous wood grain\",\n                      \"effect\": \"thin white smoke rising upward\" \"text_elements\": {\n                        \"title\": {\n                          \"text\": \"Exquisite Syrian Perfume\",\n                          \"font_style\": \"elegant serif\",\n                          \"color\": \"gold\",\n                          \"position\": \"top center\"\n                        },\n                        \"subtitle\": {\n                          \"text\": \"Luxury Syrian Perfume\",\n                          \"font_style\": \"smaller serif\",\n                          \"color\": \"gold\",\n                          \"position\": \"below main title\"\n                        },\n                        \"ingredient_labels\": [\n                          {\n                            \"title\": \"Pure Amber\",\n                            \"description\": \"Precious resin from the depths of nature\"\n                          } \"title\": \"Damask Rose\",\n                          \"description\": \"Symbol of beauty and Syrian heritage\"\n                        },\n                        {\n                          \"title\": \"White Musk\",\n                          \"description\": \"Clean, powdery scent of timeless elegance\"\n                        },\n                        {\n                          \"title\": \"Aged Agarwood\",\n                          \"description\": \"Rich, smoky wood with deep warmth\"\n                        }\n                      ],\n                      \"typography_details\": {\n                        \"connector_lines\": \"thin curved golden lines connecting text to ingredients\",\n                        \"icons\": \"small circular markers at line endpoints\"\n                      } \"opacity\": \"slightly translucent\"\n                    } \"overall_mood\": \"tone\": \"luxurious, warm, elegant\",\n                    \"theme\": \"heritage perfume craftsmanship\",\n                    \"visual_feel\": \"rich, premium, cinematic ads",
+    "prompt": "{\n  \"master_prompt_type\": \"超精细8K AI图像生成\",\n  \"global_settings\": {\n    \"resolution\": \"8K UHD\",\n    \"aspect_ratio\": \"2:3 竖版\",\n    \"render_quality\": \"极致锐度、超微细节、电影级光效\",\n    \"style\": \"超现实商业产品摄影\",\n    \"color_profile\": \"温暖金调搭配柔和琥珀高光\",\n    \"environment\": {\n      \"location\": \"古老中东市场走廊\",\n      \"architecture\": {\n        \"walls\": \"岁月痕迹的粗糙石墙与可见纹理\",\n        \"arches\": \"背景巨型石拱\",\n        \"floor\": \"暖棕色石材地面\"\n      },\n      \"background_elements\": [\n        \"装满香料的木架\",\n        \"袋装与碗装干货\",\n        \"悬挂草药束\",\n        \"散发暖黄光的传统金属灯笼\"\n      ],\n      \"lighting\": {\n        \"primary\": \"柔和金色环境光\",\n        \"secondary\": \"两侧暖灯笼辉光\",\n        \"atmosphere\": \"薄雾增强光线漫射\"\n      }\n    },\n    \"main_subject\": {\n      \"type\": \"香水瓶\",\n      \"position\": \"中心前景\",\n      \"placement\": \"置于华丽木桌之上\",\n      \"material\": {\n        \"bottle\": \"透明清玻璃\",\n        \"cap\": \"黄金金属矩形瓶盖\",\n        \"liquid\": \"淡金香水液体\"\n      },\n      \"design\": {\n        \"shape\": \"圆角矩形瓶身\",\n        \"finish\": \"高光反射表面\",\n        \"label\": \"无可见标签\"\n      },\n      \"table\": {\n        \"material\": \"深色雕花木材\",\n        \"shape\": \"方形台面\",\n        \"details\": [\n          \"繁复花卉与几何雕刻\",\n          \"金色镶嵌装饰\",\n          \"抛光表面映光\"\n        ]\n      },\n      \"floating_elements\": {\n        \"composition_style\": \"竖向成分堆叠\",\n        \"motion\": \"成分悬浮并伴随旋转金光\",\n        \"effects\": [\n          \"发光粒子\",\n          \"闪耀尘埃\",\n          \"柔光尾迹连接元素\"\n        ],\n        \"elements_order_top_to_bottom\": [\n          {\n            \"ingredient\": \"琥珀树脂\",\n            \"appearance\": \"半透明金棕树脂块\",\n            \"glow\": \"温暖内发光\"\n          },\n          {\n            \"ingredient\": \"大马士革玫瑰\",\n            \"appearance\": \"盛放粉色玫瑰\",\n            \"details\": [\n              \"柔软层叠花瓣\",\n              \"自然绿叶\",\n              \"轻飘附近花瓣\"\n            ]\n          },\n          {\n            \"ingredient\": \"白麝香\",\n            \"appearance\": \"光滑白水晶状石块\",\n            \"additional\": \"石下细白粉末\"\n          },\n          {\n            \"ingredient\": \"陈年沉香\",\n            \"appearance\": \"深棕木片\",\n            \"texture\": \"粗糙纤维木纹\",\n            \"effect\": \"缕缕白烟上升\"\n          }\n        ]\n      },\n      \"text_elements\": {\n        \"title\": {\n          \"text\": \"精致叙利亚香水\",\n          \"font_style\": \"优雅衬线体\",\n          \"color\": \"金色\",\n          \"position\": \"顶部中央\"\n        },\n        \"subtitle\": {\n          \"text\": \"奢华叙利亚香水\",\n          \"font_style\": \"较小衬线体\",\n          \"color\": \"金色\",\n          \"position\": \"主标题下方\"\n        },\n        \"ingredient_labels\": [\n          {\n            \"title\": \"纯琥珀\",\n            \"description\": \"来自自然深处的珍贵树脂\"\n          },\n          {\n            \"title\": \"大马士革玫瑰\",\n            \"description\": \"美丽与叙利亚传承的象征\"\n          },\n          {\n            \"title\": \"白麝香\",\n            \"description\": \"干净、粉感、永恒优雅的香氛\"\n          },\n          {\n            \"title\": \"陈年沉香\",\n            \"description\": \"深邃温暖、浓郁烟熏木香\"\n          }\n        ],\n        \"typography_details\": {\n          \"connector_lines\": \"细弯金线连接文字与成分\",\n          \"icons\": \"线末端小圆点标记\"\n        },\n        \"opacity\": \"轻微半透明\"\n      }\n    },\n    \"overall_mood\": {\n      \"tone\": \"奢华、温暖、优雅\",\n      \"theme\": \"传承香水工艺\",\n      \"visual_feel\": \"浓郁、高端、电影级广告\"\n    }\n  }\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -3483,7 +3168,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
     "recommendedSize": "9:16",
     "imageUrl": "https://img.opennana.com/prompts/assets/202601/1768056882155-qis0af56-1.jpeg",
     "imageAlt": "俯拍巨女城景自拍示例图",
-    "prompt": "中文提示词\n{\n  \"type\": \"图像生成提示词\",\n  \"language\": \"zh\",\n  \"style\": \"超现实电影感自拍摄影\",\n  \"aspect_ratio\": \"9:16\",\n  \"identity_preservation\": {\n    \"use_reference_image\": true,\n    \"strict_identity_lock\": true,\n    \"alter_face\": false,\n    \"alter_skin\": false,\n    \"alter_hair\": false,\n    \"alter_gender\": false,\n    \"notes\": \"保留上传参考图像中完全一致的脸部特征、皮肤纹理、头发、眼镜、年龄和性别。禁止合成皮肤或雕塑感。\"\n  },\n  \"subject\": {\n    \"gender\": \"女性\",\n    \"capture_method\": \"由主体本人拍摄的自拍\",\n    \"pose\": {\n      \"selfie_arm\": {\n        \"description\": \"一只手臂完全伸直并完全向上伸展，手持拍摄自拍的相机\",\n        \"visibility\": \"手臂在画面中清晰可见、笔直且占主导地位\",\n        \"camera_visibility\": \"自拍相机设备本身不得在画面中出现\"\n      },\n      \"product_arm\": {\n        \"description\": \"另一只手臂完全伸向相机，手持附带的佳能相机\",\n        \"importance\": \"产品最靠近相机并在视觉上占主导地位\"\n      },\n      \"head\": {\n        \"tilt\": \"头部向自拍相机微微倾斜\"\n      },\n      \"expression\": \"自然放松的面部表情\"\n    },\n    \"body_visibility\": \"从头到脚全身可见\",\n    \"feet\": \"双脚清晰接触路面\"\n  },\n  \"composition\": {\n    \"perspective\": \"胸部高度的自然自拍视角\",\n    \"camera_angle\": \"极端俯拍角度，相机位于主体正上方并直视下方\",\n    \"layer_depth\": [\n      \"产品（最靠近相机）\",\n      \"脸部\",\n      \"全身\",\n      \"城市环境（背景）\"\n    ]\n  },\n  \"scale_and_perspective\": {\n    \"effect\": \"强制透视\",\n    \"subject_scale\": \"女性呈现极度巨大\",\n    \"buildings_scale\": \"建筑物显得小得多，最高不超过她的膝盖\",\n    \"dominance\": \"主体在视觉上完全主导整个场景\",\n    \"realism\": \"激发规模感同时保持物理可信\"\n  },\n  \"environment\": {\n    \"location\": \"真实城市十字路口\",\n    \"elements\": [\n      \"人行横道\",\n      \"道路标线\",\n      \"交通标志\",\n      \"汽车\",\n      \"自行车\",\n      \"真实人类尺度的行人\"\n    ],\n    \"setting\": \"地面层城市环境\"\n  },\n  \"lighting\": {\n    \"type\": \"自然日光\",\n    \"conditions\": \"晴朗或轻度多云天空\",\n    \"shadows\": \"柔和且真实\",\n    \"restrictions\": \"禁止奇幻或戏剧性照明\"\n  },\n  \"product_rules\": {\n    \"usage\": \"完全按提供的上传佳能产品使用\",\n    \"distortion\": \"无\",\n    \"logo\": \"保持不变\",\n    \"appearance\": \"仅有自然反射和真实高光\"\n  },\n  \"camera_quality\": {\n    \"realism\": \"最大照片真实感\",\n    \"depth\": \"前景、主体与背景清晰分离\",\n    \"artifacts\": \"无\"\n  },\n  \"constraints\": [\n    \"禁止AI艺术感\",\n    \"禁止塑料或雕塑皮肤\",\n    \"禁止扭曲脸部或身体\",\n    \"禁止多余肢体或错误解剖\",\n    \"禁止文字或水印\",\n    \"禁止可见自拍相机设备\"\n  ],\n  \"output_goal\": \"创作一张超现实电影感自拍图像：女性使用其确切参考身份，从极端俯拍视角在真实城市人行横道拍摄，具备强制透视比例、自然日光，并将佳能相机产品明显持向镜头。\"\n}\n\n英文提示词\n{\n  \"type\": \"image_generation_prompt\",\n  \"language\": \"en\",\n  \"style\": \"hyper-realistic cinematic selfie photography\",\n  \"aspect_ratio\": \"9:16\",\n  \"identity_preservation\": {\n    \"use_reference_image\": true,\n    \"strict_identity_lock\": true,\n    \"alter_face\": false,\n    \"alter_skin\": false,\n    \"alter_hair\": false,\n    \"alter_gender\": false,\n    \"notes\": \"Preserve identical facial features, skin texture, hair, glasses, age, and gender from the uploaded reference image. No synthetic skin or sculptural look.\"\n  },\n  \"subject\": {\n    \"gender\": \"female\",\n    \"capture_method\": \"selfie taken by the subject herself\",\n    \"pose\": {\n      \"selfie_arm\": {\n        \"description\": \"one arm fully straight and completely extended upward holding the camera that takes the selfie\",\n        \"visibility\": \"arm clearly visible, straight and dominant in frame\",\n        \"camera_visibility\": \"the selfie camera device itself must NOT be visible in the frame\"\n      },\n      \"product_arm\": {\n        \"description\": \"the other arm fully extended toward the camera holding the attached Canon camera\",\n        \"importance\": \"product is closest to the camera and visually dominant\"\n      },\n      \"head\": {\n        \"tilt\": \"slightly tilted toward the selfie camera\"\n      },\n      \"expression\": \"natural and relaxed facial expression\"\n    },\n    \"body_visibility\": \"full body visible from head to toe\",\n    \"feet\": \"feet clearly touching the road surface\"\n  },\n  \"composition\": {\n    \"perspective\": \"natural selfie perspective at chest height\",\n    \"camera_angle\": \"extreme top-down angle, camera above the subject looking directly downward\",\n    \"layer_depth\": [\n      \"product (closest to camera)\",\n      \"face\",\n      \"full body\",\n      \"city environment (background)\"\n    ]\n  },\n  \"scale_and_perspective\": {\n    \"effect\": \"forced perspective\",\n    \"subject_scale\": \"the woman appears extremely giant\",\n    \"buildings_scale\": \"buildings appear much smaller, reaching no higher than her knees\",\n    \"dominance\": \"the subject visually dominates the entire scene\",\n    \"realism\": \"inspiring scale while remaining physically believable\"\n  },\n  \"environment\": {\n    \"location\": \"real urban intersection\",\n    \"elements\": [\n      \"pedestrian crosswalk\",\n      \"road markings\",\n      \"traffic signs\",\n      \"cars\",\n      \"bicycles\",\n      \"pedestrians at realistic human scale\"\n    ],\n    \"setting\": \"ground-level urban environment\"\n  },\n  \"lighting\": {\n    \"type\": \"natural daylight\",\n    \"conditions\": \"clear or lightly cloudy sky\",\n    \"shadows\": \"soft and realistic\",\n    \"restrictions\": \"no fantasy or dramatic lighting\"\n  },\n  \"product_rules\": {\n    \"usage\": \"use the uploaded Canon product exactly as provided\",\n    \"distortion\": \"none\",\n    \"logo\": \"unchanged\",\n    \"appearance\": \"natural reflections and realistic highlights only\"\n  },\n  \"camera_quality\": {\n    \"realism\": \"maximum photorealism\",\n    \"depth\": \"clear separation of foreground, subject, and background\",\n    \"artifacts\": \"none\"\n  },\n  \"constraints\": [\n    \"No AI-art look\",\n    \"No plastic or sculpted skin\",\n    \"No distortion of face or body\",\n    \"No extra limbs or incorrect anatomy\",\n    \"No text or watermarks\",\n    \"No visible selfie camera device\"\n  ],\n  \"output_goal\": \"Create a hyper-realistic cinematic selfie image of a woman using her exact reference identity, captured from an extreme top-down perspective in a real urban crosswalk, with forced perspective scale, natural daylight, and a Canon camera product prominently held toward the lens.\"\n}",
+    "prompt": "{\n  \"type\": \"图像生成提示词\",\n  \"language\": \"zh\",\n  \"style\": \"超现实电影感自拍摄影\",\n  \"aspect_ratio\": \"9:16\",\n  \"identity_preservation\": {\n    \"use_reference_image\": true,\n    \"strict_identity_lock\": true,\n    \"alter_face\": false,\n    \"alter_skin\": false,\n    \"alter_hair\": false,\n    \"alter_gender\": false,\n    \"notes\": \"保留上传参考图像中完全一致的脸部特征、皮肤纹理、头发、眼镜、年龄和性别。禁止合成皮肤或雕塑感。\"\n  },\n  \"subject\": {\n    \"gender\": \"女性\",\n    \"capture_method\": \"由主体本人拍摄的自拍\",\n    \"pose\": {\n      \"selfie_arm\": {\n        \"description\": \"一只手臂完全伸直并完全向上伸展，手持拍摄自拍的相机\",\n        \"visibility\": \"手臂在画面中清晰可见、笔直且占主导地位\",\n        \"camera_visibility\": \"自拍相机设备本身不得在画面中出现\"\n      },\n      \"product_arm\": {\n        \"description\": \"另一只手臂完全伸向相机，手持附带的佳能相机\",\n        \"importance\": \"产品最靠近相机并在视觉上占主导地位\"\n      },\n      \"head\": {\n        \"tilt\": \"头部向自拍相机微微倾斜\"\n      },\n      \"expression\": \"自然放松的面部表情\"\n    },\n    \"body_visibility\": \"从头到脚全身可见\",\n    \"feet\": \"双脚清晰接触路面\"\n  },\n  \"composition\": {\n    \"perspective\": \"胸部高度的自然自拍视角\",\n    \"camera_angle\": \"极端俯拍角度，相机位于主体正上方并直视下方\",\n    \"layer_depth\": [\n      \"产品（最靠近相机）\",\n      \"脸部\",\n      \"全身\",\n      \"城市环境（背景）\"\n    ]\n  },\n  \"scale_and_perspective\": {\n    \"effect\": \"强制透视\",\n    \"subject_scale\": \"女性呈现极度巨大\",\n    \"buildings_scale\": \"建筑物显得小得多，最高不超过她的膝盖\",\n    \"dominance\": \"主体在视觉上完全主导整个场景\",\n    \"realism\": \"激发规模感同时保持物理可信\"\n  },\n  \"environment\": {\n    \"location\": \"真实城市十字路口\",\n    \"elements\": [\n      \"人行横道\",\n      \"道路标线\",\n      \"交通标志\",\n      \"汽车\",\n      \"自行车\",\n      \"真实人类尺度的行人\"\n    ],\n    \"setting\": \"地面层城市环境\"\n  },\n  \"lighting\": {\n    \"type\": \"自然日光\",\n    \"conditions\": \"晴朗或轻度多云天空\",\n    \"shadows\": \"柔和且真实\",\n    \"restrictions\": \"禁止奇幻或戏剧性照明\"\n  },\n  \"product_rules\": {\n    \"usage\": \"完全按提供的上传佳能产品使用\",\n    \"distortion\": \"无\",\n    \"logo\": \"保持不变\",\n    \"appearance\": \"仅有自然反射和真实高光\"\n  },\n  \"camera_quality\": {\n    \"realism\": \"最大照片真实感\",\n    \"depth\": \"前景、主体与背景清晰分离\",\n    \"artifacts\": \"无\"\n  },\n  \"constraints\": [\n    \"禁止AI艺术感\",\n    \"禁止塑料或雕塑皮肤\",\n    \"禁止扭曲脸部或身体\",\n    \"禁止多余肢体或错误解剖\",\n    \"禁止文字或水印\",\n    \"禁止可见自拍相机设备\"\n  ],\n  \"output_goal\": \"创作一张超现实电影感自拍图像：女性使用其确切参考身份，从极端俯拍视角在真实城市人行横道拍摄，具备强制透视比例、自然日光，并将佳能相机产品明显持向镜头。\"\n}",
     "tips": [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
@@ -8885,8 +8570,7 @@ const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
       "先替换主题、主体、品牌、城市、标题等变量，再保持原有结构生成。",
       "如果画面文字较多，建议把标题、标签和正文分段写清楚。"
     ]
-  },
-
+  }
 ]
 
 const DEFAULT_CURATED_TEMPLATE_TIPS = [
