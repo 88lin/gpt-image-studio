@@ -1,5 +1,5 @@
-import type { AgentConversation, AgentInputDraft, AppMode, AppSettings, FavoriteCollection, InputImage, MaskDraft, TaskParams } from '../types'
-import { normalizeSettings } from './apiProfiles'
+import type { AgentConversation, AgentInputDraft, AppMode, AppSettings, FavoriteCollection, InputImage, MaskDraft, PresetConfig, TaskParams } from '../types'
+import { normalizePresetAgent, normalizeSettings } from './apiProfiles'
 import { normalizeAgentConversations } from './agentConversationState'
 import { ensureDefaultFavoriteCollection, normalizeFavoriteCollections, resolveDefaultFavoriteCollectionId } from './favoriteState'
 import { cleanStaleAgentInputDrafts, getPersistableAgentInputDrafts, isEmptyAgentInputDraft, normalizeAgentInputDraft, normalizeAgentInputDrafts, normalizeAgentInputDraftsByKey, saveGalleryInputDraft } from './inputDraftState'
@@ -7,7 +7,7 @@ import { getPersistableAgentConversations, stripPersistedAgentConversations } fr
 
 export interface PersistedAppState {
   settings: AppSettings
-  previousPresetConfig?: Pick<AppSettings, 'customProviders' | 'profiles'> | null
+  previousPresetConfig?: PresetConfig | null
   dismissedPresetProfileIds?: string[]
   dismissedPresetProviderIds?: string[]
   params: TaskParams
@@ -42,7 +42,7 @@ type PersistedStateFallback = Pick<
 }
 
 export type NormalizedPersistedAppState = PersistedAppState & {
-  previousPresetConfig: Pick<AppSettings, 'customProviders' | 'profiles'> | null
+  previousPresetConfig: PresetConfig | null
   dismissedPresetProfileIds: string[]
   dismissedPresetProviderIds: string[]
   prompt: string
@@ -138,9 +138,11 @@ export function normalizePersistedState(
   const previousPresetConfig = isRecord(persistedState.previousPresetConfig) && Array.isArray(persistedState.previousPresetConfig.profiles)
     ? (() => {
         const normalized = normalizeSettings(persistedState.previousPresetConfig)
+        const agent = normalizePresetAgent(persistedState.previousPresetConfig.agent, normalized.profiles)
         return {
           customProviders: normalized.customProviders,
           profiles: persistedState.previousPresetConfig.profiles.length ? normalized.profiles : [],
+          ...(agent ? { agent } : {}),
         }
       })()
     : null

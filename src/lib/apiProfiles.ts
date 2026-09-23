@@ -3,6 +3,8 @@ import type {
   ApiProfile,
   ApiProvider,
   AppSettings,
+  PresetAgentConfig,
+  PresetConfig,
   AgentApiConfigMode,
   CustomProviderContentType,
   CustomProviderDefinition,
@@ -765,10 +767,32 @@ export function isOpenAICompatibleProvider(settings: Partial<AppSettings> | unkn
   return provider === 'openai' || Boolean(getCustomProviderDefinition(settings, provider))
 }
 
-export interface ImportedProviderSettings {
-  customProviders: CustomProviderDefinition[]
-  profiles: ApiProfile[]
+export interface ImportedProviderSettings extends PresetConfig {
   presetProfileFields?: Record<string, string[]>
+}
+
+export function normalizePresetAgent(value: unknown, profiles: ApiProfile[]): PresetAgentConfig | undefined {
+  if (value === undefined) return undefined
+  if (!isRecord(value)
+    || (value.apiConfigMode !== undefined && value.apiConfigMode !== 'off' && value.apiConfigMode !== 'native' && value.apiConfigMode !== 'hybrid')
+    || (value.textProfileId !== undefined && !profiles.some((profile) => profile.id === value.textProfileId && isAgentTextApiProfile(profile)))
+    || (value.imageProfileId !== undefined && !profiles.some((profile) => profile.id === value.imageProfileId))) {
+    console.warn('忽略无效的 Agent 预置配置：请检查模式及引用的配置 ID（文本配置必须使用 Responses API）')
+    return undefined
+  }
+  return {
+    ...(value.apiConfigMode !== undefined ? { apiConfigMode: value.apiConfigMode as AgentApiConfigMode } : {}),
+    ...(value.textProfileId !== undefined ? { textProfileId: value.textProfileId as string } : {}),
+    ...(value.imageProfileId !== undefined ? { imageProfileId: value.imageProfileId as string } : {}),
+  }
+}
+
+export function getPresetAgentSettings(agent: PresetAgentConfig | undefined): Partial<AppSettings> {
+  return {
+    ...(agent?.apiConfigMode !== undefined ? { agentApiConfigMode: agent.apiConfigMode } : {}),
+    ...(agent?.textProfileId !== undefined ? { agentTextProfileId: agent.textProfileId } : {}),
+    ...(agent?.imageProfileId !== undefined ? { agentImageProfileId: agent.imageProfileId } : {}),
+  }
 }
 
 function validateCustomProviderTaskMappings(providers: CustomProviderDefinition[]) {
@@ -802,12 +826,12 @@ export function importCustomProviderSettingsFromJson(
 
   const record = parsed as Record<string, unknown>
 
-  // 包裹结构：{customProviders: [...], profiles: [...]}
-  if (Array.isArray(record.customProviders)) {
+  // 包裹结构：profiles 可独立于自定义服务商配置导入。
+  if (Array.isArray(record.profiles) || Array.isArray(record.customProviders)) {
     if (options.deploymentConfig) validateDeploymentProviderIds(record.customProviders)
     const customProviders = normalizeCustomProviderDefinitions(record.customProviders)
-    if (customProviders.length === 0) {
-      if (!options.deploymentConfig) throw new Error('customProviders 数组中没有有效的服务商配置')
+    if (!options.deploymentConfig && Array.isArray(record.customProviders) && record.customProviders.length > 0 && !customProviders.length) {
+      throw new Error('customProviders 数组中没有有效的服务商配置')
     }
     validateCustomProviderTaskMappings(customProviders)
     const customProviderIds = new Set(customProviders.map((provider) => provider.id))
@@ -816,9 +840,11 @@ export function importCustomProviderSettingsFromJson(
     const profiles = profileEntries.map((entry) => entry.profile)
     if (!options.deploymentConfig) return { customProviders, profiles }
 
+    const agent = normalizePresetAgent(record.agent, profiles)
     return {
       customProviders,
       profiles,
+      ...(agent ? { agent } : {}),
       ...(profileEntries.length
         ? { presetProfileFields: Object.fromEntries(profileEntries.map((entry) => [entry.profile.id, Object.keys(entry.source)])) }
         : {}),
@@ -1107,10 +1133,10 @@ export function mergePresetImportedSettings(
     lockPresetParams?: boolean
     dismissedPresetProfileIds?: string[]
     dismissedPresetProviderIds?: string[]
-    previousPresetConfig?: Pick<AppSettings, 'customProviders' | 'profiles'> | null
+    previousPresetConfig?: PresetConfig | null
     usedPresetProfileIds?: string[]
   } = {},
-): { settings: AppSettings; presetConfig: Pick<AppSettings, 'customProviders' | 'profiles'> } {
+): { settings: AppSettings; presetConfig: PresetConfig } {
   const importedRecord = isRecord(importedSettings) ? importedSettings : {}
   validateDeploymentProviderIds(importedRecord.customProviders)
   const normalizedImported = normalizeSettings(importedSettings)
@@ -1216,9 +1242,15 @@ export function mergePresetImportedSettings(
     if (!sourceProfileIds.has(profile.id) && profiles.some((item) => item.id === profile.id)) presetProfiles.push(profile)
   }
 
+  const agent = normalizePresetAgent(importedRecord.agent, allSourceProfileEntries.map((entry) => entry.profile))
+  const previousAgentSettings = getPresetAgentSettings(options.previousPresetConfig?.agent)
+  const agentSettings = Object.fromEntries(Object.entries(getPresetAgentSettings(agent))
+    .filter(([key, value]) => options.lockPresetParams || value !== previousAgentSettings[key as keyof AppSettings]))
+
   return {
     settings: normalizeSettings({
       ...current,
+      ...agentSettings,
       customProviders,
       profiles,
       activeProfileId: replacingPristineDefault ? sourceDefaultProfileId ?? nextProfiles[0].id : current.activeProfileId,
@@ -1226,6 +1258,7 @@ export function mergePresetImportedSettings(
     presetConfig: {
       customProviders: presetProviders,
       profiles: presetProfiles,
+      ...(agent ? { agent } : {}),
     },
   }
 }

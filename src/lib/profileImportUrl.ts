@@ -28,7 +28,7 @@ export function createCustomProfileImportUrl(
     if (options.useNewApiModel) importProfile.model = '{model}'
   }
   url.searchParams.set('settings', JSON.stringify({
-    customProviders: provider ? [provider] : [],
+    ...(provider ? { customProviders: [provider] } : {}),
     profiles: [importProfile],
   }))
 

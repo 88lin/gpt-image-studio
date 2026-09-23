@@ -546,10 +546,11 @@ JSON 结构示例：
 <a id="preset-config-json"></a>
 ## 📋 预置配置 JSON 格式
 
-使用 JSON 文件或分享链接提供预置配置时，JSON 对象包含两个顶层字段：
+使用 JSON 文件或分享链接提供预置配置时，JSON 对象支持以下顶层字段：
 
-- **`customProviders`**（数组）：自定义供应商定义。如果只使用内置供应商（OpenAI 兼容、sub2api（异步）或 fal.ai），此数组留空 `[]` 即可。
+- **`customProviders`**（可选数组）：自定义供应商定义。只使用内置供应商（OpenAI 兼容、sub2api（异步）或 fal.ai）时可省略。
 - **`profiles`**（数组）：预置的 API 配置列表。每项对应用户配置页中的一个配置条目。
+- **`agent`**（可选对象）：预置 Agent 的独立 API 模式及文本、图像配置选择，示例见下方。
 
 ### 配置列表字段说明（`profiles`）
 
@@ -573,7 +574,6 @@ JSON 结构示例：
 
 ```json
 {
-  "customProviders": [],
   "profiles": [
     {
       "id": "my-openai",
@@ -591,7 +591,6 @@ JSON 结构示例：
 
 ```json
 {
-  "customProviders": [],
   "profiles": [
     {
       "id": "openai-main",
@@ -619,6 +618,49 @@ JSON 结构示例：
 }
 ```
 
+### 示例：预置 Agent 配置
+
+Agent 可以选择是否使用独立的 API 配置：
+
+- **关闭（`off`）**：沿用当前 API 配置。
+- **原生（`native`）**：文本模型通过 Responses API 调用 `image_generation` 工具生成图片。
+- **混合（`hybrid`）**：文本模型调用自定义工具，再由图像模型生成图片，适用于文本模型不支持原生图像工具的情况。
+
+在预置 JSON 中添加 `agent`，即可指定默认模式，以及文本和图像模型使用的配置：
+
+```json
+{
+  "profiles": [
+    {
+      "id": "default-openai",
+      "name": "图像配置",
+      "provider": "openai",
+      "baseUrl": "https://api.example.com/v1",
+      "model": "image-model",
+      "apiMode": "images",
+      "isDefault": true
+    },
+    {
+      "id": "default-openai-agent",
+      "name": "文本配置",
+      "provider": "openai",
+      "baseUrl": "https://api.example.com/v1",
+      "model": "text-model",
+      "apiMode": "responses"
+    }
+  ],
+  "agent": {
+    "apiConfigMode": "hybrid",
+    "textProfileId": "default-openai-agent",
+    "imageProfileId": "default-openai"
+  }
+}
+```
+
+`textProfileId` 和 `imageProfileId` 引用上方 `profiles` 中的 ID。文本配置须使用 OpenAI 兼容的 Responses API；图像配置可使用任意支持的供应商。`agent` 及其三个字段都可省略。部署更新与锁定遵循上文的预置配置规则。
+
+完整示例见 [`gpt-image-config.agent.example.json`](gpt-image-config.agent.example.json)。
+
 ### 如何将预置配置提供给环境变量
 
 预置配置 JSON 可以通过以下三种方式填入部署环境变量（`VITE_DEFAULT_API_URL` 或 Docker 的 `DEFAULT_API_URL`）：
@@ -631,7 +673,7 @@ JSON 结构示例：
 > 页面中的"复制导入配置 URL"按钮导出的是**当前选中的单个配置**及其关联的自定义供应商。如需一次性预置包含多个供应商的列表，请使用下方的本地/仓库文件或远程 URL 方式。
 
 ```dotenv
-VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22customProviders%22%3A%5B...%5D%2C%22profiles%22%3A%5B...%5D%7D
+VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D%7D
 ```
 
 **2. 仓库内／本地配置文件（推荐）**

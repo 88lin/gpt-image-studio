@@ -1,9 +1,24 @@
 import { describe, expect, it } from 'vitest'
-import { createDefaultOpenAIProfile, DEFAULT_SETTINGS, normalizeSettings } from './apiProfiles'
+import { createDefaultOpenAIProfile, DEFAULT_SETTINGS, importCustomProviderSettingsFromJson, normalizeSettings } from './apiProfiles'
 import { createCustomProfileImportUrl } from './profileImportUrl'
 import { buildSettingsFromUrlParams } from './urlSettings'
 
 describe('createCustomProfileImportUrl', () => {
+  it('omits unused providers from built-in profile links and imports them normally', () => {
+    const profile = createDefaultOpenAIProfile({ id: 'built-in', apiKey: 'key' })
+    const url = new URL(createCustomProfileImportUrl('https://playground.example.com', profile, undefined, {
+      includeApiKey: true, useNewApiAddress: false, useNewApiKey: false, useNewApiModel: false,
+    }))
+    const json = url.searchParams.get('settings')!
+    expect(JSON.parse(json)).not.toHaveProperty('customProviders')
+    expect(importCustomProviderSettingsFromJson(json).profiles).toHaveLength(1)
+    expect(buildSettingsFromUrlParams(DEFAULT_SETTINGS, url.searchParams).profiles).toHaveLength(1)
+
+    const legacy = JSON.stringify({ customProviders: [], profiles: JSON.parse(json).profiles })
+    expect(importCustomProviderSettingsFromJson(legacy).profiles).toHaveLength(1)
+    expect(buildSettingsFromUrlParams(DEFAULT_SETTINGS, new URLSearchParams({ settings: legacy })).profiles).toHaveLength(1)
+  })
+
   it('does not include the source profile ID in the shared URL', () => {
     const provider = { id: 'custom-provider', name: 'Custom Provider', submit: { path: 'generate' } }
     const profile = createDefaultOpenAIProfile({

@@ -92,6 +92,18 @@ export interface ApiProfile {
   providerDrafts?: Partial<Record<ApiProvider, Partial<Pick<ApiProfile, 'baseUrl' | 'model' | 'imageGenerationModel' | 'apiMode' | 'reasoningEffort' | 'codexCli' | 'apiProxy' | 'responseFormatB64Json' | 'streamImages' | 'streamPartialImages' | 'transparentBackgroundMethod'>>>>
 }
 
+export interface PresetAgentConfig {
+  apiConfigMode?: AgentApiConfigMode
+  textProfileId?: string
+  imageProfileId?: string
+}
+
+export interface PresetConfig {
+  customProviders: CustomProviderDefinition[]
+  profiles: ApiProfile[]
+  agent?: PresetAgentConfig
+}
+
 export interface AppSettings {
   /** 旧版单配置字段：保留用于导入/查询参数兼容，实际请求以 active profile 为准 */
   baseUrl: string
@@ -454,7 +466,7 @@ export interface ExportData {
     index: number
     total: number
   }
-  settings?: AppSettings
+  settings?: Omit<AppSettings, 'customProviders'> & { customProviders?: CustomProviderDefinition[] }
   tasks?: TaskRecord[]
   favoriteCollections?: FavoriteCollection[]
   defaultFavoriteCollectionId?: string | null

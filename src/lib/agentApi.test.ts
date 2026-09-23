@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
 import { createDefaultOpenAIProfile, DEFAULT_SETTINGS } from './apiProfiles'
-import { callAgentConversationTitleApi, callAgentResponsesApi, parseBatchImageCallArguments } from './agentApi'
+import { callAgentConversationTitleApi, callAgentResponsesApi, callBatchImageSingle, parseBatchImageCallArguments } from './agentApi'
 
 describe('parseBatchImageCallArguments', () => {
   it('trims ids and prompts, fills missing ids, and skips empty prompts', () => {
@@ -32,6 +32,33 @@ describe('parseBatchImageCallArguments', () => {
       { id: 'same_3', prompt: 'four' },
     ])
     expect(parseBatchImageCallArguments(args)).toEqual(parseBatchImageCallArguments(args))
+  })
+})
+
+describe('callBatchImageSingle', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('reports the image tool error without a misleading streaming hint', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      error: { message: "Tool choice 'required' must be specified with 'tools' parameter." },
+    }), { status: 400, headers: { 'Content-Type': 'application/json' } }))
+
+    const result = await callBatchImageSingle({
+      profile: createDefaultOpenAIProfile({ apiKey: 'test-key', apiMode: 'responses', streamImages: true }),
+      params: DEFAULT_PARAMS,
+      batchItemId: 'image_1',
+      prompt: 'prompt',
+      referenceImageDataUrls: [],
+    })
+
+    expect(result).toMatchObject({
+      batchItemId: 'image_1',
+      image: null,
+      error: "Tool choice 'required' must be specified with 'tools' parameter.\n提示：当前使用的 API 可能未正确转发图像生成工具，请尝试更换支持该工具的接口或模型。",
+    })
+    expect(fetchMock).toHaveBeenCalledTimes(1)
   })
 })
 

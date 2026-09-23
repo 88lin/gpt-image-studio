@@ -55,6 +55,21 @@ describe('custom provider config URL', () => {
     })
   })
 
+  it('accepts a deployment file with profiles and no customProviders', async () => {
+    const config = { profiles: [{ id: 'builtin', provider: 'openai', apiMode: 'images', model: 'image-model' }] }
+    const json = JSON.stringify(config)
+    const bytes = new TextEncoder().encode(json)
+    const base64 = btoa(Array.from(bytes, (byte) => String.fromCharCode(byte)).join(''))
+    expect(loadEmbeddedDefaultConfig(`embedded-config:${base64}`)).toMatchObject({ customProviders: [], profiles: [expect.objectContaining({ id: 'builtin' })] })
+    expect((await loadCustomProviderSettingsFromUrl(`https://example.com/?settings=${encodeURIComponent(json)}`))?.profiles[0].id).toBe('builtin')
+
+    const legacy = JSON.stringify({ customProviders: [], ...config })
+    const legacyBytes = new TextEncoder().encode(legacy)
+    const legacyBase64 = btoa(Array.from(legacyBytes, (byte) => String.fromCharCode(byte)).join(''))
+    expect(loadEmbeddedDefaultConfig(`embedded-config:${legacyBase64}`)?.profiles[0].id).toBe('builtin')
+    expect((await loadCustomProviderSettingsFromUrl(`https://example.com/?settings=${encodeURIComponent(legacy)}`))?.profiles[0].id).toBe('builtin')
+  })
+
   it('imports settings directly from URL settings param', async () => {
     const settings = {
       customProviders: [{

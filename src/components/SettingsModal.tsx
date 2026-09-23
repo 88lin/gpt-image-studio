@@ -440,8 +440,8 @@ export default function SettingsModal() {
         ? nextDraft.activeProfileId
         : (normalizedProfiles[0]?.id ?? fallbackProfile.id),
     })
-    setDraft(normalizedDraft)
     setSettings(normalizedDraft)
+    setDraft(useStore.getState().settings)
   }
 
   const setZipDownloadRouteEnabled = (route: ZipDownloadRoute, enabled: boolean) => {

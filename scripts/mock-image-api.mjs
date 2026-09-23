@@ -11,6 +11,7 @@ const pathModes = new Set([
   'api-no-cors',
   'alternating-http-error',
   'b64',
+  'drop-image-tool',
   'empty',
   'http-error',
   'invalid-json',
@@ -363,6 +364,12 @@ async function handleResponses(req, res, url) {
 
   if (mode === 'http-error') {
     sendJson(res, 500, { error: { message: 'Mock Responses API failure' } })
+    return
+  }
+
+  // 模拟中转丢弃 image_generation 工具但保留 tool_choice，用于验证应用的报错提示
+  if (mode === 'drop-image-tool') {
+    sendJson(res, 400, { error: { message: "Tool choice 'required' must be specified with 'tools' parameter." } })
     return
   }
 

@@ -43,6 +43,7 @@ $env:MOCK_IMAGE_API_PORT="8788"; npm run mock:api
 - `http://127.0.0.1:8787/slow`：API 延迟返回，可把配置里的超时时间调低来测试超时。
 - `http://127.0.0.1:8787/api-no-cors`：API 本身不返回 CORS 头，浏览器应在 API 请求阶段失败。
 - `http://127.0.0.1:8787/alternating-http-error`：每隔一次请求返回 HTTP 500，可配合多图并发测试“部分失败”。
+- `http://127.0.0.1:8787/drop-image-tool`：模拟 API 转发时丢弃 `image_generation` 工具却保留 `tool_choice`，返回 `Tool choice 'required' must be specified with 'tools' parameter.`；应用应报出该错误并提示更换支持该工具的接口或模型。
 
 流式传输相关模式需要在配置里开启“流式传输”：
 

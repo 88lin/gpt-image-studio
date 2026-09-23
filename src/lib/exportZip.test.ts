@@ -1,9 +1,29 @@
 import { describe, expect, it } from 'vitest'
 
 import type { AppSettings, StoredImage, StoredImageThumbnail, TaskParams, TaskRecord } from '../types'
+import { DEFAULT_SETTINGS } from './apiProfiles'
 import { buildExportZip, getExportImageEstimatedBytes, getExportZipPlan, readExportZip, readExportZipFileAsDataUrl } from './exportZip'
 
 describe('exportZip', () => {
+  it('omits empty customProviders in backup settings and retains non-empty providers', async () => {
+    const opts = {
+      options: { exportConfig: true },
+      exportedAt: 1700000001000,
+      settings: DEFAULT_SETTINGS,
+      tasks: [],
+      images: [],
+      thumbnailsByImageId: new Map(),
+      favoriteCollections: [],
+      defaultFavoriteCollectionId: null,
+      agentConversations: [],
+    }
+    const empty = await buildExportZip(opts)
+    expect((await readExportZip(empty.bytes)).manifest.settings).not.toHaveProperty('customProviders')
+    const provider = { id: 'custom', name: 'Custom', submit: { path: 'generate' } }
+    const filled = await buildExportZip({ ...opts, settings: { ...DEFAULT_SETTINGS, customProviders: [provider] } })
+    expect((await readExportZip(filled.bytes)).manifest.settings?.customProviders).toEqual([provider])
+  })
+
   it('builds and reads backup zip entries without changing manifest shape', async () => {
     const task: TaskRecord = {
       id: 'task-1',
@@ -42,7 +62,7 @@ describe('exportZip', () => {
     const { manifest, bytes } = await buildExportZip({
       options: { exportConfig: true, exportTasks: true },
       exportedAt: 1700000001000,
-      settings: {} as AppSettings,
+      settings: DEFAULT_SETTINGS,
       tasks: [task],
       images,
       thumbnailsByImageId: new Map([[thumbnail.id, thumbnail]]),
@@ -96,7 +116,7 @@ describe('exportZip', () => {
     const params = {
       options: { exportConfig: true, exportTasks: true },
       exportedAt: 1700000001000,
-      settings: {} as AppSettings,
+      settings: DEFAULT_SETTINGS,
       tasks: [task],
       images,
       thumbnailsByImageId: new Map(),
@@ -150,7 +170,7 @@ describe('exportZip', () => {
     const params = {
       options: { exportConfig: true, exportTasks: true },
       exportedAt: 1700000001000,
-      settings: {} as AppSettings,
+      settings: DEFAULT_SETTINGS,
       tasks,
       images: [],
       thumbnailsByImageId: new Map(),
@@ -168,7 +188,7 @@ describe('exportZip', () => {
     const plan = getExportZipPlan({
       options: { exportConfig: true, exportTasks: false },
       exportedAt: 1700000001000,
-      settings: { largeConfig: 'x'.repeat(600_000) } as unknown as AppSettings,
+      settings: { ...DEFAULT_SETTINGS, largeConfig: 'x'.repeat(600_000) } as AppSettings,
       tasks: [{
         id: 'ignored-task',
         prompt: 'prompt',

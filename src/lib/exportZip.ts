@@ -50,6 +50,12 @@ export interface ExportZipPlanPart {
   includeBaseData: boolean
 }
 
+function getExportSettings(settings: AppSettings): NonNullable<ExportData['settings']> {
+  if (settings.customProviders.length) return settings
+  const { customProviders, ...rest } = settings
+  return rest
+}
+
 export async function buildExportZip(params: BuildExportZipParams) {
   const exportedAtDate = new Date(params.exportedAt)
   const imageTasks = params.options.exportTasks ? params.imageTasks ?? params.tasks : []
@@ -98,7 +104,9 @@ export async function buildExportZip(params: BuildExportZipParams) {
   }
 
   if (params.backupPart) manifest.backupPart = params.backupPart
-  if (params.options.exportConfig && params.includeManifestData !== false) manifest.settings = params.settings
+  if (params.options.exportConfig && params.includeManifestData !== false) {
+    manifest.settings = getExportSettings(params.settings)
+  }
   if (params.options.exportTasks) {
     if (params.includeManifestData !== false || params.tasks.length) manifest.tasks = params.tasks
     if (params.includeManifestData !== false || params.agentConversations.length) manifest.agentConversations = params.agentConversations
@@ -243,7 +251,7 @@ function getBaseManifestEstimatedBytes(params: Omit<BuildExportZipParams, 'image
   const manifest = {
     version: 3,
     exportedAt: new Date(params.exportedAt).toISOString(),
-    ...(params.options.exportConfig ? { settings: params.settings } : {}),
+    ...(params.options.exportConfig ? { settings: getExportSettings(params.settings) } : {}),
     ...(params.options.exportTasks ? {
       tasks: [],
       favoriteCollections: params.favoriteCollections,

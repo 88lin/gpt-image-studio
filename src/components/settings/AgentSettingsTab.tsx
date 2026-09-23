@@ -5,6 +5,7 @@ import {
   type AppSettings,
 } from '../../types'
 import { normalizeAgentMaxToolRounds } from '../../lib/apiProfiles'
+import { isPresetAgentFieldLocked } from '../../lib/presetConfig'
 import Select from '../Select'
 
 interface SelectOption {
@@ -45,6 +46,7 @@ export default function AgentSettingsTab({
           <div className="w-20 shrink-0">
             <Select
               value={draft.agentApiConfigMode}
+              disabled={isPresetAgentFieldLocked('apiConfigMode')}
               onChange={(value) => updateAgentApiConfigMode(value as AgentApiConfigMode)}
               options={[
                 { label: '关闭', value: 'off' },
@@ -56,6 +58,9 @@ export default function AgentSettingsTab({
           </div>
         </div>
         <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500 space-y-1">
+          {(['apiConfigMode', 'textProfileId', 'imageProfileId'] as const).some(isPresetAgentFieldLocked) && (
+            <div>部分选项由部署配置锁定。</div>
+          )}
           <div>原生：使用原生的 Responses API 配置，由模型调用 <code className="rounded bg-gray-100 px-1 py-0.5 font-mono text-[10px] dark:bg-white/[0.06]">image_generation</code> 工具生成图片。</div>
           <div>混合：使用非原生的混合 API 配置，由文本模型调用自定义工具，请求图像模型生成图像，解决部分服务商/模型不支持 <code className="rounded bg-gray-100 px-1 py-0.5 font-mono text-[10px] dark:bg-white/[0.06]">image_generation</code> 工具的问题。</div>
         </div>
@@ -70,6 +75,7 @@ export default function AgentSettingsTab({
                 {agentTextProfileOptions.length > 0 ? (
                   <Select
                     value={selectedAgentTextProfile?.id ?? '请选择配置'}
+                    disabled={isPresetAgentFieldLocked('textProfileId')}
                     onChange={(value) => commitSettings({ ...draft, agentTextProfileId: String(value) })}
                     options={agentTextProfileOptions}
                     showValueTooltips
@@ -95,6 +101,7 @@ export default function AgentSettingsTab({
                   {agentImageProfileOptions.length > 0 ? (
                     <Select
                       value={selectedAgentImageProfile?.id ?? '请选择配置'}
+                      disabled={isPresetAgentFieldLocked('imageProfileId')}
                       onChange={(value) => commitSettings({ ...draft, agentImageProfileId: String(value) })}
                       options={agentImageProfileOptions}
                       showValueTooltips
