@@ -1251,6 +1251,35 @@ describe('default API profile marker', () => {
   })
 })
 
+describe('built-in providers', () => {
+  it('registers grok as a built-in OpenAI-compatible provider', () => {
+    const grokProfile = createDefaultGrokProfile()
+    expect(grokProfile).toMatchObject({
+      provider: 'grok',
+      baseUrl: DEFAULT_GROK_BASE_URL,
+      model: DEFAULT_GROK_MODEL,
+      apiMode: 'images',
+      codexCli: false,
+      streamImages: false,
+      transparentBackgroundMethod: 'local',
+    })
+
+    const openaiProfile = createDefaultOpenAIProfile({ apiMode: 'responses', streamImages: true })
+    const switched = switchApiProfileProvider(openaiProfile, 'grok')
+    expect(switched).toMatchObject({
+      provider: 'grok',
+      baseUrl: DEFAULT_GROK_BASE_URL,
+      model: DEFAULT_GROK_MODEL,
+      apiMode: 'images',
+      streamImages: false,
+      codexCli: false,
+      transparentBackgroundMethod: 'local',
+    })
+
+    expect(getApiProviderLabel({}, 'grok')).toBe('Grok (xAI)')
+  })
+})
+
 describe('custom providers', () => {
   it('provides the built-in sub2api async manifest', () => {
     const settings = normalizeSettings({
@@ -1637,33 +1666,6 @@ describe('custom providers', () => {
 
     expect(falProfile).toMatchObject({ provider: 'fal', apiMode: 'images', streamImages: false, transparentBackgroundMethod: 'api' })
     expect(customProfile).toMatchObject({ provider: provider.id, apiMode: 'images', streamImages: false })
-  })
-
-  it('registers grok as a built-in OpenAI-compatible provider', () => {
-    const grokProfile = createDefaultGrokProfile()
-    expect(grokProfile).toMatchObject({
-      provider: 'grok',
-      baseUrl: DEFAULT_GROK_BASE_URL,
-      model: DEFAULT_GROK_MODEL,
-      apiMode: 'images',
-      codexCli: false,
-      streamImages: false,
-      transparentBackgroundMethod: 'local',
-    })
-
-    const openaiProfile = createDefaultOpenAIProfile({ apiMode: 'responses', streamImages: true })
-    const switched = switchApiProfileProvider(openaiProfile, 'grok')
-    expect(switched).toMatchObject({
-      provider: 'grok',
-      baseUrl: DEFAULT_GROK_BASE_URL,
-      model: DEFAULT_GROK_MODEL,
-      apiMode: 'images',
-      streamImages: false,
-      codexCli: false,
-      transparentBackgroundMethod: 'local',
-    })
-
-    expect(getApiProviderLabel({}, 'grok')).toBe('Grok (xAI)')
   })
 
   it('keeps an explicitly empty fal.ai URL', () => {
