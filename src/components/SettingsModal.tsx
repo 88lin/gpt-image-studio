@@ -9,6 +9,8 @@ import {
   createDefaultOpenAIProfile,
   DEFAULT_FAL_BASE_URL,
   DEFAULT_FAL_MODEL,
+  DEFAULT_GROK_BASE_URL,
+  DEFAULT_GROK_MODEL,
   DEFAULT_IMAGES_MODEL,
   DEFAULT_RESPONSES_MODEL,
   DEFAULT_SETTINGS,
@@ -240,13 +242,14 @@ export default function SettingsModal() {
   const activeCustomProviderAsync = isAsyncCustomProvider(activeCustomProvider)
   const apiProxyChecked = activeProfileApiProxyEligible && (apiProxyLocked || activeProfile.apiProxy)
   const apiProxyEnabled = apiProxyAvailable && activeProfileApiProxyEligible && apiProxyChecked
-  const defaultProviderOrder = ['openai', 'sb2api-async', 'fal', ...draft.customProviders.map(p => p.id)]
+  const defaultProviderOrder = ['openai', 'sb2api-async', 'fal', 'grok', ...draft.customProviders.map(p => p.id)]
   const providerOrder = draft.providerOrder || defaultProviderOrder
 
   const unorderedProviderOptions = [
     { label: 'OpenAI 兼容接口', value: 'openai', draggable: true },
     { label: 'sub2api（异步）', value: 'sb2api-async', draggable: true },
     { label: 'fal.ai', value: 'fal', draggable: true },
+    { label: 'Grok (xAI)', value: 'grok', draggable: true },
     ...draft.customProviders.map((provider) => {
       const actions = [
         ...(!presetConfigOnly && !isPresetProviderLocked(provider.id) ? [{ label: '编辑', onClick: () => openEditCustomProvider(provider) }] : []),
@@ -418,8 +421,14 @@ export default function SettingsModal() {
         : DEFAULT_SETTINGS.baseUrl
       const normalizedBaseUrl = profile.provider === 'fal'
         ? profile.baseUrl.trim().replace(/\/+$/, '') || (profile.id === defaultProfileId ? '' : DEFAULT_FAL_BASE_URL)
-        : shouldKeepEmptyBaseUrl ? '' : normalizeBaseUrl(profile.baseUrl.trim() || emptyBaseUrlFallback)
-      const defaultModel = profile.provider === 'fal' ? DEFAULT_FAL_MODEL : getDefaultModelForMode(profile.apiMode)
+        : profile.provider === 'grok'
+          ? profile.baseUrl.trim().replace(/\/+$/, '') || (shouldKeepEmptyBaseUrl ? '' : DEFAULT_GROK_BASE_URL)
+          : shouldKeepEmptyBaseUrl ? '' : normalizeBaseUrl(profile.baseUrl.trim() || emptyBaseUrlFallback)
+      const defaultModel = profile.provider === 'fal'
+        ? DEFAULT_FAL_MODEL
+        : profile.provider === 'grok'
+          ? DEFAULT_GROK_MODEL
+          : getDefaultModelForMode(profile.apiMode)
       return {
         ...profile,
         name: profile.name.trim() || (profile.id === defaultProfileId ? '默认' : '新配置'),
@@ -907,7 +916,7 @@ export default function SettingsModal() {
   }
 
   const handleProviderReorder = (sourceValue: string | number, targetValue: string | number, position: 'before' | 'after' | null) => {
-    const currentOrder = draft.providerOrder || ['openai', 'sb2api-async', 'fal', ...draft.customProviders.map(p => p.id)]
+    const currentOrder = draft.providerOrder || ['openai', 'sb2api-async', 'fal', 'grok', ...draft.customProviders.map(p => p.id)]
     const sourceIndex = currentOrder.indexOf(String(sourceValue))
     const targetIndex = currentOrder.indexOf(String(targetValue))
     if (sourceIndex < 0 || targetIndex < 0) return
@@ -1461,7 +1470,7 @@ export default function SettingsModal() {
                     onBlur={(e) => commitActiveProfilePatch({ baseUrl: e.target.value })}
                     type="text"
                     disabled={apiProxyEnabled || activeProfileLocked}
-                    placeholder={activeProfile.provider === 'fal' ? DEFAULT_FAL_BASE_URL : DEFAULT_SETTINGS.baseUrl}
+                    placeholder={activeProfile.provider === 'fal' ? DEFAULT_FAL_BASE_URL : activeProfile.provider === 'grok' ? DEFAULT_GROK_BASE_URL : DEFAULT_SETTINGS.baseUrl}
                     className={`w-full rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50 ${apiProxyEnabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                   />
                   <div data-selectable-text className="mt-1.5 min-h-[22px] flex items-center text-xs text-gray-500 dark:text-gray-500">
@@ -1469,6 +1478,8 @@ export default function SettingsModal() {
                       <span className="text-yellow-600 dark:text-yellow-500">已开启代理，实际请求目标由部署端决定，此处设置被忽略。</span>
                     ) : activeProfile.provider === 'fal' ? (
                       <span>默认使用 <code className="bg-gray-100 dark:bg-white/[0.06] px-1 py-0.5 rounded">{DEFAULT_FAL_BASE_URL}</code>；填写自定义地址时将作为 fal.ai 代理 URL。</span>
+                    ) : activeProfile.provider === 'grok' ? (
+                      <span>默认使用 xAI 官方地址 <code className="bg-gray-100 dark:bg-white/[0.06] px-1 py-0.5 rounded">{DEFAULT_GROK_BASE_URL}</code>；走中转时填中转地址，模型 ID 按中转方支持填写。</span>
                     ) : (
                       <span>末尾带 <code className="bg-gray-100 dark:bg-white/[0.06] px-1 py-0.5 rounded">/</code> 时直接使用该地址拼接接口，不补 <code className="bg-gray-100 dark:bg-white/[0.06] px-1 py-0.5 rounded">/v1</code> 前缀；支持通过查询参数覆盖：<code className="bg-gray-100 dark:bg-white/[0.06] px-1 py-0.5 rounded">?apiUrl=</code>。</span>
                     )}
@@ -1573,7 +1584,7 @@ export default function SettingsModal() {
                   onBlur={(e) => commitActiveProfilePatch({ model: e.target.value })}
                   type="text"
                   disabled={activeProfileLocked}
-                  placeholder={activeProfile.provider === 'fal' ? DEFAULT_FAL_MODEL : getDefaultModelForMode(activeProfile.apiMode ?? DEFAULT_SETTINGS.apiMode)}
+                  placeholder={activeProfile.provider === 'fal' ? DEFAULT_FAL_MODEL : activeProfile.provider === 'grok' ? DEFAULT_GROK_MODEL : getDefaultModelForMode(activeProfile.apiMode ?? DEFAULT_SETTINGS.apiMode)}
                   className="w-full rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50"
                 />
                   <div data-selectable-text className="mt-1.5 text-xs text-gray-500 dark:text-gray-500">
@@ -1583,6 +1594,8 @@ export default function SettingsModal() {
                       <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">openai/gpt-image-2.5/sunburst</code>{' '}
                       <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">openai/gpt-image-2.5/flare</code>。
                     </>
+                  ) : activeProfile.provider === 'grok' ? (
+                    <>xAI 图像模型，例如 <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">{DEFAULT_GROK_MODEL}</code>；走中转时填中转方支持的模型 ID。</>
                   ) : activeCustomProvider ? (
                     <>当前使用 <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-white/[0.06]">{activeCustomProvider.name}</code>。</>
                   ) : (activeProfile.apiMode ?? DEFAULT_SETTINGS.apiMode) === 'responses' ? (

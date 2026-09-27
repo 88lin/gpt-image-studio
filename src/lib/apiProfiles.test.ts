@@ -2,12 +2,15 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   DEFAULT_FAL_BASE_URL,
   DEFAULT_FAL_MODEL,
+  DEFAULT_GROK_BASE_URL,
+  DEFAULT_GROK_MODEL,
   DEFAULT_IMAGES_MODEL,
   DEFAULT_RESPONSES_MODEL,
   DEFAULT_OPENAI_PROFILE_ID,
   DEFAULT_SETTINGS,
   createDefaultOpenAIProfile,
   createDefaultFalProfile,
+  createDefaultGrokProfile,
   getApiProviderLabel,
   getActiveApiProfile,
   getCustomProviderDefinition,
@@ -1248,6 +1251,35 @@ describe('default API profile marker', () => {
   })
 })
 
+describe('built-in providers', () => {
+  it('registers grok as a built-in OpenAI-compatible provider', () => {
+    const grokProfile = createDefaultGrokProfile()
+    expect(grokProfile).toMatchObject({
+      provider: 'grok',
+      baseUrl: DEFAULT_GROK_BASE_URL,
+      model: DEFAULT_GROK_MODEL,
+      apiMode: 'images',
+      codexCli: false,
+      streamImages: false,
+      transparentBackgroundMethod: 'local',
+    })
+
+    const openaiProfile = createDefaultOpenAIProfile({ apiMode: 'responses', streamImages: true })
+    const switched = switchApiProfileProvider(openaiProfile, 'grok')
+    expect(switched).toMatchObject({
+      provider: 'grok',
+      baseUrl: DEFAULT_GROK_BASE_URL,
+      model: DEFAULT_GROK_MODEL,
+      apiMode: 'images',
+      streamImages: false,
+      codexCli: false,
+      transparentBackgroundMethod: 'local',
+    })
+
+    expect(getApiProviderLabel({}, 'grok')).toBe('Grok (xAI)')
+  })
+})
+
 describe('custom providers', () => {
   it('provides the built-in sub2api async manifest', () => {
     const settings = normalizeSettings({
@@ -1602,7 +1634,7 @@ describe('custom providers', () => {
       ],
     })
 
-    expect(settings.providerOrder).toEqual(['fal', 'openai', 'sb2api-async', 'custom-alpha', 'custom-beta'])
+    expect(settings.providerOrder).toEqual(['fal', 'openai', 'sb2api-async', 'grok', 'custom-alpha', 'custom-beta'])
   })
 
   it('keeps active custom providers in Images API mode when legacy apiMode is responses', () => {

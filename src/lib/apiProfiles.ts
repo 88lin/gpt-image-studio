@@ -35,10 +35,12 @@ export { DEFAULT_IMAGES_MODEL } from './imageModels'
 export const DEFAULT_RESPONSES_MODEL = 'gpt-5.6-sol'
 export const DEFAULT_FAL_BASE_URL = 'https://fal.run'
 export const DEFAULT_FAL_MODEL = 'openai/gpt-image-2'
+export const DEFAULT_GROK_BASE_URL = 'https://api.x.ai/v1'
+export const DEFAULT_GROK_MODEL = 'grok-imagine-image-2'
 export const DEFAULT_OPENAI_PROFILE_ID = 'default-openai'
 export const DEFAULT_API_TIMEOUT = 600
 
-const BUILT_IN_PROVIDER_IDS = new Set<ApiProvider>(['openai', 'sb2api-async', 'fal'])
+const BUILT_IN_PROVIDER_IDS = new Set<ApiProvider>(['openai', 'sb2api-async', 'fal', 'grok'])
 const DEFAULT_CUSTOM_PROVIDER_PATHS = {
   generationPath: 'images/generations',
   editPath: 'images/edits',
@@ -135,7 +137,7 @@ function normalizeZipDownloadRoutes(value: unknown) {
 function normalizeProviderOrder(value: unknown, customProviders: CustomProviderDefinition[]): string[] | undefined {
   if (!Array.isArray(value)) return undefined
 
-  const providerIds = ['openai', 'sb2api-async', 'fal', ...customProviders.map((provider) => provider.id)]
+  const providerIds = ['openai', 'sb2api-async', 'fal', 'grok', ...customProviders.map((provider) => provider.id)]
   const knownIds = new Set(providerIds)
   const ordered = value
     .map(String)
@@ -400,6 +402,26 @@ export function createDefaultFalProfile(overrides: Partial<ApiProfile> = {}): Ap
   }
 }
 
+export function createDefaultGrokProfile(overrides: Partial<ApiProfile> = {}): ApiProfile {
+  return {
+    id: `grok-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
+    name: '新配置',
+    provider: 'grok',
+    baseUrl: DEFAULT_GROK_BASE_URL,
+    apiKey: '',
+    model: DEFAULT_GROK_MODEL,
+    imageGenerationModel: '',
+    timeout: DEFAULT_API_TIMEOUT,
+    apiMode: 'images',
+    codexCli: false,
+    apiProxy: false,
+    streamImages: false,
+    streamPartialImages: DEFAULT_STREAM_PARTIAL_IMAGES,
+    transparentBackgroundMethod: 'local',
+    ...overrides,
+  }
+}
+
 export function switchApiProfileProvider(profile: ApiProfile, provider: ApiProvider, customProvider?: CustomProviderDefinition): ApiProfile {
   const providerDrafts = {
     ...profile.providerDrafts,
@@ -438,8 +460,27 @@ export function switchApiProfileProvider(profile: ApiProfile, provider: ApiProvi
     }
   }
 
+  if (provider === 'grok') {
+    return {
+      ...profile,
+      provider,
+      baseUrl: savedDraft?.baseUrl ?? DEFAULT_GROK_BASE_URL,
+      model: savedDraft?.model ?? DEFAULT_GROK_MODEL,
+      imageGenerationModel: savedDraft?.imageGenerationModel ?? '',
+      apiMode: 'images',
+      reasoningEffort: savedDraft?.reasoningEffort,
+      codexCli: false,
+      apiProxy: savedDraft?.apiProxy ?? false,
+      responseFormatB64Json: savedDraft?.responseFormatB64Json,
+      streamImages: false,
+      streamPartialImages: savedDraft?.streamPartialImages ?? DEFAULT_STREAM_PARTIAL_IMAGES,
+      transparentBackgroundMethod: savedDraft?.transparentBackgroundMethod ?? 'local',
+      providerDrafts,
+    }
+  }
+
   if (customProvider) {
-    const shouldUseOpenAIDefaults = profile.provider === 'fal'
+    const shouldUseOpenAIDefaults = profile.provider === 'fal' || profile.provider === 'grok'
     const supportsNativeTransparentBackground = customProviderSupportsNativeTransparentBackground(customProvider)
     return {
       ...profile,
@@ -496,7 +537,9 @@ function normalizeProviderDraft(
   const transparentBackgroundMethod = nativeTransparentBackgroundUnavailable ? 'local' : 'api'
   const fallback = provider === 'fal'
     ? createDefaultFalProfile()
-    : createDefaultOpenAIProfile({ transparentBackgroundMethod })
+    : provider === 'grok'
+      ? createDefaultGrokProfile()
+      : createDefaultOpenAIProfile({ transparentBackgroundMethod })
   const baseUrl = typeof input.baseUrl === 'string' ? input.baseUrl : undefined
   const model = typeof input.model === 'string' && input.model.trim() ? input.model : undefined
   const imageGenerationModel = typeof input.imageGenerationModel === 'string' ? input.imageGenerationModel.trim() : ''
@@ -551,7 +594,9 @@ export function normalizeApiProfile(
     : fallback
   const defaults = provider === 'fal'
     ? createDefaultFalProfile(providerFallback)
-    : createDefaultOpenAIProfile({ ...providerFallback, apiMode })
+    : provider === 'grok'
+      ? createDefaultGrokProfile(providerFallback)
+      : createDefaultOpenAIProfile({ ...providerFallback, apiMode })
   const rawBaseUrl = typeof record.baseUrl === 'string' ? record.baseUrl : defaults.baseUrl
   const streamImages = provider === 'openai'
     ? typeof record.streamImages === 'boolean' ? record.streamImages : defaults.streamImages
@@ -758,13 +803,14 @@ export function getCustomProviderDefinition(settings: Partial<AppSettings> | unk
 
 export function getApiProviderLabel(settings: Partial<AppSettings> | unknown, provider: ApiProvider): string {
   if (provider === 'fal') return 'fal.ai'
+  if (provider === 'grok') return 'Grok (xAI)'
   if (provider === 'openai') return 'OpenAI'
   if (provider === 'sb2api-async') return SUB2API_PROVIDER.name
   return getCustomProviderDefinition(settings, provider)?.name ?? provider
 }
 
 export function isOpenAICompatibleProvider(settings: Partial<AppSettings> | unknown, provider: ApiProvider): boolean {
-  return provider === 'openai' || Boolean(getCustomProviderDefinition(settings, provider))
+  return provider === 'openai' || provider === 'grok' || Boolean(getCustomProviderDefinition(settings, provider))
 }
 
 export interface ImportedProviderSettings extends PresetConfig {
