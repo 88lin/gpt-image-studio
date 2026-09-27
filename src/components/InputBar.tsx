@@ -350,7 +350,7 @@ export default function InputBar() {
   const textareaRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const imagesRef = useRef<HTMLDivElement>(null)
-  const prevHeightRef = useRef(window.innerWidth < 640 ? 48 : 112)
+  const prevHeightRef = useRef(DESKTOP_MIN_PROMPT_HEIGHT)
   const manualPromptHeightRef = useRef<number | null>(null)
 
   const [isDragging, setIsDragging] = useState(false)
@@ -476,7 +476,10 @@ export default function InputBar() {
     ? maskDraft ? '遮罩编辑' : '生成图像'
     : '请先配置 API'
   const submitTooltipText = activeAgentIsRunning ? '停止生成' : '尚未完成 API 配置，请在右上角设置中进行'
-  const promptPlaceholder = '描述你想生成的图片，可输入 @ 来指定参考图...'
+  // 移动端窄屏放不下完整文案，用短版本避免占位文案折行把空输入框撑成多行
+  const promptPlaceholder = isMobile
+    ? '描述你想生成的图片，@ 引用参考图'
+    : '描述你想生成的图片，可输入 @ 来指定参考图...'
   const submitCurrentMode = useCallback(() => {
     if (appMode === 'agent') {
       void submitAgentMessage()
@@ -1073,12 +1076,13 @@ export default function InputBar() {
     if (!el) return
 
     const imagesHeight = imagesRef.current?.offsetHeight ?? 0
-    const placeholderEl = el.parentElement?.querySelector<HTMLElement>('.prompt-placeholder')
-    const placeholderHeight = placeholderEl ? placeholderEl.scrollHeight : 0
 
     el.style.transition = 'none'
     el.style.height = '0'
     el.style.overflowY = 'hidden'
+    // 先把输入框压到最小再测量占位文案，避免测到上一次高度或过渡中的中间值
+    const placeholderEl = el.parentElement?.querySelector<HTMLElement>('.prompt-placeholder')
+    const placeholderHeight = placeholderEl ? placeholderEl.scrollHeight : 0
     const { targetHeight, shouldScroll, canExpand, isSingleLine } = getPromptTextareaLayout({
       isMobile,
       scrollHeight: el.scrollHeight,
@@ -1773,8 +1777,8 @@ export default function InputBar() {
               className={`col-start-1 row-start-1 min-h-[42px] w-full overflow-hidden ios-rounded-scroll-fix whitespace-pre-wrap break-words rounded-2xl border border-gray-200/60 bg-white/50 pl-4 pr-10 py-3 text-sm leading-relaxed shadow-sm outline-none transition-[border-color,box-shadow] duration-200 focus:ring-1 focus:ring-blue-300/40 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-100 dark:focus:ring-blue-500/30${promptExpanded ? ' !h-full !overflow-y-auto' : ''}`}
             />
             {prompt.length === 0 && (
-              <div className={`prompt-placeholder col-start-1 row-start-1 pointer-events-none pl-4 pr-10 py-3 text-sm leading-relaxed text-gray-400 dark:text-gray-500${
-                isMobile && mobileCollapsed ? ' truncate' : ''
+              <div className={`prompt-placeholder col-start-1 row-start-1 self-start pointer-events-none pl-4 pr-10 py-3 text-sm leading-relaxed text-gray-400 dark:text-gray-500${
+                isMobile ? ' truncate' : ''
               }`}>
                 {promptPlaceholder}
               </div>
