@@ -2,10 +2,11 @@
   "customProviders": [],
   "profiles": [
     {
-      "id": "gpt_image_studio-default-openai",
+      "id": "default-openai",
       "name": "默认",
       "provider": "openai",
       "baseUrl": "https://api.openai.com/v1",
+      "apiKey": "",
       "model": "gpt-image-2.5-sunburst",
       "apiMode": "images",
       "isDefault": true
@@ -13,11 +14,18 @@
     {
       "id": "sheapi",
       "name": "SheApi",
-      "description": "[SheApi](https://www.sheapi.top/sign-up?aff=MvcR) 提供稳定高效的 OpenAI 兼容 API 中转服务，支持 GPT-Image-2 系列模型。GPT-Image-2 生图每张约 $0.04；受邀注册赠送 $1 体验金，每日签到还可领取额外免费额度。",
+      "description": "[SheApi](https://www.sheapi.top/sign-up?aff=MvcR) 提供稳定高效的 OpenAI 兼容 API 中转服务，GPT-Image-2 生图每张约 0.04，受邀注册赠送 1 体验金，每日签到还可领取额外免费额度。",
       "provider": "openai",
       "baseUrl": "https://www.sheapi.top/v1",
+      "apiKey": "",
       "model": "gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare",
-      "apiMode": "images"
+      "imageGenerationModel": "gpt-image-2.5-sunburst",
+      "apiMode": "images",
+      "apiProxy": false,
+      "codexCli": false,
+      "streamImages": false,
+      "streamPartialImages": 1,
+      "transparentBackgroundMethod": "api"
     }
   ]
 }

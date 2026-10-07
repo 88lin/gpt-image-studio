@@ -4,6 +4,7 @@ import { buildSettingsFromUrlParams, clearUrlSettingParams, getExplicitUrlSettin
 import { createDefaultOpenAIProfile, hasDefaultPresetConfig, isAgentTextApiProfile, normalizeSettings } from './lib/apiProfiles'
 import { getCustomProviderConfigUrl, hasEmbeddedDefaultConfig, loadCustomProviderSettingsFromUrl, loadEmbeddedDefaultConfig } from './lib/customProviderConfigUrl'
 import { getDefaultPresetProfileId, getPresetProfileIds, isPresetConfigOnlyEnabled, setPresetConfig } from './lib/presetConfig'
+import { mergeSponsorPresets } from './lib/sponsorPresets'
 import { useDockerApiUrlMigrationNotice } from './hooks/useDockerApiUrlMigrationNotice'
 import type { AppSettings } from './types'
 import Header from './components/Header'
@@ -66,32 +67,22 @@ export default function App() {
 
     void initStore()
       .then(async () => {
-        const importedSettings = embeddedDefaultConfig || customProviderConfigUrl
-          ? await loadDefaultConfig()
+        const loadedSettings = embeddedDefaultConfig || customProviderConfigUrl
+          ? await loadDefaultConfig().catch((error) => {
+              console.warn('Failed to load deployment config, keeping previous presets:', error)
+              return useStore.getState().previousPresetConfig
+            })
           : hasDefaultPresetConfig()
             ? {
                 customProviders: [],
                 profiles: [{ ...createDefaultOpenAIProfile(), isDefault: true }],
               }
             : null
+        const importedSettings = mergeSponsorPresets(loadedSettings, useStore.getState().settings)
         setPresetConfig(importedSettings)
 
         const state = useStore.getState()
-        if (importedSettings) {
-          await state.setPresetImportedSettings(importedSettings)
-        } else if (state.previousPresetConfig) {
-          await state.setPresetImportedSettings({ customProviders: [], profiles: [] })
-        }
-
-        const syncedState = useStore.getState()
-        if (!importedSettings) {
-          useStore.setState({ dismissedPresetProfileIds: [], dismissedPresetProviderIds: [] })
-          if (syncedState.settings.profiles.some((profile) => profile.isDefault)) {
-            syncedState.setSettings({
-              profiles: syncedState.settings.profiles.map((profile) => profile.isDefault ? { ...profile, isDefault: undefined } : profile),
-            })
-          }
-        }
+        await state.setPresetImportedSettings(importedSettings)
 
         const current = useStore.getState()
         const presetIds = getPresetProfileIds()
