@@ -43,7 +43,8 @@ async function embedDefaultConfig(value: string) {
 
 export default defineConfig(async ({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const defaultApiUrl = await embedDefaultConfig(process.env.VITE_DEFAULT_API_URL ?? env.VITE_DEFAULT_API_URL ?? '')
+  const configuredDefaultApiUrl = process.env.VITE_DEFAULT_API_URL ?? env.VITE_DEFAULT_API_URL
+  const defaultApiUrl = await embedDefaultConfig(configuredDefaultApiUrl ?? './sponsor-presets.json')
   if (defaultApiUrl.startsWith('embedded-config:')) process.env.VITE_DEFAULT_API_URL = defaultApiUrl
   const devProxyConfig = command === 'serve' ? loadDevProxyConfig() : null
 
