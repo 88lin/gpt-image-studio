@@ -6,6 +6,7 @@ import {
   DEFAULT_RESPONSES_MODEL,
   findEquivalentApiProfile,
   mergeImportedSettings,
+  normalizeModelList,
   normalizeSettings,
   normalizeReasoningEffort,
   normalizeStreamPartialImages,
@@ -19,7 +20,8 @@ function getProfileDedupKey(profile: ApiProfile) {
     profile.provider,
     profile.baseUrl.trim().toLowerCase(),
     profile.apiKey.trim(),
-    profile.model.trim(),
+    // URL 新建的配置尚未规整，按规整后的模型列表比较才能命中已保存的配置
+    normalizeModelList(profile.model),
     profile.imageGenerationModel?.trim(),
     profile.apiMode,
     profile.reasoningEffort,

@@ -76,7 +76,7 @@ export default function ProfileImportUrlModal({
         <div className="flex gap-2">
           <button
             onClick={() => onCopy(false)}
-            className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-white/[0.08] text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition"
+            className="flex-1 py-2 rounded-xl border border-transparent dark:bg-white/[0.06] text-sm text-gray-600 dark:text-gray-400 hover:bg-black/[0.07] dark:hover:bg-white/[0.1] transition"
           >
             不包含
           </button>

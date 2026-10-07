@@ -43,7 +43,7 @@ export function getConfirmDialogInitialFocusTarget(showCancel: boolean | undefin
 
 function getActionButtonClass(tone: 'primary' | 'secondary' | 'danger' | 'warning' = 'primary') {
   if (tone === 'secondary') {
-    return 'border border-gray-200 text-gray-600 hover:bg-gray-50 dark:border-white/[0.08] dark:text-gray-400 dark:hover:bg-white/[0.06]'
+    return 'border border-transparent text-gray-600 hover:bg-black/[0.07] dark:bg-white/[0.06] dark:text-gray-400 dark:hover:bg-white/[0.1]'
   }
   if (tone === 'warning') return 'bg-orange-500 text-white hover:bg-orange-600'
   if (tone === 'danger') return 'bg-red-500 text-white hover:bg-red-600'

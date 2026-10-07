@@ -16,6 +16,30 @@ describe('viewport transform helpers', () => {
     })
   })
 
+  it('lets zoomed content fill a visible box larger than the canvas without exposing its edges', () => {
+    // 画布 100x100 位于 300x200 可见区域中，左上角偏移 (100, 50)
+    const bounds = { x: -100, y: -50, width: 300, height: 200 }
+    expect(clampViewTransform({ scale: 4, x: 0, y: 0 }, { width: 100, height: 100 }, bounds)).toEqual({
+      scale: 4,
+      x: -100,
+      y: -50,
+    })
+    expect(clampViewTransform({ scale: 4, x: -500, y: -500 }, { width: 100, height: 100 }, bounds)).toEqual({
+      scale: 4,
+      x: -200,
+      y: -250,
+    })
+  })
+
+  it('keeps zoomed content that is still smaller than the visible box inside it', () => {
+    const bounds = { x: -100, y: -50, width: 300, height: 200 }
+    expect(clampViewTransform({ scale: 1.5, x: 200, y: -200 }, { width: 100, height: 100 }, bounds)).toEqual({
+      scale: 1.5,
+      x: 50,
+      y: -50,
+    })
+  })
+
   it('zooms around the requested point instead of drifting to an edge', () => {
     expect(zoomAtPoint(
       { scale: 1, x: 0, y: 0 },

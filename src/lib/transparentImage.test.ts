@@ -16,8 +16,8 @@ describe('transparent image prompt and params', () => {
     expect(prompt).toContain('单主体贴纸素材')
     expect(prompt).toContain('#00FF00')
     expect(prompt).toContain('#FF00FF')
-    expect(prompt).toContain('纯色填充')
-    expect(prompt).toContain('禁止')
+    expect(prompt).toContain('solid color only')
+    expect(prompt).toContain('Forbidden')
   })
 
   it('forces unsupported transparent formats to PNG without mutating the original params', () => {

@@ -60,7 +60,7 @@ export default function CustomProviderModal({
         </div>
 
         <div ref={scrollBoundaryRef} className="flex-1 flex flex-col min-h-0 px-1 -mx-1 pb-2">
-          <div className="mb-6 shrink-0 rounded-2xl bg-gray-50/80 p-4 border border-gray-200/60 dark:bg-white/[0.02] dark:border-white/[0.05]">
+          <div className="mb-6 shrink-0 rounded-2xl bg-black/[0.04] p-4 border border-transparent dark:bg-white/[0.06]">
             <div className="mb-1.5 flex items-center gap-1.5 text-sm font-medium text-gray-800 dark:text-gray-200">
               <svg className="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -89,7 +89,7 @@ export default function CustomProviderModal({
                   }}
                   onTouchEnd={clearLlmPromptTooltipTimer}
                   onTouchCancel={clearLlmPromptTooltipTimer}
-                  className="flex items-center gap-1.5 rounded-xl bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm border border-gray-200/80 transition hover:bg-gray-50 hover:text-gray-900 dark:bg-white/[0.05] dark:border-white/[0.08] dark:text-gray-300 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                  className="flex items-center gap-1.5 rounded-xl bg-black/[0.04] px-3 py-2 text-xs font-medium text-gray-700 border border-transparent transition hover:bg-black/[0.07] hover:text-gray-900 dark:bg-white/[0.06] dark:text-gray-300 dark:hover:bg-white/[0.1] dark:hover:text-white"
                 >
                   <LinkIcon className="h-3.5 w-3.5" />
                   复制生成提示词
@@ -102,7 +102,7 @@ export default function CustomProviderModal({
                 type="button"
                 onClick={onImportJson}
                 disabled={isImportingJson}
-                className="flex items-center gap-1.5 rounded-xl bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm border border-gray-200/80 transition hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-white/[0.05] dark:border-white/[0.08] dark:text-gray-300 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                className="flex items-center gap-1.5 rounded-xl bg-black/[0.04] px-3 py-2 text-xs font-medium text-gray-700 border border-transparent transition hover:bg-black/[0.07] hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-white/[0.06] dark:text-gray-300 dark:hover:bg-white/[0.1] dark:hover:text-white"
               >
                 {isImportingJson ? (
                   <>
@@ -126,7 +126,7 @@ export default function CustomProviderModal({
                 value={json}
                 onChange={(e) => onJsonChange(e.target.value)}
                 spellCheck={false}
-                className="flex-1 min-h-[150px] w-full resize-none rounded-xl border border-gray-200/70 bg-white/60 px-3 py-2 font-mono text-xs leading-relaxed text-gray-700 outline-none transition focus:border-blue-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-gray-200 dark:focus:border-blue-500/50 custom-scrollbar"
+                className="flex-1 min-h-[150px] w-full resize-none rounded-xl border border-transparent bg-black/[0.04] px-3 py-2 font-mono text-xs leading-relaxed text-gray-700 outline-none transition focus:border-blue-300 dark:bg-white/[0.06] dark:text-gray-200 dark:focus:border-blue-500/50 custom-scrollbar"
               />
             </label>
           </div>

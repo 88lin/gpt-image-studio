@@ -70,7 +70,7 @@ export default function ZipDownloadRouteModal({
                   event.preventDefault()
                   onSetEnabled(option.route, !isChecked)
                 }}
-                className={`cursor-pointer rounded-2xl border p-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20 ${isChecked ? 'border-blue-500/30 bg-blue-50/50 dark:border-blue-400/30 dark:bg-blue-500/[0.05]' : 'border-gray-100 bg-gray-50/70 hover:bg-gray-100/70 dark:border-white/[0.06] dark:bg-white/[0.03] dark:hover:bg-white/[0.05]'}`}
+                className={`cursor-pointer rounded-2xl border p-3.5 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20 ${isChecked ? 'border-transparent bg-blue-50 dark:bg-blue-500/[0.1]' : 'border-transparent bg-black/[0.04] hover:bg-black/[0.07] dark:bg-white/[0.06] dark:hover:bg-white/[0.08]'}`}
               >
                 <div onClick={(event) => event.stopPropagation()}>
                   <Checkbox

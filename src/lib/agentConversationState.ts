@@ -1,4 +1,5 @@
 import type { AgentConversation, AgentMessage, AgentRound, TaskRecord } from '../types'
+import { stripImageMentionMarkers } from './promptImageMentions'
 import { normalizeResponsesOutputItems } from './responsesOutputState'
 
 const AGENT_ROUND_IMAGE_MENTION_RE = /@(?:第)?(\d+)轮图(\d+)/g
@@ -268,9 +269,10 @@ export function getAgentConversationTaskIds(conversation: AgentConversation | nu
 }
 
 export function getConversationSearchText(conversation: AgentConversation) {
+  // 去掉提及标记和评论胶囊中的编码数据，只按可见文字搜索
   return [
     conversation.title,
     ...conversation.messages.map((message) => message.content),
     ...conversation.rounds.map((round) => round.prompt),
-  ].join('\n').toLocaleLowerCase()
+  ].map(stripImageMentionMarkers).join('\n').toLocaleLowerCase()
 }

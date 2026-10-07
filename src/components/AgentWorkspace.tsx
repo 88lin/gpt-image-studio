@@ -1,22 +1,25 @@
 import { useEffect, useMemo, useState, useRef, useCallback, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from 'react'
 import type { AgentMessage, AgentRound, TaskRecord } from '../types'
 import { editOutputs, regenerateAgentAssistantMessage, removeMultipleTasks, removeTask, reuseConfig, useStore } from '../store'
-import { getActiveAgentRounds, getAgentBranchLeafId, getConversationSearchText, getAgentRoundTaskIds, getAgentSiblingRounds } from '../lib/agentConversationState'
+import { getActiveAgentRounds, getAgentBranchLeafId, getAgentRoundPath, getConversationSearchText, getAgentRoundTaskIds, getAgentSiblingRounds } from '../lib/agentConversationState'
 import { ensureImageCached, getCachedImage } from '../lib/imageCache'
-import { getPromptMentionParts } from '../lib/promptImageMentions'
+import { getImageComments, getPromptMentionParts } from '../lib/promptImageMentions'
+import { replaceAgentPromptImageReferencesForApi } from '../lib/agentImageReferences'
 import { copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
 import type { AgentWebSearchStatus } from '../lib/agentWebSearch'
 import { getAgentAssistantBlocks, getAgentAssistantCopyContent, getRoundTaskSlots } from '../lib/agentAssistantBlocks'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
 import { downloadImageEntriesAsZip, downloadImageIds, getImageZipEntries } from '../lib/downloadImages'
 import TaskCard from './TaskCard'
+import { CommentBadge } from './CommentMarks'
 import MarkdownRenderer from './MarkdownRenderer'
 import { TooltipButton as AgentActionButton } from './TooltipButton'
 import { TrashIcon, DownloadIcon, EditIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, SidebarLeftIcon, FavoriteIcon, CloseIcon, CopyIcon, RefreshIcon, ArrowDownIcon } from './icons'
 
-function ChatImageThumb({ imageId, imageIndex, maskImageId }: { imageId: string; imageIndex: number; maskImageId?: string | null }) {
+function ChatImageThumb({ imageId, imageIndex, maskImageId, round }: { imageId: string; imageIndex: number; maskImageId?: string | null; round: AgentRound }) {
   const [src, setSrc] = useState<string>(() => getCachedImage(imageId) || '')
   const setLightboxImageId = useStore((s) => s.setLightboxImageId)
+  const commentCount = getImageComments(round.prompt, imageIndex).length
 
   useEffect(() => {
     let cancelled = false
@@ -50,9 +53,9 @@ function ChatImageThumb({ imageId, imageIndex, maskImageId }: { imageId: string;
   return (
     <div
       className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-lg shadow-sm cursor-pointer transition-opacity hover:opacity-90 ${
-        maskImageId ? 'border-2 border-blue-500' : 'border border-gray-200 dark:border-white/[0.08]'
+        maskImageId || commentCount > 0 ? 'border-2 border-blue-500' : 'border border-gray-200 dark:border-white/[0.08]'
       }`}
-      onClick={() => setLightboxImageId(imageId, [imageId])}
+      onClick={() => setLightboxImageId(imageId, round.inputImageIds, round.prompt)}
     >
       {src ? <img src={src} className="h-full w-full object-cover" alt="" /> : <div className="h-full w-full bg-gray-100 dark:bg-white/[0.04]" />}
       {maskImageId && (
@@ -60,6 +63,7 @@ function ChatImageThumb({ imageId, imageIndex, maskImageId }: { imageId: string;
           MASK
         </span>
       )}
+      {commentCount > 0 && <CommentBadge count={commentCount} className={maskImageId ? 'left-1 top-[18px]' : 'left-1 top-1'} />}
       <span className="absolute bottom-1 left-1 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-black/55 text-[9px] font-semibold text-white backdrop-blur-sm pointer-events-none">
         {imageIndex + 1}
       </span>
@@ -640,7 +644,7 @@ export default function AgentWorkspace() {
               value={conversationSearchQuery}
               onChange={(e) => setConversationSearchQuery(e.target.value)}
               placeholder="搜索聊天..."
-              className="w-full rounded-xl border border-gray-200 bg-gray-100/80 px-3 py-2 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-400 focus:bg-white dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-white dark:focus:border-blue-400 dark:focus:bg-white/[0.07]"
+              className="w-full rounded-xl border border-transparent bg-black/[0.04] px-3 py-2 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-400 focus:bg-white dark:bg-white/[0.06] dark:text-white dark:focus:border-blue-400 dark:focus:bg-white/[0.07]"
             />
           </div>
           <div className="space-y-1 overflow-y-auto flex-1 px-4 pb-4">
@@ -698,7 +702,7 @@ export default function AgentWorkspace() {
                       <AgentActionButton tooltip="编辑标题" className="p-1.5 text-gray-400 hover:text-gray-700 disabled:text-gray-300 disabled:hover:text-gray-300 disabled:cursor-not-allowed dark:hover:text-gray-200 dark:disabled:text-gray-600 dark:disabled:hover:text-gray-600" onClick={(e) => startRenameConversation(e, item.id, item.title)} disabled={isGeneratingTitle}>
                         <EditIcon className="w-4 h-4" />
                       </AgentActionButton>
-                      <AgentActionButton tooltip="删除" className="p-1.5 text-gray-400 hover:text-red-500" onClick={(e) => { e.stopPropagation(); handleDeleteConversation(item.id) }}>
+                      <AgentActionButton tooltip="删除" className="p-1.5 text-gray-400 hover:text-red-600" onClick={(e) => { e.stopPropagation(); handleDeleteConversation(item.id) }}>
                         <TrashIcon className="w-4 h-4" />
                       </AgentActionButton>
                     </>
@@ -812,6 +816,7 @@ export default function AgentWorkspace() {
                               imageId={imgId}
                               imageIndex={imageIndex}
                               maskImageId={imgId === (round.maskTargetImageId ?? round.inputImageIds[0]) ? round.maskImageId : null}
+                              round={round}
                             />
                           ))}
                       </div>
@@ -820,7 +825,7 @@ export default function AgentWorkspace() {
                     {round?.status === 'error' && isAssistant && message.content.startsWith('请求失败：') ? (
                       <div
                         data-selectable-text
-                        className="-m-2 flex cursor-copy select-text flex-col rounded-xl p-2 transition-colors hover:bg-red-50/60 dark:hover:bg-red-500/5"
+                        className="-m-2 flex cursor-copy select-text flex-col rounded-xl p-2 transition-colors hover:bg-red-500/[0.1] dark:hover:bg-red-500/[0.16]"
                         title="点击复制完整报错"
                         onPointerDown={handleErrorCopyPointerDown}
                         onClick={(e) => handleErrorCopyClick(e, message.content)}
@@ -972,7 +977,7 @@ export default function AgentWorkspace() {
                              }}>
                                <DownloadIcon className="w-4 h-4" />
                              </AgentActionButton>
-                            <AgentActionButton tooltip="删除消息" className="p-1.5 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-md transition-colors" onClick={() => {
+                            <AgentActionButton tooltip="删除消息" className="p-1.5 hover:text-red-600 hover:bg-red-500/[0.1] dark:hover:bg-red-500/[0.16] rounded-md transition-colors" onClick={() => {
                               if (round) handleDeleteMessage(message, round);
                             }}>
                               <TrashIcon className="w-4 h-4" />
@@ -981,7 +986,8 @@ export default function AgentWorkspace() {
                         ) : (
                           <>
                             <AgentActionButton tooltip="复制提示词" className="p-1.5 rounded-md hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200/50 dark:hover:bg-white/[0.04] transition-colors" onClick={() => {
-                              void handleCopyMessage(message.content);
+                              // 与画廊一致，复制实际发送给接口的文字
+                              void handleCopyMessage(round ? replaceAgentPromptImageReferencesForApi(message.content, round, getAgentRoundPath(conversation, round.id), tasks) : message.content);
                             }}>
                               <CopyIcon className="w-4 h-4" />
                             </AgentActionButton>
@@ -990,7 +996,7 @@ export default function AgentWorkspace() {
                             }}>
                               <EditIcon className="w-4 h-4" />
                             </AgentActionButton>
-                            <AgentActionButton tooltip="删除" className="p-1.5 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-md transition-colors" onClick={() => {
+                            <AgentActionButton tooltip="删除" className="p-1.5 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-500/[0.1] dark:hover:bg-red-500/[0.16] rounded-md transition-colors" onClick={() => {
                               if (round) handleDeleteMessage(message, round);
                             }}>
                               <TrashIcon className="w-4 h-4" />
@@ -1014,7 +1020,7 @@ export default function AgentWorkspace() {
                   {renderedMessages}
                   {runningRounds.map((round) => (
                     <div key={`running-${round.id}`} className="flex w-full justify-start mb-6">
-                      <article className="flex min-w-[16rem] max-w-[95%] flex-col rounded-2xl rounded-tl-sm border border-gray-200 bg-white/70 p-4 dark:border-white/[0.08] dark:bg-white/[0.03] md:max-w-[85%] lg:max-w-[75%]">
+                      <article className="flex min-w-[16rem] max-w-[95%] flex-col rounded-2xl rounded-tl-sm border border-transparent bg-black/[0.04] p-4 dark:bg-white/[0.06] md:max-w-[85%] lg:max-w-[75%]">
                         <div className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                           <span className="text-blue-600 dark:text-blue-400 font-semibold">Agent</span> <span className="ml-1 font-normal opacity-60">· 第 {round.index} 轮</span>
                         </div>

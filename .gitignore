@@ -4,3 +4,4 @@ dev-proxy.config.json
 .wrangler/
 .env.local
 .env.*.local
+.claude/

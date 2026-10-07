@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
+import type { ImageComment } from '../types'
 import { createInputImageFromFile, deleteImageIfUnreferenced, useStore } from '../store'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
-import { useHintTooltip } from '../hooks/useHintTooltip'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
 import { suppressGlobalClicks } from '../lib/clickSuppression'
 import { ensureImageCached, getCachedImage } from '../lib/imageCache'
-import ButtonTooltip from './input/buttonTooltip'
+import { getImageComments } from '../lib/promptImageMentions'
+import { CommentPin } from './CommentMarks'
 import { EditIcon, RefreshIcon } from './icons'
 
 const MIN_SCALE = 1
@@ -29,8 +30,13 @@ export default function Lightbox() {
   const maskDraft = useStore((s) => s.maskDraft)
   const tasks = useStore((s) => s.tasks)
   const inputImages = useStore((s) => s.inputImages)
+  const lightboxCommentPrompt = useStore((s) => s.lightboxCommentPrompt)
   const replaceInputImage = useStore((s) => s.replaceInputImage)
   const setMaskEditorImageId = useStore((s) => s.setMaskEditorImageId)
+  const setSketchBoard = useStore((s) => s.setSketchBoard)
+  const setConfirmDialog = useStore((s) => s.setConfirmDialog)
+  const settings = useStore((s) => s.settings)
+  const setSettings = useStore((s) => s.setSettings)
   const showToast = useStore((s) => s.showToast)
   const replaceFileInputRef = useRef<HTMLInputElement>(null)
   const replaceImageTargetRef = useRef<string | null>(null)
@@ -134,8 +140,8 @@ export default function Lightbox() {
   const goTo = useCallback((idx: number) => {
     if (lightboxImageList.length === 0) return
     const wrapped = ((idx % lightboxImageList.length) + lightboxImageList.length) % lightboxImageList.length
-    setLightboxImageId(lightboxImageList[wrapped], lightboxImageList)
-  }, [lightboxImageList, setLightboxImageId])
+    setLightboxImageId(lightboxImageList[wrapped], lightboxImageList, lightboxCommentPrompt)
+  }, [lightboxCommentPrompt, lightboxImageList, setLightboxImageId])
 
   const goPrev = useCallback(() => { if (showNav) goTo(currentIndex - 1) }, [showNav, currentIndex, goTo])
   const goNext = useCallback(() => { if (showNav) goTo(currentIndex + 1) }, [showNav, currentIndex, goTo])
@@ -180,19 +186,74 @@ export default function Lightbox() {
 
       replaceInputImage(targetIdx, image)
       const nextList = lightboxImageList.map((id) => id === targetId ? image.id : id)
-      setLightboxImageId(image.id, nextList)
+      setLightboxImageId(image.id, nextList, lightboxCommentPrompt)
       showToast('参考图已替换', 'success')
     } catch (err) {
       showToast(`参考图替换失败：${err instanceof Error ? err.message : String(err)}`, 'error')
     }
-  }, [lightboxImageList, replaceInputImage, setLightboxImageId, showToast])
+  }, [lightboxCommentPrompt, lightboxImageList, replaceInputImage, setLightboxImageId, showToast])
 
   const editInputImage = useCallback(() => {
-    if (!lightboxImageId || !isInputImage) return
+    if (!lightboxImageId || !isInputImage || !src) return
     const imageId = lightboxImageId
-    close()
-    setMaskEditorImageId(imageId)
-  }, [close, isInputImage, lightboxImageId, setMaskEditorImageId])
+    const baseImageSrc = src
+
+    // 已是遮罩主图时继续编辑遮罩
+    if (maskDraft?.targetImageId === imageId) {
+      close()
+      setMaskEditorImageId(imageId)
+      return
+    }
+
+    const openSketch = () => {
+      close()
+      setSketchBoard({ baseImageSrc, replaceImageId: imageId })
+    }
+    const openMask = () => {
+      if (maskDraft) {
+        showToast('只能有一张遮罩图，请先移除现有遮罩', 'info')
+        return
+      }
+      close()
+      setMaskEditorImageId(imageId)
+    }
+    const remember = (choice: 'sketch' | 'mask', checked?: boolean) => {
+      if (checked) setSettings({ referenceImageEditAction: choice })
+    }
+
+    if (settings.referenceImageEditAction === 'sketch') {
+      openSketch()
+      return
+    }
+    if (settings.referenceImageEditAction === 'mask') {
+      openMask()
+      return
+    }
+
+    setConfirmDialog({
+      title: '编辑图片',
+      message: '画板可在图片上手绘、评论，标注修改意图；遮罩可指定需要重绘的区域。\n若勾选下方选项，之后可在 **设置-习惯配置** 中修改。',
+      checkbox: { label: '以后默认执行此选择' },
+      buttons: [
+        {
+          label: '遮罩',
+          tone: 'secondary',
+          action: (checked) => {
+            remember('mask', checked)
+            openMask()
+          },
+        },
+        {
+          label: '画板',
+          tone: 'primary',
+          action: (checked) => {
+            remember('sketch', checked)
+            openSketch()
+          },
+        },
+      ],
+    })
+  }, [close, isInputImage, lightboxImageId, maskDraft, setConfirmDialog, setMaskEditorImageId, setSettings, setSketchBoard, settings.referenceImageEditAction, showToast, src])
 
   // 键盘左右切换
   useEffect(() => {
@@ -207,10 +268,14 @@ export default function Lightbox() {
 
   if (!lightboxImageId || !src) return null
 
+  // 打开预览的入口（输入栏、任务详情、Agent 消息）会传入对应的提示词，图片在列表中的位置即其序号
+  const comments = lightboxCommentPrompt != null && currentIndex >= 0 ? getImageComments(lightboxCommentPrompt, currentIndex) : []
+
   return (
     <>
       <LightboxInner
         src={src}
+        comments={comments}
         imageId={lightboxImageId}
         maskPreviewSrc={maskPreviewSrc}
         onClose={close}
@@ -220,7 +285,6 @@ export default function Lightbox() {
         onPrev={goPrev}
         onNext={goNext}
         showInputActions={isInputImage}
-        editDisabled={Boolean(maskDraft && maskDraft.targetImageId !== lightboxImageId)}
         onReplace={openReplaceFilePicker}
         onEdit={editInputImage}
       />
@@ -237,6 +301,7 @@ export default function Lightbox() {
 
 interface LightboxInnerProps {
   src: string
+  comments: ImageComment[]
   imageId: string
   maskPreviewSrc?: string
   onClose: () => void
@@ -246,16 +311,14 @@ interface LightboxInnerProps {
   onPrev: () => void
   onNext: () => void
   showInputActions: boolean
-  editDisabled: boolean
   onReplace: () => void
   onEdit: () => void
 }
 
 /** 内部组件：保证挂载时 DOM 已经存在，所有 ref / effect 都可靠 */
-function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, currentIndex, total, onPrev, onNext, showInputActions, editDisabled, onReplace, onEdit }: LightboxInnerProps) {
+function LightboxInner({ src, comments, imageId, maskPreviewSrc, onClose, showNav, currentIndex, total, onPrev, onNext, showInputActions, onReplace, onEdit }: LightboxInnerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const openedAtRef = useRef(Date.now())
-  const editHint = useHintTooltip({ enabled: () => editDisabled })
 
   // 用 ref 追踪最新变换，避免闭包过期
   const scaleRef = useRef(1)
@@ -268,6 +331,17 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
 
   // 缩放倍率显示：2s 无操作后自动隐藏
   const [showZoomBadge, setShowZoomBadge] = useState(false)
+  // 点击评论气泡可收起 / 展开其文字，切换到其他图片时恢复全部展开
+  const [hiddenComments, setHiddenComments] = useState<{ imageId: string; indexes: number[] }>({ imageId, indexes: [] })
+  // 渲染期间发现图片已切换就直接重置，避免切回原图时沿用旧的收起状态，也不会闪一帧
+  if (hiddenComments.imageId !== imageId) setHiddenComments({ imageId, indexes: [] })
+  const hiddenCommentIndexes = hiddenComments.indexes
+  const toggleComment = (idx: number) => {
+    setHiddenComments({
+      imageId,
+      indexes: hiddenCommentIndexes.includes(idx) ? hiddenCommentIndexes.filter((item) => item !== idx) : [...hiddenCommentIndexes, idx],
+    })
+  }
   const zoomTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   // 拖拽状态
   const dragRef = useRef({
@@ -731,6 +805,41 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
               alt=""
             />
           )}
+          {comments.map((comment, idx) => (
+            // 气泡尖角落在评论位置，并抵消外层缩放，保持屏幕上的大小不变；靠右的评论文字放到气泡左侧，避免伸出图片
+            <div
+              key={idx}
+              className="pointer-events-none absolute"
+              style={{
+                left: `${comment.x * 100}%`,
+                bottom: `${(1 - comment.y) * 100}%`,
+                transform: `scale(${1 / s})`,
+                transformOrigin: '0 100%',
+                transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+              }}
+            >
+              {/* 用按钮承载气泡，触摸手势会把它识别为控件，点按不会关闭预览 */}
+              <button
+                type="button"
+                aria-label={hiddenCommentIndexes.includes(idx) ? `显示评论 ${idx + 1}` : `隐藏评论 ${idx + 1}`}
+                aria-pressed={!hiddenCommentIndexes.includes(idx)}
+                className="pointer-events-auto block cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleComment(idx)
+                }}
+                onDoubleClick={(e) => e.stopPropagation()}
+              >
+                <CommentPin index={idx} />
+              </button>
+              {/* 收起时向气泡一侧缩小淡出 */}
+              <span className={`absolute bottom-0 w-max max-w-[18rem] whitespace-pre-wrap break-words rounded-xl border border-gray-200/80 bg-white/95 px-3 py-2 text-sm leading-snug text-gray-800 shadow-lg backdrop-blur-md transition-[opacity,transform] duration-150 ease-out dark:border-white/[0.08] dark:bg-gray-800/95 dark:text-gray-100 ${
+                comment.x > 0.6 ? 'right-full mr-1.5 origin-bottom-right' : 'left-full ml-1.5 origin-bottom-left'
+              } ${hiddenCommentIndexes.includes(idx) ? 'scale-75 opacity-0' : 'scale-100 opacity-100'}`}>
+                {comment.text}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -769,25 +878,14 @@ function LightboxInner({ src, imageId, maskPreviewSrc, onClose, showNav, current
             <RefreshIcon className="w-4 h-4" />
             <span>替换图片</span>
           </button>
-          <div
-            className="relative flex items-center"
-            onMouseEnter={editHint.show}
-            onMouseLeave={editHint.hide}
-            onTouchStart={editHint.startTouch}
-            onTouchEnd={editHint.clearTimer}
-            onTouchCancel={editHint.hide}
+          <button
+            type="button"
+            className="flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-blue-500 px-5 py-2.5 text-sm font-medium text-white shadow-md transition hover:bg-blue-600 hover:shadow-blue-500/25 active:scale-95"
+            onClick={onEdit}
           >
-            <ButtonTooltip visible={editDisabled && editHint.visible} text="只能有一张遮罩图" />
-            <button
-              type="button"
-              disabled={editDisabled}
-              className={`flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-5 py-2.5 text-sm font-medium shadow-md transition active:scale-95 ${editDisabled ? 'cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/10 dark:text-white/40 shadow-none' : 'bg-blue-500 text-white hover:bg-blue-600 hover:shadow-blue-500/25'}`}
-              onClick={onEdit}
-            >
-              <EditIcon className="w-4 h-4" />
-              <span>编辑图片</span>
-            </button>
-          </div>
+            <EditIcon className="w-4 h-4" />
+            <span>编辑图片</span>
+          </button>
         </div>
       )}
 

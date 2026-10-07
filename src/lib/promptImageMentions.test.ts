@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { InputImage } from '../types'
-import { getAtImageQuery, getPromptMentionParts, getSelectedImageMentionLabel, getSelectedTextMentionLabel, insertImageMention, insertTextMentionAtVisibleRange, isCursorInSelectedImageMention, remapImageMentionsForOrder, replaceImageMentionsForApi } from './promptImageMentions'
+import { expandImageCommentMentions, getAtImageQuery, getImageCommentMention, getImageComments, getPromptIndexFromVisibleIndex, getPromptMentionParts, getSelectedImageMentionLabel, getTaskPromptText, getSelectedTextMentionLabel, insertImageMention, insertTextMentionAtVisibleRange, isCursorInSelectedImageMention, remapImageMentionsForOrder, replaceImageMentionsForApi, stripImageMentionMarkers, upsertImageCommentMention } from './promptImageMentions'
 
 const images: InputImage[] = [
   { id: 'image-a', dataUrl: 'data:image/png;base64,a' },
@@ -126,6 +126,76 @@ describe('prompt image mentions', () => {
 
     it('does not replace mentions outside the current image range', () => {
       expect(replaceImageMentionsForApi(`把 ${getSelectedImageMentionLabel(2)} 变蓝`, 2)).toBe('把 @图3 变蓝')
+    })
+  })
+
+  describe('image comment mentions', () => {
+    const comments = [{ x: 0.52, y: 0.41, text: '改成红色 "引号"' }, { x: 0.1, y: 0.8, text: '删除' }]
+
+    it('round-trips comments and hides the data segment from visible text', () => {
+      const prompt = `参考${getImageCommentMention(1, comments)}调整`
+      expect(getImageComments(prompt, 1)).toEqual(comments)
+      expect(getImageComments(prompt, 0)).toEqual([])
+      expect(stripImageMentionMarkers(prompt)).toBe('参考@图2 评论调整')
+      // 可见偏移 8 位于胶囊之后，应跳过隐藏的数据段
+      expect(prompt.slice(getPromptIndexFromVisibleIndex(prompt, 8))).toBe('调整')
+      expect(getPromptMentionParts(prompt, images)[1]).toEqual({ type: 'mention', text: '@图2 评论', imageIndex: 1, mentionText: getImageCommentMention(1, comments) })
+    })
+
+    it('inserts a comment mention right before an existing mention without breaking it', () => {
+      const prompt = `abc${getSelectedImageMentionLabel(0)} tail`
+      for (const [cursor, before] of [[3, 'abc'], [0, '']] as const) {
+        const next = upsertImageCommentMention(cursor === 0 ? `${getSelectedImageMentionLabel(0)} tail` : prompt, 1, comments, cursor).prompt
+        expect(next).toBe(`${before}${getImageCommentMention(1, comments)}${getSelectedImageMentionLabel(0)} tail`)
+      }
+    })
+
+    it('replaces the selected mention and returns the cursor after the new comment mention', () => {
+      const prompt = `前${getSelectedImageMentionLabel(0)}后`
+      const result = upsertImageCommentMention(prompt, 1, comments, 1, 4)
+      expect(result.prompt).toBe(`前${getImageCommentMention(1, comments)}后`)
+      expect(result.cursor).toBe(7)
+      expect(upsertImageCommentMention(result.prompt, 1, comments.slice(1), 0, 8).cursor).toBeNull()
+    })
+
+    it('inserts, replaces and removes the comment mention of an image', () => {
+      const inserted = upsertImageCommentMention('前后', 0, comments, 1).prompt
+      expect(stripImageMentionMarkers(inserted)).toBe('前@图1 评论后')
+      const replaced = upsertImageCommentMention(inserted, 0, comments.slice(1), 0).prompt
+      expect(getImageComments(replaced, 0)).toEqual(comments.slice(1))
+      expect(stripImageMentionMarkers(replaced)).toBe('前@图1 评论后')
+      expect(upsertImageCommentMention(replaced, 0, [], 0)).toEqual({ prompt: '前后', cursor: null })
+      expect(stripImageMentionMarkers(upsertImageCommentMention('文本', 1, comments, Infinity).prompt)).toBe('文本@图2 评论')
+    })
+
+    it('follows image reordering and disappears with the removed image', () => {
+      const prompt = getImageCommentMention(0, comments)
+      expect(getImageComments(remapImageMentionsForOrder(prompt, images, [images[1], images[0]]), 1)).toEqual(comments)
+      expect(remapImageMentionsForOrder(prompt, images, [images[1]])).toBe('')
+    })
+
+    it('expands comments into percentage-coordinate lines, separated from text and other images by a blank line', () => {
+      const prompt = `把背景换掉${getImageCommentMention(0, comments)}${getImageCommentMention(1, [comments[1]])} 整体偏暖色调`
+      expect(stripImageMentionMarkers(expandImageCommentMentions(prompt))).toBe([
+        '把背景换掉',
+        '',
+        '@图1 notes:',
+        '1. (X=52%, Y=41%) 改成红色 "引号"',
+        '2. (X=10%, Y=80%) 删除',
+        '',
+        '@图2 notes:',
+        '1. (X=10%, Y=80%) 删除',
+        '',
+        '整体偏暖色调',
+      ].join('\n'))
+      expect(replaceImageMentionsForApi(expandImageCommentMentions(getImageCommentMention(0, comments)), 1)).toContain('[image 1] notes:')
+    })
+
+    it('shows the exact request text for task records', () => {
+      const prompt = `参考 ${getSelectedImageMentionLabel(0)} ${getImageCommentMention(0, [comments[1]])}`
+      expect(getTaskPromptText(prompt, 1)).toBe('参考 [image 1]\n\n[image 1] notes:\n1. (X=10%, Y=80%) 删除')
+      // 原本就空了一行时不再重复补空行
+      expect(getTaskPromptText(`前\n\n${getImageCommentMention(0, [comments[1]])}\n\n后`, 1)).toBe('前\n\n[image 1] notes:\n1. (X=10%, Y=80%) 删除\n\n后')
     })
   })
 })

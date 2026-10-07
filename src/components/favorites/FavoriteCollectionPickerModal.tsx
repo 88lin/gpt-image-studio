@@ -435,7 +435,7 @@ export function FavoriteCollectionPickerModal() {
               }}
               type="text"
               placeholder="新建收藏夹..."
-              className="min-w-0 flex-1 rounded-xl border border-gray-300 bg-transparent px-4 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-white/10 dark:text-white dark:focus:border-white/30 dark:focus:ring-white/30"
+              className="min-w-0 flex-1 rounded-xl border border-transparent bg-black/[0.04] px-4 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-white/[0.06] dark:text-white dark:focus:border-white/30 dark:focus:ring-white/30"
             />
             <button
               type="button"
@@ -447,7 +447,7 @@ export function FavoriteCollectionPickerModal() {
             </button>
           </div>
           <div className="mt-5 flex gap-4">
-            <button type="button" onClick={closePicker} className="flex-1 rounded-xl border border-gray-200 bg-transparent px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors dark:border-white/10 dark:text-gray-200 dark:hover:bg-white/[0.04]">取消</button>
+            <button type="button" onClick={closePicker} className="flex-1 rounded-xl border border-transparent bg-black/[0.04] px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-black/[0.07] transition-colors dark:bg-white/[0.06] dark:text-gray-200 dark:hover:bg-white/[0.1]">取消</button>
             <button type="button" onClick={handleConfirm} className="flex-1 rounded-xl bg-blue-500 px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-600 transition-colors shadow-sm border border-transparent">确认</button>
           </div>
         </div>

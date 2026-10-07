@@ -296,7 +296,7 @@ export function FavoriteCollectionOverviewCard({
                       e.stopPropagation()
                       handleDelete(card.collection!, card.tasks)
                     }}
-                    className={`p-1.5 rounded-md transition ${canDelete ? 'hover:bg-red-50 dark:hover:bg-red-950/30 text-gray-400 hover:text-red-500' : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'}`}
+                    className={`p-1.5 rounded-md transition ${canDelete ? 'hover:bg-red-500/[0.1] dark:hover:bg-red-500/[0.16] text-gray-400 hover:text-red-600' : 'text-gray-300 dark:text-gray-600 cursor-not-allowed'}`}
                   >
                     <TrashIcon className="w-4 h-4" />
                   </FavoriteActionButton>
