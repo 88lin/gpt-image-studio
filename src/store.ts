@@ -78,6 +78,7 @@ const CUSTOM_RECOVERY_POLL_MS = 10_000
 const falRecoveryTimers = new Map<string, ReturnType<typeof setTimeout>>()
 const customRecoveryTimers = new Map<string, ReturnType<typeof setTimeout>>()
 const openAIWatchdogTimers = new Map<string, ReturnType<typeof setTimeout>>()
+const taskExecutions = new Map<string, symbol>()
 const agentRoundControllers = new Map<string, AbortController>()
 const agentRecoveryContinuations = new Set<string>()
 const deletedActiveAgentTasks = new Map<string, { task: TaskRecord; controller: AbortController }>()
@@ -1095,7 +1096,7 @@ function failOpenAITaskIfStillRunning(taskId: string, error: string, now = Date.
   updateTaskInStore(taskId, {
     ...createTaskErrorPatch(task, error, now),
     falRecoverable: false,
-    elapsed: Math.max(0, now - task.createdAt),
+    elapsed: Math.max(0, now - (task.startedAt ?? task.createdAt)),
   })
   return true
 }
@@ -1106,7 +1107,7 @@ function scheduleOpenAIWatchdog(taskId: string, timeoutSeconds: number, profile?
   if (!task || !isRunningOpenAITask(task)) return
 
   const timeoutMs = Math.max(0, timeoutSeconds * 1000)
-  const remainingMs = Math.max(0, timeoutMs - (Date.now() - task.createdAt))
+  const remainingMs = Math.max(0, timeoutMs - (Date.now() - (task.startedAt ?? task.createdAt)))
   const timer = setTimeout(() => {
     openAIWatchdogTimers.delete(taskId)
     const failed = failOpenAITaskIfStillRunning(taskId, createOpenAITimeoutError(timeoutSeconds, profile))
@@ -1926,7 +1927,7 @@ function markAgentRoundTasksStopped(conversationId: string, roundId: string, now
       ...createTaskErrorPatch(task, AGENT_STOPPED_MESSAGE, now),
       falRecoverable: false,
       customRecoverable: false,
-      elapsed: Math.max(0, now - task.createdAt),
+      elapsed: Math.max(0, now - (task.startedAt ?? task.createdAt)),
     })
   }
   return runningTasks.length > 0
@@ -1954,7 +1955,7 @@ function markAgentRoundTasksFailed(
       ...(rawResponsePayload ? { rawResponsePayload } : {}),
       falRecoverable: false,
       customRecoverable: false,
-      elapsed: Math.max(0, now - task.createdAt),
+      elapsed: Math.max(0, now - (task.startedAt ?? task.createdAt)),
     })
   }
   return runningTasks.length > 0
@@ -2175,13 +2176,13 @@ async function deleteUnreferencedImageIds(imageIds: Iterable<string>) {
   }
 }
 
-async function persistTaskStreamPartialImage(taskId: string, dataUrl: string) {
+async function persistTaskStreamPartialImage(taskId: string, dataUrl: string, execution?: symbol) {
   try {
     const imgId = await storeImage(dataUrl, 'generated')
     cacheImage(imgId, dataUrl)
 
     const latestTask = useStore.getState().tasks.find((task) => task.id === taskId)
-    if (!latestTask || latestTask.status === 'done') {
+    if (!latestTask || latestTask.status === 'done' || (execution && taskExecutions.get(taskId) !== execution)) {
       await deleteUnreferencedImageIds([imgId])
       return
     }
@@ -3616,6 +3617,8 @@ async function executeTask(taskId: string) {
   const { settings } = useStore.getState()
   const task = useStore.getState().tasks.find((t) => t.id === taskId)
   if (!task) return
+  const execution = Symbol(taskId)
+  taskExecutions.set(taskId, execution)
   const taskProfile = getTaskApiProfile(settings, task)
   if (!taskProfile && task.apiProfileId) {
     updateTaskInStore(taskId, {
@@ -3623,6 +3626,7 @@ async function executeTask(taskId: string) {
       falRecoverable: false,
       customRecoverable: false,
     })
+    taskExecutions.delete(taskId)
     return
   }
   const activeProfile = taskProfile ?? getActiveApiProfile(settings)
@@ -3670,6 +3674,7 @@ async function executeTask(taskId: string) {
       maskDataUrl,
       skipCodexCliSizePrompt: task.sourceMode === 'agent',
       onFalRequestEnqueued: (request) => {
+        if (taskExecutions.get(taskId) !== execution) return
         falRequestInfo = request
         updateTaskInStore(taskId, {
           falRequestId: request.requestId,
@@ -3678,6 +3683,7 @@ async function executeTask(taskId: string) {
         })
       },
       onCustomTaskEnqueued: (request) => {
+        if (taskExecutions.get(taskId) !== execution) return
         customTaskInfo = request
         updateTaskInStore(taskId, {
           customTaskId: request.taskId,
@@ -3685,12 +3691,14 @@ async function executeTask(taskId: string) {
         })
       },
       onPartialImage: (partial) => {
+        if (taskExecutions.get(taskId) !== execution) return
         useStore.getState().setTaskStreamPreview(taskId, partial.image, partial.requestIndex)
-        void persistTaskStreamPartialImage(taskId, partial.image)
+        void persistTaskStreamPartialImage(taskId, partial.image, execution)
       },
     })
 
     const latestBeforeSuccess = useStore.getState().tasks.find((t) => t.id === taskId)
+    if (taskExecutions.get(taskId) !== execution) return
     if (!latestBeforeSuccess || latestBeforeSuccess.status !== 'running') {
       useStore.getState().setTaskStreamPreview(taskId)
       return
@@ -3715,7 +3723,7 @@ async function executeTask(taskId: string) {
       (revisedPrompt) => revisedPrompt?.trim() && revisedPrompt.trim() !== requestPrompt.trim(),
     )
     const hasRevisedPromptValue = shouldStoreRevisedPrompts && revisedPrompts?.some((revisedPrompt) => revisedPrompt?.trim())
-    if (taskProvider === 'openai' && activeProfile.apiMode === 'responses' && !activeProfile.codexCli) {
+    if (taskExecutions.get(taskId) === execution && taskProvider === 'openai' && activeProfile.apiMode === 'responses' && !activeProfile.codexCli) {
       if (promptWasRevised) {
         showCodexCliPrompt()
       } else if (!hasRevisedPromptValue) {
@@ -3725,8 +3733,8 @@ async function executeTask(taskId: string) {
 
     // 更新任务
     const latestBeforeUpdate = useStore.getState().tasks.find((t) => t.id === taskId)
-    if (!latestBeforeUpdate || latestBeforeUpdate.status !== 'running') {
-      useStore.getState().setTaskStreamPreview(taskId)
+    if (taskExecutions.get(taskId) !== execution || !latestBeforeUpdate || latestBeforeUpdate.status !== 'running') {
+      if (taskExecutions.get(taskId) === execution) useStore.getState().setTaskStreamPreview(taskId)
       await deleteUnreferencedImageIds([...outputIds, ...(transparentOriginalImageIds ?? [])])
       return
     }
@@ -3767,6 +3775,7 @@ async function executeTask(taskId: string) {
       useStore.getState().clearMaskDraft()
     }
   } catch (err) {
+    if (taskExecutions.get(taskId) !== execution) return
     clearOpenAIWatchdogTimer(taskId)
     const latestTask = useStore.getState().tasks.find((t) => t.id === taskId)
     if (!latestTask || latestTask.status !== 'running') return
@@ -3802,7 +3811,7 @@ async function executeTask(taskId: string) {
         streamImages: activeProfile.streamImages,
         streamPartialImages: activeProfile.streamPartialImages,
       }
-      const networkErrorHint = getApiRequestNetworkErrorHint(err, latestTask.createdAt, usesApiProxy, hintProfile)
+      const networkErrorHint = getApiRequestNetworkErrorHint(err, latestTask.startedAt ?? latestTask.createdAt, usesApiProxy, hintProfile)
       if (networkErrorHint && !errorMessage.includes(IMAGE_FETCH_CORS_HINT)) {
         errorMessage += `\n${networkErrorHint}`
       }
@@ -3816,9 +3825,10 @@ async function executeTask(taskId: string) {
       if (!batchTaskIds.has(taskId)) useStore.getState().setDetailTaskId(taskId)
     }
   } finally {
+    if (taskExecutions.get(taskId) === execution) taskExecutions.delete(taskId)
     // 释放输入图片的内存缓存（已持久化到 IndexedDB，后续按需从 DB 加载）
-    for (const imgId of task.inputImageIds) {
-      deleteCachedImage(imgId)
+    if (!taskExecutions.has(taskId)) {
+      for (const imgId of task.inputImageIds) deleteCachedImage(imgId)
     }
   }
 }
@@ -3922,44 +3932,82 @@ export async function deleteFavoriteCollection(collectionId: string, deleteTasks
   useStore.getState().showToast(`已删除收藏夹「${collection.name}」`, 'success')
 }
 
-/** 重试失败的任务：创建新任务并执行 */
+/** 按重试方式新建任务或覆盖原任务；Agent 对话中的任务始终新建 */
 export async function retryTask(task: TaskRecord) {
-  const { settings } = useStore.getState()
+  const { settings, tasks } = useStore.getState()
+  const source = tasks.find((item) => item.id === task.id)
+  if (!source || source.status === 'running' || source.falRecoverable || source.customRecoverable) return
   const activeProfile = getActiveApiProfile(settings)
-  const normalizedParams = normalizeParamsForSettings(task.params, settings, { hasInputImages: task.inputImageIds.length > 0 })
+  const normalizedParams = normalizeParamsForSettings(source.params, settings, { hasInputImages: source.inputImageIds.length > 0 })
   const shouldUseTransparentOutput = (normalizedParams.output_format === 'png' || normalizedParams.output_format === 'webp') && normalizedParams.transparent_output
   const taskParams = shouldUseTransparentOutput
     ? getTransparentRequestParams(normalizedParams)
     : { ...normalizedParams, transparent_output: false }
   const transparentMeta = taskParams.transparent_output && activeProfile.transparentBackgroundMethod === 'local'
-    ? createTransparentOutputMeta(task.prompt.trim())
+    ? createTransparentOutputMeta(source.prompt.trim())
     : null
-  const taskId = genId()
+  const overwrite = !isAgentTask(source) && (
+    settings.retryMode === 'overwriteAll' || (settings.retryMode === 'overwriteFailed' && source.status === 'error')
+  )
+  const taskId = overwrite ? source.id : genId()
+  const startedAt = Date.now()
   const newTask: TaskRecord = {
+    ...(overwrite ? source : {}),
     id: taskId,
-    prompt: task.prompt,
+    prompt: source.prompt,
     params: taskParams,
     apiProvider: activeProfile.provider,
     apiProfileId: activeProfile.id,
     apiProfileName: activeProfile.name,
     apiMode: activeProfile.apiMode,
     apiModel: activeProfile.model,
-    inputImageIds: [...task.inputImageIds],
-    maskTargetImageId: task.maskTargetImageId ?? null,
-    maskImageId: task.maskImageId ?? null,
+    inputImageIds: [...source.inputImageIds],
+    maskTargetImageId: source.maskTargetImageId ?? null,
+    maskImageId: source.maskImageId ?? null,
     transparentOutput: transparentMeta?.transparentOutput,
     transparentPrompt: transparentMeta?.effectivePrompt,
     outputImages: [],
+    outputErrors: undefined,
+    transparentOriginalImages: undefined,
+    actualParams: undefined,
+    actualParamsByImage: undefined,
+    revisedPromptByImage: undefined,
+    rawImageUrls: undefined,
+    rawResponsePayload: undefined,
+    streamPartialImageIds: undefined,
+    falRequestId: undefined,
+    falEndpoint: undefined,
+    falRecoverable: false,
+    customTaskId: undefined,
+    customRecoverable: false,
     status: 'running',
     error: null,
-    createdAt: Date.now(),
+    createdAt: overwrite ? source.createdAt : startedAt,
+    startedAt,
     finishedAt: null,
     elapsed: null,
   }
 
-  const latestTasks = useStore.getState().tasks
-  useStore.getState().setTasks([newTask, ...latestTasks])
+  if (overwrite) {
+    taskExecutions.delete(taskId)
+    // 覆盖后不再属于原批量，完成时应正常提示
+    batchTaskIds.delete(taskId)
+    clearOpenAIWatchdogTimer(taskId)
+    clearFalRecoveryTimer(taskId)
+    clearCustomRecoveryTimer(taskId)
+    useStore.getState().setTaskStreamPreview(taskId)
+  }
+  useStore.getState().setTasks(overwrite
+    ? tasks.map((item) => item.id === taskId ? newTask : item)
+    : [newTask, ...tasks])
   await putTask(newTask)
+  if (overwrite) {
+    void deleteUnreferencedImageIds([
+      ...source.outputImages,
+      ...(source.transparentOriginalImages ?? []),
+      ...(source.streamPartialImageIds ?? []),
+    ])
+  }
 
   executeTask(taskId)
 }
@@ -4237,6 +4285,7 @@ async function removeTasks(taskIds: string[], updateState?: TaskDeletionStateUpd
     clearFalRecoveryTimer(task.id)
     clearCustomRecoveryTimer(task.id)
     clearOpenAIWatchdogTimer(task.id)
+    taskExecutions.delete(task.id)
   }
 
   const cleanup = scrubAgentOutputPayloadsForDeletedTasks(deletedTasks)
@@ -4585,7 +4634,8 @@ export async function importData(input: File | File[], options: ImportOptions = 
       }
 
       for (const task of importedTasks) {
-        await putTask(task)
+        // startedAt 来自导入文件，非法值会让计时和“重试于”显示异常
+        await putTask(Number.isFinite(task.startedAt) || task.startedAt === undefined ? task : { ...task, startedAt: undefined })
       }
 
       const tasks = await getAllTasks()

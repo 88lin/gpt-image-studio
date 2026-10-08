@@ -112,6 +112,9 @@ export interface PresetConfig {
 /** 参考图预览中“编辑图片”按钮的默认行为 */
 export type ReferenceImageEditAction = 'ask' | 'sketch' | 'mask'
 
+/** 重试任务时新建任务，还是覆盖原任务 */
+export type RetryMode = 'new' | 'overwriteFailed' | 'overwriteAll'
+
 /** 打开画板的请求：baseImageSrc 为空时是空白画板，replaceImageId 表示完成后替换该参考图 */
 export interface SketchBoardRequest {
   baseImageSrc: string | null
@@ -145,6 +148,7 @@ export interface AppSettings {
   persistInputOnRestart: boolean
   reuseTaskApiProfileTemporarily: boolean
   alwaysShowRetryButton: boolean
+  retryMode: RetryMode
   allowPromptRewrite: boolean
   taskCompletionNotification: boolean
   enterSubmit: boolean
@@ -278,6 +282,8 @@ export interface TaskRecord {
   status: TaskStatus
   error: string | null
   createdAt: number
+  /** 本次生成开始时间，重试时不改变原始创建时间 */
+  startedAt?: number
   finishedAt: number | null
   /** 总耗时毫秒 */
   elapsed: number | null

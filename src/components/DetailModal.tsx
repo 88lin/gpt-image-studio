@@ -53,6 +53,7 @@ export default function DetailModal() {
   const viewRawResponseTooltip = useTooltip()
   const downloadPartialImagesTooltip = useTooltip()
   const retryTooltip = useTooltip()
+  const retriedAtTooltip = useTooltip()
   const downloadImageTooltip = useTooltip()
   const downloadOriginalImageTooltip = useTooltip()
   const downloadAllTooltip = useTooltip()
@@ -281,7 +282,7 @@ export default function DetailModal() {
 
   const formatDuration = () => {
     if (task.status === 'running' || isFalReconnecting || isCustomReconnecting) {
-      const seconds = Math.max(0, Math.floor((now - task.createdAt) / 1000))
+      const seconds = Math.max(0, Math.floor((now - (task.startedAt ?? task.createdAt)) / 1000))
       const mm = String(Math.floor(seconds / 60)).padStart(2, '0')
       const ss = String(seconds % 60).padStart(2, '0')
       return `${mm}:${ss}`
@@ -813,25 +814,27 @@ export default function DetailModal() {
                     </ViewportTooltip>
                   </div>
                 )}
-                <div className="relative group">
-                  <button
-                    type="button"
-                    {...retryTooltip.handlers}
-                    onClick={() => {
-                      retryTooltip.handlers.onClick()
-                      handleRetry()
-                    }}
-                    className="inline-flex items-center justify-center rounded-full border border-blue-200/80 bg-white/80 px-3 py-1.5 text-blue-500 transition hover:bg-blue-50 dark:border-blue-400/20 dark:bg-white/[0.04] dark:hover:bg-blue-500/10"
-                    aria-label="重试任务"
-                  >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  </button>
-                  <ViewportTooltip visible={retryTooltip.visible} className="whitespace-nowrap">
-                    重试任务
-                  </ViewportTooltip>
-                </div>
+                {!isCustomReconnecting && (
+                  <div className="relative group">
+                    <button
+                      type="button"
+                      {...retryTooltip.handlers}
+                      onClick={() => {
+                        retryTooltip.handlers.onClick()
+                        handleRetry()
+                      }}
+                      className="inline-flex items-center justify-center rounded-full border border-blue-200/80 bg-white/80 px-3 py-1.5 text-blue-500 transition hover:bg-blue-50 dark:border-blue-400/20 dark:bg-white/[0.04] dark:hover:bg-blue-500/10"
+                      aria-label="重试任务"
+                    >
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    </button>
+                    <ViewportTooltip visible={retryTooltip.visible} className="whitespace-nowrap">
+                      重试任务
+                    </ViewportTooltip>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -1034,6 +1037,23 @@ export default function DetailModal() {
             {/* 时间 */}
             <div className="text-xs text-gray-400 dark:text-gray-500 mb-4">
               <span>创建于 {formatTime(task.createdAt)}</span>
+              {task.startedAt != null && task.startedAt > task.createdAt && (
+                <span className="relative ml-1 inline-flex align-middle">
+                  <button
+                    type="button"
+                    {...retriedAtTooltip.handlers}
+                    className="inline-flex text-gray-400 transition hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                    aria-label="查看重试时间"
+                  >
+                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
+                  <ViewportTooltip visible={retriedAtTooltip.visible} className="whitespace-nowrap">
+                    重试于 {formatTime(task.startedAt)}
+                  </ViewportTooltip>
+                </span>
+              )}
               {formatDuration() && <span> · 耗时 {formatDuration()}</span>}
             </div>
           </div>

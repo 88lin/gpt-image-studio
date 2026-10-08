@@ -84,6 +84,17 @@ describe('normalizeApiProfile', () => {
 })
 
 describe('normalizeSettings', () => {
+  it('falls back to creating a new task for unknown retry modes', () => {
+    expect(normalizeSettings({}).retryMode).toBe('new')
+    expect(normalizeSettings({ retryMode: 'bogus' }).retryMode).toBe('new')
+    expect(normalizeSettings({ retryMode: 'overwriteFailed' }).retryMode).toBe('overwriteFailed')
+  })
+
+  it('only keeps overwriting any task while successful tasks show the retry button', () => {
+    expect(normalizeSettings({ retryMode: 'overwriteAll' }).retryMode).toBe('overwriteFailed')
+    expect(normalizeSettings({ retryMode: 'overwriteAll', alwaysShowRetryButton: true }).retryMode).toBe('overwriteAll')
+  })
+
   it('preserves a non-empty profile description and removes an empty one', () => {
     const settings = normalizeSettings({
       profiles: [

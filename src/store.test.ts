@@ -137,7 +137,7 @@ import { callImageApi } from './lib/api'
 import { callAgentResponsesApi, callBatchImageSingle } from './lib/agentApi'
 import { getFalQueuedImageResult } from './lib/falAiImageApi'
 import { removeKeyedBackgroundFromDataUrl } from './lib/transparentImage'
-import { clearData, clearFailedTasks, deleteFavoriteCollection, editOutputs, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, regenerateAgentAssistantMessage, removeMultipleTasks, removeTask, restoreExplicitPresetConfig, reuseConfig, stopAgentResponse, submitAgentMessage, submitTask, taskMatchesFilterStatus, taskMatchesSearchQuery, useStore } from './store'
+import { clearData, clearFailedTasks, deleteFavoriteCollection, editOutputs, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, regenerateAgentAssistantMessage, removeMultipleTasks, removeTask, restoreExplicitPresetConfig, retryTask, reuseConfig, stopAgentResponse, submitAgentMessage, submitTask, taskMatchesFilterStatus, taskMatchesSearchQuery, useStore } from './store'
 
 const commitTaskDeletionImplementation = vi.mocked(commitTaskDeletion).getMockImplementation()!
 const deleteDbImageImplementation = vi.mocked(deleteDbImage).getMockImplementation()!
@@ -275,6 +275,231 @@ describe('favorite collection deletion', () => {
       favoriteCollectionIds: [collectionB.id],
     })
     expect((await getAllTasks()).map((item) => item.id)).toEqual([sharedTask.id])
+  })
+})
+
+describe('task retry', () => {
+  beforeEach(async () => {
+    await clearTasks()
+    await clearImages()
+    vi.mocked(callImageApi).mockReset()
+    useStore.setState({
+      settings: { ...DEFAULT_SETTINGS, baseUrl: 'https://api.example.com/v1', apiKey: 'test-key', retryMode: 'overwriteFailed' },
+      tasks: [],
+      showToast: vi.fn(),
+      detailTaskId: null,
+    })
+  })
+
+  it('creates a separate task for a failed one by default', async () => {
+    const failed = task({ status: 'error', error: '上次失败' })
+    useStore.setState({ settings: { ...useStore.getState().settings, retryMode: DEFAULT_SETTINGS.retryMode }, tasks: [failed] })
+    const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)
+
+    await retryTask(failed)
+    expect(useStore.getState().tasks).toHaveLength(2)
+    expect(useStore.getState().tasks[0].id).not.toBe(failed.id)
+    expect(useStore.getState().tasks[1]).toEqual(failed)
+    request.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
+  })
+
+  it.each([
+    ['sourceMode', { sourceMode: 'agent' as const, agentConversationId: 'conversation-1', agentRoundId: 'round-1' }],
+    ['legacy conversation id', { agentConversationId: 'conversation-1' }],
+  ])('always creates a gallery task when retrying an Agent task (%s)', async (_label, agentFields) => {
+    const failed = task({ status: 'error', error: '上次失败', ...agentFields })
+    useStore.setState({ settings: { ...useStore.getState().settings, retryMode: 'overwriteAll' }, tasks: [failed] })
+    const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)
+
+    await retryTask(failed)
+    expect(useStore.getState().tasks).toHaveLength(2)
+    expect(useStore.getState().tasks[0].sourceMode).toBeUndefined()
+    expect(useStore.getState().tasks[0].agentConversationId).toBeUndefined()
+    expect(useStore.getState().tasks[1]).toEqual(failed)
+    request.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
+  })
+
+  it('overwrites a successful task when retry mode allows any task', async () => {
+    const original = task({ outputImages: ['old-output'], isFavorite: true })
+    await putImage({ id: 'old-output', dataUrl: 'data:image/png;base64,old', source: 'generated', createdAt: 1 })
+    useStore.setState({ settings: { ...useStore.getState().settings, alwaysShowRetryButton: true, retryMode: 'overwriteAll' }, tasks: [original] })
+    const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)
+
+    await retryTask(original)
+    expect(useStore.getState().tasks).toHaveLength(1)
+    expect(useStore.getState().tasks[0]).toMatchObject({ id: original.id, status: 'running', createdAt: original.createdAt, outputImages: [], isFavorite: true, elapsed: null })
+    await vi.waitFor(async () => expect(await getImage('old-output')).toBeUndefined())
+    request.resolve({ images: ['data:image/png;base64,new'], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
+    expect(useStore.getState().tasks[0].outputImages).toHaveLength(1)
+    expect(useStore.getState().tasks[0].outputImages[0]).not.toBe('old-output')
+  })
+
+  it('retries a failed task in place without losing its metadata', async () => {
+    const failed = task({
+      status: 'error',
+      error: '上次失败',
+      outputErrors: [{ requestIndex: 0, error: '上次失败' }],
+      rawResponsePayload: '旧响应',
+      falRequestId: '旧请求',
+      falEndpoint: '旧 endpoint',
+      favoriteCollectionIds: ['collection-1'],
+      isFavorite: true,
+    })
+    await putDbTask(failed)
+    useStore.setState({ tasks: [failed] })
+    const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)
+
+    await retryTask(failed)
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledOnce())
+    expect(useStore.getState().tasks).toHaveLength(1)
+    expect(useStore.getState().tasks[0]).toMatchObject({ id: failed.id, status: 'running', error: null, createdAt: failed.createdAt, favoriteCollectionIds: ['collection-1'], isFavorite: true })
+    expect(useStore.getState().tasks[0].startedAt).toBeGreaterThan(failed.createdAt)
+    expect(useStore.getState().tasks[0].rawResponsePayload).toBeUndefined()
+    expect(useStore.getState().tasks[0].falRequestId).toBeUndefined()
+    await retryTask(failed)
+    expect(callImageApi).toHaveBeenCalledOnce()
+
+    request.resolve({ images: ['data:image/png;base64,retried'], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
+    expect(useStore.getState().tasks).toHaveLength(1)
+    expect(useStore.getState().tasks[0].outputImages).toHaveLength(1)
+    await vi.waitFor(async () => expect((await getAllTasks()).map((item) => item.id)).toEqual([failed.id]))
+  })
+
+  it('ignores a late response from the failed attempt after an in-place retry', async () => {
+    const oldRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    const newRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi).mockImplementationOnce(() => oldRequest.promise).mockImplementationOnce(() => newRequest.promise)
+    // 第一轮仍在网络层执行，但界面已经判定超时。
+    useStore.setState({ prompt: 'prompt', inputImages: [], params: { ...DEFAULT_PARAMS } })
+    await submitTask()
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledOnce())
+    const original = useStore.getState().tasks[0]
+    useStore.setState({ tasks: useStore.getState().tasks.map((item) => item.id === original.id ? { ...item, status: 'error', error: '超时' } : item) })
+    await retryTask(original)
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledTimes(2))
+    oldRequest.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === original.id)?.status).toBe('running'))
+    newRequest.resolve({ images: ['data:image/png;base64,new'], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === original.id)?.status).toBe('done'))
+    expect(useStore.getState().tasks.find((item) => item.id === original.id)?.outputImages).toHaveLength(1)
+  })
+
+  it('ignores a late failure and late stream previews from the replaced attempt', async () => {
+    let emitOldPartial: () => void = () => {}
+    const oldRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    const newRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi)
+      .mockImplementationOnce((opts) => {
+        emitOldPartial = () => opts.onPartialImage?.({ image: 'data:image/png;base64,old-partial', requestIndex: 0 })
+        return oldRequest.promise
+      })
+      .mockImplementationOnce(() => newRequest.promise)
+    useStore.setState({ appMode: 'gallery', prompt: 'prompt', inputImages: [], params: { ...DEFAULT_PARAMS } })
+    await submitTask()
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledOnce())
+    const original = useStore.getState().tasks[0]
+    useStore.setState({ tasks: useStore.getState().tasks.map((item) => item.id === original.id ? { ...item, status: 'error', error: '超时' } : item) })
+    await retryTask(original)
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledTimes(2))
+
+    emitOldPartial()
+    expect(useStore.getState().streamPreviews[original.id]).toBeUndefined()
+    oldRequest.reject(new Error('旧请求失败'))
+    await oldRequest.promise.catch(() => {})
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(useStore.getState().tasks[0]).toMatchObject({ id: original.id, status: 'running', error: null })
+    expect(useStore.getState().tasks[0].streamPartialImageIds).toBeUndefined()
+    expect(await getAllImageIds()).toEqual([])
+
+    newRequest.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
+  })
+
+  it('does not show the Codex CLI prompt for a replaced attempt', async () => {
+    const postProcess = deferred<string>()
+    const newRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    const setConfirmDialog = vi.fn()
+    vi.mocked(callImageApi)
+      .mockResolvedValueOnce({ images: ['data:image/png;base64,old'], actualParams: {}, actualParamsList: [], revisedPrompts: ['完全不同的提示词'] })
+      .mockImplementationOnce(() => newRequest.promise)
+    vi.mocked(removeKeyedBackgroundFromDataUrl).mockImplementationOnce(() => postProcess.promise)
+    useStore.setState({
+      settings: {
+        ...useStore.getState().settings,
+        profiles: useStore.getState().settings.profiles.map((profile) => ({ ...profile, apiMode: 'responses', codexCli: false, transparentBackgroundMethod: 'local' })),
+      },
+      appMode: 'gallery',
+      prompt: 'prompt',
+      inputImages: [],
+      params: { ...DEFAULT_PARAMS, output_format: 'png', transparent_output: true },
+      dismissedCodexCliPrompts: [],
+      setConfirmDialog,
+    })
+    await submitTask()
+    // 旧请求已通过成功前检查，正在做透明背景后处理时被判定失败并重试
+    await vi.waitFor(() => expect(removeKeyedBackgroundFromDataUrl).toHaveBeenCalledOnce())
+    const original = useStore.getState().tasks[0]
+    useStore.setState({ tasks: useStore.getState().tasks.map((item) => item.id === original.id ? { ...item, status: 'error', error: '超时' } : item) })
+    await retryTask(original)
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledTimes(2))
+
+    postProcess.resolve('data:image/png;base64,old-transparent')
+    await vi.waitFor(async () => expect(await getAllImageIds()).toEqual([]))
+    expect(setConfirmDialog).not.toHaveBeenCalled()
+    expect(useStore.getState().tasks[0]).toMatchObject({ id: original.id, status: 'running' })
+
+    newRequest.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
+  })
+
+  it('shows a normal completion toast after retrying a batch task in place', async () => {
+    const showToast = vi.fn()
+    const secondRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi)
+      .mockRejectedValueOnce(new Error('第一条失败'))
+      .mockImplementationOnce(() => secondRequest.promise)
+      .mockResolvedValueOnce({ images: ['data:image/png;base64,retried'], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    useStore.setState({
+      settings: { ...useStore.getState().settings, showBatchPrompt: true, batchPromptEnabled: true, batchPromptMode: 'queue' },
+      appMode: 'gallery',
+      prompt: 'first\n\n\nsecond',
+      inputImages: [],
+      params: { ...DEFAULT_PARAMS },
+      showToast,
+    })
+    void submitTask()
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledTimes(2))
+    const failed = useStore.getState().tasks.find((item) => item.status === 'error')!
+    expect(useStore.getState().batchProgress).not.toBeNull()
+
+    await retryTask(failed)
+    await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === failed.id)?.status).toBe('done'))
+    expect(showToast).toHaveBeenCalledWith('生成完成，共 1 张图片', 'success')
+
+    secondRequest.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().batchProgress).toBeNull())
+  })
+
+  it('still creates a separate task when retrying a successful one in failed-only mode', async () => {
+    const original = task()
+    useStore.setState({ tasks: [original] })
+    const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)
+
+    await retryTask(original)
+    expect(useStore.getState().tasks).toHaveLength(2)
+    expect(useStore.getState().tasks[0].id).not.toBe(original.id)
+    expect(useStore.getState().tasks[1]).toEqual(original)
+    request.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).toBe('done'))
   })
 })
 
@@ -2457,6 +2682,23 @@ describe('data import', () => {
       favoriteCollectionIds: [importedCollections[1].id],
       isFavorite: true,
     })
+  })
+
+  it('drops invalid retry start times when importing tasks', async () => {
+    const valid = task({ id: 'imported-valid-start', createdAt: 1, startedAt: 5 })
+    const invalid = { ...task({ id: 'imported-invalid-start' }), startedAt: 'bad' } as unknown as TaskRecord
+
+    const imported = await importData(importFile({
+      version: 3,
+      exportedAt: new Date(0).toISOString(),
+      tasks: [valid, invalid],
+      imageFiles: {},
+    }), { importConfig: false, importTasks: true })
+
+    expect(imported).toBe(true)
+    const stored = await getAllTasks()
+    expect(stored.find((item) => item.id === valid.id)?.startedAt).toBe(5)
+    expect(stored.find((item) => item.id === invalid.id)?.startedAt).toBeUndefined()
   })
 
   it('skips empty agent conversations when importing task data', async () => {
