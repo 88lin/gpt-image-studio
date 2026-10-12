@@ -1,0 +1,8 @@
+[[permission]]
+identifier = "http-request"
+description = "允许主窗口经 Rust 侧向任意 http/https 地址发出请求（用户可以配置任意 API 地址），读取或取消响应"
+commands.allow = [
+  "http_send",
+  "http_read",
+  "http_cancel",
+]

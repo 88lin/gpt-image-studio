@@ -160,8 +160,9 @@ function escapeHtml(text: string) {
     .replace(/"/g, '&quot;')
 }
 
-export function getMentionTagHtml(text: string) {
-  return `<span contenteditable="false" class="mention-tag" data-mention-text="${escapeHtml(getSelectedTextMentionLabel(text))}">${escapeHtml(text)}</span>`
+/** mentionText 可能来自导入的备份等外部数据，必须与显示文本一样转义 */
+export function getMentionTagHtml(text: string, mentionText = getSelectedTextMentionLabel(text)) {
+  return `<span contenteditable="false" class="mention-tag" data-mention-text="${escapeHtml(mentionText)}">${escapeHtml(text)}</span>`
 }
 
 export function syncMentionTagSelection(el: HTMLElement) {

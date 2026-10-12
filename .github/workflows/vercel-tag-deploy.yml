@@ -4,14 +4,17 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
+    tags: ['v*']
     paths:
       - package.json
+  workflow_run:
+    workflows: ['Build Desktop Client']
+    types: [completed]
   workflow_dispatch:
 
 jobs:
   deploy:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     env:
       VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
@@ -24,9 +27,31 @@ jobs:
         id: release
         env:
           BEFORE_SHA: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         run: |
-          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch || "$GITHUB_REF" == refs/tags/v* ]]; then
+          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch ]]; then
             echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # 配置了签名私钥时，推送 tag 先构建客户端，构建成功后由 workflow_run 部署；未配置时推送 tag 直接部署
+          if [[ "$GITHUB_EVENT_NAME" == workflow_run ]]; then
+            [[ -n "$SIGNING_KEY" ]] && deploy=true || deploy=false
+            echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            [[ -z "$SIGNING_KEY" ]] && deploy=true || deploy=false
+            [[ "$deploy" == false ]] && echo "Signing key is set. Vercel deployment will run after the desktop client build."
+            echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # 自行发布客户端时，main 上的版本提交也等待客户端发布完成；未配置签名的 Fork 仍按版本变化部署。
+          if [[ -n "$SIGNING_KEY" ]]; then
+            echo "Desktop signing is configured. Waiting for the desktop release workflow."
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 

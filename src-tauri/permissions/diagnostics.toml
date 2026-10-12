@@ -1,0 +1,7 @@
+[[permission]]
+identifier = "diagnostics"
+description = "允许主窗口开关日志记录并打开日志目录"
+commands.allow = [
+  "log_set_enabled",
+  "log_open_dir",
+]

@@ -3,6 +3,9 @@ name: Build and Publish Docker Image
 on:
   push:
     tags: ['v*']
+  workflow_run:
+    workflows: ['Build Desktop Client']
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -10,10 +13,37 @@ permissions:
   packages: write
 
 jobs:
+  check:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      build: ${{ steps.check.outputs.build }}
+    steps:
+      - id: check
+        env:
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          # 配置了签名私钥时，推送 tag 先构建客户端，构建成功后由 workflow_run 构建镜像；未配置时推送 tag 直接构建
+          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch ]]; then
+            build=true
+          elif [[ "$GITHUB_EVENT_NAME" == workflow_run ]]; then
+            [[ -n "$SIGNING_KEY" ]] && build=true || build=false
+          else
+            [[ -z "$SIGNING_KEY" ]] && build=true || build=false
+          fi
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+
   docker:
+    needs: check
+    if: ${{ needs.check.outputs.build == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - id: version
+        run: echo "version=$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
 
       - uses: docker/setup-buildx-action@v3
 
@@ -23,14 +53,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # 版本号从 package.json 读取；手动运行仅在默认分支上更新 latest，避免在旧 tag 上重建时把 latest 退回旧版本
       - id: meta
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository_owner }}/gpt-image-studio
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=latest,enable=${{ github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') }}
+            type=semver,pattern={{version}},value=v${{ steps.version.outputs.version }}
+            type=semver,pattern={{major}}.{{minor}},value=v${{ steps.version.outputs.version }}
+            type=raw,value=latest,enable=${{ github.event_name != 'workflow_dispatch' || github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}
 
       - uses: docker/build-push-action@v6
         with:

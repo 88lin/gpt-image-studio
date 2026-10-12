@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ApiProfile, AppSettings, BatchProgress, BatchPromptMode, TaskParams } from '../../types'
 import { DEFAULT_BATCH_PROMPT_CONCURRENCY, normalizeBatchPromptConcurrency } from '../../lib/batchPrompts'
+import { isTauri } from '../../lib/platform'
 import { dismissAllTooltips } from '../../lib/tooltipDismiss'
 import Select from '../Select'
 import ButtonTooltip from './buttonTooltip'
@@ -78,7 +79,7 @@ function ConcurrencyInput({ value, disabled, onCommit }: { value: number; disabl
       />
       <ButtonTooltip
         visible={focused && Number(input) > DEFAULT_BATCH_PROMPT_CONCURRENCY}
-        text={`并发数超过 ${DEFAULT_BATCH_PROMPT_CONCURRENCY} 可能导致浏览器卡顿或触发服务商限流`}
+        text={`并发数超过 ${DEFAULT_BATCH_PROMPT_CONCURRENCY} 可能导致${isTauri ? '客户端' : '浏览器'}卡顿或触发服务商限流`}
       />
     </>
   )
@@ -481,7 +482,7 @@ export default function InputParamsPanel({
               )}
               {batchMode === 'concurrent' && !batchConcurrencyLimited && (
                 <p className="rounded-lg bg-amber-500/[0.1] px-2.5 py-2 text-[11px] leading-relaxed text-amber-700 dark:bg-amber-500/[0.14] dark:text-amber-400/90">
-                  不限制并发时会同时发出全部请求，提示词较多时可能导致浏览器卡顿甚至崩溃，也容易触发服务商限流。
+                  不限制并发时会同时发出全部请求，提示词较多时可能导致{isTauri ? '客户端' : '浏览器'}卡顿甚至崩溃，也容易触发服务商限流。
                 </p>
               )}
               <p className="text-[11px] leading-relaxed text-gray-400 dark:text-gray-500">

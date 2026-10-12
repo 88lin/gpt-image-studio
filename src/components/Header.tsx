@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
 import { useStore } from '../store'
-import { useVersionCheck } from '../hooks/useVersionCheck'
+import { setUpdateModalOpen, useReleaseUpdates } from '../hooks/useReleaseUpdates'
 import { useTooltip } from '../hooks/useTooltip'
+import { detectOs } from '../lib/announcements'
+import { isTauri } from '../lib/platform'
+import { RELEASES_PAGE_URL, shouldShowUpdate } from '../lib/releaseUpdates'
 import { dismissAllTooltips } from '../lib/tooltipDismiss'
 import ViewportTooltip from './ViewportTooltip'
 import HelpModal from './HelpModal'
 import HistoryModal from './HistoryModal'
 import { useFavoriteCollectionTitle } from './FavoriteCollections'
-import { EditIcon, HelpCircleIcon, HistoryIcon, InstallIcon, SettingsIcon } from './icons'
+import { DesktopDownloadIcon, EditIcon, HelpCircleIcon, HistoryIcon, InstallIcon, SettingsIcon } from './icons'
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
 }
+
+// 客户端目前只有 Windows 版，只向网页版的 Windows 用户显示下载入口
+const SHOW_CLIENT_DOWNLOAD = !isTauri
+  && detectOs(navigator.userAgent, (navigator as Navigator & { userAgentData?: { platform?: string } }).userAgentData?.platform, navigator.maxTouchPoints) === 'windows'
 
 function isInstalledPwa() {
   const nav = window.navigator as Navigator & { standalone?: boolean }
@@ -33,7 +40,8 @@ export default function Header() {
   const activeConversation = agentConversations.find((item) => item.id === activeAgentConversationId)
   const favoriteCollectionTitle = useFavoriteCollectionTitle()
   const showFavoriteCollectionTitle = appMode === 'gallery' && Boolean(activeFavoriteCollectionId)
-  const { hasUpdate, latestRelease, dismiss } = useVersionCheck()
+  const latestRelease = useReleaseUpdates((s) => s.releases[0])
+  const hasUpdate = useReleaseUpdates((s) => shouldShowUpdate(s.releases[0], __APP_VERSION__, s.ignoredVersion))
   const [showHelp, setShowHelp] = useState(false)
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [isPwaInstalled, setIsPwaInstalled] = useState(isInstalledPwa)
@@ -85,6 +93,7 @@ export default function Header() {
   }, [appMode, agentMobileHeaderVisible])
 
   const installTooltip = useTooltip()
+  const clientTooltip = useTooltip()
   const helpTooltip = useTooltip()
   const promptLibraryTooltip = useTooltip()
   const settingsTooltip = useTooltip()
@@ -161,7 +170,7 @@ export default function Header() {
                 <>
                   <span className="min-w-0 truncate text-[17px] font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:hidden" title={favoriteCollectionTitle}>{favoriteCollectionTitle}</span>
                   <a
-                    href="/"
+                    href={isTauri ? 'https://gpt-image-2.88lin.eu.org/' : '/'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hidden text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 sm:inline"
@@ -171,7 +180,7 @@ export default function Header() {
                 </>
               ) : (
                 <a
-                  href="/"
+                  href={isTauri ? 'https://gpt-image-2.88lin.eu.org/' : '/'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[17px] sm:text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
@@ -179,17 +188,16 @@ export default function Header() {
                   GPT Image 2
                 </a>
               )}
+              {/* 透明伪元素把点击区域扩大到 32px 以上，外观不变 */}
               {hasUpdate && latestRelease && (
-                <a
-                  href={latestRelease.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={dismiss}
-                  className="mt-0.5 rounded border border-red-500/30 bg-red-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white transition-colors hover:bg-red-600 animate-fade-in"
+                <button
+                  type="button"
+                  onClick={() => setUpdateModalOpen(true)}
+                  className="relative mt-0.5 rounded border border-red-500/30 bg-red-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white transition-colors hover:bg-red-600 animate-fade-in before:absolute before:left-0 before:-right-[9px] before:-inset-y-[9px] before:content-['']"
                   title={`新版本 ${latestRelease.tag}`}
                 >
                   NEW
-                </a>
+                </button>
               )}
             </h1>
             {appMode === 'agent' && <div className="hidden sm:flex items-center gap-1 relative">
@@ -258,8 +266,9 @@ export default function Header() {
               Agent
             </button>
           </div>
-          <div className="flex items-center gap-1.5">
-            {!isPwaInstalled && (
+          <div className="flex items-center gap-1.5 shrink-0">
+            {/* 客户端本身就是安装版，不显示 PWA 安装入口 */}
+            {!isTauri && !isPwaInstalled && (
               <div
                 className="relative"
                 {...installTooltip.handlers}
@@ -276,6 +285,27 @@ export default function Header() {
                 </button>
                 <ViewportTooltip visible={installTooltip.visible} className="whitespace-nowrap">
                   安装为应用
+                </ViewportTooltip>
+              </div>
+            )}
+            {/* 窄屏时按钮区空间不足，同样不显示 */}
+            {SHOW_CLIENT_DOWNLOAD && (
+              <div
+                className="relative hidden sm:block"
+                {...clientTooltip.handlers}
+              >
+                <a
+                  href={`${RELEASES_PAGE_URL}/latest`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => dismissAllTooltips()}
+                  className="block p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+                  aria-label="下载客户端"
+                >
+                  <DesktopDownloadIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                </a>
+                <ViewportTooltip visible={clientTooltip.visible} className="whitespace-nowrap">
+                  下载客户端
                 </ViewportTooltip>
               </div>
             )}

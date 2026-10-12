@@ -2,7 +2,14 @@ import { describe, expect, it } from 'vitest'
 
 import type { AppSettings, StoredImage, StoredImageThumbnail, TaskParams, TaskRecord } from '../types'
 import { DEFAULT_SETTINGS } from './apiProfiles'
-import { buildExportZip, getExportImageEstimatedBytes, getExportZipPlan, readExportZip, readExportZipFileAsDataUrl } from './exportZip'
+import { buildExportZip, getExportFileEstimatedBytes, getExportZipPlan, readExportZip, readExportZipFileAsDataUrl } from './exportZip'
+import { getDataUrlDecodedByteSize } from './imageApiShared'
+
+// 按 dataUrl 解码后的字节数估算，作为只取文件大小估算的对照
+const estimateFromDataUrl = (image: StoredImage, thumbnail?: StoredImageThumbnail) => getExportFileEstimatedBytes(
+  getDataUrlDecodedByteSize(image.dataUrl),
+  thumbnail?.thumbnailDataUrl ? getDataUrlDecodedByteSize(thumbnail.thumbnailDataUrl) : undefined,
+)
 
 describe('exportZip', () => {
   it('omits empty customProviders in backup settings and retains non-empty providers', async () => {
@@ -126,7 +133,7 @@ describe('exportZip', () => {
     }
     const plan = getExportZipPlan(
       params,
-      images.map((image) => ({ id: image.id, bytes: getExportImageEstimatedBytes(image) })),
+      images.map((image) => ({ id: image.id, bytes: estimateFromDataUrl(image) })),
       { maxBytes: 1_800_000, partBytes: 1_400_000 },
     )
 

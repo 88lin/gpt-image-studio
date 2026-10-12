@@ -1,0 +1,11 @@
+[
+  {
+    "id": "2026-10-desktop-client",
+    "title": "推荐使用全新的客户端",
+    "content": "Windows 桌面客户端现已推出。",
+    "note": "网页版会继续维护。\n在「设置 → 数据管理」导出备份，即可导入客户端。",
+    "when": { "platform": "web", "os": "windows" },
+    "media": { "type": "html", "src": "announcements/client-intro.html", "aspectRatio": "2/1" },
+    "action": { "label": "下载客户端", "url": "https://github.com/88lin/gpt-image-studio/releases/latest" }
+  }
+]

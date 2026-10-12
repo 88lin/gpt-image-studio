@@ -1,0 +1,7 @@
+[[permission]]
+identifier = "network-proxy"
+description = "允许主窗口读取和更改客户端的网络代理设置"
+commands.allow = [
+  "proxy_get",
+  "proxy_set",
+]

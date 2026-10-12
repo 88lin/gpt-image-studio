@@ -1,0 +1,8 @@
+[[permission]]
+identifier = "app-update"
+description = "允许主窗口检查本地已下载的更新包，下载或安装客户端更新包"
+commands.allow = [
+  "update_ready",
+  "update_download",
+  "update_install",
+]

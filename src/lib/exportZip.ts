@@ -3,7 +3,6 @@ import { strFromU8, strToU8, type AsyncUnzipOptions, unzip, zip } from 'fflate'
 import type { AgentConversation, AppSettings, ExportData, FavoriteCollection, StoredImage, StoredImageThumbnail, TaskRecord } from '../types'
 import { bytesToDataUrl, dataUrlToBytes } from './dataUrl'
 import { getNumberedFileNameBase, sanitizeFileNamePart } from './exportFileName'
-import { getDataUrlDecodedByteSize } from './imageApiShared'
 
 type ZipFiles = Record<string, Uint8Array | [Uint8Array, { mtime: Date; level?: 0 }]>
 
@@ -18,13 +17,25 @@ export interface BuildExportZipOptions {
   exportTasks?: boolean
 }
 
+/** 客户端直接从磁盘读出的原图，ext 须与网页版 dataUrlToBytes 推出的扩展名一致 */
+export interface ExportImageFile extends Omit<StoredImage, 'dataUrl'> {
+  ext: string
+  bytes: Uint8Array
+}
+
+/** 客户端直接从磁盘读出的缩略图，ext 规则同上 */
+export interface ExportThumbnailFile extends Omit<StoredImageThumbnail, 'thumbnailDataUrl'> {
+  ext: string
+  bytes: Uint8Array
+}
+
 export interface BuildExportZipParams {
   options: BuildExportZipOptions
   exportedAt: number
   settings: AppSettings
   tasks: TaskRecord[]
-  images: StoredImage[]
-  thumbnailsByImageId: Map<string, StoredImageThumbnail>
+  images: Array<StoredImage | ExportImageFile>
+  thumbnailsByImageId: Map<string, StoredImageThumbnail | ExportThumbnailFile>
   favoriteCollections: FavoriteCollection[]
   defaultFavoriteCollectionId: string | null
   agentConversations: AgentConversation[]
@@ -68,7 +79,7 @@ export async function buildExportZip(params: BuildExportZipParams) {
 
   if (params.options.exportTasks) {
     for (const img of params.images) {
-      const { ext, bytes } = dataUrlToBytes(img.dataUrl)
+      const { ext, bytes } = 'bytes' in img ? img : dataUrlToBytes(img.dataUrl)
       const path = getUniqueImagePath(imageFileNameBases.get(img.id) || `image-${img.id}`, ext, usedImagePaths)
       const pathBase = path.slice('images/'.length, -(ext.length + 1))
       const createdAt = img.createdAt ?? imageCreatedAtFallback.get(img.id) ?? params.exportedAt
@@ -82,8 +93,12 @@ export async function buildExportZip(params: BuildExportZipParams) {
       zipFiles[path] = [bytes, { mtime: new Date(createdAt), level: 0 }]
 
       const thumbnail = params.thumbnailsByImageId.get(img.id)
-      if (thumbnail?.thumbnailDataUrl) {
-        const { ext: thumbnailExt, bytes: thumbnailBytes } = dataUrlToBytes(thumbnail.thumbnailDataUrl)
+      const thumbnailDataUrl = thumbnail && !('bytes' in thumbnail) ? thumbnail.thumbnailDataUrl : ''
+      const thumbnailFile = thumbnail && 'bytes' in thumbnail
+        ? thumbnail
+        : thumbnailDataUrl ? dataUrlToBytes(thumbnailDataUrl) : null
+      if (thumbnail && thumbnailFile) {
+        const { ext: thumbnailExt, bytes: thumbnailBytes } = thumbnailFile
         const thumbnailPath = `thumbnails/${pathBase}.${thumbnailExt}`
         imageFiles[img.id].width = imageFiles[img.id].width ?? thumbnail.width
         imageFiles[img.id].height = imageFiles[img.id].height ?? thumbnail.height
@@ -183,7 +198,7 @@ export function getExportZipPlan(
     addItem(conversationBytes[index], '单条任务或 Agent 对话超过 2 GB，无法生成备份。', (part) => part.agentConversations.push(plannedConversations[index]))
   }
   for (const image of plannedImages) {
-    addItem(image.bytes, `图片 ${image.id} 过大，无法放入小于 2 GB 的备份分片。`, (part) => part.imageIds.push(image.id))
+    addItem(image.bytes, `图片 ${image.id} 过大，无法放入小于 2 GB 的备份分卷。`, (part) => part.imageIds.push(image.id))
   }
   return parts
 }
@@ -266,10 +281,9 @@ function getJsonEstimatedBytes(value: unknown) {
   return strToU8(JSON.stringify(value)).byteLength + ZIP_ENTRY_OVERHEAD_BYTES
 }
 
-export function getExportImageEstimatedBytes(image: StoredImage, thumbnail?: StoredImageThumbnail) {
-  return getDataUrlDecodedByteSize(image.dataUrl)
-    + (thumbnail?.thumbnailDataUrl ? getDataUrlDecodedByteSize(thumbnail.thumbnailDataUrl) : 0)
-    + ZIP_ENTRY_OVERHEAD_BYTES * (thumbnail?.thumbnailDataUrl ? 2 : 1)
+/** 按文件字节数估算，客户端直接用磁盘上的文件大小，无需读出图片 */
+export function getExportFileEstimatedBytes(imageBytes: number, thumbnailBytes?: number) {
+  return imageBytes + (thumbnailBytes ?? 0) + ZIP_ENTRY_OVERHEAD_BYTES * (thumbnailBytes != null ? 2 : 1)
 }
 
 export function readExportZipFileAsDataUrl(files: Record<string, Uint8Array>, path: string): string | null {

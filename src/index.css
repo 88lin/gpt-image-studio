@@ -1,6 +1,3 @@
-@import url('https://fontsapi.zeoseven.com/442/main/result.css');
-@import url('https://cdn.jsdmirror.com/npm/@lobehub/webfont-harmony-sans-sc@1.0.0/css/index.css');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,8 +13,9 @@
   --primary-foreground: 0 0% 100%;
   --sidebar: 240 5% 96%;
   --sidebar-foreground: 240 10% 10%;
+  /* 字体由 src/lib/fonts.ts 按设置覆盖并按需加载字体文件，这里是脚本运行前的初始值 */
   --font-ui-sans: 'HarmonyOS Sans SC', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-mono: 'Maple Mono', 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+  --font-mono: 'Maple Mono NF CN', 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-right: env(safe-area-inset-right, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
@@ -370,6 +368,15 @@ input[type="number"] {
 }
 .animate-confirm-in {
   animation: confirm-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 进度条：总量未知时来回滑动 */
+@keyframes progress-indeterminate {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(250%); }
+}
+.animate-progress-indeterminate {
+  animation: progress-indeterminate 1.2s ease-in-out infinite;
 }
 
 /* 移动端折叠区域收起/展开 */

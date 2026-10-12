@@ -1,0 +1,30 @@
+[[permission]]
+identifier = "storage"
+description = "允许主窗口读写本地数据库与图片文件，并经 Rust 侧的目录选择框更改数据目录"
+commands.allow = [
+  "tasks_get_all",
+  "task_put",
+  "task_delete",
+  "tasks_clear",
+  "tasks_commit_deletion",
+  "conversations_get_all",
+  "conversation_put",
+  "conversations_clear",
+  "conversations_replace",
+  "image_get",
+  "image_put",
+  "image_delete",
+  "images_clear",
+  "image_ids",
+  "image_stats",
+  "thumbnail_get",
+  "thumbnail_put",
+  "kv_get_all",
+  "kv_set",
+  "kv_remove",
+  "storage_info",
+  "storage_open_dir",
+  "data_dir_notice",
+  "data_dir_pick",
+  "data_dir_change",
+]

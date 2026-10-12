@@ -42,21 +42,26 @@ async function embedDefaultConfig(value: string) {
 }
 
 export default defineConfig(async ({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const configuredDefaultApiUrl = process.env.VITE_DEFAULT_API_URL ?? env.VITE_DEFAULT_API_URL
-  const defaultApiUrl = await embedDefaultConfig(configuredDefaultApiUrl ?? '')
+  // 客户端构建只读取 src-tauri/ 下的 env 文件，与网页版部署配置隔离
+  const envDir = process.env.TAURI_ENV_PLATFORM ? resolve('src-tauri') : process.cwd()
+  const env = loadEnv(mode, envDir, '')
+  const defaultApiUrl = await embedDefaultConfig(process.env.VITE_DEFAULT_API_URL ?? env.VITE_DEFAULT_API_URL ?? '')
   if (defaultApiUrl.startsWith('embedded-config:')) process.env.VITE_DEFAULT_API_URL = defaultApiUrl
   const devProxyConfig = command === 'serve' ? loadDevProxyConfig() : null
 
   return {
     plugins: [react()],
     base: './',
+    envDir,
     define: {
       __APP_VERSION__: JSON.stringify(pkg.version),
       __DEV_PROXY_CONFIG__: JSON.stringify(devProxyConfig),
     },
     server: {
       host: true,
+      // Tauri 开发模式的 devUrl 固定为 5173，端口被占用时直接报错而不是换端口
+      strictPort: Boolean(process.env.TAURI_ENV_PLATFORM),
+      watch: { ignored: ['**/src-tauri/**'] },
       proxy:
         devProxyConfig?.enabled
           ? {

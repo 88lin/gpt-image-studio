@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "GPT Image Studio",
+  "version": "../package.json",
+  "identifier": "org.88lin.gpt-image-studio",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "create": false,
+        "title": "GPT Image Studio",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "dragDropEnabled": false,
+        "backgroundThrottling": "disabled",
+        "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection,IntensiveWakeUpThrottling --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows"
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self'",
+        "script-src": "'self'",
+        "style-src": "'self' https://fontsapi.zeoseven.com/442/main/ https://cdn.jsdmirror.com/npm/@lobehub/webfont-harmony-sans-sc@1.0.0/",
+        "style-src-attr": "'unsafe-inline'",
+        "img-src": "'self' data: blob: http: https:",
+        "font-src": "'self' data: https://fontsapi.zeoseven.com/442/main/ https://cdn.jsdmirror.com/npm/@lobehub/webfont-harmony-sans-sc@1.0.0/",
+        "connect-src": "'self' ipc: http://ipc.localhost data: blob: https://api.github.com",
+        "worker-src": "'self' blob:",
+        "frame-src": "'self'",
+        "object-src": "'none'",
+        "base-uri": "'none'",
+        "form-action": "'none'"
+      },
+      "freezePrototype": true
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDA0NUU4Q0UyNEJBOTZBMTAKUldRUWFxbEw0b3hlQkQwMXFkK3VlOTBMdWxvTEpqRjJKclpoQXBBcjg2VlRuNGJyUmwwVHlDdmQK",
+      "endpoints": [
+        "https://github.com/88lin/gpt-image-studio/releases/latest/download/latest.json"
+      ],
+      "requireSignedVersion": true,
+      "windows": {
+        "installMode": "passive"
+      }
+    },
+    "deep-link": {
+      "desktop": {
+        "schemes": [
+          "gpt-image-studio"
+        ]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "createUpdaterArtifacts": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": [
+          "SimpChinese"
+        ],
+        "template": "windows/installer.nsi"
+      }
+    }
+  }
+}

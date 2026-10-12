@@ -1,5 +1,6 @@
+import type { ReactNode } from 'react'
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 import type {
   AgentConversation,
   AgentInputDraft,
@@ -38,7 +39,6 @@ import {
   clearAgentConversations as dbClearAgentConversations,
   getImage,
   getStoredImageThumbnail,
-  getImageThumbnail,
   getAllImageIds,
   putImage,
   putImageThumbnail,
@@ -61,10 +61,12 @@ import { getChangedParams, normalizeParamsForSettings } from './lib/paramCompati
 import { runWithConcurrency, splitBatchPrompts } from './lib/batchPrompts'
 import { createTransparentOutputMeta, getTransparentRequestParams, removeKeyedBackgroundFromDataUrl } from './lib/transparentImage'
 import { blobToDataUrl, fileToDataUrl } from './lib/dataUrl'
-import { cacheImage, cacheThumbnail, clearImageCaches, deleteCachedImage, deleteImageCacheEntry, ensureImageCached, scheduleThumbnailBackfill } from './lib/imageCache'
-import { hasActiveDataOperations } from './lib/dataOperations'
+import { cacheImage, cacheThumbnail, clearImageCaches, deleteCachedImage, deleteImageCacheEntry, ensureImageCached, scheduleMissingThumbnailBackfill } from './lib/imageCache'
+import { migrateImagesToBlob } from './lib/imageBlob'
+import { hasActiveDataOperations, isCustomRecoverableTask, isFalRecoverableTask } from './lib/dataOperations'
 import { formatExportFileTime } from './lib/exportFileName'
-import { buildExportZip, createExportBlob, getExportImageEstimatedBytes, getExportZipPlan, MAX_EXPORT_ZIP_BYTES, readExportZip, readExportZipFileAsDataUrl, readExportZipManifest } from './lib/exportZip'
+import { buildExportZip, createExportBlob, getExportZipPlan, MAX_EXPORT_ZIP_BYTES, readExportZip, readExportZipFileAsDataUrl, readExportZipManifest } from './lib/exportZip'
+import { getExportImageSizes, readExportImages } from './lib/exportImages'
 import { deleteAgentRoundFromConversation, getActiveAgentRounds, getAgentRoundPath, normalizeAgentConversations, remapAgentRoundMentionsForPathChange, uniqueIds } from './lib/agentConversationState'
 import { canonicalizeBatchFunctionCallArguments, countResponseToolCalls, createReadyAgentRecoveredToolState, getAgentFunctionOutputCallIds, getAgentRecoveredFailureError, getAgentRecoveredToolCallCount, getPersistableAgentConversations, getPersistableRawResponsePayload, mergeResponseOutputItems, scrubResponseOutputForDeletedAgentTasks, scrubTaskRawResponsePayloadForDeletedTasks } from './lib/agentResponseState'
 import { cleanStaleAgentInputDrafts, clearInputDraftState, isEmptyAgentInputDraft, normalizeAgentInputDrafts, remapAgentInputDraftMentionsForPathChange, restoreAgentInputDraftState, restoreGalleryInputDraftState, saveActiveAgentInputDrafts, saveGalleryInputDraft, syncActiveInputDraft, updateInputDraftImages } from './lib/inputDraftState'
@@ -72,6 +74,11 @@ import { ALL_FAVORITES_COLLECTION_ID, DEFAULT_FAVORITE_COLLECTION_ID, createDefa
 import { createPersistedState, mergePersistedAgentConversations, migratePersistedState, normalizePersistedState } from './lib/persistedState'
 import { addImageSizeParam, createTaskDonePatch, createTaskErrorPatch, deriveAgentImageActualParams, deriveGalleryActualParams, firstActualParams, hasActualParams, hasActualSizeParam, mapActualParamsByImage, mapRevisedPromptsByImage, markInterruptedOpenAIRunningTasks } from './lib/taskState'
 import { stripInjectedCodexCliSizePrompt } from './lib/size'
+import { apiFetch, FetchConnectError, isTauri } from './lib/platform'
+import { pickSaveDir, saveFile, saveFileToDir, type SaveOptions } from './lib/saveFile'
+import { endDataProgress, setDataProgressCancelable, startDataProgress, updateDataProgress } from './lib/dataProgress'
+import { throwIfAborted } from './lib/serverSentEvents'
+import { tauriStorage } from './lib/tauriStorage'
 
 const FAL_RECOVERY_POLL_MS = 10_000
 const CUSTOM_RECOVERY_POLL_MS = 10_000
@@ -149,14 +156,25 @@ function orderImagesWithMaskFirst(images: InputImage[], maskTargetImageId: strin
   return next
 }
 
-function isAgentTask(task: TaskRecord) {
+export function isAgentTask(task: TaskRecord) {
   return task.sourceMode === 'agent' || Boolean(task.agentConversationId || task.agentRoundId)
 }
 
-function showTaskCompletionNotification(title: string, body: string) {
+// 失败通知用独立 tag，避免与成功通知互相覆盖
+function showTaskCompletionNotification(title: string, body: string, tag = 'task-completion') {
   const settings = normalizeSettings(useStore.getState().settings)
   if (!settings.taskCompletionNotification) return
-  showBrowserNotification(title, { body })
+  showBrowserNotification(title, { body, tag })
+}
+
+function showTaskFailureNotification(task: TaskRecord) {
+  // Agent 任务由所在回合统一通知，批量任务在整批结束时汇总失败数量
+  if (isAgentTask(task) || batchTaskIds.has(task.id)) return
+  showTaskCompletionNotification('图像生成失败', '请回到应用查看详情。', 'task-failure')
+}
+
+export function countSuccessfulOutputImages(tasks: TaskRecord[]) {
+  return tasks.reduce((count, task) => count + (task.status === 'done' && !isAgentTask(task) ? task.outputImages.length : 0), 0)
 }
 
 function mergeImportedAgentConversations(current: AgentConversation[], imported: AgentConversation[]) {
@@ -381,6 +399,8 @@ interface AppState {
   confirmDialog: {
     title: string
     message: string
+    /** 显示在 message 下方的自定义内容，过长时可滚动 */
+    content?: ReactNode
     checkbox?: {
       label: string
       defaultChecked?: boolean
@@ -400,6 +420,8 @@ interface AppState {
     messageAlign?: 'left' | 'center'
     tone?: 'danger' | 'warning'
     awaitAction?: boolean
+    /** awaitAction 执行期间确认按钮显示的文字 */
+    busyText?: string
     action?: (checkboxChecked?: boolean) => void | boolean | Promise<void | boolean>
     cancelAction?: (checkboxChecked?: boolean) => void
   } | null
@@ -459,7 +481,7 @@ async function deleteStoredImageIfUnreferenced(imageId: string) {
   if (thumbnail) {
     await putImageThumbnail(thumbnail)
     cacheThumbnail(thumbnail.id, {
-      dataUrl: thumbnail.thumbnailDataUrl,
+      src: thumbnail.thumbnailDataUrl,
       width: thumbnail.width,
       height: thumbnail.height,
       thumbnailVersion: thumbnail.thumbnailVersion,
@@ -1011,6 +1033,8 @@ export const useStore = create<AppState>()(
     }),
     {
       name: 'gpt-image-playground',
+      // 与 zustand 默认存储（window.localStorage）一致；客户端改用预加载到内存的 SQLite kv
+      storage: createJSONStorage(() => isTauri ? tauriStorage : window.localStorage),
       version: 2,
       migrate: migratePersistedState,
       partialize: getPersistedState,
@@ -1098,6 +1122,7 @@ function failOpenAITaskIfStillRunning(taskId: string, error: string, now = Date.
     falRecoverable: false,
     elapsed: Math.max(0, now - (task.startedAt ?? task.createdAt)),
   })
+  showTaskFailureNotification(task)
   return true
 }
 
@@ -1234,11 +1259,13 @@ function getTaskApiProfileName(task: TaskRecord) {
 
 function isNetworkRecoverableError(err: unknown) {
   if (typeof DOMException !== 'undefined' && err instanceof DOMException && err.name === 'AbortError') return true
+  if (err instanceof FetchConnectError) return true
   const message = err instanceof Error ? err.message : String(err)
   return /abort|network|failed to fetch|fetch failed|load failed|timeout|连接|断开|中断/i.test(message)
 }
 
 function isApiRequestNetworkError(err: unknown): boolean {
+  if (err instanceof FetchConnectError) return true
   if (err instanceof TypeError) {
     const message = err.message.toLowerCase()
     return /failed to fetch|fetch failed|load failed|networkerror|network request failed/i.test(message)
@@ -1260,14 +1287,23 @@ function getApiRequestNetworkErrorHint(
 
   const elapsedSeconds = Math.max(0, (Date.now() - createdAt) / 1000)
 
+  // 客户端的连接错误已由 Rust 侧给出具体原因，只有兜底的“无法连接到服务器”仍追加通用提示；
+  // 超时、域名解析等发生在建立连接时，与网关超时无关，只有连接被重置或未响应就关闭才可能是等待较久后被网关断开
+  if (err instanceof FetchConnectError && !err.message.startsWith('无法连接到服务器')) {
+    if (elapsedSeconds <= 15 || !/^(连接被服务器重置|服务器未返回响应就关闭了连接)/.test(err.message)) return null
+  }
+
   if (elapsedSeconds <= 15) {
-    if (usesApiProxy) {
+    // 客户端忽略已保存的代理设置
+    if (usesApiProxy && !isTauri) {
       return '提示：请求立即失败，请检查 API 代理服务是否正常运行。'
     }
     const unsupportedApiHint = profile?.provider === 'openai'
       ? `\n· API 不支持 ${getApiModeApiName(profile.apiMode)}`
       : ''
-    return `提示：请求立即失败，可能原因：\n· API 服务器不可达或地址有误，请检查 API URL 是否正确、服务是否正常运行${unsupportedApiHint}\n· 接口不支持浏览器跨域请求，可使用 Docker 部署版或本地运行版并配置 API 代理解决`
+    // 客户端不受跨域限制，不提示跨域原因
+    const corsHint = isTauri ? '' : '\n· 接口不支持浏览器跨域请求，可使用 Docker 部署版或本地运行版并配置 API 代理解决'
+    return `提示：请求立即失败，可能原因：\n· API 服务器不可达或地址有误，请检查 API URL 是否正确、服务是否正常运行${unsupportedApiHint}${corsHint}`
   }
 
   if (elapsedSeconds >= 55 && elapsedSeconds <= 75) {
@@ -1426,11 +1462,13 @@ async function recoverFalTask(taskId: string) {
     }
 
     clearFalRecoveryTimer(taskId)
+    const error = getFalErrorMessage(err) ?? (err instanceof Error ? err.message : String(err))
     updateTaskInStore(taskId, {
-      ...createTaskErrorPatch(task, getFalErrorMessage(err) ?? (err instanceof Error ? err.message : String(err)), Date.now()),
+      ...createTaskErrorPatch(task, error, Date.now()),
       ...getRawErrorPayload(err),
       falRecoverable: false,
     })
+    showTaskFailureNotification(task)
     if (isAgentTask(task)) void continueRecoveredAgentRound(taskId)
   }
 }
@@ -1488,21 +1526,10 @@ export async function initStore() {
     .filter((task, index) => normalizedFavorites.changed || interruptedTaskIds.has(task.id) || task.rawResponsePayload !== markedTasks[index]?.rawResponsePayload)
     .map((task) => putTask(task)))
   useStore.getState().setTasks(tasks)
+  // 客户端关闭确认用同样的判断跳过这些任务，它们重启后会继续查询结果
   for (const task of tasks) {
-    if (
-      task.apiProvider === 'fal' &&
-      task.falRequestId &&
-      task.falEndpoint &&
-      (task.status === 'running' || task.falRecoverable)
-    ) {
-      scheduleFalRecovery(task.id, 0)
-    }
-    if (
-      task.customTaskId &&
-      (task.status === 'running' || task.customRecoverable)
-    ) {
-      scheduleCustomRecovery(task.id, 0)
-    }
+    if (isFalRecoverableTask(task)) scheduleFalRecovery(task.id, 0)
+    if (isCustomRecoverableTask(task)) scheduleCustomRecovery(task.id, 0)
   }
 
   // 收集所有任务引用的图片 id
@@ -1538,7 +1565,9 @@ export async function initStore() {
       await deleteImage(imgId)
     }
   }
-  scheduleThumbnailBackfill(referencedImageIds)
+  void scheduleMissingThumbnailBackfill(referencedImageIds)
+  // 网页版旧数据的原图和缩略图以 dataUrl 字符串保存，首屏加载后在后台逐条转成 Blob
+  if (!isTauri) setTimeout(() => void migrateImagesToBlob(), 2_000)
 
   const restoredInputImages: InputImage[] = []
   for (const img of persistedInputImages) {
@@ -2324,6 +2353,7 @@ async function continueRecoveredAgentRound(taskId: string) {
             : currentRound,
         ),
       }))
+      showTaskCompletionNotification('Agent 回复失败', '请回到应用查看详情。', 'task-failure')
     }
 
     const recovered = createReadyAgentRecoveredToolState(round, latestState.tasks)
@@ -3593,6 +3623,7 @@ async function executeAgentRound(
       }
     })
     useStore.getState().showToast(`Agent 请求失败：${message}`, 'error')
+    showTaskCompletionNotification('Agent 回复失败', '请回到应用查看详情。', 'task-failure')
   } finally {
     if (agentRoundControllers.get(controllerKey) === controller) {
       agentRoundControllers.delete(controllerKey)
@@ -3621,11 +3652,13 @@ async function executeTask(taskId: string) {
   taskExecutions.set(taskId, execution)
   const taskProfile = getTaskApiProfile(settings, task)
   if (!taskProfile && task.apiProfileId) {
+    const error = '找不到此任务所使用的 API 配置。'
     updateTaskInStore(taskId, {
-      ...createTaskErrorPatch(task, '找不到此任务所使用的 API 配置。', Date.now()),
+      ...createTaskErrorPatch(task, error, Date.now()),
       falRecoverable: false,
       customRecoverable: false,
     })
+    showTaskFailureNotification(task)
     taskExecutions.delete(taskId)
     return
   }
@@ -3823,6 +3856,7 @@ async function executeTask(taskId: string) {
       })
       // 批量任务不自动打开失败详情，避免连续弹窗打断
       if (!batchTaskIds.has(taskId)) useStore.getState().setDetailTaskId(taskId)
+      showTaskFailureNotification(task)
     }
   } finally {
     if (taskExecutions.get(taskId) === execution) taskExecutions.delete(taskId)
@@ -4444,11 +4478,13 @@ async function recoverCustomTask(taskId: string) {
   } catch (err) {
     clearCustomRecoveryTimer(taskId)
     if (!useStore.getState().tasks.some((item) => item.id === taskId)) return
+    const error = err instanceof Error ? err.message : String(err)
     updateTaskInStore(taskId, {
-      ...createTaskErrorPatch(task, err instanceof Error ? err.message : String(err), Date.now()),
+      ...createTaskErrorPatch(task, error, Date.now()),
       ...getRawErrorPayload(err),
       customRecoverable: false,
     })
+    showTaskFailureNotification(task)
     if (isAgentTask(task)) void continueRecoveredAgentRound(taskId)
   }
 }
@@ -4461,9 +4497,12 @@ export interface ExportOptions {
 
 /** 导出数据为 ZIP */
 export async function exportData(options: ExportOptions = { exportConfig: true, exportTasks: true }) {
+  // 导出全程可取消：网页版放弃后续下载，客户端丢弃正在写入的临时文件
+  const signal = startDataProgress('export', true)
+  let savedParts = 0
   try {
     const state = useStore.getState()
-    if (options.exportTasks && hasActiveDataOperations(state.tasks, state.agentConversations)) throw new Error('当前有任务正在进行，请完成或停止后再导出。')
+    if (options.exportTasks && hasActiveDataOperations(state.tasks, state.agentConversations)) throw new Error('有任务正在进行，完成或停止后再导出。')
     const tasks = options.exportTasks ? await getAllTasks() : []
     const imageIds = options.exportTasks ? await getAllImageIds() : []
     const { settings, agentConversations, favoriteCollections, defaultFavoriteCollectionId } = state
@@ -4478,35 +4517,34 @@ export async function exportData(options: ExportOptions = { exportConfig: true, 
       defaultFavoriteCollectionId,
       agentConversations: options.exportTasks ? getPersistableAgentConversations(agentConversations) : [],
     }
-    const imageSizes = []
-    for (const id of imageIds) {
-      const image = await getImage(id)
-      if (!image) continue
-      const thumbnail = await getImageThumbnail(id)
-      imageSizes.push({ id, bytes: getExportImageEstimatedBytes(image, thumbnail) })
-    }
+    // 进度回调中检查取消，逐张读取时也能及时中断
+    const imageSizes = await getExportImageSizes(imageIds, (done) => {
+      throwIfAborted(signal)
+      updateDataProgress('统计图片', done, imageIds.length, 'image')
+    })
+    throwIfAborted(signal)
     const plan = getExportZipPlan(params, imageSizes)
     const backupId = `${exportedAt}`
+    // 客户端分卷备份时先选择目录，一次写入全部分卷，替代浏览器的多文件下载
+    if (isTauri && plan.length > 1) updateDataProgress('选择保存位置')
+    const dir = isTauri && plan.length > 1 ? await pickSaveDir() : null
+    if (isTauri && plan.length > 1 && !dir) return
+    let savedPath = ''
+    const imageTotal = plan.reduce((sum, part) => sum + part.imageIds.length, 0)
+    let imagesRead = 0
 
     for (let index = 0; index < plan.length; index++) {
-      const images: StoredImage[] = []
-      const thumbnailsByImageId = new Map<string, StoredImageThumbnail>()
-      for (const id of plan[index].imageIds) {
-        const image = await getImage(id)
-        if (!image) continue
-        images.push(image)
-        const thumbnail = await getImageThumbnail(id)
-        if (!thumbnail?.thumbnailDataUrl) continue
-        thumbnailsByImageId.set(id, thumbnail)
-        cacheThumbnail(id, {
-          dataUrl: thumbnail.thumbnailDataUrl,
-          width: thumbnail.width,
-          height: thumbnail.height,
-          thumbnailVersion: thumbnail.thumbnailVersion,
-        })
-      }
-
       const partNumber = index + 1
+      const partLabel = plan.length > 1 ? `（第 ${partNumber} / ${plan.length} 卷）` : ''
+      throwIfAborted(signal)
+      const { images, thumbnailsByImageId } = await readExportImages(plan[index].imageIds, (done) => {
+        throwIfAborted(signal)
+        updateDataProgress(`读取图片${partLabel}`, imagesRead + done, imageTotal, 'image')
+      })
+      imagesRead += plan[index].imageIds.length
+      throwIfAborted(signal)
+      updateDataProgress(`打包${partLabel}`)
+
       const result = await buildExportZip({
         ...params,
         tasks: plan[index].tasks,
@@ -4516,23 +4554,37 @@ export async function exportData(options: ExportOptions = { exportConfig: true, 
         includeManifestData: plan[index].includeBaseData,
         backupPart: plan.length > 1 ? { id: backupId, index: partNumber, total: plan.length } : undefined,
       })
-      const blob = createExportBlob(result.bytes)
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
       const suffix = plan.length > 1 ? `_${String(plan.length).padStart(2, '0')}parts_part${String(partNumber).padStart(2, '0')}` : ''
-      a.href = url
-      a.download = `gpt-image-2-backup_${formatExportFileTime(new Date(exportedAt))}${suffix}.zip`
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      const fileName = `gpt-image-2-backup_${formatExportFileTime(new Date(exportedAt))}${suffix}.zip`
+      throwIfAborted(signal)
+      updateDataProgress(`保存文件${partLabel}`)
+      const saveOpts: SaveOptions = { signal, onProgress: (written, total) => updateDataProgress(`保存文件${partLabel}`, written, total, 'byte') }
+      if (dir) {
+        await saveFileToDir(dir, result.bytes, fileName, saveOpts)
+        savedParts++
+        continue
+      }
+      // 客户端直接传字节给 Rust 写入，不再复制一份 Blob
+      const saved = await saveFile(isTauri ? result.bytes : createExportBlob(result.bytes), fileName, saveOpts)
+      if (!saved) return
+      savedParts++
+      savedPath = saved
       if (partNumber < plan.length) await new Promise((resolve) => setTimeout(resolve, 150))
     }
-    useStore.getState().showToast(plan.length > 1 ? `已请求下载 ${plan.length} 个 ZIP，请确认浏览器已允许多文件下载` : '数据已导出', 'success')
+    const msg = dir
+      ? `已导出 ${plan.length} 个 ZIP 到 ${dir.path}`
+      : plan.length > 1 ? `正在下载 ${plan.length} 个 ZIP，如被浏览器拦截，请允许多文件下载` : isTauri ? `已导出到 ${savedPath}` : '数据已导出'
+    useStore.getState().showToast(msg, 'success')
   } catch (e) {
+    if (signal.aborted) {
+      useStore.getState().showToast(savedParts ? `已取消导出，已${isTauri ? '保存' : '下载'}的 ${savedParts} 个分卷不完整，可以删除` : '已取消导出', 'info')
+      return
+    }
     console.error('exportData failed', e)
     const detail = e instanceof Error ? e.message.trim() : String(e).trim()
-    useStore.getState().showToast(detail ? `导出失败，${detail}` : '导出失败，未知错误', 'error')
+    useStore.getState().showToast(detail ? `导出失败，${detail}` : '导出失败', 'error')
+  } finally {
+    endDataProgress()
   }
 }
 
@@ -4559,47 +4611,61 @@ export async function restoreExplicitPresetConfig(ids: { providerIds: string[], 
 
 /** 导入 ZIP 数据 */
 export async function importData(input: File | File[], options: ImportOptions = { importConfig: true, importTasks: true }): Promise<boolean> {
+  // 只允许在解析备份阶段取消；开始写入后取消会留下半份数据
+  const signal = startDataProgress('import', true)
   try {
     const state = useStore.getState()
-    if (options.importTasks && hasActiveDataOperations(state.tasks, state.agentConversations)) throw new Error('当前有任务正在进行，请完成或停止后再导入。')
+    if (options.importTasks && hasActiveDataOperations(state.tasks, state.agentConversations)) throw new Error('有任务正在进行，完成或停止后再导入。')
     const files = Array.isArray(input) ? input : [input]
     if (!files.length) throw new Error('没有选择备份文件。')
     if (files.some((file) => file.size >= MAX_EXPORT_ZIP_BYTES)) {
-      throw new Error('单个 ZIP 不能达到或超过 2 GB，请选择分片备份。')
+      throw new Error('单个 ZIP 不能超过 2 GB，请使用分卷备份。')
     }
 
     const selected = [] as Array<{ file: File; manifest: Awaited<ReturnType<typeof readExportZipManifest>> }>
-    for (const file of files) {
+    for (const [idx, file] of files.entries()) {
+      updateDataProgress('解析备份', idx, files.length > 1 ? files.length : 0, files.length > 1 ? 'file' : undefined)
       const manifest = await readExportZipManifest(new Uint8Array(await file.arrayBuffer()), options.importTasks)
       selected.push({ file, manifest })
+      throwIfAborted(signal)
     }
     const multipart = selected.some((part) => part.manifest.backupPart != null)
     if (multipart) {
-      if (selected.some((part) => !part.manifest.backupPart)) throw new Error('不能混合选择分片备份和普通备份。')
+      if (selected.some((part) => !part.manifest.backupPart)) throw new Error('不能同时选择分卷备份和普通备份。')
       const first = selected[0].manifest.backupPart!
       const indexes = new Set(selected.map((part) => part.manifest.backupPart!.index))
       const validSet = selected.every((part) => {
         const backupPart = part.manifest.backupPart!
         return backupPart.id === first.id && backupPart.total === first.total && backupPart.index >= 1 && backupPart.index <= first.total
       })
-      if (!validSet || indexes.size !== selected.length) throw new Error('所选分片不属于同一批备份或包含重复分片。')
+      if (!validSet || indexes.size !== selected.length) throw new Error('所选分卷不属于同一份备份，或有重复。')
       if (options.importTasks && (selected.length !== first.total || indexes.size !== first.total)) {
-        throw new Error(`分片备份不完整，请一次选择同一备份的全部 ${first.total} 个 ZIP。`)
+        throw new Error(`分卷不全，请一次选择全部 ${first.total} 个 ZIP。`)
       }
       selected.sort((a, b) => a.manifest.backupPart!.index - b.manifest.backupPart!.index)
     }
 
     const settingsManifests = selected.filter((part) => part.manifest.settings)
-    if (options.importConfig && !options.importTasks && !settingsManifests.length) throw new Error('所选备份不包含配置数据。')
+    if (options.importConfig && !options.importTasks && !settingsManifests.length) throw new Error('这份备份里没有配置。')
     const importedTasks = selected.flatMap((part) => part.manifest.tasks ?? [])
     const importedAgentConversations = selected.flatMap((part) => part.manifest.agentConversations ?? [])
     const hasTaskData = selected.some((part) => part.manifest.tasks != null || part.manifest.imageFiles != null)
 
+    // 先关闭取消再检查，确保点了取消就不会进入写入阶段
+    setDataProgressCancelable(false)
+    throwIfAborted(signal)
+
     const importedImageIds: string[] = []
     if (options.importTasks && hasTaskData) {
-      for (const part of selected) {
+      // 原图和缩略图合并计数，分片交替写入时进度条也只增不减
+      const fileTotal = selected.reduce((sum, part) => sum + Object.keys(part.manifest.imageFiles ?? {}).length + Object.keys(part.manifest.thumbnailFiles ?? {}).length, 0)
+      let filesDone = 0
+      for (const [idx, part] of selected.entries()) {
+        updateDataProgress(selected.length > 1 ? `读取备份（第 ${idx + 1} / ${selected.length} 个）` : '读取备份', filesDone, fileTotal, 'file')
         const { manifest, files: zipFiles } = await readExportZip(new Uint8Array(await part.file.arrayBuffer()))
         for (const [id, info] of Object.entries(manifest.imageFiles ?? {})) {
+          // 先计入当前文件，写到最后一个时进度到 100%
+          updateDataProgress('写入图片和缩略图', ++filesDone, fileTotal, 'file')
           const dataUrl = readExportZipFileAsDataUrl(zipFiles, info.path)
           if (!dataUrl) continue
           await putImage({
@@ -4615,6 +4681,7 @@ export async function importData(input: File | File[], options: ImportOptions = 
         }
 
         for (const [id, info] of Object.entries(manifest.thumbnailFiles ?? {})) {
+          updateDataProgress('写入图片和缩略图', ++filesDone, fileTotal, 'file')
           const thumbnailDataUrl = readExportZipFileAsDataUrl(zipFiles, info.path)
           if (!thumbnailDataUrl) continue
           await putImageThumbnail({
@@ -4625,7 +4692,7 @@ export async function importData(input: File | File[], options: ImportOptions = 
             thumbnailVersion: info.thumbnailVersion,
           })
           cacheThumbnail(id, {
-            dataUrl: thumbnailDataUrl,
+            src: thumbnailDataUrl,
             width: info.width,
             height: info.height,
             thumbnailVersion: info.thumbnailVersion,
@@ -4633,6 +4700,7 @@ export async function importData(input: File | File[], options: ImportOptions = 
         }
       }
 
+      updateDataProgress('写入任务和会话')
       for (const task of importedTasks) {
         // startedAt 来自导入文件，非法值会让计时和“重试于”显示异常
         await putTask(Number.isFinite(task.startedAt) || task.startedAt === undefined ? task : { ...task, startedAt: undefined })
@@ -4669,7 +4737,7 @@ export async function importData(input: File | File[], options: ImportOptions = 
         }
       })
       await replaceStoredAgentConversations(useStore.getState().agentConversations)
-      scheduleThumbnailBackfill(importedImageIds)
+      void scheduleMissingThumbnailBackfill(importedImageIds)
     }
 
     if (options.importConfig && settingsManifests.length) {
@@ -4696,20 +4764,26 @@ export async function importData(input: File | File[], options: ImportOptions = 
       current.setSettings(settings)
     }
 
-    let msg = '数据已成功导入'
+    let msg = '导入完成'
     if (options.importTasks && hasTaskData) {
       msg = `已导入 ${importedTasks.length} 个任务`
     } else if (options.importConfig && settingsManifests.length) {
-      msg = '配置已成功导入'
+      msg = '配置已导入'
     }
 
     useStore.getState().showToast(msg, 'success')
     return true
   } catch (e) {
+    if (signal.aborted) {
+      useStore.getState().showToast('已取消导入', 'info')
+      return false
+    }
     console.error('importData failed', e)
     const detail = e instanceof Error ? e.message.trim() : String(e).trim()
-    useStore.getState().showToast(detail ? `导入失败，${detail}` : '导入失败，未知错误', 'error')
+    useStore.getState().showToast(detail ? `导入失败，${detail}` : '导入失败', 'error')
     return false
+  } finally {
+    endDataProgress()
   }
 }
 
@@ -4730,7 +4804,7 @@ export async function createInputImageFromFile(file: File): Promise<InputImage |
 
 /** 添加图片到输入（右键菜单）—— 支持 data/blob/http URL */
 export async function addImageFromUrl(src: string): Promise<void> {
-  const res = await fetch(src)
+  const res = await apiFetch(src)
   const blob = await res.blob()
   if (!blob.type.startsWith('image/')) throw new Error('不是有效的图片')
   const dataUrl = await blobToDataUrl(blob)

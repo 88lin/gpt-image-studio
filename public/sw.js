@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gpt-image-studio-v0.7.17'
+const CACHE_NAME = 'gpt-image-studio-v0.8.1'
 const APP_SHELL = ['./', './index.html', './manifest.webmanifest', './pwa-icon.svg']
 const APP_SHELL_URLS = new Set(APP_SHELL.map((path) => new URL(path, self.registration.scope).href))
 const ASSETS_PATH = new URL('./assets/', self.registration.scope).pathname
@@ -27,7 +27,8 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url)
   if (url.origin !== self.location.origin) return
 
-  if (request.mode === 'navigate') {
+  // 只缓存顶层页面；公告卡片中的 iframe 也是导航请求，不能写进 index.html 的缓存
+  if (request.mode === 'navigate' && request.destination === 'document') {
     event.respondWith(
       fetch(request)
         .then((response) => {

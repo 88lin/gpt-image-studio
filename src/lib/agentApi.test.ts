@@ -67,6 +67,30 @@ describe('callAgentResponsesApi', () => {
     vi.restoreAllMocks()
   })
 
+  it('收到响应头后流式停顿时仍按超时中止，并给出中文原因', async () => {
+    // 与浏览器一致：信号中止后，读取中的响应体以 signal.reason 报错
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (_url, init) => {
+      const signal = (init as RequestInit).signal!
+      const body = new ReadableStream<Uint8Array>({
+        start: (ctrl) => {
+          ctrl.enqueue(new TextEncoder().encode('data: {"type":"response.output_text.delta","delta":"Hel"}\n\n'))
+          signal.addEventListener('abort', () => ctrl.error(signal.reason))
+        },
+      })
+      return new Response(body, { status: 200, headers: { 'Content-Type': 'text/event-stream' } })
+    })
+    const profile = createDefaultOpenAIProfile({ apiKey: 'test-key', apiMode: 'responses', streamImages: true, timeout: 0.05 })
+
+    const err = await callAgentResponsesApi({
+      settings: DEFAULT_SETTINGS,
+      profile,
+      params: DEFAULT_PARAMS,
+      input: 'prompt',
+    }).catch((e) => e)
+
+    expect(err).toMatchObject({ name: 'AbortError', message: '请求超时：超过 0.05 秒仍未完成，请稍后重试或提高超时时间。' })
+  })
+
   it('streams Agent text and requests configured partial images', async () => {
     const streamBody = [
       'data: {"type":"response.output_text.delta","delta":"Hel"}',

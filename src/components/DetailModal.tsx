@@ -9,7 +9,7 @@ import { ActualValueBadge, DetailParamValue } from '../lib/paramDisplay'
 import { copyImageSourceToClipboard, copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboard'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
 import { dismissAllTooltips } from '../lib/tooltipDismiss'
-import { downloadImageEntriesAsZip, downloadImageIds, getImageZipEntries } from '../lib/downloadImages'
+import { downloadImageEntriesAsZip, downloadImageIds, getDownloadErrorMessage, getImageZipEntries, withSaveLocation } from '../lib/downloadImages'
 import { isAgentTaskPromptPending } from '../lib/taskPromptDisplay'
 import { getImageComments, getTaskPromptText, replaceImageMentionsForApi } from '../lib/promptImageMentions'
 import { getApiProviderLabel } from '../lib/apiProfiles'
@@ -363,14 +363,15 @@ export default function DetailModal() {
 
     try {
       const result = await downloadImageIds([currentOutputImageId], `task-${task.id}`)
+      if (result.canceled) return
       if (result.successCount === 0) {
-        showToast('下载失败', 'error')
+        showToast(getDownloadErrorMessage(result.error), 'error')
       } else {
-        showToast('下载成功', 'success')
+        showToast(withSaveLocation('下载成功', result.location), 'success')
       }
     } catch (err) {
       console.error(err)
-      showToast('下载失败', 'error')
+      showToast(getDownloadErrorMessage(err), 'error')
     }
   }
 
@@ -380,14 +381,15 @@ export default function DetailModal() {
 
     try {
       const result = await downloadImageIds([currentOriginalOutputImageId], `task-${task.id}-orig`)
+      if (result.canceled) return
       if (result.successCount === 0) {
-        showToast('下载失败', 'error')
+        showToast(getDownloadErrorMessage(result.error), 'error')
       } else {
-        showToast('原图下载成功', 'success')
+        showToast(withSaveLocation('原图下载成功', result.location), 'success')
       }
     } catch (err) {
       console.error(err)
-      showToast('下载失败', 'error')
+      showToast(getDownloadErrorMessage(err), 'error')
     }
   }
 
@@ -400,16 +402,17 @@ export default function DetailModal() {
       const result = settings.zipDownloadRoutes.includes('task-detail-all')
         ? await downloadImageEntriesAsZip(getImageZipEntries(task.outputImages, fileNameBase), fileNameBase)
         : await downloadImageIds(task.outputImages, fileNameBase)
+      if (result.canceled) return
       if (result.successCount === 0) {
-        showToast('下载失败', 'error')
+        showToast(getDownloadErrorMessage(result.error), 'error')
       } else if (result.failCount > 0) {
         showToast(`部分下载失败：成功 ${result.successCount}，失败 ${result.failCount}`, 'error')
       } else {
-        showToast(result.successCount > 1 ? `下载成功：${result.successCount} 张图片` : '下载成功', 'success')
+        showToast(withSaveLocation(result.successCount > 1 ? `下载成功：${result.successCount} 张图片` : '下载成功', result.location), 'success')
       }
     } catch (err) {
       console.error(err)
-      showToast('下载失败', 'error')
+      showToast(getDownloadErrorMessage(err), 'error')
     }
   }
 
@@ -421,16 +424,17 @@ export default function DetailModal() {
       const result = settings.zipDownloadRoutes.includes('task-detail-partial')
         ? await downloadImageEntriesAsZip(getImageZipEntries(streamPartialImageIds, fileNameBase), fileNameBase)
         : await downloadImageIds(streamPartialImageIds, fileNameBase)
+      if (result.canceled) return
       if (result.successCount === 0) {
-        showToast('下载失败', 'error')
+        showToast(getDownloadErrorMessage(result.error), 'error')
       } else if (result.failCount > 0) {
         showToast(`部分下载失败：成功 ${result.successCount}，失败 ${result.failCount}`, 'error')
       } else {
-        showToast(`下载成功：${result.successCount} 张中间步骤图`, 'success')
+        showToast(withSaveLocation(`下载成功：${result.successCount} 张中间步骤图`, result.location), 'success')
       }
     } catch (err) {
       console.error(err)
-      showToast('下载失败', 'error')
+      showToast(getDownloadErrorMessage(err), 'error')
     }
   }
 

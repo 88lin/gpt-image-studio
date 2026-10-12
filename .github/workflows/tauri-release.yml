@@ -1,0 +1,116 @@
+name: Build Desktop Client
+
+# 只由推送 v* tag 触发，构建最新及以后的版本；不提供为已有 tag 手动重新构建的入口
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tauri-release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  # job 级 if 不能引用 secrets，先由轻量 job 判断是否配置了签名私钥；未配置时跳过构建，网页版与 Docker 镜像在推送 tag 时直接部署
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - id: check
+        env:
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          if [[ -z "$SIGNING_KEY" ]]; then
+            echo "TAURI_SIGNING_PRIVATE_KEY is not set. Skipping desktop client build."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
+
+  windows:
+    needs: check
+    if: ${{ needs.check.outputs.enabled == 'true' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check version and extract release notes
+        id: meta
+        shell: bash
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(jq -r .version package.json)
+          if [[ "$TAG" != "v$version" ]]; then
+            echo "::error::tag $TAG 与 package.json 的版本 $version 不一致"
+            exit 1
+          fi
+          cargo_version=$(grep -m1 '^version' src-tauri/Cargo.toml | cut -d '"' -f2)
+          if [[ "$cargo_version" != "$version" ]]; then
+            echo "::error::src-tauri/Cargo.toml 的版本 $cargo_version 与 package.json 的版本 $version 不一致"
+            exit 1
+          fi
+          # Release 正文取 RELEASE.md 中对应版本的段落（含标题），与网页版、客户端的更新弹窗显示一致
+          awk -v head="## v$version（" 'index($0, head) == 1 { found = 1; print; next } found && /^## v/ { exit } found { print }' RELEASE.md > release-notes.md
+          if [[ ! -s release-notes.md ]]; then
+            echo "::error::RELEASE.md 中没有 v$version 的发布记录"
+            exit 1
+          fi
+          {
+            echo 'body<<RELEASE_NOTES_EOF'
+            cat release-notes.md
+            echo 'RELEASE_NOTES_EOF'
+          } >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: Build desktop frontend for native tests
+        run: npm run build
+        env:
+          TAURI_ENV_PLATFORM: windows
+
+      - name: Test native client
+        run: cargo test --manifest-path src-tauri/Cargo.toml --locked --release --features tauri/custom-protocol
+
+      # 构建 NSIS 安装包并用私钥（及其密码，均来自 GitHub Secrets）为更新包签名；安装包、.sig 和 latest.json 上传到 tag 对应的 Release。
+      # package.json 没有 tauri 脚本，需指定 tauriScript，否则 tauri-action 会执行不存在的 npm run tauri
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: ${{ steps.meta.outputs.tag }}
+          releaseName: ${{ steps.meta.outputs.tag }}
+          releaseBody: ${{ steps.meta.outputs.body }}
+          releaseDraft: false
+          prerelease: false
+          includeUpdaterJson: true
+          updaterJsonPreferNsis: true
+          tauriScript: npx tauri
+
+      # tauri-action 在 Release 已存在（例如维护者手动创建）时只上传文件，不改标题、正文和草稿状态。
+      # 这里统一改为 RELEASE.md 的正文并设为正式版，客户端的更新地址 releases/latest/download/latest.json 才能指向它
+      - name: Sync release notes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.meta.outputs.tag }}
+        run: gh release edit "$TAG" --title "$TAG" --notes-file release-notes.md --draft=false --prerelease=false

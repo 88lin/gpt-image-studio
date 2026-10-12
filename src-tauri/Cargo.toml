@@ -1,0 +1,55 @@
+[package]
+name = "gpt-image-studio"
+version = "0.8.1"
+description = "GPT Image Studio"
+edition = "2021"
+
+[lib]
+name = "gpt_image_studio_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["devtools"] }
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-deep-link = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-log = "2"
+tauri-plugin-notification = "2"
+tauri-plugin-opener = "2"
+tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
+tauri-plugin-window-state = "2"
+log = "0.4"
+# 与 tauri-plugin-updater 使用同一版本：rustls + 系统证书库校验（rustls-platform-verifier），
+# 能识别企业 HTTPS 解密、杀毒软件 HTTPS 扫描和导入系统的自签 CA；并跟随系统代理。
+# 不带加密实现，启动时安装 ring（与更新插件一致），见 lib.rs
+reqwest = { version = "0.13", default-features = false, features = ["rustls-no-provider", "http2", "system-proxy"] }
+rustls = { version = "0.23", default-features = false, features = ["ring"] }
+rusqlite = { version = "0.40", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+percent-encoding = "2"
+sha2 = "0.10"
+tempfile = "3"
+# 版本与 tauri 内部使用的 tokio 一致，用于 block_in_place 和 HTTP 请求的取消
+tokio = { version = "1", features = ["rt-multi-thread", "sync", "macros"] }
+tauri-plugin-updater = "2"
+semver = "1"
+
+[target.'cfg(windows)'.dependencies]
+windows-registry = "0.6"
+# 迁移默认保存地址：不替换已有目标的 MoveFileExW、保留修改时间与属性的 CopyFileExW；
+# 更改数据目录：等待旧进程退出、启动时的迁移进度框（TaskDialog）、判断安装目录是否在 U 盘等可移动设备上
+windows-sys = { version = "0.61", features = [
+  "Win32_Foundation",
+  "Win32_Storage_FileSystem",
+  "Win32_System_IO",
+  "Win32_System_Ioctl",
+  "Win32_System_LibraryLoader",
+  "Win32_System_Threading",
+  "Win32_UI_Controls",
+  "Win32_UI_HiDpi",
+  "Win32_UI_WindowsAndMessaging",
+] }

@@ -1,0 +1,6 @@
+[[permission]]
+identifier = "close-watch"
+description = "允许主窗口回执关闭请求，页面卡死时由 Rust 侧兜底关闭窗口"
+commands.allow = [
+  "close_ack",
+]

@@ -1,0 +1,8 @@
+/* Maple Mono NF CN v7.9 Regular，由官方 TTF 无损转为 woff2，族名与在线 CDN 一致 */
+@font-face {
+  font-family: 'Maple Mono NF CN';
+  src: url('./MapleMono-NF-CN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

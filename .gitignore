@@ -5,3 +5,9 @@ dev-proxy.config.json
 .env.local
 .env.*.local
 .claude/
+src-tauri/target/
+src-tauri/gen/schemas/
+src-tauri/dev-data/
+# 开发版更改数据目录时写入的指向文件和迁移标记
+src-tauri/data-dir*
+src-tauri/dev-downloads/

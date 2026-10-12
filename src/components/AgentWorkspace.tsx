@@ -9,7 +9,7 @@ import { copyTextToClipboard, getClipboardFailureMessage } from '../lib/clipboar
 import type { AgentWebSearchStatus } from '../lib/agentWebSearch'
 import { getAgentAssistantBlocks, getAgentAssistantCopyContent, getRoundTaskSlots } from '../lib/agentAssistantBlocks'
 import { createMaskPreviewDataUrl } from '../lib/canvasImage'
-import { downloadImageEntriesAsZip, downloadImageIds, getImageZipEntries } from '../lib/downloadImages'
+import { downloadImageEntriesAsZip, downloadImageIds, getDownloadErrorMessage, getImageZipEntries, withSaveLocation } from '../lib/downloadImages'
 import TaskCard from './TaskCard'
 import { CommentBadge } from './CommentMarks'
 import MarkdownRenderer from './MarkdownRenderer'
@@ -960,19 +960,21 @@ export default function AgentWorkspace() {
                                   const roundIndex = round?.index ?? 0;
                                   const fileNameBase = 'agent-round-' + roundIndex;
                                   const settings = useStore.getState().settings;
-                                  const { successCount, failCount } = settings.zipDownloadRoutes.includes('agent-round-all')
+                                  const result = settings.zipDownloadRoutes.includes('agent-round-all')
                                     ? await downloadImageEntriesAsZip(getImageZipEntries(imageIds, fileNameBase), fileNameBase)
                                     : await downloadImageIds(imageIds, fileNameBase);
+                                 const { successCount, failCount, canceled } = result;
+                                 if (canceled) return;
                                  if (successCount === 0) {
-                                   useStore.getState().showToast('下载失败', 'error');
+                                   useStore.getState().showToast(getDownloadErrorMessage(result.error), 'error');
                                  } else if (failCount > 0) {
                                    useStore.getState().showToast('部分下载失败：成功 ' + successCount + '，失败 ' + failCount, 'error');
                                  } else {
-                                   useStore.getState().showToast(successCount > 1 ? '下载成功：' + successCount + ' 张图片' : '下载成功', 'success');
+                                   useStore.getState().showToast(withSaveLocation(successCount > 1 ? '下载成功：' + successCount + ' 张图片' : '下载成功', result.location), 'success');
                                  }
                                } catch (err) {
                                  console.error(err);
-                                 useStore.getState().showToast('下载失败', 'error');
+                                 useStore.getState().showToast(getDownloadErrorMessage(err), 'error');
                                }
                              }}>
                                <DownloadIcon className="w-4 h-4" />

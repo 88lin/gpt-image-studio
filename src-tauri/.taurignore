@@ -1,0 +1,3 @@
+# tauri dev 的文件监听忽略开发数据目录，避免写入数据库或图片时触发 Rust 重新编译
+dev-data/
+dev-downloads/

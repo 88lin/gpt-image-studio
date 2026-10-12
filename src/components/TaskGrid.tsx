@@ -1,6 +1,9 @@
 import { useMemo, useRef, useState, useEffect } from 'react'
 import { useStore, reuseConfig, editOutputs, removeTask, taskMatchesFilterStatus, taskMatchesSearchQuery } from '../store'
 import { ALL_FAVORITES_COLLECTION_ID, getTaskFavoriteCollectionIds } from '../lib/favoriteState'
+import { isTauri } from '../lib/platform'
+import { getIndexesInRect } from '../lib/virtualGrid'
+import { useVirtualGrid } from '../hooks/useVirtualGrid'
 import TaskCard from './TaskCard'
 
 export default function TaskGrid() {
@@ -13,6 +16,7 @@ export default function TaskGrid() {
   const setDetailTaskId = useStore((s) => s.setDetailTaskId)
   const setConfirmDialog = useStore((s) => s.setConfirmDialog)
   const setShowPromptLibrary = useStore((s) => s.setShowPromptLibrary)
+  const setShowSettings = useStore((s) => s.setShowSettings)
   const selectedTaskIds = useStore((s) => s.selectedTaskIds)
   const setSelectedTaskIds = useStore((s) => s.setSelectedTaskIds)
   const clearSelection = useStore((s) => s.clearSelection)
@@ -45,6 +49,10 @@ export default function TaskGrid() {
       return taskMatchesSearchQuery(t, q)
     })
   }, [tasks, searchQuery, filterStatus, filterFavorite, activeFavoriteCollectionId, defaultFavoriteCollectionId])
+  // 框选的事件处理只在挂载时注册，通过 ref 读取最新列表
+  const filteredTasksRef = useRef(filteredTasks)
+  filteredTasksRef.current = filteredTasks
+  const { startIndex, endIndex, paddingTop, paddingBottom, metricsRef } = useVirtualGrid(gridRef, filteredTasks.length)
 
   const handleDelete = (task: typeof tasks[0]) => {
     setConfirmDialog({
@@ -89,24 +97,23 @@ export default function TaskGrid() {
     const minY = Math.min(start.pageY, pageY)
     const maxY = Math.max(start.pageY, pageY)
 
-    const cards = gridRef.current.querySelectorAll('.task-card-wrapper')
+    // 虚拟列表只渲染了部分卡片，按布局计算框选范围内的全部卡片
+    const list = filteredTasksRef.current
+    const gridRect = gridRef.current.getBoundingClientRect()
+    const gridLeft = gridRect.left + window.scrollX
+    const gridTop = gridRect.top + window.scrollY
+    const hit = new Set(getIndexesInRect(list.length, metricsRef.current, {
+      left: minX - gridLeft,
+      right: maxX - gridLeft,
+      top: minY - gridTop,
+      bottom: maxY - gridTop,
+    }))
     const newSelected = new Set(initialSelection.current)
     const initialSelected = new Set(initialSelection.current)
 
-    cards.forEach((card) => {
-      const rect = card.getBoundingClientRect()
-      const taskId = card.getAttribute('data-task-id')
-      if (!taskId) return
-
-      const cardLeft = rect.left + window.scrollX
-      const cardRight = rect.right + window.scrollX
-      const cardTop = rect.top + window.scrollY
-      const cardBottom = rect.bottom + window.scrollY
-
-      const isIntersecting =
-        minX < cardRight && maxX > cardLeft && minY < cardBottom && maxY > cardTop
-
-      if (isIntersecting) {
+    list.forEach((task, idx) => {
+      const taskId = task.id
+      if (hit.has(idx)) {
         if (initialSelected.has(taskId)) {
           newSelected.delete(taskId)
         } else {
@@ -309,6 +316,18 @@ export default function TaskGrid() {
                 打开
               </div>
             </button>
+            {isTauri && !tasks.length && (
+              <p className="mt-3 text-xs">
+                从网页版迁移：在网页版的「设置 → 数据管理」中导出备份，再
+                <button
+                  type="button"
+                  onClick={() => setShowSettings(true, 'data')}
+                  className="mx-0.5 text-blue-500 hover:text-blue-600 hover:underline dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  在这里导入
+                </button>
+              </p>
+            )}
           </>
         )}
       </div>
@@ -319,10 +338,10 @@ export default function TaskGrid() {
     <div 
       ref={rootRef}
       data-task-grid-root
-      className="relative min-h-[50vh]"
+      className="relative min-h-[50vh] pb-10"
     >
-      <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
-        {filteredTasks.map((task) => (
+      <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ paddingTop, paddingBottom }}>
+        {filteredTasks.slice(startIndex, endIndex).map((task) => (
           <div key={task.id} className="task-card-wrapper" data-task-id={task.id}>
             <TaskCard
               task={task}

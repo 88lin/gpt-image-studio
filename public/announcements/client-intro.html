@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>客户端特性</title>
+<!-- 样式和脚本放在外部文件：客户端 CSP 不允许内联 <style> 和 <script> -->
+<link rel="stylesheet" href="client-intro.css">
+<script src="client-intro.js" defer></script>
+</head>
+<!-- 脚本未执行或开启减少动态效果时，四项特性以静态网格同时显示；脚本运行后改为逐页轮播 -->
+<body data-i="0">
+<main class="slides" aria-label="客户端特性">
+  <section class="slide">
+    <span class="icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-6"/><path d="M4.5 11.5v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-6"/></svg></span>
+    <h2>数据存于本地数据库</h2>
+    <p>不受清理浏览器数据或存储配额影响</p>
+  </section>
+  <section class="slide">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M9 2.5v5M15 2.5v5M6 7.5h12v3.5a6 6 0 0 1-12 0z"/><path d="M12 17v4.5"/></svg></span>
+    <h2>直连各类接口</h2>
+    <p>无需担心跨域（CORS）限制</p>
+  </section>
+  <section class="slide">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 10.5v5M9.5 13.5 12 16l2.5-2.5"/></svg></span>
+    <h2>图片直接写入文件夹</h2>
+    <p>可设置默认保存地址，无需每次选择</p>
+  </section>
+  <section class="slide">
+    <span class="icon"><svg viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 0 1-15.357-2m15.357 2H15"/></svg></span>
+    <h2>应用内更新</h2>
+    <p>下载、校验并安装新版本</p>
+  </section>
+</main>
+<div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+</body>
+</html>

@@ -2,6 +2,7 @@ import { fal } from '@fal-ai/client'
 import type { ApiProfile, FalApiResponse, TaskParams } from '../types'
 import { DEFAULT_FAL_BASE_URL } from './apiProfiles'
 import { isGptImage25Model } from './imageModels'
+import { apiFetch } from './platform'
 import {
   assertImageInputPayloadSize,
   assertMaskEditFileSize,
@@ -48,6 +49,8 @@ function configureFal(profile: ApiProfile) {
   const config: Parameters<typeof fal.config>[0] = {
     credentials: profile.apiKey,
     suppressLocalCredentialsWarning: true,
+    // fal 的类型要求接受 RequestInfo，但 SDK 内部只传字符串 URL
+    fetch: apiFetch as typeof fetch,
   }
   if (baseUrl !== DEFAULT_FAL_BASE_URL) config.proxyUrl = baseUrl
   fal.config(config)

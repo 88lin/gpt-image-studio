@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type ReactNode } from 'react'
+import { useState, useRef, useEffect, type CSSProperties, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { DEFAULT_DROPDOWN_MAX_HEIGHT } from '../lib/dropdown'
 import { ChevronDownIcon, EditIcon, PlusIcon, TrashIcon, DragHandleIcon } from './icons'
@@ -8,6 +8,8 @@ import { useTooltip } from '../hooks/useTooltip'
 interface Option {
   label: string
   value: string | number
+  /** 选项文字的样式，如用对应字体渲染字体名 */
+  style?: CSSProperties
   variant?: 'action' | 'danger'
   draggable?: boolean
   actions?: Array<{
@@ -196,7 +198,7 @@ export default function Select({ value, onChange, onReorder, options, disabled, 
           disabled ? '!opacity-50 !cursor-not-allowed !bg-gray-100/50 dark:!bg-white/[0.05]' : ''
         }`}
       >
-        <span className="truncate">{prefix}{selectedOption?.label ?? value}</span>
+        <span className="truncate">{prefix}<span style={selectedOption?.style}>{selectedOption?.label ?? value}</span></span>
         <ChevronDownIcon className={`w-3.5 h-3.5 flex-shrink-0 text-gray-400 dark:text-gray-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
         {showValueTooltips && (
           <ViewportTooltip visible={triggerTooltip.visible} className="max-w-[300px] break-words whitespace-pre-wrap">
@@ -440,7 +442,7 @@ export default function Select({ value, onChange, onReorder, options, disabled, 
                     <DragHandleIcon className="h-3.5 w-3.5" />
                   </div>
                 )}
-                <span className="min-w-0 truncate">{option.label}</span>
+                <span className="min-w-0 truncate" style={option.style}>{option.label}</span>
               </div>
               {option.actions?.length ? (
                 <span className="ml-auto flex shrink-0 items-center gap-1">

@@ -14,12 +14,12 @@ body:
 
         **以下情况不属于本项目的支持范围，请向对应项目或服务商反馈：**
 
-        1. [Wei-Shaw/sub2api](https://github.com/Wei-Shaw/sub2api) 的 Image API 存在跨域限制问题，请直接向该项目反馈。如果仍需在本项目中使用，也可以参考 README，部署 Docker 版并配置代理，或使用本地版配置代理来绕过跨域限制。
+        1. [Wei-Shaw/sub2api](https://github.com/Wei-Shaw/sub2api) 的 Image API 存在跨域限制问题，请直接向该项目反馈。如果仍需在本项目中使用，可以使用 Windows 客户端，也可以参考 README，部署 Docker 版并配置代理，或使用本地版配置代理来绕过跨域限制。
         2. 如果你使用的是 [basketikun/chatgpt2api](https://github.com/basketikun/chatgpt2api) 等反代或中转项目，遇到响应格式不兼容等问题，请向原始项目反馈并要求其遵循官方 API 格式。你也可以参考对应项目的 API 文档，尝试生成自定义服务商配置，具体操作方式见 README。本项目没有义务为各种非标准格式做无尽的兼容兜底。
         3. 如果你希望使用 Codex 的 API，建议使用 [router-for-me/CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)。
-        4. 如果你使用某些服务商的 API，遇到返回的图片是图床 URL 且限制跨域、或无法返回 Base64 URL 等问题，这属于服务商自身的限制，本项目无法解决，请向该服务商反馈。
+        4. 如果你使用某些服务商的 API，遇到返回的图片是图床 URL 且限制跨域（Windows 客户端不受此限制）、或无法返回 Base64 URL 等问题，这属于服务商自身的限制，本项目无法解决，请向该服务商反馈。
 
-        > **提示：** 如果页面长时间无响应，可以按 F12 打开浏览器控制台查看报错信息，并切换到「网络（Network）」面板查看请求的响应体。本项目已做了一定程度的跨域限制提示和 URL 捕获处理，但没有精力也没有义务覆盖所有第三方异常场景的报错显示。
+        > **提示：** 如果页面长时间无响应，可以按 F12 打开浏览器控制台查看报错信息，并切换到「网络（Network）」面板查看请求的响应体。本项目已做了一定程度的跨域限制提示和 URL 捕获处理，但没有精力也没有义务覆盖所有第三方异常场景的报错显示。Windows 客户端同样可以按 F12 打开开发者工具，也可以在「设置 → 习惯配置 → 诊断」中打开日志目录，附上其中的日志文件。
 
         > **关于响应时间：** 项目维护者精力有限，不能保证始终按预期效率修复问题或完成优化，敬请理解。
 
@@ -75,7 +75,9 @@ body:
       label: 部署方式
       description: 请选择你使用的部署方式。
       options:
+        - Windows 客户端
         - Vercel
+        - GitHub Pages
         - Cloudflare Workers
         - Docker
         - 本地部署
@@ -92,9 +94,18 @@ body:
       required: false
 
   - type: input
+    id: app_version
+    attributes:
+      label: 版本号
+      description: 可在「设置」标题右侧或「设置 → 关于」中查看。
+    validations:
+      required: true
+
+  - type: input
     id: browser
     attributes:
-      label: 浏览器与操作系统
+      label: 运行环境
+      description: 浏览器或 Windows 客户端，以及操作系统。
     validations:
       required: true
 

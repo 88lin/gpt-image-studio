@@ -168,6 +168,11 @@ else params = baseParams
   - `package-lock.json` 顶层及根包的 `version`。
   - `public/sw.js` 的 `CACHE_NAME` 版本，确保旧缓存能够在 Service Worker 激活时清理。
   - `RELEASE.md` 标题中的版本号和日期。
+  - `src-tauri/Cargo.toml` 的 `version`，以及 `src-tauri/Cargo.lock` 中 `gpt-image-studio` 包的 `version`（`tauri.conf.json` 直接引用 `package.json`，无需修改）。
+- 客户端更新包由 `tauri build` 用私钥签名（`TAURI_SIGNING_PRIVATE_KEY`，私钥设有密码，需同时提供 `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`；GitHub Secrets 中两者都要设置，本机打包时以环境变量传入，密码不得写进任何文件或提交），发布的 Release 中必须包含安装包、对应的 `.sig` 和 `latest.json`，否则客户端的应用内更新会提示找不到更新包；私钥不得提交进仓库。
+- 推送 `v版本号` tag 会触发 `.github/workflows/tauri-release.yml`（只由推送 tag 触发，不提供为已有 tag 手动重新构建的入口；已发布版本有问题时发布新版本修复）：校验 tag 与 `package.json`、`Cargo.toml` 的版本一致，在 Windows 上构建 NSIS 安装包，并把安装包、`.sig` 和 `latest.json` 上传到该 tag 的 Release。工作流最后用 `gh release edit` 把 Release 的标题设为 tag、正文设为 `RELEASE.md` 中对应版本的段落，并设为正式版（非草稿、非预发布）；手动创建的 Release 也会被覆盖。因此先在 `RELEASE.md` 写好该版本再打 tag，正文以 `RELEASE.md` 为准；不要预先手动创建草稿 Release（tauri-action 查找已有 Release 时不匹配草稿，会另建一个），之后也不要把 Release 改为草稿或预发布，否则客户端的更新地址（`releases/latest/download/latest.json`）找不到它。
+- 网页版部署（`deploy.yml` 的 GitHub Pages 和 `vercel-tag-deploy.yml` 的 Vercel）和 Docker 镜像构建（`docker.yml`）在配置了签名私钥的仓库中由该工作流成功后触发，确保它们上线时客户端 Release 已存在；未配置签名私钥时客户端构建跳过，推送 tag 后直接部署。
+- 修改 `src-tauri/windows/installer.nsi`（基于 Tauri 内置模板的自定义 NSIS 模板）或升级 `@tauri-apps/cli` 时，需对照新版内置模板同步，并在本机用 `npm run tauri:build` 构建后实测安装、覆盖安装和卸载。
 - 更新后全局搜索旧版本号，确认没有遗漏仍需同步的位置；历史发布记录中的旧版本号不需要修改。
 - 发布前运行 `npm run build` 和 `npm test`，并复查最终差异。
 

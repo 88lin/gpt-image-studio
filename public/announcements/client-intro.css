@@ -1,0 +1,40 @@
+/* 配色与圆角跟随应用：gray-800/500 文字、blue-500 强调；背景透明，由公告卡片的媒体区提供底色 */
+:root {
+  --text: #1f2937; --sub: #6b7280; --accent: #3b82f6;
+  --tile: rgba(59, 130, 246, .1); --dot: rgba(0, 0, 0, .14);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --text: #f3f4f6; --sub: #9ca3af; --accent: #60a5fa; --tile: rgba(96, 165, 250, .14); --dot: rgba(255, 255, 255, .18); }
+}
+
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; overflow: hidden; background: transparent; }
+body {
+  /* 按宽度缩放，卡片在手机上变窄时文字同步缩小 */
+  font: clamp(11px, 3.4vw, 15px)/1.45 'HarmonyOS Sans SC', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  color: var(--text);
+  display: grid; place-items: center;
+  -webkit-font-smoothing: antialiased;
+}
+svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon { display: grid; place-items: center; flex: none; color: var(--accent); background: var(--tile); }
+h2 { font-weight: 700; }
+p { color: var(--sub); }
+
+/* 静态网格：四项同时显示 */
+.slides { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1em 1.4em; width: 100%; padding: 0 7%; }
+.slide { display: flex; align-items: center; gap: .7em; min-width: 0; }
+.slide .icon { width: 2.4em; height: 2.4em; padding: .55em; border-radius: .7em; }
+.slide h2 { font-size: .95em; line-height: 1.3; }
+.slide p, .dots { display: none; }
+
+/* 轮播：整排页面水平滑动；脚本在末尾克隆首页，滑到克隆页后无过渡地跳回首页，循环无缝 */
+.js .slides { display: flex; gap: 0; height: 100%; padding: 0; transform: translateX(calc(var(--i, 0) * -100%)); transition: transform .8s cubic-bezier(.65, 0, .35, 1); }
+.js.jump .slides { transition: none; }
+.js .slide { flex: 0 0 100%; flex-direction: column; justify-content: center; gap: 0; padding-bottom: 1.6em; text-align: center; }
+.js .slide .icon { width: 3.6em; height: 3.6em; padding: .85em; border-radius: 1em; margin-bottom: .8em; }
+.js .slide h2 { font-size: 1.3em; }
+.js .slide p { display: block; margin-top: .2em; font-size: .95em; }
+.js .dots { display: flex; gap: .45em; position: absolute; left: 50%; bottom: 1.1em; transform: translateX(-50%); }
+.dots i { width: .4em; height: .4em; border-radius: 1em; background: var(--dot); transition: width .3s ease, background-color .3s ease; }
+[data-i="0"] .dots i:nth-child(1), [data-i="1"] .dots i:nth-child(2), [data-i="2"] .dots i:nth-child(3), [data-i="3"] .dots i:nth-child(4) { width: 1.1em; background: var(--accent); }

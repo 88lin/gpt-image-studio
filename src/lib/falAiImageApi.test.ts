@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi, type Mock } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
 import { createDefaultFalProfile, DEFAULT_FAL_BASE_URL, DEFAULT_SETTINGS } from './apiProfiles'
 import { callFalAiImageApi } from './falAiImageApi'
+import { apiFetch } from './platform'
 
 vi.mock('@fal-ai/client', () => ({
   fal: {
@@ -41,6 +42,7 @@ describe('callFalAiImageApi', () => {
     expect(falMock.config).toHaveBeenCalledWith({
       credentials: 'fal-key',
       suppressLocalCredentialsWarning: true,
+      fetch: apiFetch,
     })
   })
 
@@ -63,6 +65,7 @@ describe('callFalAiImageApi', () => {
     expect(falMock.config).toHaveBeenCalledWith({
       credentials: 'fal-key',
       suppressLocalCredentialsWarning: true,
+      fetch: apiFetch,
       proxyUrl: 'https://fal-proxy.example.com/api/fal',
     })
   })

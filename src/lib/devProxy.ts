@@ -1,3 +1,4 @@
+import { isTauri } from './platform'
 import { readRuntimeEnv } from './runtimeEnv'
 
 export interface DevProxyConfig {
@@ -94,6 +95,8 @@ export function readClientDevProxyConfig(): DevProxyConfig | null {
 }
 
 export function isApiProxyAvailable(proxyConfig: DevProxyConfig | null = readClientDevProxyConfig()): boolean {
+  // 客户端不受跨域限制，代理选项隐藏且不生效；已保存的代理设置保持不变，导回网页版时仍然有效
+  if (isTauri) return false
   return readRuntimeEnv(import.meta.env.VITE_API_PROXY_AVAILABLE) === 'true' || Boolean(proxyConfig?.enabled)
 }
 

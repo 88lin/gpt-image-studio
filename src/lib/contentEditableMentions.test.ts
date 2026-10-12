@@ -23,6 +23,15 @@ describe('contentEditable mentions', () => {
     )
   })
 
+  it('转义来自提示词的胶囊数据，防止属性注入', () => {
+    const el = document.createElement('div')
+    el.innerHTML = getMentionTagHtml('@图1 评论', '⁣@图1 评论⁥"><img src=x onerror=alert(1)>⁤')
+
+    expect(el.querySelector('img')).toBeNull()
+    expect(el.querySelectorAll('.mention-tag')).toHaveLength(1)
+    expect((el.firstChild as HTMLElement).dataset.mentionText).toBe('⁣@图1 评论⁥"><img src=x onerror=alert(1)>⁤')
+  })
+
   it('round-trips cursor offsets around a mention', () => {
     const el = document.createElement('div')
     el.contentEditable = 'true'

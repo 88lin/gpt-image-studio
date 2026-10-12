@@ -1,4 +1,10 @@
+import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+import { apiFetch, isTauri } from './platform'
+
 export async function copyTextToClipboard(text: string) {
+  // 客户端由插件在 Rust 侧写入：navigator.clipboard 在用户激活失效（例如复制前有耗时操作）时会弹出 WebView2 的剪贴板权限框
+  if (isTauri) return await writeText(text)
+
   let asyncClipboardError: unknown = null
 
   if (navigator.clipboard?.writeText) {
@@ -19,12 +25,27 @@ export async function copyImageSourceToClipboard(src: string | Promise<string | 
   if (!canCopyImageToClipboard()) {
     throw new Error('Clipboard image API is not available')
   }
+  if (!isClipboardTypeSupported('image/png')) {
+    throw new Error('当前浏览器不支持图像剪贴板写入')
+  }
 
-  const resolvedSrc = await Promise.resolve(src)
-  if (!resolvedSrc) throw new Error('Image source is not available')
-  const res = await fetch(resolvedSrc)
-  const blob = await res.blob()
-  await writeImageBlobToClipboard(blob)
+  // write() 之前不能有 await：Chromium 在调用 write() 时检查用户激活，取图耗时过长会弹出剪贴板权限框并挂起，
+  // 所以把取图和转码放进 ClipboardItem 的 Promise（Safari 也要求这种写法）。
+  // 不写 web image/* 自定义格式：它需要事先知道 MIME，而且客户端写入时会弹出 WebView2 的剪贴板权限框
+  const png = (async () => {
+    const resolvedSrc = await src
+    if (!resolvedSrc) throw new Error('Image source is not available')
+    // Agent Markdown 中可能是远程图片，由 apiFetch 按协议分流
+    const res = await apiFetch(resolvedSrc)
+    const blob = await res.blob()
+    if (!blob.type.startsWith('image/')) throw new Error('Clipboard item is not an image')
+    return blob.type === 'image/png' ? blob : await imageBlobToPngBlob(blob)
+  })()
+  // write() 先因权限等原因失败时，png 的失败没人接收，避免多出一条 unhandledrejection；错误仍由 write() 抛给调用方
+  png.catch(() => {})
+  await navigator.clipboard.write([
+    new ClipboardItem({ 'image/png': png }),
+  ])
 }
 
 export function canCopyImageToClipboard() {
@@ -62,31 +83,6 @@ function copyTextWithExecCommand(text: string) {
   } finally {
     document.body.removeChild(textarea)
   }
-}
-
-async function writeImageBlobToClipboard(blob: Blob) {
-  if (!blob.type.startsWith('image/')) throw new Error('Clipboard item is not an image')
-
-  const clipboardItems: Record<string, Blob | Promise<Blob>> = {}
-  const customType = `web ${blob.type}`
-
-  if (isClipboardTypeSupported(customType)) {
-    clipboardItems[customType] = blob
-  }
-
-  if (blob.type === 'image/png') {
-    clipboardItems['image/png'] = blob
-  } else if (isClipboardTypeSupported('image/png')) {
-    clipboardItems['image/png'] = imageBlobToPngBlob(blob)
-  }
-
-  if (Object.keys(clipboardItems).length === 0) {
-    throw new Error('当前浏览器不支持图像剪贴板写入')
-  }
-
-  await navigator.clipboard.write([
-    new ClipboardItem(clipboardItems),
-  ])
 }
 
 function isClipboardTypeSupported(type: string) {
