@@ -356,6 +356,8 @@ docker run -d -p 8080:80 \
 
 > 开启 API 代理后，任何人都能将你的服务器作为代理来请求目标 API。建议仅在有访问控制（如 IP 白名单）或本地网络中开启。
 
+> 若容器外层还有自己的反向代理（Nginx、Caddy 等），需一并调整其超时时间，否则约 60 秒后的长耗时图片生成仍会失败，详见 [常见问题](#faq)。
+
 > 旧版 `API_URL` 已拆分为 `DEFAULT_API_URL` 和 `API_PROXY_URL`，容器启动时自动兼容，无需立即修改。
 
 **隐藏真实 API 地址**
@@ -727,6 +729,48 @@ https://gpt-image-2.88lin.eu.org/?apiUrl={address}&apiKey={key}&model={model}
 ```text
 https://88lin.github.io/gpt-image-studio?apiUrl={address}&apiKey={key}&model={model}
 ```
+
+---
+
+<a id="faq"></a>
+## 🩺 常见问题
+
+<details>
+<summary><strong>⏱️ 图片生成耗时超过约 1 分钟就失败</strong></summary>
+
+**现象**：文生图、图生图进行约 60 秒后失败，提示 `504 Gateway Timeout` 或网络错误，稍后重试依旧失败；耗时较短的生成不受影响。
+
+**原因**：请求经过了默认读超时为 60 秒的反向代理。最常见的是自建部署时挡在应用前面的 Nginx——`proxy_read_timeout` 默认 60 秒，且它计算的是两次成功读取上游数据之间的间隔。图片生成期间，非流式请求的上游没有任何数据返回，Nginx 等待满 60 秒即返回 504。使用第三方中转站时，其中转网关也可能有同样的限制。（参考上游仓库 [Issue #7](https://github.com/CookSleep/gpt_image_playground/issues/7)。）
+
+**解决方案**：
+
+1. **自建 Nginx 反代**：在代理 location 中加大超时，以下为实测可用的配置：
+
+```nginx
+# 长时间图像生成 / 上游 API 请求超时设置
+# 解决 generations 约 60 秒被 Nginx 504 的问题
+proxy_connect_timeout 60s;
+proxy_send_timeout 600s;
+proxy_read_timeout 600s;
+send_timeout 600s;
+
+# 请求里有图片上传、base64、较大 JSON 时保留
+client_body_timeout 300s;
+client_header_timeout 60s;
+```
+
+2. **Docker 部署**：镜像内的 Nginx 已按同样思路配置（`proxy_read_timeout 600s` 等，见 [`deploy/nginx.conf`](deploy/nginx.conf)），无需额外修改。但如果容器外层还有自己的 Nginx、Caddy 或 HTTPS 网关，外层代理同样需要修改；请求链路上每一层代理的超时都不应小于应用内的请求超时。
+
+3. **应用内缓解**（设置 → API 配置，对无法修改的网关同样有效）：
+   - 开启**流式传输**，并把**请求中间步骤图像数**设为 2 或 3：生成期间会持续推送中间图，代理的读超时不会触发，这是对网关超时最有效的缓解；需要服务商和网关支持流式。
+   - **请求超时 (秒)** 默认 600，可按实际生成耗时调整；它只影响浏览器端的等待，且不应大于链路上任一代理的超时。
+
+4. **GitHub Pages / Vercel / Cloudflare Workers 部署**：这些平台只托管静态文件，图片请求由浏览器直连 API 地址，链路中没有平台方的反向代理，不会出现此 60 秒限制（Vercel Serverless Functions 的时长上限也不适用，本项目不包含函数）。这些部署方式下仍出现约 1 分钟失败时，问题在 API 服务商或其中转网关一侧，可用上面的流式方案缓解，或更换无此限制的服务商。
+
+> [!IMPORTANT]
+> 给域名开启 Cloudflare 代理（小黄云）时注意：免费版代理请求上限为 100 秒（错误 524）。本应用的 API 请求由浏览器直连服务商、不经过你的域名，通常不受影响；但若把 API 也反向代理到该域名下，则需要关闭该域名的代理或升级方案。
+
+</details>
 
 ---
 
