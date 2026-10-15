@@ -767,10 +767,10 @@ client_header_timeout 60s;
 
 4. **GitHub Pages / Vercel / Cloudflare Workers 部署**：这些平台只托管静态文件，图片请求由浏览器直连 API 地址，链路中没有平台方的反向代理，不会出现此 60 秒限制（Vercel Serverless Functions 的时长上限也不适用，本项目不包含函数）。这些部署方式下仍出现约 1 分钟失败时，问题在 API 服务商或其中转网关一侧，可用上面的流式方案缓解，或更换无此限制的服务商。
 
+</details>
+
 > [!IMPORTANT]
 > 给域名开启 Cloudflare 代理（小黄云）时注意：免费版代理请求上限为 100 秒（错误 524）。本应用的 API 请求由浏览器直连服务商、不经过你的域名，通常不受影响；但若把 API 也反向代理到该域名下，则需要关闭该域名的代理或升级方案。
-
-</details>
 
 ---
 
