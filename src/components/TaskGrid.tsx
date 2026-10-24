@@ -4,10 +4,11 @@ import { ALL_FAVORITES_COLLECTION_ID, getTaskFavoriteCollectionIds } from '../li
 import { isTauri } from '../lib/platform'
 import { getIndexesInRect } from '../lib/virtualGrid'
 import { useVirtualGrid } from '../hooks/useVirtualGrid'
+import { useVisibleTasks } from '../hooks/usePrivacyMode'
 import TaskCard from './TaskCard'
 
 export default function TaskGrid() {
-  const tasks = useStore((s) => s.tasks)
+  const tasks = useVisibleTasks()
   const searchQuery = useStore((s) => s.searchQuery)
   const filterStatus = useStore((s) => s.filterStatus)
   const filterFavorite = useStore((s) => s.filterFavorite)
@@ -318,7 +319,7 @@ export default function TaskGrid() {
             </button>
             {isTauri && !tasks.length && (
               <p className="mt-3 text-xs">
-                从网页版迁移：在网页版的「设置 → 数据管理」中导出备份，再
+                从网页版迁移：在网页版的 <strong className="font-semibold">设置 → 数据管理</strong> 中导出备份，再
                 <button
                   type="button"
                   onClick={() => setShowSettings(true, 'data')}

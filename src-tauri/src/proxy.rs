@@ -60,7 +60,8 @@ impl Route {
         Ok(match self {
             Route::System => builder,
             Route::Direct => builder.no_proxy(),
-            Route::Via(url) => builder.proxy(reqwest::Proxy::all(url.clone())?.no_proxy(NoProxy::from_string(LOOPBACK))),
+            Route::Via(url) => builder
+                .proxy(reqwest::Proxy::all(url.clone())?.no_proxy(NoProxy::from_string(LOOPBACK))),
         })
     }
 
@@ -110,19 +111,34 @@ pub fn parse(input: &str) -> Result<(String, Url), String> {
     let text = match text.split_once("://") {
         None => format!("http://{text}"),
         Some((scheme, _)) if scheme.eq_ignore_ascii_case("http") => text.to_string(),
-        Some((scheme, _)) if scheme.to_ascii_lowercase().starts_with("socks") => return Err(SOCKS.into()),
-        Some(_) => return Err(format!("只支持 HTTP 代理，地址需以 http:// 开头，{EXAMPLE}")),
+        Some((scheme, _)) if scheme.to_ascii_lowercase().starts_with("socks") => {
+            return Err(SOCKS.into())
+        }
+        Some(_) => {
+            return Err(format!(
+                "只支持 HTTP 代理，地址需以 http:// 开头，{EXAMPLE}"
+            ))
+        }
     };
     let url = Url::parse(&text).map_err(|_| {
-        let hint = if text.contains('@') { "。用户名或密码含特殊字符时请使用百分号编码" } else { "" };
+        let hint = if text.contains('@') {
+            "。用户名或密码含特殊字符时请使用百分号编码"
+        } else {
+            ""
+        };
         format!("代理地址格式不正确，{EXAMPLE}{hint}")
     })?;
     if url.path() != "/" || url.query().is_some() || url.fragment().is_some() {
         return Err(format!("代理地址只需填写主机和端口，{EXAMPLE}"));
     }
     // Url 会省略默认端口 80，从原文判断是否写了端口；IPv6 地址形如 [::1]:7890
-    let authority = text["http://".len()..].split(['/', '?', '#']).next().unwrap_or_default();
-    let host = authority.rsplit_once('@').map_or(authority, |(_, host)| host);
+    let authority = text["http://".len()..]
+        .split(['/', '?', '#'])
+        .next()
+        .unwrap_or_default();
+    let host = authority
+        .rsplit_once('@')
+        .map_or(authority, |(_, host)| host);
     let has_port = host
         .rsplit_once(':')
         .is_some_and(|(_, port)| !port.is_empty() && port.bytes().all(|b| b.is_ascii_digit()))

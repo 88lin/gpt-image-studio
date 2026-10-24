@@ -3,9 +3,11 @@
   --text: #1f2937; --sub: #6b7280; --accent: #3b82f6;
   --tile: rgba(59, 130, 246, .1); --dot: rgba(0, 0, 0, .14);
 }
+/* 颜色模式由应用通过 ?theme= 传入，未传入时跟随系统 */
 @media (prefers-color-scheme: dark) {
-  :root { --text: #f3f4f6; --sub: #9ca3af; --accent: #60a5fa; --tile: rgba(96, 165, 250, .14); --dot: rgba(255, 255, 255, .18); }
+  :root:not([data-theme=light]) { --text: #f3f4f6; --sub: #9ca3af; --accent: #60a5fa; --tile: rgba(96, 165, 250, .14); --dot: rgba(255, 255, 255, .18); }
 }
+:root[data-theme=dark] { --text: #f3f4f6; --sub: #9ca3af; --accent: #60a5fa; --tile: rgba(96, 165, 250, .14); --dot: rgba(255, 255, 255, .18); }
 
 * { box-sizing: border-box; margin: 0; }
 html, body { height: 100%; overflow: hidden; background: transparent; }

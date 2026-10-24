@@ -17,6 +17,9 @@ export interface DataProgress {
 // 独立的小 store，只有进度弹窗订阅，导出导入过程中不会让设置弹窗重渲染
 export const useDataProgress = create<{ progress: DataProgress | null }>(() => ({ progress: null }))
 
+// 设置中从点击导出导入到结束（含选择保存位置）；隐私模式据此在传输期间保留设置弹窗
+export const useSettingsDataTransfer = create<{ mode: DataProgress['mode'] | null }>(() => ({ mode: null }))
+
 // 同一阶段内的计数更新至多每 100ms 写一次 store，避免逐张图片触发渲染
 const THROTTLE_MS = 100
 

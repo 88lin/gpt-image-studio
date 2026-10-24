@@ -114,6 +114,13 @@ describe('normalizeSettings', () => {
     expect(settings.profiles[1].description).toBeUndefined()
   })
 
+  it('keeps valid color modes and falls back to following the system', () => {
+    expect(normalizeSettings({ enterSubmit: true }).colorMode).toBe('system')
+    expect(normalizeSettings({ colorMode: 'light' }).colorMode).toBe('light')
+    expect(normalizeSettings({ colorMode: 'dark' }).colorMode).toBe('dark')
+    expect(normalizeSettings({ colorMode: 'bogus' }).colorMode).toBe('system')
+  })
+
   it('defaults font settings to following the deployment for old data', () => {
     const settings = normalizeSettings({ enterSubmit: true })
 

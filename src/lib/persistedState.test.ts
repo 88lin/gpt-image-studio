@@ -40,6 +40,7 @@ function source(settings: AppSettings = DEFAULT_SETTINGS) {
     agentAssetPanelCollapsed: false,
     favoriteCollections: [collectionA],
     defaultFavoriteCollectionId: collectionA.id,
+    imageSourceUrls: {},
   }
 }
 
@@ -87,6 +88,24 @@ describe('persisted state codec', () => {
     const result = normalizePersistedState({ params: { ...DEFAULT_PARAMS, quality } }, fallback(), 100)!
 
     expect(result.state.params.quality).toBe(quality)
+  })
+
+  it('keeps only http(s) reference image source URLs', () => {
+    const result = normalizePersistedState({
+      imageSourceUrls: { a: 'https://example.com/a.png', b: 'data:image/png;base64,AA', c: 1 },
+    }, fallback(), 100)!
+
+    expect(result.state.imageSourceUrls).toEqual({ a: 'https://example.com/a.png' })
+    expect(normalizePersistedState({}, fallback(), 100)!.state.imageSourceUrls).toEqual({})
+    expect(normalizePersistedState({ imageSourceUrls: [] }, fallback(), 100)!.state.imageSourceUrls).toEqual({})
+  })
+
+  it('preserves reference image source URLs across restart', () => {
+    const imageSourceUrls = { [imageA.id]: 'https://example.com/a.png' }
+    const persisted = createPersistedState({ ...source(), imageSourceUrls })
+    const restored = normalizePersistedState(persisted, fallback(), 100)!
+
+    expect(restored.state.imageSourceUrls).toEqual(imageSourceUrls)
   })
 
   it('rejects non-record unknown data and falls back field-by-field for an invalid record', () => {

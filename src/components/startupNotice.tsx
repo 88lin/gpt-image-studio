@@ -1,4 +1,5 @@
 import { useStore } from '../store'
+import { renderMessage } from './ConfirmDialog'
 import { PathBox } from './settings/saveDirMigration'
 
 /** 一项提示：标题、一句话结论，以及可选的路径和补充说明（原因等，每项一段） */
@@ -16,7 +17,7 @@ function SectionBody({ paths = [], details = [] }: Pick<NoticeSection, 'paths' |
       {paths.length > 0 && <PathBox rows={paths} />}
       {details.map((text, idx) => (
         <p key={idx} data-selectable-text className="break-all text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-          {text}
+          {renderMessage(text)}
         </p>
       ))}
     </>

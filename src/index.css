@@ -44,11 +44,6 @@ select,
   -webkit-touch-callout: default;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
-}
-
 img {
   -webkit-user-drag: none;
   user-select: none;
@@ -67,33 +62,18 @@ body.drag-selecting * {
   user-select: none !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 98%;
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
-    --border: 240 4% 22%;
-    --input: 240 4% 22%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --sidebar: 240 5% 12%;
-    --sidebar-foreground: 0 0% 98%;
-  }
-
-  * {
-    scrollbar-color: #3f3f46 transparent;
-  }
+:root.dark {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --border: 240 4% 22%;
+  --input: 240 4% 22%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 0 0% 100%;
+  --sidebar: 240 5% 12%;
+  --sidebar-foreground: 0 0% 98%;
 }
-
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
-  transition: background-color 0.2s ease;
-}
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-::-webkit-scrollbar-track { background: transparent; }
 
 /* 隐藏 number input 的增减按?*/
 input[type="number"]::-webkit-inner-spin-button,
@@ -105,9 +85,38 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-thumb { background: #3f3f46; }
-  ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+/* 细滚动条只用于鼠标：触摸屏用系统的悬浮滚动条，不占宽度、不滚动时隐藏。
+   Chromium 中不设 scrollbar-width / scrollbar-color：设了之后不认 ::-webkit-scrollbar-*，改画带箭头的系统滚动条 */
+@media (pointer: fine) {
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  ::-webkit-scrollbar-track { background: transparent; }
+
+  /* 客户端窗口的滚动条让出标题栏 */
+  :root[data-titlebar]::-webkit-scrollbar-track { margin-top: var(--safe-area-top); }
+}
+
+@media (pointer: fine) {
+  :root.dark::-webkit-scrollbar-thumb, :root.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+  :root.dark::-webkit-scrollbar-thumb:hover, :root.dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+}
+
+/* Firefox 不支持 ::-webkit-scrollbar-*，只能用标准属性画细滚动条 */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  :root.dark,
+  :root.dark * {
+    scrollbar-color: #3f3f46 transparent;
+  }
 }
 
 @keyframes pulse-border {
@@ -123,14 +132,12 @@ input[type="number"] {
 .card-running-glow {
   animation: card-glow 2.4s ease-in-out infinite;
 }
-@media (prefers-color-scheme: dark) {
-  @keyframes card-glow-dark {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.0), 0 8px 24px rgba(0, 0, 0, 0.18); }
-    50%      { box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16), 0 12px 28px rgba(96, 165, 250, 0.10); }
-  }
-  .card-running-glow {
-    animation-name: card-glow-dark;
-  }
+@keyframes card-glow-dark {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.0), 0 8px 24px rgba(0, 0, 0, 0.18); }
+  50%      { box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16), 0 12px 28px rgba(96, 165, 250, 0.10); }
+}
+.dark .card-running-glow {
+  animation-name: card-glow-dark;
 }
 
 @keyframes agent-web-search-text-sweep {
@@ -159,11 +166,9 @@ input[type="number"] {
   animation: agent-web-search-text-sweep 2.5s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  .agent-web-search-running-text {
-    --agent-web-search-text: #9ca3af;
-    --agent-web-search-highlight: #ffffff;
-  }
+.dark .agent-web-search-running-text {
+  --agent-web-search-text: #9ca3af;
+  --agent-web-search-highlight: #ffffff;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -265,26 +270,24 @@ input[type="number"] {
   border-radius: 0.75rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  .markdown-renderer :where(blockquote) {
-    color: #a1a1aa;
-  }
+.dark .markdown-renderer :where(blockquote) {
+  color: #a1a1aa;
+}
 
-  .markdown-renderer :where(a) {
-    color: #60a5fa;
-  }
+.dark .markdown-renderer :where(a) {
+  color: #60a5fa;
+}
 
-  .markdown-renderer :where(:not(pre) > code) {
-    background: rgba(255, 255, 255, 0.1);
-  }
+.dark .markdown-renderer :where(:not(pre) > code) {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-  .markdown-renderer :where(th, td) {
-    border-color: rgba(255, 255, 255, 0.12);
-  }
+.dark .markdown-renderer :where(th, td) {
+  border-color: rgba(255, 255, 255, 0.12);
+}
 
-  .markdown-renderer :where(th) {
-    background: rgba(255, 255, 255, 0.06);
-  }
+.dark .markdown-renderer :where(th) {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .mask-edge-r {
@@ -492,35 +495,27 @@ input[type="number"] {
   box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  .mention-tag {
-    background: rgba(59, 130, 246, 0.12);
-    color: #93c5fd;
-    border-color: rgba(59, 130, 246, 0.2);
-  }
+.dark .mention-tag {
+  background: rgba(59, 130, 246, 0.12);
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, 0.2);
+}
 
-  .mention-tag::selection,
-  .mention-tag *::selection {
-    background: transparent !important;
-    color: inherit !important;
-  }
+.dark [contenteditable]::selection,
+.dark [contenteditable] *::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: inherit;
+}
 
-  [contenteditable]::selection,
-  [contenteditable] *::selection {
-    background: rgba(59, 130, 246, 0.3);
-    color: inherit;
-  }
+.dark .mention-tag:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
 
-  .mention-tag:hover {
-    background: rgba(59, 130, 246, 0.2);
-  }
-
-  .mention-tag.selected {
-    background: #3b82f6;
-    color: #ffffff;
-    border-color: #60a5fa;
-    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
-  }
+.dark .mention-tag.selected {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #60a5fa;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
 }
 
 /* 修复 iOS/Webkit 上带圆角的滚动容器内容/滚动条溢出的 bug */

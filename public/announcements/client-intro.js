@@ -1,5 +1,7 @@
 // 逐页向左滑动；开启减少动态效果时保留静态网格
 (() => {
+  const theme = new URLSearchParams(location.search).get('theme')
+  if (theme) document.documentElement.dataset.theme = theme
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   const b = document.body
   const track = document.querySelector('.slides')

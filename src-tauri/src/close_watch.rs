@@ -16,13 +16,19 @@ static NEXT: AtomicU64 = AtomicU64::new(0);
 pub fn on_close_requested<R: Runtime>(window: &Window<R>) {
     let id = NEXT.fetch_add(1, Ordering::Relaxed) + 1;
     // 已有请求在等待时沿用它的计时，连续点关闭不会推迟兜底
-    if PENDING.compare_exchange(0, id, Ordering::AcqRel, Ordering::Acquire).is_err() {
+    if PENDING
+        .compare_exchange(0, id, Ordering::AcqRel, Ordering::Acquire)
+        .is_err()
+    {
         return;
     }
     let window = window.clone();
     std::thread::spawn(move || {
         std::thread::sleep(TIMEOUT);
-        if PENDING.compare_exchange(id, 0, Ordering::AcqRel, Ordering::Acquire).is_err() {
+        if PENDING
+            .compare_exchange(id, 0, Ordering::AcqRel, Ordering::Acquire)
+            .is_err()
+        {
             return;
         }
         log::warn!("页面未响应关闭请求，强制关闭窗口");

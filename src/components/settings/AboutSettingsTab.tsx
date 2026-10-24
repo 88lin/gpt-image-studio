@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { checkForUpdates, setUpdateModalOpen, useReleaseUpdates } from '../../hooks/useReleaseUpdates'
-import { compareVersions, MANUAL_CHECK_MIN_INTERVAL_MS } from '../../lib/releaseUpdates'
+import { compareVersions, LICENSE_URL, MANUAL_CHECK_MIN_INTERVAL_MS } from '../../lib/releaseUpdates'
 import { useStore } from '../../store'
 import { ChevronRightIcon, ExternalLinkIcon, GithubIcon, HistoryIcon, RefreshIcon } from '../icons'
 
@@ -228,15 +228,26 @@ export default function AboutSettingsTab({ onOpenFontLicenses }: { onOpenFontLic
         />
       </AboutCard>
 
-      <div className="overflow-hidden rounded-2xl border border-transparent bg-black/[0.04] dark:bg-white/[0.06]">
+      <div className="divide-y divide-black/[0.05] overflow-hidden rounded-2xl border border-transparent bg-black/[0.04] dark:divide-white/[0.06] dark:bg-white/[0.06]">
+        <AboutRow
+          icon={(
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+          )}
+          title="开源协议"
+          subtitle="本软件以 MIT 协议开源"
+          href={LICENSE_URL}
+          right={EXTERNAL}
+        />
         <AboutRow
           icon={(
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           )}
-          title="字体与第三方许可"
-          subtitle="本软件使用 HarmonyOS Sans SC 与 Maple Mono NF CN 字体"
+          title="第三方许可"
+          subtitle="本软件使用的字体与依赖库的许可"
           onClick={onOpenFontLicenses}
           right={CHEVRON}
         />

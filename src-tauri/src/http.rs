@@ -122,7 +122,9 @@ fn send_error(err: &reqwest::Error, proxied: bool) -> String {
     log::warn!("请求失败：{}", detail.chain);
     let kind = detail.kind;
     let lower = detail.chain.to_lowercase();
-    let tls = ["certificate", "tls", "handshake", "corrupt message"].iter().any(|s| lower.contains(s));
+    let tls = ["certificate", "tls", "handshake", "corrupt message"]
+        .iter()
+        .any(|s| lower.contains(s));
     let reason = if lower.contains("proxy authorization required") {
         "代理服务器要求身份验证，请检查代理地址中的用户名和密码"
     } else if lower.contains("tunnel error: unsuccessful") {
@@ -137,7 +139,10 @@ fn send_error(err: &reqwest::Error, proxied: bool) -> String {
         "无法解析域名，请检查 API 地址是否正确"
     } else if kind == Some(ErrorKind::ConnectionRefused) {
         "连接被拒绝，请检查 API 地址和端口是否正确、服务是否已启动"
-    } else if matches!(kind, Some(ErrorKind::ConnectionReset | ErrorKind::ConnectionAborted)) {
+    } else if matches!(
+        kind,
+        Some(ErrorKind::ConnectionReset | ErrorKind::ConnectionAborted)
+    ) {
         // 此文案与下一条、兜底文案被 store.ts 的 getApiRequestNetworkErrorHint 按开头匹配，修改需同步
         "连接被服务器重置"
     } else if lower.contains("connection closed before message completed") {
@@ -167,7 +172,11 @@ fn subscribe(state: &Requests, id: &str) -> Result<watch::Receiver<bool>, String
 }
 
 /// 校验请求参数并构造请求，同时返回这次请求是否经过自定义代理
-fn build(meta: &Meta, body: Vec<u8>, route: &Route) -> Result<(reqwest::RequestBuilder, bool), String> {
+fn build(
+    meta: &Meta,
+    body: Vec<u8>,
+    route: &Route,
+) -> Result<(reqwest::RequestBuilder, bool), String> {
     let url = Url::parse(&meta.url).map_err(|err| format!("请求地址不合法：{err}"))?;
     // 只允许 http/https，主机和端口不限
     if !matches!(url.scheme(), "http" | "https") {
@@ -253,7 +262,12 @@ pub async fn http_send(
         headers: res
             .headers()
             .iter()
-            .map(|(name, value)| (name.to_string(), value.as_bytes().iter().map(|&b| b as char).collect()))
+            .map(|(name, value)| {
+                (
+                    name.to_string(),
+                    value.as_bytes().iter().map(|&b| b as char).collect(),
+                )
+            })
             .collect(),
         url: res.url().to_string(),
     };
@@ -335,7 +349,11 @@ mod tests {
     async fn reports_unreachable_proxy() {
         init();
         // 取一个刚释放、没有服务监听的本机端口作为代理
-        let port = std::net::TcpListener::bind("127.0.0.1:0").unwrap().local_addr().unwrap().port();
+        let port = std::net::TcpListener::bind("127.0.0.1:0")
+            .unwrap()
+            .local_addr()
+            .unwrap()
+            .port();
         let route = Route::Via(crate::proxy::parse(&format!("127.0.0.1:{port}")).unwrap().1);
         let meta = Meta {
             id: "1".into(),
@@ -362,7 +380,9 @@ mod tests {
         std::thread::spawn(move || {
             let (mut stream, _) = listener.accept().unwrap();
             let _ = stream.read(&mut [0; 1024]);
-            stream.write_all(b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n").unwrap();
+            stream
+                .write_all(b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n")
+                .unwrap();
         });
         let url = format!("http://127.0.0.1:{port}/v1?key=secret");
         let client = reqwest::Client::builder()
@@ -373,7 +393,10 @@ mod tests {
         assert!(err.to_string().contains("secret"));
         let detail = describe(&err);
         assert!(std::error::Error::source(&err).is_none());
-        assert_eq!(detail.note(true), "（HTTP status client error (404 Not Found)）");
+        assert_eq!(
+            detail.note(true),
+            "（HTTP status client error (404 Not Found)）"
+        );
         assert!(!detail.chain.contains("secret"), "{}", detail.chain);
 
         // 有 source 的连接错误：报错和用于日志的错误链都不含地址
@@ -397,11 +420,18 @@ mod tests {
     #[tokio::test(flavor = "multi_thread")]
     async fn reports_refused_connection_with_os_code_only() {
         init();
-        let port = std::net::TcpListener::bind("127.0.0.1:0").unwrap().local_addr().unwrap().port();
+        let port = std::net::TcpListener::bind("127.0.0.1:0")
+            .unwrap()
+            .local_addr()
+            .unwrap()
+            .port();
         let msg = send_direct(format!("http://127.0.0.1:{port}/")).await;
         // 只附系统错误码，不附错误链和系统说明
         let code = if cfg!(windows) { 10061 } else { 111 };
-        assert_eq!(msg, format!("连接被拒绝，请检查 API 地址和端口是否正确、服务是否已启动。（错误码 {code}）"));
+        assert_eq!(
+            msg,
+            format!("连接被拒绝，请检查 API 地址和端口是否正确、服务是否已启动。（错误码 {code}）")
+        );
     }
 
     #[tokio::test(flavor = "multi_thread")]

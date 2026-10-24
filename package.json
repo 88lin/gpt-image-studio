@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "tauri:build": "tauri build",
+    "notices": "node scripts/build-notices.mjs"
   },
   "dependencies": {
     "@fal-ai/client": "^1.10.0",
@@ -49,5 +50,12 @@
     "vite": "^6.3.2",
     "vitest": "^4.1.5",
     "wrangler": "^4.96.0"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true,
+    "esbuild@0.27.3": true,
+    "sharp@0.34.5": true,
+    "workerd@1.20260529.1": true,
+    "core-js@3.49.0": false
   }
 }

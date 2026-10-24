@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import { getCachedProxySetting, getProxySetting, setProxySetting, type ProxyMode, type ProxySetting } from '../../lib/networkProxy'
-import { useStore } from '../../store'
 import Select from '../Select'
 
 /** 仅客户端：API 请求和应用内更新使用的网络代理 */
 export default function ProxySettingsSection() {
-  const showToast = useStore((s) => s.showToast)
   // 启动时已预先读取，通常首次渲染就有值
   const [saved, setSaved] = useState(getCachedProxySetting)
   // 选择“自定义”后先显示地址输入框，填写有效地址后才保存并生效
@@ -41,7 +39,6 @@ export default function ProxySettingsSection() {
       setUrl(setting.url)
       setError('')
       setEditing(false)
-      showToast('代理设置已生效', 'success')
     } catch (err) {
       console.warn('保存代理设置失败：', err)
       setError(typeof err === 'string' ? err : '保存代理设置失败')
@@ -127,7 +124,7 @@ export default function ProxySettingsSection() {
           {showInput
             ? '只支持 HTTP 代理，可带用户名和密码。本机地址始终直连。'
             : mode === 'none'
-              ? '所有请求直接连接。'
+              ? 'API 请求和应用内更新不经过代理。'
               : 'API 请求和应用内更新使用的代理，修改后立即生效。系统使用自动配置脚本（PAC）时，请改为自定义并填写代理地址。'}
         </div>
       </div>

@@ -69,6 +69,10 @@ function normalizeAgentMessage(value: unknown): AgentMessage | null {
   }
 }
 
+export function isEmptyAgentConversation(conversation: AgentConversation) {
+  return conversation.rounds.length === 0 && conversation.messages.length === 0 && !conversation.activeRoundId
+}
+
 export function normalizeAgentConversations(value: unknown): AgentConversation[] {
   if (!Array.isArray(value)) return []
 

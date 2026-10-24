@@ -389,18 +389,29 @@ FunctionEnd
 
 ; 5. Choose install directory page
 !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
-; GPT Image Playground：所选目录下已有不属于本应用的 data 文件夹（没有 data.db、download-dir.txt 和 webview）时阻止继续。
+; GPT Image Playground：所选目录下已有不属于本应用的 data 文件夹（非空，且没有 data.db、download-dir.txt 和 webview）时阻止继续。
 ; 应用数据固定在 <安装目录>\data，误用用户自己的 data 文件夹会混入应用数据，卸载勾选删除数据时也会把它删掉
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstallDirPageLeave
 !insertmacro MUI_PAGE_DIRECTORY
 Function InstallDirPageLeave
-  ${If} ${FileExists} "$INSTDIR\data\*.*"
-  ${AndIfNot} ${FileExists} "$INSTDIR\data\data.db"
-  ${AndIfNot} ${FileExists} "$INSTDIR\data\download-dir.txt"
-  ${AndIfNot} ${FileExists} "$INSTDIR\data\webview\*.*"
-    MessageBox MB_ICONEXCLAMATION "所选目录中已有名为 data 的文件夹（$INSTDIR\data），它不是本应用的数据。应用数据会保存在安装目录的 data 文件夹中，请改选一个新的子文件夹，例如 $INSTDIR\${PRODUCTNAME}。"
-    Abort
+  ${If} ${FileExists} "$INSTDIR\data\data.db"
+  ${OrIf} ${FileExists} "$INSTDIR\data\download-dir.txt"
+  ${OrIf} ${FileExists} "$INSTDIR\data\webview\*.*"
+    Return
   ${EndIf}
+  ; *.* 也匹配 . 和 ..，跳过它们才能判断是否为空
+  ClearErrors
+  FindFirst $0 $1 "$INSTDIR\data\*.*"
+  ${DoUntil} ${Errors}
+    ${If} $1 != "."
+    ${AndIf} $1 != ".."
+      FindClose $0
+      MessageBox MB_ICONEXCLAMATION "所选文件夹中已有一个不属于 ${PRODUCTNAME} 的 data 文件夹，请改选其他文件夹。"
+      Abort
+    ${EndIf}
+    FindNext $0 $1
+  ${Loop}
+  FindClose $0
 FunctionEnd
 
 ; GPT Image Playground：默认保存地址页。
@@ -487,7 +498,7 @@ Function DownloadDirPageLeave
   ${If} $6 == $5
     ${If} $7 == ""
     ${OrIf} $7 == "\"
-      MessageBox MB_ICONEXCLAMATION "不能选择应用数据目录（$5）或其中的文件夹，请选择其他位置。"
+      MessageBox MB_ICONEXCLAMATION "不能选择 ${PRODUCTNAME} 的 data 文件夹或其中的文件夹，请改选其他文件夹。"
       Abort
     ${EndIf}
   ${EndIf}
@@ -901,6 +912,50 @@ Function un.onInit
   ${EndIf}
 FunctionEnd
 
+; GPT Image Playground：递归删除目录，遇到目录联接、符号链接只删除链接本身；RMDir /r 会进入目录联接删除目标中的文件
+Function un.RmDirSafe
+  Exch $R0
+  Push $R1
+  Push $R2
+  Push $R3
+  System::Call 'kernel32::GetFileAttributesW(w R0) i .R1'
+  ${If} $R1 <> -1
+    IntOp $R2 $R1 & 0x400 ; FILE_ATTRIBUTE_REPARSE_POINT
+    ${If} $R2 <> 0
+      RMDir $R0
+    ${Else}
+      ClearErrors
+      FindFirst $R2 $R3 "$R0\*.*"
+      ${DoUntil} ${Errors}
+        ${If} $R3 != "."
+        ${AndIf} $R3 != ".."
+          System::Call 'kernel32::GetFileAttributesW(w "$R0\$R3") i .R1'
+          IntOp $R1 $R1 & 0x10 ; FILE_ATTRIBUTE_DIRECTORY
+          ${If} $R1 <> 0
+            Push "$R0\$R3"
+            Call un.RmDirSafe
+          ${Else}
+            Delete "$R0\$R3"
+          ${EndIf}
+        ${EndIf}
+        ClearErrors
+        FindNext $R2 $R3
+      ${Loop}
+      FindClose $R2
+      RMDir $R0
+    ${EndIf}
+  ${EndIf}
+  Pop $R3
+  Pop $R2
+  Pop $R1
+  Pop $R0
+FunctionEnd
+
+!macro RmDirSafe path
+  Push "${path}"
+  Call un.RmDirSafe
+!macroend
+
 Section Uninstall
 
   !ifmacrodef NSIS_HOOK_PREUNINSTALL
@@ -1009,73 +1064,123 @@ Section Uninstall
     SetShellVarContext current
     ; GPT Image Playground：应用数据都在数据目录中，只删除它；
     ; downloads 和另选的保存目录中是用户保存的图片与备份，任何情况下都不删除。
-    ; 在客户端中更改过数据目录时，<安装目录>\data-dir 中是新位置：一行路径，UTF-8 无 BOM，
-    ; 可能省略盘符（以 \ 开头，U 盘安装时），读取时补上安装目录的盘符。该目录由用户选择，可能还放了别的东西，
-    ; 只在其中确有 data.db 时删除本应用自己的文件和文件夹，最后只删除空的目录本身。
-    ; 不勾选删除数据或更新时保留 data-dir，重新安装到同一位置后仍使用该数据目录
+    ; 更改过数据目录时，<安装目录>\data-dir 的第一行是新位置，读法与 data_dir.rs 一致；省略盘符时补上
+    ; 安装目录的盘符。该目录中可能还有别的东西，只在其中有 data.db 和 webview 时删除本应用的文件，
+    ; 最后只删除空的目录本身。不勾选删除数据或更新时保留 data-dir
     ClearErrors
     FileOpen $0 "$INSTDIR\data-dir" r
     ${IfNot} ${Errors}
-      ; 多读一个字节的余量：缓冲区由 System::Alloc 清零，读入的内容之后总有结尾的 NUL
-      System::Alloc 4096
+      ; 缓冲区比读入上限多几个字节且已清零，内容后总有结尾的 NUL
+      System::Alloc 4098
       Pop $1
       System::Call 'kernel32::ReadFile(p r0, p r1, i 4095, *i .r2, p 0)'
       FileClose $0
-      StrCpy $3 ""
-      System::Call 'kernel32::MultiByteToWideChar(i 65001, i 0, p r1, i -1, w .r3, i ${NSIS_MAX_STRLEN})'
-      System::Free $1
-      ; 只取第一行
-      StrCpy $4 0
+      ; 在转换前按字节跳过 BOM：NSIS 的字符串比较会忽略 U+FEFF
+      StrCpy $2 $1
       ${Do}
-        StrCpy $5 $3 1 $4
-        ${If} $5 == ""
-        ${OrIf} $5 == "$\r"
-        ${OrIf} $5 == "$\n"
+        System::Call '*$2(&i1 .r5, &i1 .r6, &i1 .r7)'
+        IntOp $5 $5 & 0xFF
+        IntOp $6 $6 & 0xFF
+        IntOp $7 $7 & 0xFF
+        ${If} $5 <> 0xEF
+        ${OrIf} $6 <> 0xBB
+        ${OrIf} $7 <> 0xBF
           ${ExitDo}
         ${EndIf}
+        IntPtrOp $2 $2 + 3
+      ${Loop}
+      StrCpy $3 ""
+      System::Call 'kernel32::MultiByteToWideChar(i 65001, i 0, p r2, i -1, w .r3, i ${NSIS_MAX_STRLEN})'
+      System::Free $1
+      ; 只取第一行；循环按长度结束，与空串比较对控制字符不可靠
+      StrLen $6 $3
+      StrCpy $4 0
+      ${DoWhile} $4 < $6
+        StrCpy $5 $3 1 $4
+        ${IfThen} $5 == "$\n" ${|} StrCpy $6 $4 ${|}
         IntOp $4 $4 + 1
       ${Loop}
-      StrCpy $3 $3 $4
-      ; 省略了盘符时补上安装目录的盘符
+      StrCpy $3 $3 $6
+      ; 去掉首尾的空格、\t、\r、\v、\f
+      IntFmt $8 "%c" 11
+      IntFmt $9 "%c" 12
+      ${DoWhile} $6 > 0
+        StrCpy $5 $3 1
+        ${If} $5 != " "
+        ${AndIf} $5 != "$\t"
+        ${AndIf} $5 != "$\r"
+        ${AndIf} $5 != $8
+        ${AndIf} $5 != $9
+          ${ExitDo}
+        ${EndIf}
+        StrCpy $3 $3 "" 1
+        IntOp $6 $6 - 1
+      ${Loop}
+      ${DoWhile} $6 > 0
+        StrCpy $5 $3 1 -1
+        ${If} $5 != " "
+        ${AndIf} $5 != "$\t"
+        ${AndIf} $5 != "$\r"
+        ${AndIf} $5 != $8
+        ${AndIf} $5 != $9
+          ${ExitDo}
+        ${EndIf}
+        StrCpy $3 $3 -1
+        IntOp $6 $6 - 1
+      ${Loop}
       StrCpy $5 $3 1
       StrCpy $6 $3 1 1
       ${If} $5 == "\"
-      ${AndIf} $6 != "\"
-        StrCpy $5 $INSTDIR 2
-        StrCpy $3 "$5$3"
+        ; 省略了盘符时补上安装目录的盘符
+        ${If} $6 != "\"
+          StrCpy $5 $INSTDIR 2
+          StrCpy $3 "$5$3"
+        ${EndIf}
+      ${Else}
+        ; 只接受 X:\ 开头；PathGetDriveNumberW 在不以“盘符:”开头时返回 -1
+        System::Call 'shlwapi::PathGetDriveNumberW(w r3) i .r5'
+        StrCpy $6 $3 1 2
+        ${If} $5 < 0
+        ${OrIf} $6 != "\"
+          StrCpy $3 ""
+        ${EndIf}
       ${EndIf}
       StrLen $4 $3
       ${If} $4 > 3
-      ${AndIf} ${FileExists} "$3\data.db"
-        Delete "$3\data.db"
-        Delete "$3\data.db-wal"
-        Delete "$3\data.db-shm"
-        Delete "$3\data.db-journal"
-        Delete "$3\download-dir.txt"
-        RmDir /r "$3\images"
-        RmDir /r "$3\thumbnails"
-        RmDir /r "$3\tmp"
-        RmDir /r "$3\webview"
-        RmDir /r "$3\logs"
-        RmDir /r "$3\updates"
-        RMDir "$3"
+        ${If} ${FileExists} "$3\data.db"
+        ${AndIf} ${FileExists} "$3\webview\*.*"
+          Delete "$3\data.db"
+          Delete "$3\data.db-wal"
+          Delete "$3\data.db-shm"
+          Delete "$3\data.db-journal"
+          Delete "$3\download-dir.txt"
+          !insertmacro RmDirSafe "$3\images"
+          !insertmacro RmDirSafe "$3\thumbnails"
+          !insertmacro RmDirSafe "$3\tmp"
+          !insertmacro RmDirSafe "$3\webview"
+          !insertmacro RmDirSafe "$3\logs"
+          !insertmacro RmDirSafe "$3\updates"
+          RMDir "$3"
+        ${Else}
+          DetailPrint "数据目录 $3 中没有本应用的数据（data.db 和 webview 文件夹），未删除。"
+        ${EndIf}
       ${EndIf}
       Delete "$INSTDIR\data-dir"
     ${EndIf}
-    RmDir /r "$INSTDIR\data"
+    !insertmacro RmDirSafe "$INSTDIR\data"
     RMDir "$INSTDIR"
     ; 窗口状态等插件数据写在下面两个目录；安装目录位于其中时不删除，避免连同用户文件一起删掉
     StrCpy $0 "$APPDATA\${BUNDLEID}\"
     StrLen $1 $0
     StrCpy $2 "$INSTDIR\" $1
     ${If} $2 != $0
-      RmDir /r "$APPDATA\${BUNDLEID}"
+      !insertmacro RmDirSafe "$APPDATA\${BUNDLEID}"
     ${EndIf}
     StrCpy $0 "$LOCALAPPDATA\${BUNDLEID}\"
     StrLen $1 $0
     StrCpy $2 "$INSTDIR\" $1
     ${If} $2 != $0
-      RmDir /r "$LOCALAPPDATA\${BUNDLEID}"
+      !insertmacro RmDirSafe "$LOCALAPPDATA\${BUNDLEID}"
     ${EndIf}
   ${EndIf}
 

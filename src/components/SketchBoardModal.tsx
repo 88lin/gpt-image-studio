@@ -179,8 +179,8 @@ function SketchBoardEditor({ baseImageSrc, replaceImageId }: SketchBoardRequest)
   // 文字测量不依赖具体画布，复用临时层的上下文
   const measureCtx = scratchCanvas.getContext('2d')!
 
-  // 画板背景跟随打开时的系统主题，导出的草图保持所见即所得
-  const [isDark] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches)
+  // 画板背景跟随打开时的颜色模式，导出的草图保持所见即所得
+  const [isDark] = useState(() => document.documentElement.classList.contains('dark'))
   const inkColor = isDark ? '#ffffff' : '#18181b'
   const paperColor = isDark ? '#232326' : '#ffffff'
 

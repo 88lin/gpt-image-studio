@@ -40,6 +40,7 @@ export interface BuildExportZipParams {
   defaultFavoriteCollectionId: string | null
   agentConversations: AgentConversation[]
   imageTasks?: TaskRecord[]
+  imageSourceUrls?: Record<string, string>
   includeManifestData?: boolean
   backupPart?: ExportData['backupPart']
 }
@@ -89,6 +90,7 @@ export async function buildExportZip(params: BuildExportZipParams) {
         source: img.source,
         width: img.width,
         height: img.height,
+        ...(params.imageSourceUrls?.[img.id] ? { sourceUrl: params.imageSourceUrls[img.id] } : {}),
       }
       zipFiles[path] = [bytes, { mtime: new Date(createdAt), level: 0 }]
 

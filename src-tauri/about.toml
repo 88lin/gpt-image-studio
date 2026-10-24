@@ -1,0 +1,17 @@
+# cargo-about 的配置，用于生成第三方许可清单（scripts/build-notices.mjs）。
+# 不含 GPL / AGPL / LGPL；这里列出依赖中实际出现的宽松许可，出现不在列表中的许可时生成失败，需先确认协议再加入。
+accepted = [
+    "MIT",
+    "MIT-0",
+    "Apache-2.0",
+    "BSD-3-Clause",
+    "ISC",
+    "Zlib",
+    "BSL-1.0",
+    "Unicode-3.0",
+    "MPL-2.0",
+]
+# Rust 部分只用于 Windows 客户端
+targets = ["x86_64-pc-windows-msvc"]
+# 开发依赖不随程序分发
+ignore-dev-dependencies = true

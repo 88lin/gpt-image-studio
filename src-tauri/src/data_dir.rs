@@ -535,7 +535,10 @@ fn copy_tree(from: &Path, to: &Path, progress: &Progress) -> io::Result<()> {
         let (src, dst) = (entry.path(), to.join(entry.file_name()));
         let meta = fs::symlink_metadata(&src)?;
         if meta.file_type().is_symlink() {
-            return Err(io::Error::other(format!("不支持迁移链接：{}", shown(&src))));
+            return Err(io::Error::other(format!(
+                "数据目录中有符号链接，无法复制：{}",
+                shown(&src)
+            )));
         }
         if meta.is_dir() {
             fs::create_dir(&dst)?;
@@ -759,8 +762,8 @@ fn with_progress(
 fn run_pending(base: &Path, current: &Path) -> (PathBuf, Option<Notice>) {
     let failed = |failure: Failure, to: &Path| {
         let (title, mut details) = match failure.reason {
-            None => ("已取消", vec![]),
-            Some(reason) => ("更改失败", vec![format!("原因：{reason}")]),
+            None => ("已取消更改数据目录", vec![]),
+            Some(reason) => ("更改数据目录失败", vec![format!("原因：{reason}")]),
         };
         details.extend(failure.leftover);
         let mut rows = vec![("原目录", current)];
@@ -842,7 +845,7 @@ fn interrupted(
         return notice(
             "warning",
             title,
-            "无法确定是否已完成，请检查两个目录后再删除。",
+            "无法确定是否已复制完成。请比较两个目录中的文件，确认新目录完整后再删除原目录。",
             &rows,
             vec![],
         );
@@ -939,7 +942,7 @@ fn startup(
                     notices.extend(notice(
                         "warning",
                         "已改用默认数据目录",
-                        "原目录中的数据不会被转移。",
+                        "原目录中的图片和设置不会转移。",
                         &rows,
                         vec![],
                     ));
@@ -951,7 +954,7 @@ fn startup(
                         "本次使用默认数据目录",
                         match problem {
                             Problem::Missing(_) => {
-                                "找不到原数据目录，本次使用默认目录。重新连接后重启即可恢复。"
+                                "找不到原数据目录，本次使用默认目录。重新连接存储设备后，重启即可恢复。"
                             }
                             Problem::Invalid { .. } => "原数据目录设置无效，本次使用默认目录。",
                         },
@@ -975,10 +978,10 @@ fn startup(
             let _ = fs::remove_file(base.join(PENDING));
             notices.extend(notice(
                 "warning",
-                "更改失败",
+                "更改数据目录失败",
                 "数据仍在原目录。",
                 &[("原目录", &dir)],
-                vec![format!("原因：无法在安装目录中创建锁文件（{err}）")],
+                vec![format!("原因：无法写入安装目录（{err}）")],
             ));
         }
         Ok(_lock) => {
@@ -1124,7 +1127,8 @@ pub async fn data_dir_change(app: AppHandle, picked: State<'_, PickedDir>) -> Re
             std::process::id(),
             pointer_text(&base, &to, removable_base(&base)).unwrap_or_default()
         );
-        write_atomic(&base.join(PENDING), &text).map_err(|err| format!("无法写入待迁移标记：{err}"))
+        write_atomic(&base.join(PENDING), &text)
+            .map_err(|err| format!("无法开始更改数据目录，请确认安装目录可以写入后重试。（{err}）"))
     })?;
     // 触发正常退出流程（单实例锁、未完成的保存等在 Exit 事件中清理），随后启动新进程
     app.request_restart();
@@ -1386,7 +1390,7 @@ mod dialog {
                     };
                     let confirm = choose(
                         "改用默认目录？",
-                        "原目录中的数据不会被转移。",
+                        "原目录中的图片和设置不会转移。",
                         &footer,
                         &["改用默认目录", "返回"],
                     );

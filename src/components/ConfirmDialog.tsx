@@ -5,7 +5,8 @@ import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { Checkbox } from './Checkbox'
 import { CopyIcon } from './icons'
 
-function renderMessage(message: string) {
+/** 「」中的内容连同括号加粗，**…** 中的内容去掉星号加粗，反引号中的内容显示为代码；启动提示的补充说明也用它 */
+export function renderMessage(message: string) {
   return message.split(/(`[^`]+`|「[^」]+」|\*\*[^*]+\*\*)/g).map((part, index) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       return (

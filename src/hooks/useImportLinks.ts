@@ -84,8 +84,8 @@ export function promptImportLink(input: string | URLSearchParams, opened = false
     await new Promise<void>((resolve) => {
       const unsubscribe = useStore.subscribe((state) => {
         if (state.confirmDialog === dialog) return
-        // 被其他对话框替换时用户没有做出选择，允许下次再提示
-        if (state.confirmDialog) handledImportLinks.delete(link)
+        // 被其他对话框替换或因进入隐私模式关闭时用户没有做出选择，允许下次再提示
+        if (state.confirmDialog || state.privacyMode) handledImportLinks.delete(link)
         unsubscribe()
         resolve()
       })

@@ -3,6 +3,7 @@ import { removeMultipleTasks, useStore } from '../store'
 import type { AgentConversation } from '../types'
 import { getAgentConversationTaskIds, getConversationSearchText } from '../lib/agentConversationState'
 import { useTooltip } from '../hooks/useTooltip'
+import { useVisibleAgentConversations } from '../hooks/usePrivacyMode'
 import { CloseIcon, EditIcon, TrashIcon } from './icons'
 import ViewportTooltip from './ViewportTooltip'
 
@@ -83,7 +84,7 @@ type HistoryModalProps = {
 }
 
 export default function HistoryModal({ onClose, ignoreOutsideClickRef }: HistoryModalProps) {
-  const conversations = useStore((s) => s.agentConversations)
+  const conversations = useVisibleAgentConversations()
   const activeConversationId = useStore((s) => s.activeAgentConversationId)
   const setActiveConversationId = useStore((s) => s.setActiveAgentConversationId)
   const renameConversation = useStore((s) => s.renameAgentConversation)

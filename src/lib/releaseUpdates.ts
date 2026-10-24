@@ -1,5 +1,6 @@
 export const RELEASE_REPO = '88lin/gpt-image-studio'
 export const RELEASES_PAGE_URL = `https://github.com/${RELEASE_REPO}/releases`
+export const LICENSE_URL = `https://github.com/${RELEASE_REPO}/blob/main/LICENSE`
 export const RELEASES_PER_PAGE = 10
 // GitHub API 未登录每小时限 60 次，一小时内复用本地缓存
 export const RELEASE_CACHE_TTL_MS = 60 * 60 * 1000

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { TITLEBAR_HEIGHT } from '../lib/platform'
 import { onDismissTooltips } from '../lib/tooltipDismiss'
 
 interface ViewportTooltipProps {
@@ -89,7 +90,7 @@ export default function ViewportTooltip({ visible, children, className = '' }: V
       const maxLeft = Math.max(margin, window.innerWidth - tooltipRect.width - margin)
       const left = Math.min(Math.max(anchorCenter - tooltipRect.width / 2, margin), maxLeft)
       const aboveTop = anchorRect.top - tooltipRect.height - gap
-      const placement = aboveTop >= margin ? 'top' : 'bottom'
+      const placement = aboveTop >= margin + TITLEBAR_HEIGHT ? 'top' : 'bottom'
       const top = placement === 'top' ? aboveTop : anchorRect.bottom + gap
 
       setPosition({

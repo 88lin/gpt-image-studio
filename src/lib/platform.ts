@@ -3,6 +3,9 @@ import { openUrl } from '@tauri-apps/plugin-opener'
 
 export const isTauri = detectTauri()
 
+/** 客户端自绘标题栏的高度（src/components/TitleBar.tsx），页面经 `--safe-area-top` 让出；网页版为 0 */
+export const TITLEBAR_HEIGHT = isTauri ? 32 : 0
+
 interface HttpHead {
   status: number
   statusText: string

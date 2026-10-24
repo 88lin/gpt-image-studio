@@ -5972,3 +5972,105 @@ describe('client connection errors', () => {
     else expect(error).toBe(reason)
   })
 })
+
+describe('privacy mode', () => {
+  const responsesProfile = createDefaultOpenAIProfile({
+    id: 'responses-profile',
+    apiKey: 'test-key',
+    apiMode: 'responses',
+    model: DEFAULT_RESPONSES_MODEL,
+  })
+
+  beforeEach(async () => {
+    await clearTasks()
+    await clearImages()
+    await clearAgentConversations()
+    vi.mocked(callImageApi).mockReset()
+    vi.mocked(showBrowserNotification).mockClear()
+    useStore.setState({
+      settings: normalizeSettings({
+        ...DEFAULT_SETTINGS,
+        profiles: [responsesProfile],
+        activeProfileId: responsesProfile.id,
+        taskCompletionNotification: true,
+      }),
+      privacyMode: null,
+      appMode: 'gallery',
+      prompt: 'secret prompt',
+      inputImages: [imageA],
+      maskDraft: null,
+      maskEditorImageId: null,
+      galleryInputDraft: null,
+      agentInputDrafts: { 'conversation-a': { prompt: 'agent draft', inputImages: [], maskDraft: null, maskEditorImageId: null, updatedAt: 1 } },
+      params: { ...DEFAULT_PARAMS },
+      tasks: [task({ id: 'old-task', createdAt: 1 })],
+      agentConversations: [agentConversation({ id: 'conversation-a', messages: [{ id: 'm', role: 'user', content: 'hi', roundId: 'r', createdAt: 1 }] })],
+      activeAgentConversationId: 'conversation-a',
+      searchQuery: 'secret',
+      filterFavorite: true,
+      showSettings: true,
+      showPromptLibrary: true,
+      detailTaskId: 'old-task',
+      confirmDialog: { title: '确认', message: '内容' },
+      showToast: vi.fn(),
+    })
+  })
+
+  afterEach(() => {
+    useStore.setState({ privacyMode: null })
+  })
+
+  it('clears views and input on entry, keeps the previous input persisted, and restores it on exit', () => {
+    const epoch = useStore.getState().privacyModeEpoch
+    useStore.getState().togglePrivacyMode()
+
+    const state = useStore.getState()
+    expect(state.privacyMode).not.toBeNull()
+    expect(state.privacyModeEpoch).toBe(epoch + 1)
+    expect(state).toMatchObject({
+      prompt: '',
+      inputImages: [],
+      agentInputDrafts: {},
+      activeAgentConversationId: null,
+      searchQuery: '',
+      filterFavorite: false,
+      showSettings: false,
+      showPromptLibrary: false,
+      detailTaskId: null,
+      confirmDialog: null,
+    })
+    const persisted = getPersistedState(state)
+    expect(persisted.prompt).toBe('secret prompt')
+    expect(persisted.agentInputDrafts['conversation-a']?.prompt).toBe('agent draft')
+
+    useStore.getState().setPrompt('typed in privacy mode')
+    useStore.getState().togglePrivacyMode()
+
+    expect(useStore.getState().privacyMode).toBeNull()
+    expect(useStore.getState().showPromptLibrary).toBe(false)
+    expect(useStore.getState().prompt).toBe('secret prompt')
+    expect(useStore.getState().inputImages).toEqual([imageA])
+    expect(useStore.getState().agentInputDrafts['conversation-a']?.prompt).toBe('agent draft')
+  })
+
+  it('drops notifications of tasks started before entry and keeps those of new tasks', async () => {
+    const pending = deferred<never>()
+    vi.mocked(callImageApi).mockReturnValueOnce(pending.promise)
+    useStore.setState({ tasks: [], inputImages: [] })
+    await submitTask()
+    const oldTaskId = useStore.getState().tasks[0].id
+
+    useStore.getState().togglePrivacyMode()
+    pending.reject(new Error('接口报错'))
+    await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === oldTaskId)?.status).toBe('error'))
+    expect(showBrowserNotification).not.toHaveBeenCalled()
+    expect(useStore.getState().detailTaskId).toBeNull()
+
+    vi.mocked(callImageApi).mockRejectedValueOnce(new Error('接口报错'))
+    useStore.getState().setPrompt('new prompt')
+    await submitTask()
+    await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('error'))
+    expect(showBrowserNotification).toHaveBeenCalledOnce()
+    expect(useStore.getState().detailTaskId).toBe(useStore.getState().tasks[0].id)
+  })
+})

@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🎨 GPT Image Studio
+<img src="public/pwa-icon.svg" alt="GPT Image Studio" width="128" height="128">
+
+# GPT Image Studio
 
 [![GitHub stars](https://img.shields.io/github/stars/88lin/gpt-image-studio?style=flat-square&logo=github&logoColor=white&color=FFB300)](https://github.com/88lin/gpt-image-studio/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/88lin/gpt-image-studio?style=flat-square&logo=github&logoColor=white&color=60A5FA)](https://github.com/88lin/gpt-image-studio/network/members)
@@ -129,7 +131,7 @@
 ## ✨ 核心特性
 
 ### 🎨 强大的图像生成与编辑
-- **参考图与遮罩**：最多 16 张参考图（支持剪贴板和拖拽），内置遮罩编辑器，自动预处理以符合官方分辨率限制。
+- **参考图与遮罩**：最多 16 张参考图（支持剪贴板、拖拽和图片链接），内置遮罩编辑器，自动预处理以符合官方分辨率限制。
 - **画板标注**：在空白画布或参考图上用画笔、文字、图形和像素橡皮擦标注修改意图，完成后作为参考图；画板与遮罩编辑器可缩放平移（Alt / Ctrl + 滚轮、Alt + 拖动、双指捏合）。
 - **评论标注**：在画板中用评论工具点击图片添加评论，以“@图N 评论”插入提示词，发送时附上评论在图中的位置（如 `(X=52%, Y=41%)`），复用任务时可恢复。
 - **批量与迭代**：支持单次多图生成；一键将满意结果转为参考图，无缝开启下一轮修改。
@@ -172,7 +174,8 @@
 - **Codex CLI 兼容模式**：上游为 Codex CLI 时，按其实际支持的参数发送请求，并把多图生成拆成并发单图。
 - **提示词防改写**：Responses API 始终在请求前加入防改写指令；开启 Codex CLI 模式后，Images API 也会加入。
 - **智能诊断提示**：检测到接口异常改写或缺少常规参数时，提示开启相应的兼容模式。
-- **习惯配置**：提交后清空输入、重启后保留输入、临时复用历史任务的 API 配置、重试方式、关闭提示词防改写、界面字体、系统通知、自动检查更新等。
+- **外观配置**：颜色模式（跟随系统、浅色、深色）、界面字体与代码字体。
+- **习惯配置**：提交后清空输入、重启后保留输入、临时复用历史任务的 API 配置、重试方式、关闭提示词防改写、系统通知、自动检查更新、隐私模式快捷键等。
 - **版本更新**：启动时检查新版本并展示更新说明；客户端可直接下载并安装更新。
 
 ---
@@ -820,6 +823,18 @@ client_header_timeout 60s;
 ```
 
 ---
+
+## 🔤 字体许可
+
+本项目内置以下两款字体，由 `VITE_BUILTIN_FONT_SOURCE` 决定从公共 CDN 加载还是使用 [`fonts/`](fonts) 目录中的字体文件。完整许可文本位于 [`third-party-licenses/`](third-party-licenses)，也可在应用的“设置 → 关于 → 第三方许可”中查看。
+
+| 字体 | 版权方 | 许可 | 项目地址 | 许可文件 |
+|------|------|------|------|------|
+| HarmonyOS Sans SC | Huawei Device Co., Ltd. | HarmonyOS Sans Fonts License Agreement | [HarmonyOS 设计资源](https://developer.huawei.com/consumer/cn/design/resource/)，[许可证（License）](https://github.com/openharmony/resources/blob/master/LICENSE_Fonts) | [`third-party-licenses/HarmonyOS-Sans-LICENSE.txt`](third-party-licenses/HarmonyOS-Sans-LICENSE.txt) |
+| Maple Mono NF CN | The Maple Mono Project Authors | SIL Open Font License 1.1 | [subframe7536/maple-font](https://github.com/subframe7536/maple-font) | [`third-party-licenses/MapleMono-LICENSE.txt`](third-party-licenses/MapleMono-LICENSE.txt) |
+
+- HarmonyOS Sans SC 为官方未经修改的 TTF 文件（Regular、Medium、Bold）。
+- Maple Mono NF CN 取自官方 v7.9 Release 的 Regular 字重，按 OFL 转换为 woff2 格式，未改动字形和名称。
 
 ## ⭐ Star History
 

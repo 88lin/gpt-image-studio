@@ -71,7 +71,8 @@ fn read_meta(dir: &Path) -> Option<Meta> {
 /// 读取版本高于当前运行版本且通过 sha256 校验的安装包；版本不高于当前版本时只返回 None（交给启动清理），
 /// sha256 校验失败时删除
 fn read_saved(dir: &Path, current: &Version) -> Option<(Meta, Vec<u8>)> {
-    let meta = read_meta(dir).filter(|meta| parse_version(&meta.version).is_some_and(|v| v > *current))?;
+    let meta =
+        read_meta(dir).filter(|meta| parse_version(&meta.version).is_some_and(|v| v > *current))?;
     let bytes = fs::read(dir.join(PACKAGE_FILE))
         .ok()
         .filter(|bytes| format!("{:x}", Sha256::digest(bytes)) == meta.sha256);
@@ -194,7 +195,9 @@ async fn check<R: Runtime>(app: &AppHandle<R>, any: bool) -> Result<Update, Stri
     #[cfg(debug_assertions)]
     let builder = match std::env::var("GIP_UPDATER_ENDPOINT") {
         Ok(url) => {
-            let url = url.parse().map_err(|err| format!("更新源地址无效：{err}"))?;
+            let url = url
+                .parse()
+                .map_err(|err| format!("更新源地址无效：{err}"))?;
             builder
                 .endpoints(vec![url])
                 .map_err(|err| format!("更新源地址无效：{err}"))?
@@ -227,9 +230,11 @@ pub async fn update_ready<R: Runtime>(app: AppHandle<R>) -> Result<Option<String
     }
     let dir = updates_dir()?;
     let current = app.package_info().version.clone();
-    tauri::async_runtime::spawn_blocking(move || read_saved(&dir, &current).map(|(meta, _)| meta.version))
-        .await
-        .map_err(|err| format!("校验更新包异常结束：{err}"))
+    tauri::async_runtime::spawn_blocking(move || {
+        read_saved(&dir, &current).map(|(meta, _)| meta.version)
+    })
+    .await
+    .map_err(|err| format!("校验更新包异常结束：{err}"))
 }
 
 /// 下载 version 对应的更新包并保存（覆盖旧包），下载进度经 on_progress 传给前端。
@@ -267,7 +272,9 @@ pub async fn update_download<R: Runtime>(
             log::warn!("下载更新包失败：{err}");
             match err {
                 Error::Reqwest(err) if err.is_timeout() => "下载更新包超时，请重试".into(),
-                Error::Reqwest(_) | Error::Network(_) => "网络连接失败，请检查网络和代理设置后重试".into(),
+                Error::Reqwest(_) | Error::Network(_) => {
+                    "网络连接失败，请检查网络和代理设置后重试".into()
+                }
                 Error::Minisign(_)
                 | Error::Base64(_)
                 | Error::SignatureUtf8(_)
@@ -329,26 +336,53 @@ mod tests {
 
     #[test]
     fn save_errors_explain_fixable_causes() {
-        assert_eq!(save_error(ErrorKind::StorageFull.into()), "磁盘空间不足，无法保存更新包");
-        assert_eq!(save_error(ErrorKind::PermissionDenied.into()), "没有写入权限，无法保存更新包");
+        assert_eq!(
+            save_error(ErrorKind::StorageFull.into()),
+            "磁盘空间不足，无法保存更新包"
+        );
+        assert_eq!(
+            save_error(ErrorKind::PermissionDenied.into()),
+            "没有写入权限，无法保存更新包"
+        );
         assert!(save_error(io::Error::other("x")).starts_with("保存更新包失败："));
     }
 
     #[cfg(windows)]
     #[test]
     fn save_and_install_errors_detect_locked_files() {
-        assert_eq!(save_error(io::Error::from_raw_os_error(32)), "更新包文件被占用，请稍后重试");
-        assert_eq!(save_error(io::Error::from_raw_os_error(33)), "更新包文件被占用，请稍后重试");
-        assert_eq!(install_error(Error::Io(io::Error::from_raw_os_error(32))), "安装程序文件被占用，请稍后重试");
+        assert_eq!(
+            save_error(io::Error::from_raw_os_error(32)),
+            "更新包文件被占用，请稍后重试"
+        );
+        assert_eq!(
+            save_error(io::Error::from_raw_os_error(33)),
+            "更新包文件被占用，请稍后重试"
+        );
+        assert_eq!(
+            install_error(Error::Io(io::Error::from_raw_os_error(32))),
+            "安装程序文件被占用，请稍后重试"
+        );
         // ERROR_ACCESS_DENIED / ERROR_FILE_NOT_FOUND 经 ErrorKind 映射
-        assert_eq!(install_error(Error::Io(io::Error::from_raw_os_error(5))), "没有权限写入或启动安装程序，可能被安全软件拦截");
-        assert_eq!(install_error(Error::Io(io::Error::from_raw_os_error(2))), "找不到安装程序，可能被安全软件删除，请重新下载");
+        assert_eq!(
+            install_error(Error::Io(io::Error::from_raw_os_error(5))),
+            "没有权限写入或启动安装程序，可能被安全软件拦截"
+        );
+        assert_eq!(
+            install_error(Error::Io(io::Error::from_raw_os_error(2))),
+            "找不到安装程序，可能被安全软件删除，请重新下载"
+        );
     }
 
     #[test]
     fn install_errors_explain_fixable_causes() {
-        assert_eq!(install_error(Error::Io(ErrorKind::StorageFull.into())), "磁盘空间不足，无法写入安装程序");
-        assert_eq!(install_error(Error::InvalidUpdaterFormat), "安装包格式无效，请重新下载");
+        assert_eq!(
+            install_error(Error::Io(ErrorKind::StorageFull.into())),
+            "磁盘空间不足，无法写入安装程序"
+        );
+        assert_eq!(
+            install_error(Error::InvalidUpdaterFormat),
+            "安装包格式无效，请重新下载"
+        );
         assert!(install_error(Error::TempDirNotFound).starts_with("安装更新失败："));
     }
 }

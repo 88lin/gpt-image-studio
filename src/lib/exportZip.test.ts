@@ -31,6 +31,28 @@ describe('exportZip', () => {
     expect((await readExportZip(filled.bytes)).manifest.settings?.customProviders).toEqual([provider])
   })
 
+  it('records source URLs of reference images added by link', async () => {
+    const { bytes } = await buildExportZip({
+      options: { exportTasks: true },
+      exportedAt: 1700000001000,
+      settings: DEFAULT_SETTINGS,
+      tasks: [],
+      images: [
+        { id: 'linked', dataUrl: 'data:image/png;base64,AAECAw==', source: 'upload' },
+        { id: 'local', dataUrl: 'data:image/png;base64,BAUGBw==', source: 'upload' },
+      ],
+      imageSourceUrls: { linked: 'https://example.com/a.png' },
+      thumbnailsByImageId: new Map(),
+      favoriteCollections: [],
+      defaultFavoriteCollectionId: null,
+      agentConversations: [],
+    })
+    const manifest = (await readExportZip(bytes)).manifest
+
+    expect(manifest.imageFiles?.linked?.sourceUrl).toBe('https://example.com/a.png')
+    expect(manifest.imageFiles?.local).not.toHaveProperty('sourceUrl')
+  })
+
   it('builds and reads backup zip entries without changing manifest shape', async () => {
     const task: TaskRecord = {
       id: 'task-1',

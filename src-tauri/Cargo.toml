@@ -2,6 +2,7 @@
 name = "gpt-image-studio"
 version = "0.8.1"
 description = "GPT Image Studio"
+license = "MIT"
 edition = "2021"
 
 [lib]
@@ -53,3 +54,7 @@ windows-sys = { version = "0.61", features = [
   "Win32_UI_HiDpi",
   "Win32_UI_WindowsAndMessaging",
 ] }
+
+[profile.dev.package."*"]
+# 第三方依赖只保留行号（调用栈仍完整），减小调试构建的体积；需要调试某个依赖时临时给它单独设 debug = true
+debug = "line-tables-only"

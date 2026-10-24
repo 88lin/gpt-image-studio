@@ -120,6 +120,7 @@ export type RetryMode = 'new' | 'overwriteFailed' | 'overwriteAll'
 
 /** 字体选择：default 表示使用部署默认（VITE_DEFAULT_UI_FONT / VITE_DEFAULT_MONO_FONT）；builtin 为内置字体，加载来源由 VITE_BUILTIN_FONT_SOURCE 决定 */
 export type FontMode = 'default' | 'builtin' | 'system' | 'custom'
+export type ColorMode = 'system' | 'light' | 'dark'
 
 /** 打开画板的请求：baseImageSrc 为空时是空白画板，replaceImageId 表示完成后替换该参考图 */
 export interface SketchBoardRequest {
@@ -162,6 +163,9 @@ export interface AppSettings {
   /** 仅客户端：把警告和错误写入日志文件 */
   writeLogFile: boolean
   enterSubmit: boolean
+  /** 切换隐私模式的快捷键，如 Ctrl+Shift+H；空字符串表示禁用 */
+  privacyModeShortcut: string
+  colorMode: ColorMode
   uiFont: FontMode
   /** uiFont 为 custom 时使用的本机字体名称 */
   uiFontName: string
@@ -542,6 +546,8 @@ export interface ExportData {
     source?: 'upload' | 'generated' | 'mask'
     width?: number
     height?: number
+    /** 通过链接添加时的原链接 */
+    sourceUrl?: string
   }>
   /** imageId → 缩略图信息 */
   thumbnailFiles?: Record<string, {

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import type { AppSettings } from '../../types'
 import { markSaveLocationAsked } from '../../hooks/useSaveLocationPrompt'
+import { DEFAULT_PRIVACY_MODE_SHORTCUT } from '../../lib/keyboardShortcut'
 import { isTauri } from '../../lib/platform'
 import { getDefaultSaveDir, openDefaultSaveDir } from '../../lib/saveFile'
 import { openTauriLogDir } from '../../lib/tauriLog'
 import { useStore } from '../../store'
 import Select from '../Select'
-import FontSettingField from './FontSettingField'
 import ProxySettingsSection from './ProxySettingsSection'
+import ShortcutRecorder from './ShortcutRecorder'
 import { changeSaveDirWithMigration } from './saveDirMigration'
 
 interface GeneralSettingsTabProps {
@@ -66,25 +67,6 @@ export default function GeneralSettingsTab({
 
   return (
     <div className="space-y-8">
-      <section className="space-y-4">
-        <h4 className="text-sm font-bold text-gray-800 dark:text-gray-100">外观</h4>
-        <FontSettingField
-          slot="ui"
-          label="界面字体"
-          description="内置字体为 HarmonyOS Sans SC；系统字体不加载任何字体文件。"
-          mode={draft.uiFont}
-          name={draft.uiFontName}
-          onChange={(mode, name) => commitSettings({ ...draft, uiFont: mode, uiFontName: name })}
-        />
-        <FontSettingField
-          slot="mono"
-          label="代码字体"
-          description="内置字体为 Maple Mono NF CN，用于代码块等等宽文本。"
-          mode={draft.monoFont}
-          name={draft.monoFontName}
-          onChange={(mode, name) => commitSettings({ ...draft, monoFont: mode, monoFontName: name })}
-        />
-      </section>
       <section className="space-y-4">
         <h4 className="text-sm font-bold text-gray-800 dark:text-gray-100">输入</h4>
         <div className="hidden sm:block">
@@ -366,6 +348,22 @@ export default function GeneralSettingsTab({
         </div>
       </section>
       <section className="space-y-4">
+        <h4 className="text-sm font-bold text-gray-800 dark:text-gray-100">隐私</h4>
+        <div className="block">
+          <div className="mb-1 flex items-center justify-between gap-3">
+            <span className="block text-sm text-gray-600 dark:text-gray-300">隐私模式快捷键</span>
+            <ShortcutRecorder
+              value={draft.privacyModeShortcut}
+              defaultValue={DEFAULT_PRIVACY_MODE_SHORTCUT}
+              onChange={(value) => commitSettings({ ...draft, privacyModeShortcut: value })}
+            />
+          </div>
+          <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
+            按下后关闭所有弹窗，隐藏历史记录、收藏夹和输入框内容，之前任务的通知不再提示；再按一次恢复。点击按钮后按下新组合即可修改。
+          </div>
+        </div>
+      </section>
+      <section className="space-y-4">
         <h4 className="text-sm font-bold text-gray-800 dark:text-gray-100">Agent 对话</h4>
         <div className="block">
           <div className="mb-1 flex items-center justify-between">
@@ -444,7 +442,7 @@ export default function GeneralSettingsTab({
               </button>
             </div>
             <div data-selectable-text className="text-xs text-gray-500 dark:text-gray-500">
-              记录警告和错误，便于排查问题。按 F12 可打开开发者工具。
+              记录警告和错误，便于排查问题。
             </div>
           </div>
           <div className="block">

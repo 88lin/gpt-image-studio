@@ -5,7 +5,7 @@ import 'streamdown/styles.css'
 import 'katex/dist/katex.min.css'
 import './index.css'
 import { getProxySetting } from './lib/networkProxy'
-import { installBrowserBehaviorGuards, installExternalLinkHandler, isTauri } from './lib/platform'
+import { installBrowserBehaviorGuards, installExternalLinkHandler, isTauri, TITLEBAR_HEIGHT } from './lib/platform'
 import { installTauriLog } from './lib/tauriLog'
 import { installTauriStorageFlush, loadTauriStorage } from './lib/tauriStorage'
 import { installMobileViewportGuards } from './lib/viewport'
@@ -16,6 +16,8 @@ if (isTauri) {
   installTauriLog()
   installExternalLinkHandler()
   installBrowserBehaviorGuards()
+  document.documentElement.dataset.titlebar = ''
+  document.documentElement.style.setProperty('--safe-area-top', `${TITLEBAR_HEIGHT}px`)
   // 预先读取代理设置，打开设置时不必等待；失败时由设置页重新读取并显示原因
   void getProxySetting().catch((err) => console.warn('预读代理设置失败：', err))
 }

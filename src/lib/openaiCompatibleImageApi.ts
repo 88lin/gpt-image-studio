@@ -698,12 +698,16 @@ function createCustomProviderContext(opts: CallApiOptions, profile: ApiProfile) 
     ...(opts.nativeTransparentBackground ? { background: 'transparent' } : {}),
   }
 
+  const inputImageUrls = opts.inputImageUrls?.filter(isHttpUrl) ?? []
+
   return {
     profile,
     prompt,
     params,
     inputImages: {
       dataUrls: opts.inputImageDataUrls.length ? opts.inputImageDataUrls : undefined,
+      base64: opts.inputImageDataUrls.length ? opts.inputImageDataUrls.map((url) => url.replace(/^data:[^;]+;base64,/, '')) : undefined,
+      urls: inputImageUrls.length ? inputImageUrls : undefined,
       count: opts.inputImageDataUrls.length,
     },
     mask: {
@@ -800,6 +804,16 @@ async function extractCustomImages(payload: unknown, result: CustomProviderResul
 async function submitCustomRequest(mapping: CustomProviderSubmitMapping, opts: CallApiOptions, profile: ApiProfile, controller: AbortController, proxyConfig: ReturnType<typeof readClientDevProxyConfig>, useApiProxy: boolean): Promise<unknown> {
   const requestHeaders = createRequestHeaders(profile)
   const context = createCustomProviderContext(opts, profile)
+  // 只用链接传参考图时，不能把其余参考图静默丢掉；同时用其他方式传参考图时链接只是补充
+  const template = JSON.stringify([mapping.body, mapping.query])
+  const linkOnly = template.includes('$inputImages.urls')
+    && !template.includes('$inputImages.dataUrls')
+    && !template.includes('$inputImages.base64')
+    && !mapping.files?.some((file) => file.source === 'inputImages')
+  const missingUrlCount = context.inputImages.count - (context.inputImages.urls?.length ?? 0)
+  if (linkOnly && missingUrlCount > 0) {
+    throw new Error(`当前服务商只接受链接参考图，有 ${missingUrlCount} 张参考图不是通过链接添加的。请在输入框的「+ → 添加链接」中添加，或移除这些参考图后重试。`)
+  }
   const method = mapping.method ?? 'POST'
   const contentType = mapping.contentType ?? 'json'
   const path = appendQuery(mapping.path, renderQuery(mapping.query, context))

@@ -50,6 +50,14 @@ export default function Header() {
   const [showHistoryModal, setShowHistoryModal] = useState(false)
   const historyButtonRef = useRef<HTMLButtonElement>(null)
   const createConversation = useStore((s) => s.createAgentConversation)
+  const privacyModeEpoch = useStore((s) => s.privacyModeEpoch)
+  const [popupEpoch, setPopupEpoch] = useState(privacyModeEpoch)
+  // 进入隐私模式时在渲染中直接关闭帮助和历史弹窗；整个顶栏不重新挂载，保留已捕获的 PWA 安装事件
+  if (popupEpoch !== privacyModeEpoch) {
+    setPopupEpoch(privacyModeEpoch)
+    setShowHelp(false)
+    setShowHistoryModal(false)
+  }
 
   useEffect(() => {
     if (appMode === 'agent') {

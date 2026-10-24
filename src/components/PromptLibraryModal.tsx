@@ -392,6 +392,7 @@ export default function PromptLibraryModal() {
     <div
       data-no-drag-select
       className="fixed inset-0 z-[95] bg-[#f8faf5] dark:bg-zinc-950"
+      style={{ paddingTop: 'var(--safe-area-top)' }}
       onClick={close}
     >
       <div
@@ -728,6 +729,7 @@ export default function PromptLibraryModal() {
             type="button"
             onClick={closeZoomImage}
             className="absolute right-4 top-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/18 focus:outline-none focus:ring-2 focus:ring-white/50 sm:right-6 sm:top-6"
+            style={{ marginTop: 'var(--safe-area-top)' }}
             aria-label="关闭示例图预览"
           >
             <CloseIcon className="h-5 w-5" />

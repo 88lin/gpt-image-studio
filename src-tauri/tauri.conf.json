@@ -20,6 +20,7 @@
         "minWidth": 800,
         "minHeight": 600,
         "center": true,
+        "decorations": false,
         "dragDropEnabled": false,
         "backgroundThrottling": "disabled",
         "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection,IntensiveWakeUpThrottling --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows"
@@ -80,6 +81,8 @@
         "languages": [
           "SimpChinese"
         ],
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
         "template": "windows/installer.nsi"
       }
     }

@@ -17,6 +17,7 @@
 | 构建 | `npm run build` |
 | 运行测试 | `npm test` |
 | 监听测试 | `npm run test:watch` |
+| 生成第三方许可清单（需要先安装 cargo-about：`cargo install cargo-about --version 0.9.2 --locked --features cli`） | `npm run notices` |
 
 - 测试使用 Vitest，已有多个 `*.test.ts` 文件。
 - 不要新增 lint/formatter 配置文件，除非明确要求。
@@ -150,7 +151,13 @@ else params = baseParams
 
 - 代码注释使用**中文**，与项目现有风格保持一致。
 - UI 文案默认中文。
-- 注释应简洁，说明"为什么"而非"做了什么"——除非逻辑复杂不易一眼看出。
+- 注释应简洁，说明“为什么”而非“做了什么”——除非逻辑复杂不易一眼看出。代码本身能说清的不写注释。
+- 注释只描述代码现在的样子，读者是以后看代码的人，不是这次的审查者。不要写：
+  - 开发过程：改动前是什么样、修了什么问题、哪轮审查发现的、“新增”“改为”“不再”“之前”这类相对说法；
+  - 提交号、Issue / PR 编号及其讨论过程、会话或报告；
+  - 复述函数名、参数名或下一行代码，以及“注意”“重要”之类没有信息量的提示；
+  - 对不会发生的情况的辩解，或已删除代码的去向。
+- 涉及实测数据的取舍（例如某个供应商接口的兼容处理、超时或并发数的取值），注释只写结论和关键数字，不写测试经过。
 
 ## 发布版本升级
 
@@ -178,6 +185,7 @@ else params = baseParams
 
 ## 架构约束
 
+- **依赖协议**：只引入 MIT、Apache 2.0、BSD、ISC、Zlib、公有领域等宽松协议的依赖，**不引入 GPL / AGPL / LGPL**。新增依赖前先确认协议；第三方许可清单 `src/assets/third-party-notices.txt` 是提交进仓库的生成文件，在“设置 → 关于 → 第三方许可”中显示（Web 版与客户端相同），Rust 或前端依赖变化后运行 `npm run notices` 重新生成并一起提交；Rust 依赖中出现新的宽松协议时先确认，再加入 `src-tauri/about.toml` 的 `accepted`；npm 包中没有许可文件时生成会失败，需从上游仓库对应版本取许可原文放进 `third-party-licenses/npm/`。Tauri 等带进来的 MPL-2.0 间接依赖（未修改）可以接受，许可清单中注明其源码位置。
 - 新增纯函数或工具逻辑时，放 `src/lib/` 而非 `src/store.ts`。store 文件已过大，应只包含 state 定义和 action 入口。
 - 避免在多处重复定义相同工具函数（如 `blobToDataUrl`），优先复用 `src/lib/` 中已有导出。
 - 新增较大功能时，优先拆成独立模块（lib 函数 + hook + 组件），而非全部塞进现有大文件。
@@ -191,4 +199,4 @@ else params = baseParams
   - 新增 state 字段时，考虑是否需要持久化以及升级路径。
 - `src/lib/apiProfiles.ts` 包含多供应商配置，修改时注意向后兼容。
 - `src/lib/db.ts` 是 IndexedDB 封装层，修改 schema 时需升级 `DB_VERSION` 并处理 `onupgradeneeded`。
-- 修改完成后优先运行 `npm run build` 验证编译，再运行 `npm test` 验证测试。
+- 修改完成后优先运行 `npm run build` 验证编译，再运行 `npm test` 验证测试；依赖有变化时运行 `npm run notices`。

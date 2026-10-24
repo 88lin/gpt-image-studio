@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { useStore } from '../store'
 import { useAnnouncements } from '../hooks/useAnnouncements'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
+import { useIsDarkMode } from '../hooks/useColorMode'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { useReleaseUpdates } from '../hooks/useReleaseUpdates'
 import MarkdownRenderer from './MarkdownRenderer'
@@ -12,12 +13,13 @@ export default function AnnouncementModal({ ready }: { ready: boolean }) {
   const { pending, dismiss } = useAnnouncements(ready)
   const announcement = pending[0]
   const scrollRef = useRef<HTMLDivElement>(null)
-  // 启动时可能同时出现导入确认、存储错误等弹窗，公告让位于其他弹窗，关闭后再显示
+  // 启动时可能同时出现导入确认、存储错误等弹窗，公告让位于其他弹窗，关闭后再显示；隐私模式中暂不显示，不记为已读
   const blocked = useStore((s) => Boolean(
-    s.confirmDialog || s.showPromptLibrary || s.showSettings || s.detailTaskId || s.lightboxImageId || s.maskEditorImageId || s.sketchBoard
+    s.privacyMode || s.confirmDialog || s.showPromptLibrary || s.showSettings || s.detailTaskId || s.lightboxImageId || s.maskEditorImageId || s.sketchBoard
     || s.isManageCollectionsModalOpen || s.favoritePickerTaskIds,
   ))
   const updateModalOpen = useReleaseUpdates((s) => s.modalOpen)
+  const isDark = useIsDarkMode()
   const visible = Boolean(announcement) && !blocked && !updateModalOpen
   // X、Esc、点遮罩表示不想看公告，把剩下的未读公告一并记为已读；“下一条”和主按钮只读掉当前一条
   const close = () => dismiss(pending.map((item) => item.id))
@@ -28,6 +30,9 @@ export default function AnnouncementModal({ ready }: { ready: boolean }) {
 
   if (!visible || !announcement) return null
   const media = announcement.media
+  // 沙箱页面跨源，读不到应用的颜色模式，通过地址参数告知
+  const frameSrc = media?.type === 'html' ? new URL(media.src) : null
+  frameSrc?.searchParams.set('theme', isDark ? 'dark' : 'light')
   // 一句话的正文居中；多段或含列表的长正文左对齐，便于阅读
   const longContent = /\n\s*\n|^\s*([-*+]|\d+\.)\s/m.test(announcement.content.trim())
 
@@ -59,7 +64,7 @@ export default function AnnouncementModal({ ready }: { ready: boolean }) {
               {/* 只作演示：不给 same-origin，页面拿不到应用的存储；不接收指针和焦点，Esc 与点击仍由弹窗处理 */}
               {media.type === 'html' ? (
                 <iframe
-                  src={media.src}
+                  src={frameSrc?.href}
                   title={announcement.title}
                   sandbox="allow-scripts"
                   referrerPolicy="no-referrer"
