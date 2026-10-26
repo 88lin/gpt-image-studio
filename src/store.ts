@@ -122,7 +122,7 @@ function isErrorToastTitle(title: string): boolean {
   return /(?:失败|错误|异常|报错|无法|不能|超时|中断|断开|请先|请输入|已达上限|不存在|已丢失)$/.test(title)
 }
 
-export type SettingsTab = 'general' | 'appearance' | 'agent' | 'api' | 'data' | 'about'
+export type SettingsTab = 'general' | 'appearance' | 'agent' | 'skill' | 'api' | 'data' | 'about'
 
 const TIMEOUT_STREAMING_HINT = '也可尝试打开「流式传输」，并提高「请求中间步骤图像数」来维持连接。'
 const TIMEOUT_PARTIAL_IMAGES_ZERO_HINT = '官方流式接口不发送心跳，当前「请求中间步骤图像数」为 0，连接可能因无数据传输而断开。建议提高到 2 或 3。'
@@ -1761,10 +1761,23 @@ export async function initStore() {
   }
 }
 
-/** 提交新任务 */
-export async function submitTask(options: { allowFullMask?: boolean; useCurrentApiProfileWhenReusedMissing?: boolean } = {}) {
-  const { settings, prompt, inputImages, maskDraft, params, reusedTaskApiProfileId, reusedTaskApiProfileName, reusedTaskApiProfileMissing, reusedTaskApiModel, showToast, setConfirmDialog } =
-    useStore.getState()
+/** 命令行直接给出的提示词和参考图：提交时不读写输入区、遮罩和复用配置状态；多条提示词按批量提交 */
+export interface SubmitInput {
+  prompts: string[]
+  inputImages: InputImage[]
+}
+
+/** 提交新任务，返回已开始的任务 id；批量提交时等全部任务结束后才返回 */
+export async function submitTask(options: { allowFullMask?: boolean; useCurrentApiProfileWhenReusedMissing?: boolean; input?: SubmitInput } = {}): Promise<string[]> {
+  const state = useStore.getState()
+  const { settings, params, showToast, setConfirmDialog } = state
+  const input = options.input
+  const prompt = input ? input.prompts[0] ?? '' : state.prompt
+  const inputImages = input?.inputImages ?? state.inputImages
+  const maskDraft = input ? null : state.maskDraft
+  const { reusedTaskApiProfileId, reusedTaskApiProfileName, reusedTaskApiProfileMissing, reusedTaskApiModel } = input
+    ? { reusedTaskApiProfileId: null, reusedTaskApiProfileName: null, reusedTaskApiProfileMissing: false, reusedTaskApiModel: null }
+    : state
 
   const normalizedSettings = normalizeSettings(settings)
   let activeProfile = getActiveApiProfile(settings)
@@ -1784,7 +1797,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
         void submitTask({ ...options, useCurrentApiProfileWhenReusedMissing: true })
       },
         })
-        return
+        return []
       }
     } else {
       activeProfile = reusedProfile
@@ -1795,18 +1808,20 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
   if (validateApiProfile(activeProfile)) {
     showToast(`请先完善请求 API 配置：${validateApiProfile(activeProfile)}`, 'error')
     useStore.getState().setShowSettings(true)
-    return
+    return []
   }
 
   if (!prompt.trim()) {
     showToast('请输入提示词', 'error')
-    return
+    return []
   }
 
-  const batchPrompts = normalizedSettings.showBatchPrompt && normalizedSettings.batchPromptEnabled ? splitBatchPrompts(prompt) : []
+  const batchPrompts = input
+    ? input.prompts.length > 1 ? input.prompts : []
+    : normalizedSettings.showBatchPrompt && normalizedSettings.batchPromptEnabled ? splitBatchPrompts(prompt) : []
   if (useStore.getState().batchProgress) {
     showToast('批量任务进行中，请等待完成或停止后再提交', 'error')
-    return
+    return []
   }
   // 检查通过后立即占位，避免后续 await 期间重复提交启动第二批
   const batchId = batchPrompts.length ? beginBatch(batchPrompts.length) : 0
@@ -1830,7 +1845,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
           },
         })
         endBatch(batchId)
-        return
+        return []
       }
       maskImageId = await storeImage(maskDraft.maskDataUrl, 'mask')
       cacheImage(maskImageId, maskDraft.maskDataUrl)
@@ -1841,7 +1856,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
       }
       showToast(err instanceof Error ? err.message : String(err), 'error')
       endBatch(batchId)
-      return
+      return []
     }
   }
 
@@ -1854,7 +1869,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
     console.error('保存参考图失败', err)
     endBatch(batchId)
     showToast(`保存参考图失败：${err instanceof Error ? err.message : String(err)}`, 'error')
-    return
+    return []
   }
 
   const normalizedParams = normalizeParamsForSettings(params, requestSettings, { hasInputImages: orderedInputImages.length > 0 })
@@ -1867,6 +1882,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
     useStore.getState().setParams(normalizedParamPatch)
   }
 
+  const taskIds: string[] = []
   const startTask = async (taskPrompt: string) => {
     const transparentMeta = taskParams.transparent_output && activeProfile.transparentBackgroundMethod === 'local'
       ? createTransparentOutputMeta(taskPrompt)
@@ -1896,6 +1912,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
     useStore.getState().setTasks([task, ...useStore.getState().tasks])
     await putTask(task)
     if (batchId) batchTaskIds.add(task.id)
+    taskIds.push(task.id)
     // 异步调用 API
     executeTask(task.id)
     return task.id
@@ -1908,11 +1925,13 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
     useStore.getState().showToast('任务已提交', 'success')
   }
 
-  if (settings.clearInputAfterSubmit) {
-    useStore.getState().setPrompt('')
-    useStore.getState().clearInputImages()
+  if (!input) {
+    if (settings.clearInputAfterSubmit) {
+      useStore.getState().setPrompt('')
+      useStore.getState().clearInputImages()
+    }
+    useStore.getState().setReusedTaskApiProfile(null)
   }
-  useStore.getState().setReusedTaskApiProfile(null)
 
   if (batchPrompts.length) {
     const limit = normalizedSettings.batchPromptMode === 'queue'
@@ -1920,6 +1939,7 @@ export async function submitTask(options: { allowFullMask?: boolean; useCurrentA
       : normalizedSettings.batchPromptConcurrencyLimited ? normalizedSettings.batchPromptConcurrency : batchPrompts.length
     await runBatchPrompts(batchId, batchPrompts, limit, startTask)
   }
+  return taskIds
 }
 
 // 当前批量的标识，停止或结束时递增使旧批量失效；批量任务不单独弹出完成提示和失败详情
@@ -1941,7 +1961,7 @@ function endBatch(batchId: number) {
 }
 
 /** 等待任务结束（完成、失败或被删除）或批量被停止；断线待恢复的任务也视为结束，避免卡住队列 */
-function waitForTaskSettled(taskId: string, isCancelled: () => boolean) {
+export function waitForTaskSettled(taskId: string, isCancelled: () => boolean) {
   const isSettled = (tasks: TaskRecord[]) => isCancelled() || tasks.find((item) => item.id === taskId)?.status !== 'running'
   return new Promise<void>((resolve) => {
     if (isSettled(useStore.getState().tasks)) {

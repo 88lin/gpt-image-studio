@@ -38,7 +38,7 @@ export default function Toast() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed left-1/2 z-[120] pointer-events-none toast-enter"
+      className="fixed left-[calc((100%-var(--page-scrollbar-width))/2)] z-[120] pointer-events-none toast-enter"
       style={{ bottom: 'calc(var(--safe-area-bottom, 0px) + 6.5rem)' }}
     >
       <div className="flex items-center gap-2.5 w-max max-w-[calc(100vw-32px)] sm:max-w-[min(44rem,80vw)] px-5 py-3.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200/60 dark:border-white/[0.08] rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.3)] ring-1 ring-black/5 dark:ring-white/10 text-sm font-medium text-gray-700 dark:text-gray-300">

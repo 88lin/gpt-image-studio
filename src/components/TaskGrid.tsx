@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, useEffect } from 'react'
 import { useStore, reuseConfig, editOutputs, removeTask, taskMatchesFilterStatus, taskMatchesSearchQuery } from '../store'
 import { ALL_FAVORITES_COLLECTION_ID, getTaskFavoriteCollectionIds } from '../lib/favoriteState'
+import { getPageScroller, getPageScrollTop } from '../lib/pageScroll'
 import { isTauri } from '../lib/platform'
 import { getIndexesInRect } from '../lib/virtualGrid'
 import { useVirtualGrid } from '../hooks/useVirtualGrid'
@@ -65,7 +66,7 @@ export default function TaskGrid() {
 
   const getPagePoint = (clientX: number, clientY: number) => ({
     pageX: clientX + window.scrollX,
-    pageY: clientY + window.scrollY,
+    pageY: clientY + getPageScrollTop(),
   })
 
   const beginSelection = (target: HTMLElement, clientX: number, clientY: number, isCtrl: boolean) => {
@@ -102,7 +103,7 @@ export default function TaskGrid() {
     const list = filteredTasksRef.current
     const gridRect = gridRef.current.getBoundingClientRect()
     const gridLeft = gridRect.left + window.scrollX
-    const gridTop = gridRect.top + window.scrollY
+    const gridTop = gridRect.top + getPageScrollTop()
     const hit = new Set(getIndexesInRect(list.length, metricsRef.current, {
       left: minX - gridLeft,
       right: maxX - gridLeft,
@@ -142,7 +143,7 @@ export default function TaskGrid() {
       stopDragScroll()
       dragScrollDirectionRef.current = direction
       dragScrollIntervalRef.current = window.setInterval(() => {
-        window.scrollBy({ top: direction * 15, behavior: 'instant' })
+        getPageScroller().scrollBy({ top: direction * 15, behavior: 'instant' })
       }, 16)
     }
 
@@ -373,7 +374,7 @@ export default function TaskGrid() {
           className="fixed bg-blue-500/20 border border-blue-500/50 pointer-events-none z-[30]"
           style={{
             left: Math.min(selectionBox.startPageX, selectionBox.currentPageX) - window.scrollX,
-            top: Math.min(selectionBox.startPageY, selectionBox.currentPageY) - window.scrollY,
+            top: Math.min(selectionBox.startPageY, selectionBox.currentPageY) - getPageScrollTop(),
             width: Math.abs(selectionBox.currentPageX - selectionBox.startPageX),
             height: Math.abs(selectionBox.currentPageY - selectionBox.startPageY),
           }}

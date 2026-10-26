@@ -1,5 +1,5 @@
 ; 基于 tauri-cli 2.12.1 内置的 NSIS 模板，由 tauri.conf.json 的 bundle.windows.nsis.template 引用。
-; 改动处均以“GPT Image Playground：”注释标出，升级 Tauri CLI 时需对照新版内置模板同步。
+; 改动处均以“GPT Image Studio：”注释标出，升级 Tauri CLI 时需对照新版内置模板同步。
 Unicode true
 ManifestDPIAware true
 ; Add in `dpiAwareness` `PerMonitorV2` to manifest for Windows 10 1607+ (note this should not affect lower versions since they should be able to ignore this and pick up `dpiAware` `true` set by `ManifestDPIAware true`)
@@ -78,6 +78,16 @@ Var UpdateMode
 Var NoShortcutMode
 Var WixMode
 Var OldMainBinaryName
+; GPT Image Studio：“添加到 PATH”的选择（1 添加，0 不添加）及安装目录页上的复选框
+Var AddToPath
+Var AddToPathCheckbox
+
+; GPT Image Studio：结束正在运行的命令行程序，不询问。它只是等待主程序回复，主程序已由 CheckIfAppIsRunning 询问后结束，
+; 这时还在运行的只有正在启动或读取输入的进程
+!macro KillCliProcesses
+  !insertmacro RestartManager_ShutdownFile "$INSTDIR\bin\gpt-image-studio.exe" $0
+  ${IfThen} $0 <> 0 ${|} DetailPrint "无法结束 ${PRODUCTNAME} CLI（错误码 $0）。" ${|}
+!macroend
 
 Name "${PRODUCTNAME}"
 BrandingText "${COPYRIGHT}"
@@ -389,11 +399,41 @@ FunctionEnd
 
 ; 5. Choose install directory page
 !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
-; GPT Image Playground：所选目录下已有不属于本应用的 data 文件夹（非空，且没有 data.db、download-dir.txt 和 webview）时阻止继续。
-; 应用数据固定在 <安装目录>\data，误用用户自己的 data 文件夹会混入应用数据，卸载勾选删除数据时也会把它删掉
+; GPT Image Studio：所选目录下已有不属于本应用的 data 文件夹（非空，且没有 data.db、download-dir.txt 和 webview）时阻止继续。
+; 应用数据固定在 <安装目录>\data，误用用户自己的 data 文件夹会混入应用数据，卸载勾选删除数据时也会把它删掉。
+; 本页另加“添加到 PATH”复选框
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW InstallDirPageShow
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstallDirPageLeave
 !insertmacro MUI_PAGE_DIRECTORY
+Function InstallDirPageShow
+  ; 放在“目标文件夹”分组框（1020）正上方，说明文字下面的空白处；位置按分组框和窗口 DPI 计算
+  FindWindow $1 "#32770" "" $HWNDPARENT
+  System::Call "user32::GetDpiForWindow(p r1) i .r2"
+  GetDlgItem $3 $1 1020
+  System::Call "*(i,i,i,i) p .r4"
+  System::Call "user32::GetWindowRect(p r3, p r4)"
+  System::Call "user32::MapWindowPoints(p 0, p r1, p r4, i 2)"
+  System::Call "*$4(i, i .r5, i .r6, i)"
+  System::Free $4
+  IntOp $7 25 * $2
+  IntOp $7 $7 / 96
+  IntOp $8 6 * $2
+  IntOp $8 $8 / 96
+  IntOp $5 $5 - $7
+  IntOp $5 $5 - $8
+  ; 说明文字（1006）的区域原本一直延伸到分组框，收短到复选框上方，避免重叠时互相覆盖
+  GetDlgItem $0 $1 1006
+  System::Call "user32::SetWindowPos(p r0, p 0, i 0, i 0, i r6, i r5, i 0x16)"
+  System::Call 'user32::CreateWindowEx(i ${__NSD_CheckBox_EXSTYLE}, w "${__NSD_CheckBox_CLASS}", w "添加到 PATH（可在命令行中直接运行 gpt-image-studio）", i ${__NSD_CheckBox_STYLE}, i 0, i r5, i r6, i r7, p r1, i0, i0, i0) i .s'
+  Pop $AddToPathCheckbox
+  SendMessage $HWNDPARENT ${WM_GETFONT} 0 0 $0
+  SendMessage $AddToPathCheckbox ${WM_SETFONT} $0 1
+  ${If} $AddToPath = 1
+    SendMessage $AddToPathCheckbox ${BM_SETCHECK} ${BST_CHECKED} 0
+  ${EndIf}
+FunctionEnd
 Function InstallDirPageLeave
+  SendMessage $AddToPathCheckbox ${BM_GETCHECK} 0 0 $AddToPath
   ${If} ${FileExists} "$INSTDIR\data\data.db"
   ${OrIf} ${FileExists} "$INSTDIR\data\download-dir.txt"
   ${OrIf} ${FileExists} "$INSTDIR\data\webview\*.*"
@@ -414,7 +454,97 @@ Function InstallDirPageLeave
   FindClose $0
 FunctionEnd
 
-; GPT Image Playground：默认保存地址页。
+; GPT Image Studio：把 <安装目录>\bin 加入当前用户的 PATH（$AddToPath 为 1），或移除之前加入的条目（为 0）。
+; 只改 HKCU\Environment 的 Path，保持原有类型（通常为 REG_EXPAND_SZ，不展开其中的 %变量%），
+; 其他条目原样保留；条目与该目录逐条比较（不区分大小写），已有时不重复添加。
+; NSIS 字符串最长 ${NSIS_MAX_STRLEN} 个字符，Path 再长读出来会被截断，这时不修改，避免写回残缺的 Path
+!macro UpdateUserPathFunction un
+Function ${un}UpdateUserPath
+  ; $R0 类型，$R1 字节数（含结尾的 NUL）；RRF_RT_ANY | RRF_NOEXPAND
+  System::Call 'advapi32::RegGetValueW(p 0x80000001, w "Environment", w "Path", i 0x1000ffff, *i .R0, p 0, *i .R1) i .R2'
+  StrCpy $R3 ""
+  ${If} $R2 = 2
+    ; 没有 Path 时新建，类型与系统默认一致
+    StrCpy $R0 2
+  ${ElseIf} $R2 <> 0
+    DetailPrint "无法读取 PATH（错误码 $R2），未修改。"
+    Return
+  ${ElseIf} $R0 <> 1
+  ${AndIf} $R0 <> 2
+    DetailPrint "PATH 不是字符串类型，未修改。"
+    Return
+  ${Else}
+    StrLen $R4 "$INSTDIR\bin"
+    IntOp $R5 $R1 / 2
+    IntOp $R5 $R5 + $R4
+    IntOp $R5 $R5 + 2
+    ${If} $R5 > ${NSIS_MAX_STRLEN}
+      DetailPrint "PATH 过长，未修改。"
+      Return
+    ${EndIf}
+    ReadRegStr $R3 HKCU "Environment" "Path"
+  ${EndIf}
+
+  ; $R4 去掉该目录后的 Path，$R5 是否找到，$R6 未处理的部分，$R9 $R4 中是否已有条目
+  StrCpy $R4 ""
+  StrCpy $R5 0
+  StrCpy $R6 $R3
+  StrCpy $R9 0
+  ${Do}
+    StrCpy $R7 0
+    ${Do}
+      StrCpy $R8 $R6 1 $R7
+      ${If} $R8 == ""
+      ${OrIf} $R8 == ";"
+        ${ExitDo}
+      ${EndIf}
+      IntOp $R7 $R7 + 1
+    ${Loop}
+    StrCpy $0 $R6 $R7
+    IntOp $R7 $R7 + 1
+    StrCpy $R6 $R6 "" $R7
+    ${If} $0 == "$INSTDIR\bin"
+    ${OrIf} $0 == "$INSTDIR\bin\"
+      StrCpy $R5 1
+    ${ElseIf} $R9 = 1
+      StrCpy $R4 "$R4;$0"
+    ${Else}
+      StrCpy $R4 $0
+      StrCpy $R9 1
+    ${EndIf}
+  ${LoopUntil} $R8 == ""
+
+  ${If} $AddToPath = 1
+    ${IfThen} $R5 = 1 ${|} Return ${|}
+    ; 原 Path 以分号结尾时新条目后也加分号，移除时才能恢复成原样
+    StrCpy $R8 $R3 1 -1
+    ${If} $R3 == ""
+      StrCpy $R4 "$INSTDIR\bin"
+    ${ElseIf} $R8 == ";"
+      StrCpy $R4 "$R3$INSTDIR\bin;"
+    ${Else}
+      StrCpy $R4 "$R3;$INSTDIR\bin"
+    ${EndIf}
+  ${Else}
+    ${IfThen} $R5 = 0 ${|} Return ${|}
+  ${EndIf}
+
+  ${If} $R4 == ""
+    DeleteRegValue HKCU "Environment" "Path"
+  ${ElseIf} $R0 = 1
+    WriteRegStr HKCU "Environment" "Path" $R4
+  ${Else}
+    WriteRegExpandStr HKCU "Environment" "Path" $R4
+  ${EndIf}
+  ; 通知资源管理器等重新读取环境变量；SMTO_ABORTIFHUNG 跳过无响应的窗口
+  System::Call 'user32::SendMessageTimeoutW(p ${HWND_BROADCAST}, i ${WM_SETTINGCHANGE}, p 0, w "Environment", i 0x2, i 5000, *p .s)'
+  Pop $R9
+FunctionEnd
+!macroend
+!insertmacro UpdateUserPathFunction ""
+!insertmacro UpdateUserPathFunction "un."
+
+; GPT Image Studio：默认保存地址页。
 ; 客户端“文件保存位置”为“默认地址”时使用该目录，安装时写入 <安装目录>\data\download-dir.txt。
 ; 被动（/P，应用内更新使用）、更新（/UPDATE）和静默安装不显示；安装目录中已有数据或该文件、
 ; 或数据目录已在客户端中改到别处（存在 data-dir）时也不显示，不写入，保留用户之前的选择
@@ -638,6 +768,14 @@ Function .onInit
   !if "${INSTALLMODE}" == "both"
     !insertmacro MULTIUSER_INIT
   !endif
+
+  ; GPT Image Studio：“添加到 PATH”默认勾选；已安装过时沿用上次的选择，应用内更新与静默覆盖安装都保持不变
+  StrCpy $AddToPath 1
+  ClearErrors
+  ReadRegDWORD $0 SHCTX "${UNINSTKEY}" "AddToPath"
+  ${IfNot} ${Errors}
+    StrCpy $AddToPath $0
+  ${EndIf}
 FunctionEnd
 
 
@@ -760,6 +898,7 @@ Section Install
   !endif
 
   !insertmacro CheckIfAppIsRunning "$INSTDIR\${MAINBINARYNAME}.exe" "${PRODUCTNAME}"
+  !insertmacro KillCliProcesses
 
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
@@ -776,6 +915,12 @@ Section Install
   {{#each binaries}}
     File /a "/oname={{this}}" "{{no-escape @key}}"
   {{/each}}
+
+  ; GPT Image Studio：上面装到安装目录的命令行程序 gpt-image-studio-cli.exe（Cargo.toml 中的 [[bin]]）
+  ; 移到 bin\gpt-image-studio.exe：与主程序同名，所以单独放在 bin 中，加入 PATH 的也是 bin
+  CreateDirectory "$INSTDIR\bin"
+  Delete "$INSTDIR\bin\gpt-image-studio.exe"
+  Rename "$INSTDIR\gpt-image-studio-cli.exe" "$INSTDIR\bin\gpt-image-studio.exe"
 
   ; Create file associations
   {{#each file_associations as |association| ~}}
@@ -814,6 +959,23 @@ Section Install
   ; Save current MAINBINARYNAME for future updates
   WriteRegStr SHCTX "${UNINSTKEY}" "MainBinaryName" "${MAINBINARYNAME}.exe"
 
+  ; GPT Image Studio：不卸载直接装到别的目录时，先从 PATH 中移除旧安装目录的条目，再按本次的选择处理新目录
+  ReadRegStr $1 SHCTX "${UNINSTKEY}" "InstallLocation"
+  StrCpy $2 $1 1
+  ${If} $2 == '"'
+    StrCpy $1 $1 -1 1
+  ${EndIf}
+  ${If} $1 != ""
+  ${AndIf} $1 != $INSTDIR
+    StrCpy $2 $INSTDIR
+    StrCpy $3 $AddToPath
+    StrCpy $INSTDIR $1
+    StrCpy $AddToPath 0
+    Call UpdateUserPath
+    StrCpy $INSTDIR $2
+    StrCpy $AddToPath $3
+  ${EndIf}
+
   ; Registry information for add/remove programs
   WriteRegStr SHCTX "${UNINSTKEY}" "DisplayName" "${PRODUCTNAME}"
   WriteRegStr SHCTX "${UNINSTKEY}" "DisplayIcon" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\""
@@ -823,6 +985,10 @@ Section Install
   WriteRegStr SHCTX "${UNINSTKEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegDWORD SHCTX "${UNINSTKEY}" "NoModify" "1"
   WriteRegDWORD SHCTX "${UNINSTKEY}" "NoRepair" "1"
+
+  ; GPT Image Studio：按选择把 bin 加入 PATH，取消勾选时移除之前添加的条目；记下选择，以后更新时沿用
+  Call UpdateUserPath
+  WriteRegDWORD SHCTX "${UNINSTKEY}" "AddToPath" $AddToPath
 
   ${GetSize} "$INSTDIR" "/M=uninstall.exe /S=0K /G=0" $0 $1 $2
   IntOp $0 $0 + ${ESTIMATEDSIZE}
@@ -847,7 +1013,7 @@ Section Install
     Call CreateOrUpdateDesktopShortcut
   ${EndIf}
 
-  ; GPT Image Playground：写入默认保存地址页选择的目录，一行绝对路径，UTF-8 无 BOM。
+  ; GPT Image Studio：写入默认保存地址页选择的目录，一行绝对路径，UTF-8 无 BOM。
   ; NSIS 的 FileWrite 只能写系统 ANSI 编码，中文路径需先转为 UTF-8 再写入
   ${If} $DownloadDir != ""
     CreateDirectory "$INSTDIR\data"
@@ -912,7 +1078,7 @@ Function un.onInit
   ${EndIf}
 FunctionEnd
 
-; GPT Image Playground：递归删除目录，遇到目录联接、符号链接只删除链接本身；RMDir /r 会进入目录联接删除目标中的文件
+; GPT Image Studio：递归删除目录，遇到目录联接、符号链接只删除链接本身；RMDir /r 会进入目录联接删除目标中的文件
 Function un.RmDirSafe
   Exch $R0
   Push $R1
@@ -963,6 +1129,7 @@ Section Uninstall
   !endif
 
   !insertmacro CheckIfAppIsRunning "$INSTDIR\${MAINBINARYNAME}.exe" "${PRODUCTNAME}"
+  !insertmacro KillCliProcesses
 
   ; Delete the app directory and its content from disk
   ; Copy main executable
@@ -977,6 +1144,10 @@ Section Uninstall
   {{#each binaries}}
     Delete "$INSTDIR\\{{this}}"
   {{/each}}
+
+  ; GPT Image Studio：命令行程序
+  Delete "$INSTDIR\bin\gpt-image-studio.exe"
+  RMDir "$INSTDIR\bin"
 
   ; Delete app associations
   {{#each file_associations as |association| ~}}
@@ -1004,6 +1175,10 @@ Section Uninstall
 
   ; Remove shortcuts if not updating
   ${If} $UpdateMode <> 1
+    ; GPT Image Studio：从 PATH 中移除 bin；更新时保留，由新版安装程序按上次的选择处理
+    StrCpy $AddToPath 0
+    Call un.UpdateUserPath
+
     !insertmacro DeleteAppUserModelId
 
     ; Remove start menu shortcut
@@ -1062,7 +1237,7 @@ Section Uninstall
     DeleteRegKey /ifempty HKCU "${MANUKEY}"
 
     SetShellVarContext current
-    ; GPT Image Playground：应用数据都在数据目录中，只删除它；
+    ; GPT Image Studio：应用数据都在数据目录中，只删除它；
     ; downloads 和另选的保存目录中是用户保存的图片与备份，任何情况下都不删除。
     ; 更改过数据目录时，<安装目录>\data-dir 的第一行是新位置，读法与 data_dir.rs 一致；省略盘符时补上
     ; 安装目录的盘符。该目录中可能还有别的东西，只在其中有 data.db 和 webview 时删除本应用的文件，

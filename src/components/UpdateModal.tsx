@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { refreshClientUpdate, requestClientUpdateInstall, startClientUpdateDownload, useClientUpdate } from '../hooks/useClientUpdate'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
-import { usePullUpToLoad } from '../hooks/usePullUpToLoad'
+import { PULL_THRESHOLD, usePullUpToLoad } from '../hooks/usePullUpToLoad'
 import { checkForUpdates, ignoreReleaseVersion, loadOlderReleases, setUpdateModalOpen, updateModalScrollRef, useReleaseUpdates } from '../hooks/useReleaseUpdates'
 import { formatUpdateProgress } from '../lib/clientUpdate'
 import { isTauri, openExternal } from '../lib/platform'
@@ -122,6 +122,7 @@ function UpdateModalContent() {
       : armed
         ? '松开加载更早的版本'
         : '继续上滑加载更早的版本'
+  const progress = loading ? 0 : Math.min(pull / PULL_THRESHOLD, 1)
 
   return createPortal(
     <div
@@ -205,27 +206,43 @@ function UpdateModalContent() {
                     </section>
                   )
                 })}
-                <div className="flex items-center justify-center gap-2 pb-2 text-xs text-gray-400 dark:text-gray-500">
-                  {error ? (
+                {/* 随列表一起被拉起，松手后一起落回 */}
+                <div className={`flex items-center justify-center gap-2 pb-2 text-xs transition-colors ${armed && hasMore && !loading ? 'text-blue-500 dark:text-blue-400' : 'text-gray-400 dark:text-gray-500'}`}>
+                  {error && !loading ? (
                     <>
                       <span>加载失败：{error}</span>
                       <button type="button" onClick={loadMore} className="text-blue-500 hover:underline">重试</button>
                     </>
-                  ) : loading ? '正在加载…' : hasMore ? '继续上滑加载更早的版本' : '没有更早的版本了'}
+                  ) : (
+                    <>
+                      {(loading || hasMore) && (
+                        <span
+                          className={`inline-flex ${dragging ? '' : 'transition-transform duration-200 ease-out'}`}
+                          style={{ transform: `rotate(${progress * 360}deg)` }}
+                        >
+                          <svg className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" />
+                            <circle
+                              cx="12"
+                              cy="12"
+                              r="9"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                              pathLength={100}
+                              strokeDasharray={`${loading ? 25 : 10 + progress * 65} 100`}
+                              transform="rotate(-90 12 12)"
+                            />
+                          </svg>
+                        </span>
+                      )}
+                      <span>{pullText}</span>
+                    </>
+                  )}
                 </div>
               </div>
             )}
           </div>
-          {pull > 0 && (
-            <div
-              className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center overflow-hidden text-xs"
-              style={{ height: pull }}
-            >
-              <span className={`rounded-full px-3 py-1 transition-colors ${armed && hasMore ? 'bg-blue-500 text-white' : 'bg-black/[0.05] text-gray-500 dark:bg-white/[0.08] dark:text-gray-400'}`}>
-                {pullText}
-              </span>
-            </div>
-          )}
         </div>
 
         <div className="flex shrink-0 flex-wrap items-center gap-2 border-t border-gray-100 p-3 dark:border-white/[0.08] sm:p-4">

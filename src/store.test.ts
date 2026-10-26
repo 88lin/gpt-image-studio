@@ -613,6 +613,53 @@ describe('mask draft lifecycle in store actions', () => {
     expect(state.showToast).toHaveBeenCalledWith('任务已提交', 'success')
   })
 
+  it('keeps the user draft and reused profile when submitting CLI input', async () => {
+    const maskDraft = { targetImageId: imageA.id, maskDataUrl: 'data:image/png;base64,mask', updatedAt: 1 }
+    await putImage({ ...imageB, source: 'upload', createdAt: 1 })
+    useStore.setState({
+      settings: { ...useStore.getState().settings, clearInputAfterSubmit: true },
+      prompt: '用户尚未提交的草稿',
+      inputImages: [imageA],
+      maskDraft,
+      reusedTaskApiProfileId: 'missing-profile',
+      reusedTaskApiProfileName: '旧配置',
+      reusedTaskApiProfileMissing: true,
+      reusedTaskApiModel: 'old-model',
+    })
+
+    const ids = await submitTask({ input: { prompts: ['命令行提示词'], inputImages: [imageB] } })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('done'))
+
+    const state = useStore.getState()
+    expect(ids).toEqual([state.tasks[0].id])
+    expect(state.tasks[0]).toMatchObject({ prompt: '命令行提示词', maskImageId: null, maskTargetImageId: null })
+    expect(state).toMatchObject({
+      prompt: '用户尚未提交的草稿',
+      inputImages: [imageA],
+      maskDraft,
+      reusedTaskApiProfileId: 'missing-profile',
+      reusedTaskApiProfileName: '旧配置',
+      reusedTaskApiProfileMissing: true,
+      reusedTaskApiModel: 'old-model',
+    })
+    expect(state.setConfirmDialog).not.toHaveBeenCalled()
+  })
+
+  it.each([
+    ['one multiline prompt', ['主体\n\n\n构图要求']],
+    ['multiple explicit prompts', ['第一张\n\n\n构图要求', '第二张']],
+  ])('uses explicit CLI prompt boundaries with UI batch mode enabled (%s)', async (_label, prompts) => {
+    useStore.setState({
+      settings: { ...useStore.getState().settings, showBatchPrompt: true, batchPromptEnabled: true, batchPromptMode: 'queue' },
+    })
+
+    const ids = await submitTask({ input: { prompts, inputImages: [] } })
+    await vi.waitFor(() => expect(useStore.getState().tasks.every((item) => item.status === 'done')).toBe(true))
+
+    expect(ids).toHaveLength(prompts.length)
+    expect(ids.map((id) => useStore.getState().tasks.find((item) => item.id === id)?.prompt)).toEqual(prompts)
+  })
+
   it('does not apply the outer watchdog to concurrent Codex CLI custom requests', async () => {
     const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
     vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)

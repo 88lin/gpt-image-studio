@@ -1,13 +1,21 @@
 [package]
 name = "gpt-image-studio"
-version = "0.8.2"
+version = "0.8.3"
 description = "GPT Image Studio"
 license = "MIT"
 edition = "2021"
 
+# 窗口程序；命令行程序 gpt-image-studio-cli 另见下方 [[bin]]
+default-run = "gpt-image-studio"
+
 [lib]
 name = "gpt_image_studio_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
+
+# 命令行程序，安装为 bin\gpt-image-studio.exe（与窗口程序同名，所以放在 bin 中），见 src/cli/command.rs
+[[bin]]
+name = "gpt-image-studio-cli"
+path = "src/bin/cli.rs"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
@@ -34,10 +42,12 @@ serde_json = "1"
 percent-encoding = "2"
 sha2 = "0.10"
 tempfile = "3"
-# 版本与 tauri 内部使用的 tokio 一致，用于 block_in_place 和 HTTP 请求的取消
-tokio = { version = "1", features = ["rt-multi-thread", "sync", "macros"] }
+# 版本与 tauri 内部使用的 tokio 一致，用于 block_in_place、HTTP 请求的取消和命令行的命名管道
+tokio = { version = "1", features = ["rt-multi-thread", "sync", "macros", "net", "io-util", "time"] }
 tauri-plugin-updater = "2"
 semver = "1"
+# 命令行把参考图读成 data URL（cli/command.rs）
+base64 = "0.22"
 
 [target.'cfg(windows)'.dependencies]
 windows-registry = "0.6"
@@ -45,10 +55,13 @@ windows-registry = "0.6"
 # 更改数据目录：等待旧进程退出、启动时的迁移进度框（TaskDialog）、判断安装目录是否在 U 盘等可移动设备上
 windows-sys = { version = "0.61", features = [
   "Win32_Foundation",
+  "Win32_Security",
+  "Win32_Security_Authorization",
   "Win32_Storage_FileSystem",
   "Win32_System_IO",
   "Win32_System_Ioctl",
   "Win32_System_LibraryLoader",
+  "Win32_System_Pipes",
   "Win32_System_Threading",
   "Win32_UI_Controls",
   "Win32_UI_HiDpi",

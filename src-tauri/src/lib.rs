@@ -3,12 +3,18 @@ mod data_dir;
 mod diagnostics;
 mod files;
 mod http;
+mod cli;
 mod migrate;
 mod proxy;
 mod storage;
 mod update;
 
 use tauri::Manager;
+
+/// 命令行程序的入口（`src/bin/cli.rs`），见 `cli::command`
+pub fn run_cli() -> std::process::ExitCode {
+    cli::command::run()
+}
 
 pub fn run() {
     // 日志、存储和 WebView2 都使用数据目录，需最先确定；有待迁移的更改时在此完成迁移
@@ -61,6 +67,7 @@ pub fn run() {
             storage::commands::image_delete,
             storage::commands::images_clear,
             storage::commands::image_ids,
+            storage::commands::image_paths,
             storage::commands::image_stats,
             storage::commands::thumbnail_get,
             storage::commands::thumbnail_put,
@@ -94,6 +101,13 @@ pub fn run() {
             update::update_download,
             update::update_install,
             close_watch::close_ack,
+            cli::cli_ready,
+            cli::cli_progress,
+            cli::cli_respond,
+            cli::skill::skill_info,
+            cli::skill::skill_install,
+            cli::skill::skill_remove,
+            cli::skill::skill_open_dir,
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { .. } = event {
@@ -105,11 +119,14 @@ pub fn run() {
         .manage(files::MigrateSource::default())
         .manage(data_dir::PickedDir::default())
         .manage(http::Requests::default())
-        // 页面重载（含开发时的热重载）后旧页面的请求已无人读取，立即断开；未提交的保存也无人继续，删除临时文件
+        .manage(cli::Cli::default())
+        // 页面重载（含开发时的热重载）后旧页面的请求已无人读取，立即断开；未提交的保存也无人继续，删除临时文件；
+        // 等待旧页面回复的命令行命令也中断
         .on_page_load(|webview, payload| {
             if payload.event() == tauri::webview::PageLoadEvent::Started {
                 webview.state::<http::Requests>().clear();
                 webview.state::<files::Writes>().clear();
+                webview.state::<cli::Cli>().reset();
             }
         })
         .setup(|app| {
@@ -142,6 +159,7 @@ pub fn run() {
             // 代理设置需在主窗口创建前生效，前端加载后立即可能发出请求
             app.manage(proxy::Proxy::load(&state));
             app.manage(state);
+            cli::start(app.handle());
             let info = app.package_info().clone();
             tauri::async_runtime::spawn_blocking(move || {
                 update::cleanup(&info.name, &info.version)

@@ -16,6 +16,7 @@ commands.allow = [
   "image_delete",
   "images_clear",
   "image_ids",
+  "image_paths",
   "image_stats",
   "thumbnail_get",
   "thumbnail_put",

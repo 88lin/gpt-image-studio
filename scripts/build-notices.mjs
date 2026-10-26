@@ -4,7 +4,8 @@
 // 以及 npm ls --omit=dev 列出的前端依赖。
 // 需要 cargo-about：cargo install cargo-about --version 0.9.2 --locked --features cli
 import { execFileSync, execSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 const OUT = 'src/assets/third-party-notices.txt'
@@ -37,14 +38,25 @@ section('Maple Mono NF CN 字体', [
   '',
   read('third-party-licenses/MapleMono-LICENSE.txt'),
 ].join('\n'))
+section('Lobe Icons（设置中 Claude Code、Codex 的图标）', [
+  '项目地址：https://github.com/lobehub/lobe-icons',
+  '',
+  read('third-party-licenses/LobeIcons-LICENSE.txt'),
+].join('\n'))
 
 // Rust：按许可原文分组，每组列出使用它的包；本项目自己的包（没有 source）不列出
 let about
+const tempDir = mkdtempSync(join(tmpdir(), 'gpt-image-studio-notices-'))
 try {
-  about = JSON.parse(execFileSync('cargo', ['about', 'generate', '--format', 'json', '--manifest-path', 'src-tauri/Cargo.toml', '--config', 'src-tauri/about.toml', '--locked', '--fail'], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }))
+  const output = join(tempDir, 'rust.json')
+  // cargo-about 在 PowerShell 进程树中拒绝通过 stdout 输出，使用文件保持 UTF-8 编码。
+  execFileSync('cargo', ['about', 'generate', '--format', 'json', '--manifest-path', 'src-tauri/Cargo.toml', '--config', 'src-tauri/about.toml', '--locked', '--fail', '--output-file', output], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 })
+  about = JSON.parse(readFileSync(output, 'utf8'))
 } catch (err) {
   console.error('cargo about 运行失败。未安装时请先运行：cargo install cargo-about --version 0.9.2 --locked --features cli')
   throw err
+} finally {
+  rmSync(tempDir, { recursive: true, force: true })
 }
 const rust = []
 const rustSeen = new Set()

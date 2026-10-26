@@ -20,7 +20,34 @@
   --safe-area-right: env(safe-area-inset-right, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
   --safe-area-left: env(safe-area-inset-left, 0px);
+  /* 顶栏（Header.tsx）的高度，与 .safe-area-top、.safe-header-inner、下边框及窄屏的第二行一致；用于让页面滚动条从顶栏下方开始 */
+  --header-row2-height: 0px;
+  --header-height: calc(var(--safe-area-top) + 3.5rem + 1px + var(--header-row2-height));
+  /* 细滚动条的宽度，也是 [data-page-scroll] 滚动条的宽度：顶栏、输入栏等 fixed 元素按窗口宽度定位，需让出它才能与页面内容对齐 */
+  --page-scrollbar-width: 0px;
   scrollbar-gutter: stable;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: calc(max(0.5rem, var(--safe-area-top)) + 3.5rem + 1px + var(--header-row2-height));
+  }
+}
+
+/* 窄屏（Tailwind sm 以下）多出画廊/Agent 切换那一行：边框 2px、内边距 0.5rem、按钮 2rem、下边距 0.5rem。
+   画廊里它随滚动收起，Agent 里整个顶栏可上推隐藏，由 Header.tsx 标记 data-header */
+@media (max-width: 639.98px) {
+  :root {
+    --header-row2-height: calc(3rem + 2px);
+  }
+
+  :root[data-header='compact'] {
+    --header-row2-height: 0px;
+  }
+
+  :root[data-header='hidden'] {
+    --header-height: 0px;
+  }
 }
 
 html {
@@ -85,26 +112,30 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* 细滚动条只用于鼠标：触摸屏用系统的悬浮滚动条，不占宽度、不滚动时隐藏。
+/* 浏览器原生是经典滚动条时（main.tsx 测量后标记 data-classic-scrollbar）改用细滚动条；悬浮滚动条（手机等）不占宽度，保持原样。
    Chromium 中不设 scrollbar-width / scrollbar-color：设了之后不认 ::-webkit-scrollbar-*，改画带箭头的系统滚动条 */
-@media (pointer: fine) {
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 9999px;
-    transition: background-color 0.2s ease;
-  }
-  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-  ::-webkit-scrollbar-track { background: transparent; }
+:root[data-classic-scrollbar] ::-webkit-scrollbar { width: var(--page-scrollbar-width); height: var(--page-scrollbar-width); }
+:root[data-classic-scrollbar] ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; transition: background-color 0.2s ease; }
+:root[data-classic-scrollbar] ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+:root[data-classic-scrollbar] ::-webkit-scrollbar-track { background: transparent; }
+:root[data-classic-scrollbar].dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+:root[data-classic-scrollbar].dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
 
-  /* 客户端窗口的滚动条让出标题栏 */
-  :root[data-titlebar]::-webkit-scrollbar-track { margin-top: var(--safe-area-top); }
+/* 经典滚动条下页面在 App 的 [data-page-scroll] 里滚动（见 src/lib/pageScroll.ts）、窗口本身不滚动：
+   窗口滚动条总占着右侧一整列，顶栏和客户端的标题栏盖不住它。悬浮滚动条下仍滚动窗口，保留手机的地址栏收起和下拉刷新 */
+:root[data-classic-scrollbar] {
+  overflow: hidden;
+  scrollbar-gutter: auto;
+  --page-scrollbar-width: 8px;
 }
 
-@media (pointer: fine) {
-  :root.dark::-webkit-scrollbar-thumb, :root.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
-  :root.dark::-webkit-scrollbar-thumb:hover, :root.dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+:root[data-classic-scrollbar] [data-page-scroll] {
+  height: 100dvh;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
+
+:root[data-classic-scrollbar] [data-page-scroll]::-webkit-scrollbar-track { margin-top: var(--header-height); }
 
 /* Firefox 不支持 ::-webkit-scrollbar-*，只能用标准属性画细滚动条 */
 @supports not selector(::-webkit-scrollbar) {

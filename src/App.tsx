@@ -36,6 +36,7 @@ import { FavoriteCollectionPickerModal, FavoriteCollectionsView, ManageCollectio
 import { showStartupNotices, type NoticeSection } from './components/startupNotice'
 import { useGlobalClickSuppression } from './lib/clickSuppression'
 import { takeDataDirNotice } from './lib/dbTauri'
+import { installCliBridge } from './lib/cliBridge'
 import { isTauri, TITLEBAR_HEIGHT } from './lib/platform'
 import { setSaveToDefaultDir } from './lib/saveFile'
 import { setTauriLogEnabled } from './lib/tauriLog'
@@ -63,6 +64,10 @@ export default function App() {
   usePrivacyModeShortcut()
   // 运行中的链接导入要等启动时的预置配置写入完，否则会被启动流程覆盖
   useImportLinks(startupImportDone)
+
+  useEffect(() => {
+    if (isTauri && startupImportDone) return installCliBridge()
+  }, [startupImportDone])
 
   useEffect(() => {
     if (!isTauri) return
@@ -195,17 +200,19 @@ export default function App() {
   // 进入隐私模式时重新挂载带有内部弹窗或菜单的组件，直接丢弃其中未保存的内容
   return (
     <>
-      <Header />
-      {appMode === 'agent' ? (
-        <AgentWorkspace />
-      ) : (
-        <main data-home-main data-drag-select-surface className="pb-48">
-          <div className="safe-area-x max-w-7xl mx-auto">
-            <SearchBar />
-            {filterFavorite && !activeFavoriteCollectionId ? <FavoriteCollectionsView /> : <TaskGrid />}
-          </div>
-        </main>
-      )}
+      <div data-page-scroll>
+        <Header />
+        {appMode === 'agent' ? (
+          <AgentWorkspace />
+        ) : (
+          <main data-home-main data-drag-select-surface className="pb-48">
+            <div className="safe-area-x max-w-7xl mx-auto">
+              <SearchBar />
+              {filterFavorite && !activeFavoriteCollectionId ? <FavoriteCollectionsView /> : <TaskGrid />}
+            </div>
+          </main>
+        )}
+      </div>
       <InputBar key={`input-${privacyModeEpoch}`} />
       <DetailModal key={`detail-${privacyModeEpoch}`} />
       <Lightbox key={`lightbox-${privacyModeEpoch}`} />

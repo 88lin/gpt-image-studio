@@ -1814,7 +1814,7 @@ export default function InputBar() {
 
       <div
         data-input-bar
-        className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-4xl sm:w-max sm:min-w-[min(56rem,100%)] sm:max-w-[min(80rem,100%)] px-3 sm:px-4 transition-all duration-300${promptExpanded ? ' flex flex-col' : ''}`}
+        className={`fixed bottom-4 sm:bottom-6 left-[calc((100%-var(--page-scrollbar-width))/2)] -translate-x-1/2 z-30 w-[calc(100%-var(--page-scrollbar-width))] max-w-4xl sm:w-max sm:min-w-[min(56rem,calc(100%-var(--page-scrollbar-width)))] sm:max-w-[min(80rem,calc(100%-var(--page-scrollbar-width)))] px-3 sm:px-4 transition-all duration-300${promptExpanded ? ' flex flex-col' : ''}`}
         style={promptExpanded ? { top: `${promptExpandedTop}px`, transitionProperty: 'none' } : undefined}
       >
         {/* 桌面端输入栏宽度只由参数栏内容决定（最宽与任务卡片区域对齐），其余区域用 contain 排除在宽度计算之外 */}

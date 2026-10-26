@@ -1,11 +1,12 @@
 import { useCallback, useLayoutEffect, useRef, useState, type RefObject } from 'react'
+import { getPageScroller } from '../lib/pageScroll'
 import { getVisibleRange, type GridMetrics } from '../lib/virtualGrid'
 
 // 首次测量前按单列、卡片默认高度估算，挂载后在绘制前就会用实际测量值修正
 const INITIAL_METRICS: GridMetrics = { columns: 1, rowHeight: 162, rowGap: 16, columnGap: 16, width: 0 }
 
 /**
- * 窗口滚动的固定行高网格虚拟列表：只渲染视口及上下各一屏内的行，其余用网格的上下 padding 撑开。
+ * 随页面滚动的固定行高网格虚拟列表：只渲染视口及上下各一屏内的行，其余用网格的上下 padding 撑开。
  * 列数、行高、间距都从实际渲染的网格读取，响应式断点只由 CSS 决定。
  */
 export function useVirtualGrid(gridRef: RefObject<HTMLElement | null>, count: number) {
@@ -47,7 +48,7 @@ export function useVirtualGrid(gridRef: RefObject<HTMLElement | null>, count: nu
     if (anchor && (next.columns !== prev.columns || next.rowHeight !== prev.rowHeight || next.rowGap !== prev.rowGap)) {
       // 让原先位于视口顶部的那一行在新布局下仍停在视口顶部附近
       const target = Math.floor(anchor.index / next.columns) * (next.rowHeight + next.rowGap) + anchor.offset
-      window.scrollBy(0, target + grid.getBoundingClientRect().top)
+      getPageScroller().scrollBy(0, target + grid.getBoundingClientRect().top)
     }
     update()
   }, [gridRef, update])
@@ -60,13 +61,14 @@ export function useVirtualGrid(gridRef: RefObject<HTMLElement | null>, count: nu
     // 网格宽度（窗口宽度、列数）或卡片高度变化时重新测量；只改窗口高度时由 resize 事件处理
     const ro = new ResizeObserver(measure)
     ro.observe(grid)
-    window.addEventListener('scroll', update, { passive: true })
+    const scroller = getPageScroller()
+    scroller.addEventListener('scroll', update, { passive: true })
     window.addEventListener('resize', measure)
     return () => {
       ro.disconnect()
       // 列表清空期间布局可能变化，旧锚点不再可信，恢复时不应据此滚动
       anchorRef.current = null
-      window.removeEventListener('scroll', update)
+      scroller.removeEventListener('scroll', update)
       window.removeEventListener('resize', measure)
     }
   }, [gridRef, hasItems, measure, update])

@@ -21,6 +21,7 @@
     "http-request",
     "network-proxy",
     "close-watch",
+    "cli",
     "log:default",
     "deep-link:allow-get-current",
     "clipboard-manager:allow-read-text",

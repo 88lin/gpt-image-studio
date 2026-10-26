@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useStore } from '../store'
 import { getShortcutFromEvent } from '../lib/keyboardShortcut'
+import { getPageScroller } from '../lib/pageScroll'
 import { isPrivacyHiddenConversation, isPrivacyHiddenTask } from '../lib/privacyMode'
 import { setUpdateModalOpen } from './useReleaseUpdates'
 
@@ -25,7 +26,7 @@ export function usePrivacyModeShortcut() {
       useStore.getState().togglePrivacyMode()
       if (!useStore.getState().privacyMode) return
       setUpdateModalOpen(false)
-      window.scrollTo({ top: 0 })
+      getPageScroller().scrollTo({ top: 0 })
     }
     window.addEventListener('keydown', handleKeyDown, true)
     return () => window.removeEventListener('keydown', handleKeyDown, true)

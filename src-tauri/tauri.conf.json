@@ -66,6 +66,9 @@
   "bundle": {
     "active": true,
     "createUpdaterArtifacts": true,
+    "resources": {
+      "../skills/gpt-image-studio/": "skills/gpt-image-studio/"
+    },
     "targets": [
       "nsis"
     ],

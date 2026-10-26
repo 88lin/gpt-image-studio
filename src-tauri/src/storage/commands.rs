@@ -167,6 +167,11 @@ pub async fn image_ids(state: State<'_, StorageState>) -> Result<Vec<String>> {
 }
 
 #[tauri::command]
+pub async fn image_paths(state: State<'_, StorageState>, ids: Vec<String>) -> Result<Vec<Option<String>>> {
+    run(state, move |s| s.image_paths(&ids)).await
+}
+
+#[tauri::command]
 pub async fn image_stats(state: State<'_, StorageState>) -> Result<Vec<ImageStat>> {
     run(state, |s| s.image_stats()).await
 }

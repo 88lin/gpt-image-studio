@@ -1,0 +1,12 @@
+[[permission]]
+identifier = "cli"
+description = "允许主窗口接收并回传命令行发来的命令；安装或移除随附的 Skill（只限 ~/.claude/skills/gpt-image-playground 与 ~/.agents/skills/gpt-image-playground），打开随安装包附带的 Skill 文件夹"
+commands.allow = [
+  "cli_ready",
+  "cli_progress",
+  "cli_respond",
+  "skill_info",
+  "skill_install",
+  "skill_remove",
+  "skill_open_dir",
+]

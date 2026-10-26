@@ -27,13 +27,11 @@ import {
   isOpenAICompatibleProvider,
   mergeImportedSettings,
   normalizeAgentMaxToolRounds,
-  normalizeCustomProviderDefinition,
   normalizeSettings,
   normalizeStreamPartialImages,
   switchApiProfileProvider,
 } from '../lib/apiProfiles'
 import {
-  getDefaultPresetBaseUrl,
   getDefaultPresetProfileId,
   getPresetProfileDescription,
   getPresetProfileIds,
@@ -57,14 +55,27 @@ import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { updateModalScrollRef, useReleaseUpdates } from '../hooks/useReleaseUpdates'
 import { DEFAULT_DROPDOWN_MAX_HEIGHT, getDropdownMaxHeight } from '../lib/dropdown'
+import {
+  buildCustomProvider,
+  getApiProfileDeleteBlock,
+  getCustomProviderDeleteBlock,
+  getDefaultModelForMode,
+  isAsyncCustomProvider,
+  isProfileApiProxyEligible,
+  newId,
+  prepareSettingsForCommit,
+  removeApiProfile,
+  removeCustomProvider,
+} from '../lib/settingsActions'
 import Select from './Select'
 import { Checkbox } from './Checkbox'
 import ViewportTooltip from './ViewportTooltip'
-import { ChevronDownIcon, CloseIcon, CopyIcon, PlusIcon, TrashIcon, ExportIcon, ImportIcon, DragHandleIcon, LinkIcon } from './icons'
+import { ChevronDownIcon, CloseIcon, CopyIcon, PlusIcon, TrashIcon, ExportIcon, ImportIcon, DragHandleIcon, LinkIcon, SparklesIcon } from './icons'
 import { TooltipButton } from './TooltipButton'
 import GeneralSettingsTab from './settings/GeneralSettingsTab'
 import AppearanceSettingsTab from './settings/AppearanceSettingsTab'
 import AgentSettingsTab from './settings/AgentSettingsTab'
+import SkillSettingsSection from './settings/SkillSettingsSection'
 import FontLicensesModal from './settings/FontLicensesModal'
 import CustomProviderModal from './settings/CustomProviderModal'
 import ProfileImportUrlModal, { type CopyImportUrlOptions } from './settings/ProfileImportUrlModal'
@@ -72,10 +83,6 @@ import ZipDownloadRouteModal, { ZIP_DOWNLOAD_ROUTE_OPTIONS } from './settings/Zi
 import StorageInfoSection from './settings/StorageInfoSection'
 import AboutSettingsTab from './settings/AboutSettingsTab'
 import MarkdownRenderer from './MarkdownRenderer'
-
-function newId(prefix: string) {
-  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
-}
 
 const ADD_CUSTOM_PROVIDER_VALUE = '__add_custom_provider__'
 const COPY_IMPORT_URL_OPTIONS_STORAGE_KEY = 'gpt-image-playground.copy-import-url-options'
@@ -154,15 +161,6 @@ function getImportedProfileFromMergedSettings(
   return nextSettings.profiles.find((profile) => !previousProfileIds.has(profile.id)) ?? nextSettings.profiles[0]
 }
 
-function isAsyncCustomProvider(provider: CustomProviderDefinition | null | undefined) {
-  return Boolean(provider?.poll || provider?.submit.taskIdPath || provider?.editSubmit?.taskIdPath)
-}
-
-function isProfileApiProxyEligible(settings: AppSettings, profile: ApiProfile) {
-  if (!isOpenAICompatibleProvider(settings, profile.provider)) return false
-  const customProvider = getCustomProviderDefinition(settings, profile.provider)
-  return !isAsyncCustomProvider(customProvider)
-}
 
 export default function SettingsModal() {
   const showSettings = useStore((s) => s.showSettings)
@@ -296,9 +294,6 @@ export default function SettingsModal() {
     })
   ]
 
-  const getDefaultModelForMode = (apiMode: AppSettings['apiMode']) =>
-    apiMode === 'responses' ? DEFAULT_RESPONSES_MODEL : DEFAULT_IMAGES_MODEL
-
   const enabledZipDownloadRouteCount = ZIP_DOWNLOAD_ROUTE_OPTIONS
     .filter((option) => draft.zipDownloadRoutes.includes(option.route))
     .length
@@ -327,17 +322,19 @@ export default function SettingsModal() {
     value: profile.id,
   }))
 
-  const wasSettingsOpenRef = useRef(false)
+  // 草稿所对应的已保存设置。设置页打开期间设置被别处修改（例如 AI 工具通过命令行）时按新设置重建草稿，
+  // 避免之后提交草稿时把别处的修改改回去
+  const draftSourceRef = useRef<AppSettings | null>(null)
 
   useEffect(() => {
     if (!showSettings) {
-      wasSettingsOpenRef.current = false
+      draftSourceRef.current = null
       tabScrollTopsRef.current = {}
       return
     }
-    if (wasSettingsOpenRef.current) return
+    if (draftSourceRef.current === settings) return
 
-    wasSettingsOpenRef.current = true
+    draftSourceRef.current = settings
     const normalizedSettings = normalizeSettings(settings)
     const displaySettings = normalizedSettings.reuseTaskApiProfileTemporarily && reusedTaskApiProfileId && normalizedSettings.profiles.some((profile) => profile.id === reusedTaskApiProfileId)
       ? normalizeSettings({ ...normalizedSettings, activeProfileId: reusedTaskApiProfileId })
@@ -439,44 +436,9 @@ export default function SettingsModal() {
   }
 
   const commitSettings = (nextDraft: AppSettings) => {
-    const normalizedProfiles = nextDraft.profiles.map((profile) => {
-      const nextApiProxy = isProfileApiProxyEligible(nextDraft, profile) && apiProxyAvailable ? (apiProxyLocked || profile.apiProxy) : false
-      const shouldKeepEmptyBaseUrl = profile.provider !== 'fal' && nextApiProxy && !profile.baseUrl.trim()
-      const emptyBaseUrlFallback = profile.id === defaultProfileId
-        ? getDefaultPresetBaseUrl()
-        : DEFAULT_SETTINGS.baseUrl
-      const normalizedBaseUrl = profile.provider === 'fal'
-        ? profile.baseUrl.trim().replace(/\/+$/, '') || (profile.id === defaultProfileId ? '' : DEFAULT_FAL_BASE_URL)
-        : profile.provider === 'grok'
-          ? profile.baseUrl.trim().replace(/\/+$/, '') || (shouldKeepEmptyBaseUrl ? '' : DEFAULT_GROK_BASE_URL)
-          : shouldKeepEmptyBaseUrl ? '' : normalizeBaseUrl(profile.baseUrl.trim() || emptyBaseUrlFallback)
-      const defaultModel = profile.provider === 'fal'
-        ? DEFAULT_FAL_MODEL
-        : profile.provider === 'grok'
-          ? DEFAULT_GROK_MODEL
-          : getDefaultModelForMode(profile.apiMode)
-      return {
-        ...profile,
-        name: profile.name.trim() || (profile.id === defaultProfileId ? '默认' : '新配置'),
-        baseUrl: normalizedBaseUrl,
-        model: profile.model.trim() || defaultModel,
-        timeout: Number(profile.timeout) || DEFAULT_SETTINGS.timeout,
-        apiProxy: isTauri ? profile.apiProxy : nextApiProxy,
-        codexCli: isOpenAICompatibleProvider(nextDraft, profile.provider) ? profile.codexCli : false,
-        streamImages: profile.provider === 'openai' ? profile.streamImages : false,
-        streamPartialImages: profile.provider === 'openai' ? normalizeStreamPartialImages(profile.streamPartialImages) : DEFAULT_STREAM_PARTIAL_IMAGES,
-      }
-    })
-    const fallbackProfile = createDefaultOpenAIProfile({ id: newId('openai') })
-    const normalizedDraft = normalizeSettings({
-      ...nextDraft,
-      profiles: normalizedProfiles.length ? normalizedProfiles : [fallbackProfile],
-      activeProfileId: normalizedProfiles.some((profile) => profile.id === nextDraft.activeProfileId)
-        ? nextDraft.activeProfileId
-        : (normalizedProfiles[0]?.id ?? fallbackProfile.id),
-    })
-    setSettings(normalizedDraft)
-    setDraft(useStore.getState().settings)
+    setSettings(prepareSettingsForCommit(nextDraft))
+    draftSourceRef.current = useStore.getState().settings
+    setDraft(draftSourceRef.current)
   }
 
   const setZipDownloadRouteEnabled = (route: ZipDownloadRoute, enabled: boolean) => {
@@ -938,17 +900,10 @@ export default function SettingsModal() {
   }
 
   const deleteProfile = (id: string) => {
-    const preset = presetProfileIds.has(id)
-    if (presetConfigOnly || draft.profiles.length <= 1 || (preset && presetDeletionPrevented) || (!preset && id === defaultProfileId)) return
+    if (getApiProfileDeleteBlock(draft, id)) return
     if (id === reusedTaskApiProfileId) setReusedTaskApiProfile(null)
-    if (preset) dismissPresetProfile(id)
-    const nextProfiles = draft.profiles.filter((item) => item.id !== id)
-    const nextDraft = normalizeSettings({
-      ...draft,
-      profiles: nextProfiles,
-      activeProfileId: draft.activeProfileId === id ? nextProfiles[0].id : draft.activeProfileId,
-    })
-    commitSettings(nextDraft)
+    if (presetProfileIds.has(id)) dismissPresetProfile(id)
+    commitSettings(removeApiProfile(draft, id))
   }
 
   const handleProviderReorder = (sourceValue: string | number, targetValue: string | number, position: 'before' | 'after' | null) => {
@@ -990,25 +945,8 @@ export default function SettingsModal() {
     setEditingCustomProviderId(null)
   }
 
-  const buildCustomProviderFromJson = () => {
-    const input = JSON.parse(customProviderJson)
-    const usedIds = new Set(
-      draft.customProviders
-        .filter((item) => item.id !== editingCustomProviderId)
-        .map((item) => item.id),
-    )
-    const provider = normalizeCustomProviderDefinition(
-      editingCustomProviderId && input && typeof input === 'object'
-        ? {
-            ...input,
-            id: editingCustomProviderId,
-          }
-        : input,
-      usedIds,
-    )
-    if (!provider) throw new Error('自定义服务商配置无效')
-    return provider
-  }
+  const buildCustomProviderFromJson = () =>
+    buildCustomProvider(JSON.parse(customProviderJson), draft.customProviders, editingCustomProviderId)
 
   function openEditCustomProvider(provider: CustomProviderDefinition) {
     if (presetConfigOnly || isPresetProviderLocked(provider.id)) return
@@ -1068,17 +1006,9 @@ export default function SettingsModal() {
   }
 
   function deleteCustomProvider(provider: CustomProviderDefinition) {
-    if (presetConfigOnly || isPresetProviderDeletionPrevented(provider.id, draft.profiles)) return
-    const providerId = provider.id
-    if (isPresetProvider(providerId)) dismissPresetProvider(providerId)
-    const nextDraft = normalizeSettings({
-      ...draft,
-      customProviders: draft.customProviders.filter((provider) => provider.id !== providerId),
-      profiles: draft.profiles.map((profile) =>
-        profile.provider === providerId ? switchApiProfileProvider(profile, 'openai') : profile,
-      ),
-    })
-    commitSettings(nextDraft)
+    if (getCustomProviderDeleteBlock(draft, provider.id)) return
+    if (isPresetProvider(provider.id)) dismissPresetProvider(provider.id)
+    commitSettings(removeCustomProvider(draft, provider.id))
     showToast('服务商已删除', 'success')
   }
 
@@ -1229,6 +1159,15 @@ export default function SettingsModal() {
                 </svg>
                 Agent 配置
               </button>
+              {isTauri && (
+                <button
+                  onClick={() => setActiveTab('skill')}
+                  className={`whitespace-nowrap flex-shrink-0 flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-xl transition-colors ${activeTab === 'skill' ? 'bg-white dark:bg-white/[0.08] shadow-sm text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100/80 dark:hover:bg-white/[0.04]'}`}
+                >
+                  <SparklesIcon className="w-4 h-4" />
+                  Skill
+                </button>
+              )}
               <button
                 onClick={() => setActiveTab('data')}
                 className={`whitespace-nowrap flex-shrink-0 flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-xl transition-colors ${activeTab === 'data' ? 'bg-white dark:bg-white/[0.08] shadow-sm text-blue-600 dark:text-blue-400 font-medium' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100/80 dark:hover:bg-white/[0.04]'}`}
@@ -1973,6 +1912,8 @@ export default function SettingsModal() {
                 </div>
               </div>
             )}
+
+            {activeTab === 'skill' && isTauri && <SkillSettingsSection />}
 
             {activeTab === 'about' && <AboutSettingsTab onOpenFontLicenses={() => setShowFontLicenses(true)} />}
           </div>

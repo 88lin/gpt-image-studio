@@ -287,6 +287,22 @@ impl Storage {
         }
     }
 
+    /// 各图片文件的完整路径，供 CLI 交给 AI 工具直接读取；没有记录或文件缺失时为 None
+    pub fn image_paths(&self, ids: &[String]) -> Result<Vec<Option<String>>> {
+        let conn = self.lock();
+        let mut stmt = conn.prepare("SELECT file FROM images WHERE id = ?1")?;
+        ids.iter()
+            .map(|id| {
+                let file: Option<String> = stmt.query_row([id], |row| row.get(0)).optional()?;
+                // 库中的相对路径以 / 分隔，逐段拼接成本机的写法
+                Ok(file
+                    .map(|file| file.split('/').fold(self.root.clone(), |path, part| path.join(part)))
+                    .filter(|path| path.is_file())
+                    .map(|path| path.to_string_lossy().into_owned()))
+            })
+            .collect()
+    }
+
     pub fn image_ids(&self) -> Result<Vec<String>> {
         let conn = self.lock();
         let mut stmt = conn.prepare("SELECT id FROM images ORDER BY id")?;
