@@ -320,7 +320,7 @@ export default function TaskGrid() {
             </button>
             {isTauri && !tasks.length && (
               <p className="mt-3 text-xs">
-                从网页版迁移：在网页版的 <strong className="font-semibold">设置 → 数据管理</strong> 中导出备份，再
+                从网页版迁移：在网页版的<strong className="font-semibold">「设置 → 数据管理」</strong>中导出备份，再
                 <button
                   type="button"
                   onClick={() => setShowSettings(true, 'data')}

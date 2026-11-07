@@ -111,14 +111,14 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
   const empty = { text: '（空）', hint: true }
   const name = (value: string) => clip(value) || '（空）'
   const literal = (value: string) => value ? { text: value } : empty
-  const formatUrl = (value: string) => {
+  const formatUrl = (profile: ApiProfile) => {
     try {
       // 输入和流程与 buildApiUrl 发请求时完全一致，不能先折叠空白：URL 解析会删除中间的 Tab 和换行，折叠成空格会让预览与实际主机不符
-      const url = new URL(normalizeBaseUrl(value.trim()))
+      const url = new URL(normalizeBaseUrl(profile.baseUrl.trim(), profile.provider === 'google' ? 'v1beta' : 'v1'))
       return `${url.protocol}//${url.host}${clip(`${url.pathname}${url.search}`.replace(/^\/$/, ''), 40)}`
     } catch {
       // 无法解析时不截断，避免藏起真实地址
-      return text(value)
+      return text(profile.baseUrl)
     }
   }
 
@@ -131,8 +131,9 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
     ['API 代理', (p) => onOff(p.apiProxy)],
     ['API 接口', (p) => p.apiMode === 'responses' ? fixed('Responses API') : p.apiMode === 'images' ? fixed('Images API') : literal(clip(String(p.apiMode)))],
     ['首页选中的模型', (p) => literal(clip(p.selectedModel ?? ''))],
-    ['图像生成模型', (p) => literal(clip(p.imageGenerationModel ?? ''))],
     ['推理强度', (p) => p.reasoningEffort ? literal(clip(p.reasoningEffort)) : fixed('默认')],
+    ['图像模型 ID', (p) => literal(clip(p.imageGenerationModel ?? ''))],
+    ['SVG 编写模型 ID', (p) => literal(clip(p.svgModel ?? ''))],
     ['流式传输', (p) => onOff(p.streamImages)],
     ['请求中间步骤图像数', (p) => literal(String(p.streamPartialImages ?? DEFAULT_STREAM_PARTIAL_IMAGES))],
     ['透明背景实现方式', (p) => p.transparentBackgroundMethod === 'local' ? fixed('本地后处理') : p.transparentBackgroundMethod === 'api' ? fixed('API 原生') : literal(clip(String(p.transparentBackgroundMethod)))],
@@ -142,7 +143,7 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
     ['配置说明', (p) => literal(clip(p.description ?? ''))],
   ]
   // 上面已逐项展示的字段；其余字段（如其他服务商的草稿，可能含地址）有变化时统一提示
-  const shownKeys = new Set(['name', 'baseUrl', 'model', 'apiKey', 'provider', 'apiProxy', 'apiMode', 'selectedModel', 'imageGenerationModel', 'reasoningEffort', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod', 'responseFormatB64Json', 'codexCli', 'timeout', 'description'])
+  const shownKeys = new Set(['name', 'baseUrl', 'model', 'apiKey', 'provider', 'apiProxy', 'apiMode', 'selectedModel', 'imageGenerationModel', 'svgModel', 'reasoningEffort', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod', 'responseFormatB64Json', 'codexCli', 'timeout', 'description'])
   const hidden = (profile: ApiProfile) => JSON.stringify(Object.entries(profile).filter(([key]) => !shownKeys.has(key)))
   // 新增配置只有 + 行，值为空的字段没有意义，不列出
   const fieldRows = (before: ApiProfile, after: ApiProfile, showBefore: boolean): ImportLinkDiffRow[] => fields
@@ -155,8 +156,17 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
     const old = oldById.get(profile.id)
     return old && JSON.stringify(old) !== JSON.stringify(profile)
   })
-  const providerIds = new Set(current.customProviders.map((provider) => provider.id))
-  const providerNames = next.customProviders.filter((provider) => !providerIds.has(provider.id)).map((provider) => name(provider.name))
+  const oldProviderById = new Map(current.customProviders.map((provider) => [provider.id, provider]))
+  const providerNames = next.customProviders.filter((provider) => !oldProviderById.has(provider.id)).map((provider) => name(provider.name))
+  // 同 ID 的服务商定义会被链接覆盖，可能改变请求地址
+  const modifiedProviderNames = next.customProviders.filter((provider) => {
+    const old = oldProviderById.get(provider.id)
+    return old && JSON.stringify(old) !== JSON.stringify(provider)
+  }).map((provider) => name(oldProviderById.get(provider.id)!.name))
+  const providerCounts = [
+    ...(modifiedProviderNames.length ? [`修改 ${modifiedProviderNames.length} 个`] : []),
+    ...(providerNames.length ? [`新增 ${providerNames.length} 个`] : []),
+  ]
 
   // 改了地址的修改项排在最前；所有项全部列出，过多时由确认框内容区滚动
   modified.sort((a, b) => Number(b.baseUrl !== oldById.get(b.id)!.baseUrl) - Number(a.baseUrl !== oldById.get(a.id)!.baseUrl))
@@ -167,7 +177,7 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
       const keyKept = old.apiKey === profile.apiKey && Boolean(profile.apiKey)
       const rows: ImportLinkDiffRow[] = []
       if (old.name !== profile.name) rows.push({ label: '名称', before: literal(clip(old.name)), after: literal(clip(profile.name)) })
-      if (urlChanged) rows.push({ label: 'API 地址', before: literal(formatUrl(old.baseUrl)), after: literal(formatUrl(profile.baseUrl)) })
+      if (urlChanged) rows.push({ label: 'API 地址', before: literal(formatUrl(old)), after: literal(formatUrl(profile)) })
       if (old.model !== profile.model) rows.push({ label: '模型', before: literal(clip(old.model)), after: literal(clip(profile.model)) })
       rows.push(...fieldRows(old, profile, true))
       // 只描述 Key 的来源，不显示原文
@@ -190,7 +200,7 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
       return {
         title: `新增配置「${name(profile.name)}」`,
         rows: [
-          { label: 'API 地址', after: literal(formatUrl(profile.baseUrl)) },
+          { label: 'API 地址', after: literal(formatUrl(profile)) },
           { label: '模型', after: literal(clip(profile.model)) },
           ...fieldRows(base, profile, false),
           profile.apiKey ? { label: 'API Key', after: { text: '链接中的 Key', hint: true } } : { label: 'API Key', note: '链接中未包含 API Key' },
@@ -213,8 +223,8 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
     ? '请只导入来源可信的链接。'
     : count
       ? `链接将${counts.join('、')}配置${counts.length > 1 ? `，共 ${count} 个` : ''}。请只导入来源可信的链接。`
-      : providerNames.length
-        ? `链接将新增 ${providerNames.length} 个自定义服务商。请只导入来源可信的链接。`
+      : providerCounts.length
+        ? `链接将${providerCounts.join('、')}自定义服务商。请只导入来源可信的链接。`
         : switched
           ? `已存在相同的配置，导入后将切换到「${name(switched.name)}」。`
           : restoredNames.length
@@ -222,12 +232,14 @@ export function describeImportLink(params: URLSearchParams, settings: AppSetting
             : '链接中的配置不会改变当前设置（已存在相同配置，或受当前部署限制）。'
 
   return {
+    hasConfigChanges: count + providerCounts.length + restoredNames.length > 0,
     summary,
     notes: [
       ...(restoredNames.length ? [`将恢复预置配置：${restoredNames.join('、')}`] : []),
+      ...(modifiedProviderNames.length ? [`修改自定义服务商：${modifiedProviderNames.join('、')}`] : []),
       ...(providerNames.length ? [`新增自定义服务商：${providerNames.join('、')}`] : []),
-      // 只新增服务商时摘要描述服务商，切换信息放在附注中
-      ...(!count && providerNames.length && switched ? [`导入后将切换到「${name(switched.name)}」`] : []),
+      // 只涉及服务商时摘要描述服务商，切换信息放在附注中
+      ...(!count && providerCounts.length && switched ? [`导入后将切换到「${name(switched.name)}」`] : []),
     ],
     groups,
   }

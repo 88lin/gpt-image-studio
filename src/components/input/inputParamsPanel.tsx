@@ -1,19 +1,49 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ApiProfile, AppSettings, BatchProgress, BatchPromptMode, TaskParams } from '../../types'
+import { GIF_FRAME_COUNT_RANGE, GIF_FRAME_DURATION_RANGE, IMAGE_COMPLEXITIES, type ApiProfile, type AppSettings, type BatchProgress, type BatchPromptMode, type ParamDisabledReasons, type TaskParams } from '../../types'
 import { DEFAULT_BATCH_PROMPT_CONCURRENCY, normalizeBatchPromptConcurrency } from '../../lib/batchPrompts'
 import { isTauri } from '../../lib/platform'
+import { getImageModelFamily, supportsGrokQuality } from '../../lib/imageModels'
+import { getImageModelOptions, getImageModelParams } from '../../lib/imageModelParams'
+import { getImageSearchSupport, getImageThinkingSupport } from '../../lib/imageSearch'
+import { useHintTooltip } from '../../hooks/useHintTooltip'
 import { dismissAllTooltips } from '../../lib/tooltipDismiss'
-import Select from '../Select'
+import Select, { type SelectOption } from '../Select'
 import ButtonTooltip from './buttonTooltip'
 import ParamPopoverChip, { CHIP_BASE_CLASS, CHIP_IDLE_CLASS } from './paramPopoverChip'
 
 const CHIP_CLASS = `${CHIP_BASE_CLASS} ${CHIP_IDLE_CLASS}`
 const CHIP_DISABLED_CLASS = 'h-8 px-3.5 rounded-full bg-black/[0.03] dark:bg-white/[0.04] opacity-50 cursor-not-allowed text-xs text-gray-700 dark:text-gray-200'
-const ROW_CLASS = 'relative flex items-center justify-between gap-3'
+// 与下拉框同高，开关行和下拉框行的间距保持一致
+const ROW_CLASS = 'relative flex min-h-[30px] items-center justify-between gap-3'
 const ROW_LABEL_CLASS = 'text-gray-500 dark:text-gray-400'
 const CONTROL_DISABLED_CLASS = 'px-3 py-1.5 rounded-xl border border-transparent bg-black/[0.04] dark:bg-white/[0.04] opacity-50 cursor-not-allowed text-xs transition-all duration-200'
 
 type BatchSettingsPatch = Partial<Pick<AppSettings, 'batchPromptEnabled' | 'batchPromptMode' | 'batchPromptConcurrencyLimited' | 'batchPromptConcurrency'>>
+
+function ImageSearchToggle({ label, hint: hintText, checked, reason, onToggle }: { label: string; hint: string; checked: boolean; reason?: string; onToggle: () => void }) {
+  const hint = useHintTooltip()
+  return (
+    <div
+      className={ROW_CLASS}
+      onMouseEnter={hint.show}
+      onMouseLeave={hint.hide}
+      onTouchStart={hint.startTouch}
+      onTouchEnd={hint.clearTimer}
+      onTouchCancel={hint.hide}
+      onClick={reason ? hint.show : undefined}
+      onFocus={hint.show}
+      onBlur={hint.hide}
+      tabIndex={reason ? 0 : undefined}
+    >
+      <span className={ROW_LABEL_CLASS}>{label}</span>
+      <Switch label={label} checked={!reason && checked} disabled={Boolean(reason)} onToggle={onToggle} />
+      <ButtonTooltip
+        visible={hint.visible}
+        text={reason ?? hintText}
+      />
+    </div>
+  )
+}
 
 function Switch({ checked, disabled, label, onToggle }: { checked: boolean; disabled?: boolean; label: string; onToggle: () => void }) {
   return (
@@ -85,6 +115,49 @@ function ConcurrencyInput({ value, disabled, onCommit }: { value: number; disabl
   )
 }
 
+/** GIF 帧参数输入框：超出范围时取边界值，清空或无效时保留原值 */
+function GifParamInput({ value, range, onCommit }: {
+  value: number
+  range: { min: number; max: number }
+  onCommit: (value: number) => void
+}) {
+  const [input, setInput] = useState(String(value))
+  const latestRef = useRef({ input, value, onCommit })
+  latestRef.current = { input, value, onCommit }
+
+  const parse = (text: string, fallback: number) => {
+    const parsed = Number(text)
+    if (!text.trim() || !Number.isFinite(parsed)) return fallback
+    return Math.min(range.max, Math.max(range.min, Math.round(parsed)))
+  }
+
+  // 直接关闭弹层时输入框被卸载而不会触发 blur，卸载时补一次提交
+  useEffect(() => () => {
+    const latest = latestRef.current
+    const next = parse(latest.input, latest.value)
+    if (next !== latest.value) latest.onCommit(next)
+  }, [])
+
+  return (
+    <input
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      onBlur={() => {
+        const next = parse(input, value)
+        setInput(String(next))
+        if (next !== value) onCommit(next)
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') e.currentTarget.blur()
+      }}
+      type="number"
+      min={range.min}
+      max={range.max}
+      className="w-28 px-3 py-1.5 rounded-xl border border-transparent bg-black/[0.04] dark:bg-white/[0.06] focus:border-blue-300 dark:focus:border-blue-500/50 focus:outline-none text-xs transition-all duration-200"
+    />
+  )
+}
+
 interface HintTooltipState {
   visible: boolean
   show: () => void
@@ -97,10 +170,11 @@ export default function InputParamsPanel({
   params,
   setParams,
   activeProfile,
+  searchSupport,
+  thinkingSupport,
   modelOptions,
   onModelChange,
   isFalProvider,
-  isFalTextToImage,
   displaySize,
   qualityOptions,
   selectClass,
@@ -116,6 +190,9 @@ export default function InputParamsPanel({
   commitOutputCompression,
   moderationHint,
   moderationDisabled,
+  complexityHint,
+  disabledReasons,
+  hasInputImages,
   agentAutoImageCount,
   outputImageLimit,
   nInput,
@@ -147,12 +224,13 @@ export default function InputParamsPanel({
   params: TaskParams
   setParams: (patch: Partial<TaskParams>) => void
   activeProfile: ApiProfile
+  searchSupport: ReturnType<typeof getImageSearchSupport>
+  thinkingSupport: ReturnType<typeof getImageThinkingSupport>
   modelOptions: Array<{ label: string; value: string }>
   onModelChange: (model: string) => void
   isFalProvider: boolean
-  isFalTextToImage: boolean
   displaySize: string
-  qualityOptions: Array<{ label: string; value: string }>
+  qualityOptions: SelectOption[]
   selectClass: string
   transparentOutputAvailable: boolean
   showTransparentOutputControl: boolean
@@ -166,6 +244,9 @@ export default function InputParamsPanel({
   commitOutputCompression: () => void
   moderationHint: HintTooltipState
   moderationDisabled: boolean
+  complexityHint: HintTooltipState
+  disabledReasons: ParamDisabledReasons
+  hasInputImages: boolean
   agentAutoImageCount: boolean
   outputImageLimit: number
   nInput: string
@@ -195,13 +276,32 @@ export default function InputParamsPanel({
   onStopBatch: () => void
 }) {
   // 折叠时也展示弹层内每一项的当前值，不支持的参数不显示
-  const moreSummary = [
-    params.output_format.toUpperCase(),
-    showTransparentOutputControl
-      ? `透明 ${transparentOutputEnabled}`
-      : compressionDisabled ? null : `压缩 ${outputCompressionInput || '默认'}`,
-    moderationDisabled ? null : `审核 ${params.moderation}`,
-  ].filter(Boolean).join(' · ')
+  const family = getImageModelFamily(activeProfile)
+  const modelOptionsForImage = getImageModelOptions(activeProfile)
+  const modelParams = getImageModelParams(activeProfile, params)
+  const resolutionHint = useHintTooltip({ enabled: () => !modelOptionsForImage.resolutions.length })
+  const thinkingHint = useHintTooltip({ enabled: () => Boolean(thinkingSupport.reason) })
+  const qualityDisabled = family === 'grok' && !supportsGrokQuality(activeProfile.model)
+  const thinkingValue = thinkingSupport.levels.includes(params.thinking_level ?? '') ? params.thinking_level! : 'auto'
+  const isGif = params.output_format === 'gif'
+  const moreSummary = (
+    family === 'gemini'
+      ? [
+          thinkingSupport.reason ? null : `思考等级 ${thinkingValue}`,
+          params.google_search && !searchSupport.googleSearch ? 'Google Search' : null,
+          params.image_search && !searchSupport.imageSearch ? 'Image Search' : null,
+          transparentOutputAvailable ? `透明 ${Boolean(params.transparent_output)}` : null,
+        ]
+      : [
+          disabledReasons.complexity ? null : `复杂度 ${params.complexity}`,
+          params.output_format.toUpperCase(),
+          isGif ? `${params.frame_count} 帧` : null,
+          showTransparentOutputControl
+            ? `透明 ${transparentOutputEnabled}`
+            : compressionDisabled ? null : `压缩 ${outputCompressionInput || '默认'}`,
+          moderationDisabled ? null : `审核 ${params.moderation}`,
+        ]
+  ).filter(Boolean).join(' · ')
   const prefix = (text: string) => <span className="mr-1.5 text-gray-400 dark:text-gray-500">{text}</span>
 
   const batchSummary = batchProgress
@@ -209,9 +309,8 @@ export default function InputParamsPanel({
     : batchEnabled ? `${batchPromptCount} 条` : undefined
 
   return (
-    <div className="flex flex-1 flex-wrap sm:flex-nowrap items-center gap-2 min-w-0 text-xs">
-      {/* 极小的收缩权重：先截断“更多”的摘要，放不下时才压缩模型 ID */}
-      <div className="min-w-0 max-w-full sm:shrink-[0.01] max-sm:flex-auto">
+    <div className="flex flex-1 flex-wrap items-center gap-2 min-w-0 text-xs">
+      <div className="min-w-0 max-w-full max-sm:flex-auto">
         <Select
           value={activeProfile.model}
           onChange={(val) => onModelChange(String(val))}
@@ -221,55 +320,117 @@ export default function InputParamsPanel({
           className={CHIP_CLASS}
         />
       </div>
-      <div
-        className="relative max-sm:flex-auto sm:shrink-0"
-        onMouseEnter={sizeHint.show}
-        onMouseLeave={sizeHint.hide}
-        onTouchStart={sizeHint.startTouch}
-        onTouchEnd={sizeHint.clearTimer}
-        onTouchCancel={sizeHint.hide}
-        onClick={sizeHint.show}
-      >
-        <button
-          type="button"
-          onClick={() => { dismissAllTooltips(); onOpenSizePicker() }}
-          className={`flex w-full items-center ${CHIP_CLASS}`}
-        >
-          {prefix('尺寸')}
-          <span className="font-mono">{displaySize}</span>
-        </button>
-        <ButtonTooltip
-          visible={(isFalTextToImage || activeProfile.codexCli) && sizeHint.visible}
-          text={isFalTextToImage
-            ? <>fal.ai 的文生图模式不支持 <code className="rounded bg-white/10 px-1 py-0.5 font-mono">auto</code> 参数</>
-            : 'Codex CLI 不支持尺寸参数，此处设置仅基于提示词工程'}
-        />
-      </div>
-      <div
-        className="relative max-sm:flex-auto sm:shrink-0"
-        onMouseEnter={qualityHint.show}
-        onMouseLeave={qualityHint.hide}
-        onTouchStart={qualityHint.startTouch}
-        onTouchEnd={qualityHint.clearTimer}
-        onTouchCancel={qualityHint.hide}
-        onClick={qualityHint.show}
-      >
-        <Select
-          value={activeProfile.codexCli ? 'auto' : isFalProvider && params.quality === 'auto' ? 'high' : params.quality}
-          onChange={(val) => {
-            if (!activeProfile.codexCli) setParams({ quality: val as TaskParams['quality'] })
-          }}
-          options={qualityOptions}
-          disabled={activeProfile.codexCli}
-          prefix={prefix('质量')}
-          menuClassName="min-w-max"
-          className={activeProfile.codexCli ? CHIP_DISABLED_CLASS : CHIP_CLASS}
-        />
-        <ButtonTooltip
-          visible={(activeProfile.codexCli || isFalProvider) && qualityHint.visible}
-          text={isFalProvider ? <>fal.ai 不支持 <code className="rounded bg-white/10 px-1 py-0.5 font-mono">auto</code> 质量参数</> : 'Codex CLI 不支持质量参数'}
-        />
-      </div>
+      {family && (
+        <>
+          <div className="max-sm:flex-auto sm:shrink-0">
+            <Select
+              value={modelParams.aspect_ratio}
+              onChange={(value) => setParams({ aspect_ratio: String(value) })}
+              options={modelOptionsForImage.ratios.map((value) => ({ label: value, value }))}
+              prefix={prefix('比例')}
+              menuClassName="min-w-max"
+              className={CHIP_CLASS}
+            />
+          </div>
+          <div
+            className="relative max-sm:flex-auto sm:shrink-0"
+            onMouseEnter={resolutionHint.show}
+            onMouseLeave={resolutionHint.hide}
+            onTouchStart={resolutionHint.startTouch}
+            onTouchEnd={resolutionHint.clearTimer}
+            onTouchCancel={resolutionHint.hide}
+            onClick={resolutionHint.show}
+          >
+            <Select
+              value={modelParams.resolution ?? 'auto'}
+              onChange={(value) => setParams({ resolution: String(value) })}
+              options={(family === 'grok' ? ['1K', '2K'] : ['512', '1K', '2K', '4K']).map((value) => ({
+                label: value,
+                value,
+                disabledReason: modelOptionsForImage.resolutions.includes(value) ? undefined : '当前模型不支持此分辨率',
+              }))}
+              disabled={!modelOptionsForImage.resolutions.length}
+              prefix={prefix('分辨率')}
+              menuClassName="min-w-max"
+              className={modelOptionsForImage.resolutions.length ? CHIP_CLASS : CHIP_DISABLED_CLASS}
+            />
+            <ButtonTooltip visible={!modelOptionsForImage.resolutions.length && resolutionHint.visible} text="当前模型不支持分辨率参数" />
+          </div>
+          {family === 'grok' && (
+            <div
+              className="relative max-sm:flex-auto sm:shrink-0"
+              onMouseEnter={qualityHint.show}
+              onMouseLeave={qualityHint.hide}
+              onTouchStart={qualityHint.startTouch}
+              onTouchEnd={qualityHint.clearTimer}
+              onTouchCancel={qualityHint.hide}
+              onClick={qualityHint.show}
+            >
+              <Select
+                value={modelParams.quality ?? 'auto'}
+                onChange={(value) => setParams({ quality: value as TaskParams['quality'] })}
+                options={['auto', 'low', 'medium'].map((value) => ({ label: value, value }))}
+                disabled={qualityDisabled}
+                prefix={prefix('质量')}
+                menuClassName="min-w-max"
+                className={qualityDisabled ? CHIP_DISABLED_CLASS : CHIP_CLASS}
+              />
+              <ButtonTooltip visible={qualityDisabled && qualityHint.visible} text="当前模型不支持质量参数" />
+            </div>
+          )}
+        </>
+      )}
+      {!family && (
+        <>
+          <div
+            className="relative max-sm:flex-auto sm:shrink-0"
+            onMouseEnter={sizeHint.show}
+            onMouseLeave={sizeHint.hide}
+            onTouchStart={sizeHint.startTouch}
+            onTouchEnd={sizeHint.clearTimer}
+            onTouchCancel={sizeHint.hide}
+            onClick={sizeHint.show}
+          >
+            <button
+              type="button"
+              onClick={() => { dismissAllTooltips(); onOpenSizePicker() }}
+              className={`flex w-full items-center ${CHIP_CLASS}`}
+            >
+              {prefix('尺寸')}
+              <span className="font-mono">{displaySize}</span>
+            </button>
+            <ButtonTooltip
+              visible={(Boolean(disabledReasons.autoSize) || activeProfile.codexCli) && sizeHint.visible}
+              text={disabledReasons.autoSize ?? 'Codex CLI 不支持尺寸参数，此处设置仅基于提示词工程'}
+            />
+          </div>
+          <div
+            className="relative max-sm:flex-auto sm:shrink-0"
+            onMouseEnter={qualityHint.show}
+            onMouseLeave={qualityHint.hide}
+            onTouchStart={qualityHint.startTouch}
+            onTouchEnd={qualityHint.clearTimer}
+            onTouchCancel={qualityHint.hide}
+            onClick={qualityHint.show}
+          >
+            <Select
+              value={activeProfile.codexCli ? 'auto' : isFalProvider && params.quality === 'auto' ? 'high' : params.quality}
+              onChange={(val) => {
+                if (!activeProfile.codexCli) setParams({ quality: val as TaskParams['quality'] })
+              }}
+              options={qualityOptions}
+              disabled={activeProfile.codexCli}
+              prefix={prefix('质量')}
+              menuClassName="min-w-max"
+              className={activeProfile.codexCli ? CHIP_DISABLED_CLASS : CHIP_CLASS}
+            />
+            <ButtonTooltip
+              visible={activeProfile.codexCli && qualityHint.visible}
+              text="Codex CLI 不支持质量参数"
+            />
+          </div>
+        </>
+      )}
       <label
         className={`relative flex items-center max-sm:flex-auto sm:shrink-0 ${agentAutoImageCount ? CHIP_DISABLED_CLASS : `${CHIP_CLASS} cursor-text`}`}
         onMouseEnter={() => { showAgentNHint(); streamConcurrentHint.show() }}
@@ -312,125 +473,283 @@ export default function InputParamsPanel({
         <ButtonTooltip visible={nLimitHint.visible} text={nLimitHintText} />
         <ButtonTooltip visible={streamConcurrentByN && streamConcurrentHint.visible && !nLimitHint.visible} text="数量大于 1 时会将多图生成拆分为并发单图" />
       </label>
-      <ParamPopoverChip label="更多" summary={moreSummary} className="sm:min-w-[5rem]">
-            <div className={ROW_CLASS}>
-              <span className={ROW_LABEL_CLASS}>格式</span>
-              <div className="w-28">
-                <Select
-                  value={params.output_format}
-                  onChange={(val) => {
-                    setParams({
-                      output_format: val as TaskParams['output_format'],
-                      ...(val === 'png' ? { output_compression: null } : {}),
-                      ...(val === 'jpeg' ? { transparent_output: false } : {}),
-                    })
-                  }}
-                  options={[
-                    { label: 'PNG', value: 'png' },
-                    { label: 'JPEG', value: 'jpeg' },
-                    { label: 'WebP', value: 'webp' },
-                  ]}
-                  className={selectClass}
-                />
-              </div>
-            </div>
-            {showTransparentOutputControl && (
+      {family === 'grok' && transparentOutputAvailable && (
+        <div
+          className="relative max-sm:flex-auto sm:shrink-0"
+          onMouseEnter={transparentOutputHint.show}
+          onMouseLeave={transparentOutputHint.hide}
+          onTouchStart={transparentOutputHint.startTouch}
+          onTouchEnd={transparentOutputHint.clearTimer}
+          onTouchCancel={transparentOutputHint.hide}
+          onClick={transparentOutputHint.show}
+        >
+          <Select
+            value={params.transparent_output ? 'on' : 'off'}
+            onChange={(value) => setParams({ transparent_output: value === 'on' })}
+            options={[
+              { label: 'false', value: 'off' },
+              { label: 'true', value: 'on' },
+            ]}
+            prefix={prefix('透明背景')}
+            menuClassName="min-w-max"
+            className={CHIP_CLASS}
+            onOpenChange={onTransparentOutputMenuOpenChange}
+          />
+          <ButtonTooltip visible={transparentOutputHint.visible} text="当前图像模型使用本地后处理生成透明背景" />
+        </div>
+      )}
+      {family !== 'grok' && (
+        // 按 5rem 参与换行判断，再伸展到摘要全宽：空间不足时先截断摘要，连 5rem 都放不下才换行
+        <ParamPopoverChip label="更多" summary={moreSummary} className="sm:basis-20 sm:grow sm:max-w-max">
+          {family === 'gemini' && (
+            <>
               <div
                 className={ROW_CLASS}
-                onMouseEnter={transparentOutputHint.show}
-                onMouseLeave={transparentOutputHint.hide}
-                onTouchStart={transparentOutputHint.startTouch}
-                onTouchEnd={transparentOutputHint.clearTimer}
-                onTouchCancel={transparentOutputHint.hide}
-                onClick={transparentOutputHint.show}
+                onMouseEnter={thinkingHint.show}
+                onMouseLeave={thinkingHint.hide}
+                onTouchStart={thinkingHint.startTouch}
+                onTouchEnd={thinkingHint.clearTimer}
+                onTouchCancel={thinkingHint.hide}
+                onClick={thinkingHint.show}
               >
-                <span className={ROW_LABEL_CLASS}>透明背景</span>
+                <span className={ROW_LABEL_CLASS}>思考等级</span>
                 <div className="w-28">
                   <Select
-                    value={transparentOutputEnabled ? 'on' : 'off'}
-                    onChange={(val) => {
-                      if (!transparentOutputAvailable) return
-                      setParams({
-                        transparent_output: val === 'on',
-                        ...(params.output_format === 'png' ? { output_compression: null } : {}),
-                      })
-                    }}
-                    options={[
-                      { label: 'false', value: 'off' },
-                      { label: 'true', value: 'on' },
-                    ]}
-                    className={selectClass}
-                    onOpenChange={onTransparentOutputMenuOpenChange}
+                    value={thinkingValue}
+                    onChange={(value) => setParams({ thinking_level: value as TaskParams['thinking_level'] })}
+                    options={['auto', 'minimal', 'low', 'medium', 'high'].map((value) => ({
+                      label: value,
+                      value,
+                      disabledReason: value === 'auto' || thinkingSupport.levels.includes(value) ? undefined : '当前模型不支持此思考等级',
+                    }))}
+                    disabled={Boolean(thinkingSupport.reason)}
+                    className={thinkingSupport.reason ? CONTROL_DISABLED_CLASS : selectClass}
                   />
                 </div>
-                <ButtonTooltip
-                  visible={transparentOutputHint.visible}
-                  text="实现方式可在 设置 → API 配置 中选择"
-                />
+                <ButtonTooltip visible={Boolean(thinkingSupport.reason) && thinkingHint.visible} text={thinkingSupport.reason} />
               </div>
-            )}
-            {!showTransparentOutputControl && (
-              <label
-                className={ROW_CLASS}
-                onMouseEnter={compressionHint.show}
-                onMouseLeave={compressionHint.hide}
-                onTouchStart={compressionHint.startTouch}
-                onTouchEnd={compressionHint.clearTimer}
-                onTouchCancel={compressionHint.hide}
-                onClick={compressionHint.show}
-              >
-                <span className={ROW_LABEL_CLASS}>压缩率</span>
-                <input
-                  value={outputCompressionInput}
-                  onChange={(e) => setOutputCompressionInput(e.target.value)}
-                  onBlur={commitOutputCompression}
-                  disabled={compressionDisabled}
-                  type="number"
-                  min={0}
-                  max={100}
-                  placeholder="0-100"
-                  className={`w-28 px-3 py-1.5 rounded-xl border border-transparent focus:border-blue-300 dark:focus:border-blue-500/50 focus:outline-none text-xs transition-all duration-200 ${
-                    compressionDisabled
-                      ? 'bg-black/[0.03] dark:bg-white/[0.04] opacity-50 cursor-not-allowed'
-                      : 'bg-black/[0.04] dark:bg-white/[0.06]'
-                    }`}
-                />
-                <ButtonTooltip
-                  visible={compressionHint.visible}
-                  text={isFalProvider ? 'fal.ai 不支持压缩率参数' : '仅 JPEG 和 WebP 支持压缩率'}
-                />
-              </label>
-            )}
+              <ImageSearchToggle
+                label="Google Search"
+                hint="搜索网页信息，为图像生成提供参考"
+                checked={Boolean(params.google_search)}
+                reason={searchSupport.googleSearch}
+                onToggle={() => setParams({ google_search: !params.google_search })}
+              />
+              <ImageSearchToggle
+                label="Image Search"
+                hint="搜索网络图片，为图像生成提供视觉参考"
+                checked={Boolean(params.image_search)}
+                reason={searchSupport.imageSearch}
+                onToggle={() => setParams({ image_search: !params.image_search })}
+              />
+            </>
+          )}
+          {family === 'gemini' && transparentOutputAvailable && (
             <div
               className={ROW_CLASS}
-              onMouseEnter={moderationHint.show}
-              onMouseLeave={moderationHint.hide}
-              onTouchStart={moderationHint.startTouch}
-              onTouchEnd={moderationHint.clearTimer}
-              onTouchCancel={moderationHint.hide}
-              onClick={moderationHint.show}
+              onMouseEnter={transparentOutputHint.show}
+              onMouseLeave={transparentOutputHint.hide}
+              onTouchStart={transparentOutputHint.startTouch}
+              onTouchEnd={transparentOutputHint.clearTimer}
+              onTouchCancel={transparentOutputHint.hide}
+              onClick={transparentOutputHint.show}
             >
-              <span className={ROW_LABEL_CLASS}>审核</span>
+              <span className={ROW_LABEL_CLASS}>透明背景</span>
               <div className="w-28">
                 <Select
-                  value={moderationDisabled ? 'auto' : params.moderation}
-                  onChange={(val) => {
-                    if (!moderationDisabled) setParams({ moderation: val as TaskParams['moderation'] })
-                  }}
+                  value={params.transparent_output ? 'on' : 'off'}
+                  onChange={(value) => setParams({ transparent_output: value === 'on' })}
                   options={[
-                    { label: 'auto', value: 'auto' },
-                    { label: 'low', value: 'low' },
+                    { label: 'false', value: 'off' },
+                    { label: 'true', value: 'on' },
                   ]}
-                  disabled={moderationDisabled}
-                  className={moderationDisabled ? CONTROL_DISABLED_CLASS : selectClass}
+                  className={selectClass}
+                  onOpenChange={onTransparentOutputMenuOpenChange}
                 />
               </div>
               <ButtonTooltip
-                visible={moderationDisabled && moderationHint.visible}
-                text="fal.ai 不支持审核参数"
+                visible={transparentOutputHint.visible}
+                text="当前图像模型使用本地后处理生成透明背景"
               />
             </div>
-      </ParamPopoverChip>
+          )}
+          {!family && (
+            <>
+              <div
+                className={ROW_CLASS}
+                onMouseEnter={complexityHint.show}
+                onMouseLeave={complexityHint.hide}
+                onTouchStart={complexityHint.startTouch}
+                onTouchEnd={complexityHint.clearTimer}
+                onTouchCancel={complexityHint.hide}
+                onClick={complexityHint.show}
+              >
+                <span className={ROW_LABEL_CLASS}>复杂度</span>
+                <div className="w-28">
+                  <Select
+                    value={disabledReasons.complexity ? 'auto' : params.complexity}
+                    onChange={(val) => {
+                      if (!disabledReasons.complexity) setParams({ complexity: val as TaskParams['complexity'] })
+                    }}
+                    options={IMAGE_COMPLEXITIES.map((value) => ({ label: value, value }))}
+                    disabled={Boolean(disabledReasons.complexity)}
+                    className={disabledReasons.complexity ? CONTROL_DISABLED_CLASS : selectClass}
+                  />
+                </div>
+                <ButtonTooltip
+                  visible={Boolean(disabledReasons.complexity) && complexityHint.visible}
+                  text={disabledReasons.complexity}
+                />
+              </div>
+              <div className={ROW_CLASS}>
+                <span className={ROW_LABEL_CLASS}>格式</span>
+                <div className="w-28">
+                  <Select
+                    value={params.output_format}
+                    onChange={(val) => {
+                      setParams({
+                        output_format: val as TaskParams['output_format'],
+                        ...(val === 'png' || val === 'svg' || val === 'gif' ? { output_compression: null } : {}),
+                        ...(val === 'jpeg' ? { transparent_output: false } : {}),
+                      })
+                    }}
+                    options={[
+                      { label: 'PNG', value: 'png' },
+                      { label: 'JPEG', value: 'jpeg' },
+                      { label: 'WebP', value: 'webp' },
+                      { label: 'SVG', value: 'svg', disabledReason: disabledReasons.svg },
+                      { label: 'GIF', value: 'gif', disabledReason: disabledReasons.gif },
+                    ]}
+                    className={selectClass}
+                  />
+                </div>
+              </div>
+              {hasInputImages && params.output_format === 'svg' && (
+                <p className="text-[11px] leading-snug text-amber-600 dark:text-amber-400">
+                  SVG 只能用于文生图，有参考图时无法提交
+                </p>
+              )}
+              {isGif && (
+                <>
+                  <label className={ROW_CLASS}>
+                    <span className={ROW_LABEL_CLASS}>帧数</span>
+                    <GifParamInput
+                      value={params.frame_count}
+                      range={GIF_FRAME_COUNT_RANGE}
+                      onCommit={(frame_count) => setParams({ frame_count })}
+                    />
+                  </label>
+                  <label className={ROW_CLASS}>
+                    <span className={ROW_LABEL_CLASS}>每帧时长（ms）</span>
+                    <GifParamInput
+                      value={params.frame_duration_ms}
+                      range={GIF_FRAME_DURATION_RANGE}
+                      onCommit={(frame_duration_ms) => setParams({ frame_duration_ms })}
+                    />
+                  </label>
+                </>
+              )}
+              {showTransparentOutputControl && (
+                <div
+                  className={ROW_CLASS}
+                  onMouseEnter={transparentOutputHint.show}
+                  onMouseLeave={transparentOutputHint.hide}
+                  onTouchStart={transparentOutputHint.startTouch}
+                  onTouchEnd={transparentOutputHint.clearTimer}
+                  onTouchCancel={transparentOutputHint.hide}
+                  onClick={transparentOutputHint.show}
+                >
+                  <span className={ROW_LABEL_CLASS}>透明背景</span>
+                  <div className="w-28">
+                    <Select
+                      value={transparentOutputEnabled ? 'on' : 'off'}
+                      onChange={(val) => {
+                        if (!transparentOutputAvailable) return
+                        setParams({
+                          transparent_output: val === 'on',
+                          ...(params.output_format === 'png' ? { output_compression: null } : {}),
+                        })
+                      }}
+                      options={[
+                        { label: 'false', value: 'off' },
+                        { label: 'true', value: 'on' },
+                      ]}
+                      className={selectClass}
+                      onOpenChange={onTransparentOutputMenuOpenChange}
+                    />
+                  </div>
+                  {/* SVG 和 GIF 只能用接口原生透明背景，没有可选的实现方式 */}
+                  <ButtonTooltip
+                    visible={transparentOutputHint.visible && params.output_format !== 'svg' && !isGif}
+                    text={<>实现方式可在<strong className="font-semibold">「设置 → API 配置」</strong>中选择</>}
+                  />
+                </div>
+              )}
+              {!showTransparentOutputControl && (
+                <label
+                  className={ROW_CLASS}
+                  onMouseEnter={compressionHint.show}
+                  onMouseLeave={compressionHint.hide}
+                  onTouchStart={compressionHint.startTouch}
+                  onTouchEnd={compressionHint.clearTimer}
+                  onTouchCancel={compressionHint.hide}
+                  onClick={compressionHint.show}
+                >
+                  <span className={ROW_LABEL_CLASS}>压缩率</span>
+                  <input
+                    value={outputCompressionInput}
+                    onChange={(e) => setOutputCompressionInput(e.target.value)}
+                    onBlur={commitOutputCompression}
+                    disabled={compressionDisabled}
+                    type="number"
+                    min={0}
+                    max={100}
+                    placeholder="0-100"
+                    className={`w-28 px-3 py-1.5 rounded-xl border border-transparent focus:border-blue-300 dark:focus:border-blue-500/50 focus:outline-none text-xs transition-all duration-200 ${
+                      compressionDisabled
+                        ? 'bg-black/[0.03] dark:bg-white/[0.04] opacity-50 cursor-not-allowed'
+                        : 'bg-black/[0.04] dark:bg-white/[0.06]'
+                      }`}
+                  />
+                  <ButtonTooltip
+                    visible={compressionHint.visible}
+                    text={isFalProvider ? 'fal.ai 不支持压缩率参数' : '仅 JPEG 和 WebP 支持压缩率'}
+                  />
+                </label>
+              )}
+              <div
+                className={ROW_CLASS}
+                onMouseEnter={moderationHint.show}
+                onMouseLeave={moderationHint.hide}
+                onTouchStart={moderationHint.startTouch}
+                onTouchEnd={moderationHint.clearTimer}
+                onTouchCancel={moderationHint.hide}
+                onClick={moderationHint.show}
+              >
+                <span className={ROW_LABEL_CLASS}>审核</span>
+                <div className="w-28">
+                  <Select
+                    value={moderationDisabled ? 'auto' : params.moderation}
+                    onChange={(val) => {
+                      if (!moderationDisabled) setParams({ moderation: val as TaskParams['moderation'] })
+                    }}
+                    options={[
+                      { label: 'auto', value: 'auto' },
+                      { label: 'low', value: 'low' },
+                    ]}
+                    disabled={moderationDisabled}
+                    className={moderationDisabled ? CONTROL_DISABLED_CLASS : selectClass}
+                  />
+                </div>
+                <ButtonTooltip
+                  visible={moderationDisabled && moderationHint.visible}
+                  text="fal.ai 不支持审核参数"
+                />
+              </div>
+            </>
+          )}
+        </ParamPopoverChip>
+      )}
       {showBatch && (
         <ParamPopoverChip label="批量" summary={batchSummary} active={batchEnabled || Boolean(batchProgress)} className="sm:shrink-0">
           <div className={ROW_CLASS}>

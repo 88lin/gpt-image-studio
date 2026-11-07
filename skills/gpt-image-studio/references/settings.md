@@ -9,12 +9,16 @@
 | 键 | 取值 |
 |---|---|
 | `size` | 如 `1024x1024`、`1536x1024`、`1024x1536`，或 `auto` |
-| `quality` | `auto`、`low`、`medium`、`high`、`xhigh`、`max`；`xhigh`、`max` 只在支持的模型上有效，其他模型降为 `high` |
-| `output_format` | `png`、`jpeg`、`webp` |
+| `google_search`、`image_search` | Google Search、Image Search 开关（布尔值），用于支持搜索的 Google 图像模型或已映射搜索参数的自定义服务商 |
+| `thinking_level` | Gemini 思考等级：`auto` 使用模型默认值，其他可选值随模型和接口能力变化 |
+| `quality` | GPT Image 支持 `auto`、`low`、`medium`、`high`，支持扩展质量的模型还可用 `xhigh`、`max`，否则降为 `high`；Grok Imagine Image 2.0 支持 `auto`、`low`、`medium`，其他值归为 `auto`；Gemini 和其余 Grok 图像模型不发送此参数 |
+| `complexity` | `auto`、`low`、`medium`、`high`；只有 GPT Image 2.6 支持，`auto` 为不发送 |
+| `output_format` | `png`、`jpeg`、`webp`、`svg`、`gif`；`svg`、`gif` 只有 GPT Image 2.6 支持，`svg` 只能文生图，`gif` 也可用于参考图编辑 |
+| `frame_count`、`frame_duration_ms` | GIF 的帧数（2–16，默认 9）和每帧毫秒数（20–2000，默认 200） |
 | `output_compression` | 0–100，jpeg、webp 的压缩质量；`null` 为不指定 |
 | `moderation` | `auto`、`low` |
 | `n` | 每个任务生成的张数，上限取决于当前配置 |
-| `transparent_output` | 透明背景，需要 png 或 webp |
+| `transparent_output` | 透明背景，不支持 jpeg；自定义供应商未映射 `$params.background` 时 svg、gif 也不支持 |
 
 ## 偏好设置（settings）
 
@@ -30,9 +34,11 @@
 | `persistInputOnRestart` | 重启后加载上次的输入框 |
 | `enterSubmit` | 为真时按 Enter 提交，否则 Ctrl+Enter |
 | `reuseTaskApiProfileTemporarily` | 复用某个任务的配置时，临时使用该任务的 API 配置 |
+| `saveTasksToActiveFavoriteCollection` | 在收藏夹页新建或重试出的任务自动加入当前收藏夹，重试出的任务同时沿用原任务的收藏夹（总览和“全部收藏”中新建的任务加入默认收藏夹） |
 | `alwaysShowRetryButton` | 成功的任务也显示重试按钮 |
 | `retryMode` | 重试时 `new` 新建任务、`overwriteFailed` 覆盖失败的任务、`overwriteAll` 覆盖任何任务（需开启 `alwaysShowRetryButton`） |
 | `allowPromptRewrite` | 允许模型改写优化提示词 |
+| `imagePromptHints` | 附加图像生成提示词：为 Google 图像请求添加“生成图像：”前缀，启用 Google Search 或 Image Search 时附加搜索提示词；关闭后仍保留搜索工具 |
 | `referenceImageEditAction` | 参考图预览中“编辑图片”的默认行为：`ask` 每次询问、`sketch` 画板、`mask` 遮罩 |
 | `taskCompletionNotification` | 任务完成或失败时发送系统通知 |
 | `autoCheckUpdate` | 启动时检查新版本 |
@@ -57,13 +63,14 @@
 | 字段 | 含义 |
 |---|---|
 | `name` | 配置名称 |
-| `provider` | `openai`（OpenAI 兼容接口）、`sb2api-async`（sub2api 异步）、`fal`（fal.ai）、`grok`（Grok / xAI），或自定义服务商的 id。改服务商时，应用会恢复该配置在这个服务商下保存过的地址和模型 |
+| `provider` | `openai`（OpenAI 兼容接口）、`google`（Google）、`xai`（xAI）、`sb2api-async`（sub2api 异步）、`fal`（fal.ai）、`grok`（Grok / xAI），或自定义服务商的 id。改服务商时，应用会恢复该配置在这个服务商下保存过的地址和模型 |
 | `baseUrl` | API 地址，如 `https://api.openai.com/v1`。末尾带 `/` 时直接在该地址后拼接口路径，不补 `/v1` |
 | `apiKey` | API Key，只能写入 |
 | `model` | 模型 ID 列表，多个以 `, ` 分隔 |
 | `selectedModel` | 首页选中的模型，必须在 `model` 列表中 |
 | `apiMode` | `images`（Images API）或 `responses`（Responses API，需要支持 `image_generation` 工具的文本模型） |
 | `imageGenerationModel` | Responses API 下 `image_generation` 工具使用的图像模型 |
+| `svgModel` | GPT Image 2.6 输出 SVG 时负责编写 SVG 的文本模型，留空使用默认值 |
 | `reasoningEffort` | Responses API 的推理强度：`none`、`minimal`、`low`、`medium`、`high`、`xhigh`、`max` |
 | `timeout` | 请求超时（秒） |
 | `streamImages`、`streamPartialImages` | 流式传输，及请求的中间步骤图数（0–3），仅 OpenAI 兼容接口 |

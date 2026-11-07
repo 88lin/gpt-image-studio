@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { invoke } from '@tauri-apps/api/core'
+import type { SkillInfo } from './types'
 import { initStore, useStore } from './store'
 import { clearUrlSettingParams, hasUrlSettingParams } from './lib/urlSettings'
 import { createDefaultOpenAIProfile, hasDefaultPresetConfig, isAgentTextApiProfile, normalizeSettings } from './lib/apiProfiles'
@@ -32,6 +34,8 @@ import TitleBar from './components/TitleBar'
 import ImageContextMenu from './components/ImageContextMenu'
 import PromptLibraryModal from './components/PromptLibraryModal'
 import AnnouncementModal from './components/AnnouncementModal'
+import { preloadMarkdownRenderer } from './components/MarkdownRenderer'
+import { SKILL_LABEL } from './components/settings/SkillSettingsSection'
 import { FavoriteCollectionPickerModal, FavoriteCollectionsView, ManageCollectionsModal } from './components/FavoriteCollections'
 import { showStartupNotices, type NoticeSection } from './components/startupNotice'
 import { useGlobalClickSuppression } from './lib/clickSuppression'
@@ -71,6 +75,40 @@ export default function App() {
 
   useEffect(() => {
     if (!isTauri) return
+    // 安装的 Skill 是复制过去的，不会随客户端升级；启动时把内容已过时的更新为当前版本，未安装的不处理
+    void invoke<SkillInfo>('skill_info')
+      .then(async (info) => {
+        const outdated = info.skills.filter((s) => s.state === 'outdated')
+        if (!outdated.length) return
+        // 各处分别更新，一处失败不影响另一处；失败时原有的 Skill 保持不变
+        const failed: string[] = []
+        for (const s of outdated) {
+          try {
+            await invoke('skill_install', { target: s.id })
+          } catch (err) {
+            console.warn(`自动更新 ${SKILL_LABEL[s.id]} 的 Skill 失败：`, err)
+            failed.push(SKILL_LABEL[s.id])
+          }
+        }
+        useStore.getState().showToast(
+          failed.length ? `Skill 自动更新失败（${failed.join('、')}），可在「设置 → Skill」中手动更新` : 'Skill 已更新到当前版本',
+          failed.length ? 'error' : 'success',
+        )
+      })
+      .catch((err) => console.warn('读取 Skill 的安装状态失败：', err))
+  }, [])
+
+  useEffect(() => {
+    if (!('requestIdleCallback' in window)) {
+      const timer = setTimeout(preloadMarkdownRenderer, 1_000)
+      return () => clearTimeout(timer)
+    }
+    const id = window.requestIdleCallback(preloadMarkdownRenderer, { timeout: 3_000 })
+    return () => window.cancelIdleCallback(id)
+  }, [])
+
+  useEffect(() => {
+    if (!isTauri) return
     // 启动时的提示合并到一个弹窗中，避免后到的覆盖先到的：存储无法使用的原因，以及更改数据目录的结果
     void takeDataDirNotice()
       .catch((err) => {
@@ -87,11 +125,11 @@ export default function App() {
           // unavailable 涵盖目录不可写、数据库版本过高、版本信息损坏、无法打开数据库等，按 Rust 侧的说明区分建议
           const unavailable = err.code === 'unavailable'
           const advice = !unavailable
-            ? '读取设置时数据库出错，可能已损坏。可以先在 **设置 → 数据管理** 中尝试导出备份，再反馈问题。'
+            ? '读取设置时数据库出错，可能已损坏。可以先在「设置 → 数据管理」中尝试导出备份，再反馈问题。'
             : err.message.includes('不可写')
               ? custom
-                ? '请在 **设置 → 数据管理** 中把数据目录改到有写权限的位置。'
-                : '可能装在了需要管理员权限的位置，比如 C:\\Program Files。可以重新安装到其他位置，或在 **设置 → 数据管理** 中更改数据目录。'
+                ? '请在「设置 → 数据管理」中把数据目录改到有写权限的位置。'
+                : '可能装在了需要管理员权限的位置，比如 C:\\Program Files。可以重新安装到其他位置，或在「设置 → 数据管理」中更改数据目录。'
               : err.message.includes('高于当前客户端')
                 ? '数据目录由更新版本的客户端创建，请升级到最新版本的客户端后再打开。'
                 : '数据库可能被其他程序占用或已损坏，关闭相关程序后重启再尝试。'

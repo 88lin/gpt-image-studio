@@ -2,13 +2,75 @@ import { describe, expect, it } from 'vitest'
 import { createDefaultOpenAIProfile, DEFAULT_SETTINGS, importCustomProviderSettingsFromJson, normalizeSettings } from './apiProfiles'
 import { createCustomProfileImportUrl } from './profileImportUrl'
 import { buildSettingsFromUrlParams } from './urlSettings'
+import { describeImportLink } from './importLink'
+
+const SHARE_OPTIONS = { includeApiKey: true, useNewApiAddress: false, useNewApiKey: false, useNewApiModel: false }
 
 describe('createCustomProfileImportUrl', () => {
+  it.each([undefined, [], [{ id: 'custom-provider' }]])('keeps the saved custom profile when an ID-less link lacks a valid provider: %j', (customProviders) => {
+    const current = normalizeSettings({
+      customProviders: [{ id: 'custom-provider', name: 'Custom', submit: { path: 'generate' } }],
+      profiles: [createDefaultOpenAIProfile({ id: 'saved', provider: 'custom-provider', apiKey: 'key' })],
+    })
+    const params = new URLSearchParams({ settings: JSON.stringify({
+      customProviders,
+      profiles: [{ ...current.profiles[0], id: undefined }],
+    }) })
+    const next = normalizeSettings({ ...current, ...buildSettingsFromUrlParams(current, params) })
+    expect(next.profiles.find((profile) => profile.id === 'saved')).toEqual(current.profiles[0])
+    expect(next.customProviders).toEqual(current.customProviders)
+    expect(next.profiles).toHaveLength(2)
+    expect(next.activeProfileId).not.toBe('saved')
+    expect(next.profiles.find((profile) => profile.id === next.activeProfileId)?.provider).toBe('openai')
+    expect(describeImportLink(params, current).hasConfigChanges).toBe(true)
+    expect(describeImportLink(params, next).hasConfigChanges).toBe(false)
+  })
+
+  it('does not give ID-less profiles an ID set explicitly in the same payload', () => {
+    const profile = createDefaultOpenAIProfile({ id: 'saved', apiKey: 'key' })
+    const current = normalizeSettings({ profiles: [profile] })
+    const params = new URLSearchParams({ settings: JSON.stringify({ profiles: [
+      { ...profile, id: undefined },
+      { ...profile, timeout: 42 },
+    ] }) })
+    const next = normalizeSettings({ ...current, ...buildSettingsFromUrlParams(current, params) })
+    expect(next.profiles).toHaveLength(2)
+    expect(next.profiles.find((item) => item.id === 'saved')?.timeout).toBe(42)
+    expect(next.activeProfileId).not.toBe('saved')
+    expect(next.profiles.find((item) => item.id === next.activeProfileId)?.timeout).toBe(profile.timeout)
+  })
+
+  it.each([false, true])('reuses an identical saved profile and keeps its default flag (custom provider: %s)', (custom) => {
+    const provider = custom ? { id: 'custom-provider', name: 'Custom', submit: { path: 'generate' } } : undefined
+    const current = normalizeSettings({
+      customProviders: provider ? [provider] : [],
+      profiles: [
+        createDefaultOpenAIProfile({ id: 'other', apiKey: 'other-key' }),
+        createDefaultOpenAIProfile({ id: 'saved', provider: provider?.id ?? 'openai', apiKey: 'key', isDefault: true }),
+      ],
+      activeProfileId: 'other',
+    })
+    const profile = current.profiles[1]
+    const params = new URL(createCustomProfileImportUrl('https://example.com', profile, current.customProviders[0], SHARE_OPTIONS)).searchParams
+    expect(describeImportLink(params, current).hasConfigChanges).toBe(false)
+    const next = normalizeSettings({ ...current, ...buildSettingsFromUrlParams(current, params) })
+    expect(next.profiles).toEqual(current.profiles)
+    expect(next.activeProfileId).toBe('saved')
+    expect(describeImportLink(params, next).hasConfigChanges).toBe(false)
+    expect(buildSettingsFromUrlParams(next, params).profiles).toEqual(current.profiles)
+  })
+
+  it.each([{ timeout: 42 }, { apiKey: 'different' }, { apiProxy: true }, { description: 'different' }])('creates a new profile when fields differ: %j', (patch) => {
+    const profile = createDefaultOpenAIProfile({ id: 'saved', apiKey: 'key' })
+    const current = normalizeSettings({ profiles: [profile] })
+    const params = new URL(createCustomProfileImportUrl('https://example.com', { ...profile, ...patch }, undefined, SHARE_OPTIONS)).searchParams
+    expect(describeImportLink(params, current).hasConfigChanges).toBe(true)
+    expect(buildSettingsFromUrlParams(current, params).profiles).toHaveLength(2)
+  })
+
   it('omits unused providers from built-in profile links and imports them normally', () => {
     const profile = createDefaultOpenAIProfile({ id: 'built-in', apiKey: 'key' })
-    const url = new URL(createCustomProfileImportUrl('https://playground.example.com', profile, undefined, {
-      includeApiKey: true, useNewApiAddress: false, useNewApiKey: false, useNewApiModel: false,
-    }))
+    const url = new URL(createCustomProfileImportUrl('https://playground.example.com', profile, undefined, SHARE_OPTIONS))
     const json = url.searchParams.get('settings')!
     expect(JSON.parse(json)).not.toHaveProperty('customProviders')
     expect(importCustomProviderSettingsFromJson(json).profiles).toHaveLength(1)
@@ -61,7 +123,7 @@ describe('createCustomProfileImportUrl', () => {
       'https://playground.example.com',
       profile,
       provider,
-      { includeApiKey: true, useNewApiAddress: false, useNewApiKey: false, useNewApiModel: false },
+      SHARE_OPTIONS,
     ))
     const next = normalizeSettings({
       ...DEFAULT_SETTINGS,

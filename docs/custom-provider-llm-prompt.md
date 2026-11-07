@@ -11,7 +11,7 @@
 2. 如果当前环境支持读取链接，主动读取；否则要求用户粘贴文档内容。
 3. 在未获得文档前不要猜测，不要生成占位配置。
 4. 从文档中判断提交接口、图生图接口、异步任务查询接口、状态值、结果图片路径。
-5. 若文档中明确了默认模型 ID 或 API Base URL，在 profiles 中填入；若接口不在 /v1 路径下，baseUrl 必须以 / 结尾（如 https://api.example.com/ 配合 path=api/image-tasks），以直接基于该地址请求且不补齐 /v1；若未明确模型 ID，model 填 "gpt-image-2.5-sunburst"；若未明确 API Base URL，baseUrl 留空字符串 "" 由用户导入后填写。
+5. 若文档中明确了默认模型 ID 或 API Base URL，在 profiles 中填入；若接口不在 /v1 路径下，baseUrl 必须以 / 结尾（如 https://api.example.com/ 配合 path=api/image-tasks），以直接基于该地址请求且不补齐 /v1；若未明确模型 ID，model 填 "gpt-image-2.6-sunburst"；若未明确 API Base URL，baseUrl 留空字符串 "" 由用户导入后填写。
 6. 输出最终 JSON；不要索要 API Key。
 
 # 输出结构
@@ -20,14 +20,15 @@
 - profiles：API 配置数组，每项描述一个可直接使用的连接配置，引用 customProviders 中的服务商。
 
 ## customProviders 元素（Manifest）
-每个元素的顶层字段：id、name、submit、editSubmit、poll。
+每个元素的顶层字段：id、name、submit、editSubmit、poll、modelOverrides。
 id 是服务商的唯一标识，用于 profiles 中的 provider 字段引用，建议使用 custom-{英文短名} 格式。
 submit 是文生图提交配置，必填。
 editSubmit 是图生图或局部重绘提交配置，可选。如果文生图和图生图使用同一个 JSON 接口，可以省略 editSubmit，并在 submit.body 中加入 image_urls。
 poll 是异步任务查询配置，可选；同步接口不要写 poll。
+modelOverrides 是可选数组，每项包含 models（模型 ID 数组，支持 * 通配符）、submit、可选 editSubmit 和 poll。按顺序使用首个匹配项的整套提交映射，未提供 poll 时沿用顶层 poll。
 
 submit/editSubmit 字段：
-- path：接口路径，不带开头斜杠，不带 /v1/ 前缀，例如 images/generations 或 tasks/{task_id}。
+- path：接口路径，不带开头斜杠，不带 /v1/ 前缀，支持 {model} 占位符，例如 images/generations 或 generateTask/{model}。任务查询路径如 tasks/{task_id} 配置在 poll.path。
 - method：GET 或 POST，默认 POST。
 - contentType：json 或 multipart。
 - query：提交 query 参数对象，可选，例如 {"async":"true"}。
@@ -37,9 +38,9 @@ submit/editSubmit 字段：
 - result：同步响应图片提取规则。
 
 poll 字段：
-- path：任务查询路径，使用 {task_id} 占位，例如 images/tasks/{task_id} 或 tasks/{task_id}。
+- path：接口路径，不带开头斜杠，不带 /v1/ 前缀，支持 {task_id}、{taskId} 和 {model} 占位符，例如 images/tasks/{task_id}、tasks/{task_id} 或 statusTask/{model}。
 - method：GET 或 POST，默认 GET。
-- query：查询 query 参数对象，可选。
+- query：查询 query 参数对象，可选，值支持 {task_id}、{taskId} 和 {model} 占位符。
 - intervalSeconds：轮询间隔秒数。
 - statusPath：查询响应状态字段路径。
 - successValues：成功状态值数组。
@@ -50,11 +51,20 @@ poll 字段：
 result 字段：
 - imageUrlPaths：图片 URL 路径数组，支持 * 通配数组。例如 data.*.url、data.result.images.*.url.*。
 - b64JsonPaths：base64 图片路径数组，支持 * 通配数组。例如 data.*.b64_json。
+- 路径经过 JSON 字符串时自动解析，例如 data.resultJson.resultUrls.*。
 
 body 模板变量：
 - $profile.model：用户在设置里填写的模型 ID。
 - $prompt：当前提示词。
+- $mode：没有参考图时为 text-to-image，有参考图时为 image-to-image。
+- $params.aspect_ratio、$params.resolution：Gemini（含 Nano Banana）、Grok 图像模型的比例和分辨率；这些模型的 $params.size 也为比例。
+- $params.google_search、$params.image_search：Google Search、Image Search 开关（布尔值）；映射后可在 Gemini 模型的“搜索”参数中切换。
+- $params.thinking_level：Gemini 的思考等级，默认不发送；映射后可在参数栏中选择。
+- $resolution.upper、$resolution.lower：分辨率的大写、小写形式，例如 2K、2k。
+- $params.quality：Grok Imagine Image 2.0 支持 auto、low 或 medium；Gemini 和其余 Grok 图像模型省略此值。
 - $params.size、$params.quality、$params.output_format、$params.output_compression、$params.moderation、$params.n：应用内参数。
+- $params.n：用户选择的生成数量。
+- $params.complexity、$params.frame_count、$params.frame_duration_ms、$params.svg：GPT Image 2.6 参数，只在模型 ID 为 GPT Image 2.6 及以上时可用；复杂度选 auto 时省略 complexity，帧参数只在输出 GIF 时传入，svg 只在输出 SVG 时传入，值为 {"model":"SVG 编写模型 ID"}。
 - $params.background：API 原生透明背景参数；启用时为 `"transparent"`，未启用时自动省略。
 - $inputImages.dataUrls：参考图 data URL 数组；没有参考图时会自动省略该字段。
 - $inputImages.base64：参考图 base64 数组，不含 `data:image/png;base64,` 前缀；没有参考图时会自动省略该字段。
@@ -71,7 +81,7 @@ multipart files 示例：
 - name：配置名称，方便用户识别。
 - provider：对应 customProviders 中某个元素的 id。
 - baseUrl：API 基础地址。若文档明确给出则填入完整地址；若接口不在 /v1 路径下必须以 / 结尾（如 https://api.example.com/ 配合 path=api/image-tasks）；否则留空字符串 ""。
-- model：模型 ID。如果 API 文档明确了默认模型，填入该值；否则使用 "gpt-image-2.5-sunburst"。
+- model：模型 ID。如果 API 文档明确了默认模型，填入该值；否则使用 "gpt-image-2.6-sunburst"。
 - apiMode：固定为 "images"。
 - apiProxy：可选。仅同步自定义服务商可以设为 true，用于配合部署端 API 代理隐藏真实上游地址；包含 taskIdPath 或 poll 的异步任务配置不要开启，应用不支持异步自定义服务商走代理。
 - transparentBackgroundMethod：可选，`"api"`（默认）或 `"local"`。接口不支持原生透明背景时填写 `"local"`。
@@ -91,11 +101,11 @@ profiles 中不要包含 apiKey（用户导入后自行填写）。
 - profiles 包含多个配置时，只为默认预置配置输出 isDefault: true，其他普通预置配置省略该字段；只有一个配置时不要输出 isDefault。
 
 ## 同步接口示例
-{"customProviders":[{"id":"custom-example-sync","name":"示例同步服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","quality":"$params.quality","output_format":"$params.output_format","moderation":"$params.moderation","output_compression":"$params.output_compression","n":"$params.n","background":"$params.background"},"result":{"imageUrlPaths":["data.*.url"],"b64JsonPaths":["data.*.b64_json"]}},"editSubmit":{"path":"images/edits","method":"POST","contentType":"multipart","body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","quality":"$params.quality","output_format":"$params.output_format","moderation":"$params.moderation","output_compression":"$params.output_compression","n":"$params.n","background":"$params.background"},"files":[{"field":"image[]","source":"inputImages","array":true},{"field":"mask","source":"mask"}],"result":{"imageUrlPaths":["data.*.url"],"b64JsonPaths":["data.*.b64_json"]}}}],"profiles":[{"id":"custom-example-sync-profile","name":"示例同步服务商","provider":"custom-example-sync","baseUrl":"https://api.example.com/v1","model":"gpt-image-2.5-sunburst","apiMode":"images"}]}
+{"customProviders":[{"id":"custom-example-sync","name":"示例同步服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","quality":"$params.quality","output_format":"$params.output_format","moderation":"$params.moderation","output_compression":"$params.output_compression","n":"$params.n","background":"$params.background"},"result":{"imageUrlPaths":["data.*.url"],"b64JsonPaths":["data.*.b64_json"]}},"editSubmit":{"path":"images/edits","method":"POST","contentType":"multipart","body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","quality":"$params.quality","output_format":"$params.output_format","moderation":"$params.moderation","output_compression":"$params.output_compression","n":"$params.n","background":"$params.background"},"files":[{"field":"image[]","source":"inputImages","array":true},{"field":"mask","source":"mask"}],"result":{"imageUrlPaths":["data.*.url"],"b64JsonPaths":["data.*.b64_json"]}}}],"profiles":[{"id":"custom-example-sync-profile","name":"示例同步服务商","provider":"custom-example-sync","baseUrl":"https://api.example.com/v1","model":"gpt-image-2.6-sunburst","apiMode":"images"}]}
 
 ## 异步接口示例
-{"customProviders":[{"id":"custom-example-async","name":"示例异步服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","query":{"async":"true"},"body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","n":"$params.n","background":"$params.background"},"taskIdPath":"data"},"editSubmit":{"path":"images/edits","method":"POST","contentType":"multipart","query":{"async":"true"},"body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","n":"$params.n","background":"$params.background"},"files":[{"field":"image[]","source":"inputImages","array":true}],"taskIdPath":"data"},"poll":{"path":"images/tasks/{task_id}","method":"GET","intervalSeconds":5,"statusPath":"data.status","successValues":["SUCCESS"],"failureValues":["FAILURE"],"errorPath":"data.fail_reason","result":{"imageUrlPaths":["data.data.data.*.url"],"b64JsonPaths":["data.data.data.*.b64_json"]}}}],"profiles":[{"id":"custom-example-async-profile","name":"示例异步服务商","provider":"custom-example-async","baseUrl":"","model":"gpt-image-2.5-sunburst","apiMode":"images"}]}
+{"customProviders":[{"id":"custom-example-async","name":"示例异步服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","query":{"async":"true"},"body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","n":"$params.n","background":"$params.background"},"taskIdPath":"data"},"editSubmit":{"path":"images/edits","method":"POST","contentType":"multipart","query":{"async":"true"},"body":{"model":"$profile.model","prompt":"$prompt","size":"$params.size","n":"$params.n","background":"$params.background"},"files":[{"field":"image[]","source":"inputImages","array":true}],"taskIdPath":"data"},"poll":{"path":"images/tasks/{task_id}","method":"GET","intervalSeconds":5,"statusPath":"data.status","successValues":["SUCCESS"],"failureValues":["FAILURE"],"errorPath":"data.fail_reason","result":{"imageUrlPaths":["data.data.data.*.url"],"b64JsonPaths":["data.data.data.*.b64_json"]}}}],"profiles":[{"id":"custom-example-async-profile","name":"示例异步服务商","provider":"custom-example-async","baseUrl":"","model":"gpt-image-2.6-sunburst","apiMode":"images"}]}
 
 ## 统一任务接口示例
-{"customProviders":[{"id":"custom-example-task","name":"示例任务服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","body":{"model":"$profile.model","prompt":"$prompt","n":"$params.n","size":"$params.size","resolution":"2k","quality":"$params.quality","image_urls":"$inputImages.dataUrls"},"taskIdPath":"data.0.task_id"},"poll":{"path":"tasks/{task_id}","method":"GET","query":{"language":"zh"},"intervalSeconds":5,"statusPath":"data.status","successValues":["completed"],"failureValues":["failed","cancelled"],"errorPath":"data.error.message","result":{"imageUrlPaths":["data.result.images.*.url.*"],"b64JsonPaths":[]}}}],"profiles":[{"id":"custom-example-task-profile","name":"示例任务服务商","provider":"custom-example-task","baseUrl":"","model":"gpt-image-2.5-sunburst","apiMode":"images"}]}
+{"customProviders":[{"id":"custom-example-task","name":"示例任务服务商","submit":{"path":"images/generations","method":"POST","contentType":"json","body":{"model":"$profile.model","prompt":"$prompt","n":"$params.n","size":"$params.size","resolution":"2k","quality":"$params.quality","image_urls":"$inputImages.dataUrls"},"taskIdPath":"data.0.task_id"},"poll":{"path":"tasks/{task_id}","method":"GET","query":{"language":"zh"},"intervalSeconds":5,"statusPath":"data.status","successValues":["completed"],"failureValues":["failed","cancelled"],"errorPath":"data.error.message","result":{"imageUrlPaths":["data.result.images.*.url.*"],"b64JsonPaths":[]}}}],"profiles":[{"id":"custom-example-task-profile","name":"示例任务服务商","provider":"custom-example-task","baseUrl":"","model":"gpt-image-2.6-sunburst","apiMode":"images"}]}
 ````

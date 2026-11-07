@@ -12,10 +12,10 @@
 [![Vite](https://img.shields.io/badge/Vite-7-B73BFE?style=flat-square&logo=vite&logoColor=FFD62E)](https://vite.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-**基于 OpenAI gpt-image-2.5 API 的图片生成、编辑与提示词工作台**
+**支持 GPT Image、Gemini（Nano Banana）和 Grok 的图片生成、编辑与提示词工作台**
 
-提供简洁精美的 Web UI，支持 OpenAI / OpenAI 兼容接口、sub2api（异步）、fal.ai 与可导入的自定义 HTTP 供应商。<br>
-支持文本生图、参考图、画板标注与遮罩编辑，数据纯本地化存储，带来流畅的历史记录与参数管理体验。
+提供 Web UI 和 Windows 客户端，支持官方接口、OpenAI 兼容接口、sub2api、fal.ai 与自定义 HTTP 供应商。<br>
+支持文本生图、参考图编辑、画板标注、遮罩编辑与 Agent 多轮对话，图片和历史记录保存在本地。
 
 <br>
 
@@ -59,24 +59,6 @@
   <a href="https://www.sheapi.top/sign-up?aff=MvcR"><img src="https://raw.githubusercontent.com/88lin/picx-images-hosting/master/ScreenShot_2026-08-06_174058_726.webp" alt="SheApi" width="150"></a>
 </td>
 <td valign="middle"><b><a href="https://www.sheapi.top/sign-up?aff=MvcR">SheApi</a></b>&nbsp;是一家可靠高效的 API 中转服务提供商，主要提供 GPT-6 Astra、kimi-k3、grok-4.7、glm-5.3、deepseek-v4.1-flash 等主流模型的高稳定中转能力，Codex 倍率补贴低至 0.06，GPT-Image-2生图每张0.04。受邀注册送$1 体验金，每日签到还可领取专属免费额度。</td>
-</tr>
-<tr>
-<td width="180" align="center" valign="middle">
-  <a href="https://anyrouter.top/register?aff=woX5"><img src="https://raw.githubusercontent.com/88lin/picx-images-hosting/master/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260907170036_114_2.webp" alt="Any Router" width="150"></a>
-</td>
-<td valign="middle"><b><a href="https://anyrouter.top/register?aff=woX5">Any Router</a></b>&nbsp;是免费公益大模型API平台，可用GPT-6 Astra、Claude-opus-5.5等顶级模型。被邀得＄50，每日签到随机额度。</td>
-</tr>
-<tr>
-<td width="180" align="center" valign="middle">
-  <a href="https://www.workbuddy.cn/events/invite?inviteCode=w0x2ic45z"><img src="https://raw.githubusercontent.com/88lin/picx-images-hosting/master/workbuddy-logo.png" alt="WorkBuddy" width="150"></a>
-</td>
-<td valign="middle"><b><a href="https://www.workbuddy.cn/events/invite?inviteCode=w0x2ic45z">WorkBuddy</a></b>&nbsp;是腾讯出品的全能 AI 工作台，是中国最受欢迎的效率 AI 智能体服务，说出要求、开始执行任务、交付完整成果。其中Hy4模型限时免费使用，注册即可获取2000积分，每月再赠送500积分，可用Kimi-K3、GLM-5.3、Deepseek-V4.1-Flash等模型。还可以配合 <a href="https://github.com/88lin/workbuddy-auto-signin">workbuddy-auto-signin</a> 脚本自动签到，每日积分、Buddy 旅行礼物、盲盒、任务奖励等福利一键领取。</td>
-</tr>
-<tr>
-<td width="180" align="center" valign="middle">
-  <a href="https://lightvela.ai/?ref=CC9FGXAT9W"><img src="https://raw.githubusercontent.com/88lin/picx-images-hosting/master/lightvela-logo.svg" alt="LightVela" width="150"></a>
-</td>
-<td valign="middle"><b><a href="https://lightvela.ai/?ref=CC9FGXAT9W">LightVela</a></b>&nbsp;是腾讯轻量云团队推出的云端 Agent 托管产品，它把 Agent 的部署、运维与 7×24 小时运行全部放在云端托管，支持跨会话记忆、连接主流聊天通道（微信、QQ、飞书、钉钉等），可自定义模型、工具、人设。新用户免费体验1个月，送 2核8G 云主机 + 4500 AI 积分。</td>
 </tr>
 </table>
 
@@ -131,15 +113,27 @@
 ## ✨ 核心特性
 
 ### 🎨 强大的图像生成与编辑
-- **参考图与遮罩**：最多 16 张参考图（支持剪贴板、拖拽和图片链接），内置遮罩编辑器，自动预处理以符合官方分辨率限制。
-- **画板标注**：在空白画布或参考图上用画笔、文字、图形和像素橡皮擦标注修改意图，完成后作为参考图；画板与遮罩编辑器可缩放平移（Alt / Ctrl + 滚轮、Alt + 拖动、双指捏合）。
+- **参考图与遮罩**：最多 16 张参考图（支持剪贴板、拖拽和图片链接），内置遮罩编辑器，自动预处理以符合官方分辨率限制；SVG 和 GIF 作为参考图时转为 PNG（GIF 取第一帧）。
+- **画板标注**：在空白画布或参考图上用画笔、文字、图形和像素橡皮擦标注修改意图；画板与遮罩编辑器可缩放平移（Alt / Ctrl + 滚轮、Alt + 拖动、双指捏合）。
+
+  > - **参考图上的标注**：单独保存为透明图层，原图保持不变。`Images API` 使用 GPT Image 2.5 及以上模型、或使用 fal.ai 的 GPT Image 2.6 时，第一张参考图的标注以 markup 方式发送；其他情况合成到图上再发送。
+
 - **评论标注**：在画板中用评论工具点击图片添加评论，以“@图N 评论”插入提示词，发送时附上评论在图中的位置（如 `(X=52%, Y=41%)`），复用任务时可恢复。
+- **GPT Image 2.6 参数**：在「更多」中设置；当前模型或模式不支持时，选项置灰并说明原因。
+
+  > - **复杂度**：`auto`、`low`、`medium`、`high`。
+  > - **GIF 动图**：仅画廊模式，可设置帧数（2–16，默认 9）和每帧时长（20–2000 ms，默认 200），带参考图时也可用。
+  > - **SVG**：仅画廊模式，只能文生图；由文本模型编写，可在 **「设置 → API 配置」** 中指定 SVG 编写模型。
+  > - **供应商支持**：OpenAI 兼容接口（含 Codex CLI 模式）全部支持；fal.ai 支持复杂度和 GIF，暂不支持 SVG；自定义供应商需在模板中映射对应的 `$params` 变量。
+
 - **批量与迭代**：支持单次多图生成；一键将满意结果转为参考图，无缝开启下一轮修改。
 - **多提示词批量提交**：在习惯配置中开启后，可一次粘贴多条提示词（以两个空行分隔），共用参考图和参数；支持排队或并发（默认上限 10），可随时查看进度或停止。
 - **流式生成预览**：`Images API` 与 `Responses API` 模式均支持流式接收中间步骤图像，缓解连接超时问题。
-- **透明背景**：画廊模式下选择 PNG 或 WebP 后可开启，可在 API 配置页为每个配置分别选择 API 原生或本地后处理。
-- **API 原生**：直接请求模型返回透明通道，需接口和模型支持。接口返回“不支持透明背景”类错误时，应用会提示切换为本地后处理。
-- **本地后处理**：要求模型使用纯绿或纯洋红背景，结果返回后在浏览器中去除背景色，按所选格式保存。适合图标、贴纸、单主体素材；主体有复杂发丝、半透明材质、强反光或颜色接近背景色时，边缘可能残留或误抠。
+- **透明背景**：画廊模式下选择 PNG、WebP、SVG 或 GIF 后可开启，可在 API 配置页为每个配置分别选择 API 原生或本地后处理。
+
+  > - **API 原生**：直接请求模型返回透明通道，需接口和模型支持。接口返回“不支持透明背景”类错误时，应用会提示切换为本地后处理。
+  > - **本地后处理**：要求模型使用纯绿或纯洋红背景，结果返回后在浏览器中去除背景色，按所选格式保存。适合图标、贴纸、单主体素材；主体有复杂发丝、半透明材质、强反光或颜色接近背景色时，边缘可能残留或误抠。
+  > - **SVG 和 GIF**：只使用 API 原生方式；自定义供应商的生成和编辑请求未映射 `$params.background` 时不提供透明背景。
 
 ### 🧠 提示词模板库
 - **593 内置精选模板**：聚合厚十方精选、prompts.kkkm.cn、GPT-Image-2 案例观摩馆与多个社区精选来源，覆盖电商图、海报、封面、产品图、摄影风格和视觉概念图等场景。
@@ -159,7 +153,7 @@
 
 ### 📁 高效历史管理 (纯本地)
 - **瀑布流与画廊**：历史任务自动保存，支持按状态过滤、全屏大图预览与快捷下载。
-- **多收藏夹管理**：同一任务可归入多个收藏夹；概览页显示封面和任务数，进入后可叠加搜索与状态筛选；支持拖拽排序、重命名、设为默认和按收藏夹打包下载 ZIP。
+- **多收藏夹管理**：同一任务可归入多个收藏夹；概览页显示封面和任务数，进入后可叠加搜索与状态筛选；支持拖拽排序、重命名、设为默认和按收藏夹打包下载 ZIP；在收藏夹页新建的任务自动归入当前收藏夹。
 - **失败任务重试**：重试方式可选新建任务或覆盖原任务（不限失败任务）；覆盖时保留创建时间和收藏，耗时重新计算。
 - **快捷批量操作**：桌面端支持拖拽框选、Ctrl/⌘ 连选，移动端支持侧滑多选，便于批量收藏与清理。
 - **图片查看与下载**：大图预览支持左右滑动切换，移动端可长按弹出操作菜单，支持快捷下载与批量下载。
@@ -167,15 +161,17 @@
 
 ### 🔌 多配置与供应商增强
 - **多配置管理**：保存多个 API 配置（供应商、API Key、模型等）并快速切换；可一键复制当前配置到列表底部，配置和供应商列表均可拖拽排序。
-- **多模型切换**：模型 ID 可用逗号分隔填写多个（如 `gpt-image-2.5-sunburst, gpt-image-2`），在首页切换，按配置分别记住；预置配置、URL 传参与导入导出均支持此写法。
-- **多供应商接入**：内置 OpenAI 兼容接口（`Images API` / `Responses API`）、sub2api（异步）、fal.ai（队列）、Grok (xAI)，并可通过 JSON 导入自定义 HTTP 供应商（同步/异步任务）。
+- **多模型切换**：模型 ID 可用逗号分隔填写多个（如 `gpt-image-2.6-sunburst, gpt-image-2`），在首页切换，按配置分别记住；预置配置、URL 传参与导入导出均支持此写法。
+- **多供应商接入**：内置 OpenAI 兼容接口（`Images API` / `Responses API`）、Google、xAI、Grok (xAI)、sub2api（异步）、fal.ai（队列），并可通过 JSON 导入自定义 HTTP 供应商（同步/异步任务）。
+- **Gemini / Grok 图像生成**：支持官方接口和 OpenAI Images 兼容接口。
+- **Google Search / Image Search**：部分 Gemini 模型支持网页和图片搜索，详情展示来源与搜索建议。
 - **Agent 模式独立 API 配置**：Agent 可使用原生（Responses API）或混合（Responses API + Images API）的独立配置，适配不支持 `image_generation` 工具的供应商或模型。
 - **API 代理**：OpenAI 兼容接口与 fal.ai 均可配置自定义代理；OpenAI 兼容接口还可走同源 `/api-proxy/`，由 Docker 或本地开发服务器转发，绕开浏览器 CORS 限制。
 - **Codex CLI 兼容模式**：上游为 Codex CLI 时，按其实际支持的参数发送请求，并把多图生成拆成并发单图。
 - **提示词防改写**：Responses API 始终在请求前加入防改写指令；开启 Codex CLI 模式后，Images API 也会加入。
 - **智能诊断提示**：检测到接口异常改写或缺少常规参数时，提示开启相应的兼容模式。
 - **外观配置**：颜色模式（跟随系统、浅色、深色）、界面字体与代码字体。
-- **习惯配置**：提交后清空输入、重启后保留输入、临时复用历史任务的 API 配置、重试方式、关闭提示词防改写、系统通知、自动检查更新、隐私模式快捷键等。
+- **习惯配置**：提交后清空输入、重启后保留输入、临时复用历史任务的 API 配置、重试方式、关闭提示词防改写、附加图像生成提示词、系统通知、自动检查更新、隐私模式快捷键等。
 - **版本更新**：启动时检查新版本并展示更新说明；客户端可直接下载并安装更新。
 - **CLI 与 Skill**：Claude Code、Codex 等本机 AI 工具可通过客户端的 CLI 生图、读取历史和修改设置，见 [Windows 桌面客户端](#desktop-client)。
 
@@ -200,16 +196,16 @@ Windows 用户可以直接安装桌面客户端；网页版可以部署到 Verce
 **安装**
 
 - 本仓库发布客户端安装包后，可在 [Releases](https://github.com/88lin/gpt-image-studio/releases/latest) 中下载以 `_x64-setup.exe` 结尾的安装包。
-- 安装包没有代码签名，遇到 SmartScreen 提示时点击“更多信息 → 仍要运行”。
+- 安装包没有代码签名，遇到 SmartScreen 提示时点击**「更多信息 → 仍要运行」**。
 - 安装到普通文件夹（如 `D:\Apps\GPT Image Studio`）。装到 `C:\Program Files` 等需要管理员权限写入的位置会导致无法保存数据。
-- 数据默认保存在 `<安装目录>\data` 中，可在“设置 → 数据管理”中更改。
+- 数据默认保存在 `<安装目录>\data` 中，可在**「设置 → 数据管理」**中更改。
 
 **CLI 与 Skill**
 
 Claude Code、Codex 等本机 AI 工具可以通过 CLI `gpt-image-studio` 调用客户端：生成和编辑图片、读取历史记录、查看和修改全部设置（API Key 只能写入）。命令、通信管道和随附 Skill 都使用本项目独立的名称，可与上游客户端并存。
 
 - 安装时勾选“添加到 PATH”即可直接运行；使用时客户端需要保持打开，用法见 `gpt-image-studio --help`。
-- 在“设置 → Skill”中安装随附的 Skill，AI 工具就知道何时、如何调用它。
+- 在 **「设置 → Skill」** 中安装随附的 Skill，AI 工具就知道何时、如何调用它；客户端启动时会自动把已安装的 Skill 更新到当前版本。
 
 **自行构建**
 
@@ -240,7 +236,7 @@ npm run tauri:build
 
 **环境变量（可选）**
 
-在 Vercel 项目的 **Settings → Environment Variables** 中添加，添加或修改后需要重新部署：
+在 Vercel 项目的 **「Settings → Environment Variables」** 中添加，添加或修改后需要重新部署：
 
 ```dotenv
 VITE_DEFAULT_API_URL=https://api.openai.com/v1
@@ -248,14 +244,14 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 
 **绑定自定义域名（国内直连）**
 
-Vercel 分配的 `.vercel.app` 域名在国内通常无法直接访问，可在 **Settings → Domains** 中绑定自己的域名。
+Vercel 分配的 `.vercel.app` 域名在国内通常无法直接访问，可在 **「Settings → Domains」** 中绑定自己的域名。
 
 **更新方式**
 
 `vercel.json` 关闭了默认的自动部署。Fork 本仓库后，建议配置 Deploy Hook：
 
-1. 在 Vercel 项目的 **Settings → Git → Deploy Hooks** 中创建名为 `Release` 的 Hook（Branch 填 `main`），复制生成的 URL。
-2. 在 Fork 仓库的 **Settings → Secrets and variables → Actions** 中新建 Secret `VERCEL_DEPLOY_HOOK`，填入该 URL。
+1. 在 Vercel 项目的 **「Settings → Git → Deploy Hooks」** 中创建名为 `Release` 的 Hook（Branch 填 `main`），复制生成的 URL。
+2. 在 Fork 仓库的 **「Settings → Secrets and variables → Actions」** 中新建 Secret `VERCEL_DEPLOY_HOOK`，填入该 URL。
 
 配置完成后：
 
@@ -271,7 +267,7 @@ Vercel 分配的 `.vercel.app` 域名在国内通常无法直接访问，可在 
 
 **环境变量（可选）**
 
-在仓库 **Settings → Secrets and variables → Actions** 中，将 `VITE_DEFAULT_API_URL` 添加到 **Secrets**：
+在仓库 **「Settings → Secrets and variables → Actions」** 中，将 `VITE_DEFAULT_API_URL` 添加到 **Secrets**：
 
 ```dotenv
 VITE_DEFAULT_API_URL=https://api.openai.com/v1
@@ -281,7 +277,7 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 
 **初始部署**
 
-1. 在仓库 **Settings → Pages** 中，将 **Build and deployment → Source** 设为 **GitHub Actions**。
+1. 在仓库 **「Settings → Pages」** 中，将 **「Build and deployment → Source」** 设为 **GitHub Actions**。
 2. 在 **Actions** 中选择 **Deploy to GitHub Pages**，对 `main` 分支执行 **Run workflow**，完成首次部署。
 
 **更新方式**
@@ -419,7 +415,7 @@ cp dev-proxy.config.example.json dev-proxy.config.json
 ```
 
 - 将 `dev-proxy.config.json` 中的 `target` 设为完整的 API 基础地址。代理不会自动补 `/v1`，OpenAI 兼容接口通常要写到版本前缀，如 `https://api.example.com/v1`。
-- 重启开发服务器，在设置中开启 **API 代理**，请求会按 `http://localhost:5173/api-proxy/... -> target/...` 转发。
+- 重启开发服务器，在 **「设置 → API 配置」** 中开启“API 代理”，请求会按 `http://localhost:5173/api-proxy/... -> target/...` 转发。
 - 仅在 `npm run dev` 时生效，不影响构建产物。
 
 **4. 本地故障模拟 API（可选）**
@@ -459,6 +455,7 @@ npm run build
 | `VITE_LOCK_PRESET_CONFIG_PARAMS=true` | `LOCK_PRESET_CONFIG_PARAMS=true` | 锁定预置配置中除 API Key 外的参数，禁止编辑随预置引入的自定义供应商；当前锁定配置引用的供应商解除引用后才能删除 |
 | `VITE_PREVENT_PRESET_CONFIG_DELETION=true` | `PREVENT_PRESET_CONFIG_DELETION=true` | 禁止删除预置配置及随预置引入的自定义供应商，不锁定参数，普通配置不受影响 |
 | `VITE_SHOW_PRESET_CONFIG_ONLY=true` | `SHOW_PRESET_CONFIG_ONLY=true` | 只允许使用当前预置配置，禁止创建、复制、删除、拖动配置，禁止切换供应商和管理自定义供应商；未开启锁定时参数仍可编辑，API Key 始终可编辑 |
+| `VITE_SHOW_CONFIG_CHANGE_DIALOG=false` | `SHOW_CONFIG_CHANGE_DIALOG=false` | 关闭链接导入配置时的变更确认弹窗，直接导入；默认开启，已有相同配置始终不弹窗 |
 | `VITE_DEFAULT_UI_FONT` | `DEFAULT_UI_FONT` | 默认界面字体：`builtin`（内置，默认）、`system`（系统字体）或本机已安装的字体名称 |
 | `VITE_DEFAULT_MONO_FONT` | `DEFAULT_MONO_FONT` | 默认代码字体，取值规则同 `VITE_DEFAULT_UI_FONT` |
 | `VITE_BUILTIN_FONT_SOURCE` | `BUILTIN_FONT_SOURCE` | 内置字体来源：`cdn`（默认，公共 CDN）或 `local`（[`fonts/`](fonts) 目录中的文件） |
@@ -487,7 +484,7 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 **2. API 地址 + 查询参数**
 
 ```dotenv
-VITE_DEFAULT_API_URL=https://api.openai.com/v1?model=gpt-image-2.5-sunburst&apiMode=images
+VITE_DEFAULT_API_URL=https://api.openai.com/v1?model=gpt-image-2.6-sunburst&apiMode=images
 ```
 
 在地址后追加参数，预填 Key、模型等字段。可用参数与下文 [URL 传参快速填充](#url-quick-fill) 相同（`profileId` 除外）。
@@ -522,7 +519,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 顶层字段：
 
 - **`profiles`**（数组）：预置的 API 配置列表，每项对应用户配置列表中的一个配置。
-- **`customProviders`**（可选数组）：自定义供应商定义，见下文 [自定义供应商](#custom-provider-config)。只使用内置供应商（OpenAI 兼容、sub2api（异步）、fal.ai）时可省略。
+- **`customProviders`**（可选数组）：自定义供应商定义，见下文 [自定义供应商](#custom-provider-config)。只使用内置供应商时可省略。
 - **`agent`**（可选对象）：Agent 的独立 API 模式及文本、图像配置选择，见下方示例。
 
 `profiles` 中每项的字段：
@@ -532,12 +529,13 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 | `id` | 定向更新时填写 | 配置标识，见表下说明。 |
 | `name` | 是 | 配置名称。 |
 | `description` | 否 | 配置说明，支持 Markdown，显示在“当前配置”下方的说明卡片中。 |
-| `provider` | 是 | `"openai"`（OpenAI 兼容）、`"sb2api-async"`（sub2api 异步）、`"fal"`（fal.ai），或 `customProviders` 中的供应商 ID。 |
+| `provider` | 是 | `"openai"`（OpenAI 兼容）、`"google"`（Google）、`"xai"`（xAI）、`"sb2api-async"`（sub2api 异步）、`"fal"`（fal.ai）、`"grok"`（Grok / xAI），或 `customProviders` 中的供应商 ID。 |
 | `baseUrl` | 是 | API 基础地址，末尾 `/` 的规则见表下说明；fal.ai 可留空。 |
 | `apiKey` | 否 | API Key。建议省略，由用户自行填写。 |
 | `model` | 是 | 模型 ID。多个模型以逗号分隔，默认使用第一个，用户可在首页切换。 |
-| `imageGenerationModel` | 否 | Responses API 的 `image_generation` 工具模型，默认 `gpt-image-2.5-sunburst`，也可用 `gpt-image-2.5-flare`；留空时不发送，使用 API 默认值。 |
+| `imageGenerationModel` | 否 | Responses API 的 `image_generation` 工具模型，默认 `gpt-image-2.6-sunburst`，也可用 `gpt-image-2.6-flare`；留空时不发送，使用 API 默认值。 |
 | `apiMode` | 否 | `"images"` 或 `"responses"`，默认 `"images"`。 |
+| `svgModel` | 否 | GPT Image 2.6 输出 SVG 时负责编写 SVG 的文本模型，默认 `gpt-6.1-sol`。 |
 | `isDefault` | 否 | 有多个配置时为默认项设置 `true`（只能有一个），首次使用时自动选中；只有一个配置时不填。 |
 | `timeout` | 否 | 请求超时秒数，默认 600。 |
 | `apiProxy` | 否 | 是否走部署端 API 代理，默认 `false`。 |
@@ -546,7 +544,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 补充说明：
 
 - **`id`**：之后的链接（查询参数 `profileId`、`settings` 链接）或预置 JSON 携带相同 ID 时，直接更新该配置而非新建。应用内普通分享链接会省略此字段。
-- **`baseUrl`**：未以 `/` 结尾时按 OpenAI 规则补齐 `/v1`；以 `/` 结尾时直接基于该地址请求。
+- **`baseUrl`**：未以 `/` 结尾时按 OpenAI 规则补齐 `/v1`（Google 补齐 `/v1beta`）；以 `/` 结尾时直接基于该地址请求。
 - **`transparentBackgroundMethod` 默认值**：OpenAI 兼容和 fal.ai 为 `"api"`；自定义供应商的生成和编辑请求都映射了 `$params.background` 时为 `"api"`，否则为 `"local"`。
 
 ### 示例：仅 OpenAI 兼容
@@ -560,7 +558,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
       "description": "使用前请阅读 [接口说明](https://example.com/docs)。",
       "provider": "openai",
       "baseUrl": "https://api.openai.com/v1",
-      "model": "gpt-image-2.5-sunburst"
+      "model": "gpt-image-2.6-sunburst"
     }
   ]
 }
@@ -576,7 +574,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
       "name": "OpenAI",
       "provider": "openai",
       "baseUrl": "https://api.openai.com/v1",
-      "model": "gpt-image-2.5-sunburst",
+      "model": "gpt-image-2.6-sunburst",
       "isDefault": true
     },
     {
@@ -584,7 +582,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
       "name": "sub2api 异步",
       "provider": "sb2api-async",
       "baseUrl": "https://api.example.com/v1",
-      "model": "gpt-image-2.5-sunburst"
+      "model": "gpt-image-2.6-sunburst"
     },
     {
       "id": "fal-profile",
@@ -649,9 +647,11 @@ API 不是标准 OpenAI 格式时，在预置 JSON 的 `customProviders` 中定�
 
 接口不在 `/v1` 路径下时，将 `baseUrl` 设为以 `/` 结尾。例如 `baseUrl` 为 `https://api.example.com/`、`submit.path` 为 `api/image-tasks` 时，实际请求地址为 `https://api.example.com/api/image-tasks`。
 
+`modelOverrides` 可按模型 ID（支持 `*` 通配符）配置不同接口，路径支持 `{model}` 占位符。完整字段见 [自定义供应商 LLM 提示词](docs/custom-provider-llm-prompt.md)。
+
 **获取供应商定义**
 
-- **AI 生成**：在 [Vercel 在线体验](https://gpt-image-2.88lin.eu.org/) 或 [GitHub Pages 在线体验](https://88lin.github.io/gpt-image-studio) 的 **设置 → API 配置 → 供应商类型 → 创建自定义供应商 → AI 一键生成与导入** 中粘贴第三方 API 文档生成配置，再复制该配置的导入链接作为预置值。
+- **AI 生成**：在 [Vercel 在线体验](https://gpt-image-2.88lin.eu.org/) 或 [GitHub Pages 在线体验](https://88lin.github.io/gpt-image-studio) 的 **「设置 → API 配置 → 供应商类型 → 创建自定义供应商 → AI 一键生成与导入」** 中粘贴第三方 API 文档生成配置，再复制该配置的导入链接作为预置值。
 - **手动生成**：将 [自定义供应商 LLM 提示词](docs/custom-provider-llm-prompt.md) 和第三方 API 文档发给任意 LLM，获取完整 JSON。
 
 **完整 JSON 示例（异步任务供应商）**
@@ -699,7 +699,7 @@ API 不是标准 OpenAI 格式时，在预置 JSON 的 `customProviders` 中定�
       "name": "示例异步任务供应商",
       "provider": "custom-example-task",
       "baseUrl": "https://api.example.com/v1",
-      "model": "gpt-image-2.5-sunburst",
+      "model": "gpt-image-2.6-sunburst",
       "apiMode": "images"
     }
   ]
@@ -717,8 +717,8 @@ API 不是标准 OpenAI 格式时，在预置 JSON 的 `customProviders` 中定�
 |------|------|------|
 | `apiUrl` | API Base URL | `?apiUrl=https://api.example.com/v1` |
 | `apiKey` | API Key | `?apiKey=sk-xxxx` |
-| `model` | 模型 ID，多个模型以逗号分隔，可在首页切换 | `?model=gpt-image-2.5-sunburst,gpt-image-2` |
-| `imageGenerationModel` | Responses API 的图像生成工具模型，留空使用 API 默认值 | `?imageGenerationModel=gpt-image-2.5-sunburst` |
+| `model` | 模型 ID，多个模型以逗号分隔，可在首页切换 | `?model=gpt-image-2.6-sunburst,gpt-image-2` |
+| `imageGenerationModel` | Responses API 的图像生成工具模型，留空使用 API 默认值 | `?imageGenerationModel=gpt-image-2.6-sunburst` |
 | `apiMode` | `images` 或 `responses`，默认 `images` | `?apiMode=responses` |
 | `profileName` | 配置名称，默认“URL 参数配置” | `?profileName=我的配置` |
 | `reasoningEffort` | Responses API 推理强度 | `?reasoningEffort=high` |
@@ -834,7 +834,7 @@ client_header_timeout 60s;
 
 ## 🔤 字体许可
 
-本项目内置以下两款字体，由 `VITE_BUILTIN_FONT_SOURCE` 决定从公共 CDN 加载还是使用 [`fonts/`](fonts) 目录中的字体文件。完整许可文本位于 [`third-party-licenses/`](third-party-licenses)，也可在应用的“设置 → 关于 → 第三方许可”中查看。
+本项目内置以下两款字体，由 `VITE_BUILTIN_FONT_SOURCE` 决定从公共 CDN 加载还是使用 [`fonts/`](fonts) 目录中的字体文件。完整许可文本位于 [`third-party-licenses/`](third-party-licenses)，也可在应用的 **「设置 → 关于 → 第三方许可」** 中查看。
 
 | 字体 | 版权方 | 许可 | 项目地址 | 许可文件 |
 |------|------|------|------|------|

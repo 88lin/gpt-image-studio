@@ -719,6 +719,21 @@ describe('mergePresetImportedSettings', () => {
     expect(merged.customProviders[0]).toMatchObject({ id: 'source-provider', submit: { path: 'v2/generate' } })
   })
 
+  it('syncs a changed SVG authoring model from the deployment', () => {
+    const withSvgModel = (svgModel: string) => {
+      const config = createConfig('model-v1', 'old/generate')
+      return { ...config, profiles: [{ ...config.profiles[0], provider: 'openai', svgModel }], customProviders: [] }
+    }
+    const initial = mergeDefaultImportedSettings(DEFAULT_SETTINGS, withSvgModel('svg-v1'))
+    expect(initial.settings.profiles[0].svgModel).toBe('svg-v1')
+
+    const unlocked = mergeDefaultImportedSettings(initial.settings, withSvgModel('svg-v2'), { previousPresetConfig: initial.presetConfig })
+    expect(unlocked.settings.profiles[0].svgModel).toBe('svg-v2')
+
+    const locked = mergeDefaultImportedSettings(unlocked.settings, withSvgModel('svg-v3'), { previousPresetConfig: unlocked.presetConfig, lockPresetParams: true })
+    expect(locked.settings.profiles[0].svgModel).toBe('svg-v3')
+  })
+
   it('keeps the local API key while updating other locked preset parameters', () => {
     const initialConfig = createConfig('model-v1', 'old/generate')
     initialConfig.profiles[0].apiKey = 'deployed-key'
@@ -1680,7 +1695,7 @@ describe('custom providers', () => {
       ],
     })
 
-    expect(settings.providerOrder).toEqual(['fal', 'openai', 'sb2api-async', 'grok', 'custom-alpha', 'custom-beta'])
+    expect(settings.providerOrder).toEqual(['fal', 'openai', 'google', 'xai', 'sb2api-async', 'grok', 'custom-alpha', 'custom-beta'])
   })
 
   it('keeps active custom providers in Images API mode when legacy apiMode is responses', () => {
@@ -1738,6 +1753,12 @@ describe('custom providers', () => {
     expect(DEFAULT_SETTINGS.allowPromptRewrite).toBe(false)
     expect(normalizeSettings({}).allowPromptRewrite).toBe(false)
     expect(normalizeSettings({ allowPromptRewrite: true }).allowPromptRewrite).toBe(true)
+  })
+
+  it('defaults imagePromptHints to true and preserves explicit false', () => {
+    expect(DEFAULT_SETTINGS.imagePromptHints).toBe(true)
+    expect(normalizeSettings({}).imagePromptHints).toBe(true)
+    expect(normalizeSettings({ imagePromptHints: false }).imagePromptHints).toBe(false)
   })
 
   it('restores OpenAI-compatible URL after switching through fal.ai', () => {

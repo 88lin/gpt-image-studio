@@ -3,7 +3,7 @@ import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import type { AppSettings } from '../types'
 import { useStore } from '../store'
-import { DEFAULT_GROK_BASE_URL, DEFAULT_GROK_MODEL, createDefaultGrokProfile, createDefaultOpenAIProfile, normalizeSettings } from './apiProfiles'
+import { DEFAULT_GROK_BASE_URL, DEFAULT_GROK_MODEL, NATIVE_IMAGE_PROVIDERS, createDefaultGrokProfile, createDefaultOpenAIProfile, normalizeSettings } from './apiProfiles'
 import { installCliBridge } from './cliBridge'
 
 vi.mock('@tauri-apps/api/core', () => ({ invoke: vi.fn(async () => undefined), isTauri: () => false }))
@@ -25,22 +25,26 @@ beforeEach(() => {
   vi.mocked(useStore.getState, { partial: true }).mockImplementation(() => state)
 })
 
-describe('CLI 的 Grok 配置', () => {
-  it('可以新建并启用内置 Grok 配置', async () => {
+describe('CLI 的内置图像供应商配置', () => {
+  it.each([
+    ['grok', DEFAULT_GROK_BASE_URL, DEFAULT_GROK_MODEL],
+    ['google', NATIVE_IMAGE_PROVIDERS.google.baseUrl, NATIVE_IMAGE_PROVIDERS.google.model],
+    ['xai', NATIVE_IMAGE_PROVIDERS.xai.baseUrl, NATIVE_IMAGE_PROVIDERS.xai.model],
+  ])('可以新建并启用内置 %s 配置', async (provider, baseUrl, model) => {
     const stop = installCliBridge()
     const handle = vi.mocked(listen).mock.calls[0][1]
     handle({ event: 'cli-request', id: 1, payload: {
       id: 42,
       tool: 'save_api_profile',
-      arguments: { profile: { provider: 'grok', name: 'Grok' } },
+      arguments: { profile: { provider, name: provider } },
     } })
 
     await vi.waitFor(() => expect(invoke).toHaveBeenCalledWith('cli_respond', {
       id: 42,
       result: expect.objectContaining({ data: expect.objectContaining({
-        provider: 'grok',
-        baseUrl: DEFAULT_GROK_BASE_URL,
-        model: DEFAULT_GROK_MODEL,
+        provider,
+        baseUrl,
+        model,
         active: true,
       }) }),
     }))

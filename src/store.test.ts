@@ -2,13 +2,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { getPromptTextareaLayout } from './components/InputBar'
 import { strToU8, zipSync } from 'fflate'
 import { DEFAULT_PARAMS } from './types'
-import { createDefaultFalProfile, createDefaultOpenAIProfile, DEFAULT_RESPONSES_MODEL, DEFAULT_SETTINGS, normalizeSettings } from './lib/apiProfiles'
+import { createDefaultFalProfile, createDefaultOpenAIProfile, DEFAULT_IMAGES_MODEL, DEFAULT_RESPONSES_MODEL, DEFAULT_SETTINGS, normalizeSettings } from './lib/apiProfiles'
 import type { AgentConversation, ExportData, StoredImage, StoredImageThumbnail, TaskRecord } from './types'
 import { getSelectedImageMentionLabel } from './lib/promptImageMentions'
 import { hasActiveDataOperations, hasInterruptibleOperations, trackDataTransfer } from './lib/dataOperations'
 import { cancelDataProgress, useDataProgress } from './lib/dataProgress'
 import { deleteAgentRoundFromConversation, getActiveAgentRounds, getAgentConversationTaskIds, getAgentRoundTaskIds, remapAgentRoundMentionsForPathChange } from './lib/agentConversationState'
 import { cleanStaleAgentInputDrafts } from './lib/inputDraftState'
+import { ALL_FAVORITES_COLLECTION_ID } from './lib/favoriteState'
 import { normalizePersistedState } from './lib/persistedState'
 import { setPresetConfig } from './lib/presetConfig'
 import { FetchConnectError } from './lib/platform'
@@ -330,7 +331,107 @@ describe('task retry', () => {
       tasks: [],
       showToast: vi.fn(),
       detailTaskId: null,
+      filterFavorite: false,
+      activeFavoriteCollectionId: null,
     })
+  })
+
+  it('persists prompt hints and clears them when retrying without hints', async () => {
+    const hints = { prefix: '生成图像：', suffix: '请使用 google:search 搜索相关信息。' }
+    useStore.setState({ appMode: 'gallery', prompt: 'example', inputImages: [], params: { ...DEFAULT_PARAMS } })
+    vi.mocked(callImageApi).mockImplementationOnce(async (opts) => {
+      opts.onPromptHintsPrepared?.(hints)
+      throw new Error('example failure')
+    })
+    await submitTask()
+    await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('error'))
+    expect((await getAllTasks())[0].promptHints).toEqual(hints)
+    useStore.setState({ settings: { ...useStore.getState().settings, imagePromptHints: false } })
+    expect(useStore.getState().tasks[0].promptHints).toEqual(hints)
+    vi.mocked(callImageApi).mockImplementationOnce(async (opts) => {
+      opts.onPromptHintsPrepared?.(undefined)
+      return { images: [] }
+    })
+    await retryTask(useStore.getState().tasks[0])
+    await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).not.toBe('running'))
+    expect((await getAllTasks())[0].promptHints).toBeUndefined()
+  })
+
+  it('adds a new task created on a favorites page to the active collection', async () => {
+    const collection = { id: 'collection-a', name: '收藏夹 A', createdAt: 1, updatedAt: 1 }
+    const failed = task({ status: 'error', error: '上次失败' })
+    useStore.setState({
+      appMode: 'gallery',
+      filterFavorite: true,
+      activeFavoriteCollectionId: collection.id,
+      favoriteCollections: [collection],
+      defaultFavoriteCollectionId: collection.id,
+      settings: { ...useStore.getState().settings, retryMode: 'new' },
+      tasks: [failed],
+      prompt: 'prompt',
+      inputImages: [],
+      params: { ...DEFAULT_PARAMS },
+    })
+    vi.mocked(callImageApi).mockResolvedValue({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+
+    await retryTask(failed)
+    expect(useStore.getState().tasks[0]).toMatchObject({ favoriteCollectionIds: [collection.id], isFavorite: true })
+    await submitTask()
+    expect(useStore.getState().tasks[0]).toMatchObject({ favoriteCollectionIds: [collection.id], isFavorite: true })
+
+    useStore.setState({ settings: { ...useStore.getState().settings, saveTasksToActiveFavoriteCollection: false } })
+    await submitTask()
+    expect(useStore.getState().tasks[0].isFavorite).toBeUndefined()
+    await vi.waitFor(() => expect(useStore.getState().tasks.every((item) => item.status !== 'running')).toBe(true))
+  })
+
+  it('keeps the source collections when retrying on the all favorites page', async () => {
+    const collectionA = { id: 'collection-a', name: '收藏夹 A', createdAt: 1, updatedAt: 1 }
+    const collectionB = { id: 'collection-b', name: '收藏夹 B', createdAt: 1, updatedAt: 1 }
+    const failed = task({ status: 'error', error: '上次失败', favoriteCollectionIds: [collectionB.id], isFavorite: true })
+    useStore.setState({
+      appMode: 'gallery',
+      filterFavorite: true,
+      activeFavoriteCollectionId: ALL_FAVORITES_COLLECTION_ID,
+      favoriteCollections: [collectionA, collectionB],
+      defaultFavoriteCollectionId: collectionA.id,
+      settings: { ...useStore.getState().settings, retryMode: 'new' },
+      tasks: [failed],
+    })
+    vi.mocked(callImageApi).mockResolvedValue({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+
+    await retryTask(failed)
+    expect(useStore.getState().tasks[0]).toMatchObject({ favoriteCollectionIds: [collectionB.id], isFavorite: true })
+    await vi.waitFor(() => expect(useStore.getState().tasks[0].status).not.toBe('running'))
+  })
+
+  it('uses the default collection when the active one is deleted before a queued task starts', async () => {
+    const collectionA = { id: 'collection-a', name: '收藏夹 A', createdAt: 1, updatedAt: 1 }
+    const collectionB = { id: 'collection-b', name: '收藏夹 B', createdAt: 1, updatedAt: 1 }
+    const firstRequest = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+    vi.mocked(callImageApi)
+      .mockImplementationOnce(() => firstRequest.promise)
+      .mockResolvedValue({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+    useStore.setState({
+      appMode: 'gallery',
+      filterFavorite: true,
+      activeFavoriteCollectionId: collectionB.id,
+      favoriteCollections: [collectionA, collectionB],
+      defaultFavoriteCollectionId: collectionA.id,
+      settings: { ...useStore.getState().settings, showBatchPrompt: true, batchPromptEnabled: true, batchPromptMode: 'queue' },
+      prompt: 'first\n\n\nsecond',
+      inputImages: [],
+      params: { ...DEFAULT_PARAMS },
+    })
+
+    void submitTask()
+    await vi.waitFor(() => expect(callImageApi).toHaveBeenCalledOnce())
+    expect(useStore.getState().tasks[0]).toMatchObject({ prompt: 'first', favoriteCollectionIds: [collectionB.id] })
+    await deleteFavoriteCollection(collectionB.id)
+    firstRequest.resolve({ images: [], actualParams: {}, actualParamsList: [], revisedPrompts: [] })
+
+    await vi.waitFor(() => expect(useStore.getState().batchProgress).toBeNull())
+    expect(useStore.getState().tasks.find((item) => item.prompt === 'second')).toMatchObject({ favoriteCollectionIds: [collectionA.id], isFavorite: true })
   })
 
   it('creates a separate task for a failed one by default', async () => {
@@ -1496,6 +1597,39 @@ describe('agent conversation persistence', () => {
     expect(state.maskEditorImageId).toBeNull()
   })
 
+})
+
+describe('built-in image task recovery', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+    vi.unstubAllEnvs()
+  })
+
+  it.each(['openai', 'xai', 'grok'])('recovers a queued %s task after initialization', async (provider) => {
+    await clearTasks()
+    await clearImages()
+    await clearAgentConversations()
+    vi.stubEnv('VITE_API_PROXY_AVAILABLE', 'true')
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
+      data: { status: 'completed', result: { images: [{ url: 'data:image/png;base64,recovered' }] } },
+    }), { headers: { 'Content-Type': 'application/json' } }))
+    const profile = createDefaultOpenAIProfile({ id: 'queued-profile', provider, baseUrl: 'https://example.com/v1', apiKey: 'test-key', model: 'grok-imagine-image-2', apiProxy: provider !== 'xai' })
+    useStore.setState({
+      settings: normalizeSettings({ ...DEFAULT_SETTINGS, profiles: [profile], activeProfileId: profile.id }),
+      tasks: [],
+      agentConversations: [],
+      showToast: vi.fn(),
+    })
+    await putDbTask(task({
+      id: 'queued-task', apiProvider: provider, apiProfileId: profile.id, apiModel: profile.model,
+      status: 'running', customTaskId: 'queued-job', customRecoverable: true, finishedAt: null, elapsed: null,
+    }))
+
+    await initStore()
+    await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === 'queued-task')).toMatchObject({ status: 'done', customRecoverable: false }))
+    expect(fetchMock).toHaveBeenCalledOnce()
+    expect(fetchMock.mock.calls[0][0]).toBe(provider === 'xai' ? 'https://example.com/v1/tasks/queued-job' : '/api-proxy/tasks/queued-job')
+  })
 })
 
 describe('fal task recovery', () => {
@@ -5646,7 +5780,7 @@ describe('reused task API profile', () => {
     expect(getTaskApiProfile(useStore.getState().settings, sourceTask)).toMatchObject({
       id: profile.id,
       provider: 'provider-old',
-      model: 'gpt-image-2.5-sunburst',
+      model: DEFAULT_IMAGES_MODEL,
     })
   })
 
@@ -6119,5 +6253,27 @@ describe('privacy mode', () => {
     await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('error'))
     expect(showBrowserNotification).toHaveBeenCalledOnce()
     expect(useStore.getState().detailTaskId).toBe(useStore.getState().tasks[0].id)
+  })
+})
+
+describe('lightbox reference context', () => {
+  afterEach(() => useStore.getState().setLightboxImageId(null))
+
+  it('keeps markup and comments per task for the same image, and plain previews inherit no markup', () => {
+    const open = useStore.getState().setLightboxImageId
+    open('original', ['original'], 'comment A', { original: 'markup-a' })
+    expect(useStore.getState().lightboxMarkupIds).toEqual({ original: 'markup-a' })
+    open('original', ['original'], 'comment B', { original: 'markup-b' })
+    expect(useStore.getState().lightboxMarkupIds).toEqual({ original: 'markup-b' })
+    expect(useStore.getState().lightboxCommentPrompt).toBe('comment B')
+    open('original')
+    expect(useStore.getState().lightboxMarkupIds).toEqual({})
+    expect(useStore.getState().lightboxCommentPrompt).toBeNull()
+  })
+
+  it('clears markup context when the lightbox closes', () => {
+    useStore.getState().setLightboxImageId('original', ['original'], null, { original: 'markup' })
+    useStore.getState().setLightboxImageId(null)
+    expect(useStore.getState().lightboxMarkupIds).toEqual({})
   })
 })
