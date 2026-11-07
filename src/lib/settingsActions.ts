@@ -4,8 +4,6 @@ import {
   DEFAULT_FAL_BASE_URL,
   NATIVE_IMAGE_PROVIDERS,
   DEFAULT_FAL_MODEL,
-  DEFAULT_GROK_BASE_URL,
-  DEFAULT_GROK_MODEL,
   DEFAULT_IMAGES_MODEL,
   DEFAULT_RESPONSES_MODEL,
   DEFAULT_SETTINGS,
@@ -64,12 +62,8 @@ export function prepareSettingsForCommit(draft: AppSettings): AppSettings {
       : DEFAULT_SETTINGS.baseUrl
     const baseUrl = profile.provider === 'fal'
       ? profile.baseUrl.trim().replace(/\/+$/, '') || (profile.id === defaultProfileId ? '' : DEFAULT_FAL_BASE_URL)
-      : profile.provider === 'grok'
-        ? profile.baseUrl.trim().replace(/\/+$/, '') || (shouldKeepEmptyBaseUrl ? '' : DEFAULT_GROK_BASE_URL)
-        : shouldKeepEmptyBaseUrl ? '' : normalizeBaseUrl(profile.baseUrl.trim() || nativeProvider?.baseUrl || emptyBaseUrlFallback, profile.provider === 'google' ? 'v1beta' : 'v1')
-    const defaultModel = nativeProvider?.model ?? (profile.provider === 'fal'
-      ? DEFAULT_FAL_MODEL
-      : profile.provider === 'grok' ? DEFAULT_GROK_MODEL : getDefaultModelForMode(profile.apiMode))
+      : shouldKeepEmptyBaseUrl ? '' : normalizeBaseUrl(profile.baseUrl.trim() || nativeProvider?.baseUrl || emptyBaseUrlFallback, profile.provider === 'google' ? 'v1beta' : 'v1')
+    const defaultModel = nativeProvider?.model ?? (profile.provider === 'fal' ? DEFAULT_FAL_MODEL : getDefaultModelForMode(profile.apiMode))
     return {
       ...profile,
       name: profile.name.trim() || (profile.id === defaultProfileId ? '默认' : '新配置'),

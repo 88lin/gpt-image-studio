@@ -5,6 +5,7 @@ import {
   createDefaultOpenAIProfile,
   getActiveApiProfile,
   getCustomProviderDefinition,
+  migrateLegacyGrokProfile,
   normalizeSettings,
   splitModelList,
   switchApiProfileProvider,
@@ -317,10 +318,10 @@ async function updateSettings(args: Record<string, unknown>) {
 
 function saveApiProfile(args: Record<string, unknown>) {
   if (!isObject(args.profile)) throw new Error('profile 必须是对象')
-  const fields = args.profile
+  const settings = getSettings()
+  const fields = migrateLegacyGrokProfile(args.profile, new Set(settings.customProviders.map((provider) => provider.id)))
   const unknown = Object.keys(fields).filter((key) => !PROFILE_FIELDS.has(key))
   if (unknown.length) throw new Error(`API 配置没有这些字段，或不能修改：${unknown.join('、')}`)
-  const settings = getSettings()
   const id = typeof args.id === 'string' ? args.id : ''
   const existing = settings.profiles.find((profile) => profile.id === id)
   if (id && !existing) throw new Error(`找不到 API 配置：${id}`)
@@ -333,7 +334,7 @@ function saveApiProfile(args: Record<string, unknown>) {
   const base = existing ?? createDefaultOpenAIProfile({ id: newId('openai'), name: '新配置' })
   const provider = typeof fields.provider === 'string' ? fields.provider : base.provider
   const customProvider = getCustomProviderDefinition(settings, provider)
-  if (!['openai', 'google', 'xai', 'sb2api-async', 'fal', 'grok'].includes(provider) && !customProvider) throw new Error(`没有这个服务商：${provider}`)
+  if (!['openai', 'google', 'xai', 'sb2api-async', 'fal'].includes(provider) && !customProvider) throw new Error(`没有这个服务商：${provider}`)
   const switched = provider === base.provider ? base : switchApiProfileProvider(base, provider, customProvider ?? undefined)
   const profile = { ...switched, ...fields, provider } as ApiProfile
   if (fields.selectedModel !== undefined && !splitModelList(profile.model).includes(String(fields.selectedModel))) {

@@ -3,7 +3,7 @@ import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import type { AppSettings } from '../types'
 import { useStore } from '../store'
-import { DEFAULT_GROK_BASE_URL, DEFAULT_GROK_MODEL, NATIVE_IMAGE_PROVIDERS, createDefaultGrokProfile, createDefaultOpenAIProfile, normalizeSettings } from './apiProfiles'
+import { NATIVE_IMAGE_PROVIDERS, createDefaultOpenAIProfile, normalizeApiProfile, normalizeSettings } from './apiProfiles'
 import { installCliBridge } from './cliBridge'
 
 vi.mock('@tauri-apps/api/core', () => ({ invoke: vi.fn(async () => undefined), isTauri: () => false }))
@@ -27,10 +27,10 @@ beforeEach(() => {
 
 describe('CLI 的内置图像供应商配置', () => {
   it.each([
-    ['grok', DEFAULT_GROK_BASE_URL, DEFAULT_GROK_MODEL],
+    ['grok', NATIVE_IMAGE_PROVIDERS.xai.baseUrl, NATIVE_IMAGE_PROVIDERS.xai.model],
     ['google', NATIVE_IMAGE_PROVIDERS.google.baseUrl, NATIVE_IMAGE_PROVIDERS.google.model],
     ['xai', NATIVE_IMAGE_PROVIDERS.xai.baseUrl, NATIVE_IMAGE_PROVIDERS.xai.model],
-  ])('可以新建并启用内置 %s 配置', async (provider, baseUrl, model) => {
+  ])('可以保存 %s 配置，并把旧 Grok 请求迁移到 xAI', async (provider, baseUrl, model) => {
     const stop = installCliBridge()
     const handle = vi.mocked(listen).mock.calls[0][1]
     handle({ event: 'cli-request', id: 1, payload: {
@@ -42,7 +42,7 @@ describe('CLI 的内置图像供应商配置', () => {
     await vi.waitFor(() => expect(invoke).toHaveBeenCalledWith('cli_respond', {
       id: 42,
       result: expect.objectContaining({ data: expect.objectContaining({
-        provider,
+        provider: provider === 'grok' ? 'xai' : provider,
         baseUrl,
         model,
         active: true,
@@ -52,7 +52,7 @@ describe('CLI 的内置图像供应商配置', () => {
   })
 
   it('可以修改已有 Grok 配置，并在回复中隐藏 API Key', async () => {
-    const profile = createDefaultGrokProfile({ id: 'grok', apiKey: 'private-key' })
+    const profile = normalizeApiProfile({ id: 'legacy-grok', provider: 'grok', apiKey: 'private-key' })
     useStore.getState().settings = normalizeSettings({ profiles: [profile], activeProfileId: profile.id })
     const stop = installCliBridge()
     const handle = vi.mocked(listen).mock.calls[0][1]
@@ -66,9 +66,9 @@ describe('CLI 的内置图像供应商配置', () => {
       id: 43,
       result: expect.objectContaining({ data: expect.objectContaining({
         name: '我的 Grok',
-        provider: 'grok',
-        baseUrl: DEFAULT_GROK_BASE_URL,
-        model: DEFAULT_GROK_MODEL,
+        provider: 'xai',
+        baseUrl: NATIVE_IMAGE_PROVIDERS.xai.baseUrl,
+        model: NATIVE_IMAGE_PROVIDERS.xai.model,
         apiKeySet: true,
       }) }),
     }))

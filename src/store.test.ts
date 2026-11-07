@@ -1605,7 +1605,7 @@ describe('built-in image task recovery', () => {
     vi.unstubAllEnvs()
   })
 
-  it.each(['openai', 'xai', 'grok'])('recovers a queued %s task after initialization', async (provider) => {
+  it.each([['openai', true], ['xai', false], ['grok', false], ['grok', true]] as const)('recovers a queued %s task after initialization, proxy=%s', async (provider, apiProxy) => {
     await clearTasks()
     await clearImages()
     await clearAgentConversations()
@@ -1613,7 +1613,7 @@ describe('built-in image task recovery', () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({
       data: { status: 'completed', result: { images: [{ url: 'data:image/png;base64,recovered' }] } },
     }), { headers: { 'Content-Type': 'application/json' } }))
-    const profile = createDefaultOpenAIProfile({ id: 'queued-profile', provider, baseUrl: 'https://example.com/v1', apiKey: 'test-key', model: 'grok-imagine-image-2', apiProxy: provider !== 'xai' })
+    const profile = createDefaultOpenAIProfile({ id: 'queued-profile', provider, baseUrl: 'https://example.com/v1', apiKey: 'test-key', model: 'grok-imagine-image-2', apiProxy })
     useStore.setState({
       settings: normalizeSettings({ ...DEFAULT_SETTINGS, profiles: [profile], activeProfileId: profile.id }),
       tasks: [],
@@ -1628,7 +1628,7 @@ describe('built-in image task recovery', () => {
     await initStore()
     await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === 'queued-task')).toMatchObject({ status: 'done', customRecoverable: false }))
     expect(fetchMock).toHaveBeenCalledOnce()
-    expect(fetchMock.mock.calls[0][0]).toBe(provider === 'xai' ? 'https://example.com/v1/tasks/queued-job' : '/api-proxy/tasks/queued-job')
+    expect(fetchMock.mock.calls[0][0]).toBe(apiProxy ? '/api-proxy/tasks/queued-job' : 'https://example.com/v1/tasks/queued-job')
   })
 })
 

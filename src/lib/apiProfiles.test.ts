@@ -2,15 +2,12 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   DEFAULT_FAL_BASE_URL,
   DEFAULT_FAL_MODEL,
-  DEFAULT_GROK_BASE_URL,
-  DEFAULT_GROK_MODEL,
   DEFAULT_IMAGES_MODEL,
   DEFAULT_RESPONSES_MODEL,
   DEFAULT_OPENAI_PROFILE_ID,
   DEFAULT_SETTINGS,
   createDefaultOpenAIProfile,
   createDefaultFalProfile,
-  createDefaultGrokProfile,
   getApiProviderLabel,
   getActiveApiProfile,
   getCustomProviderDefinition,
@@ -1312,32 +1309,46 @@ describe('default API profile marker', () => {
   })
 })
 
-describe('built-in providers', () => {
-  it('registers grok as a built-in OpenAI-compatible provider', () => {
-    const grokProfile = createDefaultGrokProfile()
-    expect(grokProfile).toMatchObject({
-      provider: 'grok',
-      baseUrl: DEFAULT_GROK_BASE_URL,
-      model: DEFAULT_GROK_MODEL,
-      apiMode: 'images',
-      codexCli: false,
-      streamImages: false,
-      transparentBackgroundMethod: 'local',
+describe('legacy Grok migration', () => {
+  it.each([false, true])('migrates saved profiles without losing credentials or model selection, proxy=%s', (apiProxy) => {
+    const profile = {
+      id: 'legacy-grok', name: '我的 Grok', provider: 'grok',
+      baseUrl: 'https://relay.example.com/v1', apiKey: 'saved-key',
+      model: 'grok-imagine-image-2, custom-model', selectedModel: 'custom-model', apiProxy,
+    }
+    const settings = normalizeSettings({ profiles: [profile], activeProfileId: profile.id })
+    expect(settings.profiles).toHaveLength(1)
+    expect(settings.profiles[0]).toMatchObject({
+      ...profile, provider: apiProxy ? 'openai' : 'xai',
+      apiMode: 'images', streamImages: false, codexCli: false,
     })
+    expect(settings.activeProfileId).toBe(profile.id)
+    expect(normalizeSettings(JSON.parse(JSON.stringify(settings)))).toEqual(settings)
+    expect(getApiProviderLabel(settings, 'grok')).toBe('xAI')
+  })
 
-    const openaiProfile = createDefaultOpenAIProfile({ apiMode: 'responses', streamImages: true })
-    const switched = switchApiProfileProvider(openaiProfile, 'grok')
-    expect(switched).toMatchObject({
-      provider: 'grok',
-      baseUrl: DEFAULT_GROK_BASE_URL,
-      model: DEFAULT_GROK_MODEL,
-      apiMode: 'images',
-      streamImages: false,
-      codexCli: false,
-      transparentBackgroundMethod: 'local',
-    })
+  it('deduplicates the legacy provider in saved ordering', () => {
+    const settings = normalizeSettings({ providerOrder: ['grok', 'fal', 'xai', 'openai'] })
+    expect(settings.providerOrder).toEqual(['xai', 'fal', 'openai', 'google', 'sb2api-async'])
+  })
 
-    expect(getApiProviderLabel({}, 'grok')).toBe('Grok (xAI)')
+  it.each([false, true])('migrates provider drafts while keeping an existing target draft, proxy=%s', (apiProxy) => {
+    const provider = apiProxy ? 'openai' : 'xai'
+    const legacy = { baseUrl: 'https://legacy.example.com/v1', model: 'legacy-model', apiProxy }
+    const current = { baseUrl: 'https://current.example.com/v1', model: 'current-model', apiProxy }
+    const profile = normalizeApiProfile({ provider: 'fal', providerDrafts: { grok: legacy } })
+    expect(profile.providerDrafts?.grok).toBeUndefined()
+    expect(switchApiProfileProvider(profile, provider)).toMatchObject({ provider, ...legacy })
+    const both = normalizeApiProfile({ provider: 'fal', providerDrafts: { grok: legacy, [provider]: current } })
+    expect(both.providerDrafts?.grok).toBeUndefined()
+    expect(switchApiProfileProvider(both, provider)).toMatchObject({ provider, ...current })
+  })
+
+  it('imports legacy configuration JSON through the upstream xAI provider', () => {
+    const imported = importCustomProviderSettingsFromJson(JSON.stringify({
+      profiles: [{ id: 'legacy-grok', provider: 'grok', apiKey: 'saved-key', baseUrl: 'https://api.x.ai/v1', model: 'grok-imagine-image-2' }],
+    }))
+    expect(imported.profiles[0]).toMatchObject({ id: 'legacy-grok', provider: 'xai', apiKey: 'saved-key', model: 'grok-imagine-image-2' })
   })
 })
 
@@ -1695,7 +1706,7 @@ describe('custom providers', () => {
       ],
     })
 
-    expect(settings.providerOrder).toEqual(['fal', 'openai', 'google', 'xai', 'sb2api-async', 'grok', 'custom-alpha', 'custom-beta'])
+    expect(settings.providerOrder).toEqual(['fal', 'openai', 'google', 'xai', 'sb2api-async', 'custom-alpha', 'custom-beta'])
   })
 
   it('keeps active custom providers in Images API mode when legacy apiMode is responses', () => {

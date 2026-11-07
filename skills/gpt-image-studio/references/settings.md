@@ -63,7 +63,7 @@
 | 字段 | 含义 |
 |---|---|
 | `name` | 配置名称 |
-| `provider` | `openai`（OpenAI 兼容接口）、`google`（Google）、`xai`（xAI）、`sb2api-async`（sub2api 异步）、`fal`（fal.ai）、`grok`（Grok / xAI），或自定义服务商的 id。改服务商时，应用会恢复该配置在这个服务商下保存过的地址和模型 |
+| `provider` | `openai`（OpenAI 兼容接口）、`google`（Google）、`xai`（xAI）、`sb2api-async`（sub2api 异步）、`fal`（fal.ai），或自定义服务商的 id。改服务商时，应用会恢复该配置在这个服务商下保存过的地址和模型 |
 | `baseUrl` | API 地址，如 `https://api.openai.com/v1`。末尾带 `/` 时直接在该地址后拼接口路径，不补 `/v1` |
 | `apiKey` | API Key，只能写入 |
 | `model` | 模型 ID 列表，多个以 `, ` 分隔 |

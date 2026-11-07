@@ -1325,7 +1325,8 @@ function getFalRecoveryProfile(settings: AppSettings, task: TaskRecord) {
 
 function getCustomRecoveryProfile(settings: AppSettings, task: TaskRecord) {
   const taskProfile = getTaskApiProfile(settings, task)
-  if (taskProfile && taskProfile.provider === task.apiProvider && taskProfile.provider !== 'fal') return { ...taskProfile, model: task.apiModel || taskProfile.model }
+  const provider = task.apiProvider === 'grok' && (taskProfile?.provider === 'xai' || taskProfile?.provider === 'openai') ? taskProfile.provider : task.apiProvider
+  if (taskProfile && taskProfile.provider === provider && taskProfile.provider !== 'fal') return { ...taskProfile, model: task.apiModel || taskProfile.model }
   return null
 }
 
@@ -4673,7 +4674,7 @@ async function recoverCustomTask(taskId: string) {
   if (!task || !task.customTaskId || task.status === 'done') return
 
   const profile = getCustomRecoveryProfile(settings, task)
-  const definition = profile ? getCustomProviderDefinition(settings, profile.provider) ?? (profile.provider === 'openai' || profile.provider === 'xai' || profile.provider === 'grok' ? OPENAI_IMAGE_TASK_PROVIDER : null) : null
+  const definition = profile ? getCustomProviderDefinition(settings, profile.provider) ?? (profile.provider === 'openai' || profile.provider === 'xai' ? OPENAI_IMAGE_TASK_PROVIDER : null) : null
   const customProvider = profile && definition ? resolveCustomProviderModel(definition, profile.model) : null
   if (!profile || !customProvider?.poll) {
     scheduleCustomRecovery(taskId)

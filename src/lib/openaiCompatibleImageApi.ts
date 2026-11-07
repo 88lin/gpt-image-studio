@@ -501,7 +501,7 @@ async function callModelImagesApi(opts: CallApiOptions, profile: ApiProfile): Pr
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(createRequestTimeoutError(profile.timeout)), profile.timeout * 1000)
   try {
-    const response = await apiFetch(buildApiUrl(profile.baseUrl, family === 'grok' && !grokSizeParams && isEdit ? 'images/edits' : 'images/generations', proxyConfig, (profile.provider === 'openai' || profile.provider === 'grok') && shouldUseApiProxy(profile.apiProxy, proxyConfig)), {
+    const response = await apiFetch(buildApiUrl(profile.baseUrl, family === 'grok' && !grokSizeParams && isEdit ? 'images/edits' : 'images/generations', proxyConfig, profile.provider === 'openai' && shouldUseApiProxy(profile.apiProxy, proxyConfig)), {
       method: 'POST',
       headers: { ...createRequestHeaders(profile), 'Content-Type': 'application/json' },
       cache: 'no-store',
@@ -976,7 +976,7 @@ async function pollCustomTaskResult(
     const taskPath = appendQuery(buildTaskPath(poll.path.replace(/\{model\}/g, encodeURIComponent(profile.model)), taskId), query)
     let taskPayload: unknown
     try {
-      const taskResponse = await apiFetch(buildApiUrl(profile.baseUrl, taskPath, proxyConfig, (profile.provider === 'openai' || profile.provider === 'grok') && shouldUseApiProxy(profile.apiProxy, proxyConfig)), {
+      const taskResponse = await apiFetch(buildApiUrl(profile.baseUrl, taskPath, proxyConfig, profile.provider === 'openai' && shouldUseApiProxy(profile.apiProxy, proxyConfig)), {
         method: poll.method ?? 'GET',
         headers: requestHeaders,
         cache: 'no-store',
