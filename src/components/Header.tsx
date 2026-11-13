@@ -182,30 +182,30 @@ export default function Header() {
       <header data-no-drag-select className={`safe-area-top pr-[var(--page-scrollbar-width)] fixed top-0 left-0 right-0 z-40 border-b border-gray-950/[0.07] bg-[#f8f9f4]/95 backdrop-blur-md shadow-[0_6px_18px_rgba(24,24,27,0.03)] supports-[backdrop-filter]:bg-[#f8f9f4]/80 dark:border-white/[0.08] dark:bg-[#0d0f0c]/95 dark:supports-[backdrop-filter]:bg-[#0d0f0c]/80 dark:shadow-[0_6px_18px_rgba(0,0,0,0.14)] transition-transform duration-300 ease-in-out ${appMode === 'agent' && !agentMobileHeaderVisible ? '-translate-y-full sm:translate-y-0' : 'translate-y-0'}`}>
         <div className="safe-area-x safe-header-inner max-w-7xl mx-auto flex items-center justify-between relative">
           <div className="flex-1 min-w-0 pr-2 flex items-center gap-2">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-gray-950/10 bg-gray-950 text-[11px] font-black text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-gray-950">
-              G2
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-gray-950/10 bg-gray-950 text-[11px] font-black text-white shadow-sm dark:border-white/10 dark:bg-white dark:text-gray-950 max-[360px]:hidden">
+              GI
             </div>
             <h1 className="inline-flex min-w-0 items-start relative mr-2">
               {showFavoriteCollectionTitle ? (
                 <>
                   <span className="min-w-0 truncate text-[17px] font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:hidden" title={favoriteCollectionTitle}>{favoriteCollectionTitle}</span>
                   <a
-                    href={isTauri ? 'https://gpt-image-2.88lin.eu.org/' : '/'}
+                    href={isTauri ? 'https://gpt-image-2.88lin.eu.org/' : import.meta.env.BASE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hidden text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 sm:inline"
+                    className="hidden min-w-0 truncate text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 sm:inline"
                   >
-                    GPT Image 2
+                    GPT Image Studio
                   </a>
                 </>
               ) : (
                 <a
-                  href={isTauri ? 'https://gpt-image-2.88lin.eu.org/' : '/'}
+                  href={isTauri ? 'https://gpt-image-2.88lin.eu.org/' : import.meta.env.BASE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[17px] sm:text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
+                  className="min-w-0 text-[15px] leading-tight sm:truncate sm:text-lg font-bold tracking-tight text-gray-950 transition-colors hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300"
                 >
-                  GPT Image 2
+                  GPT Image<span className="block sm:inline"> Studio</span>
                 </a>
               )}
               {/* 透明伪元素把点击区域扩大到 32px 以上，外观不变 */}

@@ -1,6 +1,7 @@
 import type { PromptTemplateInput } from './promptTemplates'
 import { HOUSHIFANG_PROMPT_TEMPLATES } from './houshifangPromptTemplates'
 import { KKKM_PROMPT_TEMPLATES } from './kkkmPromptTemplates'
+import { COMMUNITY_PROMPT_TEMPLATES } from './communityPromptTemplates'
 
 const BASE_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   {
@@ -9474,4 +9475,5 @@ export const EXPANDED_PROMPT_TEMPLATES: PromptTemplateInput[] = [
   ...BASE_PROMPT_TEMPLATES,
   ...EXTRA_CURATED_PROMPT_TEMPLATES,
   ...KKKM_PROMPT_TEMPLATES,
+  ...COMMUNITY_PROMPT_TEMPLATES,
 ]

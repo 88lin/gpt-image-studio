@@ -1,7 +1,7 @@
 {
-  "name": "GPT Image 2",
-  "short_name": "GPT Image 2",
-  "description": "GPT Image 2 图像生成、编辑与提示词工作台",
+  "name": "GPT Image Studio",
+  "short_name": "GPT Image Studio",
+  "description": "支持 GPT Image 2、Gemini、Grok 和 Seedream 5.5 的 AI 生图、图片编辑与提示词工作台",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -116,7 +116,7 @@ export default function AboutSettingsTab({ onOpenFontLicenses }: { onOpenFontLic
             二次开发（MIT）
           </p>
           <p data-selectable-text className="mt-3 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-            基于 OpenAI gpt-image-2.5 API 的图片生成、编辑与提示词工作台，已内置提示词模板。
+            支持 GPT Image 2、Gemini（Nano Banana）、Grok 和 Seedream 5.5 的 AI 生图、图片编辑与提示词工作台，提供参考图编辑、遮罩编辑和 Agent 多轮创作。
           </p>
         </div>
         <a

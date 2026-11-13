@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gpt-image-2.88lin.eu.org/sitemap.xml

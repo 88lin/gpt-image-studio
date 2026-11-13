@@ -45,7 +45,7 @@ describe('promptTemplates', () => {
     )
 
     expect(PROMPT_TEMPLATE_CATEGORIES.slice(0, 5)).toEqual(['运营', 'APP', '海报', '插画', '卡通IP'])
-    expect(image2hubTemplates).toHaveLength(97)
+    expect(image2hubTemplates).toHaveLength(145)
     expect(BUILT_IN_PROMPT_TEMPLATES.slice(0, image2hubTemplates.length)).toEqual(image2hubTemplates)
     expect(new Set(image2hubTemplates.map((template) => template.imageUrl)).size).toBe(image2hubTemplates.length)
     expect(image2hubTemplates.every((template) =>
@@ -56,8 +56,10 @@ describe('promptTemplates', () => {
     expect(getPromptTemplateSubcategories('运营')).toContain('3D海报')
     expect(getPromptTemplateSubcategories('海报')).toContain('电影海报')
     expect(getPromptTemplateSubcategories('插画')).toContain('黏土风格')
-    expect(getPromptTemplateSubcategories('卡通IP')).toEqual(['卡通IP'])
-    expect(image2hubTemplates.filter((template) => template.category === '卡通IP')).toHaveLength(7)
+    expect(getPromptTemplateSubcategories('卡通IP')).toEqual(expect.arrayContaining(['卡通IP', 'AI Bot IP 角色设计', '软雕塑角色', '毛绒角色']))
+    expect(getPromptTemplateSubcategories('插画')).toEqual(expect.arrayContaining(['超现实叙事', '表现主义肖像']))
+    expect(image2hubTemplates.filter((template) => template.subcategory === '卡通IP')).toHaveLength(7)
+    expect(image2hubTemplates.filter((template) => template.category === '卡通IP')).toHaveLength(39)
   })
 
   it('keeps image2hub generated titles aligned with source subcategory names', () => {
@@ -73,6 +75,21 @@ describe('promptTemplates', () => {
     expect(gradientArtTemplates.some((template) => template.title.includes('渐变海报'))).toBe(false)
     expect(clayTemplates.every((template) => template.title.includes('黏土风格'))).toBe(true)
     expect(exaggeratedTemplates.every((template) => template.title.includes('夸张风格'))).toBe(true)
+  })
+
+  it('keeps synced Chinese prompts and their layout requirements', () => {
+    const bot = BUILT_IN_PROMPT_TEMPLATES.find((template) => template.id === 'image2hub-ai-bot-colorful-team')
+    const brain = BUILT_IN_PROMPT_TEMPLATES.find((template) => template.id === 'wuyoscar-community-167')
+    const synced = BUILT_IN_PROMPT_TEMPLATES.filter((template) => /^youmind-\d+$/.test(template.id))
+
+    expect(bot?.prompt).toContain('上方占画面高度 40%')
+    expect(bot?.prompt).toContain('3 列 2 行')
+    expect(bot?.prompt).toContain('#FFFFFF')
+    expect(brain?.prompt).toContain('过度思考者的大脑')
+    expect(brain?.prompt).toContain('气动管道、楼梯和传送带')
+    expect(synced).toHaveLength(83)
+    expect(synced.every((template) => !template.prompt.startsWith('围绕「'))).toBe(true)
+    expect(synced.every((template) => !template.prompt.includes('{argument name='))).toBe(true)
   })
 
   it('keeps image2hub prompt text translated without imported metadata chatter', () => {

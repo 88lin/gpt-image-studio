@@ -1,3 +1,4 @@
+import { shouldReturnBase64 } from './apiProfiles'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   DEFAULT_FAL_BASE_URL,
@@ -8,8 +9,11 @@ import {
   DEFAULT_SETTINGS,
   createDefaultOpenAIProfile,
   createDefaultFalProfile,
+  getApiProfileContentKey,
+  getApiProfileModelGroups,
   getApiProviderLabel,
   getActiveApiProfile,
+  getAgentImageApiProfile,
   getCustomProviderDefinition,
   findEquivalentApiProfile,
   importCustomProviderDefinitionFromJson,
@@ -1329,7 +1333,7 @@ describe('legacy Grok migration', () => {
 
   it('deduplicates the legacy provider in saved ordering', () => {
     const settings = normalizeSettings({ providerOrder: ['grok', 'fal', 'xai', 'openai'] })
-    expect(settings.providerOrder).toEqual(['xai', 'fal', 'openai', 'google', 'sb2api-async'])
+    expect(settings.providerOrder).toEqual(['xai', 'fal', 'openai', 'google', 'bytedance', 'sb2api-async'])
   })
 
   it.each([false, true])('migrates provider drafts while keeping an existing target draft, proxy=%s', (apiProxy) => {
@@ -1706,7 +1710,7 @@ describe('custom providers', () => {
       ],
     })
 
-    expect(settings.providerOrder).toEqual(['fal', 'openai', 'google', 'xai', 'sb2api-async', 'custom-alpha', 'custom-beta'])
+    expect(settings.providerOrder).toEqual(['fal', 'openai', 'google', 'xai', 'bytedance', 'sb2api-async', 'custom-alpha', 'custom-beta'])
   })
 
   it('keeps active custom providers in Images API mode when legacy apiMode is responses', () => {
@@ -1806,4 +1810,107 @@ describe('model list', () => {
     const profile = normalizeApiProfile({ id: 'p1', model: 'a,b', selectedModel: 'b' })
     expect(getActiveApiProfile({ profiles: [profile], activeProfileId: 'p1' }).model).toBe('b')
   })
+})
+
+describe('homepage model groups', () => {
+  const profile = (id: string, model: string, extra: Record<string, unknown> = {}) => normalizeApiProfile({ id, name: id, model, apiKey: `${id}-key`, ...extra })
+
+  it('lists the active profile and the profiles with quick switch enabled', () => {
+    const groups = getApiProfileModelGroups({
+      profiles: [profile('a', 'm1,m2'), profile('b', 'm3'), profile('c', 'm4', { showInModelList: true })],
+      activeProfileId: 'b',
+    })
+
+    expect(groups.map((group) => group.profileId)).toEqual(['b', 'c'])
+    expect(groups[0]).toMatchObject({ name: 'b', models: ['m3'], providerLabel: 'OpenAI' })
+    expect(groups[1].models).toEqual(['m4'])
+  })
+
+  it('keeps the active profile first and keeps configuration order for the rest', () => {
+    const groups = getApiProfileModelGroups({
+      profiles: [profile('a', 'm1', { showInModelList: true }), profile('b', 'm2'), profile('c', 'm3', { showInModelList: true })],
+      activeProfileId: 'b',
+    })
+
+    expect(groups.map((group) => group.profileId)).toEqual(['b', 'a', 'c'])
+  })
+
+  it('only stores showInModelList when enabled and keeps it out of the content key', () => {
+    expect(normalizeApiProfile({ id: 'a', showInModelList: false }).showInModelList).toBeUndefined()
+    expect(normalizeApiProfile({ id: 'a' }).showInModelList).toBeUndefined()
+    expect(normalizeApiProfile({ id: 'a', showInModelList: true }).showInModelList).toBe(true)
+
+    const base = normalizeApiProfile({ id: 'a', model: 'm1' })
+    expect(getApiProfileContentKey({ ...base, showInModelList: true })).toBe(getApiProfileContentKey(base))
+  })
+
+  it.each(['native', 'hybrid'] as const)('keeps every model of an unlisted Agent profile in %s mode', (mode) => {
+    const settings = normalizeSettings({
+      profiles: [profile('a', 'm1', { showInModelList: true }), profile('b', 'm2,m3', { selectedModel: 'm3', apiMode: 'responses' })],
+      activeProfileId: 'a',
+      agentApiConfigMode: mode,
+      agentTextProfileId: 'b',
+      agentImageProfileId: 'b',
+    })
+    const active = getAgentImageApiProfile(settings)!
+
+    expect(active.model).toBe('m3')
+    expect(getApiProfileModelGroups(settings, active.id, false)).toEqual([
+      { profileId: 'b', name: 'b', providerLabel: 'OpenAI', models: ['m2', 'm3'] },
+    ])
+  })
+
+  it('keeps every model of a temporarily reused profile regardless of homepage visibility', () => {
+    const settings = normalizeSettings({
+      profiles: [profile('a', 'm1', { showInModelList: true }), profile('b', 'm2,m3')],
+      activeProfileId: 'a',
+    })
+    const active = resolveApiProfileModel(settings.profiles[1], 'm3')
+
+    expect(active.model).toBe('m3')
+    expect(getApiProfileModelGroups(settings, active.id, false)).toEqual([
+      { profileId: 'b', name: 'b', providerLabel: 'OpenAI', models: ['m2', 'm3'] },
+    ])
+  })
+})
+
+
+describe('native provider Base64 defaults', () => {
+  it.each(['xai', 'bytedance'] as const)('enables Base64 for a new %s configuration without leaking into other providers', (provider) => {
+    const profile = switchApiProfileProvider(createDefaultOpenAIProfile(), provider)
+    expect(shouldReturnBase64(profile)).toBe(true)
+    expect(switchApiProfileProvider(profile, 'openai').responseFormatB64Json).toBeUndefined()
+    expect(switchApiProfileProvider(profile, 'custom-test', { id: 'custom-test', name: '测试', submit: { path: 'images/generations' } }).responseFormatB64Json).toBeUndefined()
+    const disabled = normalizeApiProfile({ ...profile, responseFormatB64Json: false })
+    const other = switchApiProfileProvider(disabled, 'openai')
+    expect(switchApiProfileProvider(other, provider).responseFormatB64Json).toBeFalsy()
+  })
+})
+
+it('defaults Base64 by official domain and preserves explicit choices', () => {
+  for (const baseUrl of ['https://api.x.ai/v1', 'https://ark.cn-beijing.volces.com/api/v3', 'https://ark.ap-southeast.bytepluses.com/api/v3', 'https://ark.eu-west.bytepluses.com/api/v3']) {
+    expect(shouldReturnBase64({ baseUrl })).toBe(true)
+    expect(shouldReturnBase64(normalizeApiProfile({ baseUrl, responseFormatB64Json: false }))).toBe(false)
+  }
+  for (const baseUrl of ['https://example.com/v1', 'https://api.x.ai.example.com/v1', 'https://fakevolces.com', 'https://bytepluses.com.example.org', 'invalid']) {
+    expect(shouldReturnBase64({ baseUrl })).toBe(false)
+  }
+})
+
+it('keeps automatic defaults and explicit choices distinct across repeated URL changes and reloads', () => {
+  for (const choice of [undefined, true, false]) {
+    let profile = createDefaultOpenAIProfile({ responseFormatB64Json: choice })
+    for (const [baseUrl, automatic] of [
+      ['https://example.com/v1', false],
+      ['https://ark.eu-west.bytepluses.com/api/v3', true],
+      ['https://other.example.com/v1', false],
+      ['https://api.x.ai/v1', true],
+      ['', false],
+      ['https://ark.cn-beijing.volces.com/api/v3', true],
+    ] as const) {
+      profile = normalizeApiProfile(JSON.parse(JSON.stringify({ ...profile, baseUrl })))
+      expect(profile.responseFormatB64Json).toBe(choice)
+      expect(shouldReturnBase64(profile)).toBe(choice ?? automatic)
+    }
+  }
 })

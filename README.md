@@ -12,7 +12,7 @@
 [![Vite](https://img.shields.io/badge/Vite-7-B73BFE?style=flat-square&logo=vite&logoColor=FFD62E)](https://vite.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-**支持 GPT Image、Gemini（Nano Banana）和 Grok 的图片生成、编辑与提示词工作台**
+**支持 GPT Image、Gemini（Nano Banana）、Grok 和 Seedream 5.5 的图片生成与编辑工具**
 
 提供 Web UI 和 Windows 客户端，支持官方接口、OpenAI 兼容接口、sub2api、fal.ai 与自定义 HTTP 供应商。<br>
 支持文本生图、参考图编辑、画板标注、遮罩编辑与 Agent 多轮对话，图片和历史记录保存在本地。
@@ -34,11 +34,11 @@
 
 本项目基于 [GPT Image Playground](https://github.com/CookSleep/gpt_image_playground) 二次开发，额外增加了以下功能：
 
-- **593 内置提示词模板**：聚合 10 个中英文提示词来源，支持按标题、描述、来源和标签搜索，一键套用：
-  - 厚十方精选 — 97 个电商 / 海报 / 封面 / 产品图模板
+- **947 内置中文提示词模板**：聚合多个提示词来源，支持按标题、描述、来源和标签搜索，一键套用：
+  - [厚十方精选](https://github.com/houshifang/image) — 145 个 App / 海报 / 插画 / IP 模板
   - [prompts.kkkm.cn](https://prompts.kkkm.cn/) — 251 个高质量中文提示词
-  - GPT-Image-2 案例观摩馆（[EvoLinkAI](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) / OpenNana）— 112 个实用案例
-  - 社区精选合集（ZeroLu、freestylefly、wuyoscar、YouMind-OpenLab 等）— 133 个模板
+  - GPT-Image-2 案例观摩馆（[EvoLinkAI](https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts) / OpenNana）— 284 个实用案例
+  - 社区精选合集（ZeroLu、freestylefly、wuyoscar、YouMind-OpenLab 等）— 267 个模板
 - **提示词模板库弹窗**：独立 UI 组件，支持分类浏览、关键词检索、示例图预览和一键填入输入框
 - **移除上游赞助弹窗**：去掉原项目的赞助提示，界面更干净
 - **焦点管理优化**：打开 / 关闭弹窗时自动释放焦点，避免移动端键盘残留
@@ -136,9 +136,9 @@
   > - **SVG 和 GIF**：只使用 API 原生方式；自定义供应商的生成和编辑请求未映射 `$params.background` 时不提供透明背景。
 
 ### 🧠 提示词模板库
-- **593 内置精选模板**：聚合厚十方精选、prompts.kkkm.cn、GPT-Image-2 案例观摩馆与多个社区精选来源，覆盖电商图、海报、封面、产品图、摄影风格和视觉概念图等场景。
+- **947 内置中文精选模板**：聚合厚十方精选、prompts.kkkm.cn、GPT-Image-2 案例观摩馆与多个社区精选来源，覆盖电商图、海报、封面、产品图、摄影风格和视觉概念图等场景。
 - **搜索与套用**：支持按标题、描述、来源和标签检索，一键填入输入框并继续二次编辑。
-- **示例图辅助判断**：部分模板保留示例图，便于快速判断构图、画风和适用场景。
+- **示例图辅助判断**：模板附带示例图，便于判断构图、画风和适用场景；GitHub 图片的 CDN 加载失败时，自动尝试对应原图。
 
 ### 🤖 Agent 多轮对话模式
 - **多轮对话与上下文记忆**：基于 Responses API，Agent 理解上下文并按需调用图像工具；可用 `@` 引用参考图或之前生成的图片，也会自动识别上下文中的图片。
@@ -162,8 +162,9 @@
 ### 🔌 多配置与供应商增强
 - **多配置管理**：保存多个 API 配置（供应商、API Key、模型等）并快速切换；可一键复制当前配置到列表底部，配置和供应商列表均可拖拽排序。
 - **多模型切换**：模型 ID 可用逗号分隔填写多个（如 `gpt-image-2.6-sunburst, gpt-image-2`），在首页切换，按配置分别记住；预置配置、URL 传参与导入导出均支持此写法。
-- **多供应商接入**：内置 OpenAI 兼容接口（`Images API` / `Responses API`）、Google、xAI、sub2api（异步）、fal.ai（队列），并可通过 JSON 导入自定义 HTTP 供应商（同步/异步任务）。
-- **Gemini / Grok 图像生成**：支持官方接口和 OpenAI Images 兼容接口。
+- **模型搜索与跨配置切换**：输入框模型列表按配置分组，支持按模型名、配置名或供应商搜索；在 **「设置 → API 配置」** 中开启“在输入框模型列表中展示”，即可在首页直接选择该配置的模型并切换配置。
+- **多供应商接入**：内置 OpenAI 兼容接口（`Images API` / `Responses API`）、Google、xAI、字节跳动、sub2api（异步）、fal.ai（队列），并可通过 JSON 导入自定义 HTTP 供应商（同步/异步任务）。
+- **Gemini / Grok / Seedream 5.5 图像生成**：支持官方接口和 OpenAI Images 兼容接口。
 - **Google Search / Image Search**：部分 Gemini 模型支持网页和图片搜索，详情展示来源与搜索建议。
 - **Agent 模式独立 API 配置**：Agent 可使用原生（Responses API）或混合（Responses API + Images API）的独立配置，适配不支持 `image_generation` 工具的供应商或模型。
 - **API 代理**：OpenAI 兼容接口与 fal.ai 均可配置自定义代理；OpenAI 兼容接口还可走同源 `/api-proxy/`，由 Docker 或本地开发服务器转发，绕开浏览器 CORS 限制。
@@ -529,7 +530,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 | `id` | 定向更新时填写 | 配置标识，见表下说明。 |
 | `name` | 是 | 配置名称。 |
 | `description` | 否 | 配置说明，支持 Markdown，显示在“当前配置”下方的说明卡片中。 |
-| `provider` | 是 | `"openai"`（OpenAI 兼容）、`"google"`（Google）、`"xai"`（xAI）、`"sb2api-async"`（sub2api 异步）、`"fal"`（fal.ai），或 `customProviders` 中的供应商 ID。 |
+| `provider` | 是 | `"openai"`（OpenAI 兼容）、`"google"`（Google）、`"xai"`（xAI）、`"bytedance"`（字节跳动）、`"sb2api-async"`（sub2api 异步）、`"fal"`（fal.ai），或 `customProviders` 中的供应商 ID。 |
 | `baseUrl` | 是 | API 基础地址，末尾 `/` 的规则见表下说明；fal.ai 可留空。 |
 | `apiKey` | 否 | API Key。建议省略，由用户自行填写。 |
 | `model` | 是 | 模型 ID。多个模型以逗号分隔，默认使用第一个，用户可在首页切换。 |
@@ -539,13 +540,14 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 | `isDefault` | 否 | 有多个配置时为默认项设置 `true`（只能有一个），首次使用时自动选中；只有一个配置时不填。 |
 | `timeout` | 否 | 请求超时秒数，默认 600。 |
 | `apiProxy` | 否 | 是否走部署端 API 代理，默认 `false`。 |
+| `responseFormatB64Json` | 否 | 是否要求返回 Base64 图片数据。省略时，`x.ai`、`volces.com`、`bytepluses.com` 及其子域名默认开启，其他域名默认关闭；显式设置 `true` 或 `false` 后不随地址变化。 |
 | `transparentBackgroundMethod` | 否 | 透明背景实现方式：`"api"`（API 原生）或 `"local"`（本地后处理），默认值见表下说明。 |
 
 补充说明：
 
 - **`id`**：之后的链接（查询参数 `profileId`、`settings` 链接）或预置 JSON 携带相同 ID 时，直接更新该配置而非新建。应用内普通分享链接会省略此字段。
-- **`baseUrl`**：未以 `/` 结尾时按 OpenAI 规则补齐 `/v1`（Google 补齐 `/v1beta`）；以 `/` 结尾时直接基于该地址请求。
-- **`transparentBackgroundMethod` 默认值**：OpenAI 兼容和 fal.ai 为 `"api"`；自定义供应商的生成和编辑请求都映射了 `$params.background` 时为 `"api"`，否则为 `"local"`。
+- **`baseUrl`**：未以 `/` 结尾时按 OpenAI 规则补齐 `/v1`（Google 补齐 `/v1beta`，字节跳动补齐 `/v3`）；以 `/` 结尾时直接基于该地址请求。
+- **`transparentBackgroundMethod` 默认值**：OpenAI 兼容、字节跳动和 fal.ai 为 `"api"`，Google 和 xAI 为 `"local"`；自定义供应商的生成和编辑请求都映射了 `$params.background` 时为 `"api"`，否则为 `"local"`。
 
 ### 示例：仅 OpenAI 兼容
 

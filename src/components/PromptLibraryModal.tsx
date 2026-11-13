@@ -15,6 +15,7 @@ import { useStore } from '../store'
 import { useCloseOnEscape } from '../hooks/useCloseOnEscape'
 import { usePreventBackgroundScroll } from '../hooks/usePreventBackgroundScroll'
 import { CloseIcon, CopyIcon } from './icons'
+import { PromptTemplateImage } from './PromptTemplateImage'
 
 const ALL_CATEGORY = '全部' as const
 type CategoryFilter = typeof ALL_CATEGORY | PromptTemplateCategory
@@ -101,7 +102,7 @@ function TemplatePreviewImage({
   }
 
   return (
-    <img
+    <PromptTemplateImage
       src={src}
       alt={alt ?? ''}
       loading="lazy"
@@ -734,7 +735,7 @@ export default function PromptLibraryModal() {
           >
             <CloseIcon className="h-5 w-5" />
           </button>
-          <img
+          <PromptTemplateImage
             src={zoomImage.src}
             alt={zoomImage.alt}
             className="max-h-[90vh] max-w-[94vw] rounded-2xl object-contain shadow-[0_28px_90px_rgba(0,0,0,0.45)]"

@@ -31,6 +31,36 @@ const HOUSHIFANG_CATEGORY_LABELS: Record<HoushifangCategoryKey, PromptTemplateCa
 
 
 const HOUSHIFANG_SUBCATEGORY_DIRECTIONS: Record<string, { focus: string; structure: string; style: string; useCase: string }> = {
+  'AI Bot IP 角色设计': {
+    focus: '设计具有统一材质和造型语言的智能体角色家族。',
+    structure: '上方场景主视觉，下方独立角色展示，保持角色一一对应。',
+    style: '现代互联网品牌 IP 与 3D 艺术玩具。',
+    useCase: '智能体品牌、角色家族和场景主视觉',
+  },
+  '软雕塑角色': {
+    focus: '通过夸张体块和服装材质塑造收藏人偶。',
+    structure: '竖版单人展示，保留姿态、配饰和轮廓细节。',
+    style: '柔软雕塑与 3D 设计师玩具。',
+    useCase: '潮玩造型、时装人偶和角色提案',
+  },
+  '毛绒角色': {
+    focus: '用针织、羊羔绒与蓬松纤维表达人物性格。',
+    structure: '竖版人物或生活场景，突出毛绒材质与道具。',
+    style: '毛绒艺术玩具与时装人偶。',
+    useCase: '毛绒潮玩、品牌角色和生活场景',
+  },
+  '超现实叙事': {
+    focus: '用人物、植物和日常物件建立奇异故事。',
+    structure: '竖版叙事构图，扁平透视和富有表现力的人物。',
+    style: '不透明水粉笔触与超现实绘本。',
+    useCase: '绘本故事、艺术封面和叙事插画',
+  },
+  '表现主义肖像': {
+    focus: '通过面部变形、夸张配色和服装纹样塑造肖像。',
+    structure: '竖版半身肖像，强调面部与肩部的构图关系。',
+    style: '表现主义水粉与粗颗粒笔触。',
+    useCase: '艺术肖像、时装插画和出版封面',
+  },
   'App 图标': {
     focus: '围绕应用名称设计单枚高完成度图标，主体清晰，图形语义一眼可读。',
     structure: '居中单个连续圆角图标，白色画布留出安全边距，图标主体约占画面 80%，不要生成多枚图标或复杂背景。',
@@ -990,6 +1020,438 @@ const HOUSHIFANG_PROMPT_SEEDS: HoushifangPromptSeed[] = [
       "ratio": "2 / 3",
       "imagePath": "assets/ip/cartoon-ip/ip-cartoon-nana.webp",
       "prompt": "生成一张国际3D IP 设计大师做的IP 竖版 2:3 的图片\n\n【角色基础设定】\n角色名称：NaNa\n形象描述：犀牛\n品牌主色：明黄色（高饱和度、活泼醒目，可与浅米色犄角/肚皮作低对比点缀）\n\n【造型结构】\n3D盲盒潮玩IP风格，头身比约1:1，头部圆润夸张，\nIP整体设计有夸张感，独特感，现代感，\n躯干饱满呈蛋形，四肢短促圆柱状，线条简洁流畅。\n面部特征极简，大号圆形眼睛，表情克制呆萌。\n全身哑光磨砂软胶质感，无高光无反射，\n配色控制在2-3色，局部色与主体色保持低对比度和谐关系。\n柔和摄影棚散射光，无强投影，商业产品级渲染精度。\n\n【整体版式】\n竖版白色为基础底色，\n2个区块上下堆叠排列，\n整体风格干净专业，类似潮玩品牌官方角色设定发布页。\n\n区块一——Hero Banner（占总高约60%）：\n背景填充品牌主色（与角色主体颜色一致的饱和色块），\n左上角放置角色英文名，粗体大字，白色或深色，\n名称下方配2-3行小字角色简介，字体轻盈，\n右侧呈现角色上半身或四分之三视角特写，\n角色体积占Banner右侧60%以上，底部自然溢出Banner边界，\n形成裁切感构图，氛围活泼。\n\n区块二——多视图（占总高约40%）：\n浅灰色或白色圆角矩形卡片，卡片有细描边，\n卡片顶部左对齐放置\"Multiview\"英文标题，\n卡片内横向等距排列四个角色视图，\n从左到右依次为正视图、侧视图、后视图、45°视图，\n四个角色等比例、等高度、纯白底，无阴影。"
+  },
+  {
+    "id": "image2hub-ai-bot-glossy-halloween",
+    "title": "幻彩果冻 AI Bot 团队",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-glossy-halloween.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版画面，上下分区，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色在完整的办公室环境中共同做一件事，呈现有故事性和电影感的瞬间，不要摆拍合影。下方为纯黑背景，6 个角色分别展示，按 3 列 2 行整齐排列，上下均为同一组角色的正面视图，特征完全一致。角色之间、角色与画面边缘之间留出充足空白，让构图有呼吸感。\n\n视觉风格结合 3D 半透明果冻艺术、虹彩光泽材质、抽象几何吉祥物、充气柔软形体与设计师艺术玩具。每个角色的轮廓、颜色和性格不同，但共享相同的材质、造型语言和五官系统，明确属于同一家族。整体简洁、现代、中性。无文字、标志或水印，不模仿已有 IP。"
+  },
+  {
+    "id": "image2hub-ai-bot-punctuation",
+    "title": "短绒几何 AI Bot 创意办公室",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-punctuation.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版画面，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色围绕电脑在现代创意办公室协作，完成一个具体任务，有清晰故事、真实空间纵深、自然互动、柔和环境光和电影感构图，不要摆拍。下方为独立角色展示：纯黑背景，按 3 列 2 行整齐排列；上下的轮廓、颜色、五官和标志性特征一一对应。下方角色均为完整、不裁切的正面视图，间距与边缘留白充足。\n\n造型：结合现代互联网品牌 IP、3D 绒毛艺术、抽象几何吉祥物、柔软毛绒雕塑、趣味设计师玩具和极简角色设计。以圆润、不规则的抽象几何形状设计 6 个易辨认角色，可使用变形三角形、星星、云朵、水滴、逗号、花朵等，但不局限于标准几何形。强调自然、自由、略不对称的有机轮廓，像柔软蓬松的异形靠垫。头身一体，不分离头、躯干、手臂或腿；体块饱满，边缘柔软，无尖锐结构，具有立体雕塑感。\n\n材质：精细短绒、天鹅绒或超细纤维植绒，表面细小纤维均匀柔软，有真实纤维层次和细腻散射光，呈现温暖、想触摸的质感。突出毛绒与抽象几何形的对比，不使用凌乱长毛、真实动物皮毛、塑料、橡胶或金属。\n\n五官：极简而夸张，以眼睛为主要识别点。眼睛是凸起的圆形或椭圆结构，可有白色眼圈、彩色眼皮或几何瞳孔，通过大小、开合、视线和倾斜变化表达情绪。嘴可为小点、短弧、简单切口或省略。表情略荒诞幽默，分别表现呆萌、困倦、好奇、冷酷、顽皮和慵懒；不要写实人类五官或复杂眉毛、鼻子、牙齿。\n\n颜色：高饱和但柔和的现代糖果色与粉彩渐变，6 个角色分别使用天蓝、奶油黄、梦幻紫、珊瑚粉、薄荷绿、蜜桃橙等主色。每个角色围绕单一主色，通过光影和自然渐变丰富层次，不使用复杂花纹或大块硬质装饰。个性主要通过几何轮廓、眼睛、细微表情和姿态表达，不依赖衣服、配饰或复杂身体。天真、古怪、幽默、慵懒、亲切，可爱但不幼稚，抽象但易懂。\n\n渲染：高质量 3D、柔和电影光、全局照明、环境遮蔽、细微轮廓光和柔软阴影。上方结合窗边自然光与温暖室内光；下方使用统一柔和棚拍光，清晰展示绒毛纤维和圆润体块，角色悬浮，无地面投影或底座。\n\n整体统一短绒材质、有机圆润形状、极简夸张五官与精细 3D 光影，呈现高端互联网品牌和独立艺术玩具的品质，年轻、有趣、中性。上下角色严格一致，不增减、重复或变形。无文字、标志、水印，不模仿已有 IP；无衣服、复杂配饰、真实动物身体或传统人形卡通结构。"
+  },
+  {
+    "id": "image2hub-ai-bot-fuzzy-friends",
+    "title": "长绒几何 AI Bot 好友团",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-fuzzy-friends.webp",
+    "prompt": "按照参考图风格生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版画面，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色在完整办公室中共同做一件事，具有故事性与电影感，不要摆拍。下方为纯黑背景，6 个角色单独正面展示，按 3 列 2 行整齐排列。上下角色完全相同，角色之间及与边缘之间保留充足留白。\n\n视觉结合现代互联网品牌 IP、3D 绒毛艺术、抽象几何吉祥物、蓬松长绒、极简活动眼球、细杆腿、奇趣设计师玩具、活泼角色设计和柔和电影光。突出抽象几何与毛绒材质的对比，简洁、现代、有国际审美，兼具艺术玩具收藏感与动画电影的情绪表现力。每个角色轮廓、颜色和性格不同，但材质、造型语言、五官系统统一，明确属于同一家族。整体中性，无文字、标志或水印，不模仿已有 IP。"
+  },
+  {
+    "id": "image2hub-ai-bot-colorful-team-variant",
+    "title": "糖果软胶 AI Bot 工作室",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-colorful-team-variant.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版，上方占 40%，下方占 60%。\n\n角色设计：简洁、圆润的抽象几何形，身体像柔软糖果、果冻或橡胶玩具，体积饱满、轮廓完整、没有尖角。6 个角色分别采用紫色、珊瑚红、天蓝、粉色、明黄和青柠绿。轮廓与标志特征各不相同，可为云朵、触角、水滴、圆环、方块、花朵等。五官统一为夸张凸起的大白眼球、黑瞳孔与极简小嘴，用不同视线和表情表现活泼、好奇、机灵、顽皮、呆萌等性格。\n\n材质与渲染：3D 软胶玩具质感，柔软细腻、略哑光，带极细微压纹、柔和次表面散射、饱满体积与圆润倒角，达到卡通动画电影的精细渲染品质。材质与视觉语言统一，不使用金属、机械或复杂结构。\n\n上方 40%：6 个角色在温暖明亮的创意工作室围绕笔记本电脑探索、讨论和创作，前后自然错落，有的观察屏幕，有的兴奋交流，有的专注思考，呈现团队协作的故事瞬间。环境包含木桌、台灯、窗户、绿植、书架和少量文具。午后阳光从侧窗进入，台灯提供局部暖光，形成自然光影、接触阴影、景深与电影氛围，丰富但不杂乱，焦点明确。\n\n下方 60%：纯黑背景，无渐变或纹理。6 个角色按 3 列 2 行网格整齐展示，每格一个、面向镜头、大小相近、居中、等距、留白充分。上下角色的轮廓、颜色、五官、材质和特征必须一一对应，不增减。\n\n整体现代、极简、活泼、有趣、年轻、中性，鲜艳糖果色与统一设计语言兼具玩具收藏感和动画情绪表现。上下以干净直线分隔，无边框。无文字、字母、数字、标志或水印，不模仿知名 IP。高清精细渲染。"
+  },
+  {
+    "id": "image2hub-ai-bot-cosmic-magic",
+    "title": "毛绒几何 AI Bot 奇幻团",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-cosmic-magic.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色在完整办公室环境中共同做一件事，具有故事性和电影感，不要摆拍。下方为纯黑背景，6 个角色独立正面展示，按 3 列 2 行整齐排列，上下特征完全一致。角色之间及与画面边缘之间留出充足空白。\n\n角色材质为 3D 毛绒，风格为简单几何形。每个角色的轮廓、颜色与性格不同，但共享相同材质、造型语言和五官系统，明确属于同一家族。整体简洁、现代、中性，无文字、标志或水印，不模仿已有 IP。"
+  },
+  {
+    "id": "image2hub-ai-bot-geometric-studio",
+    "title": "极简几何 AI Bot 视觉提案",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-geometric-studio.webp",
+    "prompt": "以互联网视觉设计师的标准，生成一组 6 个原创 AI 智能体 Bot IP 角色。使用 3:4 竖版，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色在完整办公室中共同做一件事，呈现故事性与电影感，不要摆拍。下方为纯黑背景，6 个角色独立展示，按 3 列 2 行整齐排列。上下均为同一组角色的正面视图，特征完全一致，角色之间及与边缘之间保留充足空白。\n\n使用 3D 材质，造型为简洁、古怪的抽象几何形，没有手臂和表情，只有眼睛。每个角色轮廓、颜色和性格不同，但材质、造型语言和五官系统一致，明确属于同一家族。整体简洁、现代、中性，无文字、标志或水印，不模仿已有 IP。"
+  },
+  {
+    "id": "image2hub-ai-bot-soft-companions",
+    "title": "柔软毛绒 AI Bot 陪伴团",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-soft-companions.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色在完整办公室中共同做一件事，具有故事性和电影感，不要摆拍。下方为纯黑背景，6 个角色单独正面展示，按 3 列 2 行整齐排列。上下为完全相同的角色，特征一致，角色之间及与画面边缘之间保留充足空白。\n\n角色材质为 3D 毛绒，风格为简洁几何形。每个角色轮廓、颜色和性格不同，但材质、造型语言和五官系统统一，明确属于同一家族。整体简洁、现代、中性，无文字、标志或水印，不模仿已有 IP。"
+  },
+  {
+    "id": "image2hub-ai-bot-nature-camp",
+    "title": "自然场景 AI Bot 家族",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-nature-camp.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，使用 3:4 竖版，上方占 40%，下方占 60%。\n\n上方为场景主视觉：6 个角色在完整环境中共同经历一个瞬间，具有故事性和电影感，不要摆拍。下方为纯黑背景，6 个角色独立展示，按 3 列 2 行整齐排列。上下是同一组角色，特征完全一致。\n\n自由设计角色：每个角色轮廓、颜色和性格不同，但共享相同材质、造型语言和五官系统，明确属于同一家族。整体亲切、简洁、中性。构图宽松，角色占画面的比例要小，不放大、不铺满、不贴边；每个角色只占所属区域约一半。角色之间及与画面边缘之间保留充足空白。无文字、标志或水印，不模仿已有 IP。"
+  },
+  {
+    "id": "image2hub-ai-bot-colorful-team",
+    "title": "彩色 AI Bot 场景与标准形象板",
+    "categoryKey": "ip",
+    "subcategory": "AI Bot IP 角色设计",
+    "ratio": "3 / 4",
+    "imagePath": "assets/ip/aibot/ai-bot-colorful-team.webp",
+    "prompt": "生成一组 6 个原创 AI 智能体 Bot IP 角色，在一张 3:4 竖版图中上下分区，上方占画面高度 40%，下方占 60%。\n\n布局必须严格遵守。上方 40% 为完整场景主视觉，铺满区域，不留白边。自由设计适合这组角色的环境和正在发生的具体事件，让 6 个角色真实生活其中，共同做一件事，如动画电影中的瞬间，不面向镜头合影。空间、家具和道具服务于事件；前、中、后景有纵深；台灯、窗光等真实光源创造电影光影与氛围；视觉焦点清晰。角色与环境自然互动，操作、搬运、观察或合作，姿势、视线和位置服务于事件，不排队看镜头。角色大小符合空间透视，受环境光照明，脚下及周围有真实接触阴影。\n\n下方 60% 为 6 个角色的独立展示，按 3 列 2 行网格排列，每格一个，居中、正面、标准站姿、大小一致、间距均匀。使用纯白背景与中性均匀光线，与上方场景形成对比。上下角色必须一一对应，轮廓、主色、五官、材质和辨识特征完全一致；不增减、不重复、不改变颜色或形状。下方为标准外观，上方为故事场景，姿态与表情可变，识别特征不可变。上下用干净直线分隔，无边框、卡片或标题区，任何位置都不添加文字，角色之间留白充足。\n\n统一规则：相同柔软材质、无尖角的圆润形状、极简五官与 3D 渲染风格；无性别或年龄感；亲切呆萌，略有机灵感；身体比例基本一致。\n\n自由创作每个角色的轮廓、主色、表情、特征，以及上方场景主题、事件和互动，不套用固定模板。角色之间不重复轮廓、主色或性格，能一眼区分，同时明显属于同一家族。可用局部特征或极简小配饰区分，不依赖复杂道具或服装。\n\n下方背景为纯白 #FFFFFF，无渐变、纹理或场景；上方环境完整铺满，颜色与光影和下方明显对比。无文字、字母、数字、品牌标志或水印，不模仿知名 IP。角色不使用金属机器人、电路、机械结构或发光科技风；场景道具不受此限制。无写实人类、复杂五官、多余肢体、恐怖或攻击性表情。输出 3:4 竖版。"
+  },
+  {
+    "id": "image2hub-lavender-sherpa-and-shades",
+    "title": "薰衣草绒衣墨镜壮汉",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/lavender-sherpa-and-shades.webp",
+    "prompt": "生成 2:3 竖版全身 3D 设计师玩具人像：一名宽肩男性抱臂站立，剃短寸头，戴厚椭圆黑墨镜和黑色耳钉，留浓密紧卷的黑胡须与小胡子。穿宽大浅薰衣草紫羊羔绒夹克，气球袖与黑纽扣，搭配宽松截短黑裤和夸张黑色厚齿底靴。略低机位，朱红橙色无缝棚拍背景。用光突出绒衣和胡须的卷曲纹理，与光滑哑光面部、靴子形成对比。"
+  },
+  {
+    "id": "image2hub-silver-bob-record-collector",
+    "title": "银紫波波头唱片收藏家",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/silver-bob-record-collector.webp",
+    "prompt": "生成 2:3 竖版四分之三视角的 3D 设计师玩具唱片收藏家，表情放松，取景从头到大腿上部。银薰衣草紫波浪波波头配齐刘海，戴厚长春花蓝遮阳式墨镜，深色镜片，留深色胡须，微笑。穿绒面钴蓝宽袖毛衣与奶油色裤子，抱一张朝镜头倾斜的黑胶唱片，唱片中心浅蓝标签，手指可见几枚厚银戒指。冰蓝无缝背景，柔和漫射光展示毛衣细纤维与唱片同心沟槽。"
+  },
+  {
+    "id": "image2hub-lavender-curls-skater",
+    "title": "薰衣草卷发滑板手",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/lavender-curls-skater.webp",
+    "prompt": "生成 2:3 竖版全身 3D 设计师玩具人像：慵懒滑板手坐在低矮浅色混凝土块上。蓬松弹性薰衣草紫卷发，超大圆白眼镜，半闭眼，珊瑚色长鼻子、小黑胡子与歪嘴笑。穿宽大钴蓝和象牙白条纹针织毛衣、宽松钴蓝裤、厚奶油色运动鞋。黑滑板横放腿上，有层叠木边和奶油色轮子，一只手垂在板面上。四分之三视角，浅长春花蓝棚拍背景，柔光区分纱线、卷发、哑光皮肤和混凝土。"
+  },
+  {
+    "id": "image2hub-neon-knit-mechanic",
+    "title": "荧光针织机械师",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/neon-knit-mechanic.webp",
+    "prompt": "生成 2:3 竖版全身 3D 设计师玩具机械师，神态顽皮。哑光珊瑚色皮肤、钴蓝眼妆、银色耳环和鼻中隔环；浅薰衣草紫头发，齐刘海、两个尖发束、粗辫向外卷。穿宽大荧光黄绿绞花高领毛衣，带钴蓝纹样、蓝色工具背带和盘绕电缆；同色系系带靴配巨大白色齿底，一把蓝色长活动扳手垂在腿旁。长春花蓝无缝背景，漫射光突出纱线、塑形皮肤和金属配件。"
+  },
+  {
+    "id": "image2hub-cobalt-puffer-fashion",
+    "title": "钴蓝蓬松外套时装人偶",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/cobalt-puffer-fashion.webp",
+    "prompt": "生成 2:3 竖版全身 3D 时装人像：铂金金发，齐刘海与雕塑般波浪，下巴压低，蓝眼睛向上看。超大电蓝外套由交错的天鹅绒填充鼓包组成，在肩部和袖子周围膨胀。搭配鲜橙上衣、不对称黄绿百褶裙、橙袜和厚象牙白松糕运动鞋，细银斜挎链上挂闪亮紫色迷你包，一只手持黑手机。人物居中，薰衣草蓝无缝背景，柔和棚拍光勾勒每个蓬松体块。"
+  },
+  {
+    "id": "image2hub-sparkler-devil",
+    "title": "仙女棒紫色小恶魔",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/sparkler-devil.webp",
+    "prompt": "生成 2:3 竖版全身 3D 设计师玩具：瘦长紫色小恶魔在头旁举着点燃的仙女棒，两根高黑角向上弯，尖耳、靛蓝卷发、琥珀半闭眼、歪嘴笑，箭头尾巴卷向一侧。穿宽大钴蓝粗针毛衣，上布黄橙星星，黑铆钉腰带、卷边蓝牛仔裤，一侧膝盖破洞，象牙白绒拖鞋。金橙无缝棚拍背景、暖轮廓光，针织线圈、哑光皮肤和光滑角的质感清楚区分。"
+  },
+  {
+    "id": "image2hub-blue-hoodie-stare",
+    "title": "蓝色卫衣倔强人偶",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/blue-hoodie-stare.webp",
+    "prompt": "生成 2:3 竖版 3D 设计师玩具人像：剃光头的人物弓身坐在低矮白折叠凳上，双膝分开，双手在巨大白袖口中交握。穿钴蓝气球袖卫衣、同色短裤和白运动鞋，突出耳朵与锐利斜眉，眼神倔强。全身在画面下部居中，矢车菊蓝无缝棚拍背景。光滑哑光软胶表面，漫射光和轻柔地面投影。"
+  },
+  {
+    "id": "image2hub-redhead-in-black",
+    "title": "铜卷发黑西装收藏人偶",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/redhead-in-black.webp",
+    "prompt": "生成 2:3 竖版棚拍 3D 收藏人偶：粗铜色卷发、下垂眼睛、长鼻子和疲惫表情。低坐屈膝，一侧脸颊托在掌心，另一手松垂在膝盖上。穿宽松黑西装、阔腿裤和素黑鞋。四分之三视角全身构图，米白无缝背景，哑光雕塑表面，柔和阴影保留黑布料褶皱。"
+  },
+  {
+    "id": "image2hub-spa-day-elder",
+    "title": "温泉白胡子老人",
+    "categoryKey": "ip",
+    "subcategory": "软雕塑角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/soft-sculpture/spa-day-elder.webp",
+    "prompt": "把脾气不好的年长温泉客人渲染成圆润 3D 设计师玩具，使用 2:3 竖版棚拍人像。巨大云朵般白胡须与小胡子，高白毛巾头巾、蓬松白浴袍和超大同色拖鞋。坐姿双膝并拢，每只拳头捏一片黄瓜，浓眉下目光斜视。象牙白人物配高饱和矢车菊蓝无缝背景，柔和侧光、微弱落地投影。"
+  },
+  {
+    "id": "image2hub-cloud-knit-dog-walker",
+    "title": "云朵针织遛狗人偶",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/cloud-knit-dog-walker.webp",
+    "prompt": "生成 2:3 竖版全身 3D 时尚玩具：古怪遛狗人，云白头发、白猫眼镜框配偏红镜片、雕塑感圆耳环。穿巨大象牙白外套，由粗大松编羊毛构成，内搭浅裤与彩色厚鞋。用细白牵引绳带着三只小白毛绒狗穿过画面底部。深钴蓝无缝背景，漫射棚拍光突出超大针织线圈。"
+  },
+  {
+    "id": "image2hub-orange-haired-guitarist",
+    "title": "橙卷发毛绒吉他手",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/orange-haired-guitarist.webp",
+    "prompt": "渲染瘦长 3D 玩具音乐人，坐在奶油黄阶梯上，有长鼻子、光环般橙卷发、白头戴耳机和蓬松淡紫针织上衣。小钴蓝电吉他横放腿上，宽松奶油色裤盖住厚棕运动鞋，身旁放微型音箱。2:3 竖版全身构图，浅天蓝场景配斜向楼梯扶手，温和日光照出卷发、纱线圈与麂皮鞋质感。"
+  },
+  {
+    "id": "image2hub-pink-afro-lounge",
+    "title": "粉色爆炸头休闲人偶",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/pink-afro-lounge.webp",
+    "prompt": "生成 2:3 竖版坐姿 3D 时尚娃娃，巨大的棉花糖粉爆炸头占画面上半部。窄粉椭圆眼镜、夸张银耳环、无聊的侧视眼神，宽大粉蓝绒毛衣配浅牛仔裤。人物陷在青柠绿椅子里，蓝色环境保持克制。柔和正面光、雕塑感五官和细微飞散绒毛光晕。"
+  },
+  {
+    "id": "image2hub-green-punk-florist",
+    "title": "绿发朋克毛绒花匠",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/green-punk-florist.webp",
+    "prompt": "生成 2:3 竖版腰部以上 3D 花匠人像，神情不悦。草绿尖发、浓绿眉毛和小胡子、极长粉鼻子、小鼻环。穿有纹理的绿针织开衫、灰绿露指手套，手持一小枝植物，周围是茂密粉、黄、橙、紫花朵，背景晴朗蓝天。浅景深和柔和日光，将可触摸的纱线、头发与花丛区分。"
+  },
+  {
+    "id": "image2hub-ringside-orange-juice",
+    "title": "拳台边喝橙汁的毛绒人偶",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/ringside-orange-juice.webp",
+    "prompt": "生成 2:3 竖版 3D 人像：矮小、闷闷不乐的人物在白拳台绳旁用吸管喝橙汁。尖锐钴蓝猫耳形发型、大白圆盘耳环、浅粉绒毛气球袖服装、超大多色跑鞋。低机位全身构图，浅蓝背景与暖象牙白拳台地面，细绒纤维、柔和棚拍阴影和冷淡侧视目光。"
+  },
+  {
+    "id": "image2hub-blue-coat-fashion-grande-dame",
+    "title": "钴蓝泰迪外套时尚老妇",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/blue-coat-fashion-grande-dame.webp",
+    "prompt": "生成 2:3 竖版全身 3D 时装人偶：严肃的年长娃娃，巨大的云白高蓬发、棱角分明的白猫眼镜和厚金耳环。裹宽大钴蓝泰迪绒外套，宽领、白流苏系带，底下只露出小浅色尖头鞋。极简冷灰室内配细微蓝色点缀，强调浓密刷绒纹理和柔和均匀棚拍光。"
+  },
+  {
+    "id": "image2hub-cobalt-skate-kid",
+    "title": "钴蓝条纹毛绒滑板少年",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/cobalt-skate-kid.webp",
+    "prompt": "生成 2:3 竖版 3D 收藏人偶：顽皮年轻滑板手，电蓝锅盖头、锐利斜眉、银圈耳环。低坐，穿宽大钴蓝白条纹绒毛衣和厚重白松糕运动鞋，用吸管喝小杯饮料。滑板和浅色轮子从人物后方右侧露出。长春花蓝无缝棚拍背景，冷漫射光，毛衣纤维清晰可见。"
+  },
+  {
+    "id": "image2hub-striped-sweater-drummer",
+    "title": "条纹毛衣毛绒鼓手",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/striped-sweater-drummer.webp",
+    "prompt": "生成 2:3 竖版全身 3D 鼓手：凌乱象牙白头发、蓝头戴耳机、小橙红墨镜、宽大钴蓝白宽条纹绒毛衣，神态放松。坐在紧凑蓝架子鼓前，鼓装白支架，一根鼓棒抬起，另一根准备落在鼓面。宽松蓝裤、米白运动鞋，鼓旁放外带杯。天蓝无缝场景，轻柔侧光与柔软地面阴影。"
+  },
+  {
+    "id": "image2hub-orange-sherpa-basketball-fan",
+    "title": "橙色羊羔绒篮球迷",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/orange-sherpa-basketball-fan.webp",
+    "prompt": "生成 2:3 竖版 3D 收藏人偶：敦实篮球迷靠在小折叠椅上，短金卷发、窄环绕墨镜、膨胀球状橘色羊羔绒服装，上有校队蓝字母和数字 37。白袜、夸张奶油色高帮鞋，一颗奶油色小球平衡在抬起的手指上。四分之三视角全身，简洁长春花蓝背景，柔和侧光照出绒毛。"
+  },
+  {
+    "id": "image2hub-periwinkle-cloud-head",
+    "title": "长春花蓝云朵头人偶",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/periwinkle-cloud-head.webp",
+    "prompt": "生成 2:3 竖版全身 3D 艺术玩具：小小坐姿人物顶着巨大横椭圆长春花蓝绒发，头发下只露一点粉脸和疲倦眼睛。搭配梨形蓝绒毛衣与巨大罗纹袖口，再用细粉小腿和巨大白运动鞋形成对比。近对称轮廓在浅蓝无缝场景中居中，柔和冷光与细腻轮廓光照亮纤维。"
+  },
+  {
+    "id": "image2hub-butter-yellow-ponytail",
+    "title": "奶油黄马尾毛绒人偶",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/butter-yellow-ponytail.webp",
+    "prompt": "生成 2:3 竖版 3D 时尚玩具女性，巨大奶油黄绒马尾、同色宽大针织毛衣与白松糕运动鞋。盘腿坐在低蓝跑道边长凳上，拿着红橙饮料与吸管，半闭眼向侧面看。高饱和宝蓝运动场景配清晰白跑道线，四分之三视角，柔光照出羊毛和绒面。"
+  },
+  {
+    "id": "image2hub-cream-knit-mustache",
+    "title": "奶油针织卷胡子人偶",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/cream-knit-mustache.webp",
+    "prompt": "生成 2:3 竖版全身 3D 胖玩具人偶，近单色燕麦与奶油色调。横向宽阔卷绒发束、夸张卷翘小胡子、半闭粉眼睛。穿超大绞花高领毛衣与收脚米色裤，一只手拿微型白茶杯。站立人物配低饱和蓝灰棚拍背景，漫射光区分纱线、卷发与哑光皮肤。"
+  },
+  {
+    "id": "image2hub-scarlet-coat-violinist",
+    "title": "猩红绒衣小提琴手",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/scarlet-coat-violinist.webp",
+    "prompt": "生成 2:3 竖版 3D 时尚玩具小提琴手：锐利眼神、光泽黑波波头与齐刘海，盘腿坐在浅色方块上。穿宽大猩红毛绒外套、黑高松糕靴。高饱和钴蓝小提琴架在肩上，蓝琴弓斜穿构图。干净浅长春花蓝背景，全身居中，柔和棚拍光区分绒外套、光滑靴子和乐器。"
+  },
+  {
+    "id": "image2hub-plush-illustrator-and-puppy",
+    "title": "毛绒插画师与小狗",
+    "categoryKey": "ip",
+    "subcategory": "毛绒角色",
+    "ratio": "2 / 3",
+    "imagePath": "assets/ip/plush-characters/plush-illustrator-and-puppy.webp",
+    "prompt": "生成温馨 2:3 竖版 3D 场景：卷发插画师坐在圆奶油豆袋椅里，用触控笔在平板上画画，小白绒狗依偎身边。蓝白耳机、白墨镜架在头上、钴蓝绒毛衣袖上有白雏菊、宽松奶油裤、蓝条纹白运动鞋。矢车菊蓝房间中放叠书、雏菊杯、蓝穹顶灯与龟背竹。柔和日光，可触摸的针织与绒毛纹理。"
+  },
+  {
+    "id": "image2hub-three-coats-at-dusk",
+    "title": "黄昏橙衣三人超现实叙事",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/three-coats-at-dusk.webp",
+    "prompt": "绘制 2:3 竖版超现实时装场景：黄昏中三个并肩人物的背影，穿宽大橙外套，上布破碎黑与海军蓝菱形纹样，重复轮廓下露出裸小腿和浅靴。人物置于深绿起伏丘陵与高黄花苞之间，鲑橙天空有浅月和厚炭灰云。使用不透明水粉般颜料、明显宽笔触、扁平透视与安静民间故事氛围。"
+  },
+  {
+    "id": "image2hub-witch-in-leopard-coat",
+    "title": "豹纹外套女巫叙事插画",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/witch-in-leopard-coat.webp",
+    "prompt": "绘制 2:3 竖版绘本时装人像：苍白女性、蓝黑长发、红脸颊、宽大下垂黑女巫帽。宽大暖赭豹纹外套填满前景，不规则黑环纹样，衣领竖起。人物越肩回望，被高橙花围绕，背景深苔绿林地。不透明水粉层叠、明显干刷边缘，墨黑、赭色与焦橙营造沉静氛围。"
+  },
+  {
+    "id": "image2hub-unicorn-and-orange-blossoms",
+    "title": "独角兽与橙花童话肖像",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/unicorn-and-orange-blossoms.webp",
+    "prompt": "绘制 2:3 竖版童话人像：庄重橙发人物戴小金冠、蓝奶油色褶领与巨大绿象牙白棋盘格披风。白独角兽紧靠肩后，长脸与人物并列，角指向右上。中央有小束橙花，背景平面深青绿。使用不规则水粉笔触，目光安静、直视观者。"
+  },
+  {
+    "id": "image2hub-man-and-watching-lamp",
+    "title": "男子与凝视台灯的超现实室内",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/man-and-watching-lamp.webp",
+    "prompt": "绘制 2:3 竖版超现实室内：严肃胡子男子僵坐在森林绿扶手椅上，齐黑波波头、宽大棕豹纹外套、窄奶油细条纹裤和黑鞋。右侧橙落地灯罩上画一只大眼，下铺红蓝纹样地毯。暖铁锈墙面、正面构图、扁平透视与层叠哑光笔迹，呈现冷幽默和诡异感。"
+  },
+  {
+    "id": "image2hub-blue-faced-striped-portrait",
+    "title": "蓝脸条纹表现主义肖像",
+    "categoryKey": "illustration",
+    "subcategory": "表现主义肖像",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/expressionist-portraits/blue-faced-striped-portrait.webp",
+    "prompt": "绘制 2:3 竖版表现主义半身肖像：疲惫人物，向后梳黑短发，薰衣草蓝狭长棱角脸，超大珊瑚耳鼻，向下垂的黄橙眼皮。肩膀转开，脸回倾看观者。下半部以黑象牙白条纹夹克和青柠绿领填满，背景纯午夜蓝。哑光水粉色、明显纸纹、粗犷坚定的笔触边缘。"
+  },
+  {
+    "id": "image2hub-orange-bob-blue-glasses",
+    "title": "橙发蓝眼镜表现主义肖像",
+    "categoryKey": "illustration",
+    "subcategory": "表现主义肖像",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/expressionist-portraits/orange-bob-blue-glasses.webp",
+    "prompt": "绘制 2:3 竖版表现主义半身像：冷淡男子，几何橙波波头、超大方钴蓝眼镜、长玫瑰粉鼻子、深色卷翘八字胡。穿高领毛衣，宽海军蓝与灰蓝条纹沿肩弯曲。胸像略转，眼睛靠近中心。深森林绿背景，不透明颜料和柔和干刷颗粒。"
+  },
+  {
+    "id": "image2hub-dandy-and-blue-anemone",
+    "title": "绅士与蓝银莲花表现主义肖像",
+    "categoryKey": "illustration",
+    "subcategory": "表现主义肖像",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/expressionist-portraits/dandy-and-blue-anemone.webp",
+    "prompt": "绘制 2:3 竖版表现主义人像：胡子绅士扬起珊瑚长鼻子，闻浅蓝银莲花。花朵和高绿茎沿脸左侧上升。后梳黑发、一只向上看绿眼、橙罗纹衬衫、黑领结和醒目黑奶油条纹夹克。平面群青背景、简化形状、明显水粉笔触纹理。"
+  },
+  {
+    "id": "image2hub-copper-curls-over-the-shoulder",
+    "title": "铜卷发越肩回望肖像",
+    "categoryKey": "illustration",
+    "subcategory": "表现主义肖像",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/expressionist-portraits/copper-curls-over-the-shoulder.webp",
+    "prompt": "绘制紧凑 2:3 竖版四分之三视角人像：多疑男子越肩回看，火橙小卷发、纠缠铜胡须、沉重绿眼、夸张深红鼻子、带雀斑粉紫皮肤。海军蓝与薰衣草宽条纹夹克斜扫右下。灰蓝背景、颗粒感不透明笔触，面部结构采用表现主义变形。"
+  },
+  {
+    "id": "image2hub-sunflower-coat-and-flames",
+    "title": "向日葵外套与火焰超现实肖像",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/sunflower-coat-and-flames.webp",
+    "prompt": "绘制 2:3 竖版超现实半身像：人物穿深绿外套，上布密集橙向日葵，头戴近乎无特征黑兜帽，卷曲橙黄火焰在周围升起，如不规则王冠。衣领上露一条窄暖色颈部。带纹理午夜青绿背景、扁平形体、不透明水粉层叠、强烈冷暖对比。"
+  },
+  {
+    "id": "image2hub-secret-in-the-blue-flowers",
+    "title": "蓝花丛中的秘密叙事插画",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/secret-in-the-blue-flowers.webp",
+    "prompt": "绘制 2:3 竖版超现实花园：黑发黑胡子男子从密集钴蓝花和高橄榄绿茎间探头，穿橙奶油格子衣袖，一根食指竖在唇前。脸位于中心稍下，前景花瓣遮住部分人物，深色植物填满全图。不透明水粉、扁平植物纹样、带小黄花心的纹理花瓣。"
+  },
+  {
+    "id": "image2hub-starry-periwinkle-portrait",
+    "title": "星空长春花蓝表现主义肖像",
+    "categoryKey": "illustration",
+    "subcategory": "表现主义肖像",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/expressionist-portraits/starry-periwinkle-portrait.webp",
+    "prompt": "绘制 2:3 竖版表现主义时装半身像：冷淡紫蓝人物，利落白波波头和齐刘海、珊瑚鼻耳，四分之三视角可见一只沉重半闭黄眼。肩上裹厚黑电蓝棋盘格外套，边缘有绒感笔触。深钴蓝背景散布少量金八角星。哑光不透明颜料、可见颗粒、受控配色和强色彩对比。"
+  },
+  {
+    "id": "image2hub-ginger-crop-checkered-coat",
+    "title": "姜红短发棋盘格外套肖像",
+    "categoryKey": "illustration",
+    "subcategory": "表现主义肖像",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/expressionist-portraits/ginger-crop-checkered-coat.webp",
+    "prompt": "绘制 2:3 竖版表现主义肖像：消瘦人物越肩回望，贴头铁锈橙锅盖头、疲惫浅蓝眼睛、长红鼻子、小圈耳环与深唇。脖颈肩膀裹雕塑感黑米白棋盘格外套，袖部格子变条纹。带纹理深石油蓝背景、不透明笔触，脸部有斑驳粉色。"
+  },
+  {
+    "id": "image2hub-flying-oranges-at-the-market",
+    "title": "市场上飞散的橙子叙事插画",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/flying-oranges-at-the-market.webp",
+    "prompt": "绘制 2:3 竖版诙谐市场场景：惊讶购物者穿鲜红橙外套，凌乱黑发、巨大白圈耳环，一只手抬起。前景敞开棕纸购物袋倾斜，橙子滚落并在空中弹跳。身后店面斜置，加入片段手绘店铺招牌。夸张眼睛、斜线构图、高饱和朱红与钴蓝、不透明且明显的笔触。"
+  },
+  {
+    "id": "image2hub-headphones-on-the-commute",
+    "title": "通勤耳机男子超现实叙事",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/headphones-on-the-commute.webp",
+    "prompt": "绘制 2:3 竖版超现实通勤场景：蓬乱头发男子戴超大银耳机、蓝矩形眼镜，黑皮夹克布满徽章，内穿蓝条纹衬衫。嘴张大唱歌，腿上有浅口鼻小黑狗。身后座位挤满面无表情乘客，重复橙框架与绿椅背。哑光水粉色、夸张漫画式人物、紧凑正面裁切构图。"
+  },
+  {
+    "id": "image2hub-secret-in-the-pink-bells",
+    "title": "粉色风铃花间的秘密",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/secret-in-the-pink-bells.webp",
+    "prompt": "绘制 2:3 竖版超现实林地特写：棕胡子男子藏在密集枝叶里，大眼向侧面看，食指举到唇边。周围为高蓝花穗和重复下垂粉钟形花，花心金色。叶茎横穿头发与胡须，脸位于画面下部。近黑绿背景、层叠水粉笔触、暖粉花朵与冷蓝茎对比。"
+  },
+  {
+    "id": "image2hub-bouquet-in-the-doorway",
+    "title": "门口巨型花束叙事插画",
+    "categoryKey": "illustration",
+    "subcategory": "超现实叙事",
+    "ratio": "2 / 3",
+    "imagePath": "assets/illustration/surreal-narrative/bouquet-in-the-doorway.webp",
+    "prompt": "绘制 2:3 竖版绘本场景：大眼黑发男子留巨大深色小胡子，穿钴蓝外套站在珊瑚粉门口。怀抱巨大花束，蓝银莲花与珊瑚橙花遮住大部分胸口、围绕脸上升，长绿茎收在臂弯。身后房间有几张好奇脸探出。扁平透视、高饱和互补色、颗粒不透明笔触，表现笨拙而温情的气氛。"
   }
 ]
 

@@ -5,16 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#111827" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="GPT Image 2" />
+    <meta name="apple-mobile-web-app-title" content="GPT Image Studio" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./pwa-icon.svg" />
     <link rel="icon" href="./pwa-icon.svg" type="image/svg+xml" />
-    <title>GPT Image 2</title>
+    <title>GPT Image Studio - AI 生图、图片编辑与提示词模板</title>
+    <meta name="description" content="GPT Image Studio 是开源 AI 生图与图片编辑工作台，支持 GPT Image 2、Gemini（Nano Banana）、Grok 和 Seedream 5.5，提供文生图、参考图编辑、遮罩编辑、提示词模板和 Agent 多轮创作，图片与历史记录保存在本地。" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://gpt-image-2.88lin.eu.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="GPT Image Studio" />
+    <meta property="og:title" content="GPT Image Studio - AI 生图、图片编辑与提示词模板" />
+    <meta property="og:description" content="开源 AI 生图与图片编辑工作台，支持 GPT Image 2、Gemini、Grok 和 Seedream 5.5，内置提示词模板、参考图编辑、遮罩编辑与 Agent 多轮创作。" />
+    <meta property="og:url" content="https://gpt-image-2.88lin.eu.org/" />
+    <meta property="og:image" content="https://gpt-image-2.88lin.eu.org/social-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="GPT Image Studio：AI 生图、图片编辑与提示词模板" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GPT Image Studio - AI 生图、图片编辑与提示词模板" />
+    <meta name="twitter:description" content="开源 AI 生图与图片编辑工作台，支持 GPT Image 2、Gemini、Grok 和 Seedream 5.5，内置提示词模板、参考图编辑、遮罩编辑与 Agent 多轮创作。" />
+    <meta name="twitter:image" content="https://gpt-image-2.88lin.eu.org/social-preview.png" />
+    <meta name="twitter:image:alt" content="GPT Image Studio：AI 生图、图片编辑与提示词模板" />
     <script src="./color-mode.js"></script>
   </head>
   <body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen">
-    <div id="root"></div>
+    <div id="root">
+      <main class="mx-auto max-w-3xl px-6 py-16">
+        <h1 class="text-3xl font-bold">GPT Image Studio</h1>
+        <h2 class="mt-4 text-xl font-semibold">AI 生图、图片编辑与提示词模板</h2>
+        <p class="mt-4 leading-relaxed">支持 GPT Image 2、Gemini（Nano Banana）、Grok 和 Seedream 5.5，提供文生图、参考图编辑、遮罩编辑与 Agent 多轮创作。</p>
+        <p class="mt-3 leading-relaxed">内置电商图、海报、封面、产品摄影等场景的提示词模板，支持接入自己的 API 配置，图片和历史记录保存在本地。</p>
+        <p class="mt-4"><a href="https://github.com/88lin/gpt-image-studio" class="underline">查看开源项目与使用说明</a></p>
+        <noscript><p class="mt-4">请启用 JavaScript 使用图像生成与编辑功能</p></noscript>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

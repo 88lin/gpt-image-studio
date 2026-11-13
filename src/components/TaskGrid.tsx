@@ -284,7 +284,9 @@ export default function TaskGrid() {
                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            <p className="text-sm">输入提示词开始生成图片</p>
+            <h2 className="text-base font-semibold text-gray-700 dark:text-gray-300">AI 生图与图片编辑工作台</h2>
+            <p className="mt-2 text-sm">输入提示词开始生成图片</p>
+            <p className="mx-auto mt-2 max-w-md px-4 text-xs leading-relaxed">支持 GPT Image 2、Gemini、Grok 和 Seedream 5.5</p>
             <button
               type="button"
               onClick={() => setShowPromptLibrary(true)}
