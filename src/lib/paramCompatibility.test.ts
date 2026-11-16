@@ -1,9 +1,39 @@
 import { describe, expect, it } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
-import { createDefaultFalProfile, createDefaultOpenAIProfile, DEFAULT_SETTINGS, normalizeSettings } from './apiProfiles'
-import { getOutputImageLimitForSettings, getTaskParamSupport, normalizeParamsForSettings } from './paramCompatibility'
+import { createDefaultFalProfile, createDefaultOpenAIProfile, DEFAULT_SETTINGS, getActiveApiProfile, normalizeSettings } from './apiProfiles'
+import { getOutputImageLimitForSettings, getParamDisabledReasons, getTaskParamSupport, normalizeParamsForSettings } from './paramCompatibility'
 
 describe('parameter compatibility', () => {
+  it.each(['google/nano-banana-2.1', 'xai/grok-imagine-image/v2.0/text-to-image', 'bytedance/seedream/v5.5/text-to-image'])('allows automatic ratios for fal.ai %s', (model) => {
+    expect(getParamDisabledReasons(createDefaultFalProfile({ model })).autoSize).toBeUndefined()
+  })
+
+  it('only disables automatic size for fal.ai GPT Image generation', () => {
+    const profile = createDefaultFalProfile({ model: 'openai/gpt-image-2.6/sunburst' })
+    expect(getParamDisabledReasons(profile).autoSize).toBe('当前模型的文生图模式不支持自动尺寸')
+    expect(getParamDisabledReasons(profile, { hasInputImages: true }).autoSize).toBeUndefined()
+  })
+
+  it.each(['google/nano-banana-2.1', 'xai/grok-imagine-image/v2.0/text-to-image', 'bytedance/seedream/v5.5/text-to-image'])('keeps output count when SVG falls back to PNG for %s', (model) => {
+    const profile = createDefaultFalProfile({ model })
+    const settings = normalizeSettings({ ...DEFAULT_SETTINGS, profiles: [profile], activeProfileId: profile.id })
+    expect(normalizeParamsForSettings({ ...DEFAULT_PARAMS, output_format: 'svg', n: 4 }, settings)).toMatchObject({ output_format: 'png', n: 4 })
+    expect(normalizeParamsForSettings({ ...DEFAULT_PARAMS, output_format: 'svg', n: 8 }, settings)).toMatchObject({ output_format: 'png', n: 4 })
+  })
+  it.each([
+    ['google/nano-banana-2.1', 'gemini', 4, 'local'],
+    ['xai/grok-imagine-image/v2.0/text-to-image', 'grok', 4, 'local'],
+    ['bytedance/seedream/v5.5/text-to-image', 'seedream', 4, 'api'],
+  ])('normalizes fal.ai family controls for %s', (model, family, count, method) => {
+    const profile = createDefaultFalProfile({ model })
+    const settings = normalizeSettings({ ...DEFAULT_SETTINGS, profiles: [profile], activeProfileId: profile.id })
+    const params = normalizeParamsForSettings({ ...DEFAULT_PARAMS, n: 8, resolution: '2K', aspect_ratio: '16:9', google_search: true, thinking_level: 'medium', complexity: 'high' }, settings)
+    expect(getOutputImageLimitForSettings(settings)).toBe(count)
+    expect(params).toMatchObject({ n: count, aspect_ratio: '16:9', resolution: '2K', complexity: 'auto' })
+    expect(getActiveApiProfile(settings).transparentBackgroundMethod).toBe(method)
+    expect(params.google_search).toBe(family === 'gemini' ? true : undefined)
+    expect(params.thinking_level).toBe(family === 'gemini' ? 'medium' : undefined)
+  })
   it.each([
     ['gemini-nano-banana-2.1', true],
     ['gemini-3-pro-image', false],
@@ -40,6 +70,18 @@ describe('parameter compatibility', () => {
 
     expect(getOutputImageLimitForSettings(settings)).toBe(4)
     expect(normalizeParamsForSettings({ ...DEFAULT_PARAMS, n: 8 }, settings).n).toBe(4)
+  })
+
+  it('limits fal.ai SVG generation to one image and falls back to PNG for reference edits', () => {
+    const profile = createDefaultFalProfile({ model: 'openai/gpt-image-2.6/sunburst' })
+    const settings = normalizeSettings({ ...DEFAULT_SETTINGS, profiles: [profile], activeProfileId: profile.id })
+
+    expect(getParamDisabledReasons(profile).svg).toBeUndefined()
+    expect(getParamDisabledReasons(profile, { hasInputImages: true }).svg).toBe('fal.ai 的参考图编辑不支持 SVG')
+    expect(getOutputImageLimitForSettings(settings, 'svg')).toBe(1)
+    expect(getOutputImageLimitForSettings(settings, 'png')).toBe(4)
+    expect(normalizeParamsForSettings({ ...DEFAULT_PARAMS, output_format: 'svg', n: 4 }, settings)).toMatchObject({ output_format: 'svg', n: 1 })
+    expect(normalizeParamsForSettings({ ...DEFAULT_PARAMS, output_format: 'svg', n: 4 }, settings, { hasInputImages: true })).toMatchObject({ output_format: 'png', n: 4 })
   })
 
   it('keeps OpenAI streaming output count so the request can disable streaming', () => {

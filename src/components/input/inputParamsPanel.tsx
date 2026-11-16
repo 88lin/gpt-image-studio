@@ -352,7 +352,7 @@ export default function InputParamsPanel({
             <Select
               value={modelParams.resolution ?? 'auto'}
               onChange={(value) => setParams({ resolution: String(value) })}
-              options={(family === 'grok' ? ['1K', '2K'] : ['512', '1K', '2K', '4K']).map((value) => ({
+              options={(family === 'grok' ? isFalProvider ? ['1K', '1.5K', '2K'] : ['1K', '2K'] : ['512', '1K', '2K', '4K']).map((value) => ({
                 label: value,
                 value,
                 disabledReason: modelOptionsForImage.resolutions.includes(value) ? undefined : '当前模型不支持此分辨率',
@@ -441,7 +441,7 @@ export default function InputParamsPanel({
           )}
         </>
       )}
-      {family !== 'seedream' && (
+      {(family !== 'seedream' || isFalProvider) && (
         <label
           className={`relative flex items-center max-sm:flex-auto sm:shrink-0 ${agentAutoImageCount ? CHIP_DISABLED_CLASS : `${CHIP_CLASS} cursor-text`}`}
           onMouseEnter={() => { showAgentNHint(); streamConcurrentHint.show() }}
@@ -675,11 +675,6 @@ export default function InputParamsPanel({
                   />
                 </div>
               </div>
-              {hasInputImages && params.output_format === 'svg' && (
-                <p className="text-[11px] leading-snug text-amber-600 dark:text-amber-400">
-                  SVG 只能用于文生图，有参考图时无法提交
-                </p>
-              )}
               {isGif && (
                 <>
                   <label className={ROW_CLASS}>

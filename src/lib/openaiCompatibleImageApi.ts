@@ -1,5 +1,6 @@
 import { shouldReturnBase64 } from './apiProfiles'
 import { DEFAULT_STREAM_PARTIAL_IMAGES, type ApiProfile, type CustomProviderDefinition, type CustomProviderPollMapping, type CustomProviderResultMapping, type CustomProviderSubmitMapping, type ImageApiResponse, type ImageResponseItem, type ResponsesApiResponse, type ResponsesOutputItem, type TaskParams } from '../types'
+import { assertInputImageLimit } from './inputImageLimits'
 import { dataUrlToBlob, imageDataUrlToPngBlob, maskDataUrlToPngBlob } from './canvasImage'
 import { buildApiUrl, readClientDevProxyConfig, shouldUseApiProxy } from './devProxy'
 import {
@@ -153,7 +154,7 @@ function createResponsesImageTool(
     tool.size = params.size
   }
 
-  if (profile.streamImages) {
+  if (profile.streamImages && !isVectorOrAnimatedFormat(params.output_format)) {
     tool.partial_images = getStreamPartialImages(profile)
   }
 
@@ -443,11 +444,11 @@ async function parseResponsesApiStreamResponse(
 }
 
 export async function callOpenAICompatibleImageApi(opts: CallApiOptions, profile: ApiProfile, customProvider?: CustomProviderDefinition | null): Promise<CallApiResult> {
+  assertInputImageLimit(profile, opts.inputImageDataUrls.length)
   const family = getImageModelFamily(profile)
   if (family) {
     if (opts.maskDataUrl) throw new Error('此模型不支持遮罩编辑，请使用参考图和提示词描述修改内容')
     if (family !== 'seedream') opts = { ...opts, nativeTransparentBackground: false }
-    if (family === 'seedream' && opts.inputImageDataUrls.length > 10) throw new Error('Seedream 5.5 每次最多接受 10 张参考图')
   }
   if (customProvider) {
     customProvider = resolveCustomProviderModel(customProvider, profile.model)
@@ -463,8 +464,8 @@ export async function callOpenAICompatibleImageApi(opts: CallApiOptions, profile
 
   if (family) return callModelImagesApi(opts, profile)
 
-  // SVG 和 GIF 不支持流式和中间图
-  const requestProfile = isVectorOrAnimatedFormat(opts.params.output_format) ? { ...profile, streamImages: false } : profile
+  // Responses 的 GIF 可流式返回生命周期事件，但不请求中间图
+  const requestProfile = (opts.params.output_format === 'svg' || (opts.params.output_format === 'gif' && profile.apiMode !== 'responses')) ? { ...profile, streamImages: false } : profile
   return requestProfile.apiMode === 'responses'
     ? callResponsesImageApi(opts, requestProfile)
     : callImagesApi(opts, requestProfile)
@@ -492,7 +493,6 @@ async function callModelImagesApi(opts: CallApiOptions, profile: ApiProfile): Pr
     if (isEdit) {
       const urls = opts.inputImageUrls?.filter(isHttpUrl) ?? []
       if (urls.length !== opts.inputImageDataUrls.length) throw new Error('此模型只接受链接参考图，请通过图片链接添加参考图')
-      if (urls.length > 5) throw new Error('此模型每次最多接受 5 张参考图')
       body.image_urls = urls
     }
   } else {
@@ -502,7 +502,6 @@ async function callModelImagesApi(opts: CallApiOptions, profile: ApiProfile): Pr
     const images = opts.inputImageDataUrls.map((url) => ({ type: 'image_url', url }))
     if (images.length === 1) body.image = images[0]
     if (images.length > 1) body.images = images
-    if (profile.provider === 'xai' && images.length > 5) throw new Error('xAI 每次最多接受 5 张参考图')
   }
   if (shouldReturnBase64(profile)) body.response_format = 'b64_json'
   assertImageInputPayloadSize(opts.inputImageDataUrls.reduce((sum, url) => sum + url.length, 0))
@@ -602,12 +601,17 @@ async function callImagesApiSingle(opts: CallApiOptions, profile: ApiProfile): P
       if (!profile.codexCli) {
         formData.append('quality', params.quality)
       }
-      // 与生成接口共用同一份 2.6 参数；编辑接口不支持 SVG，不会出现对象字段
       const gptImage26Params: Record<string, unknown> = {}
       applyGptImage26Params(gptImage26Params, params, profile)
-      for (const [key, value] of Object.entries(gptImage26Params)) {
-        if (typeof value !== 'object') formData.append(key, String(value))
+      // 表单只能传字符串，嵌套的 svg 字段展开为 svg[model]、svg[reasoning][effort]
+      const appendField = (key: string, value: unknown) => {
+        if (value && typeof value === 'object') {
+          for (const [name, item] of Object.entries(value)) appendField(`${key}[${name}]`, item)
+        } else {
+          formData.append(key, String(value))
+        }
       }
+      for (const [key, value] of Object.entries(gptImage26Params)) appendField(key, value)
 
       if (params.output_format !== 'png' && params.output_compression != null) {
         formData.append('output_compression', String(params.output_compression))

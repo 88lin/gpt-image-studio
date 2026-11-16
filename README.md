@@ -113,22 +113,16 @@
 ## ✨ 核心特性
 
 ### 🎨 强大的图像生成与编辑
-- **参考图与遮罩**：最多 16 张参考图（支持剪贴板、拖拽和图片链接），内置遮罩编辑器，自动预处理以符合官方分辨率限制；SVG 和 GIF 作为参考图时转为 PNG（GIF 取第一帧）。
-- **画板标注**：在空白画布或参考图上用画笔、文字、图形和像素橡皮擦标注修改意图；画板与遮罩编辑器可缩放平移（Alt / Ctrl + 滚轮、Alt + 拖动、双指捏合）。
-
-  > - **参考图上的标注**：单独保存为透明图层，原图保持不变。`Images API` 使用 GPT Image 2.5 及以上模型、或使用 fal.ai 的 GPT Image 2.6 时，第一张参考图的标注以 markup 方式发送；其他情况合成到图上再发送。
-
+- **参考图与遮罩**：支持剪贴板、拖拽和图片链接，提交数量上限按模型和服务商确定。超限图片保留并置灰，悬浮或长按可查看原因；切换模型不会删除图片，提交前需移除超限图片或切换模型。参考图区高度受限，图片较多时可上下滚动；移动端横向起拖可排序。内置遮罩编辑器，自动预处理以符合官方分辨率限制；不支持遮罩的模型或输出格式点击“编辑图片”会直接进入画板；已有遮罩图会置灰，悬浮或长按可查看原因，预览右侧可移除遮罩后继续编辑；SVG 和 GIF 作为参考图时转为 PNG（GIF 取第 1 帧）。
+- **画板标注**：在空白画布或参考图上用画笔、文字、图形和像素橡皮擦标注修改意图；画板与遮罩编辑器可缩放平移（Alt / Ctrl + 滚轮、Alt + 拖动、双指捏合）。GPT Image 2.5／2.6 的 OpenAI Images API 和 fal.ai 的 GPT Image 2.6 支持独立标注层；Agent、遮罩编辑及其他模型保存合成图。
 - **评论标注**：在画板中用评论工具点击图片添加评论，以“@图N 评论”插入提示词，发送时附上评论在图中的位置（如 `(X=52%, Y=41%)`），复用任务时可恢复。
-- **GPT Image 2.6 参数**：在「更多」中设置；当前模型或模式不支持时，选项置灰并说明原因。
-
-  > - **复杂度**：`auto`、`low`、`medium`、`high`。
-  > - **GIF 动图**：仅画廊模式，可设置帧数（2–16，默认 9）和每帧时长（20–2000 ms，默认 200），带参考图时也可用。
-  > - **SVG**：仅画廊模式，只能文生图；由文本模型编写，可在 **「设置 → API 配置」** 中指定 SVG 编写模型。
-  > - **供应商支持**：OpenAI 兼容接口（含 Codex CLI 模式）全部支持；fal.ai 支持复杂度和 GIF，暂不支持 SVG；自定义供应商需在模板中映射对应的 `$params` 变量。
-
+- **复杂度**：`auto`、`low`、`medium`、`high`，仅 GPT Image 2.6 及以上支持，在「更多」中设置；当前模型或模式不支持时选项置灰并说明原因。
+- **GIF 动图**：仅画廊模式，可设置帧数（2–16，默认 9）和每帧时长（20–2000 ms，默认 200），带参考图时也可用，但不能使用遮罩。
+- **SVG**：仅画廊模式，由文本模型编写，支持透明背景。OpenAI 支持文生图和参考图编辑；fal.ai 仅支持文生图，每次生成一张。可在 **「设置 → API 配置」** 中指定 SVG 编写模型，fal.ai 不提供 SVG 编写模型的推理强度设置。
+- **供应商支持**：OpenAI 兼容接口（含 Codex CLI 模式）支持上述功能，具体能力取决于所用接口；fal.ai 支持复杂度、GIF 和文生图 SVG；自定义供应商需在模板中映射对应的 `$params` 变量。
 - **批量与迭代**：支持单次多图生成；一键将满意结果转为参考图，无缝开启下一轮修改。
 - **多提示词批量提交**：在习惯配置中开启后，可一次粘贴多条提示词（以两个空行分隔），共用参考图和参数；支持排队或并发（默认上限 10），可随时查看进度或停止。
-- **流式生成预览**：`Images API` 与 `Responses API` 模式均支持流式接收中间步骤图像，缓解连接超时问题。
+- **流式生成预览**：`Images API` 与 `Responses API` 均可流式接收中间步骤图像，缓解连接超时问题。
 - **透明背景**：画廊模式下选择 PNG、WebP、SVG 或 GIF 后可开启，可在 API 配置页为每个配置分别选择 API 原生或本地后处理。
 
   > - **API 原生**：直接请求模型返回透明通道，需接口和模型支持。接口返回“不支持透明背景”类错误时，应用会提示切换为本地后处理。
@@ -148,7 +142,7 @@
 - **可选 Web 搜索**：可开启 `web_search` 工具，Agent 会在需要时搜索网络信息并附带引用链接。
 
 ### ⚙️ 精细化参数追踪
-- **智能尺寸控制**：提供 1K/2K/4K 预设，自定义宽高时自动规整到模型安全范围（16 的倍数、总像素校验等）。
+- **智能尺寸控制**：提供 1K/2K/4K 预设，自定义宽高时自动规整到模型支持的范围。
 - **实际参数对比**：提取 API 响应中实际生效的尺寸、质量、耗时和**模型改写后的提示词**，与请求参数高亮对比。
 
 ### 📁 高效历史管理 (纯本地)
@@ -157,14 +151,14 @@
 - **失败任务重试**：重试方式可选新建任务或覆盖原任务（不限失败任务）；覆盖时保留创建时间和收藏，耗时重新计算。
 - **快捷批量操作**：桌面端支持拖拽框选、Ctrl/⌘ 连选，移动端支持侧滑多选，便于批量收藏与清理。
 - **图片查看与下载**：大图预览支持左右滑动切换，移动端可长按弹出操作菜单，支持快捷下载与批量下载。
-- **性能与隐私**：记录和图片只保存在本地（网页版为 IndexedDB，客户端为本机数据目录），SHA-256 去重压缩，不经过第三方服务器；可打包导出 ZIP 备份。
+- **性能与隐私**：记录和图片只保存在本地（网页版为 IndexedDB，客户端为本机数据目录），自动去重压缩，不经过第三方服务器；可打包导出 ZIP 备份。
 
 ### 🔌 多配置与供应商增强
 - **多配置管理**：保存多个 API 配置（供应商、API Key、模型等）并快速切换；可一键复制当前配置到列表底部，配置和供应商列表均可拖拽排序。
 - **多模型切换**：模型 ID 可用逗号分隔填写多个（如 `gpt-image-2.6-sunburst, gpt-image-2`），在首页切换，按配置分别记住；预置配置、URL 传参与导入导出均支持此写法。
 - **模型搜索与跨配置切换**：输入框模型列表按配置分组，支持按模型名、配置名或供应商搜索；在 **「设置 → API 配置」** 中开启“在输入框模型列表中展示”，即可在首页直接选择该配置的模型并切换配置。
 - **多供应商接入**：内置 OpenAI 兼容接口（`Images API` / `Responses API`）、Google、xAI、字节跳动、sub2api（异步）、fal.ai（队列），并可通过 JSON 导入自定义 HTTP 供应商（同步/异步任务）。
-- **Gemini / Grok / Seedream 5.5 图像生成**：支持官方接口和 OpenAI Images 兼容接口。
+- **Gemini / Grok / Seedream 5.5 图像生成**：支持官方接口、OpenAI Images 兼容接口和 fal.ai。可在 fal.ai 模型广场查看 [Gemini（Nano Banana）](https://fal.ai/explore/search?q=nano-banana)、[Grok](https://fal.ai/explore/search?q=grok-imagine-image) 和 [Seedream 5.5](https://fal.ai/explore/search?q=seedream) 的相关模型 ID，添加参考图后自动使用编辑接口。
 - **Google Search / Image Search**：部分 Gemini 模型支持网页和图片搜索，详情展示来源与搜索建议。
 - **Agent 模式独立 API 配置**：Agent 可使用原生（Responses API）或混合（Responses API + Images API）的独立配置，适配不支持 `image_generation` 工具的供应商或模型。
 - **API 代理**：OpenAI 兼容接口与 fal.ai 均可配置自定义代理；OpenAI 兼容接口还可走同源 `/api-proxy/`，由 Docker 或本地开发服务器转发，绕开浏览器 CORS 限制。
@@ -205,6 +199,7 @@ Windows 用户可以直接安装桌面客户端；网页版可以部署到 Verce
 
 Claude Code、Codex 等本机 AI 工具可以通过 CLI `gpt-image-studio` 调用客户端：生成和编辑图片、读取历史记录、查看和修改全部设置（API Key 只能写入）。命令、通信管道和随附 Skill 都使用本项目独立的名称，可与上游客户端并存。
 
+- `generate --image` 可重复指定参考图，按应用当前启用的模型校验数量；超限时返回错误，不创建任务。
 - 安装时勾选“添加到 PATH”即可直接运行；使用时客户端需要保持打开，用法见 `gpt-image-studio --help`。
 - 在 **「设置 → Skill」** 中安装随附的 Skill，AI 工具就知道何时、如何调用它；客户端启动时会自动把已安装的 Skill 更新到当前版本。
 
@@ -237,11 +232,7 @@ npm run tauri:build
 
 **环境变量（可选）**
 
-在 Vercel 项目的 **「Settings → Environment Variables」** 中添加，添加或修改后需要重新部署：
-
-```dotenv
-VITE_DEFAULT_API_URL=https://api.openai.com/v1
-```
+在 Vercel 项目的 **「Settings → Environment Variables」** 中添加（变量见 [环境变量](#env-vars)），添加或修改后需要重新部署。
 
 **绑定自定义域名（国内直连）**
 
@@ -268,13 +259,7 @@ Vercel 分配的 `.vercel.app` 域名在国内通常无法直接访问，可在 
 
 **环境变量（可选）**
 
-在仓库 **「Settings → Secrets and variables → Actions」** 中，将 `VITE_DEFAULT_API_URL` 添加到 **Secrets**：
-
-```dotenv
-VITE_DEFAULT_API_URL=https://api.openai.com/v1
-```
-
-其他变量添加到 **Variables**，变量名与 [环境变量](#env-vars) 表一致。
+在仓库 **「Settings → Secrets and variables → Actions」** 中添加：`VITE_DEFAULT_API_URL` 放进 **Secrets**，其他变量放进 **Variables**，变量名与 [环境变量](#env-vars) 表一致。
 
 **初始部署**
 
@@ -295,11 +280,7 @@ VITE_DEFAULT_API_URL=https://api.openai.com/v1
 
 **环境变量（可选）**
 
-Cloudflare Workers 不会在部署后改写静态文件，变量必须在构建前设置（如写入项目根目录的 `.env.local`）：
-
-```dotenv
-VITE_DEFAULT_API_URL=https://api.openai.com/v1
-```
+Cloudflare Workers 不会在部署后改写静态文件，变量必须在构建前设置，例如写入项目根目录的 `.env.local`，变量见 [环境变量](#env-vars)。
 
 **部署**
 
@@ -534,13 +515,14 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 | `baseUrl` | 是 | API 基础地址，末尾 `/` 的规则见表下说明；fal.ai 可留空。 |
 | `apiKey` | 否 | API Key。建议省略，由用户自行填写。 |
 | `model` | 是 | 模型 ID。多个模型以逗号分隔，默认使用第一个，用户可在首页切换。 |
-| `imageGenerationModel` | 否 | Responses API 的 `image_generation` 工具模型，默认 `gpt-image-2.6-sunburst`，也可用 `gpt-image-2.6-flare`；留空时不发送，使用 API 默认值。 |
+| `imageGenerationModel` | 否 | Responses API 的 `image_generation` 工具模型，可填任意该接口支持的图像模型，如 `gpt-image-2.6-sunburst`、`gpt-image-2.6-flare`；留空时不发送，使用 API 默认值。 |
 | `apiMode` | 否 | `"images"` 或 `"responses"`，默认 `"images"`。 |
-| `svgModel` | 否 | GPT Image 2.6 输出 SVG 时负责编写 SVG 的文本模型，默认 `gpt-6.1-sol`。 |
+| `svgModel` | 否 | SVG 编写模型。OpenAI 兼容 Images API 留空使用 `gpt-6.1-sol`；Responses API 留空不指定，由接口使用外层 Responses 模型或默认编写模型；fal.ai 留空使用接口默认模型。 |
+| `svgReasoningEffort` | 否 | SVG 编写模型的推理强度：`none`、`minimal`、`low`、`medium`、`high`、`xhigh`、`max`。省略时使用编写模型自身默认值，fal.ai 不适用。 |
 | `isDefault` | 否 | 有多个配置时为默认项设置 `true`（只能有一个），首次使用时自动选中；只有一个配置时不填。 |
 | `timeout` | 否 | 请求超时秒数，默认 600。 |
 | `apiProxy` | 否 | 是否走部署端 API 代理，默认 `false`。 |
-| `responseFormatB64Json` | 否 | 是否要求返回 Base64 图片数据。省略时，`x.ai`、`volces.com`、`bytepluses.com` 及其子域名默认开启，其他域名默认关闭；显式设置 `true` 或 `false` 后不随地址变化。 |
+| `responseFormatB64Json` | 否 | 是否要求返回 Base64 图片数据。省略时，仅网页版对 `x.ai`、`volces.com`、`bytepluses.com` 及其子域名默认开启；客户端及网页其他域名默认关闭。显式设置 `true` 或 `false` 后不随地址变化。 |
 | `transparentBackgroundMethod` | 否 | 透明背景实现方式：`"api"`（API 原生）或 `"local"`（本地后处理），默认值见表下说明。 |
 
 补充说明：
@@ -724,11 +706,17 @@ API 不是标准 OpenAI 格式时，在预置 JSON 的 `customProviders` 中定�
 | `apiMode` | `images` 或 `responses`，默认 `images` | `?apiMode=responses` |
 | `profileName` | 配置名称，默认“URL 参数配置” | `?profileName=我的配置` |
 | `reasoningEffort` | Responses API 推理强度 | `?reasoningEffort=high` |
+| `svgModel` | SVG 编写模型；留空行为见上方配置字段说明 | `?svgModel=gpt-6.1-sol` |
+| `svgReasoningEffort` | SVG 编写模型的独立推理强度，fal.ai 不适用 | `?svgReasoningEffort=high` |
+| `timeout` | 请求超时秒数 | `?timeout=600` |
+| `responseFormatB64Json` | 是否要求返回 Base64 图片数据，留空按默认值 | `?responseFormatB64Json=false` |
 | `codexCli` | Codex CLI 兼容模式 | `?codexCli=true` |
-| `streamImages` | 流式传输 | `?streamImages=true` |
+| `streamImages` | 流式传输，`true` 开启、`false` 关闭 | `?streamImages=true` |
 | `streamPartialImages` | 中间步骤图像数（需配合 streamImages） | `?streamPartialImages=2` |
 | `profileId` | 目标配置 ID；匹配到同 ID 配置时直接更新 | `?profileId=my-service` |
 | `transparentBackgroundMethod` | 透明背景实现方式：`api`（原生）或 `local`（本地后处理） | `?transparentBackgroundMethod=local` |
+
+手写链接省略参数时，更新已有配置会保留原值，新建配置使用部署或程序默认值。应用复制的配置链接会明确携带默认值和关闭状态；`reasoningEffort=`、`svgModel=`、`svgReasoningEffort=`、`responseFormatB64Json=` 均表示恢复默认。
 
 在客户端中，复制带 `apiUrl` 或 `settings` 参数的导入链接后切回客户端，即会提示导入。
 

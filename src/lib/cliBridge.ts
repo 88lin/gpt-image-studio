@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
-import { GIF_FRAME_COUNT_RANGE, GIF_FRAME_DURATION_RANGE, IMAGE_COMPLEXITIES, MAX_INPUT_IMAGES, OUTPUT_FORMATS, type ApiProfile, type AppSettings, type InputImage, type TaskParams } from '../types'
+import { GIF_FRAME_COUNT_RANGE, GIF_FRAME_DURATION_RANGE, IMAGE_COMPLEXITIES, OUTPUT_FORMATS, type ApiProfile, type AppSettings, type InputImage, type TaskParams } from '../types'
 import {
   createDefaultOpenAIProfile,
   getActiveApiProfile,
@@ -14,6 +14,7 @@ import {
 import { requestBrowserNotificationPermission } from './browserNotification'
 import { ensureImageCached } from './imageCache'
 import { toReferenceImage } from './inputImages'
+import { assertInputImageLimit } from './inputImageLimits'
 import { normalizeParamsForSettings, supportsTransparentOutput } from './paramCompatibility'
 import { getImageModelFamily } from './imageModels'
 import { normalizeSeedreamImageSize, SEEDREAM_RESOLUTIONS } from './size'
@@ -59,7 +60,7 @@ const SETTING_KEYS = [
 
 const PROFILE_FIELDS = new Set([
   'name', 'provider', 'baseUrl', 'apiKey', 'model', 'selectedModel', 'imageGenerationModel', 'timeout', 'apiMode',
-  'reasoningEffort', 'codexCli', 'apiProxy', 'responseFormatB64Json', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod', 'svgModel',
+  'reasoningEffort', 'codexCli', 'apiProxy', 'responseFormatB64Json', 'streamImages', 'streamPartialImages', 'transparentBackgroundMethod', 'svgModel', 'svgReasoningEffort',
 ])
 
 const QUALITIES = ['auto', 'low', 'medium', 'high', 'xhigh', 'max']
@@ -191,12 +192,11 @@ async function generateImage(requestId: number, args: Record<string, unknown>): 
   if (useStore.getState().batchProgress) throw new Error('应用正在批量提交任务，请等它完成后再试')
 
   const references = Array.isArray(args.reference_images) ? args.reference_images : []
-  if (references.length > MAX_INPUT_IMAGES) throw new Error(`参考图最多 ${MAX_INPUT_IMAGES} 张`)
+  assertInputImageLimit(getActiveApiProfile(getSettings()), references.length)
   const params = parseParams(args)
   // 与 submitTask 相同：按提交时的配置规范化后再检查，不支持 SVG 的模型会自动改用 PNG
   const settings = getSettings()
   const finalParams = normalizeParamsForSettings({ ...useStore.getState().params, ...params }, settings, { hasInputImages: references.length > 0 })
-  if (references.length && finalParams.output_format === 'svg') throw new Error('SVG 只能用于文生图，请去掉参考图或换用其他格式')
   if (finalParams.transparent_output && !supportsTransparentOutput(settings, getActiveApiProfile(settings), finalParams.output_format)) {
     throw new Error('当前自定义服务商未映射 $params.background，SVG 和 GIF 无法使用透明背景，请关闭透明背景或换用 PNG、WebP')
   }

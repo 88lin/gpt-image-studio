@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { existsSync, readFileSync } from 'fs'
@@ -56,6 +57,11 @@ export default defineConfig(async ({ command, mode }) => {
     define: {
       __APP_VERSION__: JSON.stringify(pkg.version),
       __DEV_PROXY_CONFIG__: JSON.stringify(devProxyConfig),
+    },
+    test: {
+      // 关闭 Node 原生存储，让 jsdom 提供 localStorage。
+      execArgv: process.allowedNodeEnvironmentFlags.has('--no-webstorage') ? ['--no-webstorage']
+        : process.allowedNodeEnvironmentFlags.has('--no-experimental-webstorage') ? ['--no-experimental-webstorage'] : [],
     },
     server: {
       host: true,
