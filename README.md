@@ -14,7 +14,7 @@
 
 **支持 GPT Image、Gemini（Nano Banana）、Grok 和 Seedream 5.5 的图片生成与编辑工具**
 
-提供 Web UI 和 Windows 客户端，支持官方接口、OpenAI 兼容接口、sub2api、fal.ai 与自定义 HTTP 供应商。<br>
+提供 Web UI 和 Windows 客户端，支持官方接口、OpenAI 兼容接口、sub2api 和 fal.ai，也可通过自定义供应商配置接入非标准 API。<br>
 支持文本生图、参考图编辑、画板标注、遮罩编辑与 Agent 多轮对话，图片和历史记录保存在本地。
 
 <br>
@@ -142,11 +142,11 @@
 - **可选 Web 搜索**：可开启 `web_search` 工具，Agent 会在需要时搜索网络信息并附带引用链接。
 
 ### ⚙️ 精细化参数追踪
-- **智能尺寸控制**：提供 1K/2K/4K 预设，自定义宽高时自动规整到模型支持的范围。
-- **实际参数对比**：提取 API 响应中实际生效的尺寸、质量、耗时和**模型改写后的提示词**，与请求参数高亮对比。
+- **智能尺寸控制**：按模型选择比例、分辨率档位或具体宽高，自定义供应商可分别设置各模型的可选值。
+- **实际参数对比**：读取每张图片的真实尺寸，推算比例和分辨率档位，并与请求参数高亮对比；同时展示质量、耗时和**模型改写后的提示词**。
 
 ### 📁 高效历史管理 (纯本地)
-- **瀑布流与画廊**：历史任务自动保存，支持按状态过滤、全屏大图预览与快捷下载。
+- **瀑布流与画廊**：历史任务自动保存，支持按状态过滤、全屏大图预览与快捷下载；多结果任务可在详情中单独删除图片或失败记录。
 - **多收藏夹管理**：同一任务可归入多个收藏夹；概览页显示封面和任务数，进入后可叠加搜索与状态筛选；支持拖拽排序、重命名、设为默认和按收藏夹打包下载 ZIP；在收藏夹页新建的任务自动归入当前收藏夹。
 - **失败任务重试**：重试方式可选新建任务或覆盖原任务（不限失败任务）；覆盖时保留创建时间和收藏，耗时重新计算。
 - **快捷批量操作**：桌面端支持拖拽框选、Ctrl/⌘ 连选，移动端支持侧滑多选，便于批量收藏与清理。
@@ -178,6 +178,8 @@ Windows 用户可以直接安装桌面客户端；网页版可以部署到 Verce
 
 部署时可以通过环境变量 `VITE_DEFAULT_API_URL` 提供**预置配置**：部署端预先加入用户配置列表的 API 配置，格式与用户自建的配置相同，用户打开页面通常只需补充 API Key。
 
+预置配置也可包含自定义供应商，让用户直接使用部署者配置好的非标准 API。
+
 完整写法见 [预置配置](#preset-config)，其余变量见 [环境变量](#env-vars)。
 
 仓库中的 GitHub Actions 工作流分别负责客户端、Vercel、GitHub Pages 和 Docker 镜像，不需要的可在 **Actions** 中选中对应工作流后停用（**Disable workflow**）。
@@ -195,9 +197,9 @@ Windows 用户可以直接安装桌面客户端；网页版可以部署到 Verce
 - 安装到普通文件夹（如 `D:\Apps\GPT Image Studio`）。装到 `C:\Program Files` 等需要管理员权限写入的位置会导致无法保存数据。
 - 数据默认保存在 `<安装目录>\data` 中，可在**「设置 → 数据管理」**中更改。
 
-**CLI 与 Skill**
+**接入 AI 工具**
 
-Claude Code、Codex 等本机 AI 工具可以通过 CLI `gpt-image-studio` 调用客户端：生成和编辑图片、读取历史记录、查看和修改全部设置（API Key 只能写入）。命令、通信管道和随附 Skill 都使用本项目独立的名称，可与上游客户端并存。
+Claude Code、Codex 等本机 AI 工具可以通过 CLI `gpt-image-studio` 调用客户端：生成和编辑图片、读取历史记录、查看和修改全部设置（API Key 只能写入）。命令、通信管道和随附 Skill 都使用本项目独立的名称，可与上游客户端并存。参数查询、逐张图片尺寸与结果删除等用法见 [CLI 参考](skills/gpt-image-studio/references/cli.md)。
 
 - `generate --image` 可重复指定参考图，按应用当前启用的模型校验数量；超限时返回错误，不创建任务。
 - 安装时勾选“添加到 PATH”即可直接运行；使用时客户端需要保持打开，用法见 `gpt-image-studio --help`。
@@ -501,7 +503,7 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 顶层字段：
 
 - **`profiles`**（数组）：预置的 API 配置列表，每项对应用户配置列表中的一个配置。
-- **`customProviders`**（可选数组）：自定义供应商定义，见下文 [自定义供应商](#custom-provider-config)。只使用内置供应商时可省略。
+- **`customProviders`**（可选数组）：配置非标准 API 的请求参数、任务查询和结果读取方式，见 [自定义供应商](#custom-provider-config)。只使用内置供应商时可省略。
 - **`agent`**（可选对象）：Agent 的独立 API 模式及文本、图像配置选择，见下方示例。
 
 `profiles` 中每项的字段：
@@ -620,16 +622,15 @@ VITE_DEFAULT_API_URL=https://你的域名?settings=%7B%22profiles%22%3A%5B...%5D
 - 文本配置须使用 OpenAI 兼容的 Responses API；图像配置可使用任意支持的供应商。
 - `agent` 及其三个字段都可省略，随部署更新和锁定的规则与预置配置相同。
 
-完整示例见 [`gpt-image-config.agent.example.json`](gpt-image-config.agent.example.json)。
-
 ---
 
 <a id="custom-provider-config"></a>
 ## 🔌 自定义供应商
 
-API 不是标准 OpenAI 格式时，在预置 JSON 的 `customProviders` 中定义请求和响应结构。每个供应商需有唯一的 `id`，由 `profiles` 中的 `provider` 字段引用。
+支持接入非标准的图像生成接口，包括同步请求和异步任务。可以通过以下两种方式让 AI 根据提示词和第三方 API 文档生成配置：
 
-接口不在 `/v1` 路径下时，将 `baseUrl` 设为以 `/` 结尾。例如 `baseUrl` 为 `https://api.example.com/`、`submit.path` 为 `api/image-tasks` 时，实际请求地址为 `https://api.example.com/api/image-tasks`。
+- **作为用户在网页/应用中添加**：进入 **「设置 → API 配置 → 供应商类型 → 创建自定义供应商」**，点击“复制生成提示词”，将提示词和 API 文档发给 AI；复制返回的 JSON，再回到网页或应用点击“从剪贴板粘贴并导入”。
+- **作为部署者配置预置供应商**：将 [文档中的提示词](docs/custom-provider-llm-prompt.md) 和 API 文档发给 AI，获取完整配置 JSON，再按 [预置配置](#preset-config) 的说明用于部署。
 
 `modelOverrides` 可按模型 ID（支持 `*` 通配符）配置不同接口，路径支持 `{model}` 占位符。完整字段见 [自定义供应商 LLM 提示词](docs/custom-provider-llm-prompt.md)。
 

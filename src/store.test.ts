@@ -11,6 +11,7 @@ import { deleteAgentRoundFromConversation, getActiveAgentRounds, getAgentConvers
 import { cleanStaleAgentInputDrafts } from './lib/inputDraftState'
 import { ALL_FAVORITES_COLLECTION_ID } from './lib/favoriteState'
 import { normalizePersistedState } from './lib/persistedState'
+import { getTaskOutputSlots } from './lib/taskState'
 import { setPresetConfig } from './lib/presetConfig'
 import { FetchConnectError } from './lib/platform'
 vi.mock('./lib/db', () => {
@@ -53,11 +54,11 @@ vi.mock('./lib/db', () => {
       agentConversations.clear()
       for (const conversation of conversations) agentConversations.set(conversation.id, conversation)
     },
-    getImage: async (id: string) => images.get(id),
+    getImage: vi.fn(async (id: string) => images.get(id)),
     getStoredImageThumbnail: async (id: string) => thumbnails.get(id),
     getImageThumbnail: async (id: string) => thumbnails.get(id),
     getImageMeta: async (id: string) => images.get(id),
-    getAllImageIds: async () => [...images.keys()],
+    getAllImageIds: vi.fn(async (opts?: { includeThumbnails?: boolean }) => [...new Set([...images.keys(), ...opts?.includeThumbnails ? thumbnails.keys() : []])]),
     getAllImages: async () => [...images.values()],
     putImage: async (image: StoredImage) => {
       images.set(image.id, image)
@@ -145,7 +146,7 @@ import { callImageApi } from './lib/api'
 import { callAgentResponsesApi, callBatchImageSingle } from './lib/agentApi'
 import { getFalQueuedImageResult } from './lib/falAiImageApi'
 import { removeKeyedBackgroundFromDataUrl } from './lib/transparentImage'
-import { clearData, clearFailedTasks, deleteFavoriteCollection, editOutputs, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, regenerateAgentAssistantMessage, removeMultipleTasks, removeTask, restoreExplicitPresetConfig, retryTask, reuseConfig, stopAgentResponse, submitAgentMessage, submitTask, taskMatchesFilterStatus, taskMatchesSearchQuery, useStore } from './store'
+import { clearData, clearFailedTasks, deleteFavoriteCollection, editOutputs, getErrorToastMessage, getPersistedState, getTaskApiProfile, importData, initStore, regenerateAgentAssistantMessage, removeMultipleTasks, removeTask, removeTaskOutput, restoreExplicitPresetConfig, retryTask, reuseConfig, stopAgentResponse, submitAgentMessage, submitTask, taskMatchesFilterStatus, taskMatchesSearchQuery, useStore } from './store'
 
 const commitTaskDeletionImplementation = vi.mocked(commitTaskDeletion).getMockImplementation()!
 const deleteDbImageImplementation = vi.mocked(deleteDbImage).getMockImplementation()!
@@ -803,7 +804,7 @@ describe('mask draft lifecycle in store actions', () => {
     setTimeoutSpy.mockRestore()
   })
 
-  it('stores decoded image size as actual size when the API omits size', async () => {
+  it('stores decoded dimensions on the image without duplicating them in actual params', async () => {
     const { callImageApi } = await import('./lib/api')
     vi.mocked(callImageApi).mockClear()
     vi.mocked(callImageApi).mockResolvedValueOnce({
@@ -821,13 +822,13 @@ describe('mask draft lifecycle in store actions', () => {
     await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('done'))
 
     const [task] = useStore.getState().tasks
-    expect(task.actualParams).toMatchObject({ size: '1254x1254', output_format: 'png', n: 1 })
-    expect(task.actualParamsByImage?.[task.outputImages[0]]).toMatchObject({ size: '1254x1254', output_format: 'png' })
+    expect(task.actualParams).toMatchObject({ output_format: 'png', n: 1 })
+    expect(task.actualParamsByImage?.[task.outputImages[0]]).toMatchObject({ output_format: 'png' })
     await clearTasks()
     await clearImages()
   })
 
-  it('keeps API-returned actual size over decoded image size', async () => {
+  it('discards API dimensions and persists decoded image dimensions separately', async () => {
     const { callImageApi } = await import('./lib/api')
     vi.mocked(callImageApi).mockClear()
     vi.mocked(callImageApi).mockResolvedValueOnce({
@@ -845,8 +846,9 @@ describe('mask draft lifecycle in store actions', () => {
     await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('done'))
 
     const [task] = useStore.getState().tasks
-    expect(task.actualParams?.size).toBe('1024x1024')
-    expect(task.actualParamsByImage?.[task.outputImages[0]].size).toBe('1024x1024')
+    expect(task.actualParams?.size).toBeUndefined()
+    expect(await getImage(task.outputImages[0])).toMatchObject({ width: 1254, height: 1254 })
+    expect(task.actualParamsByImage?.[task.outputImages[0]].size).toBeUndefined()
     await clearTasks()
     await clearImages()
   })
@@ -1448,6 +1450,23 @@ describe('agent conversation persistence', () => {
     expect(serializedStoredTasks).not.toContain('legacy-task-base64')
   })
 
+  it('启动时清理历史任务中的尺寸类响应字段并写回', async () => {
+    const source = task({
+      id: 'legacy-size',
+      outputImages: ['a'],
+      params: { ...DEFAULT_PARAMS, size: '1024x1024', resolution: '1K' },
+      actualParams: { size: '2K', resolution: '2K', quality: 'high' },
+      actualParamsByImage: { a: { size: '2K', aspect_ratio: '1:1', output_format: 'png' } },
+    })
+    await putDbTask(source)
+    await initStore()
+    const loaded = useStore.getState().tasks.find((item) => item.id === source.id)
+    expect(loaded?.actualParams).toEqual({ quality: 'high' })
+    expect(loaded?.actualParamsByImage).toEqual({ a: { output_format: 'png' } })
+    expect(loaded?.params).toEqual(source.params)
+    expect((await getAllTasks()).find((item) => item.id === source.id)).toEqual(loaded)
+  })
+
   it('keeps agent conversations created while initStore is loading', async () => {
     const legacyConversation = agentConversation({ id: 'legacy-conversation', createdAt: 1, updatedAt: 1 })
     const earlyConversation = agentConversation({ id: 'early-conversation', createdAt: 2, updatedAt: 2 })
@@ -1629,6 +1648,150 @@ describe('built-in image task recovery', () => {
     await vi.waitFor(() => expect(useStore.getState().tasks.find((item) => item.id === 'queued-task')).toMatchObject({ status: 'done', customRecoverable: false }))
     expect(fetchMock).toHaveBeenCalledOnce()
     expect(fetchMock.mock.calls[0][0]).toBe(apiProxy ? '/api-proxy/tasks/queued-job' : 'https://example.com/v1/tasks/queued-job')
+  })
+})
+
+describe('Seedream concurrent tasks', () => {
+  const profile = createDefaultOpenAIProfile({
+    id: 'seedream-profile', provider: 'bytedance', model: 'doubao-seedream-5-5-261028',
+    baseUrl: 'https://example.com/v1', apiKey: 'test-key', timeout: 1,
+  })
+
+  beforeEach(async () => {
+    await clearTasks()
+    await clearImages()
+    await clearAgentConversations()
+    vi.mocked(callImageApi).mockReset()
+    useStore.setState({
+      settings: normalizeSettings({ profiles: [profile], activeProfileId: profile.id }),
+      tasks: [], agentConversations: [], appMode: 'gallery', inputImages: [], maskDraft: null,
+      prompt: 'prompt', params: { ...DEFAULT_PARAMS, n: 3 },
+    })
+  })
+
+  it('lets direct child requests finish after the task timeout', async () => {
+    vi.useFakeTimers()
+    try {
+      const request = deferred<Awaited<ReturnType<typeof callImageApi>>>()
+      vi.mocked(callImageApi).mockImplementationOnce(() => request.promise)
+
+      await submitTask()
+      await vi.advanceTimersByTimeAsync(2000)
+      const current = useStore.getState().tasks[0]
+      expect(current.status).toBe('running')
+      expect(hasInterruptibleOperations([current], [], null)).toBe(true)
+
+      request.resolve({ images: ['data:image/png;base64,c3VjY2Vzcw=='], failedRequests: [{ requestIndex: 1, error: '请求超时' }] })
+      await vi.advanceTimersByTimeAsync(1)
+      expect(useStore.getState().tasks[0]).toMatchObject({
+        status: 'done',
+        outputImages: [expect.any(String)],
+        outputErrors: [{ requestIndex: 1, error: '请求超时' }],
+      })
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('recovers all images from one saved custom batch ID without submitting again', async () => {
+    const customProfile = { ...profile, provider: 'custom-async' }
+    useStore.setState({ settings: normalizeSettings({
+      profiles: [customProfile], activeProfileId: customProfile.id,
+      customProviders: [{
+        id: 'custom-async', name: '测试',
+        submit: { path: 'submit', body: { n: '$params.n' }, taskIdPath: 'id' },
+        poll: { path: 'jobs/{task_id}', statusPath: 'status', successValues: ['done'],
+          failureValues: ['failed'], result: { b64JsonPaths: ['data.*.b64_json'] } },
+      }],
+    }) })
+    await putDbTask(task({
+      id: 'seedream-recover', apiProvider: customProfile.provider, apiProfileId: profile.id, apiModel: profile.model,
+      status: 'running', params: { ...DEFAULT_PARAMS, n: 3 }, customTaskId: 'job-1',
+    }))
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
+      expect(String(input)).toBe('https://example.com/v1/jobs/job-1')
+      expect(init?.method).toBe('GET')
+      return Response.json({ status: 'done', data: Array.from({ length: 3 }, () => ({ b64_json: 'c3VjY2Vzcw==' })) })
+    })
+    try {
+      await initStore()
+      await vi.waitFor(() => expect(useStore.getState().tasks[0]?.status).toBe('done'))
+      expect(fetchMock).toHaveBeenCalledOnce()
+      const recovered = (await getAllTasks())[0]
+      expect(recovered.outputImages).toHaveLength(3)
+      expect(recovered.customTaskId).toBe('job-1')
+      expect(recovered.customRecoverable).toBe(false)
+    } finally {
+      fetchMock.mockRestore()
+    }
+  })
+})
+
+describe('custom task deletion cancels polling', () => {
+  const profile = createDefaultOpenAIProfile({
+    id: 'cancel-profile', provider: 'custom-async', model: 'seedream-5.5',
+    baseUrl: 'https://example.com/v1', apiKey: 'test-key',
+  })
+  beforeEach(async () => {
+    await clearTasks()
+    await clearImages()
+    await clearAgentConversations()
+    useStore.setState({
+      settings: normalizeSettings({
+        profiles: [profile], activeProfileId: profile.id,
+        customProviders: [{
+          id: 'custom-async', name: '测试',
+          submit: { path: 'submit', taskIdPath: 'id' },
+          poll: { path: 'jobs/{task_id}', intervalSeconds: 1, statusPath: 'status',
+            successValues: ['done'], failureValues: ['failed'], result: { b64JsonPaths: ['data.*.b64_json'] } },
+        }],
+      }),
+      tasks: [], agentConversations: [], appMode: 'gallery', prompt: 'test',
+      params: DEFAULT_PARAMS, inputImages: [], maskDraft: null, galleryInputDraft: null,
+    })
+  })
+
+  it.each(['submitted', 'recovered', 'inflight', 'clear'])('stops %s polling and keeps deleted tasks absent', async (mode) => {
+    vi.useFakeTimers()
+    let pollingSignal: AbortSignal | undefined
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async (_input, init) => {
+      if (init?.method === 'POST') return Response.json({ id: 'job-1' })
+      pollingSignal = init?.signal ?? undefined
+      if (mode === 'inflight') return new Promise<Response>((_, reject) => {
+        pollingSignal?.addEventListener('abort', () => reject(pollingSignal?.reason), { once: true })
+      })
+      return Response.json({ status: 'pending' })
+    })
+    try {
+      if (mode === 'submitted') {
+        const api = await vi.importActual<typeof import('./lib/api')>('./lib/api')
+        vi.mocked(callImageApi).mockImplementationOnce(api.callImageApi)
+        await submitTask()
+      } else {
+        await putDbTask(task({
+          id: 'cancel-task', apiProvider: profile.provider, apiProfileId: profile.id, apiModel: profile.model,
+          status: 'running', customTaskId: 'job-1',
+        }))
+        await initStore()
+      }
+      await vi.advanceTimersByTimeAsync(1)
+      expect(pollingSignal).toBeDefined()
+      expect(pollingSignal?.aborted).toBe(false)
+      const callsBeforeDeletion = fetchMock.mock.calls.length
+      const removal = mode === 'clear'
+        ? clearData({ clearConfig: false, clearTasks: true })
+        : removeTask(useStore.getState().tasks[0])
+      expect(useStore.getState().tasks).toEqual([])
+      expect(pollingSignal?.aborted).toBe(true)
+      await removal
+      await vi.advanceTimersByTimeAsync(10000)
+      expect(fetchMock).toHaveBeenCalledTimes(callsBeforeDeletion)
+      expect(await getAllTasks()).toEqual([])
+      expect(useStore.getState().tasks).toEqual([])
+    } finally {
+      fetchMock.mockRestore()
+      vi.useRealTimers()
+    }
   })
 })
 
@@ -2750,6 +2913,32 @@ describe('agent round deletion', () => {
     expect(useStore.getState().agentConversations[0].messages.map((message) => message.id)).toEqual(['message-concurrent'])
   })
 
+  it.each(['updated', 'removed'])('uses current conversation state when deletion fallback runs after it was %s', async (change) => {
+    const conversation = agentConversation({
+      activeRoundId: 'round-a',
+      rounds: [{
+        id: 'round-a', index: 1, parentRoundId: null, userMessageId: 'user-a',
+        prompt: '删除', inputImageIds: [], outputTaskIds: ['task-a'],
+        status: 'done', error: null, createdAt: 1, finishedAt: 2,
+      }],
+      messages: [{ id: 'user-a', role: 'user', content: '删除', roundId: 'round-a', createdAt: 1 }],
+    })
+    useStore.setState({
+      agentConversations: [conversation],
+      tasks: [task({ id: 'task-a', sourceMode: 'agent', agentConversationId: conversation.id, agentRoundId: 'round-a' })],
+    })
+    const pending = deferred<undefined>()
+    vi.mocked(commitTaskDeletion).mockImplementationOnce(() => pending.promise)
+    const deletion = useStore.getState().deleteAgentRound(conversation.id, 'round-a')
+    await vi.waitFor(() => expect(useStore.getState().agentConversations[0].rounds).toEqual([]))
+    const latest = { ...useStore.getState().agentConversations[0], title: '新回复后的会话' }
+    useStore.setState({ agentConversations: change === 'updated' ? [latest] : [] })
+    await vi.waitFor(async () => expect((await getAllAgentConversations()).map((item) => item.title)).toEqual(change === 'updated' ? [latest.title] : []))
+    pending.reject(new Error('atomic failed'))
+    await deletion
+    expect((await getAllAgentConversations()).map((item) => item.title)).toEqual(change === 'updated' ? [latest.title] : [])
+  })
+
   it('reports a warning when both atomic persistence and its fallback fail after deletion', async () => {
     const conversation = agentConversation({
       activeRoundId: 'round-a',
@@ -2940,6 +3129,23 @@ describe('data import', () => {
     const stored = await getAllTasks()
     expect(stored.find((item) => item.id === valid.id)?.startedAt).toBe(5)
     expect(stored.find((item) => item.id === invalid.id)?.startedAt).toBeUndefined()
+  })
+
+  it('导入旧备份时清理尺寸类响应字段并持久化，保留请求参数', async () => {
+    const source = task({
+      id: 'imported-size', params: { ...DEFAULT_PARAMS, size: '1024x1024', resolution: '1K' },
+      actualParams: { size: '2K', aspect_ratio: '1:1', resolution: '2K', quality: 'high' },
+      actualParamsByImage: { a: { size: '1024x1024' } },
+    })
+    const imported = await importData(importFile({
+      version: 3, exportedAt: new Date(0).toISOString(), tasks: [source], imageFiles: {},
+    }), { importConfig: false, importTasks: true })
+    expect(imported).toBe(true)
+    const stored = (await getAllTasks()).find((item) => item.id === source.id)
+    expect(stored?.actualParams).toEqual({ quality: 'high' })
+    expect(stored?.actualParamsByImage).toBeUndefined()
+    expect(stored?.params).toEqual(source.params)
+    expect(useStore.getState().tasks.find((item) => item.id === source.id)).toEqual(stored)
   })
 
   it('skips empty agent conversations when importing task data', async () => {
@@ -4002,6 +4208,139 @@ describe('task deletion', () => {
     expect(state.showToast).toHaveBeenCalledWith('任务已删除', 'success')
   })
 
+  it('删除中间图片并保存剩余结果、原图和图片参数', async () => {
+    const source = task({
+      params: { ...DEFAULT_PARAMS, n: 3 },
+      outputImages: ['a', 'b', 'c'],
+      transparentOriginalImages: ['original-a', 'original-b', ''],
+      actualParamsByImage: { a: { quality: 'high' }, b: { quality: 'low' } },
+      revisedPromptByImage: { a: 'A', b: 'B', c: 'C' },
+    })
+    for (const id of ['a', 'b', 'c', 'original-a', 'original-b']) {
+      await putImage({ id, dataUrl: `data:image/png;base64,${id}`, createdAt: 1 })
+    }
+    await putDbTask(source)
+    useStore.setState({ tasks: [source], detailTaskId: source.id })
+
+    await removeTaskOutput(source.id, getTaskOutputSlots(source)[1])
+
+    const updated = useStore.getState().tasks[0]
+    expect(updated.outputImages).toEqual(['a', 'c'])
+    expect(updated.transparentOriginalImages).toEqual(['original-a', ''])
+    expect(updated.actualParamsByImage).toEqual({ a: { quality: 'high' } })
+    expect(updated.revisedPromptByImage).toEqual({ a: 'A', c: 'C' })
+    expect(updated.params.n).toBe(3)
+    expect(useStore.getState().detailTaskId).toBe(source.id)
+    expect(await getAllTasks()).toEqual([updated])
+    expect((await getAllImageIds()).sort()).toEqual(['a', 'c', 'original-a'])
+  })
+
+  it('删除结果时保留其他任务及输入草稿引用的图片', async () => {
+    const source = task({ outputImages: ['a', 'b'], transparentOriginalImages: ['original-a', ''] })
+    const other = task({ id: 'other', inputImageIds: ['a'] })
+    await putImage({ id: 'a', dataUrl: 'data:image/png;base64,a', createdAt: 1 })
+    await putImage({ id: 'original-a', dataUrl: 'data:image/png;base64,original', createdAt: 1 })
+    useStore.setState({ tasks: [source, other], inputImages: [{ id: 'original-a', dataUrl: 'data:image/png;base64,original' }] })
+
+    await removeTaskOutput(source.id, getTaskOutputSlots(source)[0])
+
+    expect(useStore.getState().tasks[0].outputImages).toEqual(['b'])
+    expect((await getAllImageIds()).sort()).toEqual(['a', 'original-a'])
+  })
+
+  it('按槽位删除重复图片并保留剩余同图的元数据', async () => {
+    const source = task({
+      params: { ...DEFAULT_PARAMS, n: 4 },
+      outputImages: ['a', 'a', 'b'],
+      outputErrors: [{ requestIndex: 1, error: '没有返回图片' }],
+      transparentOriginalImages: ['original-first', 'original-second', ''],
+      actualParamsByImage: { a: { quality: 'high' } },
+      revisedPromptByImage: { a: 'A' },
+    })
+    await putImage({ id: 'a', dataUrl: 'data:image/png;base64,a', createdAt: 1 })
+    useStore.setState({ tasks: [source] })
+
+    await removeTaskOutput(source.id, getTaskOutputSlots(source)[2])
+
+    const updated = useStore.getState().tasks[0]
+    expect(getTaskOutputSlots(updated).map((slot) => slot.imageId || slot.error)).toEqual(['a', '没有返回图片', 'b'])
+    expect(updated.transparentOriginalImages).toEqual(['original-first', ''])
+    expect(updated.actualParamsByImage).toEqual(source.actualParamsByImage)
+    expect(updated.revisedPromptByImage).toEqual(source.revisedPromptByImage)
+    expect(await getImage('a')).toBeDefined()
+    expect(await getAllTasks()).toEqual([updated])
+  })
+
+  it('删除成功图片后清除失败记录会删除仅剩失败结果的任务', async () => {
+    const source = task({
+      params: { ...DEFAULT_PARAMS, n: 3 },
+      outputImages: ['a'],
+      outputErrors: [{ requestIndex: 1, error: '失败' }, { requestIndex: 2, error: '失败' }],
+    })
+    await putDbTask(source)
+    useStore.setState({ tasks: [source] })
+    await removeTaskOutput(source.id, getTaskOutputSlots(source)[0])
+    expect(getTaskOutputSlots(useStore.getState().tasks[0])).toHaveLength(2)
+
+    await clearFailedTasks()
+
+    expect(useStore.getState().tasks).toEqual([])
+    expect(await getAllTasks()).toEqual([])
+  })
+
+  it('连续删除图片和失败结果后保持翻页顺序，不按请求数量补空页', async () => {
+    const source = task({
+      params: { ...DEFAULT_PARAMS, n: 4 },
+      outputImages: ['a', 'b'],
+      outputErrors: [{ requestIndex: 1, error: '生成失败' }, { requestIndex: 3, error: '没有返回图片' }],
+    })
+    useStore.setState({ tasks: [source] })
+    await removeTaskOutput(source.id, getTaskOutputSlots(source)[0])
+    let updated = useStore.getState().tasks[0]
+    expect(getTaskOutputSlots(updated).map((slot) => slot.imageId || slot.error)).toEqual(['生成失败', 'b', '没有返回图片'])
+    await removeTaskOutput(source.id, getTaskOutputSlots(updated)[0])
+    updated = useStore.getState().tasks[0]
+    expect(getTaskOutputSlots(updated).map((slot) => slot.imageId || slot.error)).toEqual(['b', '没有返回图片'])
+    await removeTaskOutput(source.id, getTaskOutputSlots(updated)[1])
+    updated = useStore.getState().tasks[0]
+    expect(updated.outputImages).toEqual(['b'])
+    expect(updated.outputErrors).toEqual([])
+    expect(getTaskOutputSlots(updated)).toHaveLength(1)
+    expect(await getAllTasks()).toEqual([updated])
+  })
+
+  it('保留最后一个结果，不修改运行中的任务或已删除的结果', async () => {
+    const source = task({ outputImages: ['a', 'b'] })
+    useStore.setState({ tasks: [source] })
+    await removeTaskOutput(source.id, { imageId: 'missing', requestIndex: 0, error: '' })
+    expect(useStore.getState().tasks[0]).toBe(source)
+    await removeTaskOutput(source.id, getTaskOutputSlots(source)[1])
+    const updated = useStore.getState().tasks[0]
+    await removeTaskOutput(source.id, getTaskOutputSlots(updated)[0])
+    expect(useStore.getState().tasks[0]).toBe(updated)
+    const running = { ...source, status: 'running' as const }
+    useStore.setState({ tasks: [running] })
+    await removeTaskOutput(source.id, getTaskOutputSlots(running)[0])
+    expect(useStore.getState().tasks[0]).toBe(running)
+  })
+
+  it('保存失败时恢复结果并保留图片资源', async () => {
+    const source = task({ outputImages: ['a', 'b'] })
+    await putDbTask(source)
+    await putImage({ id: 'a', dataUrl: 'data:image/png;base64,a', createdAt: 1 })
+    useStore.setState({ tasks: [source] })
+    const saving = vi.spyOn(await import('./lib/db'), 'putTask').mockRejectedValueOnce(new Error('写入失败'))
+    try {
+      expect(await removeTaskOutput(source.id, getTaskOutputSlots(source)[0])).toBe(false)
+      expect(useStore.getState().tasks[0]).toBe(source)
+      expect(await getAllTasks()).toEqual([source])
+      expect(await getImage('a')).toBeDefined()
+      expect(useStore.getState().showToast).toHaveBeenCalledWith('删除失败，请重试', 'error')
+    } finally {
+      saving.mockRestore()
+    }
+  })
+
   it('still deletes the target DB record when sibling payload persistence fails', async () => {
     const rawResponsePayload = JSON.stringify({
       output: [
@@ -4765,6 +5104,62 @@ describe('agent built-in image tool failure', () => {
       size: '2048x2048',
       quality: 'high',
     })
+  })
+
+  it.each(['single', 'batch'])('skips Hybrid %s requests deleted while their task is being saved', async (mode) => {
+    const imageProfile = createDefaultOpenAIProfile({ id: 'image-profile', apiKey: 'image-key', apiMode: 'images' })
+    useStore.setState({
+      settings: normalizeSettings({
+        ...useStore.getState().settings,
+        profiles: [responsesProfile, imageProfile],
+        agentApiConfigMode: 'hybrid',
+        agentTextProfileId: responsesProfile.id,
+        agentImageProfileId: imageProfile.id,
+        agentMaxToolRounds: 3,
+      }),
+    })
+    vi.mocked(callAgentResponsesApi)
+      .mockResolvedValueOnce({
+        text: '', images: [], responseId: 'prepare-delete',
+        outputItems: [{
+          type: 'function_call',
+          name: mode === 'single' ? 'generate_image' : 'generate_image_batch',
+          call_id: 'prepare-call',
+          arguments: JSON.stringify(mode === 'single'
+            ? { id: 'deleted', prompt: 'deleted prompt' }
+            : { images: [{ id: 'deleted', prompt: 'deleted prompt' }, { id: 'live', prompt: 'live prompt' }] }),
+        }],
+      })
+      .mockResolvedValueOnce({ text: '完成', images: [], outputItems: [], responseId: 'prepare-done' })
+    vi.mocked(callImageApi).mockResolvedValue({ images: ['data:image/png;base64,live'], actualParams: {} })
+    const db = await import('./lib/db')
+    const original = db.putTask
+    const pending = deferred<void>()
+    const saving = vi.spyOn(db, 'putTask').mockImplementationOnce(async (task) => {
+      const id = await original(task)
+      await pending.promise
+      return id
+    })
+    try {
+      await submitAgentMessage()
+      await vi.waitFor(() => expect(saving).toHaveBeenCalled())
+      const deleted = useStore.getState().tasks.find((task) => task.prompt === 'deleted prompt')!
+      expect(deleted).toBeDefined()
+      expect(callImageApi).not.toHaveBeenCalled()
+      await removeTask(deleted)
+      pending.resolve()
+      await vi.waitFor(() => expect(useStore.getState().agentConversations[0].rounds[0]?.status).toBe('done'))
+      expect(callImageApi).toHaveBeenCalledTimes(mode === 'single' ? 0 : 1)
+      expect(useStore.getState().tasks.some((task) => task.id === deleted.id)).toBe(false)
+      if (mode === 'batch') {
+        expect(vi.mocked(callImageApi).mock.calls[0][0].prompt).toBe('live prompt')
+        expect(useStore.getState().tasks).toEqual([expect.objectContaining({ prompt: 'live prompt', status: 'done' })])
+      }
+      expect(JSON.stringify(useStore.getState().agentConversations[0].rounds[0].responseOutput)).not.toContain('deleted prompt')
+    } finally {
+      pending.resolve()
+      saving.mockRestore()
+    }
   })
 
   it('does not commit or report a deleted Hybrid single-image result', async () => {
@@ -6339,5 +6734,90 @@ describe('参考图数量限制入口', () => {
     expect(useStore.getState().showToast).toHaveBeenCalledWith(expect.stringContaining('最多支持 5 张'), 'error')
     expect(useStore.getState().inputImages).toEqual(images)
     expect(callImageApi).not.toHaveBeenCalled()
+  })
+})
+
+
+describe('启动图片维护', () => {
+  beforeEach(async () => {
+    await clearTasks()
+    await clearImages()
+    await clearAgentConversations()
+    vi.clearAllMocks()
+    useStore.setState({
+      appMode: 'gallery', tasks: [], inputImages: [], galleryInputDraft: null,
+      agentInputDrafts: {}, agentConversations: [], activeAgentConversationId: null,
+      privacyMode: null, imageSourceUrls: {},
+    })
+  })
+
+  it('清理独立缩略图及悬空逐图信息，保留任务和对话的所有有效引用', async () => {
+    const ids = ['live', 'task-target', 'round-input', 'round-mask', 'round-target', 'message-input', 'message-mask', 'message-target']
+    for (const id of [...ids, 'orphan']) await putImage({ id, dataUrl: id })
+    await putImageThumbnail({ id: 'thumb-only', thumbnailDataUrl: 'thumbnail', thumbnailVersion: 2 })
+    await putDbTask(task({
+      outputImages: ['live'], maskTargetImageId: 'task-target',
+      actualParamsByImage: { live: { quality: 'high' }, deleted: { quality: 'low' } },
+      revisedPromptByImage: { live: 'Live', deleted: 'Deleted' },
+    }))
+    await putAgentConversation(agentConversation({
+      rounds: [{
+        id: 'round', index: 1, userMessageId: 'message', prompt: 'p',
+        inputImageIds: ['round-input'], maskImageId: 'round-mask', maskTargetImageId: 'round-target',
+        outputTaskIds: [], status: 'done', error: null, createdAt: 1, finishedAt: 2,
+      }],
+      messages: [{
+        id: 'message', role: 'user', content: 'p', roundId: 'round', createdAt: 1,
+        inputImageIds: ['message-input'], maskImageId: 'message-mask', maskTargetImageId: 'message-target',
+      }],
+    }))
+    useStore.setState({ imageSourceUrls: { live: 'live-url', orphan: 'old-url', 'thumb-only': 'thumb-url' } })
+    await initStore()
+    expect((await getAllImageIds({ includeThumbnails: true })).sort()).toEqual(ids.sort())
+    expect(await getStoredImageThumbnail('thumb-only')).toBeUndefined()
+    expect(useStore.getState().imageSourceUrls).toEqual({ live: 'live-url' })
+    expect((await getAllTasks())[0]).toMatchObject({
+      actualParamsByImage: { live: { quality: 'high' } }, revisedPromptByImage: { live: 'Live' },
+    })
+    expect(vi.mocked(getImage).mock.calls.some(([id]) => ids.includes(id))).toBe(false)
+  })
+
+  it('单张清理失败不影响输入恢复和其他清理，下次启动重试', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    await putImage({ id: 'failed', dataUrl: 'failed' })
+    await putImage({ id: 'removed', dataUrl: 'removed' })
+    await putImage({ id: 'draft', dataUrl: 'draft-data' })
+    useStore.setState({ inputImages: [{ id: 'draft', dataUrl: '' }] })
+    vi.mocked(deleteDbImage).mockRejectedValueOnce(new Error('disk busy'))
+    await initStore()
+    expect(useStore.getState().inputImages).toEqual([{ id: 'draft', dataUrl: 'draft-data' }])
+    expect((await getAllImageIds()).sort()).toEqual(['draft', 'failed'])
+    await initStore()
+    expect(await getAllImageIds()).toEqual(['draft'])
+    warn.mockRestore()
+  })
+
+  it('清理过程中新增引用的图片仍然保留', async () => {
+    await putImage({ id: 'first', dataUrl: 'first' })
+    await putImage({ id: 'reused', dataUrl: 'reused' })
+    const remove = vi.mocked(deleteDbImage).getMockImplementation()!
+    vi.mocked(deleteDbImage).mockImplementationOnce(async (id) => {
+      useStore.setState({ inputImages: [{ id: 'reused', dataUrl: 'reused' }] })
+      await remove(id)
+    })
+    await initStore()
+    expect(await getAllImageIds()).toEqual(['reused'])
+  })
+
+  it('输入框和草稿共享一次图片读取', async () => {
+    await putImage({ id: 'shared-draft', dataUrl: 'shared-data' })
+    const inputImages = [{ id: 'shared-draft', dataUrl: '' }]
+    useStore.setState({
+      inputImages,
+      galleryInputDraft: { prompt: '', inputImages, maskDraft: null, maskEditorImageId: null, updatedAt: 1 },
+    })
+    await initStore()
+    expect(vi.mocked(getImage).mock.calls.filter(([id]) => id === 'shared-draft')).toHaveLength(1)
+    expect(useStore.getState().galleryInputDraft?.inputImages[0].dataUrl).toBe('shared-data')
   })
 })

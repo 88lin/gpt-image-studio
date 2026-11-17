@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { DEFAULT_PARAMS, type TaskRecord } from '../types'
+import { DEFAULT_PARAMS, type AgentConversation, type TaskRecord } from '../types'
 
 const invoke = vi.hoisted(() => vi.fn())
 
 vi.mock('@tauri-apps/api/core', () => ({ isTauri: () => true, invoke }))
 vi.mock('@tauri-apps/plugin-opener', () => ({ openUrl: vi.fn() }))
 
-import { getAllTasks, getImage, getStoredImageThumbnail, hashDataUrl, putImage, putImageThumbnail, storeImageWithSize } from './db'
+import { getAllTasks, getImage, getImageMeta, getStoredImageThumbnail, hashDataUrl, putImage, putImageThumbnail, storeImageWithSize, updateImageDimensions } from './db'
 import { bytesToBase64 } from './dataUrl'
-import { commitTaskDeletion, dataUrlToPayload, putTask } from './dbTauri'
+import { clearTasks, deleteTask, commitTaskDeletion, dataUrlToPayload, putTask, putAgentConversation, replaceAgentConversations, clearAgentConversations, getAllAgentConversations } from './dbTauri'
 
 /** 按 Rust 侧的格式模拟 image_put / image_get：请求头带元数据，响应为长度前缀 + JSON + 文件内容 */
 function fakeFileBackend() {
@@ -182,6 +182,102 @@ describe('dbTauri', () => {
     }, undefined)
   })
 
+  it.each(['delete', 'batch', 'clear'])('orders %s after pending saves and permits later recreation', async (operation) => {
+    let release!: () => void
+    const pending = new Promise<void>((resolve) => { release = resolve })
+    const stored = new Map<string, string>()
+    invoke.mockImplementation(async (cmd: string, args?: { id?: string; data?: string; deletedIds?: string[] }) => {
+      if (cmd === 'task_put') {
+        if (args?.data?.includes('slow')) await pending
+        stored.set(args!.id!, args!.data!)
+      } else if (cmd === 'task_delete') stored.delete(args!.id!)
+      else if (cmd === 'tasks_commit_deletion') {
+        for (const id of args!.deletedIds!) stored.delete(id)
+      } else if (cmd === 'tasks_clear') stored.clear()
+      return null
+    })
+    const save = putTask({ id: 'target', prompt: 'slow' } as TaskRecord)
+    await vi.waitFor(() => expect(invoke).toHaveBeenCalledTimes(1))
+    const remove = operation === 'delete' ? deleteTask('target')
+      : operation === 'batch' ? commitTaskDeletion(['target'], [], []) : clearTasks()
+    if (operation !== 'clear') {
+      await putTask({ id: 'other', prompt: 'fast' } as TaskRecord)
+      expect(stored.has('other')).toBe(true)
+    }
+    expect(invoke.mock.calls.some(([cmd]) => ['task_delete', 'tasks_commit_deletion', 'tasks_clear'].includes(cmd))).toBe(false)
+    const recreate = putTask({ id: 'target', prompt: 'new' } as TaskRecord)
+    release()
+    await Promise.all([save, remove, recreate])
+    expect(JSON.parse(stored.get('target')!).prompt).toBe('new')
+    const commands = invoke.mock.calls.filter(([, args]) => args?.id !== 'other').map(([cmd]) => cmd)
+    expect(commands).toEqual(['task_put', operation === 'delete' ? 'task_delete' : operation === 'batch' ? 'tasks_commit_deletion' : 'tasks_clear', 'task_put'])
+  })
+
+  it.each(['put', 'replace', 'clear'])('keeps later conversation %s after a deletion waiting for a task save', async (operation) => {
+    let release!: () => void
+    const pending = new Promise<void>((resolve) => { release = resolve })
+    const stored = new Map<string, string>()
+    invoke.mockImplementation(async (cmd: string, args?: { id?: string; data?: string; conversations?: Array<{ id: string; data: string }> }) => {
+      if (cmd === 'task_put' && args?.id === 'slow') await pending
+      if (cmd === 'conversations_replace' || cmd === 'conversations_clear') stored.clear()
+      if (cmd === 'tasks_commit_deletion' || cmd === 'conversations_replace') {
+        for (const doc of args!.conversations!) stored.set(doc.id, doc.data)
+      }
+      if (cmd === 'conversation_put') stored.set(args!.id!, args!.data!)
+      if (cmd === 'conversations_get_all') return [...stored.values()].map((data) => JSON.parse(data))
+      return null
+    })
+    const save = putTask({ id: 'slow' } as TaskRecord)
+    const deletion = commitTaskDeletion(['slow'], [], [{ id: 'c', title: 'old' } as AgentConversation])
+    const latest = { id: 'c', title: 'new' } as AgentConversation
+    const update = operation === 'put' ? putAgentConversation(latest)
+      : operation === 'replace' ? replaceAgentConversations([latest]) : clearAgentConversations()
+    const read = getAllAgentConversations()
+    await putTask({ id: 'independent' } as TaskRecord)
+    expect(invoke.mock.calls.map(([cmd]) => cmd)).toEqual(['task_put', 'task_put'])
+    release()
+    await Promise.all([save, deletion, update])
+    await expect(read).resolves.toEqual(operation === 'clear' ? [] : [latest])
+    expect(invoke.mock.calls.slice(2).map(([cmd]) => cmd)).toEqual([
+      'tasks_commit_deletion',
+      operation === 'put' ? 'conversation_put' : operation === 'replace' ? 'conversations_replace' : 'conversations_clear',
+      'conversations_get_all',
+    ])
+  })
+
+  it('waits for earlier conversation writes before deletion and releases both queues after failure', async () => {
+    let release!: () => void
+    const pending = new Promise<void>((resolve) => { release = resolve })
+    invoke.mockImplementation(async (cmd: string) => {
+      if (cmd === 'conversations_replace') await pending
+      if (cmd === 'tasks_commit_deletion') throw new Error('delete failed')
+      return null
+    })
+    const save = replaceAgentConversations([{ id: 'c' } as AgentConversation])
+    const deletion = commitTaskDeletion(['target'], [], [{ id: 'c' } as AgentConversation])
+    const failed = expect(deletion).rejects.toThrow('delete failed')
+    const later = putAgentConversation({ id: 'c', title: 'new' } as AgentConversation)
+    const taskSave = putTask({ id: 'target' } as TaskRecord)
+    await putTask({ id: 'independent' } as TaskRecord)
+    expect(invoke.mock.calls.map(([cmd]) => cmd)).toEqual(['conversations_replace', 'task_put'])
+    release()
+    await Promise.all([save, failed, later, taskSave])
+    expect(invoke.mock.calls.slice(2).map(([cmd]) => cmd)).toEqual(['tasks_commit_deletion', 'conversation_put', 'task_put'])
+  })
+
+  it('continues queued deletion after a failed save', async () => {
+    invoke.mockImplementation(async (cmd: string) => {
+      if (cmd === 'task_put') throw new Error('disk failure')
+      return null
+    })
+    const save = putTask({ id: 'target' } as TaskRecord)
+    const failed = expect(save).rejects.toThrow('disk failure')
+    const remove = deleteTask('target')
+    await failed
+    await expect(remove).resolves.toBeUndefined()
+    expect(invoke.mock.calls.map(([cmd]) => cmd)).toEqual(['task_put', 'task_delete'])
+  })
+
   it('storeImageWithSize 经门面写入客户端存储', async () => {
     const files = fakeFileBackend()
     const dataUrl = `data:image/png;base64,${bytesToBase64(randomBytes(64))}`
@@ -189,5 +285,14 @@ describe('dbTauri', () => {
     expect(result.id).toBe(await hashDataUrl(dataUrl))
     expect(files.has(`image_put:${result.id}`)).toBe(true)
     expect((await getImage(result.id))?.dataUrl).toBe(dataUrl)
+  })
+
+  it('读取和补全宽高只调用元数据接口', async () => {
+    invoke.mockResolvedValueOnce({ width: 2496, height: 1664, source: 'generated', createdAt: 1 })
+    expect(await getImageMeta('image')).toEqual({ id: 'image', width: 2496, height: 1664, source: 'generated', createdAt: 1 })
+    expect(invoke).toHaveBeenLastCalledWith('image_meta', { id: 'image' }, undefined)
+    invoke.mockResolvedValueOnce(false)
+    expect(await updateImageDimensions('deleted', 2496, 1664)).toBe(false)
+    expect(invoke).toHaveBeenLastCalledWith('image_dimensions_update', { id: 'deleted', width: 2496, height: 1664 }, undefined)
   })
 })

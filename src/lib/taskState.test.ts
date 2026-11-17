@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { DEFAULT_PARAMS } from '../types'
 import type { TaskParams, TaskRecord } from '../types'
 import {
-  addImageSizeParam,
+  normalizeActualParams,
+  normalizeTaskImageMetadata,
   createTaskDonePatch,
   createTaskErrorPatch,
   deriveAgentImageActualParams,
@@ -86,32 +87,49 @@ describe('task lifecycle patches', () => {
 })
 
 describe('task actual params', () => {
-  it('fills missing sizes without overriding API-returned sizes', () => {
-    expect(addImageSizeParam({ output_format: 'png' }, { width: 1254, height: 1254 })).toEqual({
-      output_format: 'png',
-      size: '1254x1254',
+  it('清理尺寸类响应字段，保留请求参数和其他响应属性', () => {
+    const source = task({
+      outputImages: ['a', 'b'],
+      actualParams: { size: '2K', aspect_ratio: '1:1', resolution: '2K', quality: 'high' },
+      actualParamsByImage: { a: { size: '1024x1024' }, b: { resolution: '1K', output_format: 'png' } },
     })
-    expect(addImageSizeParam({ size: '1024x1024' }, { width: 1254, height: 1254 })).toEqual({ size: '1024x1024' })
-    expect(addImageSizeParam(undefined, { width: 0, height: 1254 })).toBeUndefined()
+    const result = normalizeTaskImageMetadata(source)
+    expect(result.actualParams).toEqual({ quality: 'high' })
+    expect(result.actualParamsByImage).toEqual({ b: { output_format: 'png' } })
+    expect(result.params).toBe(source.params)
+    expect(source.actualParams?.size).toBe('2K')
+    expect(normalizeTaskImageMetadata(result)).toBe(result)
+    expect(normalizeActualParams({ size: '2K' })).toBeUndefined()
+  })
+
+  it('清理不属于剩余输出的逐图参数和提示词，保留同图的其他槽位', () => {
+    const source = task({
+      outputImages: ['a', 'a'],
+      actualParamsByImage: { a: { quality: 'high' }, deleted: { quality: 'low' } },
+      revisedPromptByImage: { a: 'A', deleted: 'Deleted' },
+    })
+    const result = normalizeTaskImageMetadata(source)
+    expect(result.actualParamsByImage).toEqual({ a: { quality: 'high' } })
+    expect(result.revisedPromptByImage).toEqual({ a: 'A' })
+    expect(normalizeTaskImageMetadata(result)).toBe(result)
+    expect(source.revisedPromptByImage?.deleted).toBe('Deleted')
   })
 
   it('maps only non-empty actual params to matching output ids', () => {
-    const paramsList: Array<Partial<TaskParams> | undefined> = [undefined, {}, { size: '1024x1024' }, { output_format: 'webp' }]
+    const paramsList: Array<Partial<TaskParams> | undefined> = [undefined, {}, { size: '1024x1024', quality: 'high' }, { output_format: 'webp' }]
 
-    expect(firstActualParams(paramsList)).toEqual({ size: '1024x1024' })
+    expect(firstActualParams(paramsList)).toEqual({ quality: 'high' })
     expect(mapActualParamsByImage(['image-a', 'image-b', 'image-c'], paramsList)).toEqual({
-      'image-c': { size: '1024x1024' },
+      'image-c': { quality: 'high' },
     })
   })
 
   it('derives Agent single-image params with a fixed output count', () => {
-    expect(deriveAgentImageActualParams({ output_format: 'webp' }, { width: 1536, height: 1024 })).toEqual({
+    expect(deriveAgentImageActualParams({ output_format: 'webp' })).toEqual({
       output_format: 'webp',
-      size: '1536x1024',
       n: 1,
     })
-    expect(deriveAgentImageActualParams({ size: '1024x1024' }, { width: 1536, height: 1024 })).toEqual({
-      size: '1024x1024',
+    expect(deriveAgentImageActualParams({ size: '1024x1024' })).toEqual({
       n: 1,
     })
   })
@@ -119,11 +137,10 @@ describe('task actual params', () => {
   it('keeps fal and async custom params per image while deriving gallery totals for other providers', () => {
     const paramsList: Array<Partial<TaskParams>> = [{ output_format: 'png', size: '1254x1254' }]
 
-    expect(deriveGalleryActualParams('fal', false, { n: 8 }, paramsList, 1)).toEqual(paramsList[0])
-    expect(deriveGalleryActualParams('custom-provider', true, { n: 8 }, paramsList, 1)).toEqual(paramsList[0])
+    expect(deriveGalleryActualParams('fal', false, { n: 8 }, paramsList, 1)).toEqual({ output_format: 'png' })
+    expect(deriveGalleryActualParams('custom-provider', true, { n: 8 }, paramsList, 1)).toEqual({ output_format: 'png' })
     expect(deriveGalleryActualParams('openai', false, { output_format: 'png' }, paramsList, 2)).toEqual({
       output_format: 'png',
-      size: '1254x1254',
       n: 2,
     })
   })

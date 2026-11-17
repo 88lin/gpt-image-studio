@@ -75,48 +75,79 @@ function putFile(cmd: string, id: string, dataUrl: string, meta: Record<string, 
 
 // ===== Tasks =====
 
-export function getAllTasks(): Promise<TaskRecord[]> {
+// 同一任务按提交顺序写入；会话整体替换与涉及会话的删除事务共用写入顺序。
+const taskWrites = new Map<string, Promise<void>>()
+let tasksCleared = Promise.resolve()
+let conversationWrites = Promise.resolve()
+
+function queueDocumentMutation(ids: string[], run: () => Promise<unknown>, writesConversations = false): Promise<void> {
+  const result = Promise.all([
+    ids.length ? tasksCleared : undefined,
+    writesConversations ? conversationWrites : undefined,
+    ...ids.map((id) => taskWrites.get(id)),
+  ]).then(run).then(() => undefined)
+  const settled = result.catch(() => undefined)
+  if (writesConversations) conversationWrites = settled
+  for (const id of ids) taskWrites.set(id, settled)
+  void settled.then(() => {
+    for (const id of ids) {
+      if (taskWrites.get(id) === settled) taskWrites.delete(id)
+    }
+  })
+  return result
+}
+
+export async function getAllTasks(): Promise<TaskRecord[]> {
+  await Promise.all([tasksCleared, ...taskWrites.values()])
   return call('tasks_get_all')
 }
 
 export async function putTask(task: TaskRecord): Promise<IDBValidKey> {
-  await call('task_put', { id: task.id, data: JSON.stringify(task) })
+  const args = { id: task.id, data: JSON.stringify(task) }
+  await queueDocumentMutation([task.id], () => call('task_put', args))
   return task.id
 }
 
 export async function deleteTask(id: string): Promise<undefined> {
-  await call('task_delete', { id })
+  await queueDocumentMutation([id], () => call('task_delete', { id }))
   return undefined
 }
 
 export async function commitTaskDeletion(deletedTaskIds: string[], updatedTasks: TaskRecord[], updatedConversations: AgentConversation[]): Promise<undefined> {
-  await call('tasks_commit_deletion', { deletedIds: deletedTaskIds, tasks: toDocs(updatedTasks), conversations: toDocs(updatedConversations) })
+  const args = { deletedIds: [...deletedTaskIds], tasks: toDocs(updatedTasks), conversations: toDocs(updatedConversations) }
+  const ids = [...new Set([...deletedTaskIds, ...updatedTasks.map((task) => task.id)])]
+  await queueDocumentMutation(ids, () => call('tasks_commit_deletion', args), updatedConversations.length > 0)
   return undefined
 }
 
 export async function clearTasks(): Promise<undefined> {
-  await call('tasks_clear')
+  const result = Promise.all([tasksCleared, ...taskWrites.values()]).then(() => call('tasks_clear'))
+  tasksCleared = result.then(() => undefined, () => undefined)
+  await result
   return undefined
 }
 
 // ===== Agent conversations =====
 
-export function getAllAgentConversations(): Promise<AgentConversation[]> {
+export async function getAllAgentConversations(): Promise<AgentConversation[]> {
+  await conversationWrites
   return call('conversations_get_all')
 }
 
 export async function putAgentConversation(conversation: AgentConversation): Promise<IDBValidKey> {
-  await call('conversation_put', { id: conversation.id, data: JSON.stringify(conversation) })
+  const args = { id: conversation.id, data: JSON.stringify(conversation) }
+  await queueDocumentMutation([], () => call('conversation_put', args), true)
   return conversation.id
 }
 
 export async function clearAgentConversations(): Promise<undefined> {
-  await call('conversations_clear')
+  await queueDocumentMutation([], () => call('conversations_clear'), true)
   return undefined
 }
 
 export async function replaceAgentConversations(conversations: AgentConversation[]): Promise<undefined> {
-  await call('conversations_replace', { conversations: toDocs(conversations) })
+  const args = { conversations: toDocs(conversations) }
+  await queueDocumentMutation([], () => call('conversations_replace', args), true)
   return undefined
 }
 
@@ -159,17 +190,21 @@ export async function getImage(id: string): Promise<StoredImage | undefined> {
   }
 }
 
-/** 只取元数据（宽高等），不把图片编码成 dataUrl */
+/** 只查询数据库中的元数据，不读取图片文件。 */
 export async function getImageMeta(id: string): Promise<Omit<StoredImage, 'dataUrl'> | undefined> {
-  const file = await getImageFile(id)
-  if (!file) return undefined
+  const meta = await call<FileMeta | null>('image_meta', { id })
+  if (!meta) return undefined
   return {
     id,
-    createdAt: file.meta.createdAt ?? undefined,
-    source: file.meta.source ?? undefined,
-    width: file.meta.width ?? undefined,
-    height: file.meta.height ?? undefined,
+    createdAt: meta.createdAt ?? undefined,
+    source: meta.source ?? undefined,
+    width: meta.width ?? undefined,
+    height: meta.height ?? undefined,
   }
+}
+
+export function updateImageDimensions(id: string, width: number, height: number): Promise<boolean> {
+  return call('image_dimensions_update', { id, width, height })
 }
 
 export async function getStoredImageThumbnail(id: string): Promise<StoredImageThumbnail | undefined> {
@@ -203,8 +238,8 @@ export async function getAllImages(): Promise<StoredImage[]> {
   return images
 }
 
-export function getAllImageIds(): Promise<string[]> {
-  return call('image_ids')
+export function getAllImageIds(opts?: { includeThumbnails?: boolean }): Promise<string[]> {
+  return call('image_ids', opts?.includeThumbnails ? { includeThumbnails: true } : undefined)
 }
 
 export async function putImage(image: StoredImage): Promise<IDBValidKey> {

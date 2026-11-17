@@ -2,7 +2,18 @@ import type { ApiProvider, TaskParams, TaskRecord } from '../types'
 
 type TaskLifecyclePatch = Pick<TaskRecord, 'status' | 'error' | 'finishedAt' | 'elapsed'>
 type ActualParams = Partial<TaskParams>
-type ImageSize = { width?: number; height?: number }
+
+export function getTaskOutputSlots(task: TaskRecord) {
+  const errors = new Map(task.outputErrors?.map((item) => [item.requestIndex, item.error]))
+  const count = Math.max(task.outputImages.length + errors.size, ...Array.from(errors.keys(), (index) => index + 1))
+  let outputImageIndex = 0
+  return Array.from({ length: count }, (_, requestIndex) => {
+    const error = errors.get(requestIndex)
+    if (error) return { requestIndex, outputImageIndex: -1, imageId: '', error }
+    const index = outputImageIndex++
+    return { requestIndex, outputImageIndex: index, imageId: task.outputImages[index] ?? '', error: '' }
+  }).filter((slot) => slot.imageId || slot.error)
+}
 
 export function createTaskDonePatch(task: Pick<TaskRecord, 'createdAt' | 'startedAt'>, now: number): TaskLifecyclePatch {
   return {
@@ -46,30 +57,50 @@ export function hasActualParams(params: ActualParams | undefined): params is Act
 }
 
 export function firstActualParams(paramsList: Array<ActualParams | undefined> | undefined): ActualParams | undefined {
-  return paramsList?.find(hasActualParams)
+  return paramsList?.map(normalizeActualParams).find(hasActualParams)
 }
 
 export function mapActualParamsByImage(outputIds: string[], paramsList: Array<ActualParams | undefined> | undefined) {
   const mapped = paramsList?.reduce<Record<string, ActualParams>>((acc, params, index) => {
     const imgId = outputIds[index]
-    if (imgId && hasActualParams(params)) acc[imgId] = params
+    const actual = normalizeActualParams(params)
+    if (imgId && actual) acc[imgId] = actual
     return acc
   }, {})
   return mapped && Object.keys(mapped).length > 0 ? mapped : undefined
 }
 
-export function hasActualSizeParam(params: ActualParams | undefined) {
-  return Boolean(params?.size)
+/** 尺寸类属性由图片宽高推算，响应参数只保留其他属性。 */
+export function normalizeActualParams(params: ActualParams | undefined): ActualParams | undefined {
+  if (!params) return undefined
+  if (!('size' in params) && !('aspect_ratio' in params) && !('resolution' in params)) return hasActualParams(params) ? params : undefined
+  const actual = { ...params }
+  delete actual.size
+  delete actual.aspect_ratio
+  delete actual.resolution
+  return hasActualParams(actual) ? actual : undefined
 }
 
-export function addImageSizeParam(params: ActualParams | undefined, size: ImageSize | undefined): ActualParams | undefined {
-  if (hasActualSizeParam(params) || !size?.width || !size.height) return params
-  return { ...(params ?? {}), size: `${size.width}x${size.height}` }
+export function normalizeTaskImageMetadata(task: TaskRecord): TaskRecord {
+  const actualParams = normalizeActualParams(task.actualParams)
+  const outputIds = new Set(task.outputImages)
+  const entries = Object.entries(task.actualParamsByImage ?? {})
+  const changed = entries.some(([id, params]) => !outputIds.has(id) || normalizeActualParams(params) !== params)
+  const kept = entries.filter(([id]) => outputIds.has(id))
+  const actualParamsByImage = changed
+    ? mapActualParamsByImage(kept.map(([id]) => id), kept.map(([, params]) => params))
+    : task.actualParamsByImage
+  const prompts = Object.entries(task.revisedPromptByImage ?? {})
+  const revisedPromptByImage = prompts.some(([id]) => !outputIds.has(id))
+    ? mapRevisedPromptsByImage(task.outputImages, task.outputImages.map((id) => task.revisedPromptByImage?.[id]))
+    : task.revisedPromptByImage
+  if (actualParams === task.actualParams && actualParamsByImage === task.actualParamsByImage && revisedPromptByImage === task.revisedPromptByImage) return task
+  return { ...task, actualParams, actualParamsByImage, revisedPromptByImage }
 }
 
-export function deriveAgentImageActualParams(params: ActualParams | undefined, size: ImageSize | undefined): ActualParams {
+export function deriveAgentImageActualParams(params: ActualParams | undefined): ActualParams {
   return {
-    ...(addImageSizeParam(hasActualParams(params) ? params : undefined, size) ?? {}),
+    ...normalizeActualParams(params),
     n: 1,
   }
 }
@@ -82,10 +113,8 @@ export function deriveGalleryActualParams(
   outputCount: number,
 ): ActualParams | undefined {
   if (provider === 'fal' || isAsyncCustomTask) return firstActualParams(paramsList)
-  const firstParams = firstActualParams(paramsList)
   return {
-    ...resultParams,
-    size: resultParams?.size ?? firstParams?.size,
+    ...normalizeActualParams(resultParams),
     n: outputCount,
   }
 }
