@@ -1,9 +1,9 @@
 import { createRef, useEffect } from 'react'
 import { create } from 'zustand'
 import type { ReleaseCache, ReleaseInfo } from '../lib/releaseUpdates'
-import { getReleasesApiUrl, isReleaseCacheFresh, RELEASE_CACHE_TTL_MS, mergeReleasePage, parseReleaseCache, parseReleasePage } from '../lib/releaseUpdates'
+import { CLIENT_UPDATE_MANIFEST_URL, getReleasesApiUrl, isReleaseCacheFresh, RELEASE_CACHE_TTL_MS, mergeReleasePage, parseReleaseCache, parseReleasePage, parseUpdateManifest } from '../lib/releaseUpdates'
 import { readLocal, writeLocal } from '../lib/localRecord'
-import { apiFetch } from '../lib/platform'
+import { apiFetch, isTauri } from '../lib/platform'
 
 const CACHE_KEY = 'release-cache-v1'
 const IGNORED_KEY = 'ignored-release-version'
@@ -33,7 +33,11 @@ export const updateModalScrollRef = createRef<HTMLDivElement>()
 async function fetchReleasePage(page: number) {
   // 客户端由 Rust 侧发出，不依赖 CSP 的 connect-src 和 GitHub 的 CORS；网页版即原生 fetch
   const res = await apiFetch(getReleasesApiUrl(page), { headers: { Accept: 'application/vnd.github+json' } })
-  if (res.status === 403 || res.status === 429) throw new Error('GitHub 请求过于频繁，请稍后再试')
+  const data: unknown = res.status === 403 ? await res.json().catch(() => null) : null
+  const message = data && typeof data === 'object' && 'message' in data && typeof data.message === 'string' ? data.message : ''
+  if (res.status === 429 || (res.status === 403 && (res.headers.get('x-ratelimit-remaining') === '0' || res.headers.has('retry-after') || /rate limit/i.test(message)))) {
+    throw new Error('GitHub 请求过于频繁，请稍后再试')
+  }
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return parseReleasePage(await res.json())
 }
@@ -44,7 +48,7 @@ function applyCache(cache: ReleaseCache) {
 
 let checking: Promise<ReleaseInfo | undefined> | null = null
 
-/** 获取最新的 Release 列表并返回最新版本；缓存在 ttl 内直接复用（默认一小时）。同时发起的检查共用一次请求 */
+/** 获取最新版本；缓存在 ttl 内直接复用（默认一小时）。同时发起的检查共用一次请求 */
 export function checkForUpdates(ttl = RELEASE_CACHE_TTL_MS) {
   checking ??= (async () => {
     const cache = parseReleaseCache(readLocal(CACHE_KEY))
@@ -53,7 +57,13 @@ export function checkForUpdates(ttl = RELEASE_CACHE_TTL_MS) {
       return cache.releases[0]
     }
     try {
-      const next = mergeReleasePage(null, 1, await fetchReleasePage(1), Date.now())
+      // 客户端沿用安装包的更新源，避免消耗 Releases API 的匿名请求额度；历史版本按需加载
+      const res = isTauri ? await apiFetch(CLIENT_UPDATE_MANIFEST_URL, { headers: { Accept: 'application/json' } }) : null
+      if (res && !res.ok) throw new Error(`获取客户端更新信息失败（HTTP ${res.status}）`)
+      const latest = res ? parseUpdateManifest(await res.json()) : null
+      const next: ReleaseCache = latest
+        ? { fetchedAt: Date.now(), pages: 0, hasMore: true, releases: [latest] }
+        : mergeReleasePage(null, 1, await fetchReleasePage(1), Date.now())
       writeLocal(CACHE_KEY, JSON.stringify(next))
       applyCache(next)
       return next.releases[0]

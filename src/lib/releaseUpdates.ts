@@ -1,5 +1,6 @@
 export const RELEASE_REPO = '88lin/gpt-image-studio'
 export const RELEASES_PAGE_URL = `https://github.com/${RELEASE_REPO}/releases`
+export const CLIENT_UPDATE_MANIFEST_URL = `${RELEASES_PAGE_URL}/latest/download/latest.json`
 export const LICENSE_URL = `https://github.com/${RELEASE_REPO}/blob/main/LICENSE`
 export const RELEASES_PER_PAGE = 10
 // GitHub API 未登录每小时限 60 次，一小时内复用本地缓存
@@ -18,7 +19,7 @@ export interface ReleaseInfo {
 
 export interface ReleaseCache {
   fetchedAt: number
-  /** 已加载的页数，下一页为 pages + 1 */
+  /** 已加载的 API 页数；0 表示只有最新客户端版本，下一页为 pages + 1 */
   pages: number
   hasMore: boolean
   releases: ReleaseInfo[]
@@ -76,6 +77,22 @@ export function parseReleasePage(data: unknown) {
   }
 }
 
+/** 从客户端更新清单读取版本和发布说明，安装包及签名由 updater 插件验证 */
+export function parseUpdateManifest(data: unknown): ReleaseInfo {
+  if (!data || typeof data !== 'object') throw new Error('客户端更新数据格式不正确')
+  const record = data as Record<string, unknown>
+  const version = typeof record.version === 'string' ? record.version.trim().replace(/^v/i, '') : ''
+  if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(version)) throw new Error('客户端更新数据格式不正确')
+  const tag = `v${version}`
+  return {
+    tag,
+    version,
+    body: typeof record.notes === 'string' ? record.notes : '',
+    publishedAt: typeof record.pub_date === 'string' ? record.pub_date : '',
+    url: `${RELEASES_PAGE_URL}/tag/${encodeURIComponent(tag)}`,
+  }
+}
+
 /** 把新加载的一页合并进缓存；page 为 1 时视为重新获取，丢弃旧列表 */
 export function mergeReleasePage(cache: ReleaseCache | null, page: number, result: ReturnType<typeof parseReleasePage>, now: number): ReleaseCache {
   const base = page === 1 || !cache ? [] : cache.releases
@@ -108,7 +125,7 @@ export function parseReleaseCache(raw: string | null): ReleaseCache | null {
 
 export function isReleaseCacheFresh(cache: ReleaseCache | null, now: number, ttl = RELEASE_CACHE_TTL_MS): cache is ReleaseCache {
   // 时间戳在未来（系统时间被调回）时同样视为过期
-  return Boolean(cache && cache.pages > 0 && now >= cache.fetchedAt && now - cache.fetchedAt < ttl)
+  return Boolean(cache && (cache.pages > 0 || (cache.pages === 0 && cache.releases.length > 0)) && now >= cache.fetchedAt && now - cache.fetchedAt < ttl)
 }
 
 /** 最新版本高于当前版本，且高于已忽略的版本时才提示 */

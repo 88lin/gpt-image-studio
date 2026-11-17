@@ -6,6 +6,7 @@ import {
   mergeReleasePage,
   parseReleaseCache,
   parseReleasePage,
+  parseUpdateManifest,
   RELEASE_CACHE_TTL_MS,
   RELEASES_PER_PAGE,
   shouldShowUpdate,
@@ -67,6 +68,29 @@ describe('parseReleasePage', () => {
   })
 })
 
+describe('parseUpdateManifest', () => {
+  it('读取客户端更新清单的版本、说明和发布日期', () => {
+    expect(parseUpdateManifest({ version: '0.9.6', notes: '更新说明。', pub_date: '2026-11-17T03:36:30Z' })).toEqual({
+      tag: 'v0.9.6',
+      version: '0.9.6',
+      body: '更新说明。',
+      publishedAt: '2026-11-17T03:36:30Z',
+      url: 'https://github.com/88lin/gpt-image-studio/releases/tag/v0.9.6',
+    })
+  })
+
+  it('兼容版本号前缀和缺少可选说明，无效字段使用空值', () => {
+    expect(parseUpdateManifest({ version: ' v0.9.6 ', notes: 42, pub_date: null })).toMatchObject({ tag: 'v0.9.6', version: '0.9.6', body: '', publishedAt: '' })
+    expect(parseUpdateManifest({ version: '0.9.6-beta.1+build.2' }).url).toBe('https://github.com/88lin/gpt-image-studio/releases/tag/v0.9.6-beta.1%2Bbuild.2')
+  })
+
+  it('拒绝缺少版本号或版本号无效的更新清单', () => {
+    for (const data of [null, [], '0.9.6', {}, { version: 0.9 }, { version: '' }, { version: 'latest' }, { version: '0.9' }]) {
+      expect(() => parseUpdateManifest(data)).toThrow('客户端更新数据格式不正确')
+    }
+  })
+})
+
 describe('mergeReleasePage', () => {
   const fullPage = parseReleasePage(Array.from({ length: RELEASES_PER_PAGE }, (_, i) => rawRelease(`v0.7.${30 - i}`)))
 
@@ -113,6 +137,14 @@ describe('Release 缓存', () => {
     const cache = { fetchedAt: 10_000, pages: 1, hasMore: false, releases: [] }
     expect(isReleaseCacheFresh(cache, 10_000 + MANUAL_CHECK_MIN_INTERVAL_MS - 1, MANUAL_CHECK_MIN_INTERVAL_MS)).toBe(true)
     expect(isReleaseCacheFresh(cache, 10_000 + MANUAL_CHECK_MIN_INTERVAL_MS, MANUAL_CHECK_MIN_INTERVAL_MS)).toBe(false)
+  })
+
+  it('只包含最新版本的清单缓存也可复用，空清单仍视为无效', () => {
+    const cache = { fetchedAt: 10_000, pages: 0, hasMore: true, releases: [release('0.9.6')] }
+    expect(isReleaseCacheFresh(cache, 10_000)).toBe(true)
+    expect(parseReleaseCache(JSON.stringify(cache))).toEqual(cache)
+    expect(isReleaseCacheFresh({ ...cache, releases: [] }, 10_000)).toBe(false)
+    expect(isReleaseCacheFresh(cache, 10_000 + RELEASE_CACHE_TTL_MS)).toBe(false)
   })
 })
 
