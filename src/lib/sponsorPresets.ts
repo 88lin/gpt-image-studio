@@ -13,10 +13,15 @@ export function mergeSponsorPresets(deployed: ImportedProviderSettings | null, c
       const existing = current.profiles.find((item) => item.id === profile.id)
       // 已切换服务商的用户配置保持原样，不注册为新的预置配置。
       if (existing && existing.provider !== profile.provider) return []
-      const model = existing && profile.id === 'sheapi' && existing.apiMode === 'images' && existing.model === 'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare'
-        ? profile.model : existing?.model ?? profile.model
+      const updateModels = existing && profile.id === 'sheapi' && existing.apiMode === 'images' && [
+        'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare',
+        'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2.6, gpt-image-2.6-flare',
+      ].includes(existing.model)
+      const model = updateModels ? profile.model : existing?.model ?? profile.model
+      const imageGenerationModel = updateModels && existing?.imageGenerationModel === 'gpt-image-2.5-sunburst'
+        ? profile.imageGenerationModel : existing?.imageGenerationModel ?? profile.imageGenerationModel
       // 保留用户的接口参数；Key 留在用户配置中，不写进部署快照。
-      return [existing ? { ...existing, model, apiKey: '', description: profile.description, isDefault: profile.isDefault } : profile]
+      return [existing ? { ...existing, model, imageGenerationModel, apiKey: '', description: profile.description, isDefault: profile.isDefault } : profile]
     })
   const profiles = [...deployedProfiles, ...extras]
   const defaultId = deployedProfiles.find((profile) => profile.isDefault)?.id

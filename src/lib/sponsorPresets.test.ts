@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createDefaultOpenAIProfile, importCustomProviderSettingsFromJson, mergePresetImportedSettings, normalizeSettings } from './apiProfiles'
+import { createDefaultOpenAIProfile, getActiveApiProfile, importCustomProviderSettingsFromJson, mergePresetImportedSettings, normalizeSettings } from './apiProfiles'
 import { mergeSponsorPresets } from './sponsorPresets'
 
 describe('JSON sponsor presets', () => {
@@ -9,9 +9,11 @@ describe('JSON sponsor presets', () => {
     expect(imported.profiles.map((profile) => profile.id)).toEqual(['default-openai', 'sheapi'])
     expect(imported.profiles.find((profile) => profile.id === 'sheapi')).toMatchObject({
       baseUrl: 'https://www.sheapi.top/v1', apiKey: '',
-      model: 'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2.6, gpt-image-2.6-flare',
+      model: 'gpt-image-2.6, gpt-image-2.6-flare, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2',
+      imageGenerationModel: 'gpt-image-2.6',
       codexCli: false, streamImages: false, apiProxy: false,
     })
+    expect(getActiveApiProfile(normalizeSettings({ profiles: imported.profiles, activeProfileId: 'sheapi' })).model).toBe('gpt-image-2.6')
     const merged = mergePresetImportedSettings(current, imported)
     expect(merged.settings.activeProfileId).toBe('default-openai')
   })
@@ -26,11 +28,16 @@ describe('JSON sponsor presets', () => {
     expect(merged.settings.activeProfileId).toBe('existing')
   })
 
-  it.each(['https://www.sheapi.top/v1', 'https://cf.sheapi.cc/v1'])('updates the shipped SheApi model list while preserving saved settings across reloads for %s', (baseUrl) => {
+  it.each([
+    ['https://www.sheapi.top/v1', 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare'],
+    ['https://cf.sheapi.cc/v1', 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare'],
+    ['https://www.sheapi.top/v1', 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare,gpt-image-2.6,gpt-image-2.6-flare'],
+    ['https://cf.sheapi.cc/v1', 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare,gpt-image-2.6,gpt-image-2.6-flare'],
+  ])('updates the shipped SheApi model list while preserving saved settings across reloads for %s: %s', (baseUrl, model) => {
     const current = normalizeSettings({
       profiles: [createDefaultOpenAIProfile({
         id: 'sheapi', baseUrl, apiKey: 'saved-key',
-        model: 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare', selectedModel: 'gpt-image-2.5-flare',
+        model, selectedModel: 'gpt-image-2.5-flare', imageGenerationModel: 'gpt-image-2.5-sunburst',
         streamImages: true,
       })],
       activeProfileId: 'sheapi', agentImageProfileId: 'sheapi',
@@ -42,11 +49,22 @@ describe('JSON sponsor presets', () => {
       expect(result.settings.profiles.find((profile) => profile.id === 'sheapi')).toEqual({
         ...current.profiles[0],
         description: expect.any(String),
-        model: 'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2.6, gpt-image-2.6-flare',
+        model: 'gpt-image-2.6, gpt-image-2.6-flare, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2',
+        imageGenerationModel: 'gpt-image-2.6',
       })
       expect(result.settings).toMatchObject({ activeProfileId: 'sheapi', agentImageProfileId: 'sheapi' })
       expect(result.presetConfig.profiles.every((profile) => profile.apiKey === '')).toBe(true)
     }
+  })
+
+  it('uses GPT Image 2.6 after upgrading a shipped profile without a selected model', () => {
+    const current = normalizeSettings({
+      profiles: [createDefaultOpenAIProfile({ id: 'sheapi', apiKey: 'saved-key', model: 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare' })],
+      activeProfileId: 'sheapi',
+    })
+    const previous = { customProviders: [], profiles: [{ ...current.profiles[0], apiKey: '' }] }
+    const merged = mergePresetImportedSettings(current, mergeSponsorPresets(null, current), { previousPresetConfig: previous })
+    expect(getActiveApiProfile(merged.settings).model).toBe('gpt-image-2.6')
   })
 
   it.each(['https://private.example.com/v1', 'https://www.sheapi.top/v1'])('preserves saved keys, models, order and Agent references across reloads for %s', (baseUrl) => {
