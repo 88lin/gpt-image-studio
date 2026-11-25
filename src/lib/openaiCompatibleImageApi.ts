@@ -27,6 +27,7 @@ import {
   normalizeBase64Image,
   pickActualParams,
   PROMPT_REWRITE_GUARD_PREFIX,
+  getRequestBackground,
 } from './imageApiShared'
 import { getImageGenerationModel, getImageModelFamily, isVectorOrAnimatedFormat, usesGrokSizeParams } from './imageModels'
 import { getImageModelParams, getSeedreamSize } from './imageModelParams'
@@ -167,9 +168,7 @@ function createResponsesImageTool(
     tool.output_compression = params.output_compression
   }
 
-  if (nativeTransparentBackground) {
-    tool.background = 'transparent'
-  }
+  tool.background = getRequestBackground(params, nativeTransparentBackground)
 
   if (maskDataUrl) {
     tool.input_image_mask = {
@@ -571,9 +570,8 @@ async function callImagesApiSingle(opts: CallApiOptions, profile: ApiProfile): P
         formData.append('moderation', params.moderation)
       }
       formData.append('output_format', params.output_format)
-      if (opts.nativeTransparentBackground) {
-        formData.append('background', 'transparent')
-      }
+      const background = getRequestBackground(opts.params, opts.nativeTransparentBackground)
+      if (background) formData.append('background', background)
 
       const gptImage26Params: Record<string, unknown> = {}
       applyGptImage26Params(gptImage26Params, params, profile)
@@ -648,9 +646,7 @@ async function callImagesApiSingle(opts: CallApiOptions, profile: ApiProfile): P
         output_format: params.output_format,
       }
 
-      if (opts.nativeTransparentBackground) {
-        body.background = 'transparent'
-      }
+      body.background = getRequestBackground(opts.params, opts.nativeTransparentBackground)
 
       if (!profile.codexCli) {
         body.size = params.size
@@ -770,16 +766,19 @@ function createCustomProviderContext(opts: CallApiOptions, profile: ApiProfile, 
   // 2.6 参数与原生接口同样处理：不适用的字段为 undefined，模板中自动省略
   const gptImage26Params: Record<string, unknown> = {}
   applyGptImage26Params(gptImage26Params, opts.params, profile)
+  // sub2api 的编辑表单从单个 svg 字段读取 JSON。
+  if (profile.provider === 'sb2api-async' && opts.inputImageDataUrls.length && gptImage26Params.svg) {
+    gptImage26Params.svg = JSON.stringify(gptImage26Params.svg)
+  }
   const params = {
     ...opts.params,
-    background: undefined,
+    background: getImageModelFamily(profile) ? undefined : getRequestBackground(opts.params, opts.nativeTransparentBackground),
     watermark: undefined,
     complexity: undefined,
     frame_count: undefined,
     frame_duration_ms: undefined,
     ...gptImage26Params,
     ...(profile.codexCli ? { size: undefined, quality: undefined } : {}),
-    ...(opts.nativeTransparentBackground ? { background: 'transparent' } : {}),
   }
   const familyParams = getImageModelFamily(profile) ? getImageModelParams(profile, opts.params) : null
   const modelParams = imageSize?.mode === 'pixels' ? null

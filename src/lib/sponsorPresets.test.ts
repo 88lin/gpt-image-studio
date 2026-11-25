@@ -9,7 +9,7 @@ describe('JSON sponsor presets', () => {
     expect(imported.profiles.map((profile) => profile.id)).toEqual(['default-openai', 'sheapi'])
     expect(imported.profiles.find((profile) => profile.id === 'sheapi')).toMatchObject({
       baseUrl: 'https://www.sheapi.top/v1', apiKey: '',
-      model: 'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare',
+      model: 'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2.6, gpt-image-2.6-flare',
       codexCli: false, streamImages: false, apiProxy: false,
     })
     const merged = mergePresetImportedSettings(current, imported)
@@ -26,11 +26,34 @@ describe('JSON sponsor presets', () => {
     expect(merged.settings.activeProfileId).toBe('existing')
   })
 
-  it('preserves saved endpoints, keys, models, order and Agent references across reloads', () => {
+  it.each(['https://www.sheapi.top/v1', 'https://cf.sheapi.cc/v1'])('updates the shipped SheApi model list while preserving saved settings across reloads for %s', (baseUrl) => {
+    const current = normalizeSettings({
+      profiles: [createDefaultOpenAIProfile({
+        id: 'sheapi', baseUrl, apiKey: 'saved-key',
+        model: 'gpt-image-2,gpt-image-2.5-sunburst,gpt-image-2.5-flare', selectedModel: 'gpt-image-2.5-flare',
+        streamImages: true,
+      })],
+      activeProfileId: 'sheapi', agentImageProfileId: 'sheapi',
+    })
+    const previous = { customProviders: [], profiles: [{ ...current.profiles[0], apiKey: '' }] }
+    const first = mergePresetImportedSettings(current, mergeSponsorPresets(null, current), { previousPresetConfig: previous })
+    const second = mergePresetImportedSettings(first.settings, mergeSponsorPresets(null, first.settings), { previousPresetConfig: first.presetConfig })
+    for (const result of [first, second]) {
+      expect(result.settings.profiles.find((profile) => profile.id === 'sheapi')).toEqual({
+        ...current.profiles[0],
+        description: expect.any(String),
+        model: 'gpt-image-2, gpt-image-2.5-sunburst, gpt-image-2.5-flare, gpt-image-2.6, gpt-image-2.6-flare',
+      })
+      expect(result.settings).toMatchObject({ activeProfileId: 'sheapi', agentImageProfileId: 'sheapi' })
+      expect(result.presetConfig.profiles.every((profile) => profile.apiKey === '')).toBe(true)
+    }
+  })
+
+  it.each(['https://private.example.com/v1', 'https://www.sheapi.top/v1'])('preserves saved keys, models, order and Agent references across reloads for %s', (baseUrl) => {
     const current = normalizeSettings({
       profiles: [
         createDefaultOpenAIProfile({ id: 'personal', apiKey: 'personal-test-key', model: 'personal-a,personal-b', selectedModel: 'personal-b' }),
-        createDefaultOpenAIProfile({ id: 'sheapi', baseUrl: 'https://private.example.com/v1', apiKey: 'private-test-key', model: 'private-model' }),
+        createDefaultOpenAIProfile({ id: 'sheapi', baseUrl, apiKey: 'private-test-key', model: 'private-model' }),
         createDefaultOpenAIProfile({ id: 'text', apiMode: 'responses', apiKey: 'text-test-key', model: 'text-model' }),
       ],
       activeProfileId: 'personal', agentApiConfigMode: 'hybrid', agentTextProfileId: 'text', agentImageProfileId: 'personal',

@@ -319,6 +319,48 @@ describe('GPT Image 2.6 custom providers', () => {
   })
 })
 
+describe('sub2api GPT Image 2.6 parameters', () => {
+  it.each([
+    ['gpt-image-2.6', 'png', false],
+    ['gpt-image-2.6', 'png', true],
+    ['gpt-image-2.6-flare', 'svg', false],
+    ['gpt-image-2.6-flare', 'svg', true],
+    ['gpt-image-2.6-flare', 'gif', false],
+    ['gpt-image-2.6-flare', 'gif', true],
+    ['gpt-image-2.5-flare', 'gif', false],
+    ['gpt-image-2.5-flare', 'gif', true],
+  ] as const)('sends %s %s with reference images: %s', async (model, output_format, hasInputImages) => {
+    const fetch = globalThis.fetch
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async (url, init) => {
+      if (String(url).startsWith('data:')) return fetch(url, init)
+      return new Response(JSON.stringify(String(url).endsWith('/async') ? { task_id: 'task-26' } : {
+        status: 'completed', result: { data: [{ url: 'data:image/png;base64,aW1hZ2U=' }] },
+      }))
+    })
+    const settings = createSettings({ provider: 'sb2api-async', model, baseUrl: 'https://sub2api.example.com/v1', svgReasoningEffort: 'high' })
+    const params = normalizeParamsForSettings({ ...DEFAULT_PARAMS, complexity: 'high', output_format, frame_count: 4, frame_duration_ms: 100 }, settings)
+    await callImageApi({ settings, prompt: 'prompt', params, inputImageDataUrls: hasInputImages ? ['data:image/png;base64,aW1hZ2U='] : [] })
+    const requests = fetchMock.mock.calls.filter(([url]) => String(url).startsWith('https://sub2api.example.com/'))
+    expect(requests[0][0]).toBe(`https://sub2api.example.com/v1/images/${hasInputImages ? 'edits' : 'generations'}/async`)
+    const body = hasInputImages ? getFormBody(fetchMock) : getJsonBodies(fetchMock)[0]
+    const expected = {
+      complexity: params.complexity === 'auto' ? undefined : 'high',
+      frame_count: params.output_format === 'gif' ? 4 : undefined,
+      frame_duration_ms: params.output_format === 'gif' ? 100 : undefined,
+      svg: params.output_format === 'svg' ? { model: DEFAULT_SVG_MODEL, reasoning: { effort: 'high' } } : undefined,
+    }
+    for (const [key, value] of Object.entries(expected)) {
+      if (hasInputImages) {
+        expect(body.get(key)).toBe(value === undefined ? null : typeof value === 'object' ? JSON.stringify(value) : String(value))
+      } else {
+        expect(body[key]).toEqual(value)
+      }
+    }
+    expect(requests[1][0]).toBe('https://sub2api.example.com/v1/images/tasks/task-26')
+    expect(requests).toHaveLength(2)
+  })
+})
+
 describe('moderation details', () => {
   it('appends the blocking stage and categories', () => {
     expect(appendModerationDetails('blocked', { moderation_stage: 'output', categories: ['violence', 'sexual'] }))

@@ -4,6 +4,7 @@ import { DEFAULT_PARAMS } from '../types'
 import { DEFAULT_IMAGES_MODEL, DEFAULT_SETTINGS, switchApiProfileProvider } from './apiProfiles'
 import { DEFAULT_FAVORITE_COLLECTION_ID } from './favoriteState'
 import { createPersistedState, mergePersistedAgentConversations, migratePersistedState, normalizePersistedState } from './persistedState'
+import { normalizeParamsForSettings } from './paramCompatibility'
 
 const imageA = { id: 'image-a', dataUrl: 'data:image/png;base64,image-a' }
 const collectionA: FavoriteCollection = { id: 'collection-a', name: '收藏夹 A', createdAt: 1, updatedAt: 1 }
@@ -82,6 +83,20 @@ describe('persisted state codec', () => {
 
   it('retains new defaults when no settings were persisted', () => {
     expect(normalizePersistedState({}, fallback(), 100)!.state.settings.profiles[0].imageGenerationModel).toBe(DEFAULT_IMAGES_MODEL)
+  })
+
+  it.each([
+    [undefined, false, 'auto'],
+    [undefined, true, 'transparent'],
+    ['auto', true, 'auto'],
+    ['opaque', true, 'opaque'],
+    ['transparent', false, 'transparent'],
+  ] as const)('restores background %s with legacy transparency %s as %s', (background, transparent_output, expected) => {
+    const result = normalizePersistedState({ params: { background, transparent_output } }, fallback(), 100)!
+    expect(result.state.params.background).toBe(expected)
+    expect(normalizeParamsForSettings(result.state.params, result.state.settings)).toMatchObject({
+      background: expected, transparent_output: expected === 'transparent',
+    })
   })
 
   it.each(['xhigh', 'max'] as const)('restores the %s GPT Image 2.5 quality level', (quality) => {
